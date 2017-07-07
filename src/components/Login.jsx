@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
 
 export const Login = ({store}) => {
     return(
@@ -11,12 +13,31 @@ export const Login = ({store}) => {
           <div className='unit three-fifths'>
             <div className='padding'>
               <h1>SIGN IN</h1>
-              <form>
+              <form onSubmit={
+                e => {
+                  axios.post('http://45.77.45.126/dev/login/login', {
+                    user_id: 'gina.nufus@sigma.co.id',
+                    password: 'S201502162',
+                    fpid : '160927084946'
+                  })
+                  .then(function (response) {
+                    alert('work')
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    alert('fail')
+
+                    console.log(error);
+                  });
+                  e.preventDefault()
+
+                }
+              }>
                 <h2 className='input-desc'>USERNAME</h2>
                 <input></input>
                 <h2 className='input-desc'>PASSWORD</h2>
                 <input></input>
-                <button>SIGN IN</button>
+                <button type='submit'>SIGN IN</button>
               </form>
 
             </div>

@@ -20,9 +20,14 @@ h1 {
 }
 
 input {
-  /* Rectangle 18 Copy: */
-background: #FFFFFF;
-border: 1px solid #EEEEEE;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  font-family: 'lato', sans-serif;
+  font-size: 25px;
+  overflow: hidden;
+  padding: 10px 0  10px 15px;
+  font-weight: 300;
+
 }
 
 button {
@@ -45,4 +50,5 @@ button {
   font-weight: 300;
   color: #777777;
   letter-spacing: 1px;
+
 }
