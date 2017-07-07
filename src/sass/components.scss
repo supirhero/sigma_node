@@ -1,0 +1,48 @@
+.card {
+  background: #FFFFFF;
+  box-shadow: 0 2px 25px 0 rgba(0,0,0,0.10), 0 2px 10px 0 rgba(0,0,0,0.25);
+  border-radius: 2px 2px 0 2px 2px;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+h1 {
+  /* SIGN IN: */
+  font-family: 'lato', sans-serif;
+  color: #333333;
+  letter-spacing: 0.94px;
+  font-weight: 400;
+}
+.padding {
+  // width: 100%;
+  height: 100%;
+}
+
+input {
+  /* Rectangle 18 Copy: */
+background: #FFFFFF;
+border: 1px solid #EEEEEE;
+}
+
+button {
+  /* Rectangle 4: */
+  background: $color-secondary;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 15px 42px;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
+  font-size: 18px;
+
+
+
+}
+.input-desc {
+  font-family: 'lato', sans-serif;
+  font-weight: 300;
+  color: #777777;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,23 @@
+.card {
+  height: 500px;
+  #picture {
+    width: 100%;
+    height: 500px;;
+    background-color: $color-secondary
+  }
+
+  .padding {
+    padding: 39px;
+    h1 {
+      font-size: 25px
+    }
+    .input-desc {
+      font-size: 21px;
+    }
+    input {
+      width: 100%;
+      height: 40px;
+    }
+
+  }
+}
