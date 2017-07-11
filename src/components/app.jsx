@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 // import {createBrowserHistory} from 'history'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route,IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 
@@ -15,14 +15,18 @@ import RegisterSigma from './RegisterSigma.jsx'
 import RegisterVendor from './RegisterVendor.jsx'
 import Dashboard from './Dashboard.jsx'
 import DashboardHome from './DashboardHome.jsx'
-
-
-
-
-
-
+import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
-import store from '../reducers/combineReducers.jsx'
+
+
+
+
+
+
+
+store.subscribe(()=> {
+  saveState(store.getState())
+})
 
 const history = syncHistoryWithStore(browserHistory, store)
 
@@ -31,15 +35,12 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={MainPage}>
-        <Route path="login" component={Login}/>
         <Route path="register" component={Register}>
           <Route path="sigma" component={RegisterSigma}/>
           <Route path="vendor" component={RegisterVendor}/>
         </Route>
-        <Route path="dashboard" component={Dashboard}>
-          <Route path="home" component={DashboardHome}/>
+          <IndexRoute component={DashboardHome}/>
 
-        </Route>
 
 
 

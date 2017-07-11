@@ -9,29 +9,41 @@ import Login from './Login.jsx'
 import Auth from './Auth.jsx'
 
 import store from '../reducers/combineReducers.jsx'
+import Dashboard from './Dashboard.jsx'
+
 
 
 
 
 class MainPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     console.log(store.getState());
 
-    if (store.getState().store.isLoggedIn) {
-      browserHistory.push('/dashboard')
-    }
-    else {
-      browserHistory.push('/login')
-
-    }
+    // if (store.getState().data.isloggedin) {
+    //   browserHistory.push('/dashboard')
+    // }
+    // else {
+    //   browserHistory.push('/login')
+    //
+    // }
   }
   render() {
 
-      return(
-        <div>
-              {this.props.children}
-        </div>
-      )
+          {
+            if (store.getState().data.isloggedin) {
+              return(
+                <Dashboard>
+                  {this.props.children}
+                </Dashboard>
+              )
+            }
+            else {
+              return(
+                <Login></Login>
+              )
+
+            }
+          }
     }
 
 

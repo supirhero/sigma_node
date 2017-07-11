@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
-
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+
+import store from '../reducers/combineReducers.jsx'
+
 
 
 
 class DashboardHome extends Component {
   render() {
-
+    var state = store.getState()
+    console.log(state);
     return(
       <div className='grid wrap wider'>
         <div className='unit half'>
@@ -21,7 +24,7 @@ class DashboardHome extends Component {
                     </div>
                   </div>
                   <div className='unit half'>
-                    <large>Kara Gray</large>
+                    <large>{state.data.userdata.user_name}</large>
                     <medium>Admin, Project Manager</medium>
                   </div>
                 </div>

@@ -1,18 +1,59 @@
-import {combineReducers} from 'redux';
 import auth from './authReducer.jsx'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux'
+import * as storage from 'redux-storage'
+import createEngine from 'redux-storage-engine-localstorage';
 
-const initialState = {
-  isLoggedIn : false
+
+// var initialState = {}
+// if (Object.keys(initialState).length === 0) {
+//   initialState = {
+//     isloggedin : false,
+//     bussines_unit : null,
+//     datatimesheet : null,
+//     userdata : null,
+//     projects : null
+//   }
+// }
+// else {
+//   load(store).then((newState) => {
+//     console.log('Loaded state:', newState)
+//     initialState = newState
+//   })
+//   .catch(() => console.log('Failed to load previous state'));
+// }
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) return undefined
+    return JSON.parse(serializedState)
+  }catch(err) {
+    return undefined
+  }
 }
-const store = (state = initialState, action) => {
+export const saveState = (state) => {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('state',serializedState)
+    console.log('changed: ', serializedState);
+
+}
+export const data = (state = {}, action) => {
   // state = {
   //   isLoggedIn : false
   // }
   switch (action.type) {
     case 'SESSION':
-      return Object.assign({}, state, { isLoggedIn: action.isLoggedIn })
+      saveState(store.getState())
+
+      return Object.assign({}, state, {
+        isloggedin: action.isloggedin,
+        bussines_unit : action.bussines_unit,
+        datatimesheet : action.datatimesheet,
+        userdata : action.userdata,
+        projects : action.projects
+      })
+
       break;
     default:
     return state
@@ -20,9 +61,15 @@ const store = (state = initialState, action) => {
 }
 
 const allReducers = combineReducers({
-  store : store,
+  data : data,
   routing : routerReducer
 })
+export const store = createStore(allReducers, loadState())
+// const reducer = storage.reducer(allReducers);
+//
+// const middleware = storage.createMiddleware(engine);
+// const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
+// const store = createStoreWithMiddleware(reducer);
+// console.log(load(store));
 
-
-export default createStore(allReducers)
+export default store

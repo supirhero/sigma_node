@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import store from '../reducers/combineReducers.jsx'
 import $ from "jquery";
+
+import store from '../reducers/combineReducers.jsx'
+import {saveAuthentication} from './actions.jsx'
+
 
 class Login extends Component {
     render(){
@@ -51,13 +54,12 @@ class Login extends Component {
                         fpid : '160927084946'
                       }
                     }).then(function (response) {
-                      alert('work')
-                      browserHistory.push('/dashboard/home')
-                      store.dispatch({
-                        type:'SESSION',
-                        isLoggedIn:true})
-
                       console.log(response);
+                      store.dispatch(saveAuthentication(response.data))
+                      browserHistory.push('/')
+
+
+
                     }).catch(function (error) {
                       alert('fail')
 
@@ -77,7 +79,6 @@ class Login extends Component {
                     //     console.log(data);
                     //   });
 
-                    console.log(store.getState());
 
                     e.preventDefault()
 

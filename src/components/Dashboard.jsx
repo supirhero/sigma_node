@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+import {deleteAuthentication} from './actions.jsx'
+import store from '../reducers/combineReducers.jsx'
+
+
+
 
 
 class Dashboard extends Component {
@@ -16,7 +21,13 @@ class Dashboard extends Component {
                       <a>REPORTS</a>
                     </div>
                   </div>
+                  <button onClick={
+                    e => {
+                      browserHistory.push('/')
 
+                      store.dispatch(deleteAuthentication())
+                    }
+                  }></button>
                 </div>
                 {this.props.children}
               </div>
