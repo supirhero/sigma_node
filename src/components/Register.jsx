@@ -13,10 +13,10 @@ class Register extends Component {
       <div className='grid wrap'>
         <div className='unit whole'>
           <div className='card shadow'>
-          <div className='padding'>
+          <div className='margin'>
             <div className='grid'>
               <div className='unit half'>
-                <h1>CREATE NEW ACCOUNT</h1>
+                <large>CREATE NEW ACCOUNT</large>
 
               </div>
               <div className='unit half'>

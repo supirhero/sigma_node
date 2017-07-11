@@ -9118,6 +9118,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 exports.saveAuthentication = saveAuthentication;
 exports.loadAuthentication = loadAuthentication;
 exports.authenticated = authenticated;
+exports.authenticate = authenticate;
 
 var _react = __webpack_require__(4);
 
@@ -9172,6 +9173,8 @@ function authenticated() {
     return false;
   }
 }
+
+function authenticate() {}
 
 var Auth = function (_Component) {
   _inherits(Auth, _Component);
@@ -9277,9 +9280,9 @@ var Login = function (_Component) {
               { className: 'unit three-fifths' },
               _react2.default.createElement(
                 'div',
-                { className: 'padding' },
+                { className: 'margin' },
                 _react2.default.createElement(
-                  'h1',
+                  'large',
                   null,
                   'SIGN IN'
                 ),
@@ -9319,6 +9322,11 @@ var Login = function (_Component) {
                         }
                       }).then(function (response) {
                         alert('work');
+                        _reactRouter.browserHistory.push('/dashboard/home');
+                        _combineReducers2.default.dispatch({
+                          type: 'SESSION',
+                          isLoggedIn: true });
+
                         console.log(response);
                       }).catch(function (error) {
                         alert('fail');
@@ -9336,10 +9344,7 @@ var Login = function (_Component) {
                       //     alert('work')
                       //     console.log(data);
                       //   });
-                      _combineReducers2.default.dispatch({
-                        type: 'SESSION',
-                        isLoggedIn: true });
-                      _reactRouter.browserHistory.push('/dashboard/home');
+
                       console.log(_combineReducers2.default.getState());
 
                       e.preventDefault();
@@ -15767,7 +15772,7 @@ var Register = function (_Component) {
             { className: 'card shadow' },
             _react2.default.createElement(
               'div',
-              { className: 'padding' },
+              { className: 'margin' },
               _react2.default.createElement(
                 'div',
                 { className: 'grid' },
@@ -15775,7 +15780,7 @@ var Register = function (_Component) {
                   'div',
                   { className: 'unit half' },
                   _react2.default.createElement(
-                    'h1',
+                    'large',
                     null,
                     'CREATE NEW ACCOUNT'
                   )
@@ -33416,7 +33421,7 @@ exports = module.exports = __webpack_require__(172)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900);", ""]);
 
 // module
-exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card .padding {\n  margin: 39px; }\n  .card .padding h1 {\n    font-size: 25px; }\n  .card .padding .input-desc {\n    font-size: 21px; }\n  .card .padding input {\n    width: 100%;\n    height: 50px; }\n\n.padding {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  width: 100%;\n  border-radius: 3px;\n  overflow: hidden; }\n\n.shadow {\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nh1 {\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\n.padding {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 18px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
+exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card .margin {\n  margin: 39px; }\n  .card .margin h1 {\n    font-size: 25px; }\n  .card .margin .input-desc {\n    font-size: 21px; }\n  .card .margin input {\n    width: 100%;\n    height: 50px; }\n\n.margin {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.card.profile {\n  margin: 40px 40px 0 0; }\n  .card.profile .margin {\n    margin: 20px; }\n    .card.profile .margin .pic-wrapper {\n      width: 150px;\n      height: 150px;\n      background-color: #FA5962;\n      border-radius: 100%; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  border-radius: 3px;\n  overflow: hidden; }\n\n.shadow {\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nlarge {\n  font-size: 20px;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  display: inline-block;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nmedium {\n  display: inline-block;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\nsmall {\n  display: inline-block;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\n.margin {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 16px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
 
 // exports
 
@@ -43664,14 +43669,76 @@ var DashboardHome = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'grid wrap' },
+        { className: 'grid wrap wider' },
         _react2.default.createElement(
           'div',
-          { className: 'unit whole' },
+          { className: 'unit half' },
           _react2.default.createElement(
             'div',
-            null,
-            'asdasd'
+            { className: 'card profile' },
+            _react2.default.createElement(
+              'div',
+              { className: 'margin' },
+              _react2.default.createElement(
+                'div',
+                { className: 'grid' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'unit half' },
+                  _react2.default.createElement('div', { className: 'pic-wrapper' })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'unit half' },
+                  _react2.default.createElement(
+                    'large',
+                    null,
+                    'Kara Gray'
+                  ),
+                  _react2.default.createElement(
+                    'medium',
+                    null,
+                    'Admin, Project Manager'
+                  )
+                )
+              ),
+              _react2.default.createElement('div', null)
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'unit half' },
+          _react2.default.createElement(
+            'div',
+            { className: 'margin' },
+            _react2.default.createElement(
+              'div',
+              { className: 'grid' },
+              _react2.default.createElement(
+                'div',
+                { className: 'unit half' },
+                _react2.default.createElement(
+                  'large',
+                  null,
+                  'MY PERFORMANCE'
+                ),
+                _react2.default.createElement(
+                  'medium',
+                  null,
+                  'This month, May'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'unit half' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'btn-primary' },
+                  'TIMESHEET'
+                )
+              )
+            )
           )
         )
       );
@@ -43682,12 +43749,9 @@ var DashboardHome = function (_Component) {
 }(_react.Component);
 
 function mapStateToProps(state) {
-  return {
-    state: state
-  };
+  return state;
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(DashboardHome);
-// export default Login
 
 /***/ })
 /******/ ]);

@@ -53,6 +53,9 @@ export function authenticated() {
   }
 }
 
+export function authenticate() {
+
+}
 class Auth extends Component {
   componentWillMount() {
     browserHistory.push('/login')

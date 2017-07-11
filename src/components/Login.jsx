@@ -15,8 +15,8 @@ class Login extends Component {
               <div id='picture'></div>
             </div>
             <div className='unit three-fifths'>
-              <div className='padding'>
-                <h1>SIGN IN</h1>
+              <div className='margin'>
+                <large>SIGN IN</large>
                 <form onSubmit={
                   e => {
                   //   axios.get('http://45.77.45.126/dev/home/detailproject/345'
@@ -52,6 +52,11 @@ class Login extends Component {
                       }
                     }).then(function (response) {
                       alert('work')
+                      browserHistory.push('/dashboard/home')
+                      store.dispatch({
+                        type:'SESSION',
+                        isLoggedIn:true})
+
                       console.log(response);
                     }).catch(function (error) {
                       alert('fail')
@@ -71,10 +76,7 @@ class Login extends Component {
                     //     alert('work')
                     //     console.log(data);
                     //   });
-                    store.dispatch({
-                      type:'SESSION',
-                      isLoggedIn:true})
-                    browserHistory.push('/dashboard/home')
+
                     console.log(store.getState());
 
                     e.preventDefault()
