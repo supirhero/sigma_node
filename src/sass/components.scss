@@ -1,20 +1,45 @@
 .card {
   background: #FFFFFF;
-  box-shadow: 0 2px 25px 0 rgba(0,0,0,0.10), 0 2px 10px 0 rgba(0,0,0,0.25);
   border-radius: 2px 2px 0 2px 2px;
-  width: 100%;
+  // width: 100%;
   border-radius: 3px;
   overflow: hidden;
 }
 
-h1 {
+.shadow {
+  box-shadow: 0 2px 25px 0 rgba(0,0,0,0.10), 0 2px 10px 0 rgba(0,0,0,0.25);
+
+}
+
+large {
+  font-size: 20px;
   /* SIGN IN: */
   font-family: 'lato', sans-serif;
   color: #333333;
+  display: inline-block;
   letter-spacing: 0.94px;
   font-weight: 400;
 }
-.padding {
+medium {
+  display: inline-block;
+
+  /* SIGN IN: */
+  font-family: 'lato', sans-serif;
+  color: #777777;
+  letter-spacing: 0.94px;
+  font-weight: 300;
+}
+small {
+  display: inline-block;
+
+  /* SIGN IN: */
+  font-family: 'lato', sans-serif;
+  color: #777777;
+  letter-spacing: 0.94px;
+  font-weight: 300;
+
+}
+.margin {
   // width: 100%;
   height: 100%;
 }
@@ -30,7 +55,7 @@ input {
 
 }
 
-button {
+.btn-primary {
   /* Rectangle 4: */
   background: $color-secondary;
   border-radius: 2px;
@@ -40,7 +65,7 @@ button {
   padding: 15px 42px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
 
 
 
@@ -50,5 +75,10 @@ button {
   font-weight: 300;
   color: #777777;
   letter-spacing: 1px;
+}
 
+.navbar {
+  height: 80px;
+  background-color: $color-primary;
+  width: 100%;
 }

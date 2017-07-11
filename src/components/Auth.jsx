@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { Link, browserHistory } from 'react-router'
+
 
 export function saveAuthentication(data) {
   if (typeof(Storage) !== "undefined") {
@@ -50,3 +52,26 @@ export function authenticated() {
     return false
   }
 }
+
+export function authenticate() {
+
+}
+class Auth extends Component {
+  componentWillMount() {
+    browserHistory.push('/login')
+  }
+    render(){
+      return(
+        <div></div>
+      )
+    }
+}
+
+
+function mapStateToProps(state) {
+  return {
+    state
+    // filter: ownProps.location.query.filter
+  }
+}
+export default connect(mapStateToProps)(Auth)
