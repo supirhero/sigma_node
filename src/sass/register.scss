@@ -1,0 +1,45 @@
+.padding {
+  margin: 39px;
+}
+
+.switch-wrapper{
+  width: 225px;
+  overflow: hidden;
+  height: 40px;
+  border: 2px $color-primary solid;
+  border-radius: 20px;
+  float: right;
+  button {
+    width: 50%;
+    height: 100%;
+    outline: none;
+    border: none;
+    color: white;
+    font-family: 'lato', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+  }
+  button:nth-child(1) {
+    background: $color-primary;
+    color: white;
+  }
+  button:nth-child(2) {
+    background: white;
+    color: #777777;
+  }
+
+}
+
+.unit.half:nth-child(1) {
+  input {
+    width: 95%;
+    float: left;
+  }
+}
+
+.unit.half:nth-child(2) {
+  input {
+    width: 95%;
+    float: right;
+  }
+}

@@ -1,32 +1,40 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { createStore } from 'redux'
+import { Link, browserHistory } from 'react-router'
+
 
 import { authenticated } from './Auth.jsx'
 import Login from './Login.jsx'
-import {allReducers} from '../reducers/combineReducers.jsx'
+import Auth from './Auth.jsx'
 
-const Store = createStore(allReducers)
+import store from '../reducers/combineReducers.jsx'
+
 
 
 
 class MainPage extends Component {
-  render() {
-    if (authenticated()) {
-      return(
-        <div>dsfsd</div>
-      )
+  componentWillMount() {
+    console.log(store.getState());
+
+    if (store.getState().store.isLoggedIn) {
+      browserHistory.push('/dashboard')
     }
     else {
-      return(
-        <div  className="grid wrap">
-          <Login></Login>
+      browserHistory.push('/login')
 
+    }
+  }
+  render() {
+
+      return(
+        <div>
+              {this.props.children}
         </div>
       )
     }
 
-  }
+
 }
 
 function mapStateToProps(state) {

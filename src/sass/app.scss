@@ -1,6 +1,8 @@
 @import "var";
 @import "gridism";
 @import "login";
+@import "register";
+
 @import "components";
 
 
@@ -8,4 +10,5 @@
 
 body {
   background-color: $color-background;
+  margin: 0
 }
