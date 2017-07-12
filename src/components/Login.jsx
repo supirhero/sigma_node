@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import $ from "jquery";
+import { routerMiddleware, push } from 'react-router-redux'
+
 
 import store from '../reducers/combineReducers.jsx'
 import {saveAuthentication} from './actions.jsx'
@@ -90,7 +92,8 @@ class Login extends Component {
                 <input></input>
                 <button className='btn-primary' type='submit'>SIGN IN</button>
                 <a onClick={()=> {
-                  browserHistory.push('/register/sigma')
+                  store.dispatch(push('/register'))
+                  // browserHistory.push('/register')
 
                 }}>Register</a>
               </form>

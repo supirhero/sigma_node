@@ -34,15 +34,17 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={MainPage}>
+
+        <IndexRoute component={DashboardHome}/>
+        <Route path='login' component={Login}/>
         <Route path="register" component={Register}>
           <Route path="sigma" component={RegisterSigma}/>
+          <IndexRoute component={RegisterSigma}/>
           <Route path="vendor" component={RegisterVendor}/>
         </Route>
-          <IndexRoute component={DashboardHome}/>
-          <Route path='profile' component={Profile}>
-            <IndexRoute component={ProfileBasicInformation}/>
-
-          </Route>
+        <Route path='profile' component={Profile}>
+          <IndexRoute component={ProfileBasicInformation}/>
+        </Route>
 
 
       </Route>

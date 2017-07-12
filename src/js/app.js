@@ -9253,6 +9253,8 @@ var _reactRedux = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(16);
 
+var _reactRouterRedux = __webpack_require__(82);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9311,14 +9313,18 @@ var Auth = function (_Component) {
   }
 
   _createClass(Auth, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      _reactRouter.browserHistory.push('/login');
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      store.dispatch((0, _reactRouterRedux.push)('/register'));
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', null);
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.props.children
+      );
     }
   }]);
 
@@ -9361,6 +9367,8 @@ var _reactRouter = __webpack_require__(16);
 var _jquery = __webpack_require__(202);
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _reactRouterRedux = __webpack_require__(82);
 
 var _combineReducers = __webpack_require__(81);
 
@@ -9491,7 +9499,8 @@ var Login = function (_Component) {
                   _react2.default.createElement(
                     'a',
                     { onClick: function onClick() {
-                        _reactRouter.browserHistory.push('/register/sigma');
+                        _combineReducers2.default.dispatch((0, _reactRouterRedux.push)('/register'));
+                        // browserHistory.push('/register')
                       } },
                     'Register'
                   )
@@ -16044,7 +16053,7 @@ var Dashboard = function (_Component) {
                     null,
                     _react2.default.createElement(_Components.MenuItem, { onClick: function onClick(e) {
                         console.log('work');
-                        _reactRouter.browserHistory.push('/');
+                        _reactRouter.browserHistory.push('/login');
                         //
                         _combineReducers2.default.dispatch((0, _actions.deleteAuthentication)());
                       }, title: 'LogOut' })
@@ -16461,14 +16470,6 @@ var MainPage = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       console.log(_combineReducers2.default.getState());
-
-      // if (store.getState().data.isloggedin) {
-      //   browserHistory.push('/dashboard')
-      // }
-      // else {
-      //   browserHistory.push('/login')
-      //
-      // }
     }
   }, {
     key: 'render',
@@ -16482,7 +16483,11 @@ var MainPage = function (_Component) {
             this.props.children
           );
         } else {
-          return _react2.default.createElement(_Login2.default, null);
+          return _react2.default.createElement(
+            _Auth2.default,
+            null,
+            this.props.children
+          );
         }
       }
     }
@@ -16578,7 +16583,7 @@ var Register = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick(e) {
-                          _reactRouter.browserHistory.push('/register/sigma');
+                          _reactRouter.browserHistory.push('/register');
                         } },
                       'SIGMA'
                     ),
@@ -46575,13 +46580,15 @@ var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHi
     _react2.default.createElement(
       _reactRouter.Route,
       { path: '/', component: _MainPage2.default },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _DashboardHome2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
       _react2.default.createElement(
         _reactRouter.Route,
         { path: 'register', component: _Register2.default },
         _react2.default.createElement(_reactRouter.Route, { path: 'sigma', component: _RegisterSigma2.default }),
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: _RegisterSigma2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: 'vendor', component: _RegisterVendor2.default })
       ),
-      _react2.default.createElement(_reactRouter.IndexRoute, { component: _DashboardHome2.default }),
       _react2.default.createElement(
         _reactRouter.Route,
         { path: 'profile', component: _Profile2.default },

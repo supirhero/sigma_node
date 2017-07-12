@@ -46,7 +46,7 @@ class Dashboard extends Component {
                             <MenuItem onClick={
                               e => {
                                 console.log('work');
-                                browserHistory.push('/')
+                                browserHistory.push('/login')
                                 //
                                 store.dispatch(deleteAuthentication())
                               }

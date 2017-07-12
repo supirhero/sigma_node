@@ -23,7 +23,7 @@ class Register extends Component {
                 <div className='switch-wrapper'>
                   <button  onClick={
                     e => {
-                      browserHistory.push('/register/sigma')
+                      browserHistory.push('/register')
                     }
                   }>SIGMA</button>
                   <button onClick={

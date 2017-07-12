@@ -19,14 +19,8 @@ class MainPage extends Component {
   componentDidMount() {
     console.log(store.getState());
 
-    // if (store.getState().data.isloggedin) {
-    //   browserHistory.push('/dashboard')
-    // }
-    // else {
-    //   browserHistory.push('/login')
-    //
-    // }
   }
+
   render() {
 
           {
@@ -39,7 +33,10 @@ class MainPage extends Component {
             }
             else {
               return(
-                <Login></Login>
+                <Auth>
+                  {this.props.children}
+
+                </Auth>
               )
 
             }

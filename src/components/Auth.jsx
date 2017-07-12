@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router'
+import { routerMiddleware, push } from 'react-router-redux'
+
 
 
 export function saveAuthentication(data) {
@@ -57,12 +59,16 @@ export function authenticate() {
 
 }
 class Auth extends Component {
-  componentWillMount() {
-    browserHistory.push('/login')
+  componentDidMount() {
+      store.dispatch(push('/register'))
+
   }
+
     render(){
       return(
-        <div></div>
+        <div>
+          {this.props.children}
+        </div>
       )
     }
 }
