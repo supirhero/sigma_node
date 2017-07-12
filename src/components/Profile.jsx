@@ -18,8 +18,18 @@ class Dashboard extends Component {
               <div className='unit one-quarter'>
                   <div className='sidebar'>
                     <large>EDIT YOUR PROFILE</large>
-                    <medium>Basic Information</medium>
-                    <medium>Change Password</medium>
+                    <medium onClick={
+                      e => {
+                        browserHistory.replace('/profile')
+
+                      }
+                    }>Basic Information</medium>
+                    <medium onClick={
+                      e => {
+                        browserHistory.replace('/profile/change-password')
+
+                      }
+                    }>Change Password</medium>
                   </div>
 
 

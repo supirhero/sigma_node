@@ -24,7 +24,13 @@ export class Menu extends Component {
           }>
         </div>
 
-            <div className={this.state.clicked ? 'menu active' : 'menu'}>
+            <div onMouseLeave = {
+              () => {
+                this.setState({
+                  clicked : false
+                })
+              }
+            } className={this.state.clicked ? 'menu active' : 'menu'}>
               {this.props.children}
 
             </div>

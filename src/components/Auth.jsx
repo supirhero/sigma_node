@@ -59,10 +59,7 @@ export function authenticate() {
 
 }
 class Auth extends Component {
-  componentDidMount() {
-      store.dispatch(push('/register'))
 
-  }
 
     render(){
       return(

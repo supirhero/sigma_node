@@ -5,6 +5,8 @@ import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx'
+import { routerMiddleware, push } from 'react-router-redux'
+
 
 
 
@@ -12,6 +14,12 @@ import {Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx'
 
 
 class Dashboard extends Component {
+  componentDidMount() {
+    console.log('work');
+    // browserHistory.push('/home')
+
+
+  }
 
     render(){
       return(
@@ -46,7 +54,7 @@ class Dashboard extends Component {
                             <MenuItem onClick={
                               e => {
                                 console.log('work');
-                                browserHistory.push('/login')
+                                browserHistory.pursh('/auth')
                                 //
                                 store.dispatch(deleteAuthentication())
                               }

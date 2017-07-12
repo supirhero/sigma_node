@@ -92,8 +92,7 @@ class Login extends Component {
                 <input></input>
                 <button className='btn-primary' type='submit'>SIGN IN</button>
                 <a onClick={()=> {
-                  store.dispatch(push('/register'))
-                  // browserHistory.push('/register')
+                  browserHistory.replace('/auth/register')
 
                 }}>Register</a>
               </form>

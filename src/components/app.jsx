@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 // import {createBrowserHistory} from 'history'
-import { Router, Route,IndexRoute, browserHistory } from 'react-router'
+import { Router, Route,IndexRoute, browserHistory, Redirect } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 
@@ -17,11 +17,21 @@ import Dashboard from './Dashboard.jsx'
 import DashboardHome from './DashboardHome.jsx'
 import Profile from './Profile.jsx'
 import ProfileBasicInformation from './ProfileBasicInformation.jsx'
+import ProfileChangePassword from './ProfileChangePassword.jsx'
+
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
 
+function requireAuth(nextState, replace) {
+   if (!store.getState().data.isloggedin) {
+   replace({
+   pathname: '/auth',
+   state: { nextPathname: nextState.location.pathname }
+   })
+   }
+}
 
 store.subscribe(()=> {
   saveState(store.getState())
@@ -33,10 +43,12 @@ const history = syncHistoryWithStore(browserHistory, store)
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={MainPage}>
+      {/* <Route path="/" component={MainPage}>
 
         <IndexRoute component={DashboardHome}/>
         <Route path='login' component={Login}/>
+
+
         <Route path="register" component={Register}>
           <Route path="sigma" component={RegisterSigma}/>
           <IndexRoute component={RegisterSigma}/>
@@ -47,7 +59,27 @@ render(
         </Route>
 
 
+      </Route> */}
+
+    <Route path='/' component={MainPage}>
+      <Route component={Dashboard} onEnter={requireAuth}>
+        <IndexRoute component={DashboardHome}/>
+        <Route path='profile' component={Profile}>
+          <IndexRoute component={ProfileBasicInformation}/>
+          <Route path='change-password' component={ProfileChangePassword}/>
+
+        </Route>
       </Route>
+
+      <Route path='auth' component={Auth}>
+        <Route path="register" component={Register}>
+          <IndexRoute component={RegisterSigma}/>
+          <Route path="vendor" component={RegisterVendor}/>
+        </Route>
+        <IndexRoute component={Login}/>
+      </Route>
+
+    </Route>
     </Router>
   </Provider>,
   document.getElementById('app')

@@ -18,28 +18,14 @@ import Dashboard from './Dashboard.jsx'
 class MainPage extends Component {
   componentDidMount() {
     console.log(store.getState());
+    
 
   }
 
   render() {
 
           {
-            if (store.getState().data.isloggedin) {
-              return(
-                <Dashboard>
-                  {this.props.children}
-                </Dashboard>
-              )
-            }
-            else {
-              return(
-                <Auth>
-                  {this.props.children}
-
-                </Auth>
-              )
-
-            }
+            return this.props.children
           }
     }
 
@@ -48,7 +34,8 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth : state.auth
+    // auth : state.auth
+    state
   }
 }
 export default connect(mapStateToProps)(MainPage)
