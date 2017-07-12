@@ -15,13 +15,12 @@ import RegisterSigma from './RegisterSigma.jsx'
 import RegisterVendor from './RegisterVendor.jsx'
 import Dashboard from './Dashboard.jsx'
 import DashboardHome from './DashboardHome.jsx'
+import Profile from './Profile.jsx'
+import ProfileBasicInformation from './ProfileBasicInformation.jsx'
+
+
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
-
-
-
-
-
 
 
 store.subscribe(()=> {
@@ -40,8 +39,10 @@ render(
           <Route path="vendor" component={RegisterVendor}/>
         </Route>
           <IndexRoute component={DashboardHome}/>
+          <Route path='profile' component={Profile}>
+            <IndexRoute component={ProfileBasicInformation}/>
 
-
+          </Route>
 
 
       </Route>

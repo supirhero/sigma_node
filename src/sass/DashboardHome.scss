@@ -1,17 +1,43 @@
 .card.profile {
   // padding: 30px;
-  margin: 40px 40px 0 0;
+  margin: 0px 40px 0 0;
   large {
     text-transform: capitalize;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      margin-top: 10px
+    }
   }
 
 .margin{
   margin: 20px;
-  .pic-wrapper {
-    width: 150px;
-    height: 150px;
-    background-color: $color-secondary;
-    border-radius: 100%;
-  }
+
 }
+}
+.search {
+  margin: 0 auto 54px;
+  width: 80%;
+  height: 50px;
+}
+
+.projects {
+  .card {
+    padding: 23px 32px;
+    .project-name {
+      color: #333333;
+    }
+    .project-status {
+      text-transform: uppercase;
+      font-weight: 400;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .line-bar {
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid #EEEEEE;
+    }
+  }
 }

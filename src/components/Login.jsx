@@ -13,7 +13,7 @@ class Login extends Component {
       return(
         <div className='grid wrap'>
           <div className='unit whole'>
-            <div className='card shadow'>
+            <div className='card shadow login'>
             <div className='unit two-fifths no-gutters'>
               <div id='picture'></div>
             </div>
