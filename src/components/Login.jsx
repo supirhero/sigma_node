@@ -46,7 +46,6 @@ class Login extends Component {
                     //
                     //   console.log(error);
                     // });
-
                     axios({
                       method: 'post',
                       url: "http://45.77.45.126/dev/login/login",
@@ -59,17 +58,10 @@ class Login extends Component {
                       console.log(response);
                       store.dispatch(saveAuthentication(response.data))
                       browserHistory.push('/')
-
-
-
                     }).catch(function (error) {
                       alert('fail')
-
                       console.log(error);
                     });
-
-
-
                     // $.post("http://45.77.45.126/dev/login/login",
                     //   {
                     //       user_id: 'gina.nufus@sigma.co.id',
@@ -80,10 +72,7 @@ class Login extends Component {
                     //     alert('work')
                     //     console.log(data);
                     //   });
-
-
                     e.preventDefault()
-
                   }
                 }>
                 <h2 className='input-desc'>USERNAME</h2>
@@ -93,7 +82,6 @@ class Login extends Component {
                 <button className='btn-primary' type='submit'>SIGN IN</button>
                 <a onClick={()=> {
                   browserHistory.replace('/auth/register')
-
                 }}>Register</a>
               </form>
 
@@ -110,6 +98,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   }
 }

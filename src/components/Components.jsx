@@ -72,3 +72,17 @@ export class MenuHeader extends Component {
     )
   }
 }
+
+export class Divider extends Component {
+  render() {
+    return (
+      <div className='divider-wrapper'>
+        {
+          this.props.back && <button className='btn-secondary' onClick={this.props.back}>{this.props.back_text}</button>
+        }
+        <h2><span>{this.props.text}</span></h2>
+
+      </div>
+    )
+  }
+}

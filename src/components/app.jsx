@@ -18,6 +18,8 @@ import DashboardHome from './DashboardHome.jsx'
 import Profile from './Profile.jsx'
 import ProfileBasicInformation from './ProfileBasicInformation.jsx'
 import ProfileChangePassword from './ProfileChangePassword.jsx'
+import Timesheet from './Timesheet.jsx'
+
 
 
 
@@ -44,11 +46,8 @@ render(
   <Provider store={store}>
     <Router history={history}>
       {/* <Route path="/" component={MainPage}>
-
         <IndexRoute component={DashboardHome}/>
         <Route path='login' component={Login}/>
-
-
         <Route path="register" component={Register}>
           <Route path="sigma" component={RegisterSigma}/>
           <IndexRoute component={RegisterSigma}/>
@@ -57,8 +56,6 @@ render(
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
         </Route>
-
-
       </Route> */}
 
     <Route path='/' component={MainPage}>
@@ -69,7 +66,6 @@ render(
           <Route path='change-password' component={ProfileChangePassword}/>
 
         </Route>
-      </Route>
 
       <Route path='auth' component={Auth}>
         <Route path="register" component={Register}>
@@ -78,7 +74,8 @@ render(
         </Route>
         <IndexRoute component={Login}/>
       </Route>
-
+      <Route path='timesheet' component={Timesheet}></Route>
+    </Route>
     </Route>
     </Router>
   </Provider>,

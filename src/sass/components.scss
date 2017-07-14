@@ -116,9 +116,16 @@ input {
   font-weight: 300;
   font-family: 'lato', sans-serif;
   font-size: 16px;
-
-
-
+}
+.btn-secondary {
+  /* Rectangle 4: */
+  /* Rectangle 4 Copy 2: */
+  padding: 15px 35px;
+  background: white;
+  border: 1px solid #EEEEEE;
+  border-radius: 2px;
+  font-family: 'lato', sans-serif;
+  font-size: 16px;
 }
 .input-desc {
   font-family: 'lato', sans-serif;
@@ -175,5 +182,34 @@ input {
   }
   .menu.active {
     display: block;
+  }
+}
+
+.divider-wrapper {
+  position: relative;
+  button {
+    position: absolute;
+  }
+  h2 {
+     width: 100%;
+     text-align: center;
+     border-bottom: 1px solid #CCCCCC;
+     line-height: 0.1em;
+    //  margin: 10px 0 20px;
+     margin: 24px 0 20px;
+
+     font-size: 20px;
+     /* SIGN IN: */
+     font-family: 'lato', sans-serif;
+     color: #777777;
+     display: inline-block;
+     letter-spacing: 0.94px;
+     font-weight: 400;
+     letter-spacing: 1.25px;
+  }
+
+  h2 span {
+      background:$color-background;
+      padding:0 40px;
   }
 }

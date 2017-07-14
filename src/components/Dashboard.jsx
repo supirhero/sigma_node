@@ -15,7 +15,11 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 class Dashboard extends Component {
   componentDidMount() {
-    console.log('work');
+    // console.log('work');
+    // console.log(process.env.NODE_ENV);
+    var compile_mode = process.env.NODE_ENV
+    // var compile_mode = (process.env.npm_lifecycle_script.split(' ')[3]).replace('--', '')
+    console.log('compiling : ', compile_mode)
     // browserHistory.push('/home')
 
 
@@ -54,9 +58,10 @@ class Dashboard extends Component {
                             <MenuItem onClick={
                               e => {
                                 console.log('work');
-                                browserHistory.pursh('/auth')
+                                browserHistory.replace('/auth')
                                 //
                                 store.dispatch(deleteAuthentication())
+                                e.preventDefault()
                               }
                             } title='LogOut'/>
                           </MenuSection>

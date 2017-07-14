@@ -1,7 +1,7 @@
 
 export function saveAuthentication(data) {
   return {
-    type : 'SESSION',
+    type : 'API',
     isloggedin : true,
     bussines_unit : data.bussines_unit,
     datatimesheet : data.datatimesheet,
@@ -11,7 +11,7 @@ export function saveAuthentication(data) {
 }
 export function deleteAuthentication() {
   return {
-    type : 'SESSION',
+    type : 'API',
     isloggedin : false,
     bussines_unit : null,
     datatimesheet : null,

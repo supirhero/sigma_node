@@ -15,8 +15,6 @@ class DashboardHome extends Component {
     var state = store.getState()
     console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var f = state.data.projects[0].project_name
-    console.log(f);
     var projects = state.data.projects
 
 
@@ -34,7 +32,7 @@ class DashboardHome extends Component {
                     </div>
                   </div>
                   <div className='unit three-fifths'>
-                    <large>{state.data.userdata.user_name}</large>
+                    <large>{state.data.userdata ? state.data.userdata.user_name : '-' }</large>
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
@@ -65,7 +63,12 @@ class DashboardHome extends Component {
             <small>This month, May</small>
           </div>
           <div className='unit half'>
-            <button className='btn-primary' style={{width:'100%'}}>TIMESHEET</button>
+            <button className='btn-primary' style={{width:'100%'}} onClick={
+              e => {
+                browserHistory.push('/timesheet')
+                e.preventDefault()
+              }
+            }>TIMESHEET</button>
           </div>
         </div>
         <div className='grid'>
@@ -73,9 +76,9 @@ class DashboardHome extends Component {
 
               <div className='circle-container'>
                 <Circle
-                  progress={state.data.datatimesheet.b *0.01}
+                  progress={state.data.datatimesheet ? state.data.datatimesheet.b *0.01 : '-'}
                   initialAnimate={true}
-                  text= {state.data.datatimesheet.b}
+                  text= {state.data.datatimesheet ? state.data.datatimesheet.b : '-'}
                   options={{
                     strokeWidth: 12,
                     color: '#F48165',
@@ -89,16 +92,16 @@ class DashboardHome extends Component {
                   </Circle>
                   <div className='circle-desc'>
                     <medium>Entry</medium>
-                    <small className='status'>{state.data.datatimesheet.status}</small>
+                    <small className='status'>{state.data.datatimesheet ? state.data.datatimesheet.status : '-' }</small>
                   </div>
               </div>
             </div>
             <div className='unit half'>
               <div className='circle-container'>
                 <Circle
-                  progress={state.data.datatimesheet.b *0.01}
+                  progress={state.data.datatimesheet ? state.data.datatimesheet.b *0.01 : '-'}
                   initialAnimate={true}
-                  text= {state.data.datatimesheet.b}
+                  text= {state.data.datatimesheet ? state.data.datatimesheet.b : '-'}
                   options={{
                     strokeWidth: 12,
                     color: '#F48165',
@@ -112,7 +115,7 @@ class DashboardHome extends Component {
                   </Circle>
                   <div className='circle-desc'>
                     <medium>Utilization</medium>
-                    <small className='status'>{state.data.datatimesheet.status_utilization}</small>
+                    {/* <small className='status'>{state.data.datatimesheet.status_utilization}</small> */}
                   </div>
               </div>
             </div>
@@ -135,52 +138,7 @@ class DashboardHome extends Component {
       </div>
     </div>
     <div className='projects'>
-    {
-        projects.map((value, index) => {
-          return(
-            <div className='grid wrap wider' key={index}>
-              <div className='unit whole'>
-                <div className='card'>
-                    <div className='unit two-fifths'>
-                      <medium className='project-name'>
-                        {value.project_name}
-                      </medium>
-                    </div>
-                    <div className='unit one-fifth'>
-                      <small className='project-status'>
-                      {
-                          value.project_status
-                      }
-                      &nbsp;({value.project_complete}%)
-                    </small>
-                    </div>
-                    <div className='unit two-fifths'>
-                      <Line
-                        progress={value.project_complete *0.01}
-                        initialAnimate={true}
-                        options={{
-                          strokeWidth: 3,
-                          color: '#F48165',
-                          trailColor:'#EEEEEE',
-                          trailWidth: 12,
-                          fontSize: 30,
-                          easing: 'easeInOut',
-                          duration: 700,
-                        }}
-                        containerClassName={'line-bar'}
-                        >
-                        </Line>
-                    </div>
 
-                </div>
-
-              </div>
-            </div>
-
-          )
-
-      })
-    }
     </div>
   </div>
 

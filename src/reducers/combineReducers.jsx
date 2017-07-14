@@ -42,7 +42,7 @@ export const data = (state = {}, action) => {
   //   isLoggedIn : false
   // }
   switch (action.type) {
-    case 'SESSION':
+    case 'API':
       saveState(store.getState())
 
       return Object.assign({}, state, {
