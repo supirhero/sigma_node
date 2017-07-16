@@ -2,6 +2,25 @@ var path = require("path");
 var webpack = require('webpack');
 
 
+var compile_mode = process.argv
+// var compile_mode = process.env.npm_lifecycle_event;
+
+// var compile_mode = (process.env.npm_lifecycle_script.split(' ')[3]).replace('--', '')
+// console.log('** Compile mode = ' + compile_mode + " **\n")
+// const args = process.argv[2];
+
+// var compile_mode = (process.env.npm_lifecycle_script.split(3)[1]).replace('--', '')
+const webpack_env = new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }})
+// console.log('** Compile mode = ' + process.env.NODE_ENV + " **\n")
+// var debug = (webpack_env !== 'production')
+// switch (webpack_env) {
+//   case 'mock': break;
+//   case 'local': break;
+//   case 'development': break;
+//   case 'production': break;
+//   default: throw new Error("You must set first command-line argument as --mock, --local, --development or --production"); break;
+// }
+
 
 
 

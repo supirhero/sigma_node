@@ -44,14 +44,27 @@ export const data = (state = {}, action) => {
   switch (action.type) {
     case 'API':
       saveState(store.getState())
+      // if (process.env.NODE_ENV == 'mock') {
+      //   return Object.assign({}, state, {
+      //     isloggedin: action.isloggedin,
+      //     bussines_unit : action.bussines_unit,
+      //     datatimesheet : action.datatimesheet,
+      //     userdata : action.userdata,
+      //     projects : action.projects
+      //   })
+      //
+      // }
+      // else {
+        return Object.assign({}, state, {
+          isloggedin: action.isloggedin,
+          bussines_unit : action.bussines_unit,
+          datatimesheet : action.datatimesheet,
+          userdata : action.userdata,
+          projects : action.projects
+        })
 
-      return Object.assign({}, state, {
-        isloggedin: action.isloggedin,
-        bussines_unit : action.bussines_unit,
-        datatimesheet : action.datatimesheet,
-        userdata : action.userdata,
-        projects : action.projects
-      })
+      // }
+
 
       break;
     default:
