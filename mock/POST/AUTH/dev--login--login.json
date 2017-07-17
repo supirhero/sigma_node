@@ -1,0 +1,32 @@
+{
+  "userdata": {
+    "user_name": "Fachran Dhani Achmad"
+  },
+  "datatimesheet": {
+    "b" : 75,
+    "a" : 35,
+    "status" : "under"
+  },
+  "projects":[
+    {
+      "project_name":"Penyelesaian proyek 1",
+      "project_status":"Complete",
+      "project_complete":100
+    },
+    {
+      "project_name":"Penyelesaian proyek 2",
+      "project_status":"Under",
+      "project_complete":40
+    },
+    {
+      "project_name":"Penyelesaian proyek 3",
+      "project_status":"Overdue",
+      "project_complete":60
+    },
+    {
+      "project_name":"Pembuatan 5",
+      "project_status":"Overdue",
+      "project_complete":20
+    }
+  ]
+}

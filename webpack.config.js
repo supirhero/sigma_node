@@ -55,7 +55,11 @@ module.exports = {
                   includePaths: ["absolute/path/a", "absolute/path/b"]
               }
           }]
-        }
+        },
+        {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }
         ]
     },
     plugins: [ webpack_env ],

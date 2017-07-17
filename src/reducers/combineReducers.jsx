@@ -2,9 +2,14 @@ import auth from './authReducer.jsx'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux'
 import * as storage from 'redux-storage'
+import {getData} from '../components/actions.jsx'
 
 
-// var initialState = {}
+var initialState = {
+  isloggedin : false,
+  data: null
+}
+
 // if (Object.keys(initialState).length === 0) {
 //   initialState = {
 //     isloggedin : false,
@@ -21,6 +26,7 @@ import * as storage from 'redux-storage'
 //   })
 //   .catch(() => console.log('Failed to load previous state'));
 // }
+
 
 const loadState = () => {
   try {
@@ -39,6 +45,7 @@ export const saveState = (state) => {
 }
 export const data = (state = {}, action) => {
   // state = {
+  console.log('json',action);
   //   isLoggedIn : false
   // }
   switch (action.type) {
@@ -55,12 +62,15 @@ export const data = (state = {}, action) => {
       //
       // }
       // else {
+      // var data = getData(action)
+      // console.log('data', data);
         return Object.assign({}, state, {
-          isloggedin: action.isloggedin,
-          bussines_unit : action.bussines_unit,
-          datatimesheet : action.datatimesheet,
-          userdata : action.userdata,
-          projects : action.projects
+          isloggedin: true,
+          // bussines_unit : data.bussines_unit,
+          // datatimesheet : data.datatimesheet,
+          // userdata : data.userdata,
+          // projects : data.projects
+          auth : action.res
         })
 
       // }

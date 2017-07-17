@@ -7,7 +7,7 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 
 import store from '../reducers/combineReducers.jsx'
-import {saveAuthentication} from './actions.jsx'
+import {getData} from './actions.jsx'
 
 
 class Login extends Component {
@@ -46,22 +46,22 @@ class Login extends Component {
                     //
                     //   console.log(error);
                     // });
-                    axios({
-                      method: 'post',
-                      url: "http://45.77.45.126/dev/login/login",
-                      params: {
-                        user_id: 'gina.nufus@sigma.co.id',
-                        password: 'S201502162',
-                        fpid : '160927084946'
-                      }
-                    }).then(function (response) {
-                      console.log(response);
-                      store.dispatch(saveAuthentication(response.data))
-                      browserHistory.push('/')
-                    }).catch(function (error) {
-                      alert('fail')
-                      console.log(error);
-                    });
+                      // axios({
+                      //   method: 'post',
+                      //   url: "http://45.77.45.126/dev/login/login",
+                      //   params: {
+                      //     user_id: 'gina.nufus@sigma.co.id',
+                      //     password: 'S201502162',
+                      //     fpid : '160927084946'
+                      //   }
+                      // }).then(function (response) {
+                      //   console.log(response);
+                      //   store.dispatch(saveAuthentication(response.data))
+                      //   browserHistory.push('/')
+                      // }).catch(function (error) {
+                      //   alert('fail')
+                      //   console.log(error);
+                      // });
                     // $.post("http://45.77.45.126/dev/login/login",
                     //   {
                     //       user_id: 'gina.nufus@sigma.co.id',
@@ -72,6 +72,25 @@ class Login extends Component {
                     //     alert('work')
                     //     console.log(data);
                     //   });
+                    // var data = getData({type:'API', method:'POST', type:'AUTH', request:{
+                    //   url: "/dev/login/login",
+                    //   params: {user_id: 'gina.nufus@sigma.co.id',
+                    //         password: 'S201502162',
+                    //         fpid : '160927084946'}
+                    // }})
+                    var data = getData({type:'API', method:'POST', request:{
+                      api:'AUTH',
+                      url: "/dev/login/login",
+                      params: {user_id: 'gina.nufus@sigma.co.id',
+                            password: 'S201502162',
+                            fpid : '160927084946'}}}, function () {
+                              browserHistory.replace('/')
+
+                            })
+                    console.log('data', data);
+                    store.dispatch(data)
+                    // console.log('store last', store.getState());
+
                     e.preventDefault()
                   }
                 }>
@@ -81,7 +100,7 @@ class Login extends Component {
                 <input></input>
                 <button className='btn-primary' type='submit'>SIGN IN</button>
                 <a onClick={()=> {
-                  browserHistory.replace('/auth/register')
+                  // browserHistory.replace('/auth/register')
                 }}>Register</a>
               </form>
 
