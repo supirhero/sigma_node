@@ -1,8 +1,14 @@
 import auth from './authReducer.jsx'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux'
+import axios from 'axios'
+import { Link, browserHistory } from 'react-router'
+
+
 import * as storage from 'redux-storage'
-import {getData} from '../components/actions.jsx'
+// import {getData} from '../components/actions.jsx'
+var compile_mode = process.env.NODE_ENV
+const base_URL = "http://45.77.45.126"
 
 
 var initialState = {
@@ -50,7 +56,6 @@ export const data = (state = {}, action) => {
   // }
   switch (action.type) {
     case 'API':
-      saveState(store.getState())
       // if (process.env.NODE_ENV == 'mock') {
       //   return Object.assign({}, state, {
       //     isloggedin: action.isloggedin,
@@ -62,30 +67,61 @@ export const data = (state = {}, action) => {
       //
       // }
       // else {
-      // var data = getData(action)
       // console.log('data', data);
+      if (compile_mode == 'mock') {
+        alert('mock')
+        var endpoint = action.request.url.slice(1).replace(/\//g, '--').split('?')[0]
+        var path = '../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint
+        var result = require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint + '.json')
+        console.log('result', result);
+        console.log('path', path);
+        // browserHistory.replace('/')
+
+        action.success(result)
+        saveState(store.getState())
+
         return Object.assign({}, state, {
           isloggedin: true,
-          // bussines_unit : data.bussines_unit,
-          // datatimesheet : data.datatimesheet,
-          // userdata : data.userdata,
-          // projects : data.projects
-          auth : action.res
+          auth : require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint)
         })
+      }
+      else {
+        alert('API')
 
-      // }
+          axios({
+            method: 'post',
+            url: base_URL + action.request.url,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: action.request.params
+          })
+          .then(function(response) {
+            saveState(store.getState())
+            
+            return Object.assign({}, state, {
+              isloggedin: true,
+              auth : response.data
+            })
+          })
+          .catch(
+            function (error) {
+              if (action.error) {
+                action.error(error)
 
+              }
+            })
+    }
 
       break;
     default:
     return state
-  }
 }
 
+}
 const allReducers = combineReducers({
   data : data,
   routing : routerReducer
 })
+
 export const store = createStore(allReducers, loadState())
 // const reducer = storage.reducer(allReducers);
 //

@@ -32,7 +32,7 @@ class DashboardHome extends Component {
                     </div>
                   </div>
                   <div className='unit three-fifths'>
-                    <large>{state.data.userdata ? state.data.userdata.user_name : '-' }</large>
+                    <large>{auth.userdata ? auth.userdata.user_nameentry : '-'}</large>
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
@@ -115,7 +115,7 @@ class DashboardHome extends Component {
                   </Circle>
                   <div className='circle-desc'>
                     <medium>Utilization</medium>
-                    {/* <small className='status'>{state.data.datatimesheet.status_utilization}</small> */}
+                    <small className='status'>{auth.datatimesheet.status_utilization}</small>
                   </div>
               </div>
             </div>

@@ -5,7 +5,8 @@
   "datatimesheet": {
     "b" : 75,
     "a" : 35,
-    "status" : "under"
+    "status" : "under",
+    "status_utilization" : "overing"
   },
   "projects":[
     {
@@ -27,6 +28,11 @@
       "project_name":"Pembuatan 5",
       "project_status":"Overdue",
       "project_complete":20
+    },
+    {
+      "project_name":"test",
+      "project_status":"Behind",
+      "project_complete":30
     }
   ]
 }

@@ -1,8 +1,8 @@
 import store from '../reducers/combineReducers.jsx'
 // import {saveAuthentication} from './actions.jsx'
-// "http://45.77.45.126/dev/login/login"
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
+const base_URL = "http://45.77.45.126"
 
 export function getData(data, callback) {
   if (compile_mode == 'mock') {
@@ -48,24 +48,23 @@ export function getAPI(data, callback) {
   switch (data.method) {
     case 'POST':
     axios({
-      method: 'POST',
-      url: data.request.url,
-      params: data.request.params
+      method: 'post',
+      url: "http://45.77.45.126/dev/login/login",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: data.request.params
     }).then(function (response) {
       if(callback) {
         callback(response)
       }
       return response
     }).catch(function (error) {
-      alert('fail')
-      // console.log(error);
+      console.log(error);
     });
       break;
     case 'GET':
 
       break;
     default:
-
   }
 }
 export function saveAuthentication(data) {

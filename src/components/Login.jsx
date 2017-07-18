@@ -78,17 +78,23 @@ class Login extends Component {
                     //         password: 'S201502162',
                     //         fpid : '160927084946'}
                     // }})
-                    var data = getData({type:'API', method:'POST', request:{
+                    // var data = getData()
+                    // console.log('data', data);
+                    store.dispatch({type:'API', method:'POST', request:{
                       api:'AUTH',
                       url: "/dev/login/login",
                       params: {user_id: 'gina.nufus@sigma.co.id',
                             password: 'S201502162',
-                            fpid : '160927084946'}}}, function () {
-                              browserHistory.replace('/')
+                            fpid : '160927084946'}
+                          },
+                          success: function (response) {
+                            console.log('response2', response);
+                          },
+                          error:function(error) {
 
-                            })
-                    console.log('data', data);
-                    store.dispatch(data)
+                          }}),
+                          browserHistory.replace('/')
+
                     // console.log('store last', store.getState());
 
                     e.preventDefault()
