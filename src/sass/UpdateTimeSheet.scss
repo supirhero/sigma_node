@@ -1,0 +1,33 @@
+.updateTimeSheet{
+    .updateSheet{
+        input{
+        width: 100%;
+        
+        }
+        select{
+        width: 100%;
+        }
+    }
+    .btn-primary{
+        width: 200px;
+        height: 50px;
+        
+    }
+
+    .btn-secondary{
+        width: 200px;
+        height: 50px;
+        margin-right:40px;
+    }
+    select {
+        background: #FFFFFF;
+        border: 1px solid #EEEEEE;
+        font-family: 'lato', sans-serif;
+        font-size: 25px;
+        overflow: hidden;
+        padding: 10px 0  10px 15px;
+        font-weight: 300;
+
+    }
+}
+

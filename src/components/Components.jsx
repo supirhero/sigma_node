@@ -86,3 +86,14 @@ export class Divider extends Component {
     )
   }
 }
+
+export class TimeSheetTimeButton extends Component {
+  render(){
+    return(
+    <button className ='btn-secondary'>
+      {this.props.text}
+      <small>{this.props.hours}</small>
+    </button>    
+    )
+  }
+}
