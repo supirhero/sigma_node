@@ -3,17 +3,16 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider} from  './components.jsx'
+import {Divider, TimeSheetTimeButton} from  './components.jsx'
 
 
 class Timesheet extends Component {
     render(){
       return(
         <div>
-
-            <div className='grid wrap wider'>
+            <div className='grid wrap'>
               <div className='unit whole'>
-                <Divider text='TIMESHEET' btnLeftText = 'Back' btnLeftClick={
+                <Divider text='TIMESHEET' back_text = 'Back' back={
                   e => {
                     browserHistory.goBack()
                     e.preventDefault()
@@ -21,20 +20,57 @@ class Timesheet extends Component {
                 }/>
               </div>
             </div>
-            <div className='grid wrap wider'>
-              <div className='unit whole'>
-                <div style={{marginTop:'20px'}}></div>
+            
+            <div className='grid wrap'>
+              <div className='unit whole' style={{textAlign:'center'}}>
+              <span className="icon-arrow-left-circle" />
+                <div style={{marginTop:'20px', display:'inline-block'}}>
+                  <TimeSheetTimeButton text="Tue, Jun 6" hours="DAY-OFF"/>
+                  <TimeSheetTimeButton text="Wed, Jun 7" hours="4 hours" />
+                  <TimeSheetTimeButton text="Thu, Jun 8" hours="-"/>
+                  <TimeSheetTimeButton text="Fri, Jun 9" hours="-"/>
+                  <TimeSheetTimeButton text="Sat, Jun 10" hours="-"/>
+                </div>
+                <span className="icon-arrow-right-circle" />
               </div>
             </div>
-            <div className='grid wrap wider'>
+
+            
+            <div className='grid wrap'>
               <div className='unit whole'>
-                <button style={{margin:'auto', display:'block'}} className='btn-primary'>ADD NEW</button>
+                <button style={{margin:'50px auto', display:'block'}} className='btn-primary' onClick={
+                  e => {
+                    browserHistory.push('/updatesheet')
+                    e.preventDefault() }}> 
+                    ADD NEW
+                </button>
 
               </div>
             </div>
-            <div className='grid wrap wider'>
-              <div className='unit whole'>
-                <Divider text='WEDNESDAY, JUNE 7'/>
+            <div className='grid wrap'>
+              <div className='unit whole' style={{marginBottom:'42px'}}>
+                <Divider text='WEDNESDAY, JUNE 7' />
+              </div>
+            </div>
+            
+            <div className="grid wrap">
+              <div className="unit whole">
+                <div className="card">
+                  <div className="person">
+                    <div className="person-image"></div>
+                    <div className="person-info">
+                      <large>Kara Gray</large>
+                      <small>Admin, Project Manager</small>
+                    </div>
+                  </div>
+                </div>
+              
+                <div className="card project">
+                    <small>4:55 PM</small>
+                    <medium className="project-info">
+                      Project <a href="">Transaction Based Managed Services 2017</a>
+                    </medium>
+                </div>
               </div>
             </div>
     </div>
