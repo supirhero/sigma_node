@@ -140,43 +140,62 @@ class DashboardHome extends Component {
     </div>
     <div className='projects'>
       {
-              auth.projects.map((value, index) => {
+              auth.project.map((value, index) => {
                 return(
-                  <div className='grid wrap wider' key={index}>
-                    <div className='unit whole'>
-                      <div className='card'>
-                          <div className='unit two-fifths'>
-                            <medium className='project-name'>
-                              {value.project_name}
-                            </medium>
-                          </div>
-                          <div className='unit one-fifth'>
-                            <small className='project-status'>
-                            {
-                                value.project_status
-                            }
-                            &nbsp;({value.project_complete}%)
-                          </small>
-                          </div>
-                          <div className='unit two-fifths'>
-                            <Line
-                              progress={value.project_complete *0.01}
-                              initialAnimate={true}
-                              options={{
-                                strokeWidth: 3,
-                                color: '#F48165',
-                                trailColor:'#EEEEEE',
-                                trailWidth: 12,
-                                fontSize: 30,
-                                easing: 'easeInOut',
-                                duration: 700,
-                              }}
-                              containerClassName={'line-bar'}
-                              >
-                              </Line>
-                          </div>
-                      </div>
-                    </div>
+                  <div key={index}>
+                    <div style={{marginBottom: '30px', margin: '54px auto 30px'}} className='grid wrap wider' key={index}>
+                      <div className='unit whole'>
+                    <large>Business Unit&nbsp;:&nbsp;&nbsp;</large>
+                    <a style={{fontSize:'20px'}}>{value.bu_name}</a>
+                    <button className='btn-secondary' onClick={e => {
+                      browserHistory.push('/new-project')
+
+                    }}>NEW PROJECT</button>
+                  </div>
+                </div>
+
+                    {
+                      value.project_list.map((value,index) => {
+                        return(
+                          <div className='grid wrap wider' key={index}>
+                            <div className='unit whole'>
+                              <div className='card'>
+                                <div className='unit two-fifths'>
+                                  <medium className='project-name'>
+                                    {value.project_name}
+                                  </medium>
+                                </div>
+                                <div className='unit one-fifth'>
+                                  <small className='project-status'>
+                                    {
+                                      value.project_status
+                                    }
+                                    &nbsp;({value.project_complete}%)
+                                  </small>
+                                </div>
+                                <div className='unit two-fifths'>
+                                  <Line
+                                    progress={value.project_complete *0.01}
+                                    initialAnimate={true}
+                                    options={{
+                                      strokeWidth: 3,
+                                      color: '#F48165',
+                                      trailColor:'#EEEEEE',
+                                      trailWidth: 12,
+                                      fontSize: 30,
+                                      easing: 'easeInOut',
+                                      duration: 700,
+                                    }}
+                                    containerClassName={'line-bar'}
+                                    >
+                                    </Line>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        )
+                      })
+                    }
                   </div>
                 )
             })

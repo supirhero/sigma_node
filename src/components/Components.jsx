@@ -78,9 +78,52 @@ export class Divider extends Component {
     return (
       <div className='divider-wrapper'>
         {
-          this.props.back && <button className='btn-secondary' onClick={this.props.back}>{this.props.back_text}</button>
+          this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
         }
         <h2><span>{this.props.text}</span></h2>
+
+      </div>
+    )
+  }
+}
+
+
+
+export class Input extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+        <h2 className='input-desc'>{this.props.inputName}</h2>
+        <input placeholder={this.props.placeholder}></input>
+      </div>
+    )
+  }
+}
+
+export class RadioButton extends Component {
+  render() {
+    return (
+      <p className='radio-button'>
+       <input type="radio" id={this.props.id} name={this.props.group}/>
+       <label htmlFor={this.props.id}>{this.props.label}</label>
+     </p>
+    )
+  }
+}
+
+export class Select extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+        <h2 className='input-desc'>{this.props.inputName}</h2>
+        <select className='select'>
+          {this.props.items.items.map((value,index) => {
+            return(
+              <option key={index} value={value.title}>{value.title}</option>
+
+            )
+          })}
+        </select>
 
       </div>
     )

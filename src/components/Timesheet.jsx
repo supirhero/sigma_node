@@ -13,7 +13,7 @@ class Timesheet extends Component {
 
             <div className='grid wrap wider'>
               <div className='unit whole'>
-                <Divider text='TIMESHEET' back_text = 'Back' back={
+                <Divider text='TIMESHEET' btnLeftText = 'Back' btnLeftClick={
                   e => {
                     browserHistory.goBack()
                     e.preventDefault()

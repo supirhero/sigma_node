@@ -98,9 +98,10 @@ input {
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   font-family: 'lato', sans-serif;
-  font-size: 25px;
+  font-size: 20px;
+  width: 100% !important;
   overflow: hidden;
-  padding: 10px 0  10px 15px;
+  padding: 13px 0  13px 0px;
   font-weight: 300;
 
 }
@@ -132,6 +133,7 @@ input {
   font-weight: 300;
   color: #777777;
   letter-spacing: 1px;
+  font-size: 20px
 }
 
 .navbar {
@@ -186,6 +188,7 @@ input {
 }
 
 .divider-wrapper {
+  margin: 35px 0 20px 0;
   position: relative;
   button {
     position: absolute;
@@ -212,4 +215,83 @@ input {
       background:$color-background;
       padding:0 40px;
   }
+}
+
+.radio-button {
+  label {
+        font-family: 'lato', sans-serif;
+        font-weight: 300;
+        color: #777777;
+        letter-spacing: 1px;
+        font-size: 20px
+      }
+      [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+    [type="radio"]:checked + label,
+    [type="radio"]:not(:checked) + label
+    {
+        position: relative;
+        padding-left: 36px;
+        cursor: pointer;
+        line-height: 25px;
+        display: inline-block;
+        color: #666;
+    }
+    [type="radio"]:checked + label:before,
+    [type="radio"]:not(:checked) + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        border: 3px solid $color-accent;
+        border-radius: 100%;
+        background: transparent;
+    }
+    [type="radio"]:checked + label:after,
+    [type="radio"]:not(:checked) + label:after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background: $color-accent;
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    [type="radio"]:not(:checked) + label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    [type="radio"]:checked + label:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+.select {
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  font-family: 'lato', sans-serif;
+  font-size: 20px;
+  width: 100%;
+  overflow: hidden;
+  padding: 13px 0  13px 0px;
+  font-weight: 300;
+  -webkit-border-radius: 0px;
+  border-radius:0px !important;
+  height: 52px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('http://www.davettur.com/themes/html/fonts/Svg_icons/expand-button.svg');
+  background-position: 95% 21px;
+  background-size: 11px;
+background-repeat: no-repeat;
 }

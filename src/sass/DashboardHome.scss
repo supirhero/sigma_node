@@ -18,12 +18,15 @@
 }
 }
 .search {
-  margin: 0 auto 54px;
   width: 80%;
   height: 50px;
+  margin: auto;
 }
 
 .projects {
+  .btn-secondary {
+    float: right;
+  }
   .card {
     padding: 23px 32px;
     .project-name {

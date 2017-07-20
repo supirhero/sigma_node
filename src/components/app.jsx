@@ -19,6 +19,8 @@ import Profile from './Profile.jsx'
 import ProfileBasicInformation from './ProfileBasicInformation.jsx'
 import ProfileChangePassword from './ProfileChangePassword.jsx'
 import Timesheet from './Timesheet.jsx'
+import NewProject from './NewProject.jsx'
+
 
 
 
@@ -61,13 +63,13 @@ render(
     <Route path='/' component={MainPage}>
       <Route component={Dashboard} onEnter={requireAuth}>
         <IndexRoute component={DashboardHome}/>
+        <Route path='new-project' component={NewProject}></Route>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>
 
         </Route>
       </Route>
-
       <Route path='auth' component={Auth}>
         <Route path="register" component={Register}>
           <IndexRoute component={RegisterSigma}/>
