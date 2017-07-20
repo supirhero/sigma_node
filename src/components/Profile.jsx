@@ -10,7 +10,7 @@ import store from '../reducers/combineReducers.jsx'
 
 
 
-class Dashboard extends Component {
+class Profile extends Component {
 
     render(){
       return(
@@ -51,5 +51,5 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   }
 }
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Profile)
 // export default Login

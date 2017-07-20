@@ -8,7 +8,40 @@
     "status" : "under",
     "status_utilization" : "overing"
   },
-  "projects":[
+  "project":[
+    {
+    "bu_name": "IT Operation services",
+    "project_list": [
+      {
+        "project_name":"Penyelesaian proyek 1",
+        "project_status":"Complete",
+        "project_complete":100
+      },
+      {
+        "project_name":"Penyelesaian proyek 2",
+        "project_status":"Under",
+        "project_complete":40
+      },
+      {
+        "project_name":"Penyelesaian proyek 3",
+        "project_status":"Overdue",
+        "project_complete":60
+      },
+      {
+        "project_name":"Pembuatan 5",
+        "project_status":"Overdue",
+        "project_complete":20
+      },
+      {
+        "project_name":"test",
+        "project_status":"Behind",
+        "project_complete":30
+      }
+    ]
+  },
+  {
+  "bu_name": "Cross-Industry Application Services",
+  "project_list": [
     {
       "project_name":"Penyelesaian proyek 1",
       "project_status":"Complete",
@@ -34,5 +67,8 @@
       "project_status":"Behind",
       "project_complete":30
     }
+  ]
+}
+
   ]
 }

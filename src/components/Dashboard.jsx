@@ -27,8 +27,7 @@ class Dashboard extends Component {
 
     render(){
       return(
-            <div className='grid'>
-              <div className='unit whole no-gutters'>
+              <div>
                 <div className='navbar'>
                   <div className='grid wrap'>
                     <div className='unit whole'>
@@ -83,7 +82,6 @@ class Dashboard extends Component {
               </div>
 
 
-            </div>
       )
     }
 

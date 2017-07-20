@@ -1,6 +1,6 @@
 .card.profile {
   // padding: 30px;
-  margin: 0px 40px 0 0;
+  // margin: 0px 40px 0 0;
   large {
     text-transform: capitalize;
   }
@@ -18,12 +18,15 @@
 }
 }
 .search {
-  margin: 0 auto 54px;
   width: 80%;
   height: 50px;
+  margin: auto;
 }
 
 .projects {
+  .btn-secondary {
+    float: right;
+  }
   .card {
     padding: 23px 32px;
     .project-name {

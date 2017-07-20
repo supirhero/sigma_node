@@ -4,10 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Input, RadioButton, Select} from './Components.jsx'
-
-
-
-
+import { Line} from 'react-progressbar.js'
 
 
 class NewProject extends Component {
@@ -18,11 +15,25 @@ class NewProject extends Component {
           <form>
           <div className='grid wrap'>
             <div className='unit whole'>
-              <Divider btnLeftText='BACK' btnLeftClick={ e => {
+              <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
                 browserHistory.goBack()
                 e.preventDefault()
 
               }} text='CREATE NEW PROJECT'></Divider>
+              <div className='grid wrap'>
+                <div className='unit one-quarter'>
+                  <medium style={{textAlign:'center', marginTop:'20px'}}>IWO</medium>
+                </div>
+                <div className='unit one-quarter'>
+                  <medium style={{textAlign:'center', marginTop:'20px'}}>PRODUCT</medium>
+                </div>
+                <div className='unit one-quarter'>
+                  <medium style={{textAlign:'center', marginTop:'20px'}}>STATUS</medium>
+                </div>
+                <div className='unit one-quarter'>
+                  <medium style={{textAlign:'center', marginTop:'20px'}}>FINANCE</medium>
+                </div>
+              </div>
               <Divider text='IWO'></Divider>
             </div>
           </div>
@@ -59,7 +70,8 @@ class NewProject extends Component {
               </div>
               <div className='grid wrap'>
                 <div className='unit whole'>
-                  <Divider text='STATUS'></Divider>
+
+                  <Divider text='PRODUCT'></Divider>
                 </div>
               </div>
               <div className='grid wrap'>
@@ -96,10 +108,11 @@ class NewProject extends Component {
                 <div className='unit half'>
                   <div className='grid wrap'>
                     <div className='unit half'>
-                      <RadioButton id='test2' label='Project' group='project-type'/>
+
+                      <RadioButton id='yes' label='YES' group='operation' style={{marginLeft: '20px'}}/>
                     </div>
                     <div className='unit half'>
-                      <RadioButton id='test2' label='Non-Project' group='project-type'/>
+                      <RadioButton id='no' label='NO' group='operation'/>
                     </div>
                   </div>
                   <div className='grid wrap'>
@@ -133,6 +146,122 @@ class NewProject extends Component {
                       {title : 'TBWS21312'}
                     ]
                   }}/>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit half'>
+                  <Select inputName='START DATE' style={{width:'96%'}} items={{
+                    items : [
+                      {title : 'TBWS21312'},
+                      {title : 'TBWS21312'}
+                    ]
+                  }}/>
+                </div>
+                <div className='unit half'>
+                  <Select inputName='END DATE' style={{width:'96%', float:'right'}} items={{
+                    items : [
+                      {title : 'TBWS21312'},
+                      {title : 'TBWS21312'}
+                    ]
+                  }}/>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <h1 className='input-desc'>VISIBILITY</h1>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <RadioButton id='business-member' label='Owning Busniness Member' group='visibility'/>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <RadioButton id='project-member' label='Project Members Only' group='visibility'/>
+                </div>
+              </div>
+
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <Divider text='FINANCE'></Divider>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit half'>
+                  <div className='grid wrap'>
+                    <div className='unit whole'>
+                      <Select inputName='START DATE' style={{width:'96%'}} items={{
+                        items : [
+                          {title : 'TBWS21312'},
+                          {title : 'TBWS21312'}
+                        ]
+                      }}/>
+                    </div>
+                  </div>
+                  <div className='grid wrap'>
+                    <div className='unit whole'>
+                      <Input inputName='TYPE OF EXPENSE' style={{width:'96%'}}/>
+                    </div>
+                  </div>
+                </div>
+                <div className='unit half'>
+                  <div className='grid wrap'>
+                    <div className='unit whole'>
+                      <Input inputName='PROJECT OVERHEAD' style={{width:'96%', float:'right'}}/>
+                    </div>
+                  </div>
+                  <div className='grid wrap'>
+                    <div className='unit whole'>
+                      <Input inputName='COGS' style={{width:'96%', float:'right'}}/>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <Divider text='PROJECT CHARTER FORM'></Divider>
+                </div>
+              </div>
+              <div className='grid wrap'>
+                <div className='unit three-quarters'>
+                  <large style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></large>
+                  <large style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
+
+                  <div className='completion-bar' style ={{display:'inline-block'}}>
+
+                    <Line
+                      progress={30 *0.01}
+                      initialAnimate={true}
+                      options={{
+                        strokeWidth: 3,
+                        color: '#65BDF4',
+                        trailColor:'#EEEEEE',
+                        trailWidth: 12,
+                        fontSize: 30,
+                        easing: 'easeInOut',
+                        duration: 700,
+                      }}
+                      containerClassName={'line-bar'}
+                      >
+                      </Line>
+                  </div>
+
+                </div>
+                <div className='unit one-quarter'>
+                  <button className='btn-primary'>COMPLETE FORM</button>
+                </div>
+
+              </div>
+              <div className='grid wrap'>
+                <div className='unit whole'>
+                  <div className='btn-wrapper'>
+                    <button className='btn-secondary' >CANCEL</button>
+                    <button className='btn-primary'style={{float:'right'}}>CREATE PROJECT</button>
+
+                  </div>
+
                 </div>
               </div>
 
