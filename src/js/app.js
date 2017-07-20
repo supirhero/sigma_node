@@ -52396,6 +52396,10 @@ var _Timesheet = __webpack_require__(174);
 
 var _Timesheet2 = _interopRequireDefault(_Timesheet);
 
+var _UpdateTimesheet = __webpack_require__(367);
+
+var _UpdateTimesheet2 = _interopRequireDefault(_UpdateTimesheet);
+
 var _NewProject = __webpack_require__(167);
 
 var _NewProject2 = _interopRequireDefault(_NewProject);
@@ -52410,7 +52414,6 @@ __webpack_require__(175);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import {createBrowserHistory} from 'history'
 function requireAuth(nextState, replace) {
   if (!_combineReducers.store.getState().data.isloggedin) {
     replace({
@@ -52419,6 +52422,8 @@ function requireAuth(nextState, replace) {
     });
   }
 }
+// import {createBrowserHistory} from 'history'
+
 
 _combineReducers.store.subscribe(function () {
   (0, _combineReducers.saveState)(_combineReducers.store.getState());
@@ -52447,7 +52452,9 @@ var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHi
           { path: 'profile', component: _Profile2.default },
           _react2.default.createElement(_reactRouter.IndexRoute, { component: _ProfileBasicInformation2.default }),
           _react2.default.createElement(_reactRouter.Route, { path: 'change-password', component: _ProfileChangePassword2.default })
-        )
+        ),
+        _react2.default.createElement(_reactRouter.Route, { path: 'timesheet', component: _Timesheet2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'updatesheet', component: _UpdateTimesheet2.default })
       ),
       _react2.default.createElement(
         _reactRouter.Route,
@@ -52459,8 +52466,7 @@ var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHi
           _react2.default.createElement(_reactRouter.Route, { path: 'vendor', component: _RegisterVendor2.default })
         ),
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _Login2.default })
-      ),
-      _react2.default.createElement(_reactRouter.Route, { path: 'timesheet', component: _Timesheet2.default })
+      )
     )
   )
 ), document.getElementById('app'));
@@ -52806,7 +52812,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Ope
 exports.push([module.i, "@import url(https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css);", ""]);
 
 // module
-exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card.login #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card.login .margin {\n  margin: 39px; }\n  .card.login .margin h1 {\n    font-size: 25px; }\n  .card.login .margin .input-desc {\n    font-size: 21px; }\n  .card.login .margin input {\n    width: 100%;\n    height: 50px; }\n\n.card.register .margin {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.profile .sidebar medium {\n  margin-top: 20px; }\n\n.profile .input-desc {\n  font-size: 16px; }\n\n.profile input {\n  width: 100%; }\n\n.completion-bar {\n  width: 55%;\n  display: inline-block;\n  border-radius: 30px;\n  overflow: hidden; }\n\n.btn-wrapper {\n  margin: 40px auto;\n  width: 456px;\n  display: block; }\n  .btn-wrapper button {\n    width: 208px; }\n\n.person {\n  margin-top: 21.5px;\n  margin-bottom: 21.5px; }\n  .person .person-image {\n    width: 50px;\n    height: 50px;\n    background-color: #FA5962;\n    border-radius: 100%;\n    margin-left: 50px;\n    display: inline-block; }\n  .person .person-info {\n    display: inline-block;\n    margin-left: 20px; }\n\n.card.project {\n  padding-top: 20px;\n  padding-left: 50px; }\n  .card.project small {\n    float: left; }\n  .card.project .project-info {\n    margin-left: 20px;\n    float: left; }\n\n.icon-arrow-left-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-right: 30px;\n  position: relative;\n  top: 20px; }\n\n.icon-arrow-right-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-left: 30px;\n  position: relative;\n  top: 20px; }\n\n.card.profile large {\n  text-transform: capitalize; }\n\n.card.profile ul {\n  list-style: none;\n  padding-left: 0; }\n  .card.profile ul li {\n    margin-top: 10px; }\n\n.card.profile .margin {\n  margin: 20px; }\n\n.search {\n  width: 80%;\n  height: 50px;\n  margin: auto; }\n\n.projects .btn-secondary {\n  float: right; }\n\n.projects .card {\n  padding: 23px 32px; }\n  .projects .card .project-name {\n    color: #333333; }\n  .projects .card .project-status {\n    text-transform: uppercase;\n    font-weight: 400;\n    font-family: 'Open Sans', sans-serif; }\n  .projects .card .line-bar {\n    overflow: hidden;\n    border-radius: 10px;\n    border: 1px solid #EEEEEE; }\n\n.divider {\n  border: 1px solid #CCCCCC;\n  width: 100%;\n  margin-top: 70px;\n  margin-bottom: 40px; }\n\n.pic-wrapper {\n  width: 150px;\n  height: 150px;\n  background-color: #FA5962;\n  border-radius: 100%; }\n\n.circle-container {\n  position: relative; }\n  .circle-container .circle-bar {\n    display: inline-block;\n    height: 58px;\n    width: 58px;\n    margin-top: 31px; }\n    .circle-container .circle-bar .progressbar-text {\n      color: #777777 !important;\n      font-family: 'lato', sans-serif;\n      font-weight: 300; }\n  .circle-container .circle-desc {\n    display: inline-block;\n    position: absolute;\n    top: 33px;\n    margin-left: 24px; }\n    .circle-container .circle-desc .status {\n      text-transform: uppercase;\n      font-weight: 300;\n      margin-top: 6px; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  border-radius: 3px;\n  padding: 20px;\n  overflow: hidden;\n  border: 1px solid #EEEEEE; }\n\na {\n  cursor: pointer;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  color: #F57556;\n  letter-spacing: 1px;\n  line-height: 24px; }\n\n.shadow {\n  border: none;\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nlarge {\n  font-size: 17px;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  display: inline-block;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nmedium {\n  display: block;\n  font-family: 'lato', sans-serif;\n  /* SIGN IN: */\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nsmall {\n  display: block;\n  /* SIGN IN: */\n  font-family: 'Open Sans', sans-serif;\n  font-size: 17px;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\n.margin {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100% !important;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.btn-secondary {\n  /* Rectangle 4: */\n  /* Rectangle 4 Copy 2: */\n  padding: 15px 35px;\n  background: white;\n  border: 1px solid #EEEEEE;\n  border-radius: 2px;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  margin-top: 25px;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%;\n  margin-bottom: 57px; }\n  .navbar .trigger {\n    background-color: #FA5962;\n    height: 36px;\n    width: 36px;\n    float: right;\n    border-radius: 100%; }\n  .navbar .menu {\n    z-index: 1;\n    display: none;\n    background: #FFFFFF;\n    border: 1px solid #EEEEEE;\n    position: absolute;\n    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);\n    border-radius: 2px;\n    right: 230px;\n    top: 70px; }\n    .navbar .menu .menu-section {\n      border-bottom: 1px solid #CCCCCC; }\n      .navbar .menu .menu-section .menu-header {\n        padding: 20px 40px 10px 30px; }\n        .navbar .menu .menu-section .menu-header .title {\n          font-size: 17px; }\n      .navbar .menu .menu-section .menu-item {\n        padding: 15px 40px 15px 30px; }\n      .navbar .menu .menu-section .menu-item:hover {\n        background-color: #FA5962; }\n        .navbar .menu .menu-section .menu-item:hover .menu-title {\n          color: white !important; }\n  .navbar .menu.active {\n    display: block; }\n\n.divider-wrapper {\n  margin: 35px 0 20px 0;\n  position: relative; }\n  .divider-wrapper button {\n    position: absolute; }\n  .divider-wrapper h2 {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid #CCCCCC;\n    line-height: 0.1em;\n    margin: 24px 0 20px;\n    font-size: 20px;\n    /* SIGN IN: */\n    font-family: 'lato', sans-serif;\n    color: #777777;\n    display: inline-block;\n    letter-spacing: 0.94px;\n    font-weight: 400;\n    letter-spacing: 1.25px; }\n  .divider-wrapper h2 span {\n    background: #FAFAFA;\n    padding: 0 40px; }\n\n.radio-button label {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.radio-button [type=\"radio\"]:checked,\n.radio-button [type=\"radio\"]:not(:checked) {\n  position: absolute;\n  left: -9999px; }\n\n.radio-button [type=\"radio\"]:checked + label,\n.radio-button [type=\"radio\"]:not(:checked) + label {\n  position: relative;\n  padding-left: 36px;\n  cursor: pointer;\n  line-height: 25px;\n  display: inline-block;\n  color: #666; }\n\n.radio-button [type=\"radio\"]:checked + label:before,\n.radio-button [type=\"radio\"]:not(:checked) + label:before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 20px;\n  height: 20px;\n  border: 3px solid #F48165;\n  border-radius: 100%;\n  background: transparent; }\n\n.radio-button [type=\"radio\"]:checked + label:after,\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  content: '';\n  width: 12px;\n  height: 12px;\n  background: #F48165;\n  position: absolute;\n  top: 7px;\n  left: 7px;\n  border-radius: 100%;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease; }\n\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  opacity: 0;\n  -webkit-transform: scale(0);\n  transform: scale(0); }\n\n.radio-button [type=\"radio\"]:checked + label:after {\n  opacity: 1;\n  -webkit-transform: scale(1);\n  transform: scale(1); }\n\n.select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100%;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300;\n  -webkit-border-radius: 0px;\n  border-radius: 0px !important;\n  height: 52px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  background-image: url(\"http://www.davettur.com/themes/html/fonts/Svg_icons/expand-button.svg\");\n  background-position: 95% 21px;\n  background-size: 11px;\n  background-repeat: no-repeat; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
+exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card.login #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card.login .margin {\n  margin: 39px; }\n  .card.login .margin h1 {\n    font-size: 25px; }\n  .card.login .margin .input-desc {\n    font-size: 21px; }\n  .card.login .margin input {\n    width: 100%;\n    height: 50px; }\n\n.card.register .margin {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.profile .sidebar medium {\n  margin-top: 20px; }\n\n.profile .input-desc {\n  font-size: 16px; }\n\n.profile input {\n  width: 100%; }\n\n.updateTimeSheet .updateSheet input {\n  width: 100%; }\n\n.updateTimeSheet .updateSheet select {\n  width: 100%; }\n\n.updateTimeSheet .btn-primary {\n  width: 200px;\n  height: 50px; }\n\n.updateTimeSheet .btn-secondary {\n  width: 200px;\n  height: 50px;\n  margin-right: 40px; }\n\n.updateTimeSheet select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.updateTimeSheet .task-workhours {\n  display: grid;\n  grid-template-columns: 3fr 1fr;\n  grid-column-gap: 20px; }\n\n.completion-bar {\n  width: 55%;\n  display: inline-block;\n  border-radius: 30px;\n  overflow: hidden; }\n\n.btn-wrapper {\n  margin: 40px auto;\n  width: 456px;\n  display: block; }\n  .btn-wrapper button {\n    width: 208px; }\n\n.person {\n  margin-top: 21.5px;\n  margin-bottom: 21.5px; }\n  .person .person-image {\n    width: 50px;\n    height: 50px;\n    background-color: #FA5962;\n    border-radius: 100%;\n    margin-left: 50px;\n    display: inline-block; }\n  .person .person-info {\n    display: inline-block;\n    margin-left: 20px; }\n\n.card.project {\n  padding-top: 20px;\n  padding-left: 50px; }\n  .card.project small {\n    float: left; }\n  .card.project .project-info {\n    margin-left: 20px;\n    float: left; }\n\n.icon-arrow-left-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-right: 30px;\n  position: relative;\n  top: 20px; }\n\n.icon-arrow-right-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-left: 30px;\n  position: relative;\n  top: 20px; }\n\n.card.profile large {\n  text-transform: capitalize; }\n\n.card.profile ul {\n  list-style: none;\n  padding-left: 0; }\n  .card.profile ul li {\n    margin-top: 10px; }\n\n.card.profile .margin {\n  margin: 20px; }\n\n.search {\n  width: 80%;\n  height: 50px;\n  margin: auto; }\n\n.projects .btn-secondary {\n  float: right; }\n\n.projects .card {\n  padding: 23px 32px; }\n  .projects .card .project-name {\n    color: #333333; }\n  .projects .card .project-status {\n    text-transform: uppercase;\n    font-weight: 400;\n    font-family: 'Open Sans', sans-serif; }\n  .projects .card .line-bar {\n    overflow: hidden;\n    border-radius: 10px;\n    border: 1px solid #EEEEEE; }\n\n.divider {\n  border: 1px solid #CCCCCC;\n  width: 100%;\n  margin-top: 70px;\n  margin-bottom: 40px; }\n\n.pic-wrapper {\n  width: 150px;\n  height: 150px;\n  background-color: #FA5962;\n  border-radius: 100%; }\n\n.circle-container {\n  position: relative; }\n  .circle-container .circle-bar {\n    display: inline-block;\n    height: 58px;\n    width: 58px;\n    margin-top: 31px; }\n    .circle-container .circle-bar .progressbar-text {\n      color: #777777 !important;\n      font-family: 'lato', sans-serif;\n      font-weight: 300; }\n  .circle-container .circle-desc {\n    display: inline-block;\n    position: absolute;\n    top: 33px;\n    margin-left: 24px; }\n    .circle-container .circle-desc .status {\n      text-transform: uppercase;\n      font-weight: 300;\n      margin-top: 6px; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  border-radius: 3px;\n  padding: 20px;\n  overflow: hidden;\n  border: 1px solid #EEEEEE; }\n\na {\n  cursor: pointer;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  color: #F57556;\n  letter-spacing: 1px;\n  line-height: 24px; }\n\n.shadow {\n  border: none;\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nlarge {\n  font-size: 17px;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  display: inline-block;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nmedium {\n  display: block;\n  font-family: 'lato', sans-serif;\n  /* SIGN IN: */\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nsmall {\n  display: block;\n  /* SIGN IN: */\n  font-family: 'Open Sans', sans-serif;\n  font-size: 17px;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\n.margin {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100% !important;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.btn-secondary {\n  /* Rectangle 4: */\n  /* Rectangle 4 Copy 2: */\n  padding: 15px 35px;\n  background: white;\n  border: 1px solid #EEEEEE;\n  border-radius: 2px;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  margin-top: 25px;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%;\n  margin-bottom: 57px; }\n  .navbar .trigger {\n    background-color: #FA5962;\n    height: 36px;\n    width: 36px;\n    float: right;\n    border-radius: 100%; }\n  .navbar .menu {\n    z-index: 1;\n    display: none;\n    background: #FFFFFF;\n    border: 1px solid #EEEEEE;\n    position: absolute;\n    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);\n    border-radius: 2px;\n    right: 230px;\n    top: 70px; }\n    .navbar .menu .menu-section {\n      border-bottom: 1px solid #CCCCCC; }\n      .navbar .menu .menu-section .menu-header {\n        padding: 20px 40px 10px 30px; }\n        .navbar .menu .menu-section .menu-header .title {\n          font-size: 17px; }\n      .navbar .menu .menu-section .menu-item {\n        padding: 15px 40px 15px 30px; }\n      .navbar .menu .menu-section .menu-item:hover {\n        background-color: #FA5962; }\n        .navbar .menu .menu-section .menu-item:hover .menu-title {\n          color: white !important; }\n  .navbar .menu.active {\n    display: block; }\n\n.divider-wrapper {\n  margin: 35px 0 20px 0;\n  position: relative; }\n  .divider-wrapper button {\n    position: absolute; }\n  .divider-wrapper h2 {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid #CCCCCC;\n    line-height: 0.1em;\n    margin: 24px 0 20px;\n    font-size: 20px;\n    /* SIGN IN: */\n    font-family: 'lato', sans-serif;\n    color: #777777;\n    display: inline-block;\n    letter-spacing: 0.94px;\n    font-weight: 400;\n    letter-spacing: 1.25px; }\n  .divider-wrapper h2 span {\n    background: #FAFAFA;\n    padding: 0 40px; }\n\n.radio-button label {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.radio-button [type=\"radio\"]:checked,\n.radio-button [type=\"radio\"]:not(:checked) {\n  position: absolute;\n  left: -9999px; }\n\n.radio-button [type=\"radio\"]:checked + label,\n.radio-button [type=\"radio\"]:not(:checked) + label {\n  position: relative;\n  padding-left: 36px;\n  cursor: pointer;\n  line-height: 25px;\n  display: inline-block;\n  color: #666; }\n\n.radio-button [type=\"radio\"]:checked + label:before,\n.radio-button [type=\"radio\"]:not(:checked) + label:before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 20px;\n  height: 20px;\n  border: 3px solid #F48165;\n  border-radius: 100%;\n  background: transparent; }\n\n.radio-button [type=\"radio\"]:checked + label:after,\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  content: '';\n  width: 12px;\n  height: 12px;\n  background: #F48165;\n  position: absolute;\n  top: 7px;\n  left: 7px;\n  border-radius: 100%;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease; }\n\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  opacity: 0;\n  -webkit-transform: scale(0);\n  transform: scale(0); }\n\n.radio-button [type=\"radio\"]:checked + label:after {\n  opacity: 1;\n  -webkit-transform: scale(1);\n  transform: scale(1); }\n\n.select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100%;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300;\n  -webkit-border-radius: 0px;\n  border-radius: 0px !important;\n  height: 52px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  background-image: url(\"http://www.davettur.com/themes/html/fonts/Svg_icons/expand-button.svg\");\n  background-position: 95% 21px;\n  background-size: 11px;\n  background-repeat: no-repeat; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
 
 // exports
 
@@ -53278,6 +53284,158 @@ function mapStateToProps(state) {
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(MyPerformances);
 // export default Login
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(9);
+
+var _axios = __webpack_require__(10);
+
+var _Components = __webpack_require__(164);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UpdateTimesheet = function (_Component) {
+    _inherits(UpdateTimesheet, _Component);
+
+    function UpdateTimesheet() {
+        _classCallCheck(this, UpdateTimesheet);
+
+        return _possibleConstructorReturn(this, (UpdateTimesheet.__proto__ || Object.getPrototypeOf(UpdateTimesheet)).apply(this, arguments));
+    }
+
+    _createClass(UpdateTimesheet, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'updateTimeSheet' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'grid wrap wider' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'unit whole' },
+                        _react2.default.createElement(_Components.Divider, { text: 'UPDATE TIMESHEET', back_text: 'X' })
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'grid wrap wider updateSheet' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'unit whole' },
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'DATE'
+                        ),
+                        _react2.default.createElement('input', null),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'PROJECT'
+                        ),
+                        _react2.default.createElement(
+                            'select',
+                            { value: '' },
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'project 1' },
+                                'project 1'
+                            ),
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'project 2' },
+                                'project 2'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'TASK'
+                        ),
+                        _react2.default.createElement(
+                            'select',
+                            { value: '' },
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'project 1' },
+                                'project 1'
+                            ),
+                            _react2.default.createElement(
+                                'option',
+                                { value: 'project 2' },
+                                'project 2'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'WORK HOURS'
+                        ),
+                        _react2.default.createElement('input', null),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'SUBJECT'
+                        ),
+                        _react2.default.createElement('input', null),
+                        _react2.default.createElement(
+                            'h2',
+                            { className: 'input-desc' },
+                            'MESSAGE'
+                        ),
+                        _react2.default.createElement('input', null)
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'grid wrap wider buttons' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'unit whole', style: { textAlign: 'center' } },
+                        _react2.default.createElement(
+                            'button',
+                            { style: { display: 'inline-block' }, className: 'btn-secondary' },
+                            ' CANCEL '
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { style: { display: 'inline-block' }, className: 'btn-primary' },
+                            ' ADD NEW'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return UpdateTimesheet;
+}(_react.Component);
+
+exports.default = UpdateTimesheet;
 
 /***/ })
 /******/ ]);

@@ -19,10 +19,9 @@ import Profile from './Profile.jsx'
 import ProfileBasicInformation from './ProfileBasicInformation.jsx'
 import ProfileChangePassword from './ProfileChangePassword.jsx'
 import Timesheet from './Timesheet.jsx'
+import UpdateTimeSheet from './UpdateTimesheet.jsx'
 import NewProject from './NewProject.jsx'
 import MyPerformances from './MyPerformances.jsx'
-
-
 
 
 
@@ -73,6 +72,10 @@ render(
           <Route path='change-password' component={ProfileChangePassword}/>
 
         </Route>
+        <Route path='timesheet' component={Timesheet}></Route>
+
+        <Route path='updatesheet' component={UpdateTimeSheet} />
+
       </Route>
       <Route path='auth' component={Auth}>
         <Route path="register" component={Register}>
@@ -81,7 +84,7 @@ render(
         </Route>
         <IndexRoute component={Login}/>
       </Route>
-      <Route path='timesheet' component={Timesheet}></Route>
+
     </Route>
     </Router>
   </Provider>,
