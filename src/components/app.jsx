@@ -66,6 +66,10 @@ render(
           <Route path='change-password' component={ProfileChangePassword}/>
 
         </Route>
+        <Route path='timesheet' component={Timesheet}></Route>
+        
+        <Route path='updatesheet' component={UpdateTimeSheet} />
+
       </Route>
 
       <Route path='auth' component={Auth}>
@@ -75,9 +79,7 @@ render(
         </Route>
         <IndexRoute component={Login}/>
       </Route>
-      <Route path='timesheet' component={Timesheet}></Route>
-     <Route path='updatesheet' component={UpdateTimeSheet} />
-      
+
     </Route>
     </Router>
   </Provider>,
