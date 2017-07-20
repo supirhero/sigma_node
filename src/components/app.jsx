@@ -20,6 +20,8 @@ import ProfileBasicInformation from './ProfileBasicInformation.jsx'
 import ProfileChangePassword from './ProfileChangePassword.jsx'
 import Timesheet from './Timesheet.jsx'
 import NewProject from './NewProject.jsx'
+import MyPerformances from './MyPerformances.jsx'
+
 
 
 
@@ -64,6 +66,8 @@ render(
       <Route component={Dashboard} onEnter={requireAuth}>
         <IndexRoute component={DashboardHome}/>
         <Route path='new-project' component={NewProject}></Route>
+        <Route path='my-performance' component={MyPerformances}></Route>
+
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>

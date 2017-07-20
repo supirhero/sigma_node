@@ -24,7 +24,6 @@ class DashboardHome extends Component {
       <div className='grid wrap'>
         <div className='unit half'>
           <div className='card profile'>
-            <div className='margin'>
               <div className='grid'>
 
                   <div className='unit two-fifths'>
@@ -36,7 +35,12 @@ class DashboardHome extends Component {
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
-                        <a>My Performance</a>
+                        <a onClick={
+                          e => {
+                            browserHistory.push('/my-performance')
+                            e.preventDefault()
+                          }
+                        }>My Performance</a>
                       </li>
                       <li>
                         <a >My Assigments</a>
@@ -52,7 +56,6 @@ class DashboardHome extends Component {
 
             <div>
           </div>
-        </div>
         </div>
       </div>
       <div className='unit half'>
