@@ -9,10 +9,11 @@ import {Divider, TimeSheetTimeButton} from  './components.jsx'
 class Timesheet extends Component {
     render(){
       return(
+        
         <div>
             <div className='grid wrap'>
               <div className='unit whole'>
-                <Divider text='TIMESHEET' back_text = 'Back' back={
+                <Divider text='TIMESHEET' btnLeftText = 'Back' btnLeftClick={
                   e => {
                     browserHistory.goBack()
                     e.preventDefault()
@@ -73,7 +74,7 @@ class Timesheet extends Component {
                 </div>
               </div>
             </div>
-    </div>
+      </div>
 
       )
     }
