@@ -21,7 +21,7 @@ class DashboardHome extends Component {
     // console.log(projects);
     return(
       <div>
-      <div className='grid wrap wider'>
+      <div className='grid wrap'>
         <div className='unit half'>
           <div className='card profile'>
             <div className='margin'>
@@ -32,7 +32,7 @@ class DashboardHome extends Component {
                     </div>
                   </div>
                   <div className='unit three-fifths'>
-                    <large>{auth.userdata ? auth.userdata.user_nameentry : '-'}</large>
+                    <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
@@ -124,7 +124,7 @@ class DashboardHome extends Component {
 
       </div>
     </div>
-    <div className='grid wrap wider'>
+    <div className='grid wrap'>
       <div className='unit whole'>
         <div className='divider'>
         </div>
@@ -143,10 +143,10 @@ class DashboardHome extends Component {
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
-                    <div style={{marginBottom: '30px', margin: '54px auto 30px'}} className='grid wrap wider' key={index}>
+                    <div style={{marginBottom: '30px', margin: '54px auto 30px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
                     <large>Business Unit&nbsp;:&nbsp;&nbsp;</large>
-                    <a style={{fontSize:'20px'}}>{value.bu_name}</a>
+                    <a >{value.bu_name}</a>
                     <button className='btn-secondary' onClick={e => {
                       browserHistory.push('/new-project')
 
@@ -157,8 +157,8 @@ class DashboardHome extends Component {
                     {
                       value.project_list.map((value,index) => {
                         return(
-                          <div className='grid wrap wider' key={index}>
-                            <div className='unit whole'>
+                          <div className='grid wrap' key={index}>
+                            <div className='unit whole no-gutters'>
                               <div className='card'>
                                 <div className='unit two-fifths'>
                                   <medium className='project-name'>
@@ -166,7 +166,7 @@ class DashboardHome extends Component {
                                   </medium>
                                 </div>
                                 <div className='unit one-fifth'>
-                                  <small className='project-status'>
+                                  <small style={{fontSize:'15px'}} className='project-status'>
                                     {
                                       value.project_status
                                     }

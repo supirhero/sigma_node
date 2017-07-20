@@ -1,3 +1,4 @@
+$font-size : 17px;
 .divider {
   border: 1px solid #CCCCCC;
   width: 100%;
@@ -49,7 +50,7 @@
 a {
   cursor: pointer;
   font-family: 'lato', sans-serif;
-  font-size: 16px;
+  font-size: $font-size;
   color: #F57556;
   letter-spacing: 1px;
   line-height: 24px;
@@ -62,7 +63,7 @@ a {
 
 
 large {
-  font-size: 20px;
+  font-size: $font-size;
   /* SIGN IN: */
   font-family: 'lato', sans-serif;
   color: #333333;
@@ -83,7 +84,7 @@ small {
   display: block;
   /* SIGN IN: */
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-size: $font-size;
   color: #777777;
   letter-spacing: 0.94px;
   font-weight: 300;
@@ -98,7 +99,7 @@ input {
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   font-family: 'lato', sans-serif;
-  font-size: 20px;
+  font-size: $font-size;
   width: 100% !important;
   overflow: hidden;
   padding: 13px 0  13px 0px;
@@ -116,7 +117,7 @@ input {
   padding: 15px 42px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
 }
 .btn-secondary {
   /* Rectangle 4: */
@@ -126,14 +127,15 @@ input {
   border: 1px solid #EEEEEE;
   border-radius: 2px;
   font-family: 'lato', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
 }
 .input-desc {
   font-family: 'lato', sans-serif;
   font-weight: 300;
+  margin-top: 25px;
   color: #777777;
   letter-spacing: 1px;
-  font-size: 20px
+  font-size: $font-size
 }
 
 .navbar {
@@ -165,7 +167,7 @@ input {
       .menu-header{
         padding: 20px 40px 10px 30px;
         .title {
-          font-size: 16px;
+          font-size: $font-size;
         }
       }
       .menu-item {
@@ -223,7 +225,7 @@ input {
         font-weight: 300;
         color: #777777;
         letter-spacing: 1px;
-        font-size: 20px
+        font-size: $font-size
       }
       [type="radio"]:checked,
     [type="radio"]:not(:checked) {
@@ -280,7 +282,7 @@ input {
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   font-family: 'lato', sans-serif;
-  font-size: 20px;
+  font-size: $font-size;
   width: 100%;
   overflow: hidden;
   padding: 13px 0  13px 0px;

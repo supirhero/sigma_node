@@ -103,7 +103,7 @@ export class Input extends Component {
 export class RadioButton extends Component {
   render() {
     return (
-      <p className='radio-button'>
+      <p className='radio-button' style={this.props.style}>
        <input type="radio" id={this.props.id} name={this.props.group}/>
        <label htmlFor={this.props.id}>{this.props.label}</label>
      </p>
