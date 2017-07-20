@@ -76,7 +76,7 @@ export class MenuHeader extends Component {
 export class Divider extends Component {
   render() {
     return (
-      <div className='divider-wrapper'>
+      <div className='divider-wrapper' style={this.props.style}>
         {
           this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
         }
@@ -126,6 +126,17 @@ export class Select extends Component {
         </select>
 
       </div>
+    )
+  }
+}
+
+export class TimeSheetTimeButton extends Component {
+  render(){
+    return(
+    <button className ='btn-secondary'>
+      {this.props.text}
+      <small>{this.props.hours}</small>
+    </button>
     )
   }
 }

@@ -15,7 +15,7 @@ class NewProject extends Component {
           <form>
           <div className='grid wrap'>
             <div className='unit whole'>
-              <Divider btnLeftText='BACK' btnLeftClick={ e => {
+              <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
                 browserHistory.goBack()
                 e.preventDefault()
 

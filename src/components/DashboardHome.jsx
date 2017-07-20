@@ -143,7 +143,7 @@ class DashboardHome extends Component {
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
-                    <div style={{marginBottom: '30px', margin: '54px auto 30px'}} className='grid wrap' key={index}>
+                    <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
                     <large>Business Unit&nbsp;:&nbsp;&nbsp;</large>
                     <a >{value.bu_name}</a>
