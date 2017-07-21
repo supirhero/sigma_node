@@ -67,9 +67,10 @@ class Timesheet extends Component {
 
                 <div className="card project">
                     <small>4:55 PM</small>
-                    <medium className="project-info">
-                      Project <a href="">Transaction Based Managed Services 2017</a>
-                    </medium>
+                    <small className="project-info" >
+                      Project <a href="">Transaction Based Managed Services 2017</a> 
+                      <p><b>(4 Hours)</b> - Pengiriman data dana terdebet dan belum terdebet ke mitra</p>
+                    </small>
                 </div>
               </div>
             </div>

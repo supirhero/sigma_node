@@ -228,7 +228,7 @@ class NewProject extends Component {
                 <div className='unit three-quarters'>
                   <large style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></large>
                   <large style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
-
+                  
                   <div className='completion-bar' style ={{display:'inline-block'}}>
 
                     <Line
