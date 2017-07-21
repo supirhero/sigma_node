@@ -56,6 +56,7 @@ a {
   color: #F57556;
   font-weight: 300;
   letter-spacing: 1px;
+
   line-height: 24px;
 }
 .shadow {
@@ -66,7 +67,7 @@ a {
 
 
 large {
-  font-size: $font-size;
+  font-size: 20px;
   /* SIGN IN: */
   font-family: 'lato', sans-serif;
   color: #333333;
@@ -79,7 +80,9 @@ medium {
   font-family: 'lato', sans-serif;
   /* SIGN IN: */
 
-  color: #777777;
+  // color: #777777;
+  color: #333333;
+
   letter-spacing: 0.94px;
   font-weight: 400;
 }
@@ -142,7 +145,7 @@ input {
 }
 
 .navbar {
-  height: 80px;
+  // height: 80px;
   background-color: $color-primary;
   width: 100%;
   margin-bottom: 57px;
@@ -161,8 +164,8 @@ input {
     position: absolute;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
     border-radius: 2px;
-    right: 230px;
-    top: 70px;
+    right: 0px;
+    top: 60px;
     .menu-section {
       // width: 100%;
       // padding-bottom: 10px;
@@ -306,4 +309,12 @@ background-repeat: no-repeat;
 }
 .material-icons.md-18 {
   font-size: 18px;
+}
+
+.bar-chart-container {
+  margin: auto;
+  tspan,p,ul {
+    font-family: 'lato', sans-serif;
+    font-weight: 300
+  }
 }

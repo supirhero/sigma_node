@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import {Circle, Line} from 'react-progressbar.js'
+import {BarChart as ChartBar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
+
+
 
 export class Menu extends Component {
     constructor(){
@@ -10,7 +14,7 @@ export class Menu extends Component {
     }
     render(){
       return(
-        <div>
+        <div style={this.props.style}>
         <div className='trigger' onClick={
           () => {
               console.log('working');
@@ -93,7 +97,7 @@ export class Input extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        <h2 className='input-desc'>{this.props.inputName}</h2>
+        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
         <input placeholder={this.props.placeholder}></input>
       </div>
     )
@@ -115,7 +119,7 @@ export class Select extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        <h2 className='input-desc'>{this.props.inputName}</h2>
+        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
         <select className='select'>
           {this.props.items.items.map((value,index) => {
             return(
@@ -139,4 +143,51 @@ export class TimeSheetTimeButton extends Component {
     </button>
     )
   }
+}
+
+export class Meter extends Component {
+  render(){
+    return(
+      <div className='circle-container'>
+        <Circle
+          progress={this.props.progress}
+          initialAnimate={true}
+          text= {this.props.text}
+          options={{
+            strokeWidth: 12,
+            color: '#F48165',
+            trailWidth: 12,
+            fontSize: 30,
+            easing: 'easeInOut',
+            duration: 700,
+          }}
+          containerClassName={'circle-bar'}
+          >
+          </Circle>
+          <div className='circle-desc'>
+            <medium>{this.props.title}</medium>
+            <small className='status'>{this.props.status}</small>
+          </div>
+      </div>
+    )
+  }
+}
+
+export class BarChart extends Component {
+  render() {
+    return(
+      <div className='bar-chart-container'>
+        <ResponsiveContainer width='100%' height={250}>
+          <ChartBar width={680} height={250} data={this.props.data}>
+            <XAxis dataKey="name" />
+            {/* <YAxis /> */}
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+            <Tooltip />
+            <Bar dataKey="value" fill="#F48165" />
+          </ChartBar>
+        </ResponsiveContainer>
+
+      </div>
+    )
+}
 }
