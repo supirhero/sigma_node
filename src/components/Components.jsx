@@ -53,6 +53,7 @@ export class MenuSection extends Component {
     )
   }
 }
+
 export class MenuItem extends Component {
   render() {
     return(
@@ -139,6 +140,7 @@ export class TimeSheetTimeButton extends Component {
     return(
     <button className ='btn-secondary'>
       {this.props.text}
+
       <small>{this.props.hours}</small>
     </button>
     )

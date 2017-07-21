@@ -26,8 +26,6 @@ import MyAssignments from './MyAssignments.jsx'
 
 
 
-
-
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
 

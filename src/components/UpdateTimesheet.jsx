@@ -22,13 +22,11 @@ class UpdateTimesheet extends Component {
                             <option value="project 1">project 1</option>
                             <option value="project 2">project 2</option>
                         </select>
-
                     <h2 className="input-desc">TASK</h2>
                         <select value="">
                             <option value="project 1">project 1</option>
                             <option value="project 2">project 2</option>
                         </select>
-
                     <h2 className="input-desc">WORK HOURS</h2>
                         <input></input>
 
@@ -44,6 +42,7 @@ class UpdateTimesheet extends Component {
               <div className='unit whole' style={{textAlign:'center'}}>
                 <button style={{ display:'inline-block'}} className='btn-secondary'> CANCEL </button>
                 <button style={{ display:'inline-block'}} className='btn-primary'> ADD NEW</button>
+
 
               </div>
             </div>

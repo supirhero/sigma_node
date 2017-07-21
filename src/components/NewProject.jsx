@@ -70,6 +70,7 @@ class NewProject extends Component {
               </div>
               <div className='grid wrap'>
                 <div className='unit whole'>
+
                   <Divider text='PRODUCT'></Divider>
                 </div>
               </div>
@@ -107,6 +108,7 @@ class NewProject extends Component {
                 <div className='unit half'>
                   <div className='grid wrap'>
                     <div className='unit half'>
+
                       <RadioButton id='yes' label='YES' group='operation' style={{marginLeft: '20px'}}/>
                     </div>
                     <div className='unit half'>

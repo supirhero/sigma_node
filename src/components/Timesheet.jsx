@@ -53,7 +53,6 @@ class Timesheet extends Component {
                 <Divider text='WEDNESDAY, JUNE 7' />
               </div>
             </div>
-
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
