@@ -23,15 +23,15 @@ class MyPerformances extends Component {
           </div>
           <div className='grid wrap'>
             <div className='unit whole'>
-              <div className='card'>
+              <div className='card' style={{padding:'40px'}}>
                 <div className='grid'>
                   <div className='unit golden-small'>
                     <large>Timesheet</large>
-                    <Input/>
-                    <Input/>
-                      
+
                   </div>
                   <div className='unit golden-large'>
+                    <Input style={{width:'48%', display:'inline-block'}}/>
+                    <Input style={{width:'48%', display:'inline-block', float:'right'}}/>
                   </div>
                 </div>
               </div>

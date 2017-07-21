@@ -50,9 +50,11 @@ $font-size : 17px;
 }
 a {
   cursor: pointer;
+  text-decoration: underline;
   font-family: 'lato', sans-serif;
   font-size: $font-size;
   color: #F57556;
+  font-weight: 300;
   letter-spacing: 1px;
   line-height: 24px;
 }
@@ -191,7 +193,7 @@ input {
 }
 
 .divider-wrapper {
-  margin: 35px 0 20px 0;
+  margin: 20px 0 20px 0;
   position: relative;
   button {
     position: absolute;
@@ -297,4 +299,11 @@ input {
   background-position: 95% 21px;
   background-size: 11px;
 background-repeat: no-repeat;
+}
+
+.material-icons {
+  color: $color-accent
+}
+.material-icons.md-18 {
+  font-size: 18px;
 }

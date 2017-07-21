@@ -9,7 +9,7 @@ import {Divider, TimeSheetTimeButton} from  './components.jsx'
 class Timesheet extends Component {
     render(){
       return(
-        
+
         <div>
             <div className='grid wrap'>
               <div className='unit whole'>
@@ -21,7 +21,7 @@ class Timesheet extends Component {
                 }/>
               </div>
             </div>
-            
+
             <div className='grid wrap'>
               <div className='unit whole' style={{textAlign:'center'}}>
               <span className="icon-arrow-left-circle" />
@@ -36,13 +36,13 @@ class Timesheet extends Component {
               </div>
             </div>
 
-            
+
             <div className='grid wrap'>
               <div className='unit whole'>
-                <button style={{margin:'50px auto', display:'block'}} className='btn-primary' onClick={
+                <button style={{margin:'10px auto', display:'block'}} className='btn-primary' onClick={
                   e => {
                     browserHistory.push('/updatesheet')
-                    e.preventDefault() }}> 
+                    e.preventDefault() }}>
                     ADD NEW
                 </button>
 
@@ -53,7 +53,7 @@ class Timesheet extends Component {
                 <Divider text='WEDNESDAY, JUNE 7' />
               </div>
             </div>
-            
+
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -65,7 +65,7 @@ class Timesheet extends Component {
                     </div>
                   </div>
                 </div>
-              
+
                 <div className="card project">
                     <small>4:55 PM</small>
                     <medium className="project-info">

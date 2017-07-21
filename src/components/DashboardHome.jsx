@@ -35,6 +35,7 @@ class DashboardHome extends Component {
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
+                        <span className='icon-speedometer'>&nbsp;&nbsp;</span>
                         <a onClick={
                           e => {
                             browserHistory.push('/my-performance')
@@ -43,8 +44,11 @@ class DashboardHome extends Component {
                         }>My Performance</a>
                       </li>
                       <li>
-                        <a >My Assigments</a>
-                      </li><li>
+                        <span className='icon-list'>&nbsp;&nbsp;</span>
+                        <a>My Assigments</a>
+                      </li>
+                      <li>
+                        <span className='icon-clock'>&nbsp;&nbsp;</span>
                         <a>My Recent Activities</a>
                       </li>
                     </ul>
@@ -150,10 +154,10 @@ class DashboardHome extends Component {
                       <div className='unit whole'>
                     <large>Business Unit&nbsp;:&nbsp;&nbsp;</large>
                     <a >{value.bu_name}</a>
-                    <button className='btn-secondary' onClick={e => {
+                    <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                       browserHistory.push('/new-project')
 
-                    }}>NEW PROJECT</button>
+                    }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
                   </div>
                 </div>
 
