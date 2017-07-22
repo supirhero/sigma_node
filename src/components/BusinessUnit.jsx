@@ -31,8 +31,11 @@ class BusinessUnit extends Component {
           <div className="unit whole" >
             <div className="person" style={{textAlign:"center"}}>
             <div className="person-image" style={{margin:"0 auto"}}></div>
-            <div className="person-image" style={{margin:"0 auto"}}></div>
-            <div className="person-image" style={{margin:"0 auto"}}></div>
+            <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"orange"}}></div>
+            <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"yellow"}}></div>
+            <div className="person-image" style={{margin:"0 auto",marginLeft:"30px"}}> 
+              
+            </div>
             </div>
           </div>
         </div>
@@ -44,7 +47,7 @@ class BusinessUnit extends Component {
                 <div key={index}>
                   <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                     <div className='unit whole'>
-                      <Input style={{width:'600px', display:'inline-block'}} placeholder="search business unit or project">
+                      <Input style={{width:'55%', display:'inline-block'}} placeholder="search business unit or project">
                       <div className='material-icons' style={{color:'blue'}}>search</div>
                       </Input>
                       
