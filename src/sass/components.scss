@@ -304,6 +304,29 @@ input {
 background-repeat: no-repeat;
 }
 
+.pill{
+  height: 30px;
+  border-radius: 100px;
+  font-family: 'OpenSans',sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.88;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: #ffffff;
+}
+  .denied{
+    width: 100px;
+  background-color: #cf000f; 
+  }
+  .approved{
+  background-color: #42c878;
+  width: 125px;
+  }
+  .pending{
+    background-color: #cccccc;
+    width:120px;
+  }
 .material-icons {
   color: $color-accent
 }

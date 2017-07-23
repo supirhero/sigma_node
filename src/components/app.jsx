@@ -22,6 +22,7 @@ import Timesheet from './Timesheet.jsx'
 import UpdateTimeSheet from './UpdateTimesheet.jsx'
 import NewProject from './NewProject.jsx'
 import MyPerformances from './MyPerformances.jsx'
+import MyRecentActivities from './MyRecentActivities.jsx'
 import MyAssignments from './MyAssignments.jsx'
 import BusinessUnit from './BusinessUnit.jsx'
 
@@ -76,6 +77,7 @@ render(
         </Route>
         <Route path='timesheet' component={Timesheet}></Route>
         <Route path='updatesheet' component={UpdateTimeSheet} />
+        <Route path='myactivity' component={MyRecentActivities} />
 
       </Route>
       <Route path='auth' component={Auth}>
