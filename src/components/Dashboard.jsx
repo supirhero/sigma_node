@@ -37,8 +37,8 @@ class Dashboard extends Component {
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
                       <ul>
-                        <li><a>HOME</a></li>
-                        <li><a>REPORTS</a></li>
+                        <li><Link to="/">HOME</Link></li>
+                        <li><Link to="/reports">REPORTS</Link></li>
                       </ul>
                         <Menu style={{display:'inline'}}>
                           <MenuSection>

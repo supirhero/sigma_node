@@ -132,7 +132,7 @@ class DashboardHome extends Component {
                   <div key={index}>
                     <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
-                    <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}}>{value.bu_name}</a></large>
+                    <large>Business Unit&nbsp;:&nbsp;&nbsp; <Link style={{fontSize:'20px'}} to="/business-unit">{value.bu_name}</Link></large>
 
                     <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                       browserHistory.push('/new-project')

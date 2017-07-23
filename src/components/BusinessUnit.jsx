@@ -18,12 +18,17 @@ class BusinessUnit extends Component {
         
         <div className='grid wrap'>
           <div className='unit whole'>
-            <Divider btnLeftText='BACK' text={auth.project.bu_name} btnLeftClick={
+            <Divider 
+            btnLeftText='BACK' 
+            text={auth.project.bu_name} 
+            btnLeftClick={
               e => {
                 browserHistory.goBack()
                 e.preventDefault()
               } 
-            }/>
+            }
+            btnRightText='REPORT'
+            />
           </div>
         </div>
               
