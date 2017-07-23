@@ -317,7 +317,7 @@ background-repeat: no-repeat;
 }
   .denied{
     width: 100px;
-  background-color: #cf000f; 
+  background-color: #cf000f;
   }
   .approved{
   background-color: #42c878;
@@ -327,6 +327,7 @@ background-repeat: no-repeat;
     background-color: #cccccc;
     width:120px;
   }
+
 .material-icons {
   color: $color-accent
 }
@@ -339,5 +340,30 @@ background-repeat: no-repeat;
   tspan,p,ul {
     font-family: 'lato', sans-serif;
     font-weight: 300
+  }
+}
+
+.search {
+  width: 80%;
+  margin: auto;
+  .card {
+    padding: 0px 0px 0px 25px;
+    input {
+      display: inline-block;
+      width: 93% !important;
+      height: 52px;
+      padding: 0;
+      border: none;
+    }
+    i {
+      font-size: 22px;
+      margin-top: 2%;
+      color: #969696;
+      width: 6%;
+      height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      float: right;
+    }
   }
 }

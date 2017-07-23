@@ -77,7 +77,7 @@ render(
         </Route>
         <Route path='timesheet' component={Timesheet}></Route>
         <Route path='updatesheet' component={UpdateTimeSheet} />
-        <Route path='myactivity' component={MyRecentActivities} />
+        <Route path='my-recent-activities' component={MyRecentActivities} />
 
       </Route>
       <Route path='auth' component={Auth}>

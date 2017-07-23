@@ -17,12 +17,17 @@ class MyRecentActivities extends Component {
                 e.preventDefault()
               }} text='MY RECENT ACTIVITIES'></Divider>
           </div>
-        </div>   
-        
-        
+        </div>
+
+        <div className='grid wrap'>
+          <div className='unit whole'>
+            <h2 style={{marginBottom:'0'}} className='input-desc'>GENERATE REPORT</h2>
+          </div>
+        </div>
+
         <div className="grid wrap">
-          <div className="unit one-third" > 
-            <Select inputName="GENERATE REPORT" style={{width:'100%' , display:'inline-block', float:'left', marginRight:'30px'}} items={{
+          <div className="unit one-third" >
+            <Select style={{width:'100%' , display:'inline-block', float:'left', marginRight:'30px'}} items={{
                   items : [
                     {title : 'JANUARY'},
                     {title : 'FEBRUARY'}
@@ -30,24 +35,24 @@ class MyRecentActivities extends Component {
                 }}></Select>
           </div>
           <div className="unit one-third" >
-            <Select style={{width:'100%', display:'inline-block', float:'left', marginTop:'35px'}} items={{
+            <Select style={{width:'100%', display:'inline-block', float:'left'}} items={{
                   items : [
                     {title : '2017'},
                     {title : '2016'}
                   ]
                 }}></Select>
           </div>
-          <div className="unit one-third" style={{marginTop:'58px'}} >
+          <div className="unit one-third" >
             <button className='btn-primary'style={{float:'right' , padding:'15px 90px'}}>PRINT</button>
           </div>
         </div>
-        
+
         <div className="grid wrap">
           <div className="unit whole">
              <Divider style={{marginTop:'0'}} text='WEDNESDAY, JUNE 7' />
           </div>
         </div>
-        
+
         <div className="grid wrap">
           <div className="unit whole">
 
@@ -64,7 +69,7 @@ class MyRecentActivities extends Component {
             <div className="card project">
               <small>4:55 PM</small>
               <small className="project-info" >
-                Project <a href="">Transaction Based Managed Services 2017</a> 
+                Project <a href="">Transaction Based Managed Services 2017</a>
                 <p>(<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra</p>
                 <p>left a <b>Timesheet UI #1</b> message</p>
                 <p>"Ini interface yang lama seperti ini ya"</p>
@@ -96,7 +101,7 @@ class MyRecentActivities extends Component {
                   </medium>
                   <div className="pill denied" style={{float:'right'}}>DENIED</div>
                 </div>
-    
+
                 <small className="project-info" style={{margin:'auto'}}>
                   (<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra
                 </small>
@@ -108,12 +113,12 @@ class MyRecentActivities extends Component {
                     <div className="person-image" style={{margin:'auto'}} />
                     <div className="person-info" style={{marginLeft:'46px'}}>
                       <large style={{float:'left'}}><b>Kara Gray</b></large>
-                      <small style={{display:'inline'}}>, Project Manager</small> 
+                      <small style={{display:'inline'}}>, Project Manager</small>
                     </div>
                   <div style={{display: 'inline-block',marginLeft:'95px',marginTop:'-25px'}}>
                       <small>
                         <b>Timesheet UI #2.</b> "Ini tampilan yang aku improve seperti ini.
-                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku 
+                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku
                         ngikut aja"
                       </small>
                   </div>
@@ -131,7 +136,7 @@ class MyRecentActivities extends Component {
             </div>
           </div>
         </div>
-        
+
         <div className="grid wrap">
           <div className="unit whole">
             <div className="card project">
@@ -143,7 +148,7 @@ class MyRecentActivities extends Component {
                   </medium>
                   <div className="pill approved" style={{float:'right'}}>APPROVED</div>
                 </div>
-    
+
                 <small className="project-info" style={{margin:'auto'}}>
                   (<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra
                 </small>
@@ -155,12 +160,12 @@ class MyRecentActivities extends Component {
                     <div className="person-image" style={{margin:'auto'}} />
                     <div className="person-info" style={{marginLeft:'46px'}}>
                       <large style={{float:'left'}}><b>Kara Gray</b></large>
-                      <small style={{display:'inline'}}>, Project Manager</small> 
+                      <small style={{display:'inline'}}>, Project Manager</small>
                     </div>
                   <div style={{display: 'inline-block',marginLeft:'95px',marginTop:'-25px'}}>
                       <small>
                         <b>Timesheet UI #2.</b> "Ini tampilan yang aku improve seperti ini.
-                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku 
+                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku
                         ngikut aja"
                       </small>
                   </div>
@@ -170,7 +175,7 @@ class MyRecentActivities extends Component {
               <div className="grid wrap">
                 <div className="unit whole" style={{marginLeft:'95px'}}>
                   <small>Tue,Jun 6 at 4:55 PM via web</small>
-                  
+
                 </div>
               </div>
             </div>
@@ -188,7 +193,7 @@ class MyRecentActivities extends Component {
                   </medium>
                   <div className="pill pending" style={{float:'right'}}>PENDING</div>
                 </div>
-    
+
                 <small className="project-info" style={{margin:'auto'}}>
                   (<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra
                 </small>
@@ -200,12 +205,12 @@ class MyRecentActivities extends Component {
                     <div className="person-image" style={{margin:'auto'}} />
                     <div className="person-info" style={{marginLeft:'46px'}}>
                       <large style={{float:'left'}}><b>Kara Gray</b></large>
-                      <small style={{display:'inline'}}>, Project Manager</small> 
+                      <small style={{display:'inline'}}>, Project Manager</small>
                     </div>
                   <div style={{display: 'inline-block',marginLeft:'95px',marginTop:'-25px'}}>
                       <small>
                         <b>Timesheet UI #2.</b> "Ini tampilan yang aku improve seperti ini.
-                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku 
+                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku
                         ngikut aja"
                       </small>
                   </div>
@@ -215,13 +220,13 @@ class MyRecentActivities extends Component {
               <div className="grid wrap">
                 <div className="unit whole" style={{marginLeft:'95px'}}>
                   <small>Tue,Jun 6 at 4:55 PM via web</small>
-                  
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     );
   }

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
 
-import {Meter} from './Components.jsx'
+import {Meter, Search} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -54,7 +54,12 @@ class DashboardHome extends Component {
                       </li>
                       <li>
                         <span className='icon-clock'>&nbsp;&nbsp;</span>
-                        <a>My Recent Activities</a>
+                        <a onClick={
+                          e => {
+                            browserHistory.push('/my-recent-activities')
+                            e.preventDefault()
+                          }
+                        }>My Recent Activities</a>
                       </li>
                     </ul>
 
@@ -115,8 +120,7 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-        <div className='card search'>
-        </div>
+        <Search placeholder='search business unit or project'></Search>
 
 
       </div>

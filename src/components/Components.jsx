@@ -192,4 +192,17 @@ export class BarChart extends Component {
       </div>
     )
 }
+
+}
+export class Search extends Component {
+  render() {
+    return(
+      <div className='search'>
+        <div className='card'>
+          <input placeholder={this.props.placeholder}></input>
+          <i className='icon-magnifier'></i>
+        </div>
+      </div>
+    )
+  }
 }
