@@ -25,7 +25,9 @@ import MyPerformances from './MyPerformances.jsx'
 import MyRecentActivities from './MyRecentActivities.jsx'
 import MyAssignments from './MyAssignments.jsx'
 import BusinessUnit from './BusinessUnit.jsx'
-
+import Reports from './Reports.jsx'
+import ReportsOverview from './ReportsOverview.jsx'
+import ReportsDirectorate from './ReportsDirectorate.jsx'
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
@@ -73,13 +75,23 @@ render(
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>
-
         </Route>
+
         <Route path='timesheet' component={Timesheet}></Route>
         <Route path='updatesheet' component={UpdateTimeSheet} />
         <Route path='my-recent-activities' component={MyRecentActivities} />
 
+        <Route path='reports' component={Reports}>
+          <Route path='reports-directorate' component={ReportsDirectorate} />
+          <IndexRoute component={ReportsOverview} /> 
+        </Route>
+
+
+
+
+
       </Route>
+
       <Route path='auth' component={Auth}>
         <Route path="register" component={Register}>
           <IndexRoute component={RegisterSigma}/>
