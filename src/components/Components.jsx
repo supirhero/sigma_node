@@ -183,6 +183,7 @@ export class BarChart extends Component {
   render() {
     return(
       <div className='bar-chart-container'>
+        <large>{this.props.label}</large>
         <ResponsiveContainer width='100%' height={250}>
           <ChartBar width={680} height={250} data={this.props.data}>
             <XAxis dataKey="name" />

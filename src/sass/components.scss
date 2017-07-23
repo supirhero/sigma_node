@@ -146,11 +146,29 @@ input {
 }
 
 .navbar {
+  // padding: 8px 0;
   // height: 80px;
   background-color: $color-primary;
   width: 100%;
   margin-bottom: 57px;
+  ul{
+    width: 80%;
+    margin: 0;
+    display: inline-block;
+    list-style: none;
+    li {
+      border-bottom: 4px solid white;
+      padding: 27px 0;
+      display: inline-block;
+      margin-left: 7%;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
   .trigger {
+    margin: 21px 0;
     background-color: $color-secondary;
     height: 36px;
     width: 36px;

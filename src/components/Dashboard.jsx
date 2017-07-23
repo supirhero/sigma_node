@@ -35,9 +35,11 @@ class Dashboard extends Component {
               <div>
                 <div className='navbar'>
                   <div className='grid wrap' style={{position:'relative'}}>
-                    <div className='unit whole'>
-                      <a>HOME</a>
-                      <a>REPORTS</a>
+                    <div className='unit whole no-gutters'>
+                      <ul>
+                        <li><a>HOME</a></li>
+                        <li><a>REPORTS</a></li>
+                      </ul>
                         <Menu style={{display:'inline'}}>
                           <MenuSection>
                             <MenuHeader title='Kara Cray' subTitle='@karagay'/>
