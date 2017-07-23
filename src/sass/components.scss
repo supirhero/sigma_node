@@ -1,9 +1,10 @@
 $font-size : 17px;
 .divider {
+
   border: 1px solid #CCCCCC;
   width: 100%;
   margin-top: 70px;
-  margin-bottom: 40px
+  margin-bottom: 40px;
 
 }
 .pic-wrapper {
@@ -198,6 +199,9 @@ input {
 .divider-wrapper {
   margin: 20px 0 20px 0;
   position: relative;
+  .btn-right {
+    right: 0;
+  }
   button {
     position: absolute;
   }
@@ -366,4 +370,33 @@ background-repeat: no-repeat;
       float: right;
     }
   }
+}
+
+.popup-container {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  display: none;
+  // background-color: aqua;
+  position: absolute;
+  .tint {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    opacity: 0.7;
+    background-color: #214358;
+  }
+  .card {
+    background-color: $color-background;
+    z-index: 1;
+    position: absolute;
+width: 100%;
+  }
+}
+
+.popup-container.active {
+  display: block;
 }

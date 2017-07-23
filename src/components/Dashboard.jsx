@@ -15,6 +15,11 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 class Dashboard extends Component {
   componentDidMount() {
+    if (store.getState().dom.popup) {
+      document.body.style.overflow = 'hidden';
+      document.body.scrollTop = 0; // For Chrome, Safari and Opera
+    document.documentElement.scrollTop = 0; // For IE and Firefox
+    }
     // console.log('work');
     // console.log(process.env.NODE_ENV);
     var compile_mode = process.env.NODE_ENV

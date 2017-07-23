@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import {BarChart as ChartBar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
+import store from '../reducers/combineReducers.jsx'
 
 
 
@@ -86,6 +87,9 @@ export class Divider extends Component {
           this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
         }
         <h2><span>{this.props.text}</span></h2>
+        {
+          this.props.btnRightText && <button className='btn-secondary btn-right' style={this.props.btnRightStyle} onClick={this.props.btnRightClick}>{this.props.btnRightText}</button>
+        }
 
       </div>
     )
@@ -203,6 +207,76 @@ export class Search extends Component {
           <i className='icon-magnifier'></i>
         </div>
       </div>
+    )
+  }
+}
+
+export class PopUp extends Component {
+  // constructor(){
+  //   super();
+  //   this.state = {
+  //     clicked : false
+  //
+  //   };
+  // }
+
+  render() {
+    const dom = store.getState().dom
+    console.log('dom : ',dom);
+    return(
+      <div>
+
+        <div className={dom.popup ? 'popup-container active' : 'popup-container'}>
+            <div className='grid wrap' style={{position:'relative'}}>
+              <div className='unit whole'>
+                <div className='card shadow' style={{marginTop:'6%'}}>
+                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                        document.documentElement.scrollTop = 0; // For IE and Firefox
+                        store.dispatch({
+                          type : 'POPUP',
+                          id : this.props.id,
+                          popup : false
+                        })
+                        e.preventDefault()
+                      }
+                    }></Divider>
+
+
+
+                    {this.props.children}
+
+                </div>
+              </div>
+            </div>
+            <div className='tint'></div>
+
+        </div>
+        <button className='btn-primary'
+          onClick={
+            e => {
+              document.body.style.overflow = 'hidden';
+              document.body.scrollTop = 0; // For Chrome, Safari and Opera
+            document.documentElement.scrollTop = 0; // For IE and Firefox
+              // if (window.addEventListener) // older FF
+              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+              //     window.onwheel = preventDefault; // modern standard
+              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+              //     window.ontouchmove  = preventDefault; // mobile
+              //     document.onkeydown  = preventDefaultForScrollKeys;
+
+              store.dispatch({
+                type : 'POPUP',
+                id : this.props.id,
+                popup : true
+              })
+              e.preventDefault()
+            }}
+          >{this.props.btnText}</button>
+      </div>
+
     )
   }
 }

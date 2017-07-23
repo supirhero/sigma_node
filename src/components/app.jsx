@@ -25,6 +25,8 @@ import MyPerformances from './MyPerformances.jsx'
 import MyRecentActivities from './MyRecentActivities.jsx'
 import MyAssignments from './MyAssignments.jsx'
 import BusinessUnit from './BusinessUnit.jsx'
+import {PopUp} from './Components.jsx'
+
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
@@ -65,14 +67,19 @@ render(
     <Route path='/' component={MainPage}>
       <Route component={Dashboard} onEnter={requireAuth}>
         <IndexRoute component={DashboardHome}/>
-        <Route path='new-project' component={NewProject}></Route>
-        <Route path='my-performance' component={MyPerformances}></Route>
+        <Route path='new-project' component={NewProject}>
+          <Route path='form' component={PopUp}></Route>
+          
+        </Route>
+        <Route path='my-performance' component={MyPerformances}>
+        </Route>
         <Route path='my-assignments' component={MyAssignments}></Route>
         <Route path='business-unit' component={BusinessUnit}></Route>
 
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>
+
 
         </Route>
         <Route path='timesheet' component={Timesheet}></Route>

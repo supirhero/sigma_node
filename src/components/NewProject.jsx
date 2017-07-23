@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select} from './Components.jsx'
 import { Line} from 'react-progressbar.js'
+import {Divider, Input, RadioButton, Select, PopUp} from './Components.jsx'
 
 
 class NewProject extends Component {
@@ -228,7 +228,7 @@ class NewProject extends Component {
                 <div className='unit three-quarters'>
                   <large style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></large>
                   <large style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
-                  
+
                   <div className='completion-bar' style ={{display:'inline-block'}}>
 
                     <Line
@@ -250,14 +250,83 @@ class NewProject extends Component {
 
                 </div>
                 <div className='unit one-quarter'>
-                  <button className='btn-primary'>COMPLETE FORM</button>
+                  {/* <button className='btn-primary' onClick={
+                    e => {
+                      store.dispatch({
+                        type : 'POPUP',
+                        id : 'form',
+                        popup : true
+                      })
+                      e.preventDefault()
+                    }
+                  }>COMPLETE FORM</button> */}
+                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnText='COMPLETE FORM'>
+                    <div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='PROJECT NAME' ></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit half'>
+                          <Input inputName='IWO'></Input>
+                        </div>
+                        <div className='unit half'>
+                          <Input inputName='PROJECT MANAGER'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit half'>
+                          <Input inputName='CLIENT'></Input>
+                        </div>
+                        <div className='unit half'>
+                          <Input inputName='END CUSTOMER'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit half'>
+                          <Input inputName='WU DELIVERY'></Input>
+                        </div>
+                        <div className='unit half'>
+                          <Input inputName='WU RELATED'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='PROJECT VALUE'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit half'>
+                          <Select inputName='WU DELIVERY' items={{
+                            items : [
+                              {title : 'TBWS21312'},
+                              {title : 'TBWS21312'}
+                            ]
+                          }}></Select>
+                        </div>
+                        <div className='unit half'>
+                          <Select inputName='WU RELATED' items={{
+                            items : [
+                              {title : 'TBWS21312'},
+                              {title : 'TBWS21312'}
+                            ]
+                          }}></Select>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </PopUp>
                 </div>
+
 
               </div>
               <div className='grid wrap'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                    <button className='btn-secondary' >CANCEL</button>
+                    <button className='btn-secondary'>CANCEL</button>
                     <button className='btn-primary'style={{float:'right'}}>CREATE PROJECT</button>
 
                   </div>

@@ -3,7 +3,6 @@ bundle.js
 npm-debug.log
 .DS_Store
 app.js
-app.js
 app.js.map
 
 # IntelliJ

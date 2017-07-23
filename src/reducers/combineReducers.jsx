@@ -49,6 +49,19 @@ export const saveState = (state) => {
     console.log('changed: ', serializedState);
 
 }
+export const dom = (state = {}, action) => {
+  console.log('dom', action);
+  switch (action.type) {
+    case 'POPUP':
+      return Object.assign({}, state, {
+        id: action.id,
+        popup: action.popup
+      })
+      break;
+    default: return state
+
+  }
+}
 export const data = (state = {}, action) => {
   // state = {
   console.log('json',action);
@@ -96,7 +109,7 @@ export const data = (state = {}, action) => {
           })
           .then(function(response) {
             saveState(store.getState())
-            
+
             return Object.assign({}, state, {
               isloggedin: true,
               auth : response.data
@@ -118,6 +131,7 @@ export const data = (state = {}, action) => {
 
 }
 const allReducers = combineReducers({
+  dom : dom,
   data : data,
   routing : routerReducer
 })
