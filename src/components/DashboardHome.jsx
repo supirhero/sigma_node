@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
 
-
+import {Meter} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -35,6 +35,7 @@ class DashboardHome extends Component {
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
+                        <span className='icon-speedometer'>&nbsp;&nbsp;</span>
                         <a onClick={
                           e => {
                             browserHistory.push('/my-performance')
@@ -43,8 +44,16 @@ class DashboardHome extends Component {
                         }>My Performance</a>
                       </li>
                       <li>
-                        <a >My Assigments</a>
-                      </li><li>
+                        <span className='icon-list'>&nbsp;&nbsp;</span>
+                        <a onClick={
+                          e => {
+                            browserHistory.push('/my-assignments')
+                            e.preventDefault()
+                          }
+                        }>My Assigments</a>
+                      </li>
+                      <li>
+                        <span className='icon-clock'>&nbsp;&nbsp;</span>
                         <a>My Recent Activities</a>
                       </li>
                     </ul>
@@ -77,50 +86,21 @@ class DashboardHome extends Component {
         <div className='grid'>
             <div className='unit half'>
 
-              <div className='circle-container'>
-                <Circle
-                  progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
-                  initialAnimate={true}
-                  text= {auth.datatimesheet ? auth.datatimesheet.b : '-'}
-                  options={{
-                    strokeWidth: 12,
-                    color: '#F48165',
-                    trailWidth: 12,
-                    fontSize: 30,
-                    easing: 'easeInOut',
-                    duration: 700,
-                  }}
-                  containerClassName={'circle-bar'}
-                  >
-                  </Circle>
-                  <div className='circle-desc'>
-                    <medium>Entry</medium>
-                    <small className='status'>{auth.datatimesheet ? auth.datatimesheet.status : '-' }</small>
-                  </div>
-              </div>
+
+              <Meter
+                progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
+                text={auth.datatimesheet ? auth.datatimesheet.b : '-'}
+                title='Utilization'
+                status={auth.datatimesheet.status}
+              />
             </div>
             <div className='unit half'>
-              <div className='circle-container'>
-                <Circle
-                  progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
-                  initialAnimate={true}
-                  text= {auth.datatimesheet ? auth.datatimesheet.b : '-'}
-                  options={{
-                    strokeWidth: 12,
-                    color: '#F48165',
-                    trailWidth: 12,
-                    fontSize: 30,
-                    easing: 'easeInOut',
-                    duration: 700,
-                  }}
-                  containerClassName={'circle-bar'}
-                  >
-                  </Circle>
-                  <div className='circle-desc'>
-                    <medium>Utilization</medium>
-                    <small className='status'>{auth.datatimesheet.status_utilization}</small>
-                  </div>
-              </div>
+              <Meter
+                progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
+                text={auth.datatimesheet ? auth.datatimesheet.b : '-'}
+                title='Utilization'
+                status={auth.datatimesheet.status_utilization}
+              />
             </div>
           </div>
         </div>
@@ -148,12 +128,12 @@ class DashboardHome extends Component {
                   <div key={index}>
                     <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
-                    <large>Business Unit&nbsp;:&nbsp;&nbsp;</large>
-                    <a >{value.bu_name}</a>
-                    <button className='btn-secondary' onClick={e => {
+                    <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}}>{value.bu_name}</a></large>
+
+                    <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                       browserHistory.push('/new-project')
 
-                    }}>NEW PROJECT</button>
+                    }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
                   </div>
                 </div>
 

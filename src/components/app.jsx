@@ -23,8 +23,8 @@ import UpdateTimeSheet from './UpdateTimesheet.jsx'
 import NewProject from './NewProject.jsx'
 import MyPerformances from './MyPerformances.jsx'
 import MyRecentActivities from './MyRecentActivities.jsx'
-
-
+import MyAssignments from './MyAssignments.jsx'
+import BusinessUnit from './BusinessUnit.jsx'
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
@@ -67,6 +67,8 @@ render(
         <IndexRoute component={DashboardHome}/>
         <Route path='new-project' component={NewProject}></Route>
         <Route path='my-performance' component={MyPerformances}></Route>
+        <Route path='my-assignments' component={MyAssignments}></Route>
+        <Route path='business-unit' component={BusinessUnit}></Route>
 
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
@@ -74,7 +76,6 @@ render(
 
         </Route>
         <Route path='timesheet' component={Timesheet}></Route>
-
         <Route path='updatesheet' component={UpdateTimeSheet} />
         <Route path='myactivity' component={MyRecentActivities} />
 

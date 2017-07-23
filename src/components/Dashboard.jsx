@@ -29,11 +29,11 @@ class Dashboard extends Component {
       return(
               <div>
                 <div className='navbar'>
-                  <div className='grid wrap'>
+                  <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole'>
                       <a>HOME</a>
                       <a>REPORTS</a>
-                        <Menu>
+                        <Menu style={{display:'inline'}}>
                           <MenuSection>
                             <MenuHeader title='Kara Cray' subTitle='@karagay'/>
                             <MenuItem title='Home' onClick={

@@ -7020,18 +7020,9 @@ module.exports = defaults;
 
 /***/ }),
 /* 57 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var cookie_storage_1 = __webpack_require__(195);
-exports.CookieStorage = cookie_storage_1.CookieStorage;
-var format_cookie_1 = __webpack_require__(96);
-exports.formatCookie = format_cookie_1.formatCookie;
-var parse_cookies_1 = __webpack_require__(97);
-exports.parseCookies = parse_cookies_1.parseCookies;
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/Dhani/Impruvmi/sigma_node/node_modules/cookie-storage/lib/index.js'\n    at Error (native)");
 
 /***/ }),
 /* 58 */
@@ -7453,52 +7444,26 @@ module.exports = {
 		"status": "under",
 		"status_utilization": "overing"
 	},
-	"project": [{
-		"bu_name": "IT Operation services",
-		"project_list": [{
-			"project_name": "Penyelesaian proyek 1",
-			"project_status": "Complete",
-			"project_complete": 100
-		}, {
-			"project_name": "Penyelesaian proyek 2",
-			"project_status": "Under",
-			"project_complete": 40
-		}, {
-			"project_name": "Penyelesaian proyek 3",
-			"project_status": "Overdue",
-			"project_complete": 60
-		}, {
-			"project_name": "Pembuatan 5",
-			"project_status": "Overdue",
-			"project_complete": 20
-		}, {
-			"project_name": "test",
-			"project_status": "Behind",
-			"project_complete": 30
-		}]
+	"projects": [{
+		"project_name": "Penyelesaian proyek 1",
+		"project_status": "Complete",
+		"project_complete": 100
 	}, {
-		"bu_name": "Cross-Industry Application Services",
-		"project_list": [{
-			"project_name": "Penyelesaian proyek 1",
-			"project_status": "Complete",
-			"project_complete": 100
-		}, {
-			"project_name": "Penyelesaian proyek 2",
-			"project_status": "Under",
-			"project_complete": 40
-		}, {
-			"project_name": "Penyelesaian proyek 3",
-			"project_status": "Overdue",
-			"project_complete": 60
-		}, {
-			"project_name": "Pembuatan 5",
-			"project_status": "Overdue",
-			"project_complete": 20
-		}, {
-			"project_name": "test",
-			"project_status": "Behind",
-			"project_complete": 30
-		}]
+		"project_name": "Penyelesaian proyek 2",
+		"project_status": "Under",
+		"project_complete": 40
+	}, {
+		"project_name": "Penyelesaian proyek 3",
+		"project_status": "Overdue",
+		"project_complete": 60
+	}, {
+		"project_name": "Pembuatan 5",
+		"project_status": "Overdue",
+		"project_complete": 20
+	}, {
+		"project_name": "test",
+		"project_status": "Behind",
+		"project_complete": 30
 	}]
 };
 
@@ -10066,63 +10031,67 @@ var Dashboard = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'grid' },
         _react2.default.createElement(
           'div',
-          { className: 'navbar' },
+          { className: 'unit whole no-gutters' },
           _react2.default.createElement(
             'div',
-            { className: 'grid wrap' },
+            { className: 'navbar' },
             _react2.default.createElement(
               'div',
-              { className: 'unit whole' },
+              { className: 'grid wrap' },
               _react2.default.createElement(
-                'a',
-                null,
-                'HOME'
-              ),
-              _react2.default.createElement(
-                'a',
-                null,
-                'REPORTS'
-              ),
-              _react2.default.createElement(
-                _Components.Menu,
-                null,
+                'div',
+                { className: 'unit whole' },
                 _react2.default.createElement(
-                  _Components.MenuSection,
+                  'a',
                   null,
-                  _react2.default.createElement(_Components.MenuHeader, { title: 'Kara Cray', subTitle: '@karagay' }),
-                  _react2.default.createElement(_Components.MenuItem, { title: 'Home', onClick: function onClick(e) {
-                      _reactRouter.browserHistory.push('/');
-                    } }),
-                  _react2.default.createElement(_Components.MenuItem, { title: 'Profile', onClick: function onClick(e) {
-                      _reactRouter.browserHistory.push('/profile');
-                    } })
+                  'HOME'
                 ),
                 _react2.default.createElement(
-                  _Components.MenuSection,
+                  'a',
                   null,
-                  _react2.default.createElement(_Components.MenuHeader, { title: 'ADMIN CONSOLE' }),
-                  _react2.default.createElement(_Components.MenuItem, { title: 'Master Data' }),
-                  _react2.default.createElement(_Components.MenuItem, { title: 'Manage Role & Access' })
+                  'REPORTS'
                 ),
                 _react2.default.createElement(
-                  _Components.MenuSection,
+                  _Components.Menu,
                   null,
-                  _react2.default.createElement(_Components.MenuItem, { onClick: function onClick(e) {
-                      console.log('work');
-                      _reactRouter.browserHistory.replace('/auth');
-                      //
-                      _combineReducers2.default.dispatch((0, _actions.deleteAuthentication)());
-                      e.preventDefault();
-                    }, title: 'LogOut' })
+                  _react2.default.createElement(
+                    _Components.MenuSection,
+                    null,
+                    _react2.default.createElement(_Components.MenuHeader, { title: 'Kara Cray', subTitle: '@karagay' }),
+                    _react2.default.createElement(_Components.MenuItem, { title: 'Home', onClick: function onClick(e) {
+                        _reactRouter.browserHistory.push('/');
+                      } }),
+                    _react2.default.createElement(_Components.MenuItem, { title: 'Profile', onClick: function onClick(e) {
+                        _reactRouter.browserHistory.push('/profile');
+                      } })
+                  ),
+                  _react2.default.createElement(
+                    _Components.MenuSection,
+                    null,
+                    _react2.default.createElement(_Components.MenuHeader, { title: 'ADMIN CONSOLE' }),
+                    _react2.default.createElement(_Components.MenuItem, { title: 'Master Data' }),
+                    _react2.default.createElement(_Components.MenuItem, { title: 'Manage Role & Access' })
+                  ),
+                  _react2.default.createElement(
+                    _Components.MenuSection,
+                    null,
+                    _react2.default.createElement(_Components.MenuItem, { onClick: function onClick(e) {
+                        console.log('work');
+                        _reactRouter.browserHistory.replace('/auth');
+                        //
+                        _combineReducers2.default.dispatch((0, _actions.deleteAuthentication)());
+                        e.preventDefault();
+                      }, title: 'LogOut' })
+                  )
                 )
               )
             )
-          )
-        ),
-        this.props.children
+          ),
+          this.props.children
+        )
       );
     }
   }]);
@@ -10623,79 +10592,8 @@ module.exports = function bind(fn, thisArg) {
 };
 
 /***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var formatOptions = function formatOptions(o) {
-    var path = o.path,
-        domain = o.domain,
-        expires = o.expires,
-        secure = o.secure;
-
-    return [typeof path === 'undefined' || path === null ? '' : ';path=' + path, typeof domain === 'undefined' || domain === null ? '' : ';domain=' + domain, typeof expires === 'undefined' || expires === null ? '' : ';expires=' + expires.toUTCString(), typeof secure === 'undefined' || secure === null || secure === false ? '' : ';secure'].join('');
-};
-var formatCookie = function formatCookie(k, d, o) {
-    return [encodeURIComponent(k), '=', encodeURIComponent(d), formatOptions(o)].join('');
-};
-exports.formatCookie = formatCookie;
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _slicedToArray = function () {
-    function sliceIterator(arr, i) {
-        var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
-            for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-                _arr.push(_s.value);if (i && _arr.length === i) break;
-            }
-        } catch (err) {
-            _d = true;_e = err;
-        } finally {
-            try {
-                if (!_n && _i["return"]) _i["return"]();
-            } finally {
-                if (_d) throw _e;
-            }
-        }return _arr;
-    }return function (arr, i) {
-        if (Array.isArray(arr)) {
-            return arr;
-        } else if (Symbol.iterator in Object(arr)) {
-            return sliceIterator(arr, i);
-        } else {
-            throw new TypeError("Invalid attempt to destructure non-iterable instance");
-        }
-    };
-}();
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var parseCookies = function parseCookies(s) {
-    if (s.length === 0) return {};
-    var parsed = {};
-    var pattern = new RegExp('\\s*;\\s*');
-    s.split(pattern).forEach(function (i) {
-        var _i$split = i.split('='),
-            _i$split2 = _slicedToArray(_i$split, 2),
-            encodedKey = _i$split2[0],
-            encodedValue = _i$split2[1];
-
-        var key = decodeURIComponent(encodedKey);
-        var value = decodeURIComponent(encodedValue);
-        parsed[key] = value;
-    });
-    return parsed;
-};
-exports.parseCookies = parseCookies;
-
-/***/ }),
+/* 96 */,
+/* 97 */,
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18854,7 +18752,7 @@ function warning(message) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TimeSheetTimeButton = exports.Select = exports.RadioButton = exports.Input = exports.Divider = exports.MenuHeader = exports.MenuItem = exports.MenuSection = exports.Menu = undefined;
+exports.TimeSheetTimeButton = exports.Divider = exports.MenuHeader = exports.MenuItem = exports.MenuSection = exports.Menu = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19013,11 +18911,11 @@ var Divider = exports.Divider = function (_Component5) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'divider-wrapper', style: this.props.style },
-        this.props.btnLeftText && _react2.default.createElement(
+        { className: 'divider-wrapper' },
+        this.props.back && _react2.default.createElement(
           'button',
-          { className: 'btn-secondary', onClick: this.props.btnLeftClick },
-          this.props.btnLeftText
+          { className: 'btn-secondary', onClick: this.props.back },
+          this.props.back_text
         ),
         _react2.default.createElement(
           'h2',
@@ -19035,102 +18933,8 @@ var Divider = exports.Divider = function (_Component5) {
   return Divider;
 }(_react.Component);
 
-var Input = exports.Input = function (_Component6) {
-  _inherits(Input, _Component6);
-
-  function Input() {
-    _classCallCheck(this, Input);
-
-    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
-  }
-
-  _createClass(Input, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: this.props.style },
-        _react2.default.createElement(
-          'h2',
-          { className: 'input-desc' },
-          this.props.inputName
-        ),
-        _react2.default.createElement('input', { placeholder: this.props.placeholder })
-      );
-    }
-  }]);
-
-  return Input;
-}(_react.Component);
-
-var RadioButton = exports.RadioButton = function (_Component7) {
-  _inherits(RadioButton, _Component7);
-
-  function RadioButton() {
-    _classCallCheck(this, RadioButton);
-
-    return _possibleConstructorReturn(this, (RadioButton.__proto__ || Object.getPrototypeOf(RadioButton)).apply(this, arguments));
-  }
-
-  _createClass(RadioButton, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'p',
-        { className: 'radio-button', style: this.props.style },
-        _react2.default.createElement('input', { type: 'radio', id: this.props.id, name: this.props.group }),
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.id },
-          this.props.label
-        )
-      );
-    }
-  }]);
-
-  return RadioButton;
-}(_react.Component);
-
-var Select = exports.Select = function (_Component8) {
-  _inherits(Select, _Component8);
-
-  function Select() {
-    _classCallCheck(this, Select);
-
-    return _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).apply(this, arguments));
-  }
-
-  _createClass(Select, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: this.props.style },
-        _react2.default.createElement(
-          'h2',
-          { className: 'input-desc' },
-          this.props.inputName
-        ),
-        _react2.default.createElement(
-          'select',
-          { className: 'select' },
-          this.props.items.items.map(function (value, index) {
-            return _react2.default.createElement(
-              'option',
-              { key: index, value: value.title },
-              value.title
-            );
-          })
-        )
-      );
-    }
-  }]);
-
-  return Select;
-}(_react.Component);
-
-var TimeSheetTimeButton = exports.TimeSheetTimeButton = function (_Component9) {
-  _inherits(TimeSheetTimeButton, _Component9);
+var TimeSheetTimeButton = exports.TimeSheetTimeButton = function (_Component6) {
+  _inherits(TimeSheetTimeButton, _Component6);
 
   function TimeSheetTimeButton() {
     _classCallCheck(this, TimeSheetTimeButton);
@@ -19219,7 +19023,7 @@ var DashboardHome = function (_Component) {
         null,
         _react2.default.createElement(
           'div',
-          { className: 'grid wrap' },
+          { className: 'grid wrap wider' },
           _react2.default.createElement(
             'div',
             { className: 'unit half' },
@@ -19228,62 +19032,63 @@ var DashboardHome = function (_Component) {
               { className: 'card profile' },
               _react2.default.createElement(
                 'div',
-                { className: 'grid' },
+                { className: 'margin' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'unit two-fifths' },
-                  _react2.default.createElement('div', { className: 'pic-wrapper' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit three-fifths' },
+                  { className: 'grid' },
                   _react2.default.createElement(
-                    'large',
-                    { style: { fontSize: '18px' } },
-                    auth.userdata ? auth.userdata.user_name : '-'
+                    'div',
+                    { className: 'unit two-fifths' },
+                    _react2.default.createElement('div', { className: 'pic-wrapper' })
                   ),
                   _react2.default.createElement(
-                    'small',
-                    null,
-                    'Admin, Project Manager'
-                  ),
-                  _react2.default.createElement(
-                    'ul',
-                    null,
+                    'div',
+                    { className: 'unit three-fifths' },
                     _react2.default.createElement(
-                      'li',
+                      'large',
                       null,
-                      _react2.default.createElement(
-                        'a',
-                        { onClick: function onClick(e) {
-                            _reactRouter.browserHistory.push('/my-performance');
-                            e.preventDefault();
-                          } },
-                        'My Performance'
-                      )
+                      auth.userdata ? auth.userdata.user_nameentry : '-'
                     ),
                     _react2.default.createElement(
-                      'li',
+                      'small',
                       null,
-                      _react2.default.createElement(
-                        'a',
-                        null,
-                        'My Assigments'
-                      )
+                      'Admin, Project Manager'
                     ),
                     _react2.default.createElement(
-                      'li',
+                      'ul',
                       null,
                       _react2.default.createElement(
-                        'a',
+                        'li',
                         null,
-                        'My Recent Activities'
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'My Performance'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'My Assigments'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          null,
+                          'My Recent Activities'
+                        )
                       )
                     )
                   )
-                )
-              ),
-              _react2.default.createElement('div', null)
+                ),
+                _react2.default.createElement('div', null)
+              )
             )
           ),
           _react2.default.createElement(
@@ -19403,7 +19208,7 @@ var DashboardHome = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'grid wrap' },
+          { className: 'grid wrap wider' },
           _react2.default.createElement(
             'div',
             { className: 'unit whole' },
@@ -19422,88 +19227,57 @@ var DashboardHome = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'projects' },
-          auth.project.map(function (value, index) {
+          auth.projects.map(function (value, index) {
             return _react2.default.createElement(
               'div',
-              { key: index },
+              { className: 'grid wrap wider', key: index },
               _react2.default.createElement(
                 'div',
-                { style: { marginBottom: '30px', margin: '20px auto 10px' }, className: 'grid wrap', key: index },
+                { className: 'unit whole' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(
-                    'large',
-                    null,
-                    'Business Unit\xA0:\xA0\xA0'
-                  ),
-                  _react2.default.createElement(
-                    'a',
-                    null,
-                    value.bu_name
-                  ),
-                  _react2.default.createElement(
-                    'button',
-                    { className: 'btn-secondary', onClick: function onClick(e) {
-                        _reactRouter.browserHistory.push('/new-project');
-                      } },
-                    'NEW PROJECT'
-                  )
-                )
-              ),
-              value.project_list.map(function (value, index) {
-                return _react2.default.createElement(
-                  'div',
-                  { className: 'grid wrap', key: index },
+                  { className: 'card' },
                   _react2.default.createElement(
                     'div',
-                    { className: 'unit whole no-gutters' },
+                    { className: 'unit two-fifths' },
                     _react2.default.createElement(
-                      'div',
-                      { className: 'card' },
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'unit two-fifths' },
-                        _react2.default.createElement(
-                          'medium',
-                          { className: 'project-name' },
-                          value.project_name
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'unit one-fifth' },
-                        _react2.default.createElement(
-                          'small',
-                          { style: { fontSize: '15px' }, className: 'project-status' },
-                          value.project_status,
-                          '\xA0(',
-                          value.project_complete,
-                          '%)'
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'unit two-fifths' },
-                        _react2.default.createElement(_reactProgressbar.Line, {
-                          progress: value.project_complete * 0.01,
-                          initialAnimate: true,
-                          options: {
-                            strokeWidth: 3,
-                            color: '#F48165',
-                            trailColor: '#EEEEEE',
-                            trailWidth: 12,
-                            fontSize: 30,
-                            easing: 'easeInOut',
-                            duration: 700
-                          },
-                          containerClassName: 'line-bar'
-                        })
-                      )
+                      'medium',
+                      { className: 'project-name' },
+                      value.project_name
                     )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'unit one-fifth' },
+                    _react2.default.createElement(
+                      'small',
+                      { className: 'project-status' },
+                      value.project_status,
+                      '\xA0(',
+                      value.project_complete,
+                      '%)'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'unit two-fifths' },
+                    _react2.default.createElement(_reactProgressbar.Line, {
+                      progress: value.project_complete * 0.01,
+                      initialAnimate: true,
+                      options: {
+                        strokeWidth: 3,
+                        color: '#F48165',
+                        trailColor: '#EEEEEE',
+                        trailWidth: 12,
+                        fontSize: 30,
+                        easing: 'easeInOut',
+                        duration: 700
+                      },
+                      containerClassName: 'line-bar'
+                    })
                   )
-                );
-              })
+                )
+              )
             );
           })
         )
@@ -19603,484 +19377,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(MainPage);
 // export default MainPage
 
 /***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(9);
-
-var _axios = __webpack_require__(10);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactRouter = __webpack_require__(7);
-
-var _combineReducers = __webpack_require__(14);
-
-var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-var _Components = __webpack_require__(164);
-
-var _reactProgressbar = __webpack_require__(303);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NewProject = function (_Component) {
-  _inherits(NewProject, _Component);
-
-  function NewProject() {
-    _classCallCheck(this, NewProject);
-
-    return _possibleConstructorReturn(this, (NewProject.__proto__ || Object.getPrototypeOf(NewProject)).apply(this, arguments));
-  }
-
-  _createClass(NewProject, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Divider, { btnLeftText: 'BACK', style: { marginTop: '0' }, btnLeftClick: function btnLeftClick(e) {
-                  _reactRouter.browserHistory.goBack();
-                  e.preventDefault();
-                }, text: 'CREATE NEW PROJECT' }),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit one-quarter' },
-                  _react2.default.createElement(
-                    'medium',
-                    { style: { textAlign: 'center', marginTop: '20px' } },
-                    'IWO'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit one-quarter' },
-                  _react2.default.createElement(
-                    'medium',
-                    { style: { textAlign: 'center', marginTop: '20px' } },
-                    'PRODUCT'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit one-quarter' },
-                  _react2.default.createElement(
-                    'medium',
-                    { style: { textAlign: 'center', marginTop: '20px' } },
-                    'STATUS'
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit one-quarter' },
-                  _react2.default.createElement(
-                    'medium',
-                    { style: { textAlign: 'center', marginTop: '20px' } },
-                    'FINANCE'
-                  )
-                )
-              ),
-              _react2.default.createElement(_Components.Divider, { text: 'IWO' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Select, { inputName: 'PROJECT ID', items: {
-                  items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                } }),
-              _react2.default.createElement(_Components.Input, { style: { width: '100%' }, inputName: 'NAME' }),
-              _react2.default.createElement(_Components.Input, { style: { width: '100%' }, inputName: 'BUSINESS UNIT' }),
-              _react2.default.createElement(_Components.Input, { style: { width: '100%' }, inputName: 'RELATED BUSINESS UNIT' }),
-              _react2.default.createElement(_Components.Input, { style: { width: '100%' }, inputName: 'NAME' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit one-third' },
-              _react2.default.createElement(_Components.Input, { inputName: 'CUSTOMER', style: { width: '88%' } })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit two-thirds' },
-              _react2.default.createElement(_Components.Input, { inputName: 'END CUSTOMER', style: { width: '100%' } })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit two-thirds' },
-              _react2.default.createElement(_Components.Input, { inputName: 'END CUSTOMER', style: { width: '94%' } })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit one-third' },
-              _react2.default.createElement(_Components.Input, { inputName: 'CUSTOMER', style: { width: '100%' } })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Divider, { text: 'PRODUCT' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit half' },
-                  _react2.default.createElement(_Components.RadioButton, { id: 'test1', label: 'Project', group: 'project-type' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit half' },
-                  _react2.default.createElement(_Components.RadioButton, { id: 'test2', label: 'Non-Project', group: 'project-type' })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Select, { inputName: 'PROJECT MANAGER', style: { width: '96%' }, items: {
-                      items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                    } })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Select, { inputName: 'TYPE OF OFFER', style: { width: '96%' }, items: {
-                      items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                    } })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit half' },
-                  _react2.default.createElement(_Components.RadioButton, { id: 'yes', label: 'YES', group: 'operation', style: { marginLeft: '20px' } })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit half' },
-                  _react2.default.createElement(_Components.RadioButton, { id: 'no', label: 'NO', group: 'operation' })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Select, { inputName: 'ACCOUNT MANAGER', style: { width: '96%', float: 'right' }, items: {
-                      items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                    } })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Input, { fullWidth: 'true', inputName: 'PRODUCT TYPE', style: { width: '96%', float: 'right' } })
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Divider, { text: 'STATUS' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Select, { inputName: 'ACCOUNT MANAGER', style: { width: '100%' }, items: {
-                  items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                } })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(_Components.Select, { inputName: 'START DATE', style: { width: '96%' }, items: {
-                  items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                } })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(_Components.Select, { inputName: 'END DATE', style: { width: '96%', float: 'right' }, items: {
-                  items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                } })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(
-                'h1',
-                { className: 'input-desc' },
-                'VISIBILITY'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.RadioButton, { id: 'business-member', label: 'Owning Busniness Member', group: 'visibility' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.RadioButton, { id: 'project-member', label: 'Project Members Only', group: 'visibility' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Divider, { text: 'FINANCE' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Select, { inputName: 'START DATE', style: { width: '96%' }, items: {
-                      items: [{ title: 'TBWS21312' }, { title: 'TBWS21312' }]
-                    } })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Input, { inputName: 'TYPE OF EXPENSE', style: { width: '96%' } })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit half' },
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Input, { inputName: 'PROJECT OVERHEAD', style: { width: '96%', float: 'right' } })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'grid wrap' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit whole' },
-                  _react2.default.createElement(_Components.Input, { inputName: 'COGS', style: { width: '96%', float: 'right' } })
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(_Components.Divider, { text: 'PROJECT CHARTER FORM' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit three-quarters' },
-              _react2.default.createElement(
-                'large',
-                { style: { display: 'block', marginBottom: '11px' } },
-                'FORM STATUS:\xA0',
-                _react2.default.createElement(
-                  'span',
-                  { style: { color: '#65BDF4' } },
-                  'DRAFTED'
-                )
-              ),
-              _react2.default.createElement(
-                'large',
-                { style: { display: 'inline-block' } },
-                'COMPLETION:\xA0',
-                _react2.default.createElement(
-                  'span',
-                  { style: { color: '#65BDF4' } },
-                  '25%'
-                ),
-                '\xA0\xA0\xA0\xA0\xA0'
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'completion-bar', style: { display: 'inline-block' } },
-                _react2.default.createElement(_reactProgressbar.Line, {
-                  progress: 30 * 0.01,
-                  initialAnimate: true,
-                  options: {
-                    strokeWidth: 3,
-                    color: '#65BDF4',
-                    trailColor: '#EEEEEE',
-                    trailWidth: 12,
-                    fontSize: 30,
-                    easing: 'easeInOut',
-                    duration: 700
-                  },
-                  containerClassName: 'line-bar'
-                })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'unit one-quarter' },
-              _react2.default.createElement(
-                'button',
-                { className: 'btn-primary' },
-                'COMPLETE FORM'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'grid wrap' },
-            _react2.default.createElement(
-              'div',
-              { className: 'unit whole' },
-              _react2.default.createElement(
-                'div',
-                { className: 'btn-wrapper' },
-                _react2.default.createElement(
-                  'button',
-                  { className: 'btn-secondary' },
-                  'CANCEL'
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { className: 'btn-primary', style: { float: 'right' } },
-                  'CREATE PROJECT'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return NewProject;
-}(_react.Component);
-
-function mapStateToProps(state) {
-  return {
-    state: state
-    // filter: ownProps.location.query.filter
-  };
-}
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(NewProject);
-// export default Login
-
-/***/ }),
+/* 167 */,
 /* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20119,16 +19416,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Profile = function (_Component) {
-  _inherits(Profile, _Component);
+var Dashboard = function (_Component) {
+  _inherits(Dashboard, _Component);
 
-  function Profile() {
-    _classCallCheck(this, Profile);
+  function Dashboard() {
+    _classCallCheck(this, Dashboard);
 
-    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
   }
 
-  _createClass(Profile, [{
+  _createClass(Dashboard, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -20170,7 +19467,7 @@ var Profile = function (_Component) {
     }
   }]);
 
-  return Profile;
+  return Dashboard;
 }(_react.Component);
 
 function mapStateToProps(state) {
@@ -20178,7 +19475,7 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Profile);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Dashboard);
 // export default Login
 
 /***/ }),
@@ -20815,7 +20112,7 @@ var Timesheet = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'unit whole' },
-            _react2.default.createElement(_components.Divider, { text: 'TIMESHEET', btnLeftText: 'Back', btnLeftClick: function btnLeftClick(e) {
+            _react2.default.createElement(_components.Divider, { text: 'TIMESHEET', back_text: 'Back', back: function back(e) {
                 _reactRouter.browserHistory.goBack();
                 e.preventDefault();
               } })
@@ -21806,171 +21103,7 @@ function isSlowBuffer(obj) {
 }
 
 /***/ }),
-/* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}();
-
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var format_cookie_1 = __webpack_require__(96);
-var parse_cookies_1 = __webpack_require__(97);
-
-var CookieStorage = function () {
-    function CookieStorage(defaultOptions) {
-        _classCallCheck(this, CookieStorage);
-
-        this._defaultOptions = Object.assign({
-            path: null,
-            domain: null,
-            expires: null,
-            secure: false
-        }, defaultOptions);
-        if (typeof Proxy !== 'undefined') {
-            return new Proxy(this, CookieStorageHandler);
-        }
-    }
-
-    _createClass(CookieStorage, [{
-        key: "clear",
-        value: function clear() {
-            var _this = this;
-
-            var parsed = parse_cookies_1.parseCookies(this._getCookie());
-            var keys = Object.keys(parsed);
-            keys.forEach(function (key) {
-                return _this.removeItem(key);
-            });
-        }
-    }, {
-        key: "getItem",
-        value: function getItem(key) {
-            var parsed = parse_cookies_1.parseCookies(this._getCookie());
-            return parsed.hasOwnProperty(key) ? parsed[key] : null;
-        }
-    }, {
-        key: "key",
-        value: function key(index) {
-            var parsed = parse_cookies_1.parseCookies(this._getCookie());
-            var sortedKeys = Object.keys(parsed).sort();
-            return index < sortedKeys.length ? sortedKeys[index] : null;
-        }
-    }, {
-        key: "removeItem",
-        value: function removeItem(key) {
-            var data = '';
-            var options = Object.assign({}, this._defaultOptions, {
-                expires: new Date(0)
-            });
-            var formatted = format_cookie_1.formatCookie(key, data, options);
-            this._setCookie(formatted);
-        }
-    }, {
-        key: "setItem",
-        value: function setItem(key, data, options) {
-            var opts = Object.assign({}, this._defaultOptions, options);
-            var formatted = format_cookie_1.formatCookie(key, data, opts);
-            this._setCookie(formatted);
-        }
-    }, {
-        key: "_getCookie",
-        value: function _getCookie() {
-            return typeof document === 'undefined' ? '' : typeof document.cookie === 'undefined' ? '' : document.cookie;
-        }
-    }, {
-        key: "_setCookie",
-        value: function _setCookie(value) {
-            document.cookie = value;
-        }
-    }, {
-        key: "length",
-        get: function get() {
-            var parsed = parse_cookies_1.parseCookies(this._getCookie());
-            var keys = Object.keys(parsed);
-            return keys.length;
-        }
-    }]);
-
-    return CookieStorage;
-}();
-
-exports.CookieStorage = CookieStorage;
-var CookieStorageHandler = {
-    get: function get(target, p) {
-        if (p in target) {
-            return target[p];
-        } else {
-            var result = target.getItem(p.toString());
-            return result ? result : undefined;
-        }
-    },
-    set: function set(target, p, value) {
-        target.setItem(p.toString(), value);
-        return true;
-    },
-    has: function has(target, p) {
-        if (p in target) {
-            return true;
-        } else {
-            return target.getItem(p.toString()) ? true : false;
-        }
-    },
-    deleteProperty: function deleteProperty(target, p) {
-        target.removeItem(p.toString());
-        return true;
-    },
-    defineProperty: function defineProperty(target, p, attributes) {
-        var isExtensible = Object.isExtensible(target);
-        var alreadyExists = target.getItem(p.toString());
-        if (!isExtensible && !alreadyExists) {
-            throw new TypeError("Can't add property " + p.toString() + ", object is not extensible");
-        } else {
-            target.setItem(p.toString(), attributes.value);
-            return true;
-        }
-    },
-    ownKeys: function ownKeys(target) {
-        var keys = [];
-        for (var i = 0; i < target.length; i++) {
-            if (target.key(i) == null) {
-                continue;
-            } else {
-                keys.push(target.key(i));
-            }
-        }
-        return keys;
-    },
-    getOwnPropertyDescriptor: function getOwnPropertyDescriptor(target, p) {
-        if (p in target) {
-            return undefined;
-        } else {
-            return {
-                value: target.getItem(p.toString()),
-                writable: true,
-                enumerable: true,
-                configurable: true
-            };
-        }
-    }
-};
-
-/***/ }),
+/* 195 */,
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -52400,14 +51533,6 @@ var _UpdateTimesheet = __webpack_require__(367);
 
 var _UpdateTimesheet2 = _interopRequireDefault(_UpdateTimesheet);
 
-var _NewProject = __webpack_require__(167);
-
-var _NewProject2 = _interopRequireDefault(_NewProject);
-
-var _MyPerformances = __webpack_require__(366);
-
-var _MyPerformances2 = _interopRequireDefault(_MyPerformances);
-
 var _combineReducers = __webpack_require__(14);
 
 __webpack_require__(175);
@@ -52445,8 +51570,6 @@ var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHi
         _reactRouter.Route,
         { component: _Dashboard2.default, onEnter: requireAuth },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _DashboardHome2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: 'new-project', component: _NewProject2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: 'my-performance', component: _MyPerformances2.default }),
         _react2.default.createElement(
           _reactRouter.Route,
           { path: 'profile', component: _Profile2.default },
@@ -52481,7 +51604,7 @@ var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TimeSheetTimeButton = exports.Select = exports.RadioButton = exports.Input = exports.Divider = exports.MenuHeader = exports.MenuItem = exports.MenuSection = exports.Menu = undefined;
+exports.TimeSheetTimeButton = exports.Divider = exports.MenuHeader = exports.MenuItem = exports.MenuSection = exports.Menu = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -52640,11 +51763,11 @@ var Divider = exports.Divider = function (_Component5) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'divider-wrapper', style: this.props.style },
-        this.props.btnLeftText && _react2.default.createElement(
+        { className: 'divider-wrapper' },
+        this.props.back && _react2.default.createElement(
           'button',
-          { className: 'btn-secondary', onClick: this.props.btnLeftClick },
-          this.props.btnLeftText
+          { className: 'btn-secondary', onClick: this.props.back },
+          this.props.back_text
         ),
         _react2.default.createElement(
           'h2',
@@ -52662,102 +51785,8 @@ var Divider = exports.Divider = function (_Component5) {
   return Divider;
 }(_react.Component);
 
-var Input = exports.Input = function (_Component6) {
-  _inherits(Input, _Component6);
-
-  function Input() {
-    _classCallCheck(this, Input);
-
-    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
-  }
-
-  _createClass(Input, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: this.props.style },
-        _react2.default.createElement(
-          'h2',
-          { className: 'input-desc' },
-          this.props.inputName
-        ),
-        _react2.default.createElement('input', { placeholder: this.props.placeholder })
-      );
-    }
-  }]);
-
-  return Input;
-}(_react.Component);
-
-var RadioButton = exports.RadioButton = function (_Component7) {
-  _inherits(RadioButton, _Component7);
-
-  function RadioButton() {
-    _classCallCheck(this, RadioButton);
-
-    return _possibleConstructorReturn(this, (RadioButton.__proto__ || Object.getPrototypeOf(RadioButton)).apply(this, arguments));
-  }
-
-  _createClass(RadioButton, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'p',
-        { className: 'radio-button', style: this.props.style },
-        _react2.default.createElement('input', { type: 'radio', id: this.props.id, name: this.props.group }),
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.id },
-          this.props.label
-        )
-      );
-    }
-  }]);
-
-  return RadioButton;
-}(_react.Component);
-
-var Select = exports.Select = function (_Component8) {
-  _inherits(Select, _Component8);
-
-  function Select() {
-    _classCallCheck(this, Select);
-
-    return _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).apply(this, arguments));
-  }
-
-  _createClass(Select, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: this.props.style },
-        _react2.default.createElement(
-          'h2',
-          { className: 'input-desc' },
-          this.props.inputName
-        ),
-        _react2.default.createElement(
-          'select',
-          { className: 'select' },
-          this.props.items.items.map(function (value, index) {
-            return _react2.default.createElement(
-              'option',
-              { key: index, value: value.title },
-              value.title
-            );
-          })
-        )
-      );
-    }
-  }]);
-
-  return Select;
-}(_react.Component);
-
-var TimeSheetTimeButton = exports.TimeSheetTimeButton = function (_Component9) {
-  _inherits(TimeSheetTimeButton, _Component9);
+var TimeSheetTimeButton = exports.TimeSheetTimeButton = function (_Component6) {
+  _inherits(TimeSheetTimeButton, _Component6);
 
   function TimeSheetTimeButton() {
     _classCallCheck(this, TimeSheetTimeButton);
@@ -52812,7 +51841,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Ope
 exports.push([module.i, "@import url(https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css);", ""]);
 
 // module
-exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card.login #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card.login .margin {\n  margin: 39px; }\n  .card.login .margin h1 {\n    font-size: 25px; }\n  .card.login .margin .input-desc {\n    font-size: 21px; }\n  .card.login .margin input {\n    width: 100%;\n    height: 50px; }\n\n.card.register .margin {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.profile .sidebar medium {\n  margin-top: 20px; }\n\n.profile .input-desc {\n  font-size: 16px; }\n\n.profile input {\n  width: 100%; }\n\n.updateTimeSheet .updateSheet input {\n  width: 100%; }\n\n.updateTimeSheet .updateSheet select {\n  width: 100%; }\n\n.updateTimeSheet .btn-primary {\n  width: 200px;\n  height: 50px; }\n\n.updateTimeSheet .btn-secondary {\n  width: 200px;\n  height: 50px;\n  margin-right: 40px; }\n\n.updateTimeSheet select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.updateTimeSheet .task-workhours {\n  display: grid;\n  grid-template-columns: 3fr 1fr;\n  grid-column-gap: 20px; }\n\n.completion-bar {\n  width: 55%;\n  display: inline-block;\n  border-radius: 30px;\n  overflow: hidden; }\n\n.btn-wrapper {\n  margin: 40px auto;\n  width: 456px;\n  display: block; }\n  .btn-wrapper button {\n    width: 208px; }\n\n.person {\n  margin-top: 21.5px;\n  margin-bottom: 21.5px; }\n  .person .person-image {\n    width: 50px;\n    height: 50px;\n    background-color: #FA5962;\n    border-radius: 100%;\n    margin-left: 50px;\n    display: inline-block; }\n  .person .person-info {\n    display: inline-block;\n    margin-left: 20px; }\n\n.card.project {\n  padding-top: 20px;\n  padding-left: 50px; }\n  .card.project small {\n    float: left; }\n  .card.project .project-info {\n    margin-left: 20px;\n    float: left; }\n\n.icon-arrow-left-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-right: 30px;\n  position: relative;\n  top: 20px; }\n\n.icon-arrow-right-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-left: 30px;\n  position: relative;\n  top: 20px; }\n\n.card.profile large {\n  text-transform: capitalize; }\n\n.card.profile ul {\n  list-style: none;\n  padding-left: 0; }\n  .card.profile ul li {\n    margin-top: 10px; }\n\n.card.profile .margin {\n  margin: 20px; }\n\n.search {\n  width: 80%;\n  height: 50px;\n  margin: auto; }\n\n.projects .btn-secondary {\n  float: right; }\n\n.projects .card {\n  padding: 23px 32px; }\n  .projects .card .project-name {\n    color: #333333; }\n  .projects .card .project-status {\n    text-transform: uppercase;\n    font-weight: 400;\n    font-family: 'Open Sans', sans-serif; }\n  .projects .card .line-bar {\n    overflow: hidden;\n    border-radius: 10px;\n    border: 1px solid #EEEEEE; }\n\n.divider {\n  border: 1px solid #CCCCCC;\n  width: 100%;\n  margin-top: 70px;\n  margin-bottom: 40px; }\n\n.pic-wrapper {\n  width: 150px;\n  height: 150px;\n  background-color: #FA5962;\n  border-radius: 100%; }\n\n.circle-container {\n  position: relative; }\n  .circle-container .circle-bar {\n    display: inline-block;\n    height: 58px;\n    width: 58px;\n    margin-top: 31px; }\n    .circle-container .circle-bar .progressbar-text {\n      color: #777777 !important;\n      font-family: 'lato', sans-serif;\n      font-weight: 300; }\n  .circle-container .circle-desc {\n    display: inline-block;\n    position: absolute;\n    top: 33px;\n    margin-left: 24px; }\n    .circle-container .circle-desc .status {\n      text-transform: uppercase;\n      font-weight: 300;\n      margin-top: 6px; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  border-radius: 3px;\n  padding: 20px;\n  overflow: hidden;\n  border: 1px solid #EEEEEE; }\n\na {\n  cursor: pointer;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  color: #F57556;\n  letter-spacing: 1px;\n  line-height: 24px; }\n\n.shadow {\n  border: none;\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nlarge {\n  font-size: 17px;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  display: inline-block;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nmedium {\n  display: block;\n  font-family: 'lato', sans-serif;\n  /* SIGN IN: */\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nsmall {\n  display: block;\n  /* SIGN IN: */\n  font-family: 'Open Sans', sans-serif;\n  font-size: 17px;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\n.margin {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100% !important;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.btn-secondary {\n  /* Rectangle 4: */\n  /* Rectangle 4 Copy 2: */\n  padding: 15px 35px;\n  background: white;\n  border: 1px solid #EEEEEE;\n  border-radius: 2px;\n  font-family: 'lato', sans-serif;\n  font-size: 15px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  margin-top: 25px;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%;\n  margin-bottom: 57px; }\n  .navbar .trigger {\n    background-color: #FA5962;\n    height: 36px;\n    width: 36px;\n    float: right;\n    border-radius: 100%; }\n  .navbar .menu {\n    z-index: 1;\n    display: none;\n    background: #FFFFFF;\n    border: 1px solid #EEEEEE;\n    position: absolute;\n    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);\n    border-radius: 2px;\n    right: 230px;\n    top: 70px; }\n    .navbar .menu .menu-section {\n      border-bottom: 1px solid #CCCCCC; }\n      .navbar .menu .menu-section .menu-header {\n        padding: 20px 40px 10px 30px; }\n        .navbar .menu .menu-section .menu-header .title {\n          font-size: 17px; }\n      .navbar .menu .menu-section .menu-item {\n        padding: 15px 40px 15px 30px; }\n      .navbar .menu .menu-section .menu-item:hover {\n        background-color: #FA5962; }\n        .navbar .menu .menu-section .menu-item:hover .menu-title {\n          color: white !important; }\n  .navbar .menu.active {\n    display: block; }\n\n.divider-wrapper {\n  margin: 35px 0 20px 0;\n  position: relative; }\n  .divider-wrapper button {\n    position: absolute; }\n  .divider-wrapper h2 {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid #CCCCCC;\n    line-height: 0.1em;\n    margin: 24px 0 20px;\n    font-size: 20px;\n    /* SIGN IN: */\n    font-family: 'lato', sans-serif;\n    color: #777777;\n    display: inline-block;\n    letter-spacing: 0.94px;\n    font-weight: 400;\n    letter-spacing: 1.25px; }\n  .divider-wrapper h2 span {\n    background: #FAFAFA;\n    padding: 0 40px; }\n\n.radio-button label {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px;\n  font-size: 17px; }\n\n.radio-button [type=\"radio\"]:checked,\n.radio-button [type=\"radio\"]:not(:checked) {\n  position: absolute;\n  left: -9999px; }\n\n.radio-button [type=\"radio\"]:checked + label,\n.radio-button [type=\"radio\"]:not(:checked) + label {\n  position: relative;\n  padding-left: 36px;\n  cursor: pointer;\n  line-height: 25px;\n  display: inline-block;\n  color: #666; }\n\n.radio-button [type=\"radio\"]:checked + label:before,\n.radio-button [type=\"radio\"]:not(:checked) + label:before {\n  content: '';\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 20px;\n  height: 20px;\n  border: 3px solid #F48165;\n  border-radius: 100%;\n  background: transparent; }\n\n.radio-button [type=\"radio\"]:checked + label:after,\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  content: '';\n  width: 12px;\n  height: 12px;\n  background: #F48165;\n  position: absolute;\n  top: 7px;\n  left: 7px;\n  border-radius: 100%;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease; }\n\n.radio-button [type=\"radio\"]:not(:checked) + label:after {\n  opacity: 0;\n  -webkit-transform: scale(0);\n  transform: scale(0); }\n\n.radio-button [type=\"radio\"]:checked + label:after {\n  opacity: 1;\n  -webkit-transform: scale(1);\n  transform: scale(1); }\n\n.select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 17px;\n  width: 100%;\n  overflow: hidden;\n  padding: 13px 0  13px 0px;\n  font-weight: 300;\n  -webkit-border-radius: 0px;\n  border-radius: 0px !important;\n  height: 52px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  background-image: url(\"http://www.davettur.com/themes/html/fonts/Svg_icons/expand-button.svg\");\n  background-position: 95% 21px;\n  background-size: 11px;\n  background-repeat: no-repeat; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
+exports.push([module.i, "/*\n * Gridism\n * A simple, responsive, and handy CSS grid by @cobyism\n * https://github.com/cobyism/gridism\n */\n/* Preserve some sanity */\n.grid,\n.unit {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* Set up some rules to govern the grid */\n.grid {\n  display: block;\n  clear: both; }\n\n.grid .unit {\n  float: left;\n  width: 100%;\n  padding: 10px; }\n\n/* This ensures the outer gutters are equal to the (doubled) inner gutters. */\n.grid .unit:first-child {\n  padding-left: 20px; }\n\n.grid .unit:last-child {\n  padding-right: 20px; }\n\n/* Nested grids already have padding though, so let's nuke it */\n.unit .unit:first-child {\n  padding-left: 0; }\n\n.unit .unit:last-child {\n  padding-right: 0; }\n\n.unit .grid:first-child > .unit {\n  padding-top: 0; }\n\n.unit .grid:last-child > .unit {\n  padding-bottom: 0; }\n\n/* Let people nuke the gutters/padding completely in a couple of ways */\n.no-gutters .unit,\n.unit.no-gutters {\n  padding: 0 !important; }\n\n/* Wrapping at a maximum width is optional */\n.wrap .grid,\n.grid.wrap {\n  max-width: 978px;\n  margin: 0 auto; }\n\n/* Width classes also have shorthand versions numbered as fractions\n * For example: for a grid unit 1/3 (one third) of the parent width,\n * simply apply class=\"w-1-3\" to the element. */\n.grid .whole, .grid .w-1-1 {\n  width: 100%; }\n\n.grid .half, .grid .w-1-2 {\n  width: 50%; }\n\n.grid .one-third, .grid .w-1-3 {\n  width: 33.3332%; }\n\n.grid .two-thirds, .grid .w-2-3 {\n  width: 66.6665%; }\n\n.grid .one-quarter,\n.grid .one-fourth, .grid .w-1-4 {\n  width: 25%; }\n\n.grid .three-quarters,\n.grid .three-fourths, .grid .w-3-4 {\n  width: 75%; }\n\n.grid .one-fifth, .grid .w-1-5 {\n  width: 20%; }\n\n.grid .two-fifths, .grid .w-2-5 {\n  width: 40%; }\n\n.grid .three-fifths, .grid .w-3-5 {\n  width: 60%; }\n\n.grid .four-fifths, .grid .w-4-5 {\n  width: 80%; }\n\n.grid .golden-small, .grid .w-g-s {\n  width: 38.2716%; }\n\n/* Golden section: smaller piece */\n.grid .golden-large, .grid .w-g-l {\n  width: 61.7283%; }\n\n/* Golden section: larger piece */\n/* Clearfix after every .grid */\n.grid {\n  *zoom: 1; }\n\n.grid:before, .grid:after {\n  display: table;\n  content: \"\";\n  line-height: 0; }\n\n.grid:after {\n  clear: both; }\n\n/* Utility classes */\n.align-center {\n  text-align: center; }\n\n.align-left {\n  text-align: left; }\n\n.align-right {\n  text-align: right; }\n\n.pull-left {\n  float: left; }\n\n.pull-right {\n  float: right; }\n\n/* A property for a better rendering of images in units: in\n   this way bigger pictures are just resized if the unit\n   becomes smaller */\n.unit img {\n  max-width: 100%; }\n\n/* Hide elements using this class by default */\n.only-on-mobiles {\n  display: none !important; }\n\n/* Responsive Stuff */\n@media screen and (max-width: 568px) {\n  /* Stack anything that isn't full-width on smaller screens\n     and doesn't provide the no-stacking-on-mobiles class */\n  .grid:not(.no-stacking-on-mobiles) > .unit {\n    width: 100% !important;\n    padding-left: 20px;\n    padding-right: 20px; }\n  .unit .grid .unit {\n    padding-left: 0px;\n    padding-right: 0px; }\n  /* Sometimes, you just want to be different on small screens */\n  .center-on-mobiles {\n    text-align: center !important; }\n  .hide-on-mobiles {\n    display: none !important; }\n  .only-on-mobiles {\n    display: block !important; } }\n\n/* Expand the wrap a bit further on larger screens */\n@media screen and (min-width: 1180px) {\n  .wider .grid,\n  .grid.wider {\n    max-width: 1180px;\n    margin: 0 auto; } }\n\n.card.login #picture {\n  width: 100%;\n  height: 500px;\n  background-color: #FA5962; }\n\n.card.login .margin {\n  margin: 39px; }\n  .card.login .margin h1 {\n    font-size: 25px; }\n  .card.login .margin .input-desc {\n    font-size: 21px; }\n  .card.login .margin input {\n    width: 100%;\n    height: 50px; }\n\n.card.register .margin {\n  margin: 39px; }\n\n.switch-wrapper {\n  width: 225px;\n  overflow: hidden;\n  height: 40px;\n  border: 2px #CF000F solid;\n  border-radius: 20px;\n  float: right; }\n  .switch-wrapper button {\n    width: 50%;\n    height: 100%;\n    outline: none;\n    border: none;\n    color: white;\n    font-family: 'lato', sans-serif;\n    font-weight: 300;\n    font-size: 13px; }\n  .switch-wrapper button:nth-child(1) {\n    background: #CF000F;\n    color: white; }\n  .switch-wrapper button:nth-child(2) {\n    background: white;\n    color: #777777; }\n\n.unit.half:nth-child(1) input {\n  width: 95%;\n  float: left; }\n\n.unit.half:nth-child(2) input {\n  width: 95%;\n  float: right; }\n\n.profile .sidebar medium {\n  margin-top: 20px; }\n\n.profile .input-desc {\n  font-size: 16px; }\n\n.profile input {\n  width: 100%; }\n\n.person {\n  margin-top: 21.5px;\n  margin-bottom: 21.5px; }\n  .person .person-image {\n    width: 50px;\n    height: 50px;\n    background-color: #FA5962;\n    border-radius: 100%;\n    margin-left: 50px;\n    display: inline-block; }\n  .person .person-info {\n    display: inline-block;\n    margin-left: 20px; }\n\n.card.project {\n  padding-top: 20px;\n  padding-left: 50px; }\n  .card.project small {\n    float: left; }\n  .card.project .project-info {\n    margin-left: 20px;\n    float: left; }\n\n.icon-arrow-left-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-right: 30px;\n  position: relative;\n  top: 20px; }\n\n.icon-arrow-right-circle {\n  width: 24px;\n  height: 25px;\n  font-size: 24px;\n  color: black;\n  margin-left: 30px;\n  position: relative;\n  top: 20px; }\n\n.updateTimeSheet .updateSheet input {\n  width: 100%; }\n\n.updateTimeSheet .updateSheet select {\n  width: 100%; }\n\n.updateTimeSheet .btn-primary {\n  width: 200px;\n  height: 50px; }\n\n.updateTimeSheet .btn-secondary {\n  width: 200px;\n  height: 50px;\n  margin-right: 40px; }\n\n.updateTimeSheet select {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.updateTimeSheet .task-workhours {\n  display: grid;\n  grid-template-columns: 3fr 1fr;\n  grid-column-gap: 20px; }\n\n.card.profile {\n  margin: 0px 40px 0 0; }\n  .card.profile large {\n    text-transform: capitalize; }\n  .card.profile ul {\n    list-style: none;\n    padding-left: 0; }\n    .card.profile ul li {\n      margin-top: 10px; }\n  .card.profile .margin {\n    margin: 20px; }\n\n.search {\n  margin: 0 auto 54px;\n  width: 80%;\n  height: 50px; }\n\n.projects .card {\n  padding: 23px 32px; }\n  .projects .card .project-name {\n    color: #333333; }\n  .projects .card .project-status {\n    text-transform: uppercase;\n    font-weight: 400;\n    font-family: 'Open Sans', sans-serif; }\n  .projects .card .line-bar {\n    overflow: hidden;\n    border-radius: 10px;\n    border: 1px solid #EEEEEE; }\n\n.divider {\n  border: 1px solid #CCCCCC;\n  width: 100%;\n  margin-top: 70px;\n  margin-bottom: 40px; }\n\n.pic-wrapper {\n  width: 150px;\n  height: 150px;\n  background-color: #FA5962;\n  border-radius: 100%; }\n\n.circle-container {\n  position: relative; }\n  .circle-container .circle-bar {\n    display: inline-block;\n    height: 58px;\n    width: 58px;\n    margin-top: 31px; }\n    .circle-container .circle-bar .progressbar-text {\n      color: #777777 !important;\n      font-family: 'lato', sans-serif;\n      font-weight: 300; }\n  .circle-container .circle-desc {\n    display: inline-block;\n    position: absolute;\n    top: 33px;\n    margin-left: 24px; }\n    .circle-container .circle-desc .status {\n      text-transform: uppercase;\n      font-weight: 300;\n      margin-top: 6px; }\n\n.card {\n  background: #FFFFFF;\n  border-radius: 2px 2px 0 2px 2px;\n  border-radius: 3px;\n  overflow: hidden;\n  border: 1px solid #EEEEEE; }\n\na {\n  cursor: pointer;\n  font-family: 'lato', sans-serif;\n  font-size: 16px;\n  color: #F57556;\n  letter-spacing: 1px;\n  line-height: 24px; }\n\n.shadow {\n  border: none;\n  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.25); }\n\nlarge {\n  font-size: 20px;\n  /* SIGN IN: */\n  font-family: 'lato', sans-serif;\n  color: #333333;\n  display: inline-block;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nmedium {\n  display: block;\n  font-family: 'lato', sans-serif;\n  /* SIGN IN: */\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 400; }\n\nsmall {\n  display: block;\n  /* SIGN IN: */\n  font-family: 'Open Sans', sans-serif;\n  font-size: 16px;\n  color: #777777;\n  letter-spacing: 0.94px;\n  font-weight: 300; }\n\n.margin {\n  height: 100%; }\n\ninput {\n  background: #FFFFFF;\n  border: 1px solid #EEEEEE;\n  font-family: 'lato', sans-serif;\n  font-size: 25px;\n  overflow: hidden;\n  padding: 10px 0  10px 15px;\n  font-weight: 300; }\n\n.btn-primary {\n  /* Rectangle 4: */\n  background: #FA5962;\n  border-radius: 2px;\n  outline: none;\n  border: none;\n  color: white;\n  padding: 15px 42px;\n  font-weight: 300;\n  font-family: 'lato', sans-serif;\n  font-size: 16px; }\n\n.btn-secondary {\n  /* Rectangle 4: */\n  /* Rectangle 4 Copy 2: */\n  padding: 15px 35px;\n  background: white;\n  border: 1px solid #EEEEEE;\n  border-radius: 2px;\n  font-family: 'lato', sans-serif;\n  font-size: 16px; }\n\n.input-desc {\n  font-family: 'lato', sans-serif;\n  font-weight: 300;\n  color: #777777;\n  letter-spacing: 1px; }\n\n.navbar {\n  height: 80px;\n  background-color: #CF000F;\n  width: 100%;\n  margin-bottom: 57px; }\n  .navbar .trigger {\n    background-color: #FA5962;\n    height: 36px;\n    width: 36px;\n    float: right;\n    border-radius: 100%; }\n  .navbar .menu {\n    z-index: 1;\n    display: none;\n    background: #FFFFFF;\n    border: 1px solid #EEEEEE;\n    position: absolute;\n    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);\n    border-radius: 2px;\n    right: 230px;\n    top: 70px; }\n    .navbar .menu .menu-section {\n      border-bottom: 1px solid #CCCCCC; }\n      .navbar .menu .menu-section .menu-header {\n        padding: 20px 40px 10px 30px; }\n        .navbar .menu .menu-section .menu-header .title {\n          font-size: 16px; }\n      .navbar .menu .menu-section .menu-item {\n        padding: 15px 40px 15px 30px; }\n      .navbar .menu .menu-section .menu-item:hover {\n        background-color: #FA5962; }\n        .navbar .menu .menu-section .menu-item:hover .menu-title {\n          color: white !important; }\n  .navbar .menu.active {\n    display: block; }\n\n.divider-wrapper {\n  position: relative; }\n  .divider-wrapper button {\n    position: absolute; }\n  .divider-wrapper h2 {\n    width: 100%;\n    text-align: center;\n    border-bottom: 1px solid #CCCCCC;\n    line-height: 0.1em;\n    margin: 24px 0 20px;\n    font-size: 20px;\n    /* SIGN IN: */\n    font-family: 'lato', sans-serif;\n    color: #777777;\n    display: inline-block;\n    letter-spacing: 0.94px;\n    font-weight: 400;\n    letter-spacing: 1.25px; }\n  .divider-wrapper h2 span {\n    background: #FAFAFA;\n    padding: 0 40px; }\n\nbody {\n  background-color: #FAFAFA;\n  margin: 0; }\n", ""]);
 
 // exports
 
@@ -53178,114 +52207,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 365 */,
-/* 366 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(9);
-
-var _axios = __webpack_require__(10);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactRouter = __webpack_require__(7);
-
-var _actions = __webpack_require__(41);
-
-var _combineReducers = __webpack_require__(14);
-
-var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-var _Components = __webpack_require__(164);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MyPerformances = function (_Component) {
-  _inherits(MyPerformances, _Component);
-
-  function MyPerformances() {
-    _classCallCheck(this, MyPerformances);
-
-    return _possibleConstructorReturn(this, (MyPerformances.__proto__ || Object.getPrototypeOf(MyPerformances)).apply(this, arguments));
-  }
-
-  _createClass(MyPerformances, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          { className: 'grid wrap' },
-          _react2.default.createElement(
-            'div',
-            { className: 'unit whole' },
-            _react2.default.createElement(_Components.Divider, { btnLeftText: 'BACK', text: 'MY PERFORMANCES' })
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'grid wrap' },
-          _react2.default.createElement(
-            'div',
-            { className: 'unit whole' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card' },
-              _react2.default.createElement(
-                'div',
-                { className: 'grid' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'unit golden-small' },
-                  _react2.default.createElement(
-                    'large',
-                    null,
-                    'Timesheet'
-                  ),
-                  _react2.default.createElement(_Components.Input, null),
-                  _react2.default.createElement(_Components.Input, null)
-                ),
-                _react2.default.createElement('div', { className: 'unit golden-large' })
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return MyPerformances;
-}(_react.Component);
-
-function mapStateToProps(state) {
-  return {
-    // filter: ownProps.location.query.filter
-  };
-}
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(MyPerformances);
-// export default Login
-
-/***/ }),
+/* 366 */,
 /* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 

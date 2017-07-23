@@ -2,6 +2,7 @@
 bundle.js
 npm-debug.log
 .DS_Store
+app.js
 
 # IntelliJ
 *.iml

@@ -52,4 +52,10 @@ class UpdateTimesheet extends Component {
     }
 }
 
-export default UpdateTimesheet;
+function mapStateToProps(state) {
+  return {
+    state
+    // filter: ownProps.location.query.filter
+  }
+}
+export default connect(mapStateToProps)(UpdateTimesheet)

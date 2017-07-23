@@ -39,7 +39,7 @@ class Timesheet extends Component {
 
             <div className='grid wrap'>
               <div className='unit whole'>
-                <button style={{margin:'50px auto', display:'block'}} className='btn-primary' onClick={
+                <button style={{margin:'10px auto', display:'block'}} className='btn-primary' onClick={
                   e => {
                     browserHistory.push('/updatesheet')
                     e.preventDefault() }}>
