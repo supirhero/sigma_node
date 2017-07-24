@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
-import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
+import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
+import {Table, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
+
 import store from '../reducers/combineReducers.jsx'
+
 
 
 
@@ -210,7 +213,7 @@ export class LineChart extends Component{
             <YAxis />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
-            <Legend />
+            <Legend iconType="circle" iconSize={8}/>
             <LineGraph type="monotone" dataKey="BSD" stroke="#f8aa27"/>
             <LineGraph type="monotone" dataKey="FSD" stroke="#94dea9"/>
             <LineGraph type="monotone" dataKey="SMS" stroke="#795548"/>
@@ -305,5 +308,37 @@ export class PopUp extends Component {
       </div>
 
     )
+  }
+}
+
+export class TableExample extends Component {
+  render() {
+    return (
+      <div>
+        <MuiThemeProvider>
+          <Table >
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+              {this.props.tableHeader.map((header, index) => (
+                <TableRowColumn>
+                  <TableHeaderColumn>{header.value}</TableHeaderColumn>                
+                </TableRowColumn>
+              ))}
+            </TableHeader>
+
+            <TableBody displayRowCheckbox={false} >
+              {this.props.tableData.map((row, index) => (
+                <TableRow key={index}>
+                  <TableRowColumn>{row.name}</TableRowColumn>
+                  <TableRowColumn>{row.email}</TableRowColumn>
+                  <TableRowColumn>{row.entry}</TableRowColumn>
+                  <TableRowColumn>{row.utilization}</TableRowColumn>
+                </TableRow>
+              ))}
+            </TableBody>
+
+          </Table>
+        </MuiThemeProvider>
+      </div>
+    );
   }
 }

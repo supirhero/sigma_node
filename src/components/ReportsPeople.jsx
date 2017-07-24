@@ -4,10 +4,12 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter,TableExample } from './Components.jsx';
+
 
 class ReportsPeople extends Component {
   render() {
+		
     return (
       <div>
         <div className="grid wrap">
@@ -59,7 +61,51 @@ class ReportsPeople extends Component {
 								<Input style={{width:'100%', display:'inline-block'}} placeholder="Search a name" />
 							</div>
 							</div>
+							<div className="grid wrap">
+								<div className="unit whole">
+									<TableExample 				
+									tableHeader={[
+										{value:'name'},
+										{value:'email'},
+										{value:'entry'},										
+										{value:'utilization'},
+									]}
+									tableData = {[
+										{
+											name: 'Dwi Syifa',
+											email: 'dwi.syifa@sigma.co.id',
+											entry:'10',
+											utilization:'20'
+										},
+										{
+											name : 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},	
+										{
+											name: 'Paula Cintya',
+											email: 'paula.cintya@sigma.co.id',
+											entry:'80',
+											utilization:'150'
+										},
+										{
+											name: 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},
+										{
+											name: 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},												
+									]}>
+									</TableExample>
 							
+								</div>
+							</div>		
 						</div>
 					</div>
 				</div>
