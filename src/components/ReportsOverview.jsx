@@ -52,6 +52,7 @@ class ReportsOverview extends Component {
                 <div className="unit whole">
                   <BarChart
                     label="SPI Graph"
+                    ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
                     data={[
                         { name: 'BSD', value: 20 },
                         { name: 'CEM', value: 10 },
@@ -64,7 +65,7 @@ class ReportsOverview extends Component {
                         { name: 'SMS', value: 12 },
                         { name: 'SSI', value: 40 },
                         { name: 'SP', value: 54 },
-												{ name: 'TDMO', value: 20 },
+												{ name: 'TDMO', value: 10 },
 												{ name: 'TBSDMO', value: 23 },
                     ]}
                     
@@ -102,8 +103,34 @@ class ReportsOverview extends Component {
         <div className="grid wrap wider reports" >
           <div className="unit whole" style={{paddingBottom:0}}>
             <div className="card" style={{ padding: '35px' }}>
-              <large>Yearly Performance</large>
-              <a href="" style={{float:'right'}}>hide advanced filter</a>
+              <div className="unit whole">
+                <large>Yearly Performance</large>
+                <a href="" style={{float:'right'}}>hide advanced filter</a>
+              </div>
+              <div className="unit whole">
+                <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
+                <medium>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum aperiam repellendus ducimus esse id porro libero voluptas amet vero minima, iusto magnam, nisi. Recusandae iusto odio, fugit itaque, quidem officiis.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem provident aliquid architecto assumenda sequi dolor ad nobis possimus atque iure porro reprehenderit temporibus itaque deserunt, error quidem fugiat dicta saepe.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni explicabo quis deleniti, deserunt laudantium sit vero soluta blanditiis aliquid. Officiis, ut quae ex quaerat soluta quod error fugiat assumenda aliquam.</medium>
+              </div>
+              <div className="unit whole">
+                <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
+                <div className="unit half">
+                  <Select 
+                          style={{ width: '150px', display: 'inline-block' }}  
+                          items={{
+                          items : [
+                            {title : 'JANUARY'},
+                            {title : 'FEBRUARY'}
+                          ]
+                        }}
+                        />
+                </div>
+                <div className="unit half">
+                <button style={{marginLeft:'30px', display:'inline-block',float:'right'}} className='btn-primary'>SEARCH</button>
+                <button style={{display:'inline-block',float:'right'}} className='btn-primary'>DOWNLOAD</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

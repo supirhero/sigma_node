@@ -47,9 +47,37 @@ class ReportsDirectorate extends Component {
         <div className="grid wrap">
           <div className="unit half">
             <div className="card" style={{ padding: '35px' }}>
-              <large>Projects</large>
+              <large>Finance (IDR)</large>
+              <div className="grid wrap">
+                <div className="unit half"> 
+                  <Meter
+                      progress={35}
+                      text='35'
+                    />
+                </div>
+                <div className="unit half"> 
+                  <div className="grid wrap">
+                    <div className="unit half">
+                      <medium className="project-value-label completed">Completed</medium>
+                      <large className="project-value-number completed">10</large>
+
+                      <medium className="project-value-label not-started">Not Started</medium>
+                      <large className="project-value-number not-started">6</large>
+                     </div>
+                     <div className="unit half">
+                      <medium className="project-value-label in-progress"> In Progress</medium>
+                      <large className="project-value-number in-progress"> 24</large>
+                     </div>
+                   </div>
+                </div>
+                
+               
+                
+                
+              </div>
             </div>
           </div>
+
           <div className="unit half">
             <div className="card" style={{ padding: '35px' }}>
               <large>Finance (IDR)</large>
@@ -76,7 +104,7 @@ class ReportsDirectorate extends Component {
 
         <div className="grid wrap">
           <div className="unit whole">
-            <Divider text="RESOURCES" />
+            <Divider text="RESOURCES" btnRightText="MORE" />
           </div>
         </div>
 
@@ -165,16 +193,16 @@ class ReportsDirectorate extends Component {
                       data={[
                         {name: 'Jan', value: 20},
                         {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 5},
-                        {name: 'Apr', value: 3},
-                        {name: 'May', value: 6},
-                        {name: 'Jun', value: 8},
-                        {name: 'Jul', value: 7},
-                        {name: 'Aug', value: 9},
+                        {name: 'Mar', value: 15},
+                        {name: 'Apr', value: 13},
+                        {name: 'May', value: 16},
+                        {name: 'Jun', value: 18},
+                        {name: 'Jul', value: 17},
+                        {name: 'Aug', value: 19},
                         {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 300},
-                        {name: 'Nov', value: 54},
-                        {name: 'Des', value: 1}
+                        {name: 'Oct', value: 30},
+                        {name: 'Nov', value: 23},
+                        {name: 'Des', value: 21}
                       ]}/>
 
                   </div>
@@ -216,16 +244,16 @@ class ReportsDirectorate extends Component {
                       data={[
                         {name: 'Jan', value: 20},
                         {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 5},
-                        {name: 'Apr', value: 3},
-                        {name: 'May', value: 6},
-                        {name: 'Jun', value: 8},
-                        {name: 'Jul', value: 7},
-                        {name: 'Aug', value: 9},
+                        {name: 'Mar', value: 15},
+                        {name: 'Apr', value: 13},
+                        {name: 'May', value: 16},
+                        {name: 'Jun', value: 18},
+                        {name: 'Jul', value: 17},
+                        {name: 'Aug', value: 19},
                         {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 300},
-                        {name: 'Nov', value: 54},
-                        {name: 'Des', value: 1}
+                        {name: 'Oct', value: 30},
+                        {name: 'Nov', value: 23},
+                        {name: 'Des', value: 21}
                       ]}/>
 
                   </div>

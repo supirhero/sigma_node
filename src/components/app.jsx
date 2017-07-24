@@ -29,6 +29,7 @@ import BusinessUnit from './BusinessUnit.jsx'
 import Reports from './Reports.jsx'
 import ReportsOverview from './ReportsOverview.jsx'
 import ReportsDirectorate from './ReportsDirectorate.jsx'
+import ReportsPeople from './ReportsPeople.jsx'
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
@@ -86,6 +87,7 @@ render(
 
         <Route path='reports' component={Reports}>
           <Route path='reports-directorate' component={ReportsDirectorate} />
+          <Route path='reports-people' component={ReportsPeople} />
           <IndexRoute component={ReportsOverview} />
         </Route>
 

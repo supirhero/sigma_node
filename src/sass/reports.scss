@@ -16,6 +16,8 @@
   color: #777777;
   margin-top: 20px;
 }
+
+
 .project-value-number{
   font-family: 'OpenSans',sans-serif;
   font-size: 24px;
@@ -25,5 +27,17 @@
   text-align: left;
   color: #333333;
   margin:10px 0;
+}
+
+.completed{
+  color: #42c878;
+}
+
+.in-progress{
+   color: #65bdf4;
+}
+
+.not-started{
+  color: #777777;
 }
 
