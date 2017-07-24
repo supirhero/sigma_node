@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart } from './Components.jsx';
+import { Select , Input, BarChart, LineChart } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -95,10 +95,72 @@ class ReportsOverview extends Component {
 
                 </div>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
 
+        <div className="grid wrap wider reports" >
+          <div className="unit whole" style={{paddingBottom:0}}>
+            <div className="card" style={{ padding: '35px' }}>
+              <large>Yearly Performance</large>
+              <a href="" style={{float:'right'}}>hide advanced filter</a>
+            </div>
+          </div>
+        </div>
+                    
+        <div className="grid wrap wider reports" >
+          <div className="unit whole" style={{paddingTop:0}}>
+            <div className="card" style={{ padding: '35px' }}>
+              <div className="grid wrap narrow" style={{marginTop:'55px'}}>
+                <div className="unit whole">
+                  <LineChart
+                    label="SPI HISTORY"
+                    data={[
+                        { name: 'JAN', BSD: 0.3, FSD: 0.6 , SMS: 1.2 , TDMO: 1.4 , CEM: 0.8 },
+                        { name: 'FEB', BSD: 0.5, FSD: 0.3 , SMS: 1.1 , TDMO: 1.8 , CEM: 1.0 },
+                        { name: 'MAR', BSD: 0.2, FSD: 0.4 , SMS: 1.1 , TDMO: 1.7 , CEM: 1.2 },
+                        { name: 'APR', BSD: 0.3, FSD: 0.9 , SMS: 0.7 , TDMO: 1.4 , CEM: 1.1 },
+                        { name: 'MAY', BSD: 0.6, FSD: 1.0 , SMS: 0.8 , TDMO: 1.6 , CEM: 1.2 },
+                        { name: 'JUN', BSD: 0.4, FSD: 1.5 , SMS: 0.9 , TDMO: 0.8 , CEM: 1.1 },
+                        { name: 'JUL', BSD: 0.6, FSD: 1.2 , SMS: 1.5 , TDMO: 1.0 , CEM: 1.6 },
+                        { name: 'AUG', BSD: 0.9, FSD: 1.3 , SMS: 1.8 , TDMO: 0.3 , CEM: 1.5 },
+                        { name: 'SEP', BSD: 0.7, FSD: 0.9 , SMS: 1.3 , TDMO: 0.5 , CEM: 1.6 },
+                        { name: 'OCT', BSD: 0.8, FSD: 1.0 , SMS: 1.6 , TDMO: 1.0 , CEM: 1.4 },
+                        { name: 'NOV', BSD: 0.5, FSD: 0.3 , SMS: 1.7 , TDMO: 0.8 , CEM: 1.1 },
+												{ name: 'DEC', BSD: 0.2, FSD: 0.4 , SMS: 1.6 , TDMO: 1.5 , CEM: 1.2 }
+                    ]}
+                    style={{marginTop:'50px'}}
+                  />
+
+                </div>
+              </div>
+
+              <div className="grid wrap narrow" style={{marginTop:'55px'}}>
+                <div className="unit whole">
+                  <LineChart
+                    label="CPI HISTORY"
+                    data={[
+                        { name: 'JAN', BSD: 0.3, FSD: 0.6 , SMS: 1.2 , TDMO: 1.4 , CEM: 0.8 },
+                        { name: 'FEB', BSD: 0.5, FSD: 0.3 , SMS: 1.1 , TDMO: 1.8 , CEM: 1.0 },
+                        { name: 'MAR', BSD: 0.2, FSD: 0.4 , SMS: 1.1 , TDMO: 1.7 , CEM: 1.2 },
+                        { name: 'APR', BSD: 0.3, FSD: 0.9 , SMS: 0.7 , TDMO: 1.4 , CEM: 1.1 },
+                        { name: 'MAY', BSD: 0.6, FSD: 1.0 , SMS: 0.8 , TDMO: 1.6 , CEM: 1.2 },
+                        { name: 'JUN', BSD: 0.4, FSD: 1.5 , SMS: 0.9 , TDMO: 0.8 , CEM: 1.1 },
+                        { name: 'JUL', BSD: 0.6, FSD: 1.2 , SMS: 1.5 , TDMO: 1.0 , CEM: 1.6 },
+                        { name: 'AUG', BSD: 0.9, FSD: 1.3 , SMS: 1.8 , TDMO: 0.3 , CEM: 1.5 },
+                        { name: 'SEP', BSD: 0.7, FSD: 0.9 , SMS: 1.3 , TDMO: 0.5 , CEM: 1.6 },
+                        { name: 'OCT', BSD: 0.8, FSD: 1.0 , SMS: 1.6 , TDMO: 1.0 , CEM: 1.4 },
+                        { name: 'NOV', BSD: 0.5, FSD: 0.3 , SMS: 1.7 , TDMO: 0.8 , CEM: 1.1 },
+												{ name: 'DEC', BSD: 0.2, FSD: 0.4 , SMS: 1.6 , TDMO: 1.5 , CEM: 1.2 }
+                    ]}
+                    style={{marginTop:'50px'}}
+                  />
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     );

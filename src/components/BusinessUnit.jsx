@@ -28,6 +28,12 @@ class BusinessUnit extends Component {
               } 
             }
             btnRightText='REPORT'
+            btnRightClick={
+              e => {
+                browserHistory.push('/reports')
+                e.preventDefault()
+              }
+            }
             />
           </div>
         </div>

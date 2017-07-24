@@ -37,8 +37,16 @@ class Dashboard extends Component {
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
                       <ul>
-                        <li><Link to="/">HOME</Link></li>
-                        <li><Link to="/reports">REPORTS</Link></li>
+                        <li><a onClick={
+                          e => {
+                            browserHistory.push('/')
+                            e.preventDefault()
+                          }}>HOME</a></li>
+                        <li><a onClick={
+                          e => {
+                            browserHistory.push('/reports')
+                            e.preventDefault()
+                          }}>REPORTS</a></li>
                       </ul>
                         <Menu style={{display:'inline'}}>
                           <MenuSection>

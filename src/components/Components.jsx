@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
-import {BarChart as ChartBar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
+import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts';
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -196,9 +196,35 @@ export class BarChart extends Component {
 
       </div>
     )
+  }
 }
 
+export class LineChart extends Component{
+  render(){
+    return(
+      <div className="bar-chart-container">
+        <large style={{margin:'30px 50px'}}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+          <ChartLine width={680} height={250} data={this.props.data}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip />
+            <Legend />
+            <LineGraph type="monotone" dataKey="BSD" stroke="#f8aa27"/>
+            <LineGraph type="monotone" dataKey="FSD" stroke="#94dea9"/>
+            <LineGraph type="monotone" dataKey="SMS" stroke="#795548"/>
+            <LineGraph type="monotone" dataKey="TDMO" stroke="#0099ff"/>
+            <LineGraph type="monotone" dataKey="CEM" stroke="#642bb6"/>
+          </ChartLine>        
+        </ResponsiveContainer>
+      </div>
+    )
+  }
 }
+
+
+
 export class Search extends Component {
   render() {
     return(
