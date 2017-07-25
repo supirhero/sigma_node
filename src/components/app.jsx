@@ -19,7 +19,6 @@ import Profile from './Profile.jsx'
 import ProfileBasicInformation from './ProfileBasicInformation.jsx'
 import ProfileChangePassword from './ProfileChangePassword.jsx'
 import Timesheet from './Timesheet.jsx'
-import UpdateTimeSheet from './UpdateTimesheet.jsx'
 import NewProject from './NewProject.jsx'
 import MyPerformances from './MyPerformances.jsx'
 import MyRecentActivities from './MyRecentActivities.jsx'
@@ -29,6 +28,7 @@ import Reports from './Reports.jsx'
 import ReportsOverview from './ReportsOverview.jsx'
 import ReportsDirectorate from './ReportsDirectorate.jsx'
 import ReportsPeople from './ReportsPeople.jsx'
+import ReportsFindProject from './ReportsFindProject.jsx'
 import Project from './Project.jsx'
 import ProjectOverview from './ProjectOverview.jsx'
 import ProjectSetting from './ProjectSetting.jsx'
@@ -95,13 +95,13 @@ render(
           <Route path='change-password' component={ProfileChangePassword}/>
         </Route>
 
-        <Route path='timesheet' component={Timesheet}></Route>
-        <Route path='updatesheet' component={UpdateTimeSheet} />
+        <Route path='timesheet' component={Timesheet}></Route>       
         <Route path='my-recent-activities' component={MyRecentActivities} />
 
         <Route path='reports' component={Reports}>
           <Route path='reports-directorate' component={ReportsDirectorate} />
           <Route path='reports-people' component={ReportsPeople} />
+          <Route path='find-project' component={ReportsFindProject} />
           <IndexRoute component={ReportsOverview} />
         </Route>
 

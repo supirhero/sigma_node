@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton} from  './components.jsx'
+import {Divider, TimeSheetTimeButton,PopUp,Select,Input} from  './components.jsx'
 
 
 class Timesheet extends Component {
@@ -39,12 +39,56 @@ class Timesheet extends Component {
 
             <div className='grid wrap'>
               <div className='unit whole'>
-                <button style={{margin:'10px auto', display:'block'}} className='btn-primary' onClick={
-                  e => {
-                    browserHistory.push('/updatesheet')
-                    e.preventDefault() }}>
-                    ADD NEW
-                </button>
+                <PopUp id='complete' dividerText='UPDATE TIMESHEET' btnText='ADD NEW' style={{textAlign:'center'}}>
+                    <div >
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <Input inputName='DATE' />
+                        </div>
+                      </div>                  
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Select inputName='PROJECT' items={{
+                            items : [
+                              {title : 'TBWS21312'},
+                              {title : 'TBWS21312'}
+                            ]
+                          }} />
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit three-quarters">
+                          <Select inputName='TASK' items={{
+                            items : [
+                              {title : 'TBWS21312'},
+                              {title : 'TBWS21312'}
+                            ]
+                          }} />
+                        </div>
+                        <div className="unit one-quarter">
+                          <Input inputName='WORK HOURS' />
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                           <Input inputName='SUBJECT' />                        
+                        </div>                    
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                           <Input inputName='MESSAGE' />                        
+                        </div>                    
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className='unit whole' style={{textAlign:'center'}}>
+                          <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CANCEL </button>
+                          <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} className='btn-primary'> ADD NEW</button>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </PopUp>
 
               </div>
             </div>
