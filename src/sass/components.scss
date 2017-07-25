@@ -8,8 +8,8 @@ $font-size : 17px;
 
 }
 .pic-wrapper {
-  width: 150px;
-  height: 150px;
+  // width: 150px;
+  // height: 150px;
   background-color: $color-secondary;
   border-radius: 100%;
 }
@@ -45,7 +45,7 @@ $font-size : 17px;
   border-radius: 2px 2px 0 2px 2px;
   // width: 100%;
   border-radius: 3px;
-  padding: 20px;
+  padding: 30px;
   overflow: hidden;
   border: 1px solid #EEEEEE;
 }
@@ -72,7 +72,8 @@ large {
   /* SIGN IN: */
   font-family: 'lato', sans-serif;
   color: #333333;
-  display: inline-block;
+
+  display: block;
   letter-spacing: 0.94px;
   font-weight: 400;
 }
@@ -107,7 +108,7 @@ input {
   border: 1px solid #EEEEEE;
   font-family: 'lato', sans-serif;
   font-size: $font-size;
-  width: 100% !important;
+  width: 100%;
   overflow: hidden;
   padding: 13px 0  13px 0px;
   font-weight: 300;
@@ -218,6 +219,8 @@ input {
   margin: 20px 0 20px 0;
   position: relative;
   .btn-right {
+    width: auto !important;
+
     right: 0;
   }
   button {
@@ -417,4 +420,42 @@ width: 100%;
 
 .popup-container.active {
   display: block;
+}
+
+.header{
+  large {
+    color : #333333;
+  }
+    span {
+      display: block;
+      background-color: $color-accent;
+      width: 28px;
+      margin-top: 17px;
+      height: 3px;
+  }
+}
+.header.center {
+  large {
+    width: 100%;
+    text-align: center;
+  }
+    span {
+      margin: 20px auto;
+  }
+}
+
+.project-header {
+  large {
+  }
+  large:nth-child(1) {
+    // font-family: 'open-sans', sans-serif;
+    color: #777777;
+    font-weight: 300;
+  }
+  large:nth-child(2) {
+    margin-top: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+
+  }
 }

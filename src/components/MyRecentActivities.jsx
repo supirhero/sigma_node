@@ -232,4 +232,10 @@ class MyRecentActivities extends Component {
   }
 }
 
-export default MyRecentActivities;
+function mapStateToProps(state) {
+  return {
+    state
+    // filter: ownProps.location.query.filter
+  }
+}
+export default connect(mapStateToProps)(MyRecentActivities)

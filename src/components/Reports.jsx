@@ -10,7 +10,7 @@ class Reports extends Component {
   render() {
     return (
       <div>
-        <div className="grid wrap wider reports">
+        <div className="grid wrap  reports">
           <div className="unit whole">
             <large> REPORTS </large>
             <div style={{ marginTop: '20px' }}>
@@ -22,7 +22,7 @@ class Reports extends Component {
 									  }}
               > Overview </medium>
 
-              <medium 
+              <medium
                 className="heading"
                 onClick={
                   (e) => {
@@ -30,7 +30,7 @@ class Reports extends Component {
 									  }
                 }
               > Directorate / BU </medium>
-              <medium 
+              <medium
               className="heading"
               onClick={
                 (e) => {
@@ -43,7 +43,7 @@ class Reports extends Component {
           </div>
         </div>
 
-        <div className="grid wrap wider reports">
+        <div className="grid wrap  reports">
           <div className="unit whole">
             {this.props.children}
           </div>

@@ -15,17 +15,17 @@ class BusinessUnit extends Component {
     var auth = state.data.auth;
     return (
       <div>
-        
+
         <div className='grid wrap'>
           <div className='unit whole'>
-            <Divider 
-            btnLeftText='BACK' 
-            text={auth.project.bu_name} 
+            <Divider
+            btnLeftText='BACK'
+            text={auth.project.bu_name}
             btnLeftClick={
               e => {
                 browserHistory.goBack()
                 e.preventDefault()
-              } 
+              }
             }
             btnRightText='REPORT'
             btnRightClick={
@@ -37,15 +37,15 @@ class BusinessUnit extends Component {
             />
           </div>
         </div>
-              
+
         <div className="grid wrap">
           <div className="unit whole" >
             <div className="person" style={{textAlign:"center"}}>
             <div className="person-image" style={{margin:"0 auto"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"orange"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"yellow"}}></div>
-            <div className="person-image" style={{margin:"0 auto",marginLeft:"30px"}}> 
-              
+            <div className="person-image" style={{margin:"0 auto",marginLeft:"30px"}}>
+
             </div>
             </div>
           </div>
@@ -61,13 +61,13 @@ class BusinessUnit extends Component {
                       <Input style={{width:'55%', display:'inline-block'}} placeholder="search business unit or project">
                       <div className='material-icons' style={{color:'blue'}}>search</div>
                       </Input>
-                      
+
                         <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                           browserHistory.push('/new-project')
                           }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
                     </div>
                   </div>
-                          
+
                       {
                         value.project_list.map((value,index) => {
                           return(
@@ -114,7 +114,7 @@ class BusinessUnit extends Component {
               )
             })
           }
-          </div>      
+          </div>
       </div>
     );
   }
@@ -129,6 +129,3 @@ function mapStateToProps(state) {
   return state
 }
 export default connect(mapStateToProps)(BusinessUnit);
-
-
-

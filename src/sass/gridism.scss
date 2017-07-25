@@ -12,6 +12,7 @@
   box-sizing: border-box;
 }
 
+
 /* Set up some rules to govern the grid */
 .grid {
   display: block;
@@ -21,6 +22,10 @@
   float: left;
   width: 100%;
   padding: 10px;
+}
+
+.padding-left {
+  padding:  0 0 0 45px;
 }
 
 /* This ensures the outer gutters are equal to the (doubled) inner gutters. */

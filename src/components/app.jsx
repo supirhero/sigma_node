@@ -25,11 +25,15 @@ import MyPerformances from './MyPerformances.jsx'
 import MyRecentActivities from './MyRecentActivities.jsx'
 import MyAssignments from './MyAssignments.jsx'
 import BusinessUnit from './BusinessUnit.jsx'
-
 import Reports from './Reports.jsx'
 import ReportsOverview from './ReportsOverview.jsx'
 import ReportsDirectorate from './ReportsDirectorate.jsx'
 import ReportsPeople from './ReportsPeople.jsx'
+import Project from './Project.jsx'
+import ProjectOverview from './ProjectOverview.jsx'
+import ProjectSetting from './ProjectSetting.jsx'
+import ProjectActivities from './ProjectActivities.jsx'
+import ProjectTeamMember from './ProjectTeamMember.jsx'
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
@@ -75,6 +79,16 @@ render(
         </Route>
         <Route path='my-assignments' component={MyAssignments}></Route>
         <Route path='business-unit' component={BusinessUnit}></Route>
+        <Route path='project' component={Project}>
+          <IndexRoute component={ProjectOverview}></IndexRoute>
+          <Route path='setting' component={ProjectSetting}></Route>
+          <Route path='activities' component={ProjectActivities}></Route>
+          <Route path='team-member' component={ProjectTeamMember}></Route>
+
+
+
+        </Route>
+
 
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>

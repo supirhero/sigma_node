@@ -9,22 +9,22 @@ import { Select, Input, BarChart, Divider, Meter } from './Components.jsx';
 class ReportsDirectorate extends Component {
   render() {
     return (
-      <div>
-        <div className="grid wrap">
-          <div className="unit golden-large">
-            <Select
+
+			<div>
+				<div className="grid wrap">
+					<div className="unit golden-large">
+						<Select
               style={{ width: '100%', display: 'inline-block', float: 'left' }}
               items={{
-                items: [
-                { title: 'DIRECTORATE' },
-                { title: 'BUSINESS UNIT' },
-                ],
-              }}
-            />
-          </div>
-          <div className="unit golden-small">
-            <Select
-              style={{ width: '50%', display: 'inline-block', float: 'left', marginLeft: '33%' }}
+                items : [
+                {title : 'DIRECTORATE'},
+                {title : 'BUSINESS UNIT'}
+                ]
+							}}/>
+					</div>
+					<div className="unit golden-small">
+						<Select
+              style={{ width: '50%', display: 'inline-block', float: 'left',marginLeft:'33%' }}
               items={{
                 items: [
               { title: '2017' },
@@ -47,15 +47,15 @@ class ReportsDirectorate extends Component {
         <div className="grid wrap">
           <div className="unit half">
             <div className="card" style={{ padding: '35px' }}>
-              <large>Finance (IDR)</large>
+              <large>Projects</large>
               <div className="grid wrap">
-                <div className="unit half"> 
+                <div className="unit golden-small">
                   <Meter
                       progress={35}
                       text='35'
                     />
                 </div>
-                <div className="unit half"> 
+                <div className="unit golden-large">
                   <div className="grid wrap">
                     <div className="unit half">
                       <medium className="project-value-label completed">Completed</medium>
@@ -70,10 +70,10 @@ class ReportsDirectorate extends Component {
                      </div>
                    </div>
                 </div>
-                
-               
-                
-                
+
+
+
+
               </div>
             </div>
           </div>
@@ -158,7 +158,7 @@ class ReportsDirectorate extends Component {
             </div>
           </div>
 				</div>
-				
+
 				<div className='grid wrap narrow'>
             <div className='unit whole'>
               <div className='card' style={{padding:'35px'}}>
@@ -262,7 +262,8 @@ class ReportsDirectorate extends Component {
             </div>
           </div>
 
-      </div>
+
+			</div>
     );
   }
 }

@@ -27,7 +27,7 @@ class DashboardHome extends Component {
               <div className='grid'>
 
                   <div className='unit two-fifths'>
-                    <div className='pic-wrapper'>
+                    <div className='pic-wrapper' style={{width:'150px',height:'150px'}}>
                     </div>
                   </div>
                   <div className='unit three-fifths'>
@@ -132,7 +132,12 @@ class DashboardHome extends Component {
                   <div key={index}>
                     <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
-                    <large>Business Unit&nbsp;:&nbsp;&nbsp; <Link style={{fontSize:'20px'}} to="/business-unit">{value.bu_name}</Link></large>
+
+                    <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
+                      e=> {
+                        browserHistory.push('/business-unit')
+                      }
+                    }>{value.bu_name}</a></large>
 
                     <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                       browserHistory.push('/new-project')
@@ -146,7 +151,12 @@ class DashboardHome extends Component {
                         return(
                           <div className='grid wrap' key={index}>
                             <div className='unit whole no-gutters'>
-                              <div className='card'>
+                              <div className='card' onClick={
+                                e => {
+                                  browserHistory.push('/project')
+                                  e.preventDefault()
+                                }
+                              }>
                                 <div className='unit two-fifths'>
                                   <medium className='project-name'>
                                     {value.project_name}

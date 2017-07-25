@@ -16,15 +16,15 @@ class ReportsOverview extends Component {
             <div className="card" style={{ padding: '35px' }}>
               <div className="grid wrap">
                 <div className="unit half">
-                  <large>Monthly Performance</large>
+                  <large style={{display:'inline-block'}}>Monthly Performance</large>
                   <span className="fa fa-bar-chart fa-2x material-icons" style={{ marginLeft: '64px' }} />
                   <span className="fa fa-table fa-2x material-icons" style={{ marginLeft: '30px' }} />
                 </div>
                 <div className="unit half">
                   <div className="grid">
                     <div className="unit four-fifths">
-                      <Select 
-                        style={{ width: '48%', display: 'inline-block' }}  
+                      <Select
+                        style={{ width: '48%', display: 'inline-block' }}
                         items={{
                         items : [
                           {title : 'JANUARY'},
@@ -32,8 +32,8 @@ class ReportsOverview extends Component {
                         ]
                       }}
                       />
-                      <Select 
-                        style={{ width: '48%', display: 'inline-block', float: 'right' }} 
+                      <Select
+                        style={{ width: '48%', display: 'inline-block', float: 'right' }}
                         items={{
                         items : [
                           {title : '2017'},
@@ -68,7 +68,7 @@ class ReportsOverview extends Component {
 												{ name: 'TDMO', value: 10 },
 												{ name: 'TBSDMO', value: 23 },
                     ]}
-                    
+
                   />
                 </div>
               </div>
@@ -96,7 +96,7 @@ class ReportsOverview extends Component {
 
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
 
@@ -116,8 +116,8 @@ class ReportsOverview extends Component {
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
                 <div className="unit half">
-                  <Select 
-                          style={{ width: '150px', display: 'inline-block' }}  
+                  <Select
+                          style={{ width: '150px', display: 'inline-block' }}
                           items={{
                           items : [
                             {title : 'JANUARY'},
@@ -134,7 +134,7 @@ class ReportsOverview extends Component {
             </div>
           </div>
         </div>
-                    
+
         <div className="grid wrap wider reports" >
           <div className="unit whole" style={{paddingTop:0}}>
             <div className="card" style={{ padding: '35px' }}>

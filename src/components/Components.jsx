@@ -107,6 +107,7 @@ export class Input extends Component {
       <div style={this.props.style}>
         {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
         <input placeholder={this.props.placeholder}></input>
+        {this.props.children}
       </div>
     )
   }
@@ -219,7 +220,7 @@ export class LineChart extends Component{
             <LineGraph type="monotone" dataKey="SMS" stroke="#795548"/>
             <LineGraph type="monotone" dataKey="TDMO" stroke="#0099ff"/>
             <LineGraph type="monotone" dataKey="CEM" stroke="#642bb6"/>
-          </ChartLine>        
+          </ChartLine>
         </ResponsiveContainer>
       </div>
     )
@@ -240,6 +241,7 @@ export class Search extends Component {
     )
   }
 }
+
 
 export class PopUp extends Component {
   // constructor(){
@@ -320,7 +322,7 @@ export class TableExample extends Component {
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               {this.props.tableHeader.map((header, index) => (
                 <TableRowColumn>
-                  <TableHeaderColumn>{header.value}</TableHeaderColumn>                
+                  <TableHeaderColumn>{header.value}</TableHeaderColumn>
                 </TableRowColumn>
               ))}
             </TableHeader>
@@ -340,5 +342,26 @@ export class TableExample extends Component {
         </MuiThemeProvider>
       </div>
     );
+  }
+}
+export class Header extends Component {
+  render() {
+    return(
+      <div className={this.props.center ? 'header center' : 'header'} style={this.props.style}>
+        <large>{this.props.text}</large>
+        <span></span>
+      </div>
+    )
+  }
+}
+
+export class ProjectHeader extends Component {
+  render () {
+    return (
+      <div className='project-header'>
+        <large>{this.props.projectName}</large>
+        <large>{this.props.sectionName}</large>
+      </div>
+    )
   }
 }
