@@ -1,9 +1,9 @@
-/node_modules
+#/node_modules
 bundle.js
 npm-debug.log
 .DS_Store
-app.js
-app.js.map
+#app.js
+#app.js.map
 /dist
 
 # IntelliJ
