@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
-import {Table, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
+import {Table, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 
 import store from '../reducers/combineReducers.jsx'
 
@@ -361,6 +361,24 @@ export class ProjectHeader extends Component {
       <div className='project-header'>
         <large>{this.props.projectName}</large>
         <large>{this.props.sectionName}</large>
+      </div>
+    )
+  }
+}
+
+export class Checkbox extends Component {
+  render(){
+    return(
+      <div>
+      <MuiThemeProvider>
+         <div style={{maxWidth:'250px'}}>
+          <MaterialCheckbox
+            label={this.props.label}
+            style={{
+           
+          }}   />
+          </div>
+          </MuiThemeProvider>
       </div>
     )
   }

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart } from './Components.jsx';
+import { Select , Input, BarChart, LineChart, Checkbox } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -109,9 +109,10 @@ class ReportsOverview extends Component {
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
-                <medium>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum aperiam repellendus ducimus esse id porro libero voluptas amet vero minima, iusto magnam, nisi. Recusandae iusto odio, fugit itaque, quidem officiis.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem provident aliquid architecto assumenda sequi dolor ad nobis possimus atque iure porro reprehenderit temporibus itaque deserunt, error quidem fugiat dicta saepe.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni explicabo quis deleniti, deserunt laudantium sit vero soluta blanditiis aliquid. Officiis, ut quae ex quaerat soluta quod error fugiat assumenda aliquam.</medium>
+                    <Checkbox
+                      label="Simple"
+                                      
+                    />
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
