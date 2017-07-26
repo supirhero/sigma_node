@@ -45,7 +45,13 @@ class Project extends Component {
                             return(
                               <li><small onClick={
                                 e => {
-                                  browserHistory.replace(value.path)
+                                  if (value.name == 'Workplan') {
+                                    browserHistory.push(value.path)
+                                  }
+                                  else {
+                                    browserHistory.replace(value.path)
+
+                                  }
                                   e.preventDefault()
                                 }
                               }>{value.name}</small></li>
