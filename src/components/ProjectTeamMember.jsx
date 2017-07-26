@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, Header, ProjectHeader, Input} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input} from  './Components.jsx'
 
 
 

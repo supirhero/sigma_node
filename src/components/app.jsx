@@ -34,6 +34,12 @@ import ProjectOverview from './ProjectOverview.jsx'
 import ProjectSetting from './ProjectSetting.jsx'
 import ProjectActivities from './ProjectActivities.jsx'
 import ProjectTeamMember from './ProjectTeamMember.jsx'
+import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
+import ProjectIssues from './ProjectIssues.jsx'
+import ProjectWorkplan from './ProjectWorkplan.jsx'
+
+
+
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
@@ -84,12 +90,10 @@ render(
           <Route path='setting' component={ProjectSetting}></Route>
           <Route path='activities' component={ProjectActivities}></Route>
           <Route path='team-member' component={ProjectTeamMember}></Route>
-
-
-
+          <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
+          <Route path='issues' component={ProjectIssues}></Route>
         </Route>
-
-
+        <Route path='workplan' component={ProjectWorkplan}/>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>
