@@ -13,9 +13,9 @@ class Project extends Component {
         {type:'menu', name : 'Setting', path: '/project/setting'},
         {type:'menu', name : 'Activities', path: '/project/activities'},
         {type:'title', name : 'MANAGE'},
-        {type:'menu', name : 'Workplan', path: '/project/workplan'},
+        {type:'menu', name : 'Workplan', path: '/workplan'},
         {type:'menu', name : 'Team Member', path: '/project/team-member'},
-        {type:'menu', name : 'Doc & Files', path: '/project/doc-and-files'},
+        {type:'menu', name : 'Doc & Files', path: '/project/docs-and-files'},
         {type:'menu', name : 'Issues', path: '/project/issues'},
         {type:'title', name : 'REPORTS'},
         {type:'menu', name : 'SPI & CPI', path: '/project/spi-and-cpi'},
@@ -45,7 +45,13 @@ class Project extends Component {
                             return(
                               <li><small onClick={
                                 e => {
-                                  browserHistory.replace(value.path)
+                                  if (value.name == 'Workplan') {
+                                    browserHistory.push(value.path)
+                                  }
+                                  else {
+                                    browserHistory.replace(value.path)
+
+                                  }
                                   e.preventDefault()
                                 }
                               }>{value.name}</small></li>
