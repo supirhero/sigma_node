@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "production": "cross-env NODE_ENV=production npm start",
     "mock": "cross-env NODE_ENV=mock webpack --watch --progress --colors",
-    "coba": "cross-env NODE_ENV=mock webpack-dev-server --hot --inline",
+    "coba": "cross-env NODE_ENV=mock webpack-dev-server --content-base /dist --hot --inline",
     "build": "npm start",
     "development": "npm start"
   },
@@ -54,6 +54,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uglify-js": "^3.0.26",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^2.6.1"
   }
 }

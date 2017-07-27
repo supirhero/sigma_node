@@ -29,7 +29,7 @@ const webpack_env = new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.st
 module.exports = {
     entry: "./src/components/app.jsx",
     output: {
-        publicPath: "dist/",
+        publicPath: "/dist/",
         path: path.join(__dirname,  "dist"),
         filename: "app.js"
     },
@@ -38,6 +38,9 @@ module.exports = {
     //     filename: "./src/js/app.js"
     // },
     devServer: {
+      watchOptions: {
+          ignored: /node_modules/
+        },
         contentBase: "./dist",
         hot: true
     },
@@ -71,7 +74,7 @@ module.exports = {
       }
         ]
     },
-    plugins: [ webpack_env ],
+    plugins: [ webpack_env , new webpack.optimize.UglifyJsPlugin({minimize: true})],
     devtool: 'cheap-module-source-map'
 
 };

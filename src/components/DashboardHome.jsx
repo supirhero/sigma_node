@@ -76,7 +76,7 @@ class DashboardHome extends Component {
         <div className='margin' style={{paddingTop:'20px'}}>
         <div className='grid'>
           <div className='unit half'>
-            <large>MY PERFORMANCEs in</large>
+            <large>MY PERFORMANCEs</large>
             <small>This month, May</small>
           </div>
           <div className='unit half'>
