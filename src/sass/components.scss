@@ -122,6 +122,7 @@ input {
   outline: none;
   border: none;
   color: white;
+  display: block;
   padding: 15px 42px;
   font-weight: 300;
   font-family: 'lato', sans-serif;
@@ -130,6 +131,7 @@ input {
 .btn-secondary {
   /* Rectangle 4: */
   /* Rectangle 4 Copy 2: */
+  display: block;
   padding: 15px 35px;
   background: white;
   border: 1px solid #EEEEEE;

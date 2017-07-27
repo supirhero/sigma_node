@@ -1,0 +1,5 @@
+#!/bin/sh
+mkdir -p dist
+node_modules/.bin/webpack
+node_modules/.bin/uglifyjs dist/react-menu.js \
+  --compress warnings=false > dist/react-menu.min.js
