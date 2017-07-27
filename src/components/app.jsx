@@ -34,9 +34,15 @@ import ProjectOverview from './ProjectOverview.jsx'
 import ProjectSetting from './ProjectSetting.jsx'
 import ProjectActivities from './ProjectActivities.jsx'
 import ProjectTeamMember from './ProjectTeamMember.jsx'
+<<<<<<< HEAD
 import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
 import ProjectIssues from './ProjectIssues.jsx'
+=======
+import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
+import ProjectIssues from './ProjectIssues.jsx'
+import ProjectWorkplan from './ProjectWorkplan.jsx'
+>>>>>>> ad27e0c576f0f7ebbadaca36592ef5e5da61030d
 
 
 
@@ -93,14 +99,8 @@ render(
           <Route path='team-member' component={ProjectTeamMember}></Route>
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
-
-
-
-
-
         </Route>
-
-
+        <Route path='workplan' component={ProjectWorkplan}/>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>

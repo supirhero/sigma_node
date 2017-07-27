@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import {Line} from 'react-progressbar.js';
 
-import {Input ,Divider} from './Components.jsx';
+import {Input ,Divider,Search} from './Components.jsx';
 import store from '../reducers/combineReducers.jsx';
 
 
@@ -58,10 +58,7 @@ class BusinessUnit extends Component {
                 <div key={index}>
                   <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                     <div className='unit whole'>
-                      <Input style={{width:'55%', display:'inline-block'}} placeholder="search business unit or project">
-                      <div className='material-icons' style={{color:'blue'}}>search</div>
-                      </Input>
-
+                    <Search placeholder='search business units or project' style={{width:'55%', display:'inline-block'}}></Search>
                         <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                           browserHistory.push('/new-project')
                           }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
