@@ -1,3 +1,4 @@
+
 var path = require("path");
 var webpack = require('webpack');
 
@@ -38,6 +39,7 @@ module.exports = {
     //     filename: "./src/js/app.js"
     // },
     devServer: {
+      historyApiFallback: true,
       watchOptions: {
           ignored: /node_modules/
         },
@@ -75,7 +77,8 @@ module.exports = {
       }
         ]
     },
-    plugins: [ webpack_env ],
+     plugins: process.env.NODE_ENV == 'production' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+     [webpack_env],
     devtool: 'cheap-module-source-map'
 
 };

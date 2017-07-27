@@ -43,7 +43,7 @@ class Project extends Component {
                         sidebar.map((value, index) => {
                           if (value.type == 'menu') {
                             return(
-                              <li><small onClick={
+                              <li key={index}><small onClick={
                                 e => {
                                   if (value.name == 'Workplan') {
                                     browserHistory.push(value.path)
@@ -60,7 +60,7 @@ class Project extends Component {
                           else {
                             return(
 
-                              <li style={{marginTop:'45px'}}><medium>{value.name}</medium></li>
+                              <li key={index} style={{marginTop:'45px'}}><medium>{value.name}</medium></li>
                             )
                           }
 
