@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart, Checkbox } from './Components.jsx';
+import { Select , Input, BarChart, LineChart, Checkbox, TableExample } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -13,12 +14,14 @@ class ReportsOverview extends Component {
       <div>
         <div className="grid wrap wider reports">
           <div className="unit whole">
-            <div className="card" style={{ padding: '35px' }}>
+            <div className="card" style={{ padding: '35px' }}>              
+              <Tabs>
+              <TabList>
               <div className="grid wrap">
                 <div className="unit half">
                   <large style={{display:'inline-block'}}>Monthly Performance</large>
-                  <span className="fa fa-bar-chart fa-2x material-icons" style={{ marginLeft: '64px' }} />
-                  <span className="fa fa-table fa-2x material-icons" style={{ marginLeft: '30px' }} />
+                  <Tab className="fa fa-bar-chart fa-2x material-icons" style={{marginLeft:'20px'}}></Tab>
+                  <Tab className="fa fa-table fa-2x material-icons" style={{marginLeft:'20px'}}></Tab>
                 </div>
                 <div className="unit half">
                   <div className="grid">
@@ -48,54 +51,109 @@ class ReportsOverview extends Component {
 
                 </div>
               </div>
+              </TabList>
+              
+              <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
-                  <BarChart
-                    label="SPI Graph"
-                    ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                    data={[
-                        { name: 'BSD', value: 20 },
-                        { name: 'CEM', value: 10 },
-                        { name: 'CISD', value: 14 },
-                        { name: 'DCES', value: 32 },
-                        { name: 'FSD', value: 16 },
-                        { name: 'GT', value: 4 },
-                        { name: 'ITPBS', value: 7 },
-                        { name: 'NITSM', value: 9 },
-                        { name: 'SMS', value: 12 },
-                        { name: 'SSI', value: 40 },
-                        { name: 'SP', value: 54 },
-												{ name: 'TDMO', value: 10 },
-												{ name: 'TBSDMO', value: 23 },
-                    ]}
+                 <BarChart
+                            label="SPI Graph"
+                            ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                            data={[
+                                { name: 'BSD', value: 20 },
+                                { name: 'CEM', value: 10 },
+                                { name: 'CISD', value: 14 },
+                                { name: 'DCES', value: 32 },
+                                { name: 'FSD', value: 16 },
+                                { name: 'GT', value: 4 },
+                                { name: 'ITPBS', value: 7 },
+                                { name: 'NITSM', value: 9 },
+                                { name: 'SMS', value: 12 },
+                                { name: 'SSI', value: 40 },
+                                { name: 'SP', value: 54 },
+                                { name: 'TDMO', value: 10 },
+                                { name: 'TBSDMO', value: 23 },
+                            ]}
 
-                  />
-                </div>
+                          />
+                  
+                </div>     
+              <div className="unit whole">
+                 <BarChart
+                            label="CPI Graph"
+                            ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                            data={[
+                                { name: 'BSD', value: 20 },
+                                { name: 'CEM', value: 10 },
+                                { name: 'CISD', value: 14 },
+                                { name: 'DCES', value: 32 },
+                                { name: 'FSD', value: 16 },
+                                { name: 'GT', value: 4 },
+                                { name: 'ITPBS', value: 7 },
+                                { name: 'NITSM', value: 9 },
+                                { name: 'SMS', value: 12 },
+                                { name: 'SSI', value: 40 },
+                                { name: 'SP', value: 54 },
+                                { name: 'TDMO', value: 10 },
+                                { name: 'TBSDMO', value: 23 },
+                            ]}
+
+                          />
+                  
+                </div>           
               </div>
-              <div className="grid wrap narrow" style={{marginTop:'55px'}}>
+              </TabPanel>
+
+              <TabPanel>
+              <div className="grid wrap narrow">
                 <div className="unit whole">
-                  <BarChart
-                    label="CPI Graph"
-                    data={[
-                        { name: 'BSD', value: 20 },
-                        { name: 'CEM', value: 10 },
-                        { name: 'CISD', value: 14 },
-                        { name: 'DCES', value: 32 },
-                        { name: 'FSD', value: 16 },
-                        { name: 'GT', value: 4 },
-                        { name: 'ITPBS', value: 7 },
-                        { name: 'NITSM', value: 9 },
-                        { name: 'SMS', value: 12 },
-                        { name: 'SSI', value: 40 },
-                        { name: 'SP', value: 54 },
-												{ name: 'TDMO', value: 20 },
-												{ name: 'TBSDMO', value: 23 },
-                    ]}
-                    style={{marginTop:'50px'}}
-                  />
-
-                </div>
+                 <TableExample 				
+									tableHeader={[
+										{value:'name'},
+										{value:'email'},
+										{value:'entry'},										
+										{value:'utilization'},
+									]}
+									tableData = {[
+										{
+											name: 'Dwi Syifa',
+											email: 'dwi.syifa@sigma.co.id',
+											entry:'10',
+											utilization:'20'
+										},
+										{
+											name : 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},	
+										{
+											name: 'Paula Cintya',
+											email: 'paula.cintya@sigma.co.id',
+											entry:'80',
+											utilization:'150'
+										},
+										{
+											name: 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},
+										{
+											name: 'Ivan Gita Pribadi',
+											email: 'ivan.gita.pribadi@sigma.co.id',
+											entry:'100',
+											utilization:'20'
+										},												
+									]}>
+									</TableExample>
+                </div>              
               </div>
+              </TabPanel>
+
+
+              </Tabs>
+              
             </div>
           </div>
         </div>
@@ -109,10 +167,7 @@ class ReportsOverview extends Component {
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
-                    <Checkbox
-                      label="Simple"
-                                      
-                    />
+                    
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
