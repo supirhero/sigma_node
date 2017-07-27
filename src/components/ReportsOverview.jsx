@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart, Checkbox, TableExample } from './Components.jsx';
+import { Select , Input, BarChart, LineChart, Checkbox, Table } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -107,46 +107,59 @@ class ReportsOverview extends Component {
               <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
-                 <TableExample
+                 <Table
 									tableHeader={[
-										{value:'name'},
-										{value:'email'},
-										{value:'entry'},
-										{value:'utilization'},
-									]}
+										{value:'Name'},
+										{value:'Email'},
+                    {value:'Entry'},
+                    {value:'Entry Status'},
+                    {value:'Utilization'},
+                    {value:'Utilization Status'},
+									]} 
 									tableData = {[
 										{
 											name: 'Dwi Syifa',
 											email: 'dwi.syifa@sigma.co.id',
-											entry:'10',
-											utilization:'20'
+                      entry:'10',
+                      entryStatus:'NORMAL',
+                      utilization:'20',
+                      utilizationStatus:'NORMAL',
+
 										},
 										{
 											name : 'Ivan Gita Pribadi',
 											email: 'ivan.gita.pribadi@sigma.co.id',
-											entry:'100',
-											utilization:'20'
+                      entry:'100',
+                      entryStatus:'NORMAL',
+                      utilization:'20',
+                      utilizationStatus:'NORMAL',
 										},
 										{
 											name: 'Paula Cintya',
 											email: 'paula.cintya@sigma.co.id',
-											entry:'80',
-											utilization:'150'
+                      entry:'80',
+                      entryStatus:'NORMAL',
+                      utilization:'150',
+                      utilizationStatus:'NORMAL',
 										},
 										{
 											name: 'Ivan Gita Pribadi',
 											email: 'ivan.gita.pribadi@sigma.co.id',
-											entry:'100',
-											utilization:'20'
+                      entry:'100',
+                      entryStatus:'NORMAL',
+                      utilization:'20',
+                      utilizationStatus:'NORMAL',
 										},
 										{
 											name: 'Ivan Gita Pribadi',
 											email: 'ivan.gita.pribadi@sigma.co.id',
-											entry:'100',
-											utilization:'20'
+                      entry:'100',
+                      entryStatus:'NORMAL',
+                      utilization:'20',
+                      utilizationStatus:'NORMAL',
 										},
 									]}>
-									</TableExample>
+									</Table>
                 </div>
               </div>
               </TabPanel>

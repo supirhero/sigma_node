@@ -88,7 +88,7 @@ class ReportsFindProject extends Component {
 								</div>
 								<div className="unit half" >
 									<medium className="status">CPI</medium> <span className="fa fa-question-circle-o"></span>
-									<medium style={{display:'block', float:'right'}}>1.05</medium>
+									<medium style={{display:'block'}}>1.05</medium>
 								</div>
 							</div>
 						</div>

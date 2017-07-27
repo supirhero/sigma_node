@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
-import {Table, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
+import {Table as MaterialTable, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 
 import store from '../reducers/combineReducers.jsx'
 
@@ -146,9 +146,8 @@ export class Select extends Component {
 export class TimeSheetTimeButton extends Component {
   render(){
     return(
-    <button className ='btn-secondary'>
+    <button className ='btn-secondary' style={{float:'left'}}>
       {this.props.text}
-
       <small>{this.props.hours}</small>
     </button>
     )
@@ -313,12 +312,12 @@ export class PopUp extends Component {
   }
 }
 
-export class TableExample extends Component {
+export class Table extends Component {
   render() {
     return (
       <div>
         <MuiThemeProvider>
-          <Table >
+          <MaterialTable >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               {this.props.tableHeader.map((header, index) => (
                 <TableRowColumn>
@@ -333,12 +332,14 @@ export class TableExample extends Component {
                   <TableRowColumn>{row.name}</TableRowColumn>
                   <TableRowColumn>{row.email}</TableRowColumn>
                   <TableRowColumn>{row.entry}</TableRowColumn>
+                  <TableRowColumn>{row.entryStatus}</TableRowColumn>
                   <TableRowColumn>{row.utilization}</TableRowColumn>
+                  <TableRowColumn>{row.utilizationStatus}</TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>
 
-          </Table>
+          </MaterialTable>
         </MuiThemeProvider>
       </div>
     );

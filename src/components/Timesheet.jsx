@@ -31,8 +31,8 @@ class Timesheet extends Component {
                   <TimeSheetTimeButton text="Thu, Jun 8" hours="-"/>
                   <TimeSheetTimeButton text="Fri, Jun 9" hours="-"/>
                   <TimeSheetTimeButton text="Sat, Jun 10" hours="-"/>
-                </div>
                 <span className="icon-arrow-right-circle" />
+                </div>
               </div>
             </div>
 
