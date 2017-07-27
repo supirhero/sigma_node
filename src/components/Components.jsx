@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
-import {Table, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
+import {Table, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 
 import store from '../reducers/combineReducers.jsx'
 
@@ -232,7 +232,7 @@ export class LineChart extends Component{
 export class Search extends Component {
   render() {
     return(
-      <div className='search'>
+      <div className='search' style={this.props.style}>
         <div className='card'>
           <input placeholder={this.props.placeholder}></input>
           <i className='icon-magnifier'></i>
@@ -256,7 +256,7 @@ export class PopUp extends Component {
     const dom = store.getState().dom
     console.log('dom : ',dom);
     return(
-      <div>
+      <div style={this.props.style}>
 
         <div className={dom.popup ? 'popup-container active' : 'popup-container'}>
             <div className='grid wrap' style={{position:'relative'}}>
@@ -361,6 +361,24 @@ export class ProjectHeader extends Component {
       <div className='project-header'>
         <large>{this.props.projectName}</large>
         <large>{this.props.sectionName}</large>
+      </div>
+    )
+  }
+}
+
+export class Checkbox extends Component {
+  render(){
+    return(
+      <div>
+      <MuiThemeProvider>
+         <div style={{maxWidth:'250px'}}>
+          <MaterialCheckbox
+            label={this.props.label}
+            style={{
+           
+          }}   />
+          </div>
+          </MuiThemeProvider>
       </div>
     )
   }

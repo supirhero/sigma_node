@@ -38,7 +38,13 @@ class Reports extends Component {
                 }
               }
               > People </medium>
-              <medium className="heading"> Find Project </medium>
+              <medium className="heading"
+              onClick={
+                (e) => {
+                  browserHistory.replace('/reports/find-project');
+                }
+              }
+              > Find Project </medium>
             </div>
           </div>
         </div>

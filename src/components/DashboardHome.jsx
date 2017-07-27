@@ -120,7 +120,7 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-        <Search placeholder='search business unit or project'></Search>
+        <Search placeholder='search business units or project'></Search>
 
 
       </div>

@@ -24,7 +24,7 @@ class ReportsDirectorate extends Component {
 					</div>
 					<div className="unit golden-small">
 						<Select
-              style={{ width: '50%', display: 'inline-block', float: 'left',marginLeft:'33%' }}
+              style={{ width: '50%', display: 'inline-block', float: 'left',marginLeft:'29%' }}
               items={{
                 items: [
               { title: '2017' },
