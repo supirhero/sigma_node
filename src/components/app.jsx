@@ -99,7 +99,7 @@ render(
           <Route path='change-password' component={ProfileChangePassword}/>
         </Route>
 
-        <Route path='timesheet' component={Timesheet}></Route>       
+        <Route path='timesheet' component={Timesheet}></Route>
         <Route path='my-recent-activities' component={MyRecentActivities} />
 
         <Route path='reports' component={Reports}>

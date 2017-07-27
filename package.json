@@ -8,7 +8,6 @@
     "production": "cross-env NODE_ENV=production npm start",
     "mock": "cross-env NODE_ENV=mock webpack --watch",
     "dummy": "cross-env NODE_ENV=mock webpack-dev-server  --hot --inline --colors",
-
     "build": "npm start",
     "development": "npm start"
   },

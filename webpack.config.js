@@ -28,16 +28,18 @@ const webpack_env = new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.st
 
 module.exports = {
     entry: "./src/components/app.jsx",
-    output: {
-        // publicPath: "/dist/",
-        path: path.resolve(__dirname,  "dist"),
-        filename: "js/app.js"
-    },
-    // entry: "./src/components/app.jsx",
     // output: {
-    //     filename: "./src/js/app.js"
+    //     // publicPath: "/dist/",
+    //     path: path.resolve(__dirname,  "dist"),
+    //     filename: "app.js"
     // },
+    entry: path.resolve(__dirname,"src/components/app.jsx"),
+    output: {
+      path: path.resolve(__dirname,"src/dist"),
+      filename: "js/app.js"
+    },
     devServer: {
+      historyApiFallback: true,
       watchOptions: {
           ignored: /node_modules/
         },
