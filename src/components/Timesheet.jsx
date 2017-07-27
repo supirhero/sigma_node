@@ -39,7 +39,7 @@ class Timesheet extends Component {
 
             <div className='grid wrap'>
               <div className='unit whole'>
-                <PopUp id='complete' dividerText='UPDATE TIMESHEET' btnText='ADD NEW' style={{textAlign:'center'}}>
+                <PopUp id='addNew' dividerText='UPDATE TIMESHEET' btnText='ADD NEW' style={{textAlign:'center'}}>
                     <div >
                       <div className="grid wrap narrow">
                         <div className="unit whole">

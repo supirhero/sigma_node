@@ -20,8 +20,8 @@ class ReportsOverview extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <large style={{display:'inline-block'}}>Monthly Performance</large>
-                  <Tab className="fa fa-bar-chart fa-2x material-icons" style={{marginLeft:'20px'}}></Tab>
-                  <Tab className="fa fa-table fa-2x material-icons" style={{marginLeft:'20px'}}></Tab>
+                  <Tab className="fa fa-bar-chart fa-2x " style={{marginLeft:'20px'}}></Tab>
+                  <Tab className="fa fa-table fa-2x " style={{marginLeft:'20px'}}></Tab>
                 </div>
                 <div className="unit half">
                   <div className="grid">
