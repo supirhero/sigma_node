@@ -29,9 +29,9 @@ const webpack_env = new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.st
 module.exports = {
     entry: "./src/components/app.jsx",
     output: {
-        publicPath: "/dist/",
-        path: path.join(__dirname,  "dist"),
-        filename: "app.js"
+        // publicPath: "/dist/",
+        path: path.resolve(__dirname,  "dist"),
+        filename: "js/app.js"
     },
     // entry: "./src/components/app.jsx",
     // output: {
@@ -41,17 +41,18 @@ module.exports = {
       watchOptions: {
           ignored: /node_modules/
         },
-        contentBase: "./dist",
+        contentBase: "dist",
         hot: true
     },
     module: {
         loaders: [
           {
           test: /\.js|\.jsx?$/,
+          exclude:'/node_modules/',
           loader: 'babel-loader',
           query: {
             presets: ["react", "es2015"]
-          }
+          },
         },
         { test: /\.css$/, loader: "style!css" },
         {
@@ -74,7 +75,7 @@ module.exports = {
       }
         ]
     },
-    plugins: [ webpack_env , new webpack.optimize.UglifyJsPlugin({minimize: true})],
+    plugins: [ webpack_env ],
     devtool: 'cheap-module-source-map'
 
 };
