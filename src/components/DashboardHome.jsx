@@ -76,7 +76,7 @@ class DashboardHome extends Component {
         <div className='margin' style={{paddingTop:'20px'}}>
         <div className='grid'>
           <div className='unit half'>
-            <large>MY PERFORMANCE</large>
+            <large>MY PERFORMANCEs in</large>
             <small>This month, May</small>
           </div>
           <div className='unit half'>
@@ -120,7 +120,7 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-        <Search placeholder='search business unit or project'></Search>
+        <Search placeholder='search business units or project'></Search>
 
 
       </div>
