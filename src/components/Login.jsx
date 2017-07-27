@@ -14,7 +14,7 @@ class Login extends Component {
       return(
         <div className='grid wrap'>
           <div className='unit whole'>
-            <div className='card shadow login'>
+            <div className='card shadow login' style={{padding:'0'}}>
             <div className='unit two-fifths no-gutters'>
               <div id='picture'></div>
             </div>

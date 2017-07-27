@@ -36,7 +36,7 @@ module.exports = {
     // },
     entry: path.resolve(__dirname,"src/components/app.jsx"),
     output: {
-      path: path.resolve(__dirname,"src/dist"),
+      path: path.resolve(__dirname,"dist"),
       filename: "js/app.js"
     },
     devServer: {

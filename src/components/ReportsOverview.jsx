@@ -14,7 +14,7 @@ class ReportsOverview extends Component {
       <div>
         <div className="grid wrap wider reports">
           <div className="unit whole">
-            <div className="card" style={{ padding: '35px' }}>              
+            <div className="card" style={{ padding: '35px' }}>
               <Tabs>
               <TabList>
               <div className="grid wrap">
@@ -52,7 +52,7 @@ class ReportsOverview extends Component {
                 </div>
               </div>
               </TabList>
-              
+
               <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
@@ -76,8 +76,8 @@ class ReportsOverview extends Component {
                             ]}
 
                           />
-                  
-                </div>     
+
+                </div>
               <div className="unit whole">
                  <BarChart
                             label="CPI Graph"
@@ -99,19 +99,19 @@ class ReportsOverview extends Component {
                             ]}
 
                           />
-                  
-                </div>           
+
+                </div>
               </div>
               </TabPanel>
 
               <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
-                 <TableExample 				
+                 <TableExample
 									tableHeader={[
 										{value:'name'},
 										{value:'email'},
-										{value:'entry'},										
+										{value:'entry'},
 										{value:'utilization'},
 									]}
 									tableData = {[
@@ -126,7 +126,7 @@ class ReportsOverview extends Component {
 											email: 'ivan.gita.pribadi@sigma.co.id',
 											entry:'100',
 											utilization:'20'
-										},	
+										},
 										{
 											name: 'Paula Cintya',
 											email: 'paula.cintya@sigma.co.id',
@@ -144,16 +144,16 @@ class ReportsOverview extends Component {
 											email: 'ivan.gita.pribadi@sigma.co.id',
 											entry:'100',
 											utilization:'20'
-										},												
+										},
 									]}>
 									</TableExample>
-                </div>              
+                </div>
               </div>
               </TabPanel>
 
 
               </Tabs>
-              
+
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ class ReportsOverview extends Component {
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
-                    
+
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
