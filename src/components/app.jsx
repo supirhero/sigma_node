@@ -37,6 +37,7 @@ import ProjectTeamMember from './ProjectTeamMember.jsx'
 import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
 import ProjectIssues from './ProjectIssues.jsx'
 import ProjectWorkplan from './ProjectWorkplan.jsx'
+import ProjectSpiCpi from './ProjectSpiCpi.jsx'
 
 
 
@@ -93,8 +94,9 @@ render(
           <Route path='team-member' component={ProjectTeamMember}></Route>
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
+          <Route path='workplan' component={ProjectWorkplan}></Route>
+          <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
         </Route>
-        <Route path='workplan' component={ProjectWorkplan}/>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
           <Route path='change-password' component={ProfileChangePassword}/>
