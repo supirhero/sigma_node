@@ -298,7 +298,7 @@ class NewProject extends Component {
                       </div>
                       <div className='grid wrap narrow'>
                         <div className='unit half'>
-                          <Select inputName='WU DELIVERY' items={{
+                          <Select inputName='PROJECT START DATE' items={{
                             items : [
                               {title : 'TBWS21312'},
                               {title : 'TBWS21312'}
@@ -306,7 +306,7 @@ class NewProject extends Component {
                           }}></Select>
                         </div>
                         <div className='unit half'>
-                          <Select inputName='WU RELATED' items={{
+                          <Select inputName='PROJECT END DATE' items={{
                             items : [
                               {title : 'TBWS21312'},
                               {title : 'TBWS21312'}
@@ -314,6 +314,139 @@ class NewProject extends Component {
                           }}></Select>
                         </div>
                       </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='PROJECT DESCRIPTION'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='SCOPE OF WORK' placeholder='Uraian terkait pekerjaan yang akan dideliver (hardware/software/services, dll)'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='CONSTRAINTS' placeholder='Sebutkan constraints (keterbatasan kondisi) yang ada di dalam project' ></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='ASSUMPTIONS' placeholder='Sebutkan asumsi-asumsi yang digunakan untuk menjalankan project'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='RISKS' placeholder='Sebutkan resiko-resiko yang mungkin terjadi di dalam project'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='DELIVERABLES' placeholder='Dokumen yang harus dideliver untuk penyelesaian project'></Input>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>                      
+                      </div> 
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className= "input-desc">MILESTONES</h2> <br/>
+                        </div>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0', marginTop:'-5%'}}>
+                          <h2 className= "input-desc"><i>Tahapan penting dan tanggal penting dalam project</i></h2>
+                        </div>  
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input inputName='DATE' style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input inputName='MILESTONE' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input inputName='DESCRIPTION' style={{width:'70%',display:'inline-block'}}></Input>                      
+                      </div>
+                      </div> 
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input style={{width:'70%',display:'inline-block'}}></Input>
+                          <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
+                      </div>
+                      </div>  
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD MILESTONES</button>
+                        </div>
+                      </div> 
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>                      
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className= "input-desc">ROLES AND RESPONSIBILITIES</h2> <br/>
+                        </div>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0', marginTop:'-5%'}}>
+                          <h2 className= "input-desc"><i>Daftar role and responsibilities tim member </i></h2>
+                        </div>  
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input inputName='NAME' style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input inputName='ROLES' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input inputName='RESPONSIBILITIES' style={{width:'70%',display:'inline-block'}}></Input>                      
+                      </div>
+                      </div> 
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input style={{width:'70%',display:'inline-block'}}></Input>
+                          <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
+                      </div>
+                      </div>  
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD ROLES AND RESPONSIBILITIES</button>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName="PROJECT MANAGER'S RESPONSIBILITIES" placeholder='Uraian tanggung jawab PM'style={{width:'80%'}}></Input>
+                        </div>
+                      </div> 
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>                      
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className='input-desc'>SUPPORTING DOCUMENT</h2>
+                          <h2 className='input-desc'><i>You can attach one of these documents (Proposal, SPK/Contract, IWO, Change Management, Service Request, Others). If you want to add 2 or more, you can upload the compressed file (.zip). Max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                          <Input style={{width:'100%'}} placeholder='Uraian tanggung jawab PM'></Input>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className='unit whole' style={{textAlign:'center',marginTop:'50px'}}>
+                          <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CLOSE </button>
+                          <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} className='btn-primary'> PRINT </button>
+                        </div>
+                      </div>
+
 
 
                     </div>
