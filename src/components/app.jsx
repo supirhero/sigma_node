@@ -86,7 +86,7 @@ render(
         <Route path='my-assignments' component={MyAssignments}></Route>
         <Route path='business-unit' component={BusinessUnit}></Route>
         <Route path='workplan' component={ProjectWorkplan}></Route>
-        <Route path='project' component={Project}>
+        <Route path='project/:id' component={Project}>
           <IndexRoute component={ProjectOverview}></IndexRoute>
           <Route path='setting' component={ProjectSetting}></Route>
           <Route path='activities' component={ProjectActivities}></Route>

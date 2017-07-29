@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "production": "cross-env NODE_ENV=production npm start",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --progress --color --inline --debug --hot --port 8089 ",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --progress --inline --debug --hot --port 8089 ",
     "mock": "cross-env NODE_ENV=mock webpack --watch",
-    "dummy":"cross-env NODE_ENV=mock webpack-dev-server --progress -colors  --hot --debug --inline --colors --debug --port 8089",
+    "dummy":"cross-env NODE_ENV=mock webpack-dev-server --progress --hot --debug --inline --colors --debug --port 8089",
     "build": "npm start",
     "development": "npm start"
   },

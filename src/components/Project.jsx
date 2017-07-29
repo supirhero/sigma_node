@@ -7,6 +7,14 @@ import {Divider, TimeSheetTimeButton} from  './components.jsx'
 
 
 class Project extends Component {
+    componentDidMount() {
+      store.dispatch({type:'API', method:'POST', request:{
+        api:'AUTH',
+        url: "/dev/home/detailproject/<id dari project>",
+        params: {id: ''}
+            }})
+      // http://45.77.45.126/dev/home/detaiproject/<id dari project>
+    }
     render(){
       const sidebar = [
         {type:'menu', name : 'Overview', path: '/project'},
@@ -24,8 +32,6 @@ class Project extends Component {
       ]
       return(
         <div className='project'>
-
-
 
             <div className='grid wrap'>
               <div className='unit one-fifth no-gutters'>

@@ -87,7 +87,7 @@ module.exports = {
         ]
     },
      plugins:
-    //  process.env.NODE_ENV == 'production' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+     process.env.NODE_ENV == 'development' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
      [webpack_env],
     devtool: 'cheap-module-source-map'
 
