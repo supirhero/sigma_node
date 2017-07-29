@@ -8,9 +8,10 @@ import {Divider, TimeSheetTimeButton} from  './components.jsx'
 
 class Project extends Component {
     componentDidMount() {
-      store.dispatch({type:'API', method:'POST', request:{
-        api:'AUTH',
-        url: "/dev/home/detailproject/<id dari project>",
+      const id = this.props.location.state.id;
+      store.dispatch({type:'API', method:'GET', request:{
+        api:'PROJECT',
+        url: "/dev/home/detailproject/" + id,
         params: {id: ''}
             }})
       // http://45.77.45.126/dev/home/detaiproject/<id dari project>
