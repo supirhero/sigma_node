@@ -91,8 +91,8 @@ class Login extends Component {
                           },
                           error:function(error) {
 
-                          }}),
-                          browserHistory.replace('/')
+                          }})
+                      // browserHistory.replace('/')
 
                     // console.log('store last', store.getState());
 

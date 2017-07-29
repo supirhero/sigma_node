@@ -376,8 +376,7 @@ export class Checkbox extends Component {
           <MaterialCheckbox
             label={this.props.label}
             style={{
-           
-          }}   />
+            }}   />
           </div>
           </MuiThemeProvider>
       </div>
