@@ -394,17 +394,16 @@ export class InputFile extends Component {
   render(){
     return(
       <div style={this.props.style}>
-      <div className="selectFileContainer">
         <form>
           <FileInput
-            name="selectFile"
+            name={this.props.name}
+            placeholder={this.props.placeholder}
             accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
             onChange={this.handleChange}
             >        
           </FileInput>
         </form>
         </div>        
-      </div>
     )
   }
 }

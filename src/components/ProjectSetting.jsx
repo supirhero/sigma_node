@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import { Line} from 'react-progressbar.js'
-import {Divider, Input, RadioButton, Select, PopUp, ProjectHeader} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ProjectHeader,InputFile} from './Components.jsx'
 
 
 class NewProject extends Component {
@@ -437,7 +437,9 @@ class NewProject extends Component {
                         <div className="unit whole">
                           <h2 className='input-desc'>SUPPORTING DOCUMENT</h2>
                           <h2 className='input-desc'><i>You can attach one of these documents (Proposal, SPK/Contract, IWO, Change Management, Service Request, Others). If you want to add 2 or more, you can upload the compressed file (.zip). Max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
-                          <Input style={{width:'100%'}} placeholder='Uraian tanggung jawab PM'></Input>
+                        </div>
+                        <div className="unit whole no-gutters">
+                          <InputFile placeholder="Select file from your computer"/>
                         </div>
                       </div>
                       <div className="grid wrap narrow">

@@ -31,7 +31,7 @@ class ProjectDocsAndFiles extends Component {
                     <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
                   </div>
                   <div className="unit whole  no-gutters">        
-                   <InputFile inputName="Select File" />
+                   <InputFile name="selectFile" />
                   </div>
                 </div>
                   <div className="grid wrap narrow">
