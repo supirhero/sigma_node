@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './components.jsx'
 
-import { Line} from 'react-progressbar.js'
+import { Line } from 'react-progressbar.js'
 
 
 class ProjectOverview extends Component {

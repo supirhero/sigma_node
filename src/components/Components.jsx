@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
+import FileInput from 'react-file-input';
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
 import {Table as MaterialTable, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
-
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -384,3 +384,28 @@ export class Checkbox extends Component {
     )
   }
 }
+
+export class InputFile extends Component {
+
+  handleChange(event) {
+    console.log('Selected file:', event.target.files[0]);
+  }
+
+  render(){
+    return(
+      <div style={this.props.style}>
+      <div className="selectFileContainer">
+        <form>
+          <FileInput
+            name="selectFile"
+            accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+            onChange={this.handleChange}
+            >        
+          </FileInput>
+        </form>
+        </div>        
+      </div>
+    )
+  }
+}
+

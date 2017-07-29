@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader, Input} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input, PopUp, InputFile} from  './Components.jsx'
 
 
 
@@ -18,7 +18,31 @@ class ProjectDocsAndFiles extends Component {
           </div>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <button style={{margin:'auto'}} className='btn-primary'>UPLOAD FILE</button>
+              <PopUp id="uploadFile" dividerText="UPLOAD FILE" btnText="UPLOAD FILE" style={{ margin: 'auto'}}>
+              <div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" />
+                  </div>
+                </div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <h2 className="input-desc">SELECT FILE</h2>
+                    <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                  </div>
+                  <div className="unit whole  no-gutters">        
+                   <InputFile inputName="Select File" />
+                  </div>
+                </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
+                    </div>
+                  </div>
+                
+              </div>
+            </PopUp>
             </div>
           </div>
           <div className='grid padding-left'>
