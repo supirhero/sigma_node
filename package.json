@@ -10,7 +10,7 @@
     "mock": "cross-env NODE_ENV=mock webpack --watch",
     "dummy":"cross-env NODE_ENV=mock webpack-dev-server --progress --hot --debug --inline --colors --debug --port 8089",
     "build": "npm start",
-    "development": "npm start"
+    "development": "NODE_ENV=development webpack --watch"
   },
   "author": "",
   "license": "ISC",

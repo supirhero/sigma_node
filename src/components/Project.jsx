@@ -17,8 +17,10 @@ class Project extends Component {
       // http://45.77.45.126/dev/home/detaiproject/<id dari project>
     }
     render(){
+      // const id = this.props.location.state.id;
+
       const sidebar = [
-        {type:'menu', name : 'Overview', path: '/project'},
+        {type:'menu', name : 'Overview', path: '/project/'},
         {type:'menu', name : 'Setting', path: '/project/setting'},
         {type:'menu', name : 'Activities', path: '/project/activities'},
         {type:'title', name : 'MANAGE'},

@@ -48,6 +48,7 @@ module.exports = {
       filename: "js/app.js"
     },
     devServer: {
+       disableHostCheck: true,   // That solved it
       historyApiFallback: true,
       watchOptions: {
           ignored: /node_modules/
@@ -87,7 +88,7 @@ module.exports = {
         ]
     },
      plugins:
-     process.env.NODE_ENV == 'development' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+     process.env.NODE_ENV == 'mock' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
      [webpack_env],
     devtool: 'cheap-module-source-map'
 
