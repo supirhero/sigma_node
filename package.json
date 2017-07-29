@@ -28,6 +28,7 @@
     "react-contextmenu": "^2.6.3",
     "react-data-components": "^1.1.0",
     "react-dom": "^15.6.1",
+    "react-file-input": "^0.2.5",
     "react-menu": "0.0.10",
     "react-progressbar.js": "^0.2.0",
     "react-redux": "^5.0.5",
