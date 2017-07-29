@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader,PopUp,Input,Select} from  './Components.jsx'
+import {Divider, Header, ProjectHeader,PopUp,Input,Select,InputFile} from  './Components.jsx'
 
 
 
@@ -43,15 +43,10 @@ class ProjectIssues extends Component {
                     />
                   </div>
                   <div className="unit golden-large">
-                    <Select
-                      inputName="EVIDENCE"
-                      items={{
-                        items: [
-                          { title: 'TBWS21312' },
-                          { title: 'TBWS21312' },
-                        ],
-                      }}
-                    />
+                     <h2 className='input-desc'>SUPPORTING DOCUMENT</h2>
+                  </div>
+                  <div className="unit golden-large" style={{paddingTop:'0',paddingRight:'0'}}>
+                      <InputFile placeholder="choose a file" />
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>

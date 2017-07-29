@@ -401,7 +401,7 @@ export class InputFile extends Component {
             accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
             onChange={this.handleChange}
             >        
-          </FileInput>
+          </FileInput>          
         </form>
         </div>        
     )
