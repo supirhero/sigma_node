@@ -100,7 +100,26 @@ export const data = (state = {}, action) => {
       }
       else {
         alert('API')
+          axios({
+            method: 'post',
+            url: base_URL + action.request.url,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: action.request.params
+          })
+          .then(function(response) {
+            saveState(store.getState())
 
+            return Object.assign({}, state, {
+              auth : response.data
+            })
+          })
+          .catch(
+            function (error) {
+              if (action.error) {
+                action.error(error)
+
+              }
+            })
     }
 
       break;

@@ -8,7 +8,7 @@
     "production": "cross-env NODE_ENV=production npm start",
     "start": "cross-env NODE_ENV=development webpack-dev-server --progress --color --inline --debug --hot --port 8089 ",
     "mock": "cross-env NODE_ENV=mock webpack --watch",
-    "dummy":"cross-env NODE_ENV=mock webpack-dev-server --progress -colors  --hot --debug --inline --colors --debug --port 8089",
+    "dummy": "cross-env NODE_ENV=mock webpack-dev-server --progress -colors  --hot --debug --inline --colors --debug --port 8089",
     "build": "npm start",
     "development": "npm start"
   },
@@ -40,6 +40,7 @@
     "redux-persist": "^4.8.2",
     "redux-storage": "^4.1.2",
     "redux-storage-engine-localstorage": "^1.1.4",
+    "redux-thunk": "^2.2.0",
     "resolve-pathname": "^2.1.0",
     "webpack-dev-server": "^2.5.1"
   },
