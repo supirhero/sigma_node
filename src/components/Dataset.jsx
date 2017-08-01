@@ -27,6 +27,7 @@ class Dataset extends Component {
 									return(									
 									<medium 
 										key={index} 
+										style={{ display: 'inline-block' }}
 										className="heading" 
 										onClick={
 											(e) => {

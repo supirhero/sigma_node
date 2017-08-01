@@ -1,5 +1,5 @@
 .dataset{
-  .heading{
+  .heading:nth-child(n+2){
     display: inline-block;
     margin-left: 60px;
   }
