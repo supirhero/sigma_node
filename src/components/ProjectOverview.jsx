@@ -131,7 +131,7 @@ class ProjectOverview extends Component {
                 </div>
 
               </div>
-            <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>
+            <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnClass='btn-primary' btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>
               <div>
                 <div className="grid wrap narrow">
                   <div className="unit whole">
@@ -149,7 +149,7 @@ class ProjectOverview extends Component {
                       <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> CLOSE PROJECT </button>
                     </div>
                   </div>
-                
+
               </div>
             </PopUp>
 

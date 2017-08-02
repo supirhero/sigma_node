@@ -105,7 +105,8 @@ export class Input extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <input placeholder={this.props.placeholder}></input>
         {this.props.children}
       </div>
@@ -128,7 +129,8 @@ export class Select extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <select className='select'>
           {this.props.items.items.map((value,index) => {
             return(
@@ -193,7 +195,7 @@ export class BarChart extends Component {
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
-            <Bar dataKey="value" fill="#F48165" />
+            <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
           </ChartBar>
         </ResponsiveContainer>
 
@@ -243,21 +245,21 @@ export class Search extends Component {
 
 
 export class PopUp extends Component {
-  // constructor(){
-  //   super();
-  //   this.state = {
-  //     clicked : false
-  //
-  //   };
-  // }
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
+
+    };
+  }
 
   render() {
-    const dom = store.getState().dom
-    console.log('dom : ',dom);
+    // const dom = store.getState().dom
+    // console.log('dom : ',dom);
     return(
       <div style={this.props.style}>
 
-        <div className={dom.popup ? 'popup-container active' : 'popup-container'}>
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
                 <div className='card shadow' style={{marginTop:'6%'}}>
@@ -266,10 +268,8 @@ export class PopUp extends Component {
                         document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
-                        store.dispatch({
-                          type : 'POPUP',
-                          id : this.props.id,
-                          popup : false
+                        this.setState({
+                          clicked:false
                         })
                         e.preventDefault()
                       }
@@ -285,7 +285,7 @@ export class PopUp extends Component {
             <div className='tint'></div>
 
         </div>
-        <button className='btn-primary'
+        <button style={this.props.btnStyle} className={this.props.btnClass}
           onClick={
             e => {
               document.body.style.overflow = 'hidden';
@@ -298,10 +298,8 @@ export class PopUp extends Component {
               //     window.ontouchmove  = preventDefault; // mobile
               //     document.onkeydown  = preventDefaultForScrollKeys;
 
-              store.dispatch({
-                type : 'POPUP',
-                id : this.props.id,
-                popup : true
+              this.setState({
+                clicked:true
               })
               e.preventDefault()
             }}
@@ -329,14 +327,16 @@ export class Table extends Component {
             <TableBody displayRowCheckbox={false} >
               {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
-                  <TableRowColumn>{row.name}</TableRowColumn>
-                  <TableRowColumn>{row.email}</TableRowColumn>
-                  <TableRowColumn>{row.entry}</TableRowColumn>
-                  <TableRowColumn>{row.entryStatus}</TableRowColumn>
-                  <TableRowColumn>{row.utilization}</TableRowColumn>
-                  <TableRowColumn>{row.utilizationStatus}</TableRowColumn>
+                  {
+                    row.column.map((column, index) =>
+                    (
+                      <TableRowColumn>{column.value}</TableRowColumn>
+                    ))
+
+                  }
                 </TableRow>
-              ))}
+              ))
+            }
             </TableBody>
 
           </MaterialTable>
@@ -376,7 +376,7 @@ export class Checkbox extends Component {
           <MaterialCheckbox
             label={this.props.label}
             style={{
-           
+
           }}   />
           </div>
           </MuiThemeProvider>
@@ -400,11 +400,10 @@ export class InputFile extends Component {
             placeholder={this.props.placeholder}
             accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
             onChange={this.handleChange}
-            >        
-          </FileInput>          
+            >
+          </FileInput>
         </form>
-        </div>        
+        </div>
     )
   }
 }
-

@@ -260,7 +260,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnText='VIEW FORM'>
+                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 41px'}} btnText='VIEW FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
@@ -352,15 +352,15 @@ class NewProject extends Component {
                       <div className="grid wrap narrow">
                         <div className="unit whole">
                           <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
-                        </div>                      
-                      </div> 
+                        </div>
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                          <h2 className= "input-desc">MILESTONES</h2> <br/>
+                          <h2 className= "input-name">MILESTONES</h2>
                         </div>
-                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0', marginTop:'-5%'}}>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0'}}>
                           <h2 className= "input-desc"><i>Tahapan penting dan tanggal penting dalam project</i></h2>
-                        </div>  
+                        </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit half">
@@ -368,9 +368,9 @@ class NewProject extends Component {
                           <Input inputName='MILESTONE' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
                         </div>
                         <div className="unit half">
-                          <Input inputName='DESCRIPTION' style={{width:'70%',display:'inline-block'}}></Input>                      
+                          <Input inputName='DESCRIPTION' style={{width:'70%',display:'inline-block'}}></Input>
                       </div>
-                      </div> 
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit half">
                           <Input style={{width:'40%', display:'inline-block'}} ></Input>
@@ -380,24 +380,24 @@ class NewProject extends Component {
                           <Input style={{width:'70%',display:'inline-block'}}></Input>
                           <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
                       </div>
-                      </div>  
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
                           <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD MILESTONES</button>
                         </div>
-                      </div> 
-                      <div className="grid wrap narrow">
-                        <div className="unit whole">
-                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
-                        </div>                      
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                          <h2 className= "input-desc">ROLES AND RESPONSIBILITIES</h2> <br/>
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
                         </div>
-                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0', marginTop:'-5%'}}>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className= "input-name">ROLES AND RESPONSIBILITIES</h2>
+                        </div>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0'}}>
                           <h2 className= "input-desc"><i>Daftar role and responsibilities tim member </i></h2>
-                        </div>  
+                        </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit half">
@@ -405,9 +405,9 @@ class NewProject extends Component {
                           <Input inputName='ROLES' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
                         </div>
                         <div className="unit half">
-                          <Input inputName='RESPONSIBILITIES' style={{width:'70%',display:'inline-block'}}></Input>                      
+                          <Input inputName='RESPONSIBILITIES' style={{width:'70%',display:'inline-block'}}></Input>
                       </div>
-                      </div> 
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit half">
                           <Input style={{width:'40%', display:'inline-block'}} ></Input>
@@ -417,7 +417,7 @@ class NewProject extends Component {
                           <Input style={{width:'70%',display:'inline-block'}}></Input>
                           <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
                       </div>
-                      </div>  
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
                           <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD ROLES AND RESPONSIBILITIES</button>
@@ -427,11 +427,11 @@ class NewProject extends Component {
                         <div className='unit whole'>
                           <Input inputName="PROJECT MANAGER'S RESPONSIBILITIES" placeholder='Uraian tanggung jawab PM'style={{width:'80%'}}></Input>
                         </div>
-                      </div> 
+                      </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
                           <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
-                        </div>                      
+                        </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">

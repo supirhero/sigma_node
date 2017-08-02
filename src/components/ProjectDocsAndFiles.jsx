@@ -18,7 +18,7 @@ class ProjectDocsAndFiles extends Component {
           </div>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <PopUp id="uploadFile" dividerText="UPLOAD FILE" btnText="UPLOAD FILE" style={{ margin: 'auto'}}>
+              <PopUp id="uploadFile" dividerText="UPLOAD FILE" btnText="UPLOAD FILE" btnClass='btn-primary' btnStyle={{display:'block', margin: 'auto'}}>
               <div>
                 <div className="grid wrap narrow">
                   <div className="unit whole">
@@ -30,7 +30,7 @@ class ProjectDocsAndFiles extends Component {
                     <h2 className="input-desc">SELECT FILE</h2>
                     <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
                   </div>
-                  <div className="unit whole no-gutters">        
+                  <div className="unit whole no-gutters">
                    <InputFile name="selectFile" />
                   </div>
                 </div>
@@ -40,7 +40,7 @@ class ProjectDocsAndFiles extends Component {
                       <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
                     </div>
                   </div>
-                
+
               </div>
             </PopUp>
             </div>
