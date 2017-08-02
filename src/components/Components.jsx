@@ -329,12 +329,11 @@ export class Table extends Component {
             <TableBody displayRowCheckbox={false} >
               {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
-                  <TableRowColumn>{row.name}</TableRowColumn>
-                  <TableRowColumn>{row.email}</TableRowColumn>
-                  <TableRowColumn>{row.entry}</TableRowColumn>
-                  <TableRowColumn>{row.entryStatus}</TableRowColumn>
-                  <TableRowColumn>{row.utilization}</TableRowColumn>
-                  <TableRowColumn>{row.utilizationStatus}</TableRowColumn>
+                  {
+                    row.column.map((column,index)=>(
+                      <TableRowColumn>{column.value}</TableRowColumn>
+                    ))
+                  }
                 </TableRow>
               ))}
             </TableBody>

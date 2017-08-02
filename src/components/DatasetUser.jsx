@@ -19,6 +19,34 @@ class DatasetUser extends Component {
                 <Header text='User' style={{display:'inline-block'}} />
                 <Search placeholder='search user' style={{float:'right',width:'400px'}} />
               </div>
+              <div className="unit whole">
+                <Table
+                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'LAST LOGIN'}]}
+                  tableData={[{column:[
+                    {value:'1'},
+                    {value:'4100001'},
+                    {value:'Joshua Howard'},
+                    {value:'huel_cora@hotmail.com'},
+                    {value:'08 APR 2017'}
+
+                  ]},{
+                    column:[
+                    {value:'2'},
+                    {value:'4100002'},
+                    {value:'Luella Perry'},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+
+                    ]
+                  }
+                  
+                
+                ]}
+                >
+                
+                </Table>
+              
+              </div>
                 
             </div>
           </div>

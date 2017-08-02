@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,Header,Search } from './Components.jsx';
-import ReactTable from 'react-table';
+
 
 class DatasetCustomer extends Component {
   render() {
@@ -19,7 +19,37 @@ class DatasetCustomer extends Component {
 								<div className="unit whole">
 									<Header text='Customer' style={{display:'inline-block'}} />
 									<Search placeholder='search customer' style={{float:'right',width:'400px'}} />
-            	  </div>
+                </div>
+                <div className="unit whole">
+                  <Table
+                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'CODE'},{value:'SAP ID'},{value:'AM'},{value:'ADDRESS'}]}
+                  tableData={[{column:[
+                    {value:'1'},
+                    {value:'4100001'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100001'},
+                    {value:'-'},
+                    {value:'092 Durward Praire'}
+
+                  ]},{
+                    column:[
+                    {value:'2'},
+                    {value:'4100002'},
+                    {value:'PT ABC JASAMARGA'},
+                    {value:'JSMRG'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]
+                  }
+                  
+                
+                ]}
+                >
+                
+                </Table>
+                </div>
         			</div>
             </div>
           </div>
