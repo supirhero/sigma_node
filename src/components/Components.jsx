@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
+import FileInput from 'react-file-input';
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
 import {Table as MaterialTable, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
-
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -105,7 +105,8 @@ export class Input extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <input placeholder={this.props.placeholder}></input>
         {this.props.children}
       </div>
@@ -128,7 +129,8 @@ export class Select extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-desc'>{this.props.inputName}</h2> : null}
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <select className='select'>
           {this.props.items.items.map((value,index) => {
             return(
@@ -193,7 +195,7 @@ export class BarChart extends Component {
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
-            <Bar dataKey="value" fill="#F48165" />
+            <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
           </ChartBar>
         </ResponsiveContainer>
 
@@ -214,7 +216,7 @@ export class LineChart extends Component{
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
-            {this.props.lines.map((props)=> 
+            {this.props.lines.map((props)=>
               <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
@@ -240,21 +242,21 @@ export class Search extends Component {
 
 
 export class PopUp extends Component {
-  // constructor(){
-  //   super();
-  //   this.state = {
-  //     clicked : false
-  //
-  //   };
-  // }
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
+
+    };
+  }
 
   render() {
-    const dom = store.getState().dom
-    console.log('dom : ',dom);
+    // const dom = store.getState().dom
+    // console.log('dom : ',dom);
     return(
       <div style={this.props.style}>
 
-        <div className={dom.popup ? 'popup-container active' : 'popup-container'}>
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
                 <div className='card shadow' style={{marginTop:'6%'}}>
@@ -263,10 +265,8 @@ export class PopUp extends Component {
                         document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
-                        store.dispatch({
-                          type : 'POPUP',
-                          id : this.props.id,
-                          popup : false
+                        this.setState({
+                          clicked:false
                         })
                         e.preventDefault()
                       }
@@ -282,7 +282,7 @@ export class PopUp extends Component {
             <div className='tint'></div>
 
         </div>
-        <button className='btn-primary'
+        <button style={this.props.btnStyle} className={this.props.btnClass}
           onClick={
             e => {
               document.body.style.overflow = 'hidden';
@@ -295,10 +295,8 @@ export class PopUp extends Component {
               //     window.ontouchmove  = preventDefault; // mobile
               //     document.onkeydown  = preventDefaultForScrollKeys;
 
-              store.dispatch({
-                type : 'POPUP',
-                id : this.props.id,
-                popup : true
+              this.setState({
+                clicked:true
               })
               e.preventDefault()
             }}
@@ -326,15 +324,17 @@ export class Table extends Component {
             <TableBody displayRowCheckbox={false} >
               {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
-                  { 
-                    row.column.map((column, index) => 
-                    ( 
-                      <TableRowColumn>{column.value}</TableRowColumn> 
-                    )) 
- 
-                  } 
+                  {
+                    row.column.map((column, index) =>
+                    (
+                      <TableRowColumn>{column.value}</TableRowColumn>
+                    ))
+
+                  }
+
                 </TableRow>
-              ))}
+              ))
+            }
             </TableBody>
 
           </MaterialTable>
@@ -374,10 +374,34 @@ export class Checkbox extends Component {
           <MaterialCheckbox
             label={this.props.label}
             style={{
+
             }}   />
           </div>
           </MuiThemeProvider>
       </div>
+    )
+  }
+}
+
+export class InputFile extends Component {
+
+  handleChange(event) {
+    console.log('Selected file:', event.target.files[0]);
+  }
+
+  render(){
+    return(
+      <div style={this.props.style}>
+        <form>
+          <FileInput
+            name={this.props.name}
+            placeholder={this.props.placeholder}
+            accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+            onChange={this.handleChange}
+            >
+          </FileInput>
+        </form>
+        </div>
     )
   }
 }

@@ -140,7 +140,7 @@ input {
   font-family: 'lato', sans-serif;
   font-size: 15px;
 }
-.input-desc {
+.input-name {
   font-family: 'lato', sans-serif;
   font-weight: 300;
   margin-top: 25px;
@@ -148,6 +148,20 @@ input {
   letter-spacing: 1px;
   font-size: $font-size;
   float:left;
+  width: 100%;
+}
+.input-desc {
+  font-family: 'lato', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  display: block;
+  margin-top: 0;
+  color: #777777;
+  letter-spacing: 1px;
+  font-size: $font-size;
+  float:left;
+  width: 100%;
+
 }
 
 .navbar {
@@ -228,6 +242,7 @@ input {
     right: 0;
   }
   button {
+    top: 0;
     position: absolute;
   }
   h2 {
@@ -357,9 +372,7 @@ background-repeat: no-repeat;
     width:120px;
   }
 
-.material-icons {
-  color: $color-accent
-}
+
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -461,5 +474,11 @@ width: 100%;
     text-transform: uppercase;
     font-weight: 600;
 
+  }
+}
+
+Tabs {
+  Tab{
+    list-style:none
   }
 }
