@@ -216,11 +216,8 @@ export class LineChart extends Component{
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
-            <LineGraph type="monotone" dataKey="BSD" stroke="#f8aa27"/>
-            <LineGraph type="monotone" dataKey="FSD" stroke="#94dea9"/>
-            <LineGraph type="monotone" dataKey="SMS" stroke="#795548"/>
-            <LineGraph type="monotone" dataKey="TDMO" stroke="#0099ff"/>
-            <LineGraph type="monotone" dataKey="CEM" stroke="#642bb6"/>
+            {this.props.lines.map((props)=>
+              <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
       </div>
@@ -334,6 +331,7 @@ export class Table extends Component {
                     ))
 
                   }
+
                 </TableRow>
               ))
             }
@@ -377,7 +375,7 @@ export class Checkbox extends Component {
             label={this.props.label}
             style={{
 
-          }}   />
+            }}   />
           </div>
           </MuiThemeProvider>
       </div>

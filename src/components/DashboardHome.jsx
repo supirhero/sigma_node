@@ -153,7 +153,12 @@ class DashboardHome extends Component {
                             <div className='unit whole no-gutters'>
                               <div className='card' onClick={
                                 e => {
-                                  browserHistory.push('/project')
+                                  browserHistory.push({
+                                    pathname: '/project',
+                                    state: {
+                                      id : value.project_id
+                                    }
+                                  })
                                   e.preventDefault()
                                 }
                               }>

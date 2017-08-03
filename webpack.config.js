@@ -11,8 +11,16 @@ var compile_mode = process.argv
 // const args = process.argv[2];
 
 // var compile_mode = (process.env.npm_lifecycle_script.split(3)[1]).replace('--', '')
+// if (MOCK) {
+//   console.log('using mock');
+//
+// }
+// else {
+//   console.log('using api');
+//
+// }
 const webpack_env = new webpack.DefinePlugin({'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }})
-// console.log('** Compile mode = ' + process.env.NODE_ENV + " **\n")
+console.log('** Compile mode = ' + process.env.NODE_ENV + " **\n")
 // var debug = (webpack_env !== 'production')
 // switch (webpack_env) {
 //   case 'mock': break;
@@ -41,6 +49,7 @@ module.exports = {
       filename: "js/app.js"
     },
     devServer: {
+       disableHostCheck: true,   // That solved it
       historyApiFallback: true,
       watchOptions: {
           ignored: /node_modules/
@@ -86,6 +95,9 @@ module.exports = {
     //  process.env.NODE_ENV == 'mock' ?
      [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ],
     //  :
+    //  [webpack_env],
+    //  plugins:
+    //  process.env.NODE_ENV == 'mock' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
     //  [webpack_env],
     devtool: 'cheap-module-source-map'
 

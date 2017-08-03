@@ -82,15 +82,12 @@ export const data = (state = {}, action) => {
       // else {
       // console.log('data', data);
       if (compile_mode == 'mock') {
-        alert('mock')
+        alert('MOCK')
         var endpoint = action.request.url.slice(1).replace(/\//g, '--').split('?')[0]
         var path = '../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint
         var result = require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint + '.json')
-        console.log('result', result);
-        console.log('path', path);
         // browserHistory.replace('/')
 
-        action.success(result)
         saveState(store.getState())
 
         return Object.assign({}, state, {
@@ -100,7 +97,6 @@ export const data = (state = {}, action) => {
       }
       else {
         alert('API')
-
           axios({
             method: 'post',
             url: base_URL + action.request.url,
@@ -111,7 +107,6 @@ export const data = (state = {}, action) => {
             saveState(store.getState())
 
             return Object.assign({}, state, {
-              isloggedin: true,
               auth : response.data
             })
           })

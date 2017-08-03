@@ -81,6 +81,7 @@ class Project extends Component {
                       </div>
                     </div>
                 </PopUp>
+
                 </div>
               </div>
               <div className='grid wrap sidebar'>
