@@ -37,7 +37,7 @@ import ProjectTeamMember from './ProjectTeamMember.jsx'
 import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
 import ProjectIssues from './ProjectIssues.jsx'
 import ProjectWorkplan from './ProjectWorkplan.jsx'
-
+import ProjectSCurve from './ProjectSCurve.jsx'
 
 
 
@@ -93,6 +93,7 @@ render(
           <Route path='team-member' component={ProjectTeamMember}></Route>
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
+          <Route path='s-curve' component={ProjectSCurve}></Route>
         </Route>
         <Route path='workplan' component={ProjectWorkplan}/>
         <Route path='profile' component={Profile}>
