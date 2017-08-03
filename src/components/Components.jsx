@@ -193,7 +193,7 @@ export class BarChart extends Component {
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
-            <Bar dataKey="value" fill="#F48165" />
+            <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#D2E5FA"} />
           </ChartBar>
         </ResponsiveContainer>
 
@@ -214,7 +214,7 @@ export class LineChart extends Component{
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
-            {this.props.lines.map((props)=> 
+            {this.props.lines.map((props)=>
               <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
@@ -326,13 +326,13 @@ export class Table extends Component {
             <TableBody displayRowCheckbox={false} >
               {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
-                  { 
-                    row.column.map((column, index) => 
-                    ( 
-                      <TableRowColumn>{column.value}</TableRowColumn> 
-                    )) 
- 
-                  } 
+                  {
+                    row.column.map((column, index) =>
+                    (
+                      <TableRowColumn>{column.value}</TableRowColumn>
+                    ))
+
+                  }
                 </TableRow>
               ))}
             </TableBody>
@@ -378,6 +378,37 @@ export class Checkbox extends Component {
           </div>
           </MuiThemeProvider>
       </div>
+    )
+  }
+}
+
+export class TableNew extends Component {
+  render () {
+    return (
+      <table className='table' style={{width:'100%'}}>
+          <thead>
+                <tr>
+                  {
+                    this.props.tableHeader.map((value, index) => (
+                        <th>{value.value}</th>
+                    ))
+                  }
+                </tr>
+            </thead>
+              <tbody>
+                {
+                  this.props.tableData.map((row,index) => (
+                    <tr className='items' key={index}>
+                      {
+                        row.column.map((column,index) => (
+                          <td>{column.value}</td>
+                        ))
+                      }
+                    </tr>
+                  ))
+                }
+              </tbody>
+      </table>
     )
   }
 }

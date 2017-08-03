@@ -33,6 +33,39 @@ class ProjectWorkplan extends Component {
             </div>
 
           </div>
+          <div className='grid wrap'>
+            <div className='unit whole'>
+              <div className='card'>
+                <div className='grid wrap'>
+                  <div className='unit whole'>
+                    <Header text='Project Detail'/>
+                  </div>
+                </div>
+                <div className='grid wrap'>
+                  <div className='unit whole'>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>TASK</th>
+                          <th>WORK</th>
+                          <th>WORK<br/>TOTAL</th>
+                          <th>DURATION<br/>(DAYS)</th>
+                          <th>START<br/>DATE</th>
+                          <th>END<br/>DATE</th>
+                          <th>% WORK<br/>COMPLETE</th>
+                          <th>RESOURCES<br/></th>
+
+
+
+
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       )

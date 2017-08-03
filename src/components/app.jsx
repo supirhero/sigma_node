@@ -38,6 +38,8 @@ import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
 import ProjectIssues from './ProjectIssues.jsx'
 import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSCurve from './ProjectSCurve.jsx'
+import ProjectSpiCpi from './ProjectSpiCpi.jsx'
+
 
 
 
@@ -94,6 +96,8 @@ render(
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
           <Route path='s-curve' component={ProjectSCurve}></Route>
+          <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
+
         </Route>
         <Route path='workplan' component={ProjectWorkplan}/>
         <Route path='profile' component={Profile}>
