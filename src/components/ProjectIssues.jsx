@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader} from  './Components.jsx'
+import {Divider, Header, ProjectHeader,PopUp,Input,Select,InputFile} from  './Components.jsx'
 
 
 
@@ -17,9 +17,48 @@ class ProjectIssues extends Component {
             </div>
           </div>
           <div className='grid padding-left'>
-            <div className='unit whole'>
-              <button style={{margin:'auto'}} className='btn-primary'>REPORT AN ISSUE</button>
-            </div>
+              <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" btnClass='btn-primary' btnStyle={{ display: 'block', margin: '0 auto' }}>
+              <div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Input inputName="SUBJECT" />
+                  </div>
+                </div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Input inputName="MESSAGE" />
+                  </div>
+                </div>
+
+                <div className="grid wrap narrow">
+                  <div className="unit golden-small">
+                    <Select
+                      inputName="PRIORITY"
+                      items={{
+                        items: [
+                          { title: 'small' },
+                          { title: 'medium' },
+                        ],
+                      }}
+                    />
+                  </div>
+                  <div className="unit golden-large">
+                     <h2 className='input-desc'>SUPPORTING DOCUMENT</h2>
+                  </div>
+                  <div className="unit golden-large" style={{paddingTop:'0',paddingRight:'0'}}>
+                      <InputFile placeholder="choose a file" />
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </PopUp>
+
+
           </div>
           <div className='grid padding-left'>
             <div className='unit whole'>

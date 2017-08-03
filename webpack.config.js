@@ -36,6 +36,7 @@ console.log('** Compile mode = ' + process.env.NODE_ENV + " **\n")
 
 
 module.exports = {
+    cache: true,
     entry: "./src/components/app.jsx",
     // output: {
     //     // publicPath: "/dist/",
@@ -62,6 +63,7 @@ module.exports = {
           test: /\.js|\.jsx?$/,
           exclude:'/node_modules/',
           loader: 'babel-loader',
+          exclude: '/node_modules/',
           query: {
             presets: ["react", "es2015"]
           },
@@ -72,7 +74,8 @@ module.exports = {
           use: [{
                 loader: "style-loader"
             }, {
-                loader: "css-loader"
+                loader: "css-loader",
+                options: {minimize: true}
             },
             {
               loader: "sass-loader",
@@ -87,9 +90,15 @@ module.exports = {
       }
         ]
     },
+
      plugins:
-     process.env.NODE_ENV == 'mock' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
-     [webpack_env],
+    //  process.env.NODE_ENV == 'mock' ?
+     [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ],
+    //  :
+    //  [webpack_env],
+    //  plugins:
+    //  process.env.NODE_ENV == 'mock' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+    //  [webpack_env],
     devtool: 'cheap-module-source-map'
 
 };

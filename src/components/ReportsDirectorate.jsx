@@ -9,10 +9,9 @@ import { Select, Input, BarChart, Divider, Meter } from './Components.jsx';
 class ReportsDirectorate extends Component {
   render() {
     return (
-
 			<div>
 				<div className="grid wrap">
-					<div className="unit golden-large">
+					<div className="unit three-quarters">
 						<Select
               style={{ width: '100%', display: 'inline-block', float: 'left' }}
               items={{
@@ -22,9 +21,9 @@ class ReportsDirectorate extends Component {
                 ]
 							}}/>
 					</div>
-					<div className="unit golden-small">
+					<div className="unit one-quarter">
 						<Select
-              style={{ width: '50%', display: 'inline-block', float: 'left',marginLeft:'29%' }}
+              style={{ width: '60%',float:'left', display: 'inline-block',marginLeft:'35px'}}
               items={{
                 items: [
               { title: '2017' },
@@ -32,7 +31,7 @@ class ReportsDirectorate extends Component {
                 ],
               }}
             />
-            <button className="btn-primary"style={{ padding: '11px 14px', marginLeft: '20px' }} >
+            <button className="btn-primary"style={{ padding: '11px 14px',marginLeft:'5px'}} >
               <span className="material-icons" style={{ color: 'white' }}>search</span>
             </button>
           </div>
@@ -70,10 +69,6 @@ class ReportsDirectorate extends Component {
                      </div>
                    </div>
                 </div>
-
-
-
-
               </div>
             </div>
           </div>
