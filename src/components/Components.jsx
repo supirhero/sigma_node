@@ -214,11 +214,8 @@ export class LineChart extends Component{
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
-            <LineGraph type="monotone" dataKey="BSD" stroke="#f8aa27"/>
-            <LineGraph type="monotone" dataKey="FSD" stroke="#94dea9"/>
-            <LineGraph type="monotone" dataKey="SMS" stroke="#795548"/>
-            <LineGraph type="monotone" dataKey="TDMO" stroke="#0099ff"/>
-            <LineGraph type="monotone" dataKey="CEM" stroke="#642bb6"/>
+            {this.props.lines.map((props)=> 
+              <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
       </div>
@@ -329,12 +326,13 @@ export class Table extends Component {
             <TableBody displayRowCheckbox={false} >
               {this.props.tableData.map((row, index) => (
                 <TableRow key={index}>
-                  <TableRowColumn>{row.name}</TableRowColumn>
-                  <TableRowColumn>{row.email}</TableRowColumn>
-                  <TableRowColumn>{row.entry}</TableRowColumn>
-                  <TableRowColumn>{row.entryStatus}</TableRowColumn>
-                  <TableRowColumn>{row.utilization}</TableRowColumn>
-                  <TableRowColumn>{row.utilizationStatus}</TableRowColumn>
+                  { 
+                    row.column.map((column, index) => 
+                    ( 
+                      <TableRowColumn>{column.value}</TableRowColumn> 
+                    )) 
+ 
+                  } 
                 </TableRow>
               ))}
             </TableBody>

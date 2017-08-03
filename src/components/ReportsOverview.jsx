@@ -225,6 +225,12 @@ class ReportsOverview extends Component {
                         { name: 'NOV', BSD: 0.5, FSD: 0.3 , SMS: 1.7 , TDMO: 0.8 , CEM: 1.1 },
 												{ name: 'DEC', BSD: 0.2, FSD: 0.4 , SMS: 1.6 , TDMO: 1.5 , CEM: 1.2 }
                     ]}
+                    lines={[{key:'BSD', stroke:'#f8aa27'},
+                            {key:'FSD', stroke:'#94dea9'},
+                            {key:'SMS', stroke:'#795548'},
+                            {key:'TDMO', stroke:'#0099ff'},
+                            {key:'CEM', stroke:'#642bb6'},                            													
+													]}
                     style={{marginTop:'50px'}}
                   />
 
@@ -249,6 +255,12 @@ class ReportsOverview extends Component {
                         { name: 'NOV', BSD: 0.5, FSD: 0.3 , SMS: 1.7 , TDMO: 0.8 , CEM: 1.1 },
 												{ name: 'DEC', BSD: 0.2, FSD: 0.4 , SMS: 1.6 , TDMO: 1.5 , CEM: 1.2 }
                     ]}
+                    lines={[{key:'BSD', stroke:'#f8aa27'},
+                            {key:'FSD', stroke:'#94dea9'},
+                            {key:'SMS', stroke:'#795548'},
+                            {key:'TDMO', stroke:'#0099ff'},
+                            {key:'CEM', stroke:'#642bb6'},                            													
+													]}  
                     style={{marginTop:'50px'}}
                   />
 
