@@ -10,6 +10,28 @@ import { Select, Input, Table,TableNew ,Header, Search, PopUp } from './Componen
 
 class ManageRoles extends Component {
   render() {
+    const BusinessLevel = [
+			{name:'Update personal timesheet'},
+      {name:'Access business unit overview '},
+      {name:'Create object '},
+      {name:'Access all projects in business unit'},
+      {name:'Approve timesheet (non-project)'},
+      {name:'See report overview'},
+      {name:'See resources report'},
+      {name:'Download Report'},
+      {name:'Approve re-baseline'},
+    ]
+    
+    const ProjectLevel = [
+			{name:'Upload and delete workplan'},
+      {name:'Assign Task'},
+      {name:'Baseline / re-baseline'},
+      {name:'Update progress manually'},
+      {name:'Approve Timesheet (project)'},
+      {name:'Edit Project'},
+      {name:'See Project Report'},
+      {name:'Download Report'},
+		]
     return (
       <div>
         <div className="grid dataset">
@@ -22,13 +44,111 @@ class ManageRoles extends Component {
 								</div>
 								
                 <div className="unit three-quarters">
-                  <PopUp id="createProjectType" dividerText="CREATE PROJECT TYPE" btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
+                  <PopUp id="createRole" dividerText="CREATE ROLE" btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
                     <div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                          <Input inputName="NAME" />
+                          <Input inputName="ROLE NAME" />
                         </div>
                       </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <Input inputName="DESCRIPTION" />
+                        </div>
+                      </div>
+
+                      <div className="grid wrap narrow pop-container">
+                        <div className="unit whole">
+                          <small>PRIVILEGES</small>                          
+                        </div>
+                      </div>
+
+                      
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <small>IN BUSINESS UNIT LEVEL</small>
+                        </div>
+                        <div className="unit half">
+                          <div className="unit one-third">
+                            <small >ALL BU</small>
+                          </div>  
+                          <div className="unit one-third">
+                            <small >ONLY BU</small>
+                          </div>
+                          <div className="unit one-third">
+                            <small >CAN'T</small>
+                          </div>
+                        </div>
+                      </div>
+
+                      {
+                        BusinessLevel.map((value,index)=>{
+                          return(
+                          <div className="grid wrap narrow">
+                            <div className="unit half">
+                              <small key={index}>{value.name}</small>
+                            </div>
+                            <div className="unit half">
+                              <div className="unit one-third">
+                                <small>box</small>
+                              </div>  
+                              <div className="unit one-third" >
+                                <small >box</small>
+                              </div>
+                              <div className="unit one-third" >
+                                <small>box</small>
+                              </div>
+                            </div>
+                          </div>                            
+                          )
+                        })
+                      }
+
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <small>IN PROJECT LEVEL</small>
+                        </div>
+                        
+                        <div className="unit half">
+                          <div className="unit one-third" style={{visibility:'hidden'}}>
+                            .
+                          </div>
+                          <div className="unit one-third">
+                            <small>CAN</small>
+                          </div>  
+                          <div className="unit one-third">
+                            <small>CAN'T</small>
+                          </div>
+                        </div>
+                      </div>
+
+                      {
+                        ProjectLevel.map((value,index)=>{
+                          return(
+                          <div className="grid wrap narrow">
+                            <div className="unit half">
+                              <small key={index}>{value.name}</small>
+                            </div>
+                            <div className="unit half">
+                              <div className="unit one-third" style={{visibility:'hidden'}}>
+                                .
+                              </div>  
+                              <div className="unit one-third" >
+                                <small>box</small>
+                              </div>
+                              <div className="unit one-third" >
+                                <small>box</small>
+                              </div>
+                            </div>
+                          </div>                            
+                          )
+                        })
+                      }
+                      
+
+                      
+
+
                       <div className="grid wrap narrow">
                         <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
                           <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
@@ -37,6 +157,7 @@ class ManageRoles extends Component {
                       </div>
                     </div>
                   </PopUp>
+
                   <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
                 </div>
                 <div className="unit whole">

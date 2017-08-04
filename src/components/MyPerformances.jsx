@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, Meter, BarChart} from './Components.jsx'
+import {Divider, Input,Select,Meter, BarChart} from './Components.jsx'
 
 
 
@@ -38,8 +38,24 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Input style={{width:'48%', display:'inline-block'}}/>
-                        <Input style={{width:'48%', display:'inline-block', float:'right'}}/>
+                        <Select 
+                          style={{width:'48%', display:'inline-block'}}
+                          items={{
+                            items : [
+                              {title : 'JUN'},
+                              {title : 'JUL'}
+                            ]
+                           }}
+                        />
+                        <Select 
+                          style={{width:'48%', display:'inline-block', float:'right'}}
+                          items={{
+                            items : [
+                              {title : '2017'},
+                              {title : '2016'}
+                            ]
+                           }}
+                          />
                       </div>
                       <div className='unit one-fifth'>
                         <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -83,7 +99,15 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Input style={{width:'48%', display:'inline-block', float:'right'}}/>
+                        <Select 
+                          style={{width:'48%', display:'inline-block', float:'right'}}
+                          items={{
+                            items : [
+                              {title : '2016'},
+                              {title : '2017'},
+                            ]
+                           }}
+                        />
                       </div>
                       <div className='unit one-fifth'>
                         <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -126,7 +150,15 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Input style={{width:'48%', display:'inline-block', float:'right'}}/>
+                        <Select 
+                          style={{width:'48%', display:'inline-block', float:'right'}}
+                          items={{
+                            items : [
+                              {title : '2017'},
+                              {title : '2016'}
+                            ]
+                           }}
+                        />
                       </div>
                       <div className='unit one-fifth'>
                         <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>

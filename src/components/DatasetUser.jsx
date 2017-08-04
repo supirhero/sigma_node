@@ -27,7 +27,7 @@ class DatasetUser extends Component {
                     {value:'4100001'},
                     {value:'Joshua Howard'},
                     {value:'huel_cora@hotmail.com'},
-                    {value:'08 APR 2017'},
+                    {value:'08 APR 2017'},               
                   ]},{
                     column:[
                     {value:'2'},
@@ -38,46 +38,48 @@ class DatasetUser extends Component {
                     ]},{
                     column:[
                     {value:'3'},
-                    {value:'4100002'},
+                    {value:'4100003'},
                     {value:'Genevieve Wells '},
-                    {value:'maya_kutch@hotmail.com'},
+                    {value:'genevieve_wells@hotmail.com'},
                     {value:'09 MAY 2017'}
                     ]},{
                     column:[
                     {value:'4'},
-                    {value:'4100002'},
+                    {value:'4100004'},
                     {value:'Eugene Chandler'},
-                    {value:'maya_kutch@hotmail.com'},
+                    {value:'eugene_chandler@hotmail.com'},
                     {value:'09 MAY 2017'}
                     ]},{
                     column:[
                     {value:'5'},
-                    {value:'4100002'},
+                    {value:'4100005'},
                     {value:'Adele Canon'},
-                    {value:'maya_kutch@hotmail.com'},
+                    {value:'adele_canon@hotmail.com'},
                     {value:'09 MAY 2017'}
                     ]},{
                     column:[
                     {value:'6'},
-                    {value:'4100002'},
+                    {value:'4100006'},
                     {value:'Maud Berry'},
-                    {value:'maya_kutch@hotmail.com'},
+                    {value:'maud_berry@hotmail.com'},
                     {value:'09 MAY 2017'}
                     ]},{
                     column:[
                     {value:'7'},
-                    {value:'4100002'},
+                    {value:'4100007'},
                     {value:'Grace Perez'},
-                    {value:'maya_kutch@hotmail.com'},
+                    {value:'grace_perez@hotmail.com'},
                     {value:'09 MAY 2017'}
                     ]}
                   ]}>
                 </TableNew>                            
               </div>
-              <div className="unit whole" style={{float:'right'}}>
-                  <button className="arrow"> <b>></b> </button>
-                  <button className="pagination"><b>1</b></button>
-                  <button className="arrow"> <b>></b> </button>
+              <div className="unit whole">
+                  <div className="container" style={{float:'right'}}>                  
+                    <button className="arrow"> <b> &lt; </b> </button>
+                    <button className="pagination"><b>1</b></button>
+                    <button className="arrow"> <b> &gt; </b> </button>
+                  </div>
               </div>
                 
             </div>

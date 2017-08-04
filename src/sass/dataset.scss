@@ -2,7 +2,15 @@
   .heading:nth-child(n+2){
     display: inline-block;
     margin-left: 60px;
+    cursor: pointer;
   }
+  .heading:first-child{
+    cursor: pointer;
+  }
+ 
+  .one-third{
+   padding:0;
+ }
 }
 
 
