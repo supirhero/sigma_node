@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,Header,Search } from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
 
 
 class DatasetPartner extends Component {
@@ -19,7 +19,73 @@ class DatasetPartner extends Component {
 								<div className="unit whole">
 									<Header text='Partner' style={{display:'inline-block'}} />
 									<Search placeholder='search partner' style={{float:'right',width:'400px'}} />
-            	  </div>
+                </div>
+                <div className="unit whole">
+                <TableNew
+                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'ADDRESS'},{value:'TELEPHONE'}]}
+                  tableData={[{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'MOHAMAD SEMBODO'},
+                    {value:'GERMAN CENTER LT.5'},                 
+                    {value:'535-079-2137'},                                
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]},{column:[
+                    {value:'1'},
+                    {value:'0063001676'},
+                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'535-079-2137'},
+                  
+
+                  ]}
+                  
+                
+                ]}
+                >
+                
+                </TableNew>
+                
+                </div>
         			</div>
             </div>
           </div>

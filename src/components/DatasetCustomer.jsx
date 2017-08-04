@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,Header,Search } from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
 
 
 class DatasetCustomer extends Component {
@@ -21,7 +21,8 @@ class DatasetCustomer extends Component {
 									<Search placeholder='search customer' style={{float:'right',width:'400px'}} />
                 </div>
                 <div className="unit whole">
-                  <Table
+
+                  <TableNew
                   tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'CODE'},{value:'SAP ID'},{value:'AM'},{value:'ADDRESS'}]}
                   tableData={[{column:[
                     {value:'1'},
@@ -36,19 +37,72 @@ class DatasetCustomer extends Component {
                     column:[
                     {value:'2'},
                     {value:'4100002'},
-                    {value:'PT ABC JASAMARGA'},
-                    {value:'JSMRG'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
                     {value:'4100002'},
                     {value:'-'},
                     {value:'172 Zelda River'}
-                    ]
-                  }
+                    ]},{
+                    column:[
+                    {value:'3'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'4'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'5'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'6'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'7'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'8'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]}
                   
                 
                 ]}
                 >
                 
-                </Table>
+                </TableNew>
                 </div>
         			</div>
             </div>

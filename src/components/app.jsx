@@ -45,8 +45,9 @@ import DatasetPartner from './DatasetPartner.jsx'
 import DatasetHoliday from './DatasetHoliday.jsx'
 import DatasetProjectType from './DatasetProjectType.jsx'
 import DatasetBU from './DatasetBu.jsx'
-
-
+import ManageRoleAccess from './ManageRoleAccess.jsx'
+import ManageRoles from './ManageRoles.jsx'
+import ManageAccess from './ManageAccess.jsx'
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
@@ -128,6 +129,10 @@ render(
           <Route path='bu' component={DatasetBU} />
         </Route>
 
+        <Route path='manage' component={ManageRoleAccess}>
+          <IndexRoute component={ManageRoles} />
+          <Route path='access' component={ManageAccess} />      
+        </Route>
 
 
 

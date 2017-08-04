@@ -344,6 +344,41 @@ export class Table extends Component {
     );
   }
 }
+
+export class TableNew extends Component{
+  render(){
+    return(
+      <table className='table' style={{width:'100%'}}>
+        <thead>
+          <tr>
+            {
+              this.props.tableHeader.map((value,index)=>(
+                <th>{value.value}</th>
+              ))
+            }                    
+          </tr>
+        </thead>
+      
+        <tbody>
+            {
+              this.props.tableData.map((row,index)=>(
+                <tr className='items' key={index}>
+                  {
+                    row.column.map((column,index)=>(
+                      <td>{column.value}</td>
+                    ))
+                  }                                
+                </tr>
+              ))
+            }
+        
+        </tbody>
+      </table>
+    )
+  }
+}
+
+
 export class Header extends Component {
   render() {
     return(

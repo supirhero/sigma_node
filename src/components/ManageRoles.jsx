@@ -8,7 +8,7 @@ import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TableNew ,Header, Search, PopUp } from './Components.jsx';
 
 
-class DatasetProjectType extends Component {
+class ManageRoles extends Component {
   render() {
     return (
       <div>
@@ -18,7 +18,7 @@ class DatasetProjectType extends Component {
 							<div className="table-wrap">
 							
                 <div className="unit one-quarter">
-                  <Header text="Project Type" style={{ display: 'inline-block' }} />
+                  <Header text="Roles / Type of User" style={{ display: 'inline-block' }} />
 								</div>
 								
                 <div className="unit three-quarters">
@@ -41,13 +41,23 @@ class DatasetProjectType extends Component {
                 </div>
                 <div className="unit whole">
                   <TableNew
-                  tableHeader={[{value:'NO'},{value:'NAME'}]}
+                  tableHeader={[{value:'NO'},{value:'NAME'},{value:'DESCRIPTION'}]}
                   tableData={[{column:[
                     {value:'1'},
-                    {value:'Project'},
+										{value:'PRouDS'},
+										{value:'lorem ipsum dolor sit amet, consectur adi'}
                   ]},{column:[
                     {value:'2'},
-                    {value:'Non Project'},
+										{value:'Space Admin'},
+										{value:'lorem ipsum dolor sit amet, consectur adi'}
+                  ]},{column:[
+                    {value:'3'},
+										{value:'Power User'},
+										{value:'lorem ipsum dolor sit amet, consectur adi'}
+                  ]},{column:[
+                    {value:'4'},
+										{value:'Team Member'},
+										{value:'lorem ipsum dolor sit amet, consectur adi'}
                   ]},
                   ]}>
                 </TableNew>       
@@ -70,5 +80,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DatasetProjectType);
+export default connect(mapStateToProps)(ManageRoles);
 // export default Login

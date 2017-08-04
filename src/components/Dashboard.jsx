@@ -70,7 +70,11 @@ class Dashboard extends Component {
                                 browserHistory.push('/dataset')
                               }  
                             }/>
-                            <MenuItem title='Manage Role & Access'/>
+                            <MenuItem title='Manage Role & Access' onClick={
+                              e => {
+                                browserHistory.push('/manage')
+                              }
+                              }/>
                           </MenuSection>
                           <MenuSection>
                             <MenuItem onClick={

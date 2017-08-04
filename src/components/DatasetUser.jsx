@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,Header,Search } from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
 
 
 class DatasetUser extends Component {
@@ -20,15 +20,14 @@ class DatasetUser extends Component {
                 <Search placeholder='search user' style={{float:'right',width:'400px'}} />
               </div>
               <div className="unit whole">
-                <Table
+                <TableNew
                   tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'LAST LOGIN'}]}
                   tableData={[{column:[
                     {value:'1'},
                     {value:'4100001'},
                     {value:'Joshua Howard'},
                     {value:'huel_cora@hotmail.com'},
-                    {value:'08 APR 2017'}
-
+                    {value:'08 APR 2017'},
                   ]},{
                     column:[
                     {value:'2'},
@@ -36,16 +35,49 @@ class DatasetUser extends Component {
                     {value:'Luella Perry'},
                     {value:'maya_kutch@hotmail.com'},
                     {value:'09 MAY 2017'}
-
-                    ]
-                  }
-                  
-                
-                ]}
-                >
-                
-                </Table>
-              
+                    ]},{
+                    column:[
+                    {value:'3'},
+                    {value:'4100002'},
+                    {value:'Genevieve Wells '},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+                    ]},{
+                    column:[
+                    {value:'4'},
+                    {value:'4100002'},
+                    {value:'Eugene Chandler'},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+                    ]},{
+                    column:[
+                    {value:'5'},
+                    {value:'4100002'},
+                    {value:'Adele Canon'},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+                    ]},{
+                    column:[
+                    {value:'6'},
+                    {value:'4100002'},
+                    {value:'Maud Berry'},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+                    ]},{
+                    column:[
+                    {value:'7'},
+                    {value:'4100002'},
+                    {value:'Grace Perez'},
+                    {value:'maya_kutch@hotmail.com'},
+                    {value:'09 MAY 2017'}
+                    ]}
+                  ]}>
+                </TableNew>                            
+              </div>
+              <div className="unit whole" style={{float:'right'}}>
+                  <button className="arrow"> <b>></b> </button>
+                  <button className="pagination"><b>1</b></button>
+                  <button className="arrow"> <b>></b> </button>
               </div>
                 
             </div>
