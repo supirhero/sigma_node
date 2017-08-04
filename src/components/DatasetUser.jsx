@@ -27,7 +27,8 @@ class DatasetUser extends Component {
                     {value:'4100001'},
                     {value:'Joshua Howard'},
                     {value:'huel_cora@hotmail.com'},
-                    {value:'08 APR 2017'},               
+                    {value:'08 APR 2017'},
+                                
                   ]},{
                     column:[
                     {value:'2'},

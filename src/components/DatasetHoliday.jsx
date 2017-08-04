@@ -84,16 +84,18 @@ class DatasetHoliday extends Component {
                     {value:'2 Feb 2017'},
                     {value:'11 Feb 2017'},                 
 									]}
-									
-                  
+                ]}>
                 
-                ]}
-                >
-                
-                </TableNew>
-								
-								
+                </TableNew>															
 								</div>
+
+								<div className="unit whole">
+                  <div className="container" style={{float:'right'}}>                  
+                    <button className="arrow"> <b> &lt; </b> </button>
+                    <button className="pagination"><b>1</b></button>
+                    <button className="arrow"> <b> &gt; </b> </button>
+                  </div>
+              </div>
 
         			</div>
             </div>

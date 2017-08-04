@@ -1,4 +1,5 @@
 .dataset{
+  
   .heading:nth-child(n+2){
     display: inline-block;
     margin-left: 60px;
@@ -11,6 +12,10 @@
   .one-third{
    padding:0;
  }
+  .label{
+    color: #333333;
+    font-family: 'lato',sans-serif;
+  }
 }
 
 

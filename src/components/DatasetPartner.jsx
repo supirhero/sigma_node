@@ -81,11 +81,15 @@ class DatasetPartner extends Component {
                   
                 
                 ]}
-                >
-                
-                </TableNew>
-                
+                ></TableNew>                
                 </div>
+                <div className="unit whole">
+                  <div className="container" style={{float:'right'}}>                  
+                    <button className="arrow"> <b> &lt; </b> </button>
+                    <button className="pagination"><b>1</b></button>
+                    <button className="arrow"> <b> &gt; </b> </button>
+                  </div>
+              </div>
         			</div>
             </div>
           </div>

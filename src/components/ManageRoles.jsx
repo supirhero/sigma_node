@@ -86,7 +86,7 @@ class ManageRoles extends Component {
                           return(
                           <div className="grid wrap narrow">
                             <div className="unit half">
-                              <small key={index}>{value.name}</small>
+                              <small className="label" key={index}>{value.name}</small>
                             </div>
                             <div className="unit half">
                               <div className="unit one-third">
@@ -127,7 +127,7 @@ class ManageRoles extends Component {
                           return(
                           <div className="grid wrap narrow">
                             <div className="unit half">
-                              <small key={index}>{value.name}</small>
+                              <small className="label" key={index}>{value.name}</small>
                             </div>
                             <div className="unit half">
                               <div className="unit one-third" style={{visibility:'hidden'}}>
