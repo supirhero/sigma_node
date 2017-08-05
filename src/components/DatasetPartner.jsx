@@ -32,64 +32,91 @@ class DatasetPartner extends Component {
                   
 
                   ]},{column:[
-                    {value:'1'},
+                    {value:'2'},
                     {value:'0063001676'},
                     {value:'MOHAMAD SEMBODO'},
                     {value:'GERMAN CENTER LT.5'},                 
-                    {value:'535-079-2137'},                                
+                    {value:'419-793-1440'},                                
                   ]},{column:[
-                    {value:'1'},
+                    {value:'3'},
                     {value:'0063001676'},
-                    {value:'PT AARYA KINARI TIRTA'},
-                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
-                    {value:'535-079-2137'},
+                    {value:'DRS. MULYADI , MSC'},
+                    {value:'JL. SAWA CT VIII NO.94'},                 
+                    {value:'070-146-1440'},
                   
 
                   ]},{column:[
-                    {value:'1'},
+                    {value:'4'},
                     {value:'0063001676'},
-                    {value:'PT AARYA KINARI TIRTA'},
-                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
-                    {value:'535-079-2137'},
+                    {value:'Rodney Cunningham'},
+                    {value:'55 Dora Shore Suite 790'},                 
+                    {value:'208-435-2455'},
                   
 
                   ]},{column:[
-                    {value:'1'},
+                    {value:'5'},
                     {value:'0063001676'},
-                    {value:'PT AARYA KINARI TIRTA'},
-                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
-                    {value:'535-079-2137'},
+                    {value:'Laura Miller'},
+                    {value:'297 Pablo Gardens'},                 
+                    {value:'578-676-6896'},
                   
 
                   ]},{column:[
-                    {value:'1'},
+                    {value:'6'},
                     {value:'0063001676'},
-                    {value:'PT AARYA KINARI TIRTA'},
+                    {value:'Theodore Thornton'},
                     {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
                     {value:'535-079-2137'},
-                  
-
                   ]},{column:[
-                    {value:'1'},
+                    {value:'7'},
                     {value:'0063001676'},
-                    {value:'PT AARYA KINARI TIRTA'},
-                    {value:'COMMERCIAL PARK CBD BSD LOT VIII NO'},                 
+                    {value:'Jeanette Becker'},
+                    {value:'2786 Dorothea View'},                 
                     {value:'535-079-2137'},
-                  
-
+                  ]},{column:[
+                    {value:'8'},
+                    {value:'0063001676'},
+                    {value:'Clyde Gordon'},
+                    {value:'2722 Immanuel Mall'},                 
+                    {value:'395-274-2774'},
+                  ]},{column:[
+                    {value:'9'},
+                    {value:'0063001676'},
+                    {value:'Gerald Clayton'},
+                    {value:'6533 Illiana Flats Apt. 998'},                 
+                    {value:'455-023-2412'},
+                  ]},{column:[
+                    {value:'10'},
+                    {value:'0063001676'},
+                    {value:'Mildred Morrison'},
+                    {value:'672 Lowell Radial Apt. 249'},                 
+                    {value:'535-023-1321'},
                   ]}
                   
                 
                 ]}
                 ></TableNew>                
                 </div>
-                <div className="unit whole">
+                 <div className="unit whole">
+                  <div className="container" style={{float:'left'}}>
+                    <small style={{display:'inline-block'}}>show entries</small>
+                     <Select 
+                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+                          items={{
+                            items : [
+                              {title : '10'},
+                              {title : '20'}
+                            ]
+                           }}
+                        />
+                  
+                  </div>
                   <div className="container" style={{float:'right'}}>                  
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
                     <button className="arrow"> <b> &gt; </b> </button>
                   </div>
-              </div>
+                </div>
         			</div>
             </div>
           </div>

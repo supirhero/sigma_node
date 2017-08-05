@@ -96,6 +96,24 @@ class DatasetCustomer extends Component {
                     {value:'4100002'},
                     {value:'-'},
                     {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'9'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
+                    ]},{
+                    column:[
+                    {value:'10'},
+                    {value:'4100002'},
+                    {value:'PT PATRAKOM TELEKOMUNIKASI'},
+                    {value:'PATR'},
+                    {value:'4100002'},
+                    {value:'-'},
+                    {value:'172 Zelda River'}
                     ]}
                   
                 
@@ -104,13 +122,26 @@ class DatasetCustomer extends Component {
                 
                 </TableNew>
 
-                <div className="unit whole">
+                 <div className="unit whole">
+                  <div className="container" style={{float:'left'}}>
+                    <small style={{display:'inline-block'}}>show entries</small>
+                     <Select 
+                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+                          items={{
+                            items : [
+                              {title : '10'},
+                              {title : '20'}
+                            ]
+                           }}
+                        />
+                  
+                  </div>
                   <div className="container" style={{float:'right'}}>                  
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
                     <button className="arrow"> <b> &gt; </b> </button>
                   </div>
-              </div>
+                 </div>
               
                 </div>
         			</div>

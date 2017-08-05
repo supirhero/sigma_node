@@ -83,19 +83,52 @@ class DatasetHoliday extends Component {
                     {value:'Tahun Baru Masehi'},
                     {value:'2 Feb 2017'},
                     {value:'11 Feb 2017'},                 
+									]},{column:[
+                    {value:'7'},
+                    {value:'Cuti Bersama'},
+                    {value:'11 Aug 2017'},
+                    {value:'12 Jun 2017'},                 
+									]},{column:[
+                    {value:'8'},
+                    {value:'Jumat Agung'},
+                    {value:'27 Feb 2017'},
+                    {value:'12 Dec 2017'},                 
+									]},{column:[
+                    {value:'9'},
+                    {value:'Tahun Baru Imlek'},
+                    {value:'2 Jan 2017'},
+                    {value:'11 Mar 2017'},                 
+									]},{column:[
+                    {value:'10'},
+                    {value:'Hari Raya Nyepi'},
+                    {value:'23 Feb 2017'},
+                    {value:'27 Feb 2017'},                 
 									]}
                 ]}>
                 
                 </TableNew>															
 								</div>
 
-								<div className="unit whole">
+							 <div className="unit whole">
+                  <div className="container" style={{float:'left'}}>
+                    <small style={{display:'inline-block'}}>show entries</small>
+                     <Select 
+                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+                          items={{
+                            items : [
+                              {title : '10'},
+                              {title : '20'}
+                            ]
+                           }}
+                        />
+                  
+                  </div>
                   <div className="container" style={{float:'right'}}>                  
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
                     <button className="arrow"> <b> &gt; </b> </button>
                   </div>
-              </div>
+             	 </div>
 
         			</div>
             </div>
