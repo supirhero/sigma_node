@@ -36,7 +36,8 @@ class Dashboard extends Component {
                 <div className='navbar'>
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
-                      <ul>
+                      <ul>                        
+                        <div id='prouds-logo'> </div> 
                         <li><a onClick={
                           e => {
                             browserHistory.push('/')
@@ -80,8 +81,7 @@ class Dashboard extends Component {
                             } title='LogOut'/>
                           </MenuSection>
 
-                        </Menu>
-
+                        </Menu>                   
                     </div>
                   </div>
 

@@ -3,13 +3,23 @@
     margin: 39px;
   }
 
+
+  medium{
+      display: inline-block;
+      margin-left: 20px;
+    }
+  
+  a{
+    text-decoration: none;
+  }
+
 }
 
 .switch-wrapper{
   width: 225px;
   overflow: hidden;
   height: 40px;
-  border: 2px $color-primary solid;
+  border: 2px $color-secondary solid;
   border-radius: 20px;
   float: right;
   button {
@@ -23,7 +33,7 @@
     font-size: 13px;
   }
   button:nth-child(1) {
-    background: $color-primary;
+    background: $color-secondary;
     color: white;
   }
   button:nth-child(2) {

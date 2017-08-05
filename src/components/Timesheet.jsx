@@ -6,7 +6,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, TimeSheetTimeButton, PopUp, Select, Input } from './components.jsx';
 
-
 class Timesheet extends Component {
   render() {
     return (
@@ -47,7 +46,7 @@ class Timesheet extends Component {
 
           <div className="grid wrap">
             <div className="unit whole">
-              <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnText="ADD NEW" style={{ textAlign: 'center' }}>
+              <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass='btn-primary' btnText="ADD NEW"  btnStyle={{display:'block', margin: 'auto'}}>
                 <div >
                   <div className="grid wrap narrow">
                     <div className="unit whole">
@@ -116,6 +115,9 @@ class Timesheet extends Component {
             <div className="grid wrap">
               <div className="unit whole">
                 <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
+              </div>
+              <div className="unit whole" style={{margin:'absolute'}}>              
+              <img src={require("../img/day-off.png")} style={{margin:'0 auto',display:'block'}} />
               </div>
             </div>
 

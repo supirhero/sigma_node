@@ -37,8 +37,16 @@
    color: #65bdf4;
 }
 
-.not-started{
+.on-hold{
   color: #777777;
+}
+
+.due-in{
+  color: #ffea73;
+}
+
+.overdue{
+  color: #cb0000;
 }
 
 .fa-question-circle-o{
@@ -51,3 +59,32 @@
   
 }
 
+.pagination {
+  /* Rectangle 4: */
+  background: #f57556;
+  border-radius: 5px;
+  outline: none;
+  margin:7px;
+  border: none;
+  color: white;
+  display: inline-block;
+  padding: 10px 15px;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
+  font-size: 15px;
+}
+
+.arrow {
+  /* Rectangle 4: */
+  background: white;
+  border-radius: 5px;
+  outline: none;
+  margin:7px;
+  border: 1px #f57556 solid;
+  color: #f57556;
+  display: inline-block;
+  padding: 9px 14px;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
+  font-size: 15px;
+}

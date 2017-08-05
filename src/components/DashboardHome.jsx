@@ -31,7 +31,7 @@ class DashboardHome extends Component {
                     </div>
                   </div>
                   <div className='unit three-fifths'>
-                    <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>
+                    <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>                   
                     <small>Admin, Project Manager</small>
                     <ul>
                       <li>
