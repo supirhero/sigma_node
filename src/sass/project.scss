@@ -12,3 +12,32 @@
     }
   }
 }
+
+.project-workplan {
+  .tab {
+    small {
+      color : #ccc;
+    }
+    .status-total {
+      font-weight: 400;
+      font-size: 24px;
+    }
+  }
+}
+
+
+.table.workplan {
+  width: 100%;
+  th:first-child {
+  padding-left:20px;
+  padding-right:0;
+}
+  th {
+    text-align: left;
+    font-family: 'lato', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+
+    color: #777777;
+  }
+}

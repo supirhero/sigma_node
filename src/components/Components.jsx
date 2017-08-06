@@ -412,3 +412,37 @@ export class TableNew extends Component {
     )
   }
 }
+
+export class WorkplanTable extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false,
+    };
+  }
+  render(){
+    return (
+          this.props.data.map((value,index) => {
+            return(
+              <tbody>
+                <tr key={index} onClick={
+                  e => {
+                    this.setState({clicked:true})
+                    e.preventDefault()
+                    }
+                  }>
+                  <td style={{paddingLeft: '40px'}}>{value.task}</td>
+                  <td>{value.work}</td>
+                  <td>{value.work_total}</td>
+                  <td>{value.duration}</td>
+                  <td>{value.start_date}</td>
+                  <td>{value.end_date}</td>
+                  <td>{value.work_complete}</td>
+                  <td>{value.resources}</td>
+              </tr>
+            </tbody>
+          )
+        })
+    )
+  }
+}
