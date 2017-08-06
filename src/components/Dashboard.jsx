@@ -36,8 +36,7 @@ class Dashboard extends Component {
                 <div className='navbar'>
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
-                      <ul>                        
-                        <div id='prouds-logo'> </div> 
+                      <ul>                                               
                         <li><a onClick={
                           e => {
                             browserHistory.push('/')
