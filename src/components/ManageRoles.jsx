@@ -21,7 +21,7 @@ class ManageRoles extends Component {
       {name:'Download Report'},
       {name:'Approve re-baseline'},
     ]
-    
+
     const ProjectLevel = [
 			{name:'Upload and delete workplan'},
       {name:'Assign Task'},
@@ -38,13 +38,13 @@ class ManageRoles extends Component {
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
 							<div className="table-wrap">
-							
+
                 <div className="unit one-quarter">
                   <Header text="Roles / Type of User" style={{ display: 'inline-block' }} />
 								</div>
-								
+
                 <div className="unit three-quarters">
-                  <PopUp id="createRole" dividerText="CREATE ROLE" btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
+                  <PopUp id="createRole" dividerText="CREATE ROLE" btnText="ADD NEW" btnClass='btn-primary' style={{ display: 'inline-block', marginLeft: '35px' }}>
                     <div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
@@ -59,11 +59,11 @@ class ManageRoles extends Component {
 
                       <div className="grid wrap narrow pop-container">
                         <div className="unit whole">
-                          <small>PRIVILEGES</small>                          
+                          <small>PRIVILEGES</small>
                         </div>
                       </div>
 
-                      
+
                       <div className="grid wrap narrow">
                         <div className="unit half">
                           <small>IN BUSINESS UNIT LEVEL</small>
@@ -71,7 +71,7 @@ class ManageRoles extends Component {
                         <div className="unit half">
                           <div className="unit one-third">
                             <small >ALL BU</small>
-                          </div>  
+                          </div>
                           <div className="unit one-third">
                             <small >ONLY BU</small>
                           </div>
@@ -91,7 +91,7 @@ class ManageRoles extends Component {
                             <div className="unit half">
                               <div className="unit one-third">
                                 <small>box</small>
-                              </div>  
+                              </div>
                               <div className="unit one-third" >
                                 <small >box</small>
                               </div>
@@ -99,7 +99,7 @@ class ManageRoles extends Component {
                                 <small>box</small>
                               </div>
                             </div>
-                          </div>                            
+                          </div>
                           )
                         })
                       }
@@ -108,14 +108,14 @@ class ManageRoles extends Component {
                         <div className="unit half">
                           <small>IN PROJECT LEVEL</small>
                         </div>
-                        
+
                         <div className="unit half">
                           <div className="unit one-third" style={{visibility:'hidden'}}>
                             .
                           </div>
                           <div className="unit one-third">
                             <small>CAN</small>
-                          </div>  
+                          </div>
                           <div className="unit one-third">
                             <small>CAN'T</small>
                           </div>
@@ -132,7 +132,7 @@ class ManageRoles extends Component {
                             <div className="unit half">
                               <div className="unit one-third" style={{visibility:'hidden'}}>
                                 .
-                              </div>  
+                              </div>
                               <div className="unit one-third" >
                                 <small>box</small>
                               </div>
@@ -140,13 +140,13 @@ class ManageRoles extends Component {
                                 <small>box</small>
                               </div>
                             </div>
-                          </div>                            
+                          </div>
                           )
                         })
                       }
-                      
 
-                      
+
+
 
 
                       <div className="grid wrap narrow">
@@ -181,10 +181,10 @@ class ManageRoles extends Component {
 										{value:'lorem ipsum dolor sit amet, consectur adi'}
                   ]},
                   ]}>
-                </TableNew>       
-                
+                </TableNew>
+
                 </div>
-								
+
               </div>
             </div>
           </div>
