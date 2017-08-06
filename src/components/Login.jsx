@@ -99,7 +99,7 @@ class Login extends Component {
                 <input></input>
                 <button className='btn-primary' type='submit'>SIGN IN</button>
                 <a onClick={()=> {
-                  // browserHistory.replace('/auth/register')
+                  browserHistory.replace('/auth/register')
                 }}>Register</a>
               </form>
 
