@@ -40,6 +40,7 @@ import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSpiCpi from './ProjectSpiCpi.jsx'
 import ProjectSCurve from './ProjectSCurve.jsx'
 
+
 import Dataset from './Dataset.jsx'
 import DatasetUser from './DatasetUser.jsx'
 import DatasetCustomer from './DatasetCustomer.jsx'
@@ -111,6 +112,8 @@ render(
           <Route path='workplan' component={ProjectWorkplan}></Route>
           <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
           <Route path='s-curve' component={ProjectSCurve}></Route>
+          <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
+
         </Route>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>
@@ -138,7 +141,7 @@ render(
 
         <Route path='manage' component={ManageRoleAccess}>
           <IndexRoute component={ManageRoles} />
-          <Route path='access' component={ManageAccess} />      
+          <Route path='access' component={ManageAccess} />
         </Route>
 
 
