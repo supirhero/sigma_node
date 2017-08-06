@@ -180,7 +180,7 @@ class ReportsOverview extends Component {
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
-
+                <Checkbox id='test1' label='BSD' group='working' />
               </div>
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>

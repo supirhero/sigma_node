@@ -6,7 +6,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, TimeSheetTimeButton, PopUp, Select, Input } from './components.jsx';
 
-
 class Timesheet extends Component {
   render() {
     return (
@@ -47,7 +46,7 @@ class Timesheet extends Component {
 
           <div className="grid wrap">
             <div className="unit whole">
-              <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnText="ADD NEW" style={{ textAlign: 'center' }}>
+              <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass='btn-primary' btnText="ADD NEW"  btnStyle={{display:'block', margin: 'auto'}}>
                 <div >
                   <div className="grid wrap narrow">
                     <div className="unit whole">
@@ -117,6 +116,9 @@ class Timesheet extends Component {
               <div className="unit whole">
                 <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
               </div>
+              <div className="unit whole" style={{margin:'absolute'}}>              
+              <img src={require("../img/day-off.png")} style={{margin:'0 auto',display:'block'}} />
+              </div>
             </div>
 
           </TabPanel>
@@ -152,9 +154,28 @@ class Timesheet extends Component {
                       <medium><b>WAITING FOR APPROVAL</b></medium>
                     </div>
                   </div>
-                </div>
+                </div>  
+                
+                <div className="card project">
+                  <small>4:55 PM</small>
+                  <small className="project-info" >
+                  Project <a href="">Transaction Based Managed Services 2017</a>
+                    <p>(<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra</p>
+                    <p>left a <b>Timesheet UI #1</b> message</p>
+                    <p>"Ini interface yang lama seperti ini ya"</p>
+                  </small>
+                  <div className="grid wrap" style={{ float: 'right' }}>
+                    <div className="unit whole" >
+                      <medium style={{display:'inline-block'}}>
+                        <a href="">RE-SUBMIT TIMESHEET</a>
+                      </medium>    
+                      <medium style={{display:'inline-block',marginLeft:'50px'}}><b>DENIED</b></medium>
+                    </div>
+                  </div>
+                </div>  
               </div>
             </div>
+            
           </TabPanel>
         </Tabs>
       </div>

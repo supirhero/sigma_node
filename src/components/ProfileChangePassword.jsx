@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 
+import {Input} from './Components.jsx'
 
 
 
@@ -16,14 +17,10 @@ class ProfileChangePassword extends Component {
       return(
             <div className='grid wrap '>
               <div className='unit whole'>
-                <h2 className='input-desc'>OLD PASSWORD</h2>
-                <input></input>
-                <h2 className='input-desc'>NEW PASSWORD</h2>
-                <input></input>
-                <h2 className='input-desc'>CONFIRM PASSWORD</h2>
-                <input></input>
+               <Input inputName='OLD PASSWORD' />
+               <Input inputName='NEW PASSWORD' />
+               <Input inputName='CONFIRM PASSWORD' />
                 <button style={{marginTop :'50px'}} className='btn-primary' type='submit'>CHANGE PASSWORD</button>
-
               </div>
 
 

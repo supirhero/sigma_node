@@ -59,9 +59,10 @@ class ProjectActivities extends Component {
               </div>
               <div className="grid wrap">
                 <div className="unit whole" style={{marginLeft:'95px'}}>
-                  <small>Tue,Jun 6 at 4:55 PM via web</small>
-                  <medium style={{display:'inline',marginLeft:'37%'}}>
-                    <a href="">RE-SUBMIT TIMESHEET</a>
+                  <small style={{display:'inline-block',marginLeft:'50px'}}>Tue,Jun 6 at 4:55 PM via web</small>
+                  <medium style={{display:'inline-block',marginLeft:'70px'}}>
+                    <a>DENY</a>
+                    <a style={{marginLeft:'30px'}}>APPROVE</a>
                   </medium>
                 </div>
               </div>

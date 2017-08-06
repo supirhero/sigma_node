@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { routerMiddleware, push } from 'react-router-redux'
 
-
+import {Input} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {getData} from './actions.jsx'
 
@@ -15,8 +15,14 @@ class Login extends Component {
         <div className='grid wrap'>
           <div className='unit whole'>
             <div className='card shadow login' style={{padding:'0'}}>
-            <div className='unit two-fifths no-gutters'>
-              <div id='picture'></div>
+            <div className='unit two-fifths no-gutters' style={{height:'100%'}}>
+              <span style={{position:'relative'}}>
+                <div id='picture'>
+                  <img src={require('../img/ProuDS-logo-clean.png')} id='prouds-logo-big'/>                  
+                  <small>Project Management &</small>
+                  <small>Resource Delivery System</small>
+                </div>                
+              </span>
             </div>
             <div className='unit three-fifths'>
               <div className='margin'>
@@ -93,14 +99,15 @@ class Login extends Component {
                     e.preventDefault()
                   }
                 }>
-                <h2 className='input-desc'>USERNAME</h2>
-                <input></input>
-                <h2 className='input-desc'>PASSWORD</h2>
-                <input></input>
-                <button className='btn-primary' type='submit'>SIGN IN</button>
-                <a onClick={()=> {
+
+                <Input inputName='USERNAME' />
+                <Input inputName='PASSWORD' />                
+                <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
+                <medium>Or <a onClick={()=> {
                   browserHistory.replace('/auth/register')
-                }}>Register</a>
+                }}>Register</a> </medium>
+                <medium style={{marginTop:'67px',marginLeft:'40px'}}><a>download Mobile PRouDS</a></medium>
+
               </form>
 
             </div>

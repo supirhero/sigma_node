@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+import {Input} from './Components.jsx'
 
 class RegisterSigma extends Component {
   render() {
@@ -11,22 +12,20 @@ class RegisterSigma extends Component {
       <form>
         <div className='grid'>
           <div className='unit half'>
-            <h2 className='input-desc'>NIK</h2>
-            <input></input>
-            <h2 className='input-desc'>FULL NAME</h2>
-            <input></input>
+            <Input inputName="NIK" />
+            <Input inputName="FULL NAME" />          
           </div>
           <div className='unit half'>
-            <h2 className='input-desc'>EMAIL ADDRESS</h2>
-            <input></input>
-            <h2 className='input-desc'>PASSWORD</h2>
-            <input></input>
+            <Input inputName="EMAIL ADDRESS" />
+            <Input inputName="PASSWORD" />              
           </div>
         </div>
         <div className='grid'>
           <div className='unit whole'>
-            <button className='btn-primary' type ='submit'>REGISTER</button>
-
+            <button className='btn-primary' type ='submit' style={{display:'inline-block'}}>REGISTER</button>
+            <medium>Or back to <a onClick={()=> {
+                  browserHistory.replace('/auth')
+                }}>Login Page</a> </medium>
           </div>
 
         </div>
