@@ -59,11 +59,10 @@ export function authenticate() {
 
 }
 class Auth extends Component {
-
-
     render(){
       return(
         <div>
+          <div id='telkom-sigma-logo' />             
           {this.props.children}
         </div>
       )

@@ -15,10 +15,12 @@ class Login extends Component {
         <div className='grid wrap'>
           <div className='unit whole'>
             <div className='card shadow login' style={{padding:'0'}}>
-            <div className='unit two-fifths no-gutters'>
+            <div className='unit two-fifths no-gutters' style={{height:'100%'}}>
               <span style={{position:'relative'}}>
                 <div id='picture'>
-                  <img src={require('../img/logo-prouds@2x.png')} id='prouds-logo-big'/>
+                  <img src={require('../img/ProuDS-logo-clean.png')} id='prouds-logo-big'/>                  
+                  <small>Project Management &</small>
+                  <small>Resource Delivery System</small>
                 </div>                
               </span>
             </div>
@@ -101,8 +103,9 @@ class Login extends Component {
                 <Input inputName='PASSWORD' />                
                 <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
                 <medium>Or <a onClick={()=> {
-                  // browserHistory.replace('/auth/register')
+                  browserHistory.replace('/auth/register')
                 }}>Register</a> </medium>
+                <medium style={{marginTop:'67px',marginLeft:'40px'}}><a>download Mobile PRouDS</a></medium>
                 
               </form>
 

@@ -154,9 +154,28 @@ class Timesheet extends Component {
                       <medium><b>WAITING FOR APPROVAL</b></medium>
                     </div>
                   </div>
-                </div>
+                </div>  
+                
+                <div className="card project">
+                  <small>4:55 PM</small>
+                  <small className="project-info" >
+                  Project <a href="">Transaction Based Managed Services 2017</a>
+                    <p>(<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra</p>
+                    <p>left a <b>Timesheet UI #1</b> message</p>
+                    <p>"Ini interface yang lama seperti ini ya"</p>
+                  </small>
+                  <div className="grid wrap" style={{ float: 'right' }}>
+                    <div className="unit whole" >
+                      <medium style={{display:'inline-block'}}>
+                        <a href="">RE-SUBMIT TIMESHEET</a>
+                      </medium>    
+                      <medium style={{display:'inline-block',marginLeft:'50px'}}><b>DENIED</b></medium>
+                    </div>
+                  </div>
+                </div>  
               </div>
             </div>
+            
           </TabPanel>
         </Tabs>
       </div>

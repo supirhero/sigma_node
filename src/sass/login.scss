@@ -1,18 +1,36 @@
+#telkom-sigma-logo{
+  width:300px;
+  height:89px;
+  margin-bottom: 30px;
+  margin-left: 660px;
+  margin-top: 121px;
+  background-image: url('../img/telkom-sigma-color.png');
+  }
+
 .card.login {
   width:700px;
   margin: 0 auto;
-  // height: 500px;
+  height: 500px;
   #picture {
     width: 100%;
-    height: 500px;
+    height: 100%;
     background-image: url('../img/log-in-image.png');
     
+    small{
+      display:inline-block;
+      color: #ffffff;
+      font-family: 'lato',sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: 1.3px;    
+      margin-left: 33px;
+    }
   }
 
   #prouds-logo-big{   
-    margin-top:370px;
-    margin-left: 20px;
-    width: 90%;
+    margin-top:372px;
+    margin-left: 33px;
+    width: 70%;
     
   }
 
@@ -42,6 +60,11 @@
     medium{
       display: inline-block;
       margin-left: 20px;
+      font-family: 'lato',sans-serif;
+      font-size: 16px;
+      line-height: 1;
+      letter-spacing: 1px;
+
     }
 
   }
