@@ -85,14 +85,8 @@ class Login extends Component {
                       params: {user_id: 'gina.nufus@sigma.co.id',
                             password: 'S201502162',
                             fpid : '160927084946'}
-                          },
-                          success: function (response) {
-                            console.log('response2', response);
-                          },
-                          error:function(error) {
-
-                          }}),
-                          browserHistory.replace('/')
+                          }})
+                      browserHistory.replace('/')
 
                     // console.log('store last', store.getState());
 

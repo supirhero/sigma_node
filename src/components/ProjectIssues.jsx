@@ -17,7 +17,7 @@ class ProjectIssues extends Component {
             </div>
           </div>
           <div className='grid padding-left'>
-              <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" style={{ margin: '0 auto' }}>
+              <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" btnClass='btn-primary' btnStyle={{ display: 'block', margin: '0 auto' }}>
               <div>
                 <div className="grid wrap narrow">
                   <div className="unit whole">
@@ -58,7 +58,7 @@ class ProjectIssues extends Component {
               </div>
             </PopUp>
 
-            
+
           </div>
           <div className='grid padding-left'>
             <div className='unit whole'>
