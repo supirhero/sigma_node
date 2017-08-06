@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 
+import {Input} from './Components.jsx'
 
 
 
@@ -20,26 +21,19 @@ class ProfileBasicInformation extends Component {
               <div className='pic-wrapper'>
               </div>
             </div>
-            <div className='unit two-thirds'>
+            <div className='unit two-thirds'>           
               <button className='btn-primary'>UPLOAD NEW PICTURE</button>
-
+              <small style={{marginTop:'10px'}}><i>max file size is 1 MB</i></small>
 
             </div>
           </div>
           <div className='grid wrap'>
           <div className='unit whole'>
-            <h2 className='input-desc'>USER ID</h2>
-            <input></input>
-            <h2 className='input-desc'>ROLE</h2>
-            <input></input>
-            <h2 className='input-desc'>FULL NAME</h2>
-            <input></input>
-            <h2 className='input-desc'>EMAIL ADRESS</h2>
-            <input></input>
-            <h2 className='input-desc'>PHONE NUMBER</h2>
-            <input></input>
-            <h2 className='input-desc'>ADDRESS</h2>
-            <input></input>
+            <Input inputName='USER ID' />
+            <Input inputName='FULL NAME' />
+            <Input inputName='EMAIL ADDRESS' />
+            <Input inputName='PHONE NUMBER' />
+            <Input inputName='ADDRESS' />                        
             <button style={{marginTop:'62px'}} className='btn-primary'>SAVE</button>
           </div>
         </div>

@@ -482,3 +482,63 @@ Tabs {
     list-style:none
   }
 }
+
+
+.checkbox-button {
+  label {
+        font-family: 'lato', sans-serif;
+        font-weight: 300;
+        color: #777777;
+        letter-spacing: 1px;
+        font-size: $font-size
+      }
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+    [type="checkbox"]:checked + label,
+    [type="checkbox"]:not(:checked) + label
+    {
+        position: relative;
+        padding-left: 36px;
+        cursor: pointer;
+        line-height: 25px;
+        display: inline-block;
+        color: #666;
+    }
+    [type="checkbox"]:checked + label:before,
+    [type="checkbox"]:not(:checked) + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        border: solid 1px #777777 ;
+        border-radius: 5px;
+        background: transparent;
+    }
+    [type="checkbox"]:checked + label:after,
+    [type="checkbox"]:not(:checked) + label:after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background: url('../img/check.png') no-repeat center center;
+        position: absolute;
+        top: 0px;
+        left: 2px;        
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    [type="checkbox"]:not(:checked) + label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    [type="checkbox"]:checked + label:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}

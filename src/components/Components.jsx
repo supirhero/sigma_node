@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import FileInput from 'react-file-input';
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
-import {Table as MaterialTable, Checkbox as MaterialCheckbox, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
+import {Table as MaterialTable, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 import store from '../reducers/combineReducers.jsx'
 
 
@@ -121,6 +121,17 @@ export class RadioButton extends Component {
        <input type="radio" id={this.props.id} name={this.props.group}/>
        <label htmlFor={this.props.id}>{this.props.label}</label>
      </p>
+    )
+  }
+}
+
+export class Checkbox extends Component{
+  render(){
+    return (
+      <p className='checkbox-button' style={this.props.style}>
+        <input type='checkbox' id={this.props.id} name={this.props.group} />
+        <label htmlFor={this.props.id}>{this.props.label}</label>
+      </p>
     )
   }
 }
@@ -365,23 +376,6 @@ export class ProjectHeader extends Component {
   }
 }
 
-export class Checkbox extends Component {
-  render(){
-    return(
-      <div>
-      <MuiThemeProvider>
-         <div style={{maxWidth:'250px'}}>
-          <MaterialCheckbox
-            label={this.props.label}
-            style={{
-
-            }}   />
-          </div>
-          </MuiThemeProvider>
-      </div>
-    )
-  }
-}
 
 export class InputFile extends Component {
 
