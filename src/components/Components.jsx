@@ -422,9 +422,10 @@ export class WorkplanTable extends Component {
   }
   render(){
     return (
+      <tbody>
+          {
           this.props.data.map((value,index) => {
             return(
-              <tbody>
                 <tr key={index} onClick={
                   e => {
                     this.setState({clicked:true})
@@ -440,9 +441,10 @@ export class WorkplanTable extends Component {
                   <td>{value.work_complete}</td>
                   <td>{value.resources}</td>
               </tr>
-            </tbody>
           )
         })
+      }
+    </tbody>
     )
   }
 }
