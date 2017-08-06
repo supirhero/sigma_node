@@ -36,7 +36,8 @@ class Dashboard extends Component {
                 <div className='navbar'>
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
-                      <ul>                                               
+                      <div id='prouds-logo'></div>
+                      <ul>
                         <li><a onClick={
                           e => {
                             browserHistory.push('/')
@@ -48,6 +49,8 @@ class Dashboard extends Component {
                             e.preventDefault()
                           }}>REPORTS</a></li>
                       </ul>
+                      <div id='sigma-logo'></div>
+
                         <Menu style={{display:'inline'}}>
                           <MenuSection>
                             <MenuHeader title='Kara Cray' subTitle='@karagay'/>
@@ -68,7 +71,7 @@ class Dashboard extends Component {
                             <MenuItem title='Master Data' onClick={
                               e => {
                                 browserHistory.push('/dataset')
-                              }  
+                              }
                             }/>
                             <MenuItem title='Manage Role & Access' onClick={
                               e => {
@@ -88,7 +91,8 @@ class Dashboard extends Component {
                             } title='LogOut'/>
                           </MenuSection>
 
-                        </Menu>                   
+                        </Menu>
+
                     </div>
                   </div>
 
