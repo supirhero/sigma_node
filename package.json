@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "production": "cross-env NODE_ENV=production npm start",
     "mock": "cross-env NODE_ENV=mock webpack --watch",
-    "dummy":"cross-env NODE_ENV=mock webpack-dev-server  --hot --inline --colors",
+    "dummy": "cross-env NODE_ENV=mock webpack-dev-server  --hot --inline --colors",
     "build": "npm start",
     "development": "npm start"
   },
