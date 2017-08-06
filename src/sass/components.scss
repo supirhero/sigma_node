@@ -140,7 +140,7 @@ input {
   font-family: 'lato', sans-serif;
   font-size: 15px;
 }
-.input-desc {
+.input-name {
   font-family: 'lato', sans-serif;
   font-weight: 300;
   margin-top: 25px;
@@ -148,6 +148,20 @@ input {
   letter-spacing: 1px;
   font-size: $font-size;
   float:left;
+  width: 100%;
+}
+.input-desc {
+  font-family: 'lato', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  display: block;
+  margin-top: 0;
+  color: #777777;
+  letter-spacing: 1px;
+  font-size: $font-size;
+  float:left;
+  width: 100%;
+
 }
 
 .navbar {
@@ -228,6 +242,7 @@ input {
     right: 0;
   }
   button {
+    top: 0;
     position: absolute;
   }
   h2 {
@@ -468,6 +483,7 @@ Tabs {
   }
 }
 
+
 th {
   padding: 20px 0;
   text-align: left;
@@ -505,4 +521,5 @@ th {
 
 
 }
+
 

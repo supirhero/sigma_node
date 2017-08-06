@@ -38,6 +38,8 @@ import ProjectDocsAndFiles from './ProjectDocsAndFiles.jsx'
 import ProjectIssues from './ProjectIssues.jsx'
 import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSpiCpi from './ProjectSpiCpi.jsx'
+import ProjectSCurve from './ProjectSCurve.jsx'
+
 import Dataset from './Dataset.jsx'
 import DatasetUser from './DatasetUser.jsx'
 import DatasetCustomer from './DatasetCustomer.jsx'
@@ -48,6 +50,10 @@ import DatasetBU from './DatasetBu.jsx'
 import ManageRoleAccess from './ManageRoleAccess.jsx'
 import ManageRoles from './ManageRoles.jsx'
 import ManageAccess from './ManageAccess.jsx'
+
+
+
+
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
@@ -104,6 +110,7 @@ render(
           <Route path='issues' component={ProjectIssues}></Route>
           <Route path='workplan' component={ProjectWorkplan}></Route>
           <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
+          <Route path='s-curve' component={ProjectSCurve}></Route>
         </Route>
         <Route path='profile' component={Profile}>
           <IndexRoute component={ProfileBasicInformation}/>

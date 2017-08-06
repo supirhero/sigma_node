@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, Header, ProjectHeader, Input, BarChart, Table } from './Components.jsx';
+import { Divider, Header, ProjectHeader, Input, BarChart, Table, InputFile } from './Components.jsx';
 
 
 class ProjectSpiCpi extends Component {
@@ -27,7 +27,7 @@ class ProjectSpiCpi extends Component {
                 <TabPanel>
                   <div className="grid padding-left">
                     <div className="unit whole">
-                      <BarChart
+                      <BarChart fill= "#D2E5FA"
                         data={[
 													{ name: 'W2', value: 20 },
 													{ name: 'W4', value: 10 },
@@ -46,55 +46,28 @@ class ProjectSpiCpi extends Component {
                     <div className="unit whole">
                       <Table
                         tableHeader={[
-													{ value: 'Name' },
-													{ value: 'Email' },
-													{ value: 'Entry' },
-													{ value: 'Entry Status' },
-													{ value: 'Utilization' },
-													{ value: 'Utilization Status' },
+													{ value: 'Time Period' },
+													{ value: 'EV' },
+													{ value: 'AC' },
+													{ value: 'CPI' }
                         ]}
                         tableData={[
                           {
-                            name: 'Dwi Syifa',
-                            email: 'dwi.syifa@sigma.co.id',
-                            entry: '10',
-                            entryStatus: 'NORMAL',
-                            utilization: '20',
-                            utilizationStatus: 'NORMAL',
-
+                            column : [
+                              {value : 'WEEK 1 (APRIL 1 2017 - APRIL 5 2017)'},
+                              {value : '102'},
+                              {value : '112'},
+                              {value : '0.92'},
+                            ]
                           },
                           {
-                            name: 'Ivan Gita Pribadi',
-                            email: 'ivan.gita.pribadi@sigma.co.id',
-                            entry: '100',
-                            entryStatus: 'NORMAL',
-                            utilization: '20',
-                            utilizationStatus: 'NORMAL',
-                          },
-                          {
-                            name: 'Paula Cintya',
-                            email: 'paula.cintya@sigma.co.id',
-                            entry: '80',
-                            entryStatus: 'NORMAL',
-                            utilization: '150',
-                            utilizationStatus: 'NORMAL',
-                          },
-                          {
-                            name: 'Ivan Gita Pribadi',
-                            email: 'ivan.gita.pribadi@sigma.co.id',
-                            entry: '100',
-                            entryStatus: 'NORMAL',
-                            utilization: '20',
-                            utilizationStatus: 'NORMAL',
-                          },
-                          {
-                            name: 'Ivan Gita Pribadi',
-                            email: 'ivan.gita.pribadi@sigma.co.id',
-                            entry: '100',
-                            entryStatus: 'NORMAL',
-                            utilization: '20',
-                            utilizationStatus: 'NORMAL',
-                          },
+                            column : [
+                              {value : 'WEEK 2 (APRIL 1 2017 - APRIL 5 2017)'},
+                              {value : '104'},
+                              {value : '152'},
+                              {value : '0.12'},
+                            ]
+                          }
                         ]}
                       />
                     </div>
@@ -140,7 +113,6 @@ class ProjectSpiCpi extends Component {
                             entryStatus: 'NORMAL',
                             utilization: '20',
                             utilizationStatus: 'NORMAL',
-
                           },
                           {
                             name: 'Ivan Gita Pribadi',

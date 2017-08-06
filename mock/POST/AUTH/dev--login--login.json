@@ -13,26 +13,31 @@
     "bu_name": "IT Operation services",
     "project_list": [
       {
+        "project_id": 1,
         "project_name":"Penyelesaian proyek 1",
         "project_status":"Complete",
         "project_complete":100
       },
       {
+        "project_id": 2,
         "project_name":"Penyelesaian proyek 2",
         "project_status":"Under",
         "project_complete":40
       },
       {
+        "project_id": 3,
         "project_name":"Penyelesaian proyek 3",
         "project_status":"Overdue",
         "project_complete":60
       },
       {
+        "project_id": 4,
         "project_name":"Pembuatan 5",
         "project_status":"Overdue",
         "project_complete":20
       },
       {
+        "project_id": 5,
         "project_name":"test",
         "project_status":"Behind",
         "project_complete":30
@@ -43,26 +48,31 @@
   "bu_name": "Cross-Industry Application Services",
   "project_list": [
     {
+      "project_id": 6,
       "project_name":"Penyelesaian proyek 1",
       "project_status":"Complete",
       "project_complete":100
     },
     {
+      "project_id": 7,
       "project_name":"Penyelesaian proyek 2",
       "project_status":"Under",
       "project_complete":40
     },
     {
+      "project_id": 8,
       "project_name":"Penyelesaian proyek 3",
       "project_status":"Overdue",
       "project_complete":60
     },
     {
+      "project_id": 9,
       "project_name":"Pembuatan 5",
       "project_status":"Overdue",
       "project_complete":20
     },
     {
+      "project_id": 10,
       "project_name":"test",
       "project_status":"Behind",
       "project_complete":30
