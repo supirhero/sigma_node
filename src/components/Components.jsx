@@ -353,10 +353,10 @@ export class TableNew extends Component{
               this.props.tableHeader.map((value,index)=>(
                 <th>{value.value}</th>
               ))
-            }                    
+            }
           </tr>
         </thead>
-      
+
         <tbody>
             {
               this.props.tableData.map((row,index)=>(
@@ -365,11 +365,11 @@ export class TableNew extends Component{
                     row.column.map((column,index)=>(
                       <td>{column.value}</td>
                     ))
-                  }                                
+                  }
                 </tr>
               ))
             }
-        
+
         </tbody>
       </table>
     )
