@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart, Checkbox, Table } from './Components.jsx';
+import { Select , Input, BarChart, LineChart, Checkbox, TableNew } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -107,59 +107,135 @@ class ReportsOverview extends Component {
               <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
-                 <Table
+                 <TableNew
 									tableHeader={[
-										{value:'Name'},
-										{value:'Email'},
-                    {value:'Entry'},
-                    {value:'Entry Status'},
-                    {value:'Utilization'},
-                    {value:'Utilization Status'},
+										{value:'Business Unit Name'},
+										{value:'EV'},
+                    {value:'PV'},
+                    {value:'AC'},
+                    {value:'SPI'},
+                    {value:'CPI'},
 									]} 
-									tableData = {[
-										{
-											name: 'Dwi Syifa',
-											email: 'dwi.syifa@sigma.co.id',
-                      entry:'10',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
+									tableData = {[{column:[                
+										
+										  {value: 'Banking Solution Delivery'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
 
-										},
-										{
-											name : 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Paula Cintya',
-											email: 'paula.cintya@sigma.co.id',
-                      entry:'80',
-                      entryStatus:'NORMAL',
-                      utilization:'150',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
+										]},{column:[                
+										
+										  {value: 'Corporate Effectiveness Management'},
+										  {value: '1023.73'},
+                      {value:'2314.25'},
+                      {value:'4381.21'},
+                      {value:'0.46'},
+                      {value:'0.52'},
+										]},{column:[                
+										
+										  {value: 'Cross-Industry Solution Delivery'},
+										  {value: '1014.96'},
+                      {value:'4218.23'},
+                      {value:'3213.42'},
+                      {value:'0.81'},
+                      {value:'1.06'},
+
+										]},{column:[                
+										
+										  {value: 'Data Center Ecosystem Solutions'},
+										  {value: '2632.21'},
+                      {value:'3212.21'},
+                      {value:'4324.25'},
+                      {value:'0.74'},
+                      {value:'0.8'},
+
+										]},{column:[                
+										
+										  {value: 'Financial Solution Delivery'},
+										  {value: '3213.23'},
+                      {value:'5424.13'},
+                      {value:'3213.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Graha Telkomsigma'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'IT & Property Business Solution'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Network & IT Security Management'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Sigma Metrasys Solution'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Sigma Solusi Integrasi'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Signet Pratama'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Telkom Delivery & MO'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]},{column:[                
+										
+										  {value: 'Telkomsel Business Solution, Delivery & MO'},
+										  {value: '9682.73'},
+                      {value:'6372.25'},
+                      {value:'6748.29'},
+                      {value:'1.52'},
+                      {value:'1.52'},
+
+										]}
+										
 									]}>
-									</Table>
+									</TableNew>
                 </div>
               </div>
               </TabPanel>
