@@ -99,6 +99,7 @@ class Login extends Component {
                     e.preventDefault()
                   }
                 }>
+
                 <Input inputName='USERNAME' />
                 <Input inputName='PASSWORD' />                
                 <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
@@ -106,7 +107,7 @@ class Login extends Component {
                   browserHistory.replace('/auth/register')
                 }}>Register</a> </medium>
                 <medium style={{marginTop:'67px',marginLeft:'40px'}}><a>download Mobile PRouDS</a></medium>
-                
+
               </form>
 
             </div>
