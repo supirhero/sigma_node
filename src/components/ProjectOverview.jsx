@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, Header, ProjectHeader} from  './components.jsx'
+import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './components.jsx'
 
-import { Line} from 'react-progressbar.js'
+import { Line } from 'react-progressbar.js'
 
 
 class ProjectOverview extends Component {
@@ -131,6 +131,28 @@ class ProjectOverview extends Component {
                 </div>
 
               </div>
+            <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnClass='btn-primary' btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>
+              <div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Input inputName="LESSON LEARNT" />
+                  </div>
+                </div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Input inputName="CHANGE MANAGEMENT NUMBER" />
+                  </div>
+                </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> CLOSE PROJECT </button>
+                    </div>
+                  </div>
+
+              </div>
+            </PopUp>
+
             </div>
           </div>
 

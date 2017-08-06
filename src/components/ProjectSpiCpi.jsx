@@ -7,6 +7,7 @@ import store from '../reducers/combineReducers.jsx';
 import { Divider, Header, ProjectHeader, Input, BarChart, Table, InputFile, TableNew } from './Components.jsx';
 
 
+
 class ProjectSpiCpi extends Component {
   render() {
     return (
@@ -50,6 +51,7 @@ class ProjectSpiCpi extends Component {
 													{ value: 'EV' },
 													{ value: 'PV' },
 													{ value: 'SPI' }
+
                         ]}
                         tableData={[
                           {

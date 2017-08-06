@@ -35,7 +35,7 @@ class MyRecentActivities extends Component {
                 }}></Select>
           </div>
           <div className="unit one-third" >
-            <Select style={{width:'100%', display:'inline-block', float:'left'}} items={{
+            <Select style={{width:'225px', display:'inline-block', float:'right'}} items={{
                   items : [
                     {title : '2017'},
                     {title : '2016'}
@@ -43,7 +43,7 @@ class MyRecentActivities extends Component {
                 }}></Select>
           </div>
           <div className="unit one-third" >
-            <button className='btn-primary'style={{float:'right' , padding:'15px 90px'}}>PRINT</button>
+            <button className='btn-primary'style={{float:'right' , padding:'17px 90px'}}>PRINT</button>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ class MyRecentActivities extends Component {
         </div>
 
         <div className="grid wrap">
-          <div className="unit whole">
+          <div className="unit whole" style={{paddingBottom:'0'}}>
             <div className="card project">
 
               <div className="grid wrap">
@@ -138,7 +138,7 @@ class MyRecentActivities extends Component {
         </div>
 
         <div className="grid wrap">
-          <div className="unit whole">
+          <div className="unit whole" style={{paddingBottom:'0', paddingTop:'0'}}>
             <div className="card project">
 
               <div className="grid wrap">
@@ -183,7 +183,7 @@ class MyRecentActivities extends Component {
         </div>
 
         <div className="grid wrap">
-          <div className="unit whole">
+          <div className="unit whole"  style={{paddingBottom:'0', paddingTop:'0'}}>
             <div className="card project">
 
               <div className="grid wrap">
