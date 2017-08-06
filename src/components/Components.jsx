@@ -413,7 +413,107 @@ export class TableNew extends Component {
   }
 }
 
-export class WorkplanTable extends Component {
+export class WorkplanRow extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false,
+      working : false,
+      non_working : false
+
+    };
+  }
+  render(){
+    var value = this.props.data
+    return (
+      <tbody>
+        <tr onClick={
+          e => {
+            if (this.state.clicked) {
+              this.setState({clicked:false})
+            }
+            else {
+              this.setState({clicked:true})
+
+            }
+            e.preventDefault()
+          }
+        }>
+        <td style={{paddingLeft: '20px'}}>{value.task}</td>
+        <td>{value.work}</td>
+        <td>{value.work_total}</td>
+        <td>{value.duration}</td>
+        <td>{value.start_date}</td>
+        <td>{value.end_date}</td>
+        <td>{value.work_complete}</td>
+        <td>{value.resources}</td>
+      </tr>
+      {
+        this.state.clicked &&
+        <tr onClick={
+          e => {
+            if (this.state.working) {
+              this.setState({working:false})
+            }
+            else {
+              this.setState({working:true})
+
+            }
+            e.preventDefault()
+            }
+          }>
+          <td style={{paddingLeft: '40px'}}>{value.working_activity.task}</td>
+          <td>{value.working_activity.work}</td>
+          <td>{value.working_activity.work_total}</td>
+          <td>{value.working_activity.duration}</td>
+          <td>{value.working_activity.start_date}</td>
+          <td>{value.working_activity.end_date}</td>
+          <td>{value.working_activity.work_complete}</td>
+          <td>{value.working_activity.resources}</td>
+      </tr>
+      }
+      {
+        this.state.working && this.state.clicked &&
+        <ActivityRow data={value.working_activity}></ActivityRow>
+      }
+
+      {
+        this.state.clicked &&
+        <tr onClick={
+          e => {
+            if (this.state.non_working) {
+              this.setState({non_working:false})
+            }
+            else {
+              this.setState({non_working:true})
+
+            }
+            e.preventDefault()
+            }
+          }>
+          <td style={{paddingLeft: '40px'}}>{value.non_working_activity.task}</td>
+          <td>{value.non_working_activity.work}</td>
+          <td>{value.non_working_activity.work_total}</td>
+          <td>{value.non_working_activity.duration}</td>
+          <td>{value.non_working_activity.start_date}</td>
+          <td>{value.non_working_activity.end_date}</td>
+          <td>{value.non_working_activity.work_complete}</td>
+          <td>{value.non_working_activity.resources}</td>
+      </tr>
+      }
+
+
+
+      {
+        this.state.non_working && this.state.clicked &&
+        <ActivityRow data={value.non_working_activity}></ActivityRow>
+      }
+      </tbody>
+    )
+  }
+}
+
+export class ActivityRow extends Component {
   constructor(){
     super();
     this.state = {
@@ -421,30 +521,24 @@ export class WorkplanTable extends Component {
     };
   }
   render(){
+    var value = this.props.data
     return (
       <tbody>
-          {
-          this.props.data.map((value,index) => {
-            return(
-                <tr key={index} onClick={
-                  e => {
-                    this.setState({clicked:true})
-                    e.preventDefault()
-                    }
-                  }>
-                  <td style={{paddingLeft: '40px'}}>{value.task}</td>
-                  <td>{value.work}</td>
-                  <td>{value.work_total}</td>
-                  <td>{value.duration}</td>
-                  <td>{value.start_date}</td>
-                  <td>{value.end_date}</td>
-                  <td>{value.work_complete}</td>
-                  <td>{value.resources}</td>
-              </tr>
-          )
-        })
-      }
-    </tbody>
+        {
+          value.sub.map((value, index) => (
+            <tr>
+              <td style={{paddingLeft: '60px'}}>{value.task}</td>
+              <td>{value.work}</td>
+              <td>{value.work_total}</td>
+              <td>{value.duration}</td>
+              <td>{value.start_date}</td>
+              <td>{value.end_date}</td>
+              <td>{value.work_complete}</td>
+              <td>{value.resources}</td>
+            </tr>
+          ))
+        }
+      </tbody>
     )
   }
 }

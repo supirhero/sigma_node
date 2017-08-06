@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader, WorkplanTable} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, WorkplanRow} from  './Components.jsx'
 
 
 class ProjectWorkplan extends Component {
@@ -19,19 +19,73 @@ class ProjectWorkplan extends Component {
           end_date: '23 Apr 2017',
           complete: 0.41,
           resources: '2 people',
-          sub: [
-            {
-              task: 'Working Activity',
-              work: 258,
-              work_total: 55328,
-              duration: 12,
-              start_date: '08 Apr 2017',
-              end_date: '23 Apr 2017',
-              complete: 0.41,
-              resources: '2 people',
+          working_activity: {
+                task: 'Working Activity',
+                work: 258,
+                work_total: 55328,
+                duration: 12,
+                start_date: '08 Apr 2017',
+                end_date: '23 Apr 2017',
+                complete: 0.41,
+                resources: '2 people',
+                sub: [
+                  {
+                    task: 'Annual Working',
+                    work: 258,
+                    work_total: 55328,
+                    duration: 12,
+                    start_date: '08 Apr 2017',
+                    end_date: '23 Apr 2017',
+                    complete: 0.41,
+                    resources: '2 people',
+                  },
+                  {
+                    task: 'Overtime',
+                    work: 258,
+                    work_total: 55328,
+                    duration: 12,
+                    start_date: '08 Apr 2017',
+                    end_date: '23 Apr 2017',
+                    complete: 0.41,
+                    resources: '2 people',
+                  }
+                ]
+              },
+              non_working_activity: {
+                    task: 'Non Working Activity',
+                    work: 258,
+                    work_total: 55328,
+                    duration: 12,
+                    start_date: '08 Apr 2017',
+                    end_date: '23 Apr 2017',
+                    complete: 0.41,
+                    resources: '2 people',
+                    sub: [
+                      {
+                        task: 'Annual Leave',
+                        work: 258,
+                        work_total: 55328,
+                        duration: 12,
+                        start_date: '08 Apr 2017',
+                        end_date: '23 Apr 2017',
+                        complete: 0.41,
+                        resources: '2 people',
+                      },
+                      {
+                        task: 'Sick Leave',
+                        work: 258,
+                        work_total: 55328,
+                        duration: 12,
+                        start_date: '08 Apr 2017',
+                        end_date: '23 Apr 2017',
+                        complete: 0.41,
+                        resources: '2 people',
+                      }
+                    ]
+                  }
             },
             {
-              task: 'Non Working',
+              task: 'Transaction Aptitude 2018',
               work: 258,
               work_total: 55328,
               duration: 12,
@@ -39,10 +93,72 @@ class ProjectWorkplan extends Component {
               end_date: '23 Apr 2017',
               complete: 0.41,
               resources: '2 people',
-            }
+              working_activity: {
+                    task: 'Working Activity',
+                    work: 258,
+                    work_total: 55328,
+                    duration: 12,
+                    start_date: '08 Apr 2017',
+                    end_date: '23 Apr 2017',
+                    complete: 0.41,
+                    resources: '2 people',
+                    sub: [
+                      {
+                        task: 'Annual Working',
+                        work: 258,
+                        work_total: 55328,
+                        duration: 12,
+                        start_date: '08 Apr 2017',
+                        end_date: '23 Apr 2017',
+                        complete: 0.41,
+                        resources: '2 people',
+                      },
+                      {
+                        task: 'Overtime',
+                        work: 258,
+                        work_total: 55328,
+                        duration: 12,
+                        start_date: '08 Apr 2017',
+                        end_date: '23 Apr 2017',
+                        complete: 0.41,
+                        resources: '2 people',
+                      }
+                    ]
+                  },
+                  non_working_activity: {
+                        task: 'Non Working Activity',
+                        work: 258,
+                        work_total: 55328,
+                        duration: 12,
+                        start_date: '08 Apr 2017',
+                        end_date: '23 Apr 2017',
+                        complete: 0.41,
+                        resources: '2 people',
+                        sub: [
+                          {
+                            task: 'Annual Leave',
+                            work: 258,
+                            work_total: 55328,
+                            duration: 12,
+                            start_date: '08 Apr 2017',
+                            end_date: '23 Apr 2017',
+                            complete: 0.41,
+                            resources: '2 people',
+                          },
+                          {
+                            task: 'Sick Leave',
+                            work: 258,
+                            work_total: 55328,
+                            duration: 12,
+                            start_date: '08 Apr 2017',
+                            end_date: '23 Apr 2017',
+                            complete: 0.41,
+                            resources: '2 people',
+                          }
+                        ]
+                      }
+                }
           ]
-        }
-      ]
       return(
         <div className='project-workplan'>
           <div className='grid wrap'>
@@ -78,7 +194,7 @@ class ProjectWorkplan extends Component {
                   <div className='unit whole'>
                     <table className='table workplan'>
                       <thead>
-                        <Header style={{paddingLeft: '20px'}} text='Project Detail'/>
+                        <Header style={{padding: '20px 0 0 20px'}} text='Project Detail'/>
 
                         <tr>
                           <th>TASK</th>
@@ -91,8 +207,13 @@ class ProjectWorkplan extends Component {
                           <th>RESOURCES<br/></th>
                         </tr>
                       </thead>
-                        <WorkplanTable  data={workplan} >
-                        </WorkplanTable>
+                      {
+                      workplan.map((value,index) => {
+                        return(
+                          <WorkplanRow data={value}></WorkplanRow>
+                      )
+                    })
+                  }
 
                     </table>
                   </div>
