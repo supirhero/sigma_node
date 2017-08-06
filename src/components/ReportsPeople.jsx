@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter,Table } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter,Table, TableNew } from './Components.jsx';
 
 
 class ReportsPeople extends Component {
@@ -63,7 +63,7 @@ class ReportsPeople extends Component {
 							</div>
 							<div className="grid wrap">
 								<div className="unit whole">
-									<Table
+									<TableNew
 									tableHeader={[
 										{value:'Name'},
 										{value:'Email'},
@@ -72,50 +72,55 @@ class ReportsPeople extends Component {
                     {value:'Utilization'},
                     {value:'Utilization Status'},
 									]} 
-									tableData = {[
-										{
-											name: 'Dwi Syifa',
-											email: 'dwi.syifa@sigma.co.id',
-                      entry:'10',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
+									tableData = {[{column:[                
+										
+										  {value: 'Dwi Syifa'},
+										  {value: 'dwi.syifa@sigma.co.id'},
+                      {value:'10'},
+                      {value:'UNDER'},
+                      {value:'20'},
+                      {value:'UNDER'},
 
-										},
-										{
-											name : 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Paula Cintya',
-											email: 'paula.cintya@sigma.co.id',
-                      entry:'80',
-                      entryStatus:'NORMAL',
-                      utilization:'150',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
-										{
-											name: 'Ivan Gita Pribadi',
-											email: 'ivan.gita.pribadi@sigma.co.id',
-                      entry:'100',
-                      entryStatus:'NORMAL',
-                      utilization:'20',
-                      utilizationStatus:'NORMAL',
-										},
+										]},{
+                      column:[
+
+											{value: 'Ivan Gita Pribadi'},
+											{value: 'ivan.gita.pribadi@sigma.co.id'},
+                      {value:'90'},
+                      {value:'NORMAL'},
+                      {value:'90'},
+                      {value:'NORMAL'},
+                      ]},{
+                      column:[
+
+											{value: 'Paula Cintya'},
+											{value: 'paula.cintya@sigma.co.id'},
+                      {value:'80'},
+                      {value:'NORMAL'},
+                      {value:'150'},
+                      {value:'OVERLOAD'},
+                      ]},{
+                      column:[
+
+											{value: 'Akmal Ritaudin'},
+											{value: 'akmal.ritaudin@sigma.co.id'},
+                      {value:'40'},
+                      {value:'UNDER'},
+                      {value:'20'},
+                      {value:'UNDER'},
+                      ]},{
+                      column:[
+
+											{value: 'Abdurachim'},
+											{value: 'abdurachim@sigma.co.id'},
+                      {value:'50'},
+                      {value:'UNDER'},
+                      {value:'50'},
+                      {value:'UNDER'},
+                      ]},
+										
 									]}>
-									</Table>
+									</TableNew>
 							
 								</div>
 							</div>		
