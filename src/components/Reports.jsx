@@ -10,7 +10,7 @@ class Reports extends Component {
   render() {
     return (
       <div>
-        <div className="grid wrap  reports">
+        <div className="grid wrap reports">
           <div className="unit whole">
             <large> REPORTS </large>
             <div style={{ marginTop: '20px' }}>
@@ -26,7 +26,7 @@ class Reports extends Component {
                 className="heading"
                 onClick={
                   (e) => {
-                  browserHistory.replace('/reports/reports-directorate');
+                  browserHistory.replace('/reports/directorate');
 									  }
                 }
               > Directorate / BU </medium>
@@ -34,7 +34,7 @@ class Reports extends Component {
               className="heading"
               onClick={
                 (e) => {
-                  browserHistory.replace('/reports/reports-people');
+                  browserHistory.replace('/reports/people');
                 }
               }
               > People </medium>

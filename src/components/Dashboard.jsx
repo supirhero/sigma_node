@@ -65,8 +65,16 @@ class Dashboard extends Component {
                           </MenuSection>
                           <MenuSection>
                             <MenuHeader title='ADMIN CONSOLE'/>
-                            <MenuItem title='Master Data'/>
-                            <MenuItem title='Manage Role & Access'/>
+                            <MenuItem title='Master Data' onClick={
+                              e => {
+                                browserHistory.push('/dataset')
+                              }  
+                            }/>
+                            <MenuItem title='Manage Role & Access' onClick={
+                              e => {
+                                browserHistory.push('/manage')
+                              }
+                              }/>
                           </MenuSection>
                           <MenuSection>
                             <MenuItem onClick={

@@ -40,6 +40,20 @@ import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSpiCpi from './ProjectSpiCpi.jsx'
 import ProjectSCurve from './ProjectSCurve.jsx'
 
+import Dataset from './Dataset.jsx'
+import DatasetUser from './DatasetUser.jsx'
+import DatasetCustomer from './DatasetCustomer.jsx'
+import DatasetPartner from './DatasetPartner.jsx'
+import DatasetHoliday from './DatasetHoliday.jsx'
+import DatasetProjectType from './DatasetProjectType.jsx'
+import DatasetBU from './DatasetBu.jsx'
+import ManageRoleAccess from './ManageRoleAccess.jsx'
+import ManageRoles from './ManageRoles.jsx'
+import ManageAccess from './ManageAccess.jsx'
+
+
+
+
 
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
@@ -107,12 +121,25 @@ render(
         <Route path='my-recent-activities' component={MyRecentActivities} />
 
         <Route path='reports' component={Reports}>
-          <Route path='reports-directorate' component={ReportsDirectorate} />
-          <Route path='reports-people' component={ReportsPeople} />
-          <Route path='find-project' component={ReportsFindProject} />
           <IndexRoute component={ReportsOverview} />
+          <Route path='directorate' component={ReportsDirectorate} />
+          <Route path='people' component={ReportsPeople} />
+          <Route path='find-project' component={ReportsFindProject} />
         </Route>
 
+        <Route path='dataset' component={Dataset}>
+          <IndexRoute component={DatasetUser} />
+          <Route path='customer' component={DatasetCustomer} />
+          <Route path='partner' component={DatasetPartner} />
+          <Route path='holiday' component={DatasetHoliday} />
+          <Route path='project-type' component={DatasetProjectType} />
+          <Route path='bu' component={DatasetBU} />
+        </Route>
+
+        <Route path='manage' component={ManageRoleAccess}>
+          <IndexRoute component={ManageRoles} />
+          <Route path='access' component={ManageAccess} />      
+        </Route>
 
 
 
