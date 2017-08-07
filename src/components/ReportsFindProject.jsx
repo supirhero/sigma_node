@@ -46,7 +46,9 @@ class ReportsFindProject extends Component {
                   <medium>Transaction Based Managed Services 2017</medium>
                 </div>
                 <div className="unit golden-small no-gutters">
-                  <medium style={{ float: 'right',marginRight:'55px'}}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b></medium>
+                  <medium style={{ float: 'right',marginRight:'55px'}}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b>
+                    <div className="dropdown"></div>
+                  </medium>                 
                 </div>
               </div>
             </div>

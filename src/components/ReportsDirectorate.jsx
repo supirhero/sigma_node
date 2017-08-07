@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter, Header } from './Components.jsx';
 
 class ReportsDirectorate extends Component {
   render() {
@@ -46,7 +46,7 @@ class ReportsDirectorate extends Component {
         <div className="grid wrap">
           <div className="unit half">
             <div className="card" style={{ padding: '35px' }}>
-              <large>Projects</large>
+              <Header text='Projects' style={{display:'inline-block'}} />
               <div className="grid wrap">
                 <div className="unit golden-small">
                   <Meter
@@ -75,7 +75,7 @@ class ReportsDirectorate extends Component {
 
           <div className="unit half">
             <div className="card" style={{ padding: '35px' }}>
-              <large>Finance (IDR)</large>
+              <Header text='Finance (IDR)' style={{display:'inline-block'}} />
               <div className="grid wrap">
                 <div className="unit half">
                   <medium className="project-value-label">Total Project Value</medium>
@@ -108,7 +108,7 @@ class ReportsDirectorate extends Component {
             <div className="card" style={{ padding: '35px' }}>
               <div className="grid">
                 <div className="unit golden-small">
-                  <large>Timesheet</large>
+                  <Header text='Timesheet' style={{display:'inline-block'}} />
 
                 </div>
                 <div className="unit golden-large">
