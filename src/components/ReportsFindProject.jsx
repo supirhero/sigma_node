@@ -16,17 +16,11 @@ class ReportsFindProject extends Component {
           <div className="unit one-quarter">
             <div className="card" style={{ padding: '35px' }}>
               <div className="unit whole">
-                <large>FILTERED BY</large>
+                <large><b>FILTERED BY</b></large>
               </div>
-              <div className="unit whole">
-                <medium>Value</medium>
-              </div>
-              <div className="unit whole">
-                <medium>Status</medium>
-              </div>
-              <div className="unit whole">
-                <medium>Budget</medium>
-              </div>
+              <div className="unit whole no-gutters">
+                <medium><b>Value</b></medium>
+              </div>              
             </div>
           </div>
           <div className="unit three-quarters">

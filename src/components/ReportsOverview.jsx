@@ -16,7 +16,7 @@ class ReportsOverview extends Component {
           <div className="unit whole">
             <div className="card" style={{ padding: '35px' }}>
               <Tabs>
-              <TabList style={{paddingLeft:'0'}}>
+              <TabList style={{paddingLeft:'0',marginBottom:'57px'}}>
               <div className="grid wrap">
                 <div className="unit half">
                   <Header text='Monthly Performance' style={{display:'inline-block'}} />
@@ -45,7 +45,7 @@ class ReportsOverview extends Component {
                       }}/>
                     </div>
                     <div className="unit one-fifth">
-                      <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
+                      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
                     </div>
                   </div>
 
@@ -79,7 +79,7 @@ class ReportsOverview extends Component {
                           />
 
                 </div>
-              <div className="unit whole">
+              <div className="unit whole" style={{marginTop:'50px'}}>
                  <BarChart
                             fill="#65bdf4"
                             label="CPI Graph"
@@ -249,10 +249,10 @@ class ReportsOverview extends Component {
           </div>
         </div>
 
-        <div className="grid wrap wider reports" >
+        <div className="grid wrap wider reports" style={{paddingRight:'24px'}} >
           <div className="unit whole" style={{paddingBottom:0}}>
             <div className="card" style={{ padding: '35px' }}>
-              <div className="unit whole">
+              <div className="unit whole" style={{paddingLeft:'10px'}}>
                 <Header text='Yearly Performance' style={{display:'inline-block'}} />
                 <a href="" style={{float:'right'}}>hide advanced filter</a>
               </div>
