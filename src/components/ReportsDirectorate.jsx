@@ -23,7 +23,7 @@ class ReportsDirectorate extends Component {
 					</div>
 					<div className="unit one-quarter">
 						<Select
-              style={{ width: '60%',float:'left', display: 'inline-block',marginLeft:'35px'}}
+              style={{ width: '60%',float:'left', display: 'inline-block',marginRight:'35px'}}
               items={{
                 items: [
               { title: '2017' },

@@ -22,7 +22,7 @@ class DatasetHoliday extends Component {
 								</div>
 
 								<div className="unit three-quarters">
-									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
+									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
 										<div>
 											<div className="grid wrap narrow">
 												<div className="unit whole">

@@ -45,8 +45,8 @@ class ReportsFindProject extends Component {
                 <div className="unit golden-large">
                   <medium>Transaction Based Managed Services 2017</medium>
                 </div>
-                <div className="unit golden-small">
-                  <medium style={{ float: 'right' }}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b></medium>
+                <div className="unit golden-small no-gutters">
+                  <medium style={{ float: 'right',marginRight:'55px'}}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b></medium>
                 </div>
               </div>
             </div>
@@ -56,8 +56,8 @@ class ReportsFindProject extends Component {
                 <medium>PT ABC DEF</medium>
               </div>
               <div className="unit half">
-                <div style={{ float: 'right' }}>
-                  <medium style={{ float: 'right' }}>Value</medium>
+                <div style={{ float: 'right',marginRight:'55px' }}>
+                  <medium style={{ float: 'right'}}>Value</medium>
                   <medium>200.000.000</medium>
                 </div>
               </div>
@@ -72,7 +72,7 @@ class ReportsFindProject extends Component {
                   <medium >Schedule Status</medium>
                   <medium style={{ float: 'right' }}>ON SCHEDULE</medium>
                 </div>
-                <div style={{ float: 'right' }}>
+                <div style={{ float: 'right',marginRight:'55px' }}>
                   <medium>Budget Status</medium>
                   <medium style={{ float: 'right' }}>ON BUDGET</medium>
                 </div>
@@ -112,8 +112,8 @@ class ReportsFindProject extends Component {
                     <div className="unit golden-large">
                       <medium>DRC ACTIVITY 2017</medium>
                     </div>
-                    <div className="unit golden-small">
-                      <medium style={{ float: 'right' }}><b>DUE IN 3 DAYS <span className='due-in'> (80%) </span></b></medium>
+                    <div className="unit golden-small no-gutters">
+                      <medium style={{ float: 'right',marginRight:'55px' }}><b>DUE IN 3 DAYS <span className='due-in'> (80%) </span></b></medium>
                     </div>
                   </div>
                 </div>
@@ -127,8 +127,8 @@ class ReportsFindProject extends Component {
                     <div className="unit golden-large">
                       <medium>DATA CENTER BTIP - MAKASSAR 2017</medium>
                     </div>
-                    <div className="unit golden-small">
-                      <medium style={{ float: 'right' }}><b>COMPLETED <span className="completed"> (100%) </span></b></medium>
+                    <div className="unit golden-small no-gutters">
+                      <medium style={{ float: 'right',marginRight:'55px' }}><b>COMPLETED <span className="completed"> (100%) </span></b></medium>
                     </div>
                   </div>
                 </div>
@@ -142,8 +142,8 @@ class ReportsFindProject extends Component {
                     <div className="unit golden-large">
                       <medium>Application Development LCM</medium>
                     </div>
-                    <div className="unit golden-small">
-                      <medium style={{ float: 'right' }}><b>OVERDUE <span className="overdue"> (85%) </span></b></medium>
+                    <div className="unit golden-small no-gutters">
+                      <medium style={{ float: 'right',marginRight:'55px' }}><b>OVERDUE <span className="overdue"> (85%) </span></b></medium>
                     </div>
                   </div>
                 </div>
@@ -157,8 +157,8 @@ class ReportsFindProject extends Component {
                     <div className="unit golden-large">
                       <medium>Infra Activity 2017</medium>
                     </div>
-                    <div className="unit golden-small">
-                      <medium style={{ float: 'right' }}><b>ON HOLD <span className="on-hold"> (85%) </span></b></medium>
+                    <div className="unit golden-small no-gutters">
+                      <medium style={{ float: 'right',marginRight:'55px'}}><b>ON HOLD <span className="on-hold"> (85%) </span></b></medium>
                     </div>
                   </div>
                 </div>
