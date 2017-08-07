@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart, Checkbox, TableNew } from './Components.jsx';
+import { Select , Input, BarChart, LineChart, Checkbox, TableNew, Header } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
@@ -16,12 +16,12 @@ class ReportsOverview extends Component {
           <div className="unit whole">
             <div className="card" style={{ padding: '35px' }}>
               <Tabs>
-              <TabList>
+              <TabList style={{paddingLeft:'0',marginBottom:'57px'}}>
               <div className="grid wrap">
                 <div className="unit half">
-                  <large style={{display:'inline-block'}}>Monthly Performance</large>
-                  <Tab className="fa fa-bar-chart fa-2x " style={{marginLeft:'20px'}}></Tab>
-                  <Tab className="fa fa-table fa-2x " style={{marginLeft:'20px'}}></Tab>
+                  <Header text='Monthly Performance' style={{display:'inline-block'}} />
+                  <Tab className="fa fa-bar-chart fa-2x " style={{marginLeft:'20px', color:'#cccccc'}}></Tab>
+                  <Tab className="fa fa-table fa-2x " style={{marginLeft:'20px',color:'#cccccc'}}></Tab>
                 </div>
                 <div className="unit half">
                   <div className="grid">
@@ -45,7 +45,7 @@ class ReportsOverview extends Component {
                       }}/>
                     </div>
                     <div className="unit one-fifth">
-                      <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
+                      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
                     </div>
                   </div>
 
@@ -57,7 +57,9 @@ class ReportsOverview extends Component {
               <div className="grid wrap narrow">
                 <div className="unit whole">
                  <BarChart
+                            fill= "#D2E5FA"
                             label="SPI Graph"
+                            labelStyle={{padding:'0 40%'}}
                             ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
                             data={[
                                 { name: 'BSD', value: 20 },
@@ -70,17 +72,18 @@ class ReportsOverview extends Component {
                                 { name: 'NITSM', value: 9 },
                                 { name: 'SMS', value: 12 },
                                 { name: 'SSI', value: 40 },
-                                { name: 'SP', value: 54 },
-                                { name: 'TDMO', value: 10 },
+                                { name: 'SP', value: 54 },                                
                                 { name: 'TBSDMO', value: 23 },
                             ]}
 
                           />
 
                 </div>
-              <div className="unit whole">
+              <div className="unit whole" style={{marginTop:'50px'}}>
                  <BarChart
+                            fill="#65bdf4"
                             label="CPI Graph"
+                            labelStyle={{padding:'0 39%'}}
                             ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
                             data={[
                                 { name: 'BSD', value: 20 },
@@ -94,7 +97,6 @@ class ReportsOverview extends Component {
                                 { name: 'SMS', value: 12 },
                                 { name: 'SSI', value: 40 },
                                 { name: 'SP', value: 54 },
-                                { name: 'TDMO', value: 10 },
                                 { name: 'TBSDMO', value: 23 },
                             ]}
 
@@ -247,11 +249,11 @@ class ReportsOverview extends Component {
           </div>
         </div>
 
-        <div className="grid wrap wider reports" >
+        <div className="grid wrap wider reports" style={{paddingRight:'24px'}} >
           <div className="unit whole" style={{paddingBottom:0}}>
             <div className="card" style={{ padding: '35px' }}>
-              <div className="unit whole">
-                <large>Yearly Performance</large>
+              <div className="unit whole" style={{paddingLeft:'10px'}}>
+                <Header text='Yearly Performance' style={{display:'inline-block'}} />
                 <a href="" style={{float:'right'}}>hide advanced filter</a>
               </div>
               <div className="unit whole">

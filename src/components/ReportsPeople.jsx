@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter,Table, TableNew } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header } from './Components.jsx';
 
 
 class ReportsPeople extends Component {
@@ -55,7 +55,7 @@ class ReportsPeople extends Component {
 						<div className="card" style={{ padding: '35px' }}>
 							<div className="grid wrap">
 								<div className="unit half">
-								<large>Timesheet Report</large>
+								<Header text='Timesheet Report' style={{display:'inline-block'}} />
 								</div>
 								<div className="unit half">
 								<Input style={{width:'100%', display:'inline-block'}} placeholder="Search a name" />

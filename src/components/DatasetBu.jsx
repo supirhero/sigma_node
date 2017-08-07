@@ -22,7 +22,7 @@ class DatasetProjectType extends Component {
                 </div>
 
                 <div className="unit three-quarters">
-                  <PopUp id="createBusinessUnit" dividerText="CREATE BUSINESS UNIT" btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
+                  <PopUp id="createBusinessUnit" dividerText="CREATE BUSINESS UNIT" btnClass='btn-primary' btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
                     <div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
