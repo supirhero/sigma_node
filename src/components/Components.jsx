@@ -596,3 +596,19 @@ export class InputFile extends Component {
     )
   }
 }
+
+export class Loader extends Component {
+  render(){
+    return(
+      <div className='loader-wrapper'>
+        <div className='load' id={this.props.id}>
+          <div className='loader'>
+            <div className='loader__figure'></div>
+
+          </div>
+        </div>
+        {this.props.children}
+      </div>
+    )
+  }
+}

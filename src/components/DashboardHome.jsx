@@ -154,7 +154,7 @@ class DashboardHome extends Component {
                               <div className='card' onClick={
                                 e => {
                                   browserHistory.push({
-                                    pathname: '/project',
+                                    pathname: '/project/' + value.project_id,
                                     state: {
                                       id : value.project_id
                                     }
