@@ -65,6 +65,7 @@ export const data = (state = {}, action) => {
 
     saveState(store.getState())
 
+
     return Object.assign({}, state, {
       isloggedin: true,
       auth : require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint)
