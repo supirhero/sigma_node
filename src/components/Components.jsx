@@ -121,12 +121,12 @@ export class ReduxInput extends Component {
         <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-          <input 
+          <input
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
           >
-          </input>          
+          </input>
         </div>
     )
   }
@@ -611,6 +611,22 @@ export class InputFile extends Component {
           </FileInput>
         </form>
         </div>
+    )
+  }
+}
+
+export class Loader extends Component {
+  render(){
+    return(
+      <div className='loader-wrapper'>
+        <div className='load' id={this.props.id}>
+          <div className='loader'>
+            <div className='loader__figure'></div>
+
+          </div>
+        </div>
+        {this.props.children}
+      </div>
     )
   }
 }

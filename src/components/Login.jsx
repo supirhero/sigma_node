@@ -3,14 +3,24 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { routerMiddleware, push } from 'react-router-redux'
+import {Field, reduxForm} from 'redux-form';
+
 
 import store from '../reducers/combineReducers.jsx'
 import {getData, login} from './actions.jsx'
-import {Input, Loader} from './Components.jsx'
+import {Input, Loader, ReduxInput} from './Components.jsx'
+
 
 
 class Login extends Component {
+    onSubmit(props){
+      alert(props.username)
+      this.props.login(props.username, props.password)
+    }
+
     render(){
+      const {handleSubmit} = this.props;
+
       return(
         <div className='grid wrap'>
             <div className='unit whole'>
@@ -28,22 +38,33 @@ class Login extends Component {
                 <div className='unit three-fifths'>
                   <div className='margin'>
                     <large>SIGN IN</large>
-                    <form onSubmit={
-                      e => {
-                        store.dispatch(login()).then(
-                          (res)=>{
-
-                          }
-                        )
-
-                        // console.log('store last', store.getState());
-
-                        e.preventDefault()
-                      }
-                    }>
-
-                    <Input inputName='USERNAME' />
-                    <Input inputName='PASSWORD' />
+                    <form
+                      onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                    //   onSubmit={
+                    //   e => {
+                    //     store.dispatch(login()).then(
+                    //       (res)=>{
+                    //
+                    //
+                    //       }
+                    //     )
+                    //     // console.log('store last', store.getState());
+                    //     e.preventDefault()
+                    //   }
+                    // }
+                    >
+                    <Field
+                      inputName="USERNAME"
+                      name="username"
+                      type='username'
+                      component={ReduxInput}
+                    />
+                    <Field
+                      inputName="PASSWORD"
+                      name="password"
+                      type='password'
+                      component={ReduxInput}
+                    />
                     <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
                     <medium>Or <a onClick={()=> {
                       browserHistory.replace('/auth/register')
@@ -71,5 +92,18 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   }
 }
-export default connect(mapStateToProps)(Login)
+
+// export default reduxForm({
+//   // Must be unique, this will be the name for THIS PARTICULAR FORM
+//   form: 'Login',
+// })(
+//   connect(mapStateToProps, { login })(Login),
+// );
+
+export default connect(mapStateToProps, { login })
+    (
+      reduxForm({
+        form: 'Login',
+      })(Login));
+
 // export default Login

@@ -7,30 +7,58 @@ import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
 
-export function login() {
+export function login(email, password) {
+
+  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+
   return function (dispatch) {
     return axios({
-            method: 'post',
+            method: 'POST',
             url: baseURL + "/dev/login/login",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: {user_id: 'gina.nufus@sigma.co.id',
-                    password: 'S201502162',
+            data: {user_id: email,
+                    password: password,
                     fpid : '160927084946'
                   }
           }).then(
             res => {
               alert('work');
               // browserHistory.replace('/')
-              store.dispatch({type:'POST', data: res})
+              store.dispatch({type:'API', data: res})
               if (store.getState().data.data.data.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
-                store.dispatch(push('/'))
+                store.dispatch(replace('/'))
               }
               else {
+                store.dispatch({type: 'LOADER', loader:'login-loader', show: false})
+
                 store.dispatch({type:'LOGIN', isloggedin: false})
 
               }
             }
+          )
+  }
+}
+
+export function getProjectDetail(id) {
+
+  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: baseURL + "/dev/home/detailproject/" + id,
+            headers: {
+              'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              alert('work')
+            },
+            req => console.log("request", req)
+
           )
   }
 }
@@ -48,17 +76,13 @@ export function logout() {
 
 export const addTimesheet = (values) => async dispatch => {
   const config = {
-    headers: 
+    headers:
     { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
 }
   const res = await axios.post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config);
   dispatch(
     {
      type:'ADD_TIMESHEET',
-     payload: res.data,     
+     payload: res.data,
     });
 }
-
-
-
-

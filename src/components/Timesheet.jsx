@@ -10,7 +10,7 @@ import {addTimesheet} from './actions.jsx';
 
 class Timesheet extends Component {
 
-  
+
   onSubmit(values){
     this.props.addTimesheet(values,()=>{
       console.log(values);
@@ -18,7 +18,7 @@ class Timesheet extends Component {
     })
   }
 
-  
+
 
   render() {
     const {handleSubmit} = this.props;
@@ -61,15 +61,15 @@ class Timesheet extends Component {
             <div className="unit whole">
               <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass='btn-primary' btnText="ADD NEW"  btnStyle={{display:'block', margin: 'auto'}}>
                 <div>
-                {/* <form onSubmit={handleSubmit(values => console.log(values))}>  */}                                 
-                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}> 
+                {/* <form onSubmit={handleSubmit(values => console.log(values))}>  */}
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
                       <Field 
                         inputName="DATE"
                         name="TS_DATE"
-                        component={ReduxInput}                      
-                      />              
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
@@ -98,29 +98,29 @@ class Timesheet extends Component {
                       />
                     </div>
                     <div className="unit one-quarter">
-                      <Field 
+                      <Field
                         inputName="WORK HOURS"
                         name="HOUR"
-                        component={ReduxInput}                      
-                      />                  
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Field 
+                      <Field
                         inputName="SUBJECT"
                         name="TS_SUBJECT"
-                        component={ReduxInput}                      
-                      />                          
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                        <Field 
+                        <Field
                         inputName="MESSAGE"
                         name="TS_MESSAGE"
-                        component={ReduxInput}                      
-                      />         
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
@@ -147,7 +147,7 @@ class Timesheet extends Component {
               <div className="unit whole">
                 <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
               </div>
-              <div className="unit whole" style={{margin:'absolute'}}>              
+              <div className="unit whole" style={{margin:'absolute'}}>
               <img src={require("../img/day-off.png")} style={{margin:'0 auto',display:'block'}} />
               </div>
             </div>
@@ -185,8 +185,8 @@ class Timesheet extends Component {
                       <medium><b>WAITING FOR APPROVAL</b></medium>
                     </div>
                   </div>
-                </div>  
-                
+                </div>
+
                 <div className="card project">
                   <small>4:55 PM</small>
                   <small className="project-info" >
@@ -199,14 +199,14 @@ class Timesheet extends Component {
                     <div className="unit whole" >
                       <medium style={{display:'inline-block'}}>
                         <a href="">RE-SUBMIT TIMESHEET</a>
-                      </medium>    
+                      </medium>
                       <medium style={{display:'inline-block',marginLeft:'50px'}}><b>DENIED</b></medium>
                     </div>
                   </div>
-                </div>  
+                </div>
               </div>
             </div>
-            
+
           </TabPanel>
         </Tabs>
       </div>

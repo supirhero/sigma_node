@@ -4,8 +4,8 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import thunk from 'redux-thunk';
+import jQuery from 'jquery';
 import {reducer as reduxForm } from 'redux-form';
-
 import * as storage from 'redux-storage'
 // import {getData} from '../components/actions.jsx'
 var compile_mode = process.env.NODE_ENV
@@ -51,7 +51,7 @@ export const saveState = (state) => {
 
 }
 
-export const data = (state = {}, action) => {
+var data = (state = {}, action) => {
   // state = {
   console.log('json',action);
   //   isLoggedIn : false
@@ -72,6 +72,9 @@ export const data = (state = {}, action) => {
     })
   }
   else {
+    // if(action.loader!= '' || action.loader!= null ||action.loader!= undefined) {
+    //   store.dispatch({type: 'LOADER', show: true})
+    // }
     switch (action.type) {
       case 'LOGIN':
       return Object.assign({}, state, {
@@ -85,13 +88,25 @@ export const data = (state = {}, action) => {
         isloggedin: false
       })
         break;
-      case 'POST':
+      case 'API':
         return Object.assign({}, state, {
           data : action.data,
         })
         break;
       default:
       return state
+    case 'LOADER':
+      jQuery(document).ready(function ($) {
+        if (action.show) {
+          $('#' + action.loader).css({'display':'block'})
+
+        }
+        else {
+          $('#' + action.loader).css({'display':'none'})
+        }
+      })
+      return state;
+
   }
 }
 

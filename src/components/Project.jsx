@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton, PopUp, Input, InputFile, Select} from  './components.jsx'
+import { getProjectDetail } from './actions.jsx'
 
 
 class Project extends Component {
@@ -12,6 +14,14 @@ class Project extends Component {
     this.state = {
       active : 'Overview'
     };
+  }
+
+  componentWillMount(){
+    store.dispatch(getProjectDetail('6475457')).then(
+      (res)=>{
+        console.log('detail project');
+      }
+    )
   }
 
   render(){
