@@ -29,70 +29,7 @@ class Login extends Component {
                 <large>SIGN IN</large>
                 <form onSubmit={
                   e => {
-                  //   axios.get('http://45.77.45.126/dev/home/detailproject/345'
-                  // )
-                  // .then(function (response) {
-                  //   console.log(response);
-                  // })
-                  // .catch(function (error) {
-                  //   console.log(error);
-                  // });
-                    // axios.post("http://45.77.45.126/dev/login/login", {
-                    //   user_id: 'gina.nufus@sigma.co.id',
-                    //   password: 'S201502162',
-                    //   fpid : '160927084946'
-                    // })
-                    // .then(function (response) {
-                    //   alert('work')
-                    //   console.log(response);
-                    // })
-                    // .catch(function (error) {
-                    //   alert('fail')
-                    //
-                    //   console.log(error);
-                    // });
-                      // axios({
-                      //   method: 'post',
-                      //   url: "http://45.77.45.126/dev/login/login",
-                      //   params: {
-                      //     user_id: 'gina.nufus@sigma.co.id',
-                      //     password: 'S201502162',
-                      //     fpid : '160927084946'
-                      //   }
-                      // }).then(function (response) {
-                      //   console.log(response);
-                      //   store.dispatch(saveAuthentication(response.data))
-                      //   browserHistory.push('/')
-                      // }).catch(function (error) {
-                      //   alert('fail')
-                      //   console.log(error);
-                      // });
-                    // $.post("http://45.77.45.126/dev/login/login",
-                    //   {
-                    //       user_id: 'gina.nufus@sigma.co.id',
-                    //       password: 'S201502162',
-                    //       fpid : '160927084946'
-                    //   },
-                    //   function(data, status){
-                    //     alert('work')
-                    //     console.log(data);
-                    //   });
-                    // var data = getData({type:'API', method:'POST', type:'AUTH', request:{
-                    //   url: "/dev/login/login",
-                    //   params: {user_id: 'gina.nufus@sigma.co.id',
-                    //         password: 'S201502162',
-                    //         fpid : '160927084946'}
-                    // }})
-                    // var data = getData()
-                    // console.log('data', data);
-                    // store.dispatch({type:'API', method:'POST', request:{
-                    //   api:'AUTH',
-                    //   url: "/dev/login/login",
-                    //   params: {user_id: 'gina.nufus@sigma.co.id',
-                    //         password: 'S201502162',
-                    //         fpid : '160927084946'}
-                    //       }})
-                    //   browserHistory.replace('/')
+
                     store.dispatch(login()).then(
                       (res)=>{
 
@@ -104,7 +41,7 @@ class Login extends Component {
                     e.preventDefault()
                   }
                 }>
-
+                
                 <Input inputName='USERNAME' />
                 <Input inputName='PASSWORD' />
                 <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
