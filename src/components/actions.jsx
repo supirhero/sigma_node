@@ -40,3 +40,25 @@ export function logout() {
     type: 'LOGOUT'
   }
 }
+
+
+
+
+
+
+export const addTimesheet = (values) => async dispatch => {
+  const config = {
+    headers: 
+    { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
+}
+  const res = await axios.post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config);
+  dispatch(
+    {
+     type:'ADD_TIMESHEET',
+     payload: res.data,     
+    });
+}
+
+
+
+
