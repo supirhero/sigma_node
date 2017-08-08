@@ -47,9 +47,9 @@ export function getProjectDetail(id) {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: baseURL + "/dev/home/detailproject/" + id,
+            url: baseURL + "/dev/test/detailproject/" + id,
             headers: {
-              'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
              }
 
@@ -71,12 +71,9 @@ export function logout() {
 
 
 
-
-
-
 export const addTimesheet = (values) => {
   const config = {
-    headers: 
+    headers:
     { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
   }
   return function(dispatch){
