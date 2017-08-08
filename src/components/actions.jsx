@@ -74,15 +74,14 @@ export function logout() {
 
 
 
-export const addTimesheet = (values) => async dispatch => {
+export const addTimesheet = (values) => {
   const config = {
-    headers:
+    headers: 
     { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
-}
-  const res = await axios.post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config);
-  dispatch(
-    {
-     type:'ADD_TIMESHEET',
-     payload: res.data,
-    });
+  }
+  return function(dispatch){
+    axios
+      .post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config)
+      .then(res=> dispatch ({type:'API',payload:res}))
+  }
 }
