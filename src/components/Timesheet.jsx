@@ -4,12 +4,25 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select, Input } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUp, Select, Input, ReduxInput } from './components.jsx';
+import {Field, reduxForm} from 'redux-form';
+import {addTimesheet} from './actions.jsx';
 
 class Timesheet extends Component {
-  render() {
-    return (
 
+
+  onSubmit(values){
+    this.props.addTimesheet(values,()=>{
+      console.log(values);
+      this.props.history.push('/');
+    })
+  }
+
+
+
+  render() {
+    const {handleSubmit} = this.props;
+    return (
       <div>
         <div className="grid wrap">
           <div className="unit whole">
@@ -47,10 +60,16 @@ class Timesheet extends Component {
           <div className="grid wrap">
             <div className="unit whole">
               <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass='btn-primary' btnText="ADD NEW"  btnStyle={{display:'block', margin: 'auto'}}>
-                <div >
+                <div>
+                {/* <form onSubmit={handleSubmit(values => console.log(values))}>  */}
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Input inputName="DATE" />
+                      <Field 
+                        inputName="DATE"
+                        name="TS_DATE"
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
@@ -79,27 +98,39 @@ class Timesheet extends Component {
                       />
                     </div>
                     <div className="unit one-quarter">
-                      <Input inputName="WORK HOURS" />
+                      <Field
+                        inputName="WORK HOURS"
+                        name="HOUR"
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Input inputName="SUBJECT" />
+                      <Field
+                        inputName="SUBJECT"
+                        name="TS_SUBJECT"
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Input inputName="MESSAGE" />
+                        <Field
+                        inputName="MESSAGE"
+                        name="TS_MESSAGE"
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' }}>
                       <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
+                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
                     </div>
                   </div>
 
-
+                   </form>
                 </div>
               </PopUp>
 
@@ -116,7 +147,7 @@ class Timesheet extends Component {
               <div className="unit whole">
                 <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
               </div>
-              <div className="unit whole" style={{margin:'absolute'}}>              
+              <div className="unit whole" style={{margin:'absolute'}}>
               <img src={require("../img/day-off.png")} style={{margin:'0 auto',display:'block'}} />
               </div>
             </div>
@@ -154,8 +185,8 @@ class Timesheet extends Component {
                       <medium><b>WAITING FOR APPROVAL</b></medium>
                     </div>
                   </div>
-                </div>  
-                
+                </div>
+
                 <div className="card project">
                   <small>4:55 PM</small>
                   <small className="project-info" >
@@ -168,14 +199,14 @@ class Timesheet extends Component {
                     <div className="unit whole" >
                       <medium style={{display:'inline-block'}}>
                         <a href="">RE-SUBMIT TIMESHEET</a>
-                      </medium>    
+                      </medium>
                       <medium style={{display:'inline-block',marginLeft:'50px'}}><b>DENIED</b></medium>
                     </div>
                   </div>
-                </div>  
+                </div>
               </div>
             </div>
-            
+
           </TabPanel>
         </Tabs>
       </div>
@@ -191,5 +222,10 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   };
 }
-export default connect(mapStateToProps)(Timesheet);
-// export default Login
+
+export default reduxForm({
+  // Must be unique, this will be the name for THIS PARTICULAR FORM
+  form: 'AddNewTimesheet',
+})(
+  connect(mapStateToProps, { addTimesheet })(Timesheet),
+);

@@ -7,7 +7,7 @@ import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
 
-export function login() {
+export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
 
@@ -16,8 +16,8 @@ export function login() {
             method: 'POST',
             url: baseURL + "/dev/login/login",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: {user_id: 'gina.nufus@sigma.co.id',
-                    password: 'S201502162',
+            data: {user_id: email,
+                    password: password,
                     fpid : '160927084946'
                   }
           }).then(
@@ -67,4 +67,22 @@ export function logout() {
   return {
     type: 'LOGOUT'
   }
+}
+
+
+
+
+
+
+export const addTimesheet = (values) => async dispatch => {
+  const config = {
+    headers:
+    { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
+}
+  const res = await axios.post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config);
+  dispatch(
+    {
+     type:'ADD_TIMESHEET',
+     payload: res.data,
+    });
 }

@@ -115,6 +115,24 @@ export class Input extends Component {
   }
 }
 
+export class ReduxInput extends Component {
+  render(){
+    return(
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <input
+            placeholder={this.props.placeholder}
+            type='text'
+            {...this.props.input}
+          >
+          </input>
+        </div>
+    )
+  }
+}
+
+
 export class RadioButton extends Component {
   render() {
     return (
