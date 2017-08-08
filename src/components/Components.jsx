@@ -104,12 +104,13 @@ export class Divider extends Component {
 export class Input extends Component {
   render() {
     return (
-      <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <input placeholder={this.props.placeholder}></input>
-        {this.props.children}
-      </div>
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <input placeholder={this.props.placeholder}></input>
+          {this.props.children}
+        </div>
+
     )
   }
 }
