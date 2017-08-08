@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {deleteAuthentication} from './actions.jsx'
+import {logout} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
@@ -15,11 +15,11 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 class Dashboard extends Component {
   componentDidMount() {
-    if (store.getState().dom.popup) {
-      document.body.style.overflow = 'hidden';
-      document.body.scrollTop = 0; // For Chrome, Safari and Opera
-    document.documentElement.scrollTop = 0; // For IE and Firefox
-    }
+    // if (store.getState().dom.popup) {
+    //   document.body.style.overflow = 'hidden';
+    //   document.body.scrollTop = 0; // For Chrome, Safari and Opera
+    // document.documentElement.scrollTop = 0; // For IE and Firefox
+    // }
     // console.log('work');
     // console.log(process.env.NODE_ENV);
     var compile_mode = process.env.NODE_ENV
@@ -85,7 +85,7 @@ class Dashboard extends Component {
                                 console.log('work');
                                 browserHistory.replace('/auth')
                                 //
-                                store.dispatch(deleteAuthentication())
+                                store.dispatch(logout())
                                 e.preventDefault()
                               }
                             } title='LogOut'/>

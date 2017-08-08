@@ -1,4 +1,3 @@
-
 var path = require("path");
 var webpack = require('webpack');
 
@@ -90,19 +89,19 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        use: 'file-loader',
+        use: 'file-loader?name=/images/[name].[ext]',
       }
         ]
     },
 
-     plugins:
-    //  process.env.NODE_ENV == 'mock' ?
-     [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ],
-    //  :
-    //  [webpack_env],
     //  plugins:
-    //  process.env.NODE_ENV == 'mock' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+    // //  process.env.NODE_ENV == 'mock' ?
+    // //  [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ],
+    // //  :
     //  [webpack_env],
+     plugins:
+     process.env.NODE_ENV == 'production' ? [ webpack_env, new webpack.optimize.UglifyJsPlugin({minimize: true}) ]:
+     [webpack_env],
     devtool: 'cheap-module-source-map'
 
 };

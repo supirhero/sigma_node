@@ -6,7 +6,7 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 import {Input} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {getData} from './actions.jsx'
+import {getData, login} from './actions.jsx'
 
 
 class Login extends Component {
@@ -18,10 +18,10 @@ class Login extends Component {
             <div className='unit two-fifths no-gutters' style={{height:'100%'}}>
               <span style={{position:'relative'}}>
                 <div id='picture'>
-                  <img src={require('../img/ProuDS-logo-clean.png')} id='prouds-logo-big'/>                  
+                  <img src={require('../img/ProuDS-logo-clean.png')} id='prouds-logo-big'/>
                   <small>Project Management &</small>
                   <small>Resource Delivery System</small>
-                </div>                
+                </div>
               </span>
             </div>
             <div className='unit three-fifths'>
@@ -85,14 +85,19 @@ class Login extends Component {
                     // }})
                     // var data = getData()
                     // console.log('data', data);
-                    store.dispatch({type:'API', method:'POST', request:{
-                      api:'AUTH',
-                      url: "/dev/login/login",
-                      params: {user_id: 'gina.nufus@sigma.co.id',
-                            password: 'S201502162',
-                            fpid : '160927084946'}
-                          }})
-                      browserHistory.replace('/')
+                    // store.dispatch({type:'API', method:'POST', request:{
+                    //   api:'AUTH',
+                    //   url: "/dev/login/login",
+                    //   params: {user_id: 'gina.nufus@sigma.co.id',
+                    //         password: 'S201502162',
+                    //         fpid : '160927084946'}
+                    //       }})
+                    //   browserHistory.replace('/')
+                    store.dispatch(login()).then(
+                      (res)=>{
+
+                      }
+                    )
 
                     // console.log('store last', store.getState());
 
@@ -101,7 +106,7 @@ class Login extends Component {
                 }>
 
                 <Input inputName='USERNAME' />
-                <Input inputName='PASSWORD' />                
+                <Input inputName='PASSWORD' />
                 <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
                 <medium>Or <a onClick={()=> {
                   browserHistory.replace('/auth/register')

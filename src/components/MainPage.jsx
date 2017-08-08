@@ -17,13 +17,10 @@ import Dashboard from './Dashboard.jsx'
 
 class MainPage extends Component {
   componentDidMount() {
-    console.log(store.getState());
-    
-
+    // console.log(store.getState());
   }
 
   render() {
-
           {
             return this.props.children
           }

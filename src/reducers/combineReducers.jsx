@@ -1,8 +1,9 @@
  import auth from './authReducer.jsx'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+import thunk from 'redux-thunk';
 
 
 import * as storage from 'redux-storage'
@@ -49,89 +50,59 @@ export const saveState = (state) => {
     console.log('changed: ', serializedState);
 
 }
-export const dom = (state = {}, action) => {
-  console.log('dom', action);
-  switch (action.type) {
-    case 'POPUP':
-      return Object.assign({}, state, {
-        id: action.id,
-        popup: action.popup
-      })
-      break;
-    default: return state
 
-  }
-}
 export const data = (state = {}, action) => {
   // state = {
   console.log('json',action);
   //   isLoggedIn : false
   // }
-  switch (action.type) {
-    case 'API':
-      // if (process.env.NODE_ENV == 'mock') {
-      //   return Object.assign({}, state, {
-      //     isloggedin: action.isloggedin,
-      //     bussines_unit : action.bussines_unit,
-      //     datatimesheet : action.datatimesheet,
-      //     userdata : action.userdata,
-      //     projects : action.projects
-      //   })
-      //
-      // }
-      // else {
-      // console.log('data', data);
-      if (compile_mode == 'mock') {
-        alert('MOCK')
-        var endpoint = action.request.url.slice(1).replace(/\//g, '--').split('?')[0]
-        var path = '../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint
-        var result = require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint + '.json')
-        // browserHistory.replace('/')
+  if (compile_mode == 'mock') {
+    alert('MOCK')
+    var endpoint = action.request.url.slice(1).replace(/\//g, '--').split('?')[0]
+    var path = '../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint
+    var result = require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint + '.json')
+    // browserHistory.replace('/')
 
-        saveState(store.getState())
+    saveState(store.getState())
 
-        return Object.assign({}, state, {
-          isloggedin: true,
-          auth : require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint)
-        })
-      }
-      else {
-        alert('API')
-          axios({
-            method: 'post',
-            url: base_URL + action.request.url,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: action.request.params
-          })
-          .then(function(response) {
-            saveState(store.getState())
-
-            return Object.assign({}, state, {
-              auth : response.data
-            })
-          })
-          .catch(
-            function (error) {
-              if (action.error) {
-                action.error(error)
-
-              }
-            })
-    }
-
+    return Object.assign({}, state, {
+      isloggedin: true,
+      auth : require('../../mock/' + action.method +  '/' + action.request.api + '/' + endpoint)
+    })
+  }
+  else {
+    switch (action.type) {
+      case 'LOGIN':
+      return Object.assign({}, state, {
+        isloggedin: action.isloggedin
+      })
       break;
-    default:
-    return state
+
+      case 'LOGOUT':
+      return Object.assign({}, state, {
+        data : null,
+        isloggedin: false
+      })
+        break;
+      case 'POST':
+        return Object.assign({}, state, {
+          data : action.data,
+        })
+        break;
+      default:
+      return state
+  }
 }
+
 
 }
 const allReducers = combineReducers({
-  dom : dom,
   data : data,
   routing : routerReducer
 })
+const routeMiddleware = routerMiddleware(browserHistory)
 
-export const store = createStore(allReducers, loadState())
+export const store = createStore(allReducers, loadState(), applyMiddleware(thunk, routeMiddleware))
 // const reducer = storage.reducer(allReducers);
 //
 // const middleware = storage.createMiddleware(engine);

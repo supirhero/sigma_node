@@ -60,6 +60,7 @@ import ManageAccess from './ManageAccess.jsx'
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
 
+window.store = store
 function requireAuth(nextState, replace) {
    if (!store.getState().data.isloggedin) {
    replace({
@@ -70,6 +71,7 @@ function requireAuth(nextState, replace) {
 }
 
 store.subscribe(()=> {
+
   saveState(store.getState())
 })
 
