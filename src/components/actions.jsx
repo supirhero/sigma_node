@@ -24,7 +24,7 @@ export function login() {
               store.dispatch({type:'POST', data: res})
               if (store.getState().data.data.data.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
-                store.dispatch(push('/'))
+                store.dispatch(replace('/'))
               }
               else {
                 store.dispatch({type:'LOGIN', isloggedin: false})
