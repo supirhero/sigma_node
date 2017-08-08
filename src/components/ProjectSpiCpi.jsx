@@ -80,7 +80,7 @@ class ProjectSpiCpi extends Component {
                   <div className="grid padding-left">
                     <div className="unit whole">
                       <BarChart
-                        label="CPI Graph"
+                        fill= "#D2E5FA"
                         data={[
 													{ name: 'W2', value: 54 },
 													{ name: 'W4', value: 40 },
