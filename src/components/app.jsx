@@ -60,13 +60,17 @@ import ManageAccess from './ManageAccess.jsx'
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
 
+window.store = store;
 function requireAuth(nextState, replace) {
-   if (!store.getState().data.isloggedin) {
-   replace({
-   pathname: '/auth',
-   state: { nextPathname: nextState.location.pathname }
-   })
-   }
+   if (store.getState().data ==null) {
+    //  if (store.getState().data.data.data.token ==undefined || store.getState().data.data.token ==null) {
+
+       replace({
+       pathname: '/auth',
+       state: { nextPathname: nextState.location.pathname }
+       })
+      // }
+    }
 }
 
 store.subscribe(()=> {
