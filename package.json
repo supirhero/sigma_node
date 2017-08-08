@@ -12,6 +12,7 @@
     "production-mock": "cross-env NODE_ENV=mock webpack",
     "build": "npm start",
     "development": "NODE_ENV=development  webpack-dev-server --progress --hot --debug --inline --colors --debug --port 8089"
+    "development": "cross-env NODE_ENV=development  webpack-dev-server --progress --hot --debug --inline --colors --debug --port 8089"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "react-tabs": "^1.1.0",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.7.1",
+    "redux-form": "^7.0.3",
     "redux-persist": "^4.8.2",
     "redux-storage": "^4.1.2",
     "redux-storage-engine-localstorage": "^1.1.4",

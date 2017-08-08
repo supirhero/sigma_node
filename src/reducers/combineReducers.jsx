@@ -4,7 +4,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import thunk from 'redux-thunk';
-
+import {reducer as reduxForm } from 'redux-form';
 
 import * as storage from 'redux-storage'
 // import {getData} from '../components/actions.jsx'
@@ -95,11 +95,14 @@ export const data = (state = {}, action) => {
   }
 }
 
-
 }
+
+
+
 const allReducers = combineReducers({
   data : data,
-  routing : routerReducer
+  routing : routerReducer,
+  form: reduxForm
 })
 const routeMiddleware = routerMiddleware(browserHistory)
 
