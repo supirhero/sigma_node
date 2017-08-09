@@ -7,6 +7,8 @@ import thunk from 'redux-thunk';
 import jQuery from 'jquery';
 import {reducer as reduxForm } from 'redux-form';
 import * as storage from 'redux-storage'
+import Immutable from 'immutable'
+
 // import {getData} from '../components/actions.jsx'
 var compile_mode = process.env.NODE_ENV
 const base_URL = "http://45.77.45.126"
@@ -47,11 +49,11 @@ const loadState = () => {
 export const saveState = (state) => {
     const serializedState = JSON.stringify(state)
     localStorage.setItem('state',serializedState)
-    console.log('changed: ', serializedState);
+    // console.log('changed: ', serializedState);
 
 }
 
-var data = (state = {}, action) => {
+var data = (state = Immutable.List(), action) => {
   // state = {
   console.log('json',action);
   //   isLoggedIn : false
@@ -76,6 +78,17 @@ var data = (state = {}, action) => {
     //   store.dispatch({type: 'LOADER', show: true})
     // }
     switch (action.type) {
+      case 'PUSH':
+      return Object.assign({}, state, {
+        page: state.params
+      })
+
+      case 'POP':
+      return Object.assign({}, state,{
+        [action.name] : null
+      })
+      break;
+
       case 'LOGIN':
       return Object.assign({}, state, {
         isloggedin: action.isloggedin
@@ -83,15 +96,15 @@ var data = (state = {}, action) => {
       break;
 
       case 'LOGOUT':
-      return Object.assign({}, state, {
-        data : null,
+      return Object.assign({}, null, {
         isloggedin: false
       })
         break;
       case 'API':
-        return Object.assign({}, state, {
-          data : action.data,
-        })
+        return Object.assign({}, state,{
+          [action.name] :action.data.data
+        }
+        )
         break;
       default:
       return state
@@ -115,7 +128,7 @@ var data = (state = {}, action) => {
 
 
 const allReducers = combineReducers({
-  data : data,
+  data,
   routing : routerReducer,
   form: reduxForm
 })

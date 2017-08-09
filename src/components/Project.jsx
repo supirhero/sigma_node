@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 
+
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, PopUp, Input, InputFile, Select} from  './components.jsx'
-import { getProjectDetail } from './actions.jsx'
+import {Divider, TimeSheetTimeButton, PopUp, Input, InputFile, Select, PageLoader} from  './components.jsx'
+import { getProjectDetail, pop } from './actions.jsx'
 
 
 class Project extends Component {
@@ -17,33 +18,36 @@ class Project extends Component {
   }
 
   componentWillMount(){
-    store.dispatch(getProjectDetail('6475457')).then(
+    const id = store.getState().routing.locationBeforeTransitions.state.id
+    store.dispatch(getProjectDetail(id)).then(
       (res)=>{
         console.log('detail project');
       }
     )
   }
 
+  componentWillUnmount(){
+    store.dispatch(pop('project'))
+  }
+
   render(){
+    const id = store.getState().routing.locationBeforeTransitions.state.id
     const sidebar = [
-      {type:'menu', name : 'Overview', path: '/project'},
-      {type:'menu', name : 'Setting', path: '/project/setting'},
-      {type:'menu', name : 'Activities', path: '/project/activities'},
+      {type:'menu', name : 'Overview', path: `/project/${id}`},
+      {type:'menu', name : 'Setting', path: `/project/${id}/setting`},
+      {type:'menu', name : 'Activities', path: `/project/${id}/activities`},
       {type:'title', name : 'MANAGE'},
-      {type:'menu', name : 'Workplan', path: '/workplan'},
-      {type:'menu', name : 'Team Member', path: '/project/team-member'},
-      {type:'menu', name : 'Doc & Files', path: '/project/docs-and-files'},
-      {type:'menu', name : 'Issues', path: '/project/issues'},
+      {type:'menu', name : 'Workplan', path: `/${id}/workplan`},
+      {type:'menu', name : 'Team Member', path: `/project/${id}/team-member`},
+      {type:'menu', name : 'Doc & Files', path: `/project/${id}/docs-and-files`},
+      {type:'menu', name : 'Issues', path: `/project/${id}/issues`},
       {type:'title', name : 'REPORTS'},
-      {type:'menu', name : 'SPI & CPI', path: '/project/spi-and-cpi'},
-      {type:'menu', name : 'S-Curve', path: '/project/s-curve'},
-      {type:'menu', name : 'Gantt Chart', path: '/project/gantt-chart'},
+      {type:'menu', name : 'SPI & CPI', path: `/project/${id}/spi-and-cpi`},
+      {type:'menu', name : 'S-Curve', path: `/project/${id}/s-curve`},
+      {type:'menu', name : 'Gantt Chart', path: `/project/${id}/gantt-chart`},
     ]
     return(
       <div className='project'>
-
-
-
           <div className='grid wrap'>
             <div className='unit one-fifth no-gutters'>
               <div className='sidebar'>
@@ -141,7 +145,14 @@ class Project extends Component {
 
 
         <div className='unit four-fifths'>
-          {this.props.children}
+
+          {
+            store.getState().data.project ?
+            this.props.children:
+            <PageLoader></PageLoader>
+
+
+          }
         </div>
       </div>
 

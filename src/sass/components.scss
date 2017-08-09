@@ -635,7 +635,7 @@ th {
 
 }
 
-.loader-wrapper {
+.loader-login-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -645,5 +645,17 @@ th {
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.91);
+  }
+}
+
+.loader-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  .load {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // background-color: rgba(255, 255, 255, 0.91);
   }
 }

@@ -23,8 +23,8 @@ export function login(email, password) {
           }).then(
             res => {
               // browserHistory.replace('/')
-              store.dispatch({type:'API', data: res})
-              if (store.getState().data.data.data.token != undefined) {
+              store.dispatch({type:'API', name: 'login', data: res})
+              if (store.getState().data.login.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
                 store.dispatch(replace('/'))
               }
@@ -41,7 +41,7 @@ export function login(email, password) {
 
 export function getProjectDetail(id) {
 
-  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
     return axios({
@@ -54,10 +54,28 @@ export function getProjectDetail(id) {
 
           }).then(
             res => {
+              store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+
+              store.dispatch({type:'API', name: 'project', data: res})
+
             },
-            req => console.log("request", req)
 
           )
+  }
+}
+
+export function pop(name) {
+  return {
+    type: 'POP',
+    name : name
+  }
+}
+
+export function changeRoute(params) {
+  store.dispatch(replace(params.path))
+  return {
+    type: 'PUSH',
+    page: params.data
   }
 }
 
@@ -65,6 +83,31 @@ export function logout() {
   return {
     type: 'LOGOUT'
   }
+}
+
+export const getProjectTeamMember = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/test/p_teammember/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res})
+
+            },
+
+          )
+  }
+
 }
 
 

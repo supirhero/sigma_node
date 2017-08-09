@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
+import { changeRoute } from './actions.jsx'
 
 import {Meter, Search} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
@@ -15,7 +16,7 @@ class DashboardHome extends Component {
     var state = store.getState()
     console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var auth = state.data.data.data
+    var auth = state.data.login
 
 
     // console.log(projects);
@@ -153,6 +154,12 @@ class DashboardHome extends Component {
                             <div className='unit whole no-gutters'>
                               <div className='card' onClick={
                                 e => {
+                                  // store.dispatch(changeRoute({
+                                  //   path: '/project/' + value.project_id,
+                                  //   page: {
+                                  //     id : value.project_id
+                                  //   }
+                                  // }))
                                   browserHistory.push({
                                     pathname: '/project/' + value.project_id,
                                     state: {

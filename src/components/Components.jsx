@@ -615,17 +615,32 @@ export class InputFile extends Component {
   }
 }
 
-export class Loader extends Component {
+export class LoaderLogin extends Component {
   render(){
     return(
-      <div className='loader-wrapper'>
+      <div className='loader-login-wrapper'>
         <div className='load' id={this.props.id}>
-          <div className='loader'>
+          <div className='loader'  style={this.props.style}>
             <div className='loader__figure'></div>
 
           </div>
         </div>
         {this.props.children}
+      </div>
+    )
+  }
+}
+
+export class PageLoader extends Component {
+  render(){
+    return(
+      <div className='loader-wrapper'>
+        <div className='load' id={this.props.id}>
+          <div className='loader'  style={this.props.style}>
+            <div className='loader__figure'></div>
+
+          </div>
+        </div>
       </div>
     )
   }

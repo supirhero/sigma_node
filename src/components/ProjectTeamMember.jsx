@@ -3,12 +3,20 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader, Input} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
+import { getProjectTeamMember } from './actions.jsx'
 
 
 
 class ProjectTeamMember extends Component {
+  componentWillMount() {
+    const id = store.getState().routing.locationBeforeTransitions.state.id
+
+    store.dispatch(getProjectTeamMember(id))
+  }
     render(){
+      const appStore = store.getState();
+      const projectMember = appStore.data ? appStore.data.project.project_member : null
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>
@@ -34,24 +42,32 @@ class ProjectTeamMember extends Component {
 
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <div className='card' style={{padding:'15px'}}>
-                <div className='grid'>
-                  <div className='unit two-fifths no-gutters'>
-                    <div className='pic-wrapper' style={{height:'35px', width:'35px', display:'inline-block'}}></div>
-                    <div style={{display:'inline-block', marginLeft:'17px'}}>
-                      <medium style={{fontSize:'15px'}}>Kara Gray</medium>
-                      <small style={{fontSize:'15px'}}>Admin, Project Manager</small>
+              {
+                projectMember ?
+                projectMember.map((value, index) => (
+                  <div className='card' style={{padding:'15px'}} key={index}>
+                    <div className='grid'>
+                      <div className='unit three-fifths no-gutters'>
+                        <div className='pic-wrapper' style={{height:'35px', width:'35px', display:'inline-block'}}></div>
+                        <div style={{display:'inline-block', marginLeft:'17px'}}>
+                          <medium style={{fontSize:'15px'}}>{value.user_name}</medium>
+                          <small style={{fontSize:'15px'}}>{value.email}</small>
+                        </div>
+                      </div>
+                      <div className='unit one-fifth no-gutters'>
+                        <small style={{textAlign:'center', color:'#717171', marginTop:'7px'}}>{value.prof_name}</small>
+                      </div>
+                      <div className='unit one-fifth no-gutters'>
+                        <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}}></span></medium>
+                      </div>
                     </div>
                   </div>
-                  <div className='unit one-fifth no-gutters'>
-                    <small style={{textAlign:'center', color:'#717171', marginTop:'7px'}}>Leader</small>
-                  </div>
-                  <div className='unit two-fifths no-gutters'>
-                    <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}}></span></medium>
-                  </div>
 
-                </div>
-              </div>
+                )):
+
+                <PageLoader></PageLoader>
+              }
+
             </div>
           </div>
 

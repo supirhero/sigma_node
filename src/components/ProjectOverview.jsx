@@ -10,6 +10,8 @@ import { Line } from 'react-progressbar.js'
 
 class ProjectOverview extends Component {
     render(){
+      const appStore = store.getState()
+      const overview = appStore.data ? appStore.data.project.overview : null
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>
@@ -33,17 +35,17 @@ class ProjectOverview extends Component {
                 <div className='grid'>
                   <div className='unit two-fifths'>
                     <medium>IWO (Internal Work Order)</medium>
-                    <a style={{ marginTop: '12px', display:'block'}}>TBWS123213</a>
+                    <a style={{ marginTop: '12px', display:'block'}}>{overview.iwo}</a>
                   </div>
                   <div className='unit three-fifths'>
                     <medium>Business Unit Owner</medium>
-                    <a style={{ marginTop: '12px', display:'block'}}>IT Operation Services</a>
+                    <a style={{ marginTop: '12px', display:'block'}}>{overview.bu_owner}</a>
                   </div>
                 </div>
                 <div className='grid'>
                   <div className='unit whole'>
                     <medium>Description</medium>
-                    <small>Lorem Ipsum dolor sit amet, consectur un pad deu deu bla tauui</small>
+                    <small>{overview.description ? overview.description : '-'}</small>
                   </div>
 
                 </div>

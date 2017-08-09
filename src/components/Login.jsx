@@ -8,7 +8,7 @@ import {Field, reduxForm} from 'redux-form';
 
 import store from '../reducers/combineReducers.jsx'
 import {getData, login} from './actions.jsx'
-import {Input, Loader, ReduxInput} from './Components.jsx'
+import {Input, LoaderLogin, ReduxInput} from './Components.jsx'
 
 
 
@@ -34,7 +34,7 @@ class Login extends Component {
                     </div>
                   </span>
                 </div>
-                <Loader id='login-loader'>
+                <LoaderLogin id='login-loader'>
                 <div className='unit three-fifths'>
                   <div className='margin'>
                     <large>SIGN IN</large>
@@ -75,7 +75,7 @@ class Login extends Component {
 
                 </div>
               </div>
-            </Loader>
+            </LoaderLogin>
             </div>
           </div>
 
