@@ -22,7 +22,6 @@ export function login(email, password) {
                   }
           }).then(
             res => {
-              alert('work');
               // browserHistory.replace('/')
               store.dispatch({type:'API', data: res})
               if (store.getState().data.data.data.token != undefined) {
@@ -55,7 +54,6 @@ export function getProjectDetail(id) {
 
           }).then(
             res => {
-              alert('work')
             },
             req => console.log("request", req)
 
