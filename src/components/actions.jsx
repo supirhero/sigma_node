@@ -23,7 +23,7 @@ export function login(email, password) {
           }).then(
             res => {
               // browserHistory.replace('/')
-              store.dispatch({type:'API', name: 'login', data: res})
+              store.dispatch({type:'API', name: 'login', data: res, append: false})
               if (store.getState().data.login.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
                 store.dispatch(replace('/'))
@@ -64,11 +64,13 @@ export function getProjectDetail(id) {
 }
 
 export function pop() {
-  const currentPage= store.getState().data.page.name
-  return {
-    type: 'POP',
-    name : currentPage
-  }
+
+    const currentPage= store.getState().data.page ? store.getState().data.page.name : null
+    return {
+      type: 'POP',
+      name : currentPage
+    }
+
 }
 
 export function changeRoute(params) {
@@ -110,10 +112,33 @@ export const getProjectTeamMember = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
+              store.dispatch({type:'API', name: 'project', append: true, data: res})
+
+            },
+          )
+  }
+
+}
+
+export const getDocsFiles = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/test/projectdoc/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
               store.dispatch({type:'API', name: 'project', data: res})
 
             },
-
           )
   }
 

@@ -14,12 +14,10 @@ class ProjectTeamMember extends Component {
 
     store.dispatch(getProjectTeamMember(id))
   }
-  componentWillUnmount(){
-    store.dispatch(pop())
-  }
+
     render(){
       const appStore = store.getState();
-      const projectMember = appStore.data ? appStore.data.project.project_member : null
+      const projectMember = appStore.data.project.project_member 
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>

@@ -8,6 +8,7 @@ import jQuery from 'jquery';
 import {reducer as reduxForm } from 'redux-form';
 import * as storage from 'redux-storage'
 import Immutable from 'immutable'
+import _ from 'lodash'
 
 // import {getData} from '../components/actions.jsx'
 var compile_mode = process.env.NODE_ENV
@@ -84,9 +85,14 @@ var data = (state = Immutable.List(), action) => {
       })
 
       case 'POP':
-      return Object.assign({}, state,{
-        [action.name] : null
-      })
+      if (action.name != null) {
+        return Object.assign({}, state,{
+          [action.name] : null
+        })
+      }
+      else {
+        return state
+      }
       break;
 
       case 'LOGIN':
@@ -101,10 +107,28 @@ var data = (state = Immutable.List(), action) => {
       })
         break;
       case 'API':
+        if (!action.append) {
         return Object.assign({}, state,{
-          [action.name] :action.data.data
+            [action.name] :action.data.data
+          })
         }
-        )
+        else {
+          console.log("BLAA", state[action.name]);
+          return _.mergeWith({},state,{
+            [action.name] : action.data.data
+
+          }
+          )
+          // console.log("BLAAAA", newState);
+          // return state
+          // return Object.assign({},state,
+          //   {
+          //
+          //   }
+
+          // )
+        }
+
         break;
       default:
       return state
