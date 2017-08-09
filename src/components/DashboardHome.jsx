@@ -137,6 +137,12 @@ class DashboardHome extends Component {
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
                         browserHistory.push('/business-unit')
+                        store.dispatch(changeRoute({
+                          type: 'PUSH',
+                          page: {
+                            name: 'business-unit',
+                          }
+                        }))
                       }
                     }>{value.bu_name}</a></large>
 
@@ -154,18 +160,14 @@ class DashboardHome extends Component {
                             <div className='unit whole no-gutters'>
                               <div className='card' onClick={
                                 e => {
-                                  // store.dispatch(changeRoute({
-                                  //   path: '/project/' + value.project_id,
-                                  //   page: {
-                                  //     id : value.project_id
-                                  //   }
-                                  // }))
-                                  browserHistory.push({
-                                    pathname: '/project/' + value.project_id,
-                                    state: {
+                                  store.dispatch(changeRoute({
+                                    type: 'PUSH',
+                                    page: {
+                                      name: 'project',
                                       id : value.project_id
                                     }
-                                  })
+                                  }))
+
                                   e.preventDefault()
                                 }
                               }>

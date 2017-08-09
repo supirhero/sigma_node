@@ -80,7 +80,7 @@ var data = (state = Immutable.List(), action) => {
     switch (action.type) {
       case 'PUSH':
       return Object.assign({}, state, {
-        page: state.params
+        page: action.page
       })
 
       case 'POP':

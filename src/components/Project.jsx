@@ -18,7 +18,7 @@ class Project extends Component {
   }
 
   componentWillMount(){
-    const id = store.getState().routing.locationBeforeTransitions.state.id
+    const id = store.getState().data.page.id
     store.dispatch(getProjectDetail(id)).then(
       (res)=>{
         console.log('detail project');
@@ -27,11 +27,11 @@ class Project extends Component {
   }
 
   componentWillUnmount(){
-    store.dispatch(pop('project'))
+    store.dispatch(pop())
   }
 
   render(){
-    const id = store.getState().routing.locationBeforeTransitions.state.id
+    const id = store.getState().data.page.id
     const sidebar = [
       {type:'menu', name : 'Overview', path: `/project/${id}`},
       {type:'menu', name : 'Setting', path: `/project/${id}/setting`},

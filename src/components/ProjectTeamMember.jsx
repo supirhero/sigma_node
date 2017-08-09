@@ -4,15 +4,18 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
-import { getProjectTeamMember } from './actions.jsx'
+import { getProjectTeamMember, pop } from './actions.jsx'
 
 
 
 class ProjectTeamMember extends Component {
   componentWillMount() {
-    const id = store.getState().routing.locationBeforeTransitions.state.id
+    const id = store.getState().data.page.id
 
     store.dispatch(getProjectTeamMember(id))
+  }
+  componentWillUnmount(){
+    store.dispatch(pop())
   }
     render(){
       const appStore = store.getState();

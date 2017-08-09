@@ -41,7 +41,7 @@ export function login(email, password) {
 
 export function getProjectDetail(id) {
 
-  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
     return axios({
@@ -54,8 +54,7 @@ export function getProjectDetail(id) {
 
           }).then(
             res => {
-              store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               store.dispatch({type:'API', name: 'project', data: res})
 
             },
@@ -64,18 +63,28 @@ export function getProjectDetail(id) {
   }
 }
 
-export function pop(name) {
+export function pop() {
+  const currentPage= store.getState().data.page.name
   return {
     type: 'POP',
-    name : name
+    name : currentPage
   }
 }
 
 export function changeRoute(params) {
-  store.dispatch(replace(params.path))
+  switch (params.type) {
+    case 'PUSH':
+      var id = params.page.id ? params.page.id : ''
+      store.dispatch(push(`/${params.page.name}/${id}`))
+      break;
+    case 'REPLACE':
+      store.dispatch(replace(params.path))
+      break;
+    default:
+  }
   return {
-    type: 'PUSH',
-    page: params.data
+    type: params.type,
+    page: params.page
   }
 }
 
