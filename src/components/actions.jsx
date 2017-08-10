@@ -170,6 +170,7 @@ export function viewTimesheet(date) {
 
 
 export function taskList(project_id) {
+  console.log('PROJECT_ID',project_id)
   return function (dispatch) {
     return axios({
       method: 'POST',
@@ -211,7 +212,7 @@ export function taskList(project_id) {
 // }
 
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
-   const currentDate = moment().format("YYYY-MM-DD"); 
+   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
@@ -223,13 +224,15 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
              TS_SUBJECT:TS_SUBJECT,
              TS_MESSAGE:TS_MESSAGE,
              LATITUDE:'38.898648',
-             LONGITUDE:'77.037692'     
+             LONGITUDE:'77.037692'
             }
     }).then(
       (res)=>{
+        alert('Successfully added')
+        console.log("ADDTIMESHEET", res);
         store.dispatch(viewTimesheet(currentDate));
-        
-      }      
+
+      }
     )
   }
 }
@@ -244,7 +247,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 //     }).then(
 //       (res)=>{
 //         alert('timesheet updated');
-//       }      
+//       }
 //     )
 //   }
 // }
@@ -252,7 +255,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 
 export function confirmationTimesheet(TS_ID,confirm) {
-   const currentDate = moment().format("YYYY-MM-DD"); 
+   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
@@ -264,7 +267,7 @@ export function confirmationTimesheet(TS_ID,confirm) {
     }).then(
       (res)=>{
         store.dispatch(viewTimesheet(currentDate));
-      }      
+      }
     )
   }
 }

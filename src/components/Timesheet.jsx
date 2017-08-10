@@ -15,29 +15,29 @@ class Timesheet extends Component {
   onSubmit(props){
     this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
   }
-  
+
   componentWillMount(){
-    const currentDate = moment().format("YYYY-MM-DD"); 
+    const currentDate = moment().format("YYYY-MM-DD");
     const state = store.getState();
     store.dispatch(viewTimesheet(currentDate));
     store.dispatch(taskList('8790874'));
-    const timesheet = state.data.timesheet;   
+    const timesheet = state.data.timesheet;
     const auth = state.data.login;
-  
+
   }
 
 
   componentWillUnmount() {
     store.dispatch(pop());
   }
- 
+
 
   render() {
     const { handleSubmit } = this.props;
     const currentDate = moment().format("ddd,MMM DD");
     const state = store.getState();
-    const timesheet = state.data.timesheet;  
-  
+    const timesheet = state.data.timesheet;
+
     // console.log(timesheet.task);
     function status(){
       if (timesheet.user_activities.IS_APPROVED == 1){
@@ -46,13 +46,13 @@ class Timesheet extends Component {
         return <b>BELUM DIKONFIRMASI</b>
       } else{
         return <b>DITOLAK</b>
-      }    
+      }
      }
-  
+
     const auth = state.data.login;
 
-     
-     
+
+
      if(!timesheet){
      return <PageLoader></PageLoader>
    }
@@ -79,10 +79,10 @@ class Timesheet extends Component {
               <div className="unit whole" style={{ textAlign: 'center' }}>
                 <span className="icon-arrow-left-circle" />
                 <div style={{ marginTop: '20px', display: 'inline-block' }}>
-       
+
                   <Tab style={{ listStyle: 'none', display: 'inline-block', float: 'left' }}><TimeSheetTimeButton  text={currentDate} hours="4 Hours" /></Tab>
                   <Tab style={{ listStyle: 'none', display: 'inline-block', float: 'left' }}><TimeSheetTimeButton text="Sat, Jun 12" hours="DAY OFF" /></Tab>
-                
+
                   <span className="icon-arrow-right-circle" />
                 </div>
               </div>
@@ -94,27 +94,26 @@ class Timesheet extends Component {
             <div className="unit whole">
               <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass="btn-primary" btnText="ADD NEW" btnStyle={{ display: 'block', margin: 'auto' }}>
                 <div>
-        
+
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
                       <Field
                         inputName="DATE"
                         name="TS_DATE"
-                       
+
                         component={ReduxInput}
                       />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Field          
+                      <Field
                         inputName="PROJECT NAME"
                         name="PROJECT_ID"
                         onChange={
-                          PROJECT_ID=>{
-                            store.dispatch(taskList(PROJECT_ID))
-                            PROJECT_ID.preventDefault()
+                          (e)=>{
+                            store.dispatch(taskList(this.props.formValues))
                           }
                         }
                         component={ReduxSelect}>
@@ -123,10 +122,10 @@ class Timesheet extends Component {
                                 return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
                               }
                             )
-                        }   
-                          
-                        
-                        
+                        }
+
+
+
                         </Field>
                     </div>
                   </div>
@@ -136,13 +135,13 @@ class Timesheet extends Component {
                       name="WP_ID"
                       type="WP_ID"
                         inputName="TASK"
-                        component={ReduxSelect}>                    
+                        component={ReduxSelect}>
                             {
                               timesheet.task.map((value,index)=>{
                                 return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
                               }
                             )
-                            }                    
+                            }
                      </Field>
                     </div>
                     <div className="unit one-quarter">
@@ -150,7 +149,7 @@ class Timesheet extends Component {
                         inputName="WORK HOURS"
                         name="HOUR"
                         type="HOUR"
-                        component={ReduxInput}                        
+                        component={ReduxInput}
                       />
                     </div>
                   </div>
@@ -188,7 +187,7 @@ class Timesheet extends Component {
             </div>
           </div>
 
-          
+
 
           <TabPanel>
             <div className="grid wrap">
@@ -197,7 +196,7 @@ class Timesheet extends Component {
               </div>
             </div>
 
-          
+
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -214,10 +213,10 @@ class Timesheet extends Component {
                           return(
                             <div key={index}>
                             <div className="card project">
-                              <div className="unit one-fifth" style={{width: '79px'}}> 
+                              <div className="unit one-fifth" style={{width: '79px'}}>
                                 <small style={{display:'block'}}>4:55 PM</small>
                               </div>
-                                <div className="unit four-fifths">          
+                                <div className="unit four-fifths">
                               <small className="project-info" >
                                   Project <a>{value.PROJECT_NAME}</a>
                                 <p>(<b>{value.HOUR_TOTAL} hours</b>) - {value.WBS_NAME}</p>
@@ -225,7 +224,7 @@ class Timesheet extends Component {
                                 <p>{value.MESSAGE}</p>
                                   </small>
                                   <div className="grid wrap" style={{ float: 'right' }}>
-                                    <div className="unit whole" >                                     
+                                    <div className="unit whole" >
                                       <medium style={{ display: 'inline-block', marginLeft: '50px' }}>
                                       {
                                         timesheet.user_activities.IS_APPROVED == "1" ? <b>ACCEPTED</b> : <b>WAITING FOR APPROVAL</b>
@@ -233,7 +232,7 @@ class Timesheet extends Component {
                                       </medium>
                                     </div>
                                   </div>
-                                </div> 
+                                </div>
                               </div>
                             </div>
                           )
@@ -241,7 +240,7 @@ class Timesheet extends Component {
 
                       }
 
-                
+
               </div>
             </div>
 
@@ -264,9 +263,9 @@ class Timesheet extends Component {
 
           </TabPanel>
 
-          
 
-          
+
+
         </Tabs>
       </div>
 
@@ -277,6 +276,8 @@ class Timesheet extends Component {
 
 function mapStateToProps(state) {
   return {
+    formValues: state.form.AddNewTimesheet,
+
     state,
     // filter: ownProps.location.query.filter
   };
