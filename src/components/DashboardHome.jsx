@@ -33,7 +33,7 @@ class DashboardHome extends Component {
                   </div>
                   <div className='unit three-fifths'>
                     <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>
-                    <small>Admin, Project Manager</small>
+                    <small>{auth.userdata.profile_name}, {auth.userdata.position}</small>
                     <ul>
                       <li>
                         <span className='icon-speedometer'>&nbsp;&nbsp;</span>
@@ -83,7 +83,12 @@ class DashboardHome extends Component {
           <div className='unit half'>
             <button className='btn-primary' style={{width:'100%'}} onClick={
               e => {
-                browserHistory.push('/timesheet')
+                store.dispatch(changeRoute({
+                          type: 'PUSH',
+                          page: {
+                            name: 'timesheet',
+                          }
+                        }))
                 e.preventDefault()
               }
             }>TIMESHEET</button>

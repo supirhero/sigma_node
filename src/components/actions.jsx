@@ -1,6 +1,7 @@
 import store from '../reducers/combineReducers.jsx'
 import { Link, browserHistory } from 'react-router'
 import { push, replace } from 'react-router-redux'
+import moment from 'moment';
 
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
@@ -146,14 +147,124 @@ export const getDocsFiles = (id) => {
 
 
 
-export const addTimesheet = (values) => {
-  const config = {
-    headers:
-    { 'token':store.getState().data.data.data.token,'Content-Type': 'application/x-www-form-urlencoded',},
-  }
+export function viewTimesheet(date) {
+  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+  return function (dispatch) {
+    return axios({
+      method: 'POST',
+      url: `${baseURL}/dev/timesheettest/view/`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: {date:date}
+
+    }).then(
+            (res) => {
+              // alert('timesheed fetched');
+              store.dispatch({ type: 'API', name: 'timesheet', append: true, data: res });
+            },
+
+          );
+  };
+}
+
+
+export function taskList(project_id) {
+  return function (dispatch) {
+    return axios({
+      method: 'POST',
+      url: `${baseURL}/dev/timesheettest/taskList/`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: {PROJECT_ID: project_id}
+
+    }).then(
+            (res) => {
+              // alert('fetched tasklist');
+              store.dispatch({ type: 'API', name: 'timesheet', append: true, data: res });
+            },
+
+          );
+  };
+}
+
+
+// export function addTimesheet(TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE,WP_ID) {
+//   return function(dispatch){
+//     return axios({
+//       method:'POST',
+//       url:`${baseURL}/dev/timesheet/addTimesheet/`,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data: {TS_DATE: TS_DATE,
+//                     HOUR: HOUR,
+//                     WP_ID:WP_ID,
+//                     TS_SUBJECT : TS_SUBJECT,
+//                     TS_MESSAGE:TS_MESSAGE
+//                   }
+//     }).then(
+//       (res)=>{
+//         alert('timesheet updated');
+//       }
+//     )
+//   }
+// }
+
+export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
+   const currentDate = moment().format("YYYY-MM-DD"); 
   return function(dispatch){
-    axios
-      .post(`${baseURL}/dev/timesheet/addTimesheet/`,values,config)
-      .then(res=> dispatch ({type:'API',payload:res}))
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/timesheettest/addTimesheet/`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {WP_ID: WP_ID,
+             TS_DATE: TS_DATE,
+             HOUR:HOUR,
+             TS_SUBJECT:TS_SUBJECT,
+             TS_MESSAGE:TS_MESSAGE,
+             LATITUDE:'38.898648',
+             LONGITUDE:'77.037692'     
+            }
+    }).then(
+      (res)=>{
+        store.dispatch(viewTimesheet(currentDate));
+        
+      }      
+    )
+  }
+}
+
+// export function addTimesheet(values) {
+//   return function(dispatch){
+//     return axios({
+//       method:'POST',
+//       url:`${baseURL}/dev/timesheettest/addTimesheet/`,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data: {values}
+//     }).then(
+//       (res)=>{
+//         alert('timesheet updated');
+//       }      
+//     )
+//   }
+// }
+
+
+
+export function confirmationTimesheet(TS_ID,confirm) {
+   const currentDate = moment().format("YYYY-MM-DD"); 
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/timesheettest/confirmationTimesheet/`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {TS_ID:TS_ID,
+            confirm:confirm
+            }
+    }).then(
+      (res)=>{
+        store.dispatch(viewTimesheet(currentDate));
+      }      
+    )
   }
 }
