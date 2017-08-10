@@ -230,6 +230,26 @@ export class Select extends Component {
   }
 }
 
+
+export class ReduxSelectNew extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <select className='select' {...this.props.select} {...this.props.custom}
+          onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+        >
+          {this.props.children}
+        </select>
+
+      </div>
+    )
+  }
+}
+
+
 export class ReduxSelect extends Component {
   render() {
     return (
@@ -246,6 +266,7 @@ export class ReduxSelect extends Component {
 
       </div>
     );
+
   }
 }
 
@@ -253,7 +274,7 @@ export class ReduxSelect extends Component {
 export class TimeSheetTimeButton extends Component {
   render(){
     return(
-    <button className ='btn-secondary' style={{float:'left'}}>
+    <button className ='btn-secondary' style={{float:'left'}} onClick={this.props.onClick}>
       {this.props.text}
       <small>{this.props.hours}</small>
     </button>
