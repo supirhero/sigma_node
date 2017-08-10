@@ -229,6 +229,24 @@ export class Select extends Component {
   }
 }
 
+export class ReduxSelect extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+        {this.props.inputName ? <h2 className="input-name">{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className="input-desc">{this.props.inputDesc}</h2> : null}
+        <select className="select" {...this.props.select}>
+          {this.props.items.items.map((value, index) => (
+              <option key={index} value={value.title}>{value.title}</option>
+            ))}
+        </select>
+
+      </div>
+    );
+  }
+}
+
+
 export class TimeSheetTimeButton extends Component {
   render(){
     return(
