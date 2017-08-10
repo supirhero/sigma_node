@@ -2,16 +2,38 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import store from '../reducers/combineReducers.jsx'
 import { Line} from 'react-progressbar.js'
-import {Divider, Input, RadioButton, Select, PopUp} from './Components.jsx'
+import {Field, reduxForm} from 'redux-form';
+import {
+  Checkbox,
+  RadioButtonGroup,
+  SelectField,
+  TextField,
+  Toggle,
+  DatePicker
+} from 'redux-form-material-ui'
+
+import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
+
+import {addProject} from './actions.jsx'
+import store from '../reducers/combineReducers.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme} from './Components.jsx'
+
 
 
 class NewProject extends Component {
 
+  onSubmit(props){
+    alert(props.username)
+    this.props.login(props.username, props.password)
+  }
     render(){
+      const {handleSubmit} = this.props;
+
       return(
         <div>
+          <MuiThemeProvider muiTheme={muiTheme}>
+
           <form>
           <div className='grid wrap'>
             <div className='unit whole'>
@@ -45,26 +67,68 @@ class NewProject extends Component {
                     {title : 'TBWS21312'}
                   ]
                 }}></Select>
-                <Input style={{width:'100%'}} inputName='NAME'/>
-                <Input style={{width:'100%'}} inputName='BUSINESS UNIT'/>
-                <Input style={{width:'100%'}} inputName='RELATED BUSINESS UNIT'/>
-                <Input style={{width:'100%'}} inputName='NAME'/>
+                <Field
+                  inputName="NAME"
+                  name="name"
+                  type='name'
+                  style={{width:'100%'}}
+                  component={ReduxInput}
+                />
+                <Field
+                  inputName="BUSINESS UNIT"
+                  name="BU"
+                  type="BU"
+                  style={{width:'100%'}}
+                  component={ReduxInput}
+                />
+                <Field
+                  inputName="RELATED BUSINESS UNIT"
+                  name="RELATED"
+                  type="RELATED"
+                  style={{width:'100%'}}
+                  component={ReduxInput}
+                />
+
               </div>
               </div>
               <div className='grid wrap'>
                 <div className='unit one-third'>
-                  <Input inputName='CUSTOMER' style={{width:'88%'}}/>
+                  <Field
+                    inputName="CUSTOMER"
+                    name="CUST_ID"
+                    type="CUST_ID"
+                    style={{width:'88%'}}
+                    component={ReduxInput}
+                  />
                 </div>
                 <div className='unit two-thirds'>
-                  <Input inputName='END CUSTOMER' style={{width:'100%'}}/>
+                  <Field
+                    inputName="END CUSTOMER"
+                    name="END_CUST_ID"
+                    type="END_CUST_ID"
+                    style={{width:'100%'}}
+                    component={ReduxInput}
+                  />
                 </div>
               </div>
               <div className='grid wrap'>
                 <div className='unit two-thirds'>
-                  <Input inputName='END CUSTOMER' style={{width:'94%'}}/>
+                  <Field
+                    inputName="PROJECT VALUE"
+                    name="AMOUNT"
+                    type="AMOUNT"
+                    style={{width:'94%'}}
+                    component={ReduxInput}
+                  />
                 </div>
                 <div className='unit one-third'>
-                  <Input inputName='CUSTOMER' style={{width:'100%'}}/>
+                  <Field
+                    inputName="MARGIN"
+                    name="MARGIN"
+                    type="MARGIN"
+                    style={{width:'100%'}}
+                    component={ReduxInput}
+                  />
                 </div>
 
               </div>
@@ -74,15 +138,44 @@ class NewProject extends Component {
                   <Divider text='PRODUCT'></Divider>
                 </div>
               </div>
+              <div className= 'grid wrap'>
+              <div className='unit whole'>
+                <Field
+                  inputName="DESCRIPTION"
+                  name="DESC"
+                  type="DESC"
+                  style={{width:'100%'}}
+                  component={ReduxInput}
+                />
+              </div>
+              </div>
               <div className='grid wrap'>
                 <div className='unit half'>
                   <div className='grid wrap'>
-                    <div className='unit half'>
-                      <RadioButton id='test1' label='Project' group='project-type'/>
+                    {/* <div className='unit half'>
+                      <Field className='radio-button' name="PROJECT_TYPE_ID" component="input" type="radio" value="Project" label='PROJECT' />
                     </div>
                     <div className='unit half'>
-                      <RadioButton id='test2' label='Non-Project' group='project-type'/>
+                      <Field className='radio-button' name="PROJECT_TYPE_ID" component="input" type="radio" value="Non Project" label='NON PROJECT' />
+
+                    </div> */}
+                    <h2 className='input-name'>PROJECT TYPE</h2>
+                    <div className='unit half'>
+
+                      <Field name="projectType" component={RadioButtonGroup}>
+                        <RadioButton value="project" label="Project"/>
+                      </Field>
                     </div>
+                    <div className='unit half'>
+                      <Field name="projectType" component={RadioButtonGroup}>
+                        <RadioButton value="non project" label="Non-project"/>
+                      </Field>
+
+                    </div>
+                      {/* <Field name="projectType" component={RadioButtonGroup}>
+                      </Field> */}
+
+
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
@@ -107,12 +200,18 @@ class NewProject extends Component {
                 </div>
                 <div className='unit half'>
                   <div className='grid wrap'>
-                    <div className='unit half'>
+                    <h2 className='input-name'>H/O OPERATION</h2>
 
-                      <RadioButton id='yes' label='YES' group='operation' style={{marginLeft: '20px'}}/>
+                    <div className='unit half'>
+                      <Field name="operations" component={RadioButtonGroup}>
+                        <RadioButton value="project" label="YES"/>
+                      </Field>
                     </div>
                     <div className='unit half'>
-                      <RadioButton id='no' label='NO' group='operation'/>
+                      <Field name="operations" component={RadioButtonGroup}>
+                        <RadioButton value="no" label="NO"/>
+                      </Field>
+
                     </div>
                   </div>
                   <div className='grid wrap'>
@@ -127,7 +226,7 @@ class NewProject extends Component {
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Input fullWidth='true' inputName='PRODUCT TYPE' style={{width:'96%', float:'right'}}/>
+                      <Input fullWidth='true' inputName='PRODUCT TYPE' style={{width:'100%', float:'right'}}/>
                     </div>
                   </div>
 
@@ -260,7 +359,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnText='COMPLETE FORM'>
+                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnText='COMPLETE FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
@@ -335,6 +434,8 @@ class NewProject extends Component {
               </div>
 
             </form>
+          </MuiThemeProvider>
+
             </div>
       )
     }
@@ -347,5 +448,11 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   }
 }
-export default connect(mapStateToProps)(NewProject)
+
+export default connect(mapStateToProps, { addProject })
+    (
+      reduxForm({
+        form: 'add-project',
+      })(NewProject));
+// export default connect(mapStateToProps)(NewProject)
 // export default Login

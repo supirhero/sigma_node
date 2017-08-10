@@ -135,8 +135,7 @@ export const getDocsFiles = (id) => {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log(res.data);
-              store.dispatch({type:'API', name: 'project', data: res})
+              store.dispatch({type:'API', name: 'project', append: true, data: res})
 
             },
           )

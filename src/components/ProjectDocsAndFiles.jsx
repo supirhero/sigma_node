@@ -4,10 +4,15 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Header, ProjectHeader, Input, PopUp, InputFile} from  './Components.jsx'
+import { getDocsFiles } from './actions.jsx'
 
 
 
 class ProjectDocsAndFiles extends Component {
+  componentWillMount(){
+    const id = store.getState().data.page.id
+    store.dispatch(getDocsFiles(id))
+  }
     render(){
       return(
         <div className='project-DocsFiles'>

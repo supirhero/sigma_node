@@ -4,9 +4,23 @@ import FileInput from 'react-file-input';
 import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
 import {Table as MaterialTable, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 import store from '../reducers/combineReducers.jsx'
+import {RadioButtonGroup} from 'material-ui/RadioButton'
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+   import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 
+export const muiTheme = getMuiTheme({
+    fontFamily: 'lato, sans-serif',
+    fontSize: '17px',
+   radioButton: {
+        size: '24px',
 
+         checkedColor:  "#F48165",
+         borderColor: "#F48165",
+         labelColor: '#777777'
+     },
+
+   });
 
 export class Menu extends Component {
     constructor(){
@@ -115,6 +129,36 @@ export class Input extends Component {
   }
 }
 
+export class RenderRadioGroup extends Component {
+  // static childContextTypes: {
+  //   muiTheme: React.PropTypes.object
+  // }
+  constructor() {
+    super();
+
+    this.constructor.childContextTypes = {
+      muiTheme: React.PropTypes.object
+    };
+  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: this.state.muiTheme
+  //   };
+  // }
+  getChildContext() {
+               return { muiTheme: getMuiTheme(baseTheme) };
+           }
+  render(){
+    return(
+      <RadioButtonGroup
+        {...this.props.input}
+        valueSelected={this.props.input.value}
+        onChange={(event, value) => this.props.input.onChange(value)}
+      />
+
+    )
+}}
+
 export class ReduxInput extends Component {
   render(){
     return(
@@ -132,12 +176,22 @@ export class ReduxInput extends Component {
   }
 }
 
+// export class RenderRadioGroup extends Component {
+//   render() {
+//     return (
+//       <p className='radio-button' style={this.props.style}>
+//        <input type="radio" id={this.props.id} name={this.props.name} value={this.props.value} {...this.props.input} onChange={(event, value) => this.props.input.onChange(value)} />
+//        <label htmlFor={this.props.id}>{this.props.label}</label>
+//      </p>
+//     )
+//   }
+// }
 
 export class RadioButton extends Component {
   render() {
     return (
       <p className='radio-button' style={this.props.style}>
-       <input type="radio" id={this.props.id} name={this.props.group}/>
+       <input type="radio" id={this.props.id} name={this.props.name} value={this.props.value} {...this.props.input} onChange={(event, value) => this.props.input.onChange(value)} />
        <label htmlFor={this.props.id}>{this.props.label}</label>
      </p>
     )
