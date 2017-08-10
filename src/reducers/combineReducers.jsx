@@ -111,13 +111,14 @@ var data = (state = Immutable.List(), action) => {
         return Object.assign({}, state,{
             [action.name] :action.data.data
           })
+
         }
         else {
           console.log("BLAA", state[action.name]);
           return _.mergeWith({},state,{
             [action.name] : action.data.data
-
           }
+
           )
           // console.log("BLAAAA", newState);
           // return state

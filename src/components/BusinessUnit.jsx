@@ -5,14 +5,17 @@ import { Link, browserHistory } from 'react-router';
 import {Line} from 'react-progressbar.js';
 
 import {Input ,Divider,Search} from './Components.jsx';
+import {changeRoute} from './actions.jsx';
+
 import store from '../reducers/combineReducers.jsx';
 
 
 class BusinessUnit extends Component {
   render() {
     var state = store.getState();
+    const index = state.data.page.business_unit.bu_code
       // var projects = state.data.projects ? state.data.projects : null
-    var auth = state.data.auth;
+    var bu = state.data.login.project[index];
     return (
       <div>
 
@@ -20,7 +23,7 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={auth.project.bu_name}
+            text={bu.bu_name}
             btnLeftClick={
               e => {
                 browserHistory.goBack()
@@ -52,10 +55,7 @@ class BusinessUnit extends Component {
         </div>
 
         <div className='projects'>
-          {
-            auth.project.map((value, index) => {
-              return(
-                <div key={index}>
+                <div>
                   <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
                     <div className='unit whole'>
                     <Search placeholder='search business units or project' style={{width:'55%', display:'inline-block'}}></Search>
@@ -66,11 +66,20 @@ class BusinessUnit extends Component {
                   </div>
 
                       {
-                        value.project_list.map((value,index) => {
+                        bu.project_list.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>
-                                <div className='card'>
+                                <div className='card' onClick={e=>{
+                                  store.dispatch(changeRoute({
+                                    type: 'PUSH',
+                                    page: {
+                                      name: 'project',
+                                      id : value.project_id
+                                    }
+                                  }))
+                                  e.preventDefault()
+                                }}>
                                   <div className='unit two-fifths'>
                                     <medium className='project-name'>
                                       {value.project_name}
@@ -108,9 +117,6 @@ class BusinessUnit extends Component {
                         })
                       }
                 </div>
-              )
-            })
-          }
           </div>
       </div>
     );

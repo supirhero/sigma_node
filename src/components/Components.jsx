@@ -166,6 +166,7 @@ export class ReduxInput extends Component {
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <input
+            style={{width:'100%'}}
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
@@ -235,9 +236,11 @@ export class ReduxSelect extends Component {
       <div style={this.props.style}>
         {this.props.inputName ? <h2 className="input-name">{this.props.inputName}</h2> : null}
         {this.props.inputDesc ? <h2 className="input-desc">{this.props.inputDesc}</h2> : null}
-        <select className="select" {...this.props.select}>
+        <select className="select" {...this.props.select} {...this.props.custom}
+        onChange={(event, index, value) => this.props.input.onChange(event.target.value)}
+          >
           {this.props.items.items.map((value, index) => (
-              <option key={index} value={value.title}>{value.title}</option>
+              <option key={index} value={value.title} {...this.props.option}>{value.title}</option>
             ))}
         </select>
 
@@ -686,6 +689,20 @@ export class InputFile extends Component {
     )
   }
 }
+export class ReduxFileInput extends Component {
+  render(){
+    return(
+      <FileInput
+        name={this.props.name}
+        placeholder={this.props.placeholder}
+        accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+        onChange={(event)=> this.props.input.onChange(event.target.files[0])}
+        {...this.props.custom}
+        >
+      </FileInput>
+    )
+  }
+}
 
 export class LoaderLogin extends Component {
   render(){
@@ -698,6 +715,16 @@ export class LoaderLogin extends Component {
           </div>
         </div>
         {this.props.children}
+      </div>
+    )
+  }
+}
+
+export class EmptyData extends Component {
+  render(){
+    return(
+      <div style={{width:'100%'}}>
+        <large style={{width:'100%', textAlign:'center'}} >NO DATA TO SHOW</large>
       </div>
     )
   }

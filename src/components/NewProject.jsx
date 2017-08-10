@@ -15,17 +15,19 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addProject} from './actions.jsx'
+import {addNewProject, getProjectView} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect} from './Components.jsx'
 
 
 
 class NewProject extends Component {
-
+  // componentWillMount(){
+  //   store.dispatch(getProjectView())
+  // }
   onSubmit(props){
-    alert(props.username)
-    this.props.login(props.username, props.password)
+    alert(props)
+    this.props.addNewProject(props)
   }
     render(){
       const {handleSubmit} = this.props;
@@ -34,8 +36,11 @@ class NewProject extends Component {
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
 
-          <form>
-          <div className='grid wrap'>
+          <form
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+
+            >
+          <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
                 browserHistory.goBack()
@@ -59,18 +64,24 @@ class NewProject extends Component {
               <Divider text='IWO'></Divider>
             </div>
           </div>
-              <div className= 'grid wrap'>
+              <div className= 'grid wrap narrow'>
               <div className='unit whole'>
-                <Select inputName="PROJECT ID" items={{
-                  items : [
-                    {title : 'TBWS21312'},
-                    {title : 'TBWS21312'}
-                  ]
-                }}></Select>
+                <Field
+                  inputName="PROJECT ID"
+                  name="IWO_NO"
+                  component={ReduxSelect}
+                  items={{
+                    items : [
+                      {title : 'TBWS21312'},
+                      {title : 'TBASA1127'}
+                    ]
+                  }}
+                />
+
                 <Field
                   inputName="NAME"
-                  name="name"
-                  type='name'
+                  name="PROJECT_NAME"
+                  type='input'
                   style={{width:'100%'}}
                   component={ReduxInput}
                 />
@@ -91,7 +102,7 @@ class NewProject extends Component {
 
               </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit one-third'>
                   <Field
                     inputName="CUSTOMER"
@@ -111,7 +122,7 @@ class NewProject extends Component {
                   />
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit two-thirds'>
                   <Field
                     inputName="PROJECT VALUE"
@@ -132,13 +143,19 @@ class NewProject extends Component {
                 </div>
 
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
+                <div className='unit whole'>
+                  <small>You have to fill this <a>project charter form</a> because your project value exceed Rp 10 Billion</small>
+                </div>
+              </div>
+
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
 
                   <Divider text='PRODUCT'></Divider>
                 </div>
               </div>
-              <div className= 'grid wrap'>
+              <div className= 'grid wrap narrow'>
               <div className='unit whole'>
                 <Field
                   inputName="DESCRIPTION"
@@ -149,7 +166,7 @@ class NewProject extends Component {
                 />
               </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit half'>
                   <div className='grid wrap'>
                     {/* <div className='unit half'>
@@ -162,12 +179,12 @@ class NewProject extends Component {
                     <h2 className='input-name'>PROJECT TYPE</h2>
                     <div className='unit half'>
 
-                      <Field name="projectType" component={RadioButtonGroup}>
+                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
                         <RadioButton value="project" label="Project"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="projectType" component={RadioButtonGroup}>
+                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
                         <RadioButton value="non project" label="Non-project"/>
                       </Field>
 
@@ -177,24 +194,39 @@ class NewProject extends Component {
 
 
                   </div>
-                  <div className='grid wrap'>
+                  <div className='grid wrap narrow'>
                     <div className='unit whole'>
-                      <Select inputName='PROJECT MANAGER' style={{width:'96%'}} items={{
-                        items : [
-                          {title : 'TBWS21312'},
-                          {title : 'TBWS21312'}
-                        ]
-                      }}></Select>
+                      <Field
+                        inputName="PROJECT MANAGER"
+                        name="PM"
+                        style={{width:'96%'}}
+
+                        component={ReduxSelect}
+                        items={{
+                          items : [
+                            {title : 'AHMAD DEDE'},
+                            {title : 'DHANI ACHMAD'}
+                          ]
+                        }}
+                      />
+
                     </div>
                   </div>
-                  <div className='grid wrap'>
+                  <div className='grid wrap narrow'>
                     <div className='unit whole'>
-                      <Select inputName='TYPE OF OFFER' style={{width:'96%'}} items={{
-                        items : [
-                          {title : 'TBWS21312'},
-                          {title : 'TBWS21312'}
-                        ]
-                      }}></Select>
+                      <Field
+                        inputName="TYPE OF EFFORT"
+                        name="TYPE_OF_EFFORT"
+                        style={{width:'96%'}}
+                        component={ReduxSelect}
+                        items={{
+                          items : [
+                            {title : 'MAINTENANCE'},
+                            {title : 'UPDATE'}
+                          ]
+                        }}
+                      />
+
                     </div>
                   </div>
                 </div>
@@ -203,12 +235,12 @@ class NewProject extends Component {
                     <h2 className='input-name'>H/O OPERATION</h2>
 
                     <div className='unit half'>
-                      <Field name="operations" component={RadioButtonGroup}>
-                        <RadioButton value="project" label="YES"/>
+                      <Field name="H/O" component={RadioButtonGroup}>
+                        <RadioButton value="yes" label="YES"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="operations" component={RadioButtonGroup}>
+                      <Field name="H/O" component={RadioButtonGroup}>
                         <RadioButton value="no" label="NO"/>
                       </Field>
 
@@ -216,114 +248,181 @@ class NewProject extends Component {
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Select inputName='ACCOUNT MANAGER' style={{width:'96%', float:'right'}} items={{
-                        items : [
-                          {title : 'TBWS21312'},
-                          {title : 'TBWS21312'}
-                        ]
-                      }}/>
+                      <Field
+                        inputName="ACCOUNT MANAGER"
+                        name="AM_ID"
+                        style={{width:'96%', float:'right'}}
+                        component={ReduxSelect}
+                        items={{
+                          items : [
+                            {title : 'NONA SOEDHOWO'},
+                            {title : 'RIZA S.'}
+                          ]
+                        }}
+                      />
+
                     </div>
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Input fullWidth='true' inputName='PRODUCT TYPE' style={{width:'100%', float:'right'}}/>
+                      <Field
+                        inputName='PRODUCT TYPE'
+                        name="PRODUCT_TYPE"
+                        style={{width:'96%', float:'right'}}
+                        type="input"
+                        // style={{width:'100%'}}
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
 
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='STATUS'></Divider>
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
-                  <Select inputName='ACCOUNT MANAGER' style={{width:'100%'}} items={{
-                    items : [
-                      {title : 'TBWS21312'},
-                      {title : 'TBWS21312'}
-                    ]
-                  }}/>
+                  <Field
+                    inputName='PROJECT STATUS'
+                    name="PROJECT_STATUS"
+                    style={{width:'100%'}}
+                    items={{
+                      items : [
+                        {title : 'IN PROGRESS'},
+                        {title : 'COMPLETE'}
+                      ]
+                    }}
+                    component={ReduxSelect}
+                  />
+
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit half'>
-                  <Select inputName='START DATE' style={{width:'96%'}} items={{
-                    items : [
-                      {title : 'TBWS21312'},
-                      {title : 'TBWS21312'}
-                    ]
-                  }}/>
+                  <Field
+                    inputName='START DATE'
+                    name="START"
+                    style={{width:'96%'}}
+                    items={{
+                      items : [
+                        {title : '2017-12-12'},
+                        {title : '2017-12-1'}
+                      ]
+                    }}
+                    component={ReduxSelect}
+                  />
+
                 </div>
                 <div className='unit half'>
-                  <Select inputName='END DATE' style={{width:'96%', float:'right'}} items={{
-                    items : [
-                      {title : 'TBWS21312'},
-                      {title : 'TBWS21312'}
-                    ]
-                  }}/>
+                  <Field
+                    inputName='END DATE'
+                    name="END"
+                    style={{width:'96%', float:'right'}}
+                    items={{
+                      items : [
+                        {title : '2017-12-12'},
+                        {title : '2017-12-1'}
+                      ]
+                    }}
+                    component={ReduxSelect}
+                  />
+
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
-                  <h1 className='input-desc'>VISIBILITY</h1>
+                  <h1 className='input-name'>VISIBILITY</h1>
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
-                  <RadioButton id='business-member' label='Owning Busniness Member' group='visibility'/>
+                  <Field name="VISIBILITY" component={RadioButtonGroup}>
+                    <RadioButton value="BUSINESS_MEMBER" label='Owning Busniness Member'/>
+                  </Field>
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
-                  <RadioButton id='project-member' label='Project Members Only' group='visibility'/>
+                  <Field name="VISIBILITY" component={RadioButtonGroup}>
+                    <RadioButton value="PROJECT_MEMBER" label='Project Members Only'/>
+                  </Field>
                 </div>
               </div>
 
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='FINANCE'></Divider>
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit half'>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Select inputName='START DATE' style={{width:'96%'}} items={{
-                        items : [
-                          {title : 'TBWS21312'},
-                          {title : 'TBWS21312'}
-                        ]
-                      }}/>
+                      <Field
+                        inputName='TYPE OF EXPENSE'
+                        name="TYPE_OF_EXPENSE"
+                        style={{width:'96%'}}
+                        items={{
+                          items : [
+                            {title : 'Capital Expense'},
+                            {title : 'Capital ROW'},
+                          ]
+                        }}
+                        component={ReduxSelect}
+                      />
+
                     </div>
                   </div>
-                  <div className='grid wrap'>
+                  <div className='grid wrap narrow'>
                     <div className='unit whole'>
-                      <Input inputName='TYPE OF EXPENSE' style={{width:'96%'}}/>
+                      <Field
+                        inputName='ACTUAL COST WORK PLAN'
+                        name="ACTUAL_COST"
+                        style={{width:'96%'}}
+                        type="input"
+                        // style={{width:'100%'}}
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                 </div>
                 <div className='unit half'>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Input inputName='PROJECT OVERHEAD' style={{width:'96%', float:'right'}}/>
+                      <Field
+                        inputName='PROJECT OVERHEAD'
+                        name="OVERHEAD"
+                        style={{width:'96%', float:'right'}}
+                        type="input"
+                        // style={{width:'100%'}}
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
-                      <Input inputName='COGS' style={{width:'96%', float:'right'}}/>
+                      <Field
+                        inputName='COGS'
+                        name="COGS"
+                        style={{width:'96%', float:'right'}}
+                        type="input"
+                        // style={{width:'100%'}}
+                        component={ReduxInput}
+                      />
                     </div>
                   </div>
 
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='PROJECT CHARTER FORM'></Divider>
                 </div>
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit three-quarters'>
                   <large style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></large>
                   <large style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
@@ -422,11 +521,11 @@ class NewProject extends Component {
 
 
               </div>
-              <div className='grid wrap'>
+              <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                    <button className='btn-secondary'>CANCEL</button>
-                    <button className='btn-primary'style={{float:'right'}}>CREATE PROJECT</button>
+                    <button className='btn-secondary' style={{display:'inline-block'}}>CANCEL</button>
+                    <button className='btn-primary' type='submit' style={{float:'right', display:'inline-block'}}>CREATE PROJECT</button>
 
                   </div>
 
@@ -449,10 +548,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { addProject })
+export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
-        form: 'add-project',
+        form: 'add_project',
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login

@@ -14,7 +14,6 @@ import {Input, LoaderLogin, ReduxInput} from './Components.jsx'
 
 class Login extends Component {
     onSubmit(props){
-      alert(props.username)
       this.props.login(props.username, props.password)
     }
 
@@ -101,9 +100,9 @@ function mapStateToProps(state) {
 // );
 
 export default connect(mapStateToProps, { login })
-    (
-      reduxForm({
-        form: 'Login',
-      })(Login));
+(
+  reduxForm({
+    form: 'Login',
+  })(Login));
 
 // export default Login

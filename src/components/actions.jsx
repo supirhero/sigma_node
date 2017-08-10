@@ -64,12 +64,12 @@ export function getProjectDetail(id) {
 }
 
 export function pop() {
-
-    const currentPage= store.getState().data.page ? store.getState().data.page.name : null
+  const currentPage= store.getState().data.page ? store.getState().data.page.name : null
     return {
       type: 'POP',
       name : currentPage
     }
+
 
 }
 
@@ -110,8 +110,6 @@ export const getProjectTeamMember = (id) => {
 
           }).then(
             res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log(res.data);
               store.dispatch({type:'API', name: 'project', append: true, data: res})
 
             },
@@ -142,6 +140,72 @@ export const getDocsFiles = (id) => {
   }
 
 }
+
+export const addNewProject = (props) => {
+  console.log('PROPS',props);
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/projecttest/addProject_acion` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:props
+
+
+          }).then(
+            res => {
+              console.log('NEW PROJECT', res);
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              // store.dispatch({type:'API', name: 'project', data: res})
+
+            },
+          )
+  }
+}
+export const getProjectView = (id) => {
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/projecttest/editProject_view/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+
+          }).then(
+            res => {
+              console.log('GET PROJECT VIEW', res);
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              // store.dispatch({type:'API', name: 'project', data: res})
+
+            },
+          )
+  }
+}
+
+export const addDocsAndFiles = (id) => {
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/home/documentupload/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              // store.dispatch({type:'API', name: 'project', data: res})
+
+            },
+          )
+  }
+}
+
+
 
 
 

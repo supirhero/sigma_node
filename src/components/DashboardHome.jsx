@@ -136,11 +136,15 @@ class DashboardHome extends Component {
 
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
-                        browserHistory.push('/business-unit')
+                        // browserHistory.push('/business-unit')
                         store.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {
                             name: 'business-unit',
+                            business_unit: {
+                              bu_code: index
+
+                            }
                           }
                         }))
                       }
@@ -148,6 +152,12 @@ class DashboardHome extends Component {
 
                     <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                       browserHistory.push('/new-project')
+                      store.dispatch(changeRoute({
+                        type: 'PUSH',
+                        page: {
+                          name: 'new-project',
+                        }
+                      }))
 
                     }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
                   </div>
@@ -165,6 +175,7 @@ class DashboardHome extends Component {
                                     page: {
                                       name: 'project',
                                       id : value.project_id
+                                      
                                     }
                                   }))
 

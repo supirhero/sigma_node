@@ -24,6 +24,7 @@ class Project extends Component {
         console.log('detail project');
       }
     )
+
   }
 
   componentWillUnmount(){
