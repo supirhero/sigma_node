@@ -38,7 +38,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block'}}
                           items={{
                             items : [
@@ -47,7 +47,7 @@ class MyPerformances extends Component {
                             ]
                            }}
                         />
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [
@@ -77,7 +77,7 @@ class MyPerformances extends Component {
                     <Meter
                       progress={35}
                       text='35'
-                      title='Entry'
+                      title='Utilization'
                       status='Normal'
                     />
                   </div>
@@ -99,7 +99,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [
@@ -150,7 +150,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [

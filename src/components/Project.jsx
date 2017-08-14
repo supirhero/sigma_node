@@ -35,11 +35,11 @@ class Project extends Component {
     const id = store.getState().data.page.id
     const sidebar = [
       {type:'menu', name : 'Overview', path: `/project/${id}`},
-      {type:'menu', name : 'Setting', path: `/project/${id}/setting`},
+      {type:'menu', name : 'Edit Project', path: `/project/${id}/edit-project`},
       {type:'menu', name : 'Activities', path: `/project/${id}/activities`},
       {type:'title', name : 'MANAGE'},
       {type:'menu', name : 'Workplan', path: `/${id}/workplan`},
-      {type:'menu', name : 'Team Member', path: `/project/${id}/team-member`},
+      {type:'menu', name : 'People', path: `/project/${id}/people`},
       {type:'menu', name : 'Doc & Files', path: `/project/${id}/docs-and-files`},
       {type:'menu', name : 'Issues', path: `/project/${id}/issues`},
       {type:'title', name : 'REPORTS'},

@@ -22,16 +22,44 @@ import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxS
 
 
 class NewProject extends Component {
-  // componentWillMount(){
-  //   store.dispatch(getProjectView())
-  // }
+  handleInitialize() {
+  const initData = {
+    "IWO_NO": 'NONE',
+    "PM": 'NONE',
+    "AM_ID": 'NONE',
+    "TYPE_OF_EFFORT": 'NONE',
+    "PROJECT_STATUS": 'NOT STARTED',
+    "START": '2017-1-1',
+    "END": '2017-1-1',
+    "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
+  };
+
+  this.props.initialize(initData);
+}
+  componentDidMount(){
+    this.handleInitialize();
+    // store.dispatch(getProjectView())
+  }
   onSubmit(props){
     alert(props)
     this.props.addNewProject(props)
   }
     render(){
       const {handleSubmit} = this.props;
-
+      const projectStatus = [
+        {value: 'Not Started'},
+        {value: 'In Progress'},
+        // {value: 'On Hold'},
+        {value: 'Cancel'},
+        {value: 'Complete'},
+        // {value: 'In Planning'},
+        // {value: 'Cancelled'},
+      ]
+      const typeOfExpense = [
+        {value: 'Capital Expense'},
+        {value: 'Current Expense'},
+        {value: 'Dedutible Expense'},
+      ]
       return(
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
@@ -67,16 +95,18 @@ class NewProject extends Component {
               <div className= 'grid wrap narrow'>
               <div className='unit whole'>
                 <Field
-                  inputName="PROJECT ID"
+                  inputName="IWO NUMBER"
                   name="IWO_NO"
                   component={ReduxSelect}
-                  items={{
-                    items : [
-                      {title : 'TBWS21312'},
-                      {title : 'TBASA1127'}
-                    ]
-                  }}
-                />
+
+                >
+                  {
+                    projectStatus.map((value, index)=> (
+                      <option value={value.value} {...this.props.option}>{value.value}</option>
+
+                    ))
+                  }
+                </Field>
 
                 <Field
                   inputName="NAME"
@@ -200,15 +230,14 @@ class NewProject extends Component {
                         inputName="PROJECT MANAGER"
                         name="PM"
                         style={{width:'96%'}}
-
                         component={ReduxSelect}
-                        items={{
-                          items : [
-                            {title : 'AHMAD DEDE'},
-                            {title : 'DHANI ACHMAD'}
-                          ]
-                        }}
-                      />
+                      >
+                        {
+                          projectStatus.map((value, index)=> (
+                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                          ))
+                        }
+                      </Field>
 
                     </div>
                   </div>
@@ -219,13 +248,14 @@ class NewProject extends Component {
                         name="TYPE_OF_EFFORT"
                         style={{width:'96%'}}
                         component={ReduxSelect}
-                        items={{
-                          items : [
-                            {title : 'MAINTENANCE'},
-                            {title : 'UPDATE'}
-                          ]
-                        }}
-                      />
+
+                      >
+                        {
+                          projectStatus.map((value, index)=> (
+                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                          ))
+                        }
+                      </Field>
 
                     </div>
                   </div>
@@ -253,13 +283,13 @@ class NewProject extends Component {
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}
-                        items={{
-                          items : [
-                            {title : 'NONA SOEDHOWO'},
-                            {title : 'RIZA S.'}
-                          ]
-                        }}
-                      />
+                      >
+                        {
+                          projectStatus.map((value, index)=> (
+                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                          ))
+                        }
+                      </Field>
 
                     </div>
                   </div>
@@ -289,31 +319,33 @@ class NewProject extends Component {
                     inputName='PROJECT STATUS'
                     name="PROJECT_STATUS"
                     style={{width:'100%'}}
-                    items={{
-                      items : [
-                        {title : 'IN PROGRESS'},
-                        {title : 'COMPLETE'}
-                      ]
-                    }}
                     component={ReduxSelect}
-                  />
+                  >
+                    {
+                      projectStatus.map((value, index)=> (
+                        <option value={value.value} {...this.props.option}>{value.value}</option>
+
+                      ))
+                    }
+
+                  </Field>
 
                 </div>
               </div>
-              <div className='grid wrap narrow'>
+              {/* <div className='grid wrap narrow'>
                 <div className='unit half'>
                   <Field
                     inputName='START DATE'
                     name="START"
                     style={{width:'96%'}}
-                    items={{
-                      items : [
-                        {title : '2017-12-12'},
-                        {title : '2017-12-1'}
-                      ]
-                    }}
                     component={ReduxSelect}
-                  />
+                  >
+                    {
+                      projectStatus.map((value, index)=> (
+                        <option value={value.value} {...this.props.option}>{value.value}</option>
+                      ))
+                    }
+                  </Field>
 
                 </div>
                 <div className='unit half'>
@@ -321,17 +353,17 @@ class NewProject extends Component {
                     inputName='END DATE'
                     name="END"
                     style={{width:'96%', float:'right'}}
-                    items={{
-                      items : [
-                        {title : '2017-12-12'},
-                        {title : '2017-12-1'}
-                      ]
-                    }}
                     component={ReduxSelect}
-                  />
+                  >
+                    {
+                      projectStatus.map((value, index)=> (
+                        <option value={value.value} {...this.props.option}>{value.value}</option>
+                      ))
+                    }
+                  </Field>
 
                 </div>
-              </div>
+              </div> */}
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <h1 className='input-name'>VISIBILITY</h1>
@@ -365,14 +397,15 @@ class NewProject extends Component {
                         inputName='TYPE OF EXPENSE'
                         name="TYPE_OF_EXPENSE"
                         style={{width:'96%'}}
-                        items={{
-                          items : [
-                            {title : 'Capital Expense'},
-                            {title : 'Capital ROW'},
-                          ]
-                        }}
                         component={ReduxSelect}
-                      />
+                      >
+                        {
+                          typeOfExpense.map((value, index)=> (
+                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                          ))
+                        }
+
+                      </Field>
 
                     </div>
                   </div>

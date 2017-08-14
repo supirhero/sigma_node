@@ -28,7 +28,7 @@ class DashboardHome extends Component {
               <div className='grid'>
 
                   <div className='unit two-fifths'>
-                    <div className='pic-wrapper' style={{width:'150px',height:'150px'}}>
+                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://hardikmanktala.com/projects/themes/flatter/demo/assets/images/people/people-1.jpg)'}}>
                     </div>
                   </div>
                   <div className='unit three-fifths'>
@@ -147,7 +147,7 @@ class DashboardHome extends Component {
                           page: {
                             name: 'business-unit',
                             business_unit: {
-                              bu_code: index
+                              bu_code: value.bu_code
 
                             }
                           }
@@ -164,12 +164,33 @@ class DashboardHome extends Component {
                         }
                       }))
 
-                    }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
+                    }}><i style={{verticalAlign:'bottom', marginRight:'7px', color: '#FC4D54'}} className="material-icons md-18">add</i>NEW PROJECT</button>
                   </div>
                 </div>
 
                     {
                       value.project_list.map((value,index) => {
+                        var color= '#F48165'
+                        switch (value.project_status) {
+                          case 'In Progress':
+
+                            color= '#65BDF4'
+                            break;
+                          case 'Completed':
+                            color= '#42C878'
+                            break;
+                          case 'Overdue':
+                            color='#CB0000'
+                            break;
+                          case 'On Hold':
+                            color = '#777777'
+                            break;
+                          case 'In Planning':
+                            color = '#777777'
+                            break;
+                          default:
+
+                        }
                         return(
                           <div className='grid wrap' key={index}>
                             <div className='unit whole no-gutters'>
@@ -180,7 +201,7 @@ class DashboardHome extends Component {
                                     page: {
                                       name: 'project',
                                       id : value.project_id
-                                      
+
                                     }
                                   }))
 
@@ -197,7 +218,7 @@ class DashboardHome extends Component {
                                     {
                                       value.project_status
                                     }
-                                    &nbsp;({value.project_complete}%)
+                                    &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
                                   </small>
                                 </div>
                                 <div className='unit two-fifths'>
@@ -206,7 +227,7 @@ class DashboardHome extends Component {
                                     initialAnimate={true}
                                     options={{
                                       strokeWidth: 3,
-                                      color: '#F48165',
+                                      color: color,
                                       trailColor:'#EEEEEE',
                                       trailWidth: 12,
                                       fontSize: 30,

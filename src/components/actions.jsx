@@ -65,20 +65,20 @@ export function getProjectDetail(id) {
 }
 
 export function pop() {
-  const currentPage= store.getState().data.page ? store.getState().data.page.name : null
+
+    const currentPage= store.getState().data.page ? store.getState().data.page.name : null
     return {
       type: 'POP',
       name : currentPage
     }
-
 
 }
 
 export function changeRoute(params) {
   switch (params.type) {
     case 'PUSH':
-      var id = params.page.id ? params.page.id : ''
-      store.dispatch(push(`/${params.page.name}/${id}`))
+      var id = params.page.id ? '/' + params.page.id : ''
+      store.dispatch(push(`/${params.page.name}${id}`))
       break;
     case 'REPLACE':
       store.dispatch(replace(params.path))
@@ -111,6 +111,8 @@ export const getProjectTeamMember = (id) => {
 
           }).then(
             res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
               store.dispatch({type:'API', name: 'project', append: true, data: res})
 
             },
@@ -118,6 +120,7 @@ export const getProjectTeamMember = (id) => {
   }
 
 }
+
 
 export const getDocsFiles = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -134,7 +137,8 @@ export const getDocsFiles = (id) => {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              store.dispatch({type:'API', name: 'project', append: true, data: res})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
 
             },
           )
@@ -142,68 +146,31 @@ export const getDocsFiles = (id) => {
 
 }
 
-export const addNewProject = (props) => {
-  console.log('PROPS',props);
+export const getBusinessUnitDetail = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
   return function (dispatch) {
     return axios({
-            method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_acion` ,
+            method: 'GET',
+            url: `${baseURL}/dev/test/buDetail/`,
+            data: {
+              bu_code: id,
+            },
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data:props
-
-
-          }).then(
-            res => {
-              console.log('NEW PROJECT', res);
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              // store.dispatch({type:'API', name: 'project', data: res})
-
-            },
-          )
-  }
-}
-export const getProjectView = (id) => {
-  return function (dispatch) {
-    return axios({
-            method: 'POST',
-            url: `${baseURL}/dev/projecttest/editProject_view/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-
-          }).then(
-            res => {
-              console.log('GET PROJECT VIEW', res);
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              // store.dispatch({type:'API', name: 'project', data: res})
-
-            },
-          )
-  }
-}
-
-export const addDocsAndFiles = (id) => {
-  return function (dispatch) {
-    return axios({
-            method: 'POST',
-            url: `${baseURL}/dev/home/documentupload/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+             }
 
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              // store.dispatch({type:'API', name: 'project', data: res})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'business_unit', data: res})
 
             },
           )
   }
+
 }
 
 
@@ -289,8 +256,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
             }
     }).then(
       (res)=>{
-        alert('Successfully added')
-        console.log("ADDTIMESHEET", res);
+        console.log("ADDTIMESHEET");
         store.dispatch(viewTimesheet(currentDate));
 
       }

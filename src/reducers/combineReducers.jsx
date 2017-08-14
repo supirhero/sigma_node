@@ -107,13 +107,16 @@ var data = (state = Immutable.List(), action) => {
       })
         break;
       case 'API':
+        console.log("API CALLED FOR", action.name );
+        console.log("APPEND?", action.append );
+        console.log("API DATA", action.data.data);
+
         if (!action.append) {
-        return Object.assign({}, state,{
+        return _.mergeWith({}, state,{
             [action.name] :action.data.data
           })
         }
         else {
-          console.log("BLAA", state[action.name]);
           return _.mergeWith({},state,{
             [action.name] : action.data.data
 

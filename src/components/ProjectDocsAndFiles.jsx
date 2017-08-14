@@ -13,7 +13,6 @@ import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
 class ProjectDocsAndFiles extends Component {
   componentDidMount(){
     const id = store.getState().data.page.id
-
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){

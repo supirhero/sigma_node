@@ -11,8 +11,6 @@ import { getProjectTeamMember, pop } from './actions.jsx'
 class ProjectTeamMember extends Component {
   componentDidMount() {
     const id = store.getState().data.page.id
-
-
     store.dispatch(getProjectTeamMember(id))
   }
 
