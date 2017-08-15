@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {logout} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx'
+import {Menu, MenuSection, MenuItem, MenuHeader,MenuNotifItem} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 
 
@@ -51,7 +51,7 @@ class Dashboard extends Component {
                       </ul>
                       <div id='sigma-logo'></div>
 
-                        <Menu style={{display:'inline'}}>
+                        <Menu style={{display:'inline'}} triggerClass='profile'>
                           <MenuSection>
                             <MenuHeader title='Kara Cray' subTitle='@karagay'/>
                             <MenuItem title='Home' onClick={
@@ -92,6 +92,30 @@ class Dashboard extends Component {
                           </MenuSection>
 
                         </Menu>
+
+                        <Menu style={{display:'inline'}} triggerClass='notif'>
+                        <MenuSection>
+                          <MenuNotifItem onClick={ 
+                            e => { 
+                              browserHistory.push('/project/activities') 
+                            }}>
+                            <div className="person"> 
+                            <div className="person-image" style={{marginLeft:'0',marginBottom:'20px'}} /> 
+                            <div className="person-info" style={{position:'inherit'}}> 
+                              <small className="notif-info"> 
+                                <a>Denise Becker</a> has updated timesheet <br/> 
+                                You need to approve it 
+                              </small> 
+                              <small><i>1h ago</i></small> 
+                               
+                            </div> 
+                          </div> 
+                          </MenuNotifItem>
+                         
+                        </MenuSection>
+                        
+
+                      </Menu>
 
                     </div>
                   </div>

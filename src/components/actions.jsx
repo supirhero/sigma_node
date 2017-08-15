@@ -279,11 +279,11 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       method:'POST',
       url:`${baseURL}/dev/timesheettest/addTimesheet/`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {WP_ID: WP_ID,
-             TS_DATE: TS_DATE,
-             HOUR:HOUR,
-             TS_SUBJECT:TS_SUBJECT,
-             TS_MESSAGE:TS_MESSAGE,
+      data: { WP_ID,
+              TS_DATE,
+             HOUR,
+             TS_SUBJECT,
+             TS_MESSAGE,
              LATITUDE:'38.898648',
              LONGITUDE:'77.037692'
             }
@@ -322,9 +322,7 @@ export function confirmationTimesheet(TS_ID,confirm) {
       method:'POST',
       url:`${baseURL}/dev/timesheettest/confirmationTimesheet/`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {TS_ID:TS_ID,
-            confirm:confirm
-            }
+      data: {TS_ID,confirm}
     }).then(
       (res)=>{
         store.dispatch(viewTimesheet(currentDate));

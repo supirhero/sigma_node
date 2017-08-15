@@ -37,7 +37,7 @@ class Reports extends Component {
                   browserHistory.replace('/reports/people');
                 }
               }
-              > People </medium>
+              > Team Member </medium>
               <medium className="heading"
               onClick={
                 (e) => {

@@ -12,8 +12,31 @@ import {Divider, Input,Select,Meter, BarChart} from './Components.jsx'
 
 
 class MyPerformances extends Component {
-
+  
     render(){
+      function statusCom(){
+        if (completeProgress == 100){
+           return "COMPLETE"
+        } else if (completeProgress < 100){
+           return "UNDER"
+        } else{
+          return "OVER"
+        }
+       }
+
+       function statusUn(){
+        if (underProgress == 100){
+           return "COMPLETE"
+        } else if (underProgress < 100){
+           return "UNDER"
+        } else{
+          return "OVER"
+        }
+       }
+
+       const completeProgress = 100;
+       const underProgress = 80;
+
       return(
         <div>
           <div className='grid wrap'>
@@ -67,18 +90,18 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit one-third'>
                     <Meter
-                      progress={35}
-                      text='35'
+                      progress={completeProgress}
+                      text={completeProgress}
                       title='Entry'
-                      status='Normal'
+                      status={statusCom()}
                     />
                   </div>
                   <div className='unit one-third'>
                     <Meter
-                      progress={35}
-                      text='35'
-                      title='Entry'
-                      status='Normal'
+                      progress={underProgress}
+                      text={underProgress}
+                      title='Utilization'
+                      status={statusUn()}
                     />
                   </div>
                   <div className='unit one-third'>
