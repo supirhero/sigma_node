@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
 import {Field, reduxForm} from 'redux-form';
+// import { pop } from 'react-router-redux'
+
 import {
   Checkbox,
   RadioButtonGroup,
@@ -15,7 +17,7 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getProjectView} from './actions.jsx'
+import {addNewProject, getProjectView, pop} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect} from './Components.jsx'
 

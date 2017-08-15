@@ -163,7 +163,7 @@ class DashboardHome extends Component {
                           name: 'new-project',
                           new_project: {
                             bu_code: value.bu_code
-                            
+
                           }
                         }
                       }))
