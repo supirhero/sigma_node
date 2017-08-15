@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import {Line} from 'react-progressbar.js';
 
 import {Input ,Divider,Search} from './Components.jsx';
-import {changeRoute} from './actions.jsx';
+import {changeRoute, getBusinessUnitDetail} from './actions.jsx';
 
 import store from '../reducers/combineReducers.jsx';
 
@@ -13,9 +13,10 @@ import store from '../reducers/combineReducers.jsx';
 class BusinessUnit extends Component {
   render() {
     var state = store.getState();
-    const index = state.data.page.business_unit.bu_code
+    const id = state.data.page.business_unit.bu_code
+    store.dispatch(getBusinessUnitDetail(id))
       // var projects = state.data.projects ? state.data.projects : null
-    var bu = state.data.login.project[index];
+    var bu = state.data.business_unit;
     return (
       <div>
 
@@ -56,7 +57,7 @@ class BusinessUnit extends Component {
 
         <div className='projects'>
                 <div>
-                  <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
+                  <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap'>
                     <div className='unit whole'>
                     <Search placeholder='search business units or project' style={{width:'55%', display:'inline-block'}}></Search>
                         <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
@@ -66,6 +67,7 @@ class BusinessUnit extends Component {
                   </div>
 
                       {
+                        bu &&
                         bu.project_list.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>

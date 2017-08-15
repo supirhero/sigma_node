@@ -12,7 +12,7 @@ import {Divider, Input,Select,Meter, BarChart} from './Components.jsx'
 
 
 class MyPerformances extends Component {
-  
+
     render(){
       function statusCom(){
         if (completeProgress == 100){
@@ -61,7 +61,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block'}}
                           items={{
                             items : [
@@ -70,7 +70,7 @@ class MyPerformances extends Component {
                             ]
                            }}
                         />
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [
@@ -122,7 +122,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [
@@ -173,7 +173,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select 
+                        <Select
                           style={{width:'48%', display:'inline-block', float:'right'}}
                           items={{
                             items : [
