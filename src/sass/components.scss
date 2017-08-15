@@ -216,7 +216,7 @@ input {
       }
     }
   }
-  .trigger {
+  .profile {
     margin: 21px 4% 0 0;
     background-color: $color-secondary;
     height: 36px;
@@ -225,6 +225,15 @@ input {
     border: 2px solid white;
     border-radius: 100%;
   }
+  .notif { 
+    margin: 21px 4% 0 0; 
+    background-color:white; 
+    height: 36px; 
+    width: 36px; 
+    float: right; 
+    border: 2px solid white; 
+    border-radius: 100%; 
+  } 
   .menu {
     z-index: 1;
     display: none;
@@ -250,6 +259,9 @@ input {
         .menu-title {
 
         }
+      }
+      .menu-notif-item{
+        padding: 15px 40px 15px 30px;
       }
       .menu-item:hover {
         background-color: $color-secondary;

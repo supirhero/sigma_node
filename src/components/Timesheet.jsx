@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxInput,PageLoader } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepicker } from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import moment from 'moment';
@@ -20,7 +20,7 @@ class Timesheet extends Component {
     const currentDate = moment().format("YYYY-MM-DD");
     const state = store.getState();
     store.dispatch(viewTimesheet(currentDate));
-    store.dispatch(taskList('8790874'));
+    // store.dispatch(taskList('8790874'));
     const timesheet = state.data.timesheet;
     const auth = state.data.login;
 
@@ -102,7 +102,7 @@ class Timesheet extends Component {
                         inputName="DATE"
                         name="TS_DATE"
 
-                        component={ReduxInput}
+                        component={datepicker}
                       />
                     </div>
                   </div>
@@ -113,7 +113,9 @@ class Timesheet extends Component {
                         name="PROJECT_ID"
                         onChange={
                           (e)=>{
-                            store.dispatch(taskList(this.props.formValues))
+                            store.dispatch(taskList(this.props.formValues.values.PROJECT_ID))
+                            // store.dispatch(pop());
+                            // e.preventDefault()
                           }
                         }
                         component={ReduxSelectNew}>
@@ -130,20 +132,24 @@ class Timesheet extends Component {
                     </div>
                   </div>
                   <div className="grid wrap narrow">
-                    <div className="unit three-quarters">
-                      <Field
-                      name="WP_ID"
-                      type="WP_ID"
-                        inputName="TASK"
-                        component={ReduxSelectNew}>
-                            {
-                              timesheet.task.map((value,index)=>{
-                                return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
-                              }
-                            )
-                            }
-                     </Field>
-                    </div>
+                  <div className="unit three-quarters">
+                                      {
+                                        timesheet.task && 
+                                        <Field
+                                        name="WP_ID"
+                                        type="WP_ID"
+                                          inputName="TASK"
+                                          component={ReduxSelectNew}>
+                                              {                              
+                                                timesheet.task.map((value,index)=>{
+                                                  return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
+                                                }
+                                              )
+                                              }
+                                       </Field>
+                                      }
+                                      </div>
+                  
                     <div className="unit one-quarter">
                       <Field
                         inputName="WORK HOURS"
