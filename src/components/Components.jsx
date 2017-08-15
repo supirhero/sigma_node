@@ -6,8 +6,9 @@ import {Table as MaterialTable, TableBody, TableHeader, TableHeaderColumn,TableR
 import store from '../reducers/combineReducers.jsx'
 import {RadioButtonGroup} from 'material-ui/RadioButton'
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import DatePicker from 'react-datepicker';
    import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+   import moment from 'moment';
 
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
@@ -33,7 +34,7 @@ export class Menu extends Component {
     render(){
       return(
         <div style={this.props.style}>
-        <div className='trigger' onClick={
+        <div className={this.props.triggerClass} onClick={
           () => {
               console.log('working');
               if (this.state.clicked) {
@@ -81,6 +82,18 @@ export class MenuItem extends Component {
     )
   }
 }
+
+export class MenuNotifItem extends Component {
+  render() {
+    return(
+      <div className='menu-notif-item' onClick={this.props.onClick}>
+        <small className='menu-title'>{this.props.children}</small>
+      </div>
+    )
+  }
+}
+
+
 export class MenuHeader extends Component {
   render() {
     return (
@@ -765,3 +778,46 @@ export class PageLoader extends Component {
     )
   }
 }
+
+export class datepicker extends Component {
+  
+    static defaultProps(){
+      placeholder: ''
+    }
+  
+    constructor (props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this)
+    }
+  
+    handleChange (date) {
+      this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+    }
+  
+    render () {
+      const {
+        input, placeholder,
+        meta: {touched, error}
+      } = this.props
+  
+      return (
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <DatePicker
+          {...input}
+          placeholder={placeholder}
+          dateFormat="YYYY-MM-DD"
+          selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
+          onChange={this.handleChange}
+          minDate={moment().subtract(2,'month')}
+          maxDate={moment()}
+          // className="myDatePickerWrapper"
+          
+        />
+          {this.props.children}
+      </div>
+        
+      )
+    }
+  }

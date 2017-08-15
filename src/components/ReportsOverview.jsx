@@ -57,27 +57,25 @@ class ReportsOverview extends Component {
               <div className="grid wrap narrow">
                 <div className="unit whole">
                  <BarChart
-                            fill= "#D2E5FA"
-                            label="SPI Graph"
-                            labelStyle={{padding:'0 40%'}}
-                            ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                            data={[
-                                { name: 'BSD', value: 20 },
-                                { name: 'CEM', value: 10 },
-                                { name: 'CISD', value: 14 },
-                                { name: 'DCES', value: 32 },
-                                { name: 'FSD', value: 16 },
-                                { name: 'GT', value: 4 },
-                                { name: 'ITPBS', value: 7 },
-                                { name: 'NITSM', value: 9 },
-                                { name: 'SMS', value: 12 },
-                                { name: 'SSI', value: 40 },
-                                { name: 'SP', value: 54 },                                
-                                { name: 'TBSDMO', value: 23 },
-                            ]}
-
-                          />
-
+                fill = '#65bdf4'       
+                 label="SPI Graph"
+                 labelStyle={{padding:'0 40%'}}
+                 ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                 data={[
+                  { name: 'BSD', value: 20 },
+                  { name: 'CEM', value: 10 },
+                  { name: 'CISD', value: 14 },
+                  { name: 'DCES', value: 32 },
+                  { name: 'FSD', value: 16 },
+                  { name: 'GT', value: 4 },
+                  { name: 'ITPBS', value: 7 },
+                  { name: 'NITSM', value: 9 },
+                  { name: 'SMS', value: 12 },
+                  { name: 'SSI', value: 40 },
+                  { name: 'SP', value: 54 },
+                  { name: 'TBSDMO', value: 23 },
+              ]}
+                 />
                 </div>
               <div className="unit whole" style={{marginTop:'50px'}}>
                  <BarChart
