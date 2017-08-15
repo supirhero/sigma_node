@@ -65,7 +65,7 @@ class Login extends Component {
                       component={ReduxInput}
                     />
                     <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
-                    <medium>Or <a onClick={()=> {
+                    <medium>or <a onClick={()=> {
                       browserHistory.replace('/auth/register')
                     }}>Register</a> </medium>
                     <medium style={{marginTop:'67px',marginLeft:'40px'}}><a>download Mobile PRouDS</a></medium>

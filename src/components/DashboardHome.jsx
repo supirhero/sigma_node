@@ -161,6 +161,10 @@ class DashboardHome extends Component {
                         type: 'PUSH',
                         page: {
                           name: 'new-project',
+                          new_project: {
+                            bu_code: value.bu_code
+                            
+                          }
                         }
                       }))
 

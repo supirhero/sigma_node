@@ -67,6 +67,7 @@ class BusinessUnit extends Component {
                   </div>
 
                       {
+                        bu &&
                         bu.project_list.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>

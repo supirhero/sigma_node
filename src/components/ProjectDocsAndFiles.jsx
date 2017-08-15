@@ -16,7 +16,9 @@ class ProjectDocsAndFiles extends Component {
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){
-    this.props.addDocsAndFiles(props)
+    const id = store.getState().data.page.id
+
+    this.props.addDocsAndFiles(props, id)
   }
     render(){
       const {handleSubmit} = this.props;
@@ -60,7 +62,7 @@ class ProjectDocsAndFiles extends Component {
                           type='file'
                           component={ReduxFileInput}
                         />
-                       <InputFile name="selectFile" />
+                       {/* <InputFile name="selectFile" /> */}
                       </div>
                     </div>
                       <div className="grid wrap narrow">

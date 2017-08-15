@@ -29,8 +29,8 @@ class NewProject extends Component {
     "AM_ID": 'NONE',
     "TYPE_OF_EFFORT": 'NONE',
     "PROJECT_STATUS": 'NOT STARTED',
-    "START": '2017-1-1',
-    "END": '2017-1-1',
+    // "START": '2017-1-1',
+    // "END": '2017-1-1',
     "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
   };
 
@@ -38,7 +38,12 @@ class NewProject extends Component {
 }
   componentDidMount(){
     this.handleInitialize();
-    // store.dispatch(getProjectView())
+    const state = store.getState()
+    const id = state.data.page.new_project.bu_code
+    store.dispatch(getProjectView(id))
+  }
+  componentWillUnmount(){
+    store.dispatch(pop())
   }
   onSubmit(props){
     alert(props)
