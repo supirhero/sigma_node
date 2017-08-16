@@ -4,14 +4,14 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter, Header } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx';
 
 class ReportsDirectorate extends Component {
   render() {
     return (
 			<div>
 				<div className="grid wrap">
-					<div className="unit three-quarters">
+          <div className="unit three-quarters">
 						<Select
               style={{ width: '100%', display: 'inline-block', float: 'left' }}
               items={{

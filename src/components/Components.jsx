@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import FileInput from 'react-file-input';
-import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
+import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, Cell, XAxis, YAxis, CartesianGrid,Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
 import {Table as MaterialTable, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 import store from '../reducers/combineReducers.jsx'
 import {RadioButtonGroup} from 'material-ui/RadioButton'
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
-   import getMuiTheme from 'material-ui/styles/getMuiTheme';
-   import moment from 'moment';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import moment from 'moment';
 
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
@@ -283,6 +283,24 @@ export class ReduxSelect extends Component {
   }
 }
 
+export class ReduxSelectNew extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <select className='select' {...this.props.select} {...this.props.custom}
+          onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+        >
+          {this.props.children}
+        </select>
+
+      </div>
+    )
+  }
+}
+
 
 // export class ReduxSelect extends Component {
 //   render() {
@@ -357,6 +375,8 @@ export class BarChart extends Component {
             <Tooltip />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
+
+
           </ChartBar>
         </ResponsiveContainer>
 
@@ -364,6 +384,63 @@ export class BarChart extends Component {
     )
   }
 }
+
+export class BarChartSPI extends Component {
+  render() {
+    const COLORS = ['#42C878', '#CF000F'];
+    return(
+      <div className='bar-chart-container'>
+        <large style={this.props.labelStyle}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+        <ChartBar width={600} height={250} data={this.props.data}>
+        <XAxis dataKey="name"/>
+        <Tooltip />
+        <Bar dataKey="value" fill="#8884d8">
+            {
+              this.props.data.map((entry, index) => {
+                const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
+                return <Cell key={index} fill={color} />;
+              })
+            }
+   </Bar>
+  </ChartBar>
+        </ResponsiveContainer>
+
+      </div>
+    )
+  }
+}
+
+
+
+export class BarChartCPI extends Component {
+
+  render() {
+    const customLabel = "yee";
+    const COLORS = ['#42C878', '#CF000F'];
+    return(
+      <div className='bar-chart-container'>
+        <large style={this.props.labelStyle}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+        <ChartBar width={600} height={250} data={this.props.data}>
+        <XAxis dataKey="name" name="value" />
+        <Tooltip />
+        <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
+            {
+              this.props.data.map((entry, index) => {
+                const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
+                return <Cell key={index} fill={color} />;
+              })
+            }
+        </Bar>
+        </ChartBar>
+        </ResponsiveContainer>
+
+      </div>
+    )
+  }
+}
+
 
 export class LineChart extends Component{
   render(){
@@ -832,11 +909,13 @@ export class datepicker extends Component {
           selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
           onChange={this.handleChange}
           minDate={moment().subtract(2,'month')}
-          maxDate={moment()}
-          // className="myDatePickerWrapper"
-
-        />
+          maxDate={moment()}>
           {this.props.children}
+          </DatePicker>
+
+
+
+
       </div>
 
       )

@@ -4,19 +4,31 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import {Line} from 'react-progressbar.js';
 
-import {Input ,Divider,Search} from './Components.jsx';
-import {changeRoute, getBusinessUnitDetail} from './actions.jsx';
+import {Input ,Divider,Search,PageLoader} from './Components.jsx';
+import {changeRoute, getBusinessUnitDetail,pop} from './actions.jsx';
 
 import store from '../reducers/combineReducers.jsx';
 
 
 class BusinessUnit extends Component {
-  render() {
+  componentWillMount(){
     var state = store.getState();
     const id = state.data.page.business_unit.bu_code
     store.dispatch(getBusinessUnitDetail(id))
+  }
+
+  componentWillUnmount() {
+    store.dispatch(pop());
+  }
+  render() {
+    var state = store.getState();
+    const id = state.data.page.business_unit.bu_code
+    
       // var projects = state.data.projects ? state.data.projects : null
     var bu = state.data.business_unit;
+    if(!bu){
+      return <PageLoader></PageLoader>
+    }
     return (
       <div>
 
@@ -24,10 +36,10 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={bu.bu_name}
+            text={bu.project.BU_NAME}
             btnLeftClick={
               e => {
-                browserHistory.goBack()
+                browserHistory.goBack('/')
                 e.preventDefault()
               }
             }
@@ -68,7 +80,7 @@ class BusinessUnit extends Component {
 
                       {
                         bu &&
-                        bu.project_list.map((value,index) => {
+                        bu.project.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>
@@ -77,14 +89,14 @@ class BusinessUnit extends Component {
                                     type: 'PUSH',
                                     page: {
                                       name: 'project',
-                                      id : value.project_id
+                                      id : value.PROJECT_ID
                                     }
                                   }))
                                   e.preventDefault()
                                 }}>
                                   <div className='unit two-fifths'>
                                     <medium className='project-name'>
-                                      {value.project_name}
+                                      {value.PROJECT_NAME}
                                     </medium>
                                   </div>
                                   <div className='unit one-fifth'>
@@ -92,12 +104,12 @@ class BusinessUnit extends Component {
                                       {
                                         value.project_status
                                       }
-                                      &nbsp;({value.project_complete}%)
+                                      &nbsp;({value.PROJECT_COMPLETE}%)
                                     </small>
                                   </div>
                                   <div className='unit two-fifths'>
                                     <Line
-                                      progress={value.project_complete *0.01}
+                                      progress={value.PROJECT_COMPLETE *0.01}
                                       initialAnimate={true}
                                       options={{
                                       strokeWidth: 3,

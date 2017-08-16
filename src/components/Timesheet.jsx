@@ -126,8 +126,6 @@ class Timesheet extends Component {
                             )
                         }
 
-
-
                         </Field>
                     </div>
                   </div>
@@ -146,6 +144,17 @@ class Timesheet extends Component {
                                                 }
                                               )
                                               }
+                                       </Field>
+                                      }
+
+                                      {
+                                        !timesheet.task && 
+                                        <Field
+                                        name="WP_ID"
+                                        type="WP_ID"
+                                          inputName="TASK"
+                                          component={ReduxSelectNew}>
+                                            <option> </option>
                                        </Field>
                                       }
                                       </div>
