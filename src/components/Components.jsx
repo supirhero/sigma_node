@@ -7,8 +7,8 @@ import store from '../reducers/combineReducers.jsx'
 import {RadioButtonGroup} from 'material-ui/RadioButton'
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
-   import getMuiTheme from 'material-ui/styles/getMuiTheme';
-   import moment from 'moment';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import moment from 'moment';
 
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
@@ -245,6 +245,24 @@ export class Select extends Component {
 
 
 export class ReduxSelect extends Component {
+  render() {
+    return (
+      <div style={this.props.style}>
+
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <select className='select' {...this.props.select} {...this.props.custom}
+          onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+        >
+          {this.props.children}
+        </select>
+
+      </div>
+    )
+  }
+}
+
+export class ReduxSelectNew extends Component {
   render() {
     return (
       <div style={this.props.style}>
@@ -811,11 +829,13 @@ export class datepicker extends Component {
           selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
           onChange={this.handleChange}
           minDate={moment().subtract(2,'month')}
-          maxDate={moment()}
-          // className="myDatePickerWrapper"
-          
-        />
+          maxDate={moment()}>
           {this.props.children}
+          </DatePicker>
+      
+          
+        
+      
       </div>
         
       )
