@@ -4,19 +4,31 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import {Line} from 'react-progressbar.js';
 
-import {Input ,Divider,Search} from './Components.jsx';
-import {changeRoute, getBusinessUnitDetail} from './actions.jsx';
+import {Input ,Divider,Search,PageLoader} from './Components.jsx';
+import {changeRoute, getBusinessUnitDetail,pop} from './actions.jsx';
 
 import store from '../reducers/combineReducers.jsx';
 
 
 class BusinessUnit extends Component {
-  render() {
+  componentWillMount(){
     var state = store.getState();
     const id = state.data.page.business_unit.bu_code
     store.dispatch(getBusinessUnitDetail(id))
+  }
+
+  componentWillUnmount() {
+    store.dispatch(pop());
+  }
+  render() {
+    var state = store.getState();
+    const id = state.data.page.business_unit.bu_code
+    
       // var projects = state.data.projects ? state.data.projects : null
     var bu = state.data.business_unit;
+    if(!bu){
+      return <PageLoader></PageLoader>
+    }
     return (
       <div>
 
@@ -24,10 +36,10 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={bu.bu_name}
+            text={bu.project.BU_NAME}
             btnLeftClick={
               e => {
-                browserHistory.goBack()
+                browserHistory.goBack('/')
                 e.preventDefault()
               }
             }

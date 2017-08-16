@@ -126,8 +126,6 @@ class Timesheet extends Component {
                             )
                         }
 
-
-
                         </Field>
                     </div>
                   </div>

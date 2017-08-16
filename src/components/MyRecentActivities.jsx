@@ -16,18 +16,41 @@ class MyRecentActivities extends Component {
   componentWillUnmount() {
     store.dispatch(pop());
   }
-
+  
   render() {
     const myActivity = store.getState().data.myActivity
     if(!myActivity){
       return <PageLoader></PageLoader>
     }
+
+      function pill(value){
+        var className = 'pill pending'
+        var text = 'PENDING'
+        switch (value) {
+          case "0":
+          className= 'pill denied'
+          text = "DENIED"
+          break;
+          case "1":
+          className= 'pill approved'
+          text = "APPROVED"
+          break;
+          case "-1":
+          className='pill pending'
+          text = "PENDING"
+          break;
+          default:
+        }
+        return(<div className={className} style={{float:'right'}}>{text}</div>)
+       
+      }
+    
     return (
       <div>
         <div className="grid wrap">
           <div className="unit whole">
             <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
-                browserHistory.goBack()
+                browserHistory.push("/")
                 e.preventDefault()
               }} text='MY RECENT ACTIVITIES'></Divider>
           </div>
@@ -116,27 +139,9 @@ class MyRecentActivities extends Component {
               <medium style={{display:'inline'}}>
                 <a href="">{value.project_name}</a>
               </medium>
-              {
-                function (){
-                  var className = 'pill pending'
-                  switch (value.is_approved) {
-                    case 0:
-                    className= 'pill denied'
-                    break;
-                    case 1:
-                    className= 'pill approved'
-                    break;
-                    case -1:
-                    className='pill pending'
-                    break;
-                    default:
-                  }
-                  return (<div key={index} className='pill denied' style={{float:'right'}}>{value.is_approved}</div>)
-                }
-                
-              }
 
-            
+              {pill(value.is_approved)}
+
             </div>
 
             <small className="project-info" style={{margin:'auto'}}>
