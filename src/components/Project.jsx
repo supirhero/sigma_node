@@ -39,7 +39,7 @@ class Project extends Component {
       {type:'menu', name : 'Activities', path: `/project/${id}/activities`},
       {type:'title', name : 'MANAGE'},
       {type:'menu', name : 'Workplan', path: `/${id}/workplan`},
-      {type:'menu', name : 'People', path: `/project/${id}/people`},
+      {type:'menu', name : 'Team Member', path: `/project/${id}/team-member`},
       {type:'menu', name : 'Doc & Files', path: `/project/${id}/docs-and-files`},
       {type:'menu', name : 'Issues', path: `/project/${id}/issues`},
       {type:'title', name : 'REPORTS'},

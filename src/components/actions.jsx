@@ -7,6 +7,7 @@ import moment from 'moment';
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
+const token = store.getState().data.login ? store.getState().data.login : null
 
 export function login(email, password) {
 
@@ -35,6 +36,7 @@ export function login(email, password) {
                 store.dispatch({type:'LOGIN', isloggedin: false})
 
               }
+              return res
             }
           )
   }
@@ -64,12 +66,12 @@ export function getProjectDetail(id) {
   }
 }
 
-export function pop() {
+export function pop(page) {
 
     const currentPage= store.getState().data.page ? store.getState().data.page.name : null
     return {
       type: 'POP',
-      name : currentPage
+      name : page ? page : currentPage
     }
 
 }
@@ -170,6 +172,8 @@ export const addDocsAndFiles = (data, id ) => {
   }
 }
 
+
+
 export const addNewProject = (data) => {
   console.log('DATA', data);
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -246,18 +250,139 @@ export const getBusinessUnitDetail = (id) => {
   }
 
 }
-export const getProjectView = (id) => {
+
+export const getIWOEditProject = (offset) => {
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
+
+            headers: {
+              // 'token': "9b753c9902fe3025e8d3229b1e369bb2",
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'project', append:true, data: res})
+
+              console.log(res.data);
+
+            },
+          )
+  }
+
+}
+
+export const getIWO = (offset) => {
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
+
+            headers: {
+              // 'token': "9b753c9902fe3025e8d3229b1e369bb2",
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'new_project', data: res})
+
+              console.log(res.data);
+              return res
+            },
+          )
+  }
+
+}
+
+export const editProject = (data) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_view/${id}`,
+            url: `${baseURL}/dev/projecttest/editProject_action/` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              ACTUAL_COST:data.ACTUAL_COST,
+              AMOUNT:data.AMOUNT,
+              AM_ID:data.AM_ID,
+              BU:'TMS',
+              COGS:data.COGS,
+              CUST_ID:data.CUST_ID,
+              DESC:data.DESC,
+              END_CUST_ID:data.END_CUST_ID,
+              // H/O:"yes",
+              IWO_NO:data.IWO_NO,
+              MARGIN:data.MARGIN,
+              OVERHEAD:data.OVERHEAD,
+              PM:data.PM,
+              PRODUCT_TYPE:data.PRODUCT_TYPE,
+              PROJECT_NAME:data.PROJECT_NAME,
+              PROJECT_STATUS:data.PROJECT_STATUS,
+              PROJECT_TYPE_ID:data.PROJECT_TYPE_ID,
+              RELATED:data.RELATED,
+              TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
+              TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
+              VISIBILITY:data.VISIBILITY
+            }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log("RES",res.data);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+            },
+            req => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log("REQ",req);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+            },
+          )
+  }
+}
+
+export const getEditProjectView = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/projecttest/editProject_view/${id}`,
+
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project',data: res})
+            },
+            req => {
+
+            }
+          )
+  }
+
+}
+
+
+export const getAddProjectView = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/projecttest/addProject_view/`,
             data: {
               bu_code: id,
             },
             headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
              }
 
@@ -265,8 +390,8 @@ export const getProjectView = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'new_project', data: res})
-
+              store.dispatch({type:'API', name: 'new_project',data: res})
+              return res
             },
           )
   }

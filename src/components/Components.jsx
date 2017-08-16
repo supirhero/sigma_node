@@ -190,6 +190,27 @@ export class ReduxInput extends Component {
   }
 }
 
+export class ReduxInputDisabled extends Component {
+  render(){
+    return(
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <input
+            style={{width:'100%'}}
+            placeholder={this.props.placeholder}
+            type='text'
+            value={this.props.value}
+            {...this.props.input}
+
+            disabled
+          >
+          </input>
+        </div>
+    )
+  }
+}
+
 // export class RenderRadioGroup extends Component {
 //   render() {
 //     return (
@@ -354,8 +375,8 @@ export class BarChart extends Component {
             <Tooltip />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
-              
-          
+
+
           </ChartBar>
         </ResponsiveContainer>
 
@@ -393,7 +414,7 @@ export class BarChartSPI extends Component {
 
 
 export class BarChartCPI extends Component {
-  
+
   render() {
     const customLabel = "yee";
     const COLORS = ['#42C878', '#CF000F'];
@@ -857,26 +878,26 @@ export class PageLoader extends Component {
 }
 
 export class datepicker extends Component {
-  
+
     static defaultProps(){
       placeholder: ''
     }
-  
+
     constructor (props) {
       super(props)
       this.handleChange = this.handleChange.bind(this)
     }
-  
+
     handleChange (date) {
       this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
     }
-  
+
     render () {
       const {
         input, placeholder,
         meta: {touched, error}
       } = this.props
-  
+
       return (
         <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
@@ -891,12 +912,12 @@ export class datepicker extends Component {
           maxDate={moment()}>
           {this.props.children}
           </DatePicker>
-      
-          
-        
-      
+
+
+
+
       </div>
-        
+
       )
     }
   }

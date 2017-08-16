@@ -14,7 +14,8 @@ import {Input, LoaderLogin, ReduxInput} from './Components.jsx'
 
 class Login extends Component {
     onSubmit(props){
-      this.props.login(props.username, props.password)
+      this.props.login(props.username, props.password).then(res => {
+      })
     }
 
     render(){
