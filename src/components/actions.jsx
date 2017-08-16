@@ -225,7 +225,7 @@ export const getBusinessUnitDetail = (id) => {
 
   return function (dispatch) {
     return axios({
-            method: 'GET',
+            method: 'POST',
             url: `${baseURL}/dev/test/buDetail/`,
             data: {
               bu_code: id,
@@ -358,6 +358,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
     }).then(
       (res)=>{
         console.log("ADDTIMESHEET");
+        alert('successful')
         store.dispatch(viewTimesheet(currentDate));
 
       }
@@ -392,7 +393,7 @@ export function confirmationTimesheet(ts_id,confirm) {
       data: {ts_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(viewTimesheet(currentDate));
+        store.dispatch(getMyActivities());
       }
     )
   }
