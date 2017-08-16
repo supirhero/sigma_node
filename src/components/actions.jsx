@@ -382,17 +382,60 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 
 
-export function confirmationTimesheet(TS_ID,confirm) {
+export function confirmationTimesheet(ts_id,confirm) {
    const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
       url:`${baseURL}/dev/timesheettest/confirmationTimesheet/`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {TS_ID,confirm}
+      data: {ts_id,confirm}
     }).then(
       (res)=>{
         store.dispatch(viewTimesheet(currentDate));
+      }
+    )
+  }
+}
+
+export function myPerformance(bulan,tahun){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/reporttest/myperformances`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {bulan,tahun}
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'myPerformance', append: true, data: res });
+      }
+    )
+  }
+}
+
+export function getMyAssignment(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/test/myassignment`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'myAssignment', append: true, data: res });
+      }
+    )
+  }
+}
+
+export function getMyActivities(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/test/myactivities`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'myActivity', append: true, data: res });
       }
     )
   }

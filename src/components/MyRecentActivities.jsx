@@ -3,11 +3,25 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select} from './Components.jsx'
-import { Line} from 'react-progressbar.js'
+import {Divider, Input, RadioButton, Select,PageLoader} from './Components.jsx'
+import {Line} from 'react-progressbar.js'
+import {getMyActivities,pop} from './actions.jsx'
 
 class MyRecentActivities extends Component {
+  componentWillMount(){
+    const myActivity = store.getState().data.myActivity
+    store.dispatch(getMyActivities());
+  }
+
+  componentWillUnmount() {
+    store.dispatch(pop());
+  }
+
   render() {
+    const myActivity = store.getState().data.myActivity
+    if(!myActivity){
+      return <PageLoader></PageLoader>
+    }
     return (
       <div>
         <div className="grid wrap">
@@ -89,6 +103,82 @@ class MyRecentActivities extends Component {
              <Divider style={{marginTop:'0'}} text='TUESDAY , JUNE 6' />
           </div>
         </div>
+{
+  myActivity.activity_timesheet.map((value,index)=>{
+    return (
+      <div key={index}>
+      <div className="grid wrap">
+      <div className="unit whole" style={{paddingBottom:'0'}}>
+        <div className="card project">
+
+          <div className="grid wrap">
+            <div className="unit whole">
+              <medium style={{display:'inline'}}>
+                <a href="">{value.project_name}</a>
+              </medium>
+              {
+                function (){
+                  var className = 'pill pending'
+                  switch (value.is_approved) {
+                    case 0:
+                    className= 'pill denied'
+                    break;
+                    case 1:
+                    className= 'pill approved'
+                    break;
+                    case -1:
+                    className='pill pending'
+                    break;
+                    default:
+                  }
+                  return (<div key={index} className='pill denied' style={{float:'right'}}>{value.is_approved}</div>)
+                }
+                
+              }
+
+            
+            </div>
+
+            <small className="project-info" style={{margin:'auto'}}>
+              (<b>{value.hour_total}</b>) - {value.wbs_name}
+            </small>
+          </div>
+
+          <div className="grid wrap">
+            <div className="unit whole">
+              <div className="person">
+                <div className="person-image" style={{margin:'auto'}} />
+                <div className="person-info" style={{marginLeft:'46px'}}>
+                  <large style={{float:'left'}}><b>{value.user_name}</b></large>
+                  <small style={{display:'inline'}}>, Project Manager</small>
+                </div>
+              <div style={{display: 'inline-block',marginLeft:'95px',marginTop:'-25px'}}>
+                  <small>
+                    <b>{value.subject}</b> "{value.message}"
+                  </small>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid wrap">
+            <div className="unit whole" style={{marginLeft:'95px'}}>
+              <small>Tue,Jun 6 at 4:55 PM via web</small>
+              <medium style={{display:'inline',marginLeft:'37%'}}>
+              {
+                value.is_approved == 0  && 
+                <a href="">RE-SUBMIT TIMESHEET</a>
+              }
+              </medium>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+  )
+  })
+
+}
 
         <div className="grid wrap">
           <div className="unit whole" style={{paddingBottom:'0'}}>
