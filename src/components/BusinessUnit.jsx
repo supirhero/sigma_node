@@ -68,7 +68,7 @@ class BusinessUnit extends Component {
 
                       {
                         bu &&
-                        bu.project_list.map((value,index) => {
+                        bu.project.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>
@@ -77,14 +77,14 @@ class BusinessUnit extends Component {
                                     type: 'PUSH',
                                     page: {
                                       name: 'project',
-                                      id : value.project_id
+                                      id : value.PROJECT_ID
                                     }
                                   }))
                                   e.preventDefault()
                                 }}>
                                   <div className='unit two-fifths'>
                                     <medium className='project-name'>
-                                      {value.project_name}
+                                      {value.PROJECT_NAME}
                                     </medium>
                                   </div>
                                   <div className='unit one-fifth'>
@@ -92,12 +92,12 @@ class BusinessUnit extends Component {
                                       {
                                         value.project_status
                                       }
-                                      &nbsp;({value.project_complete}%)
+                                      &nbsp;({value.PROJECT_COMPLETE}%)
                                     </small>
                                   </div>
                                   <div className='unit two-fifths'>
                                     <Line
-                                      progress={value.project_complete *0.01}
+                                      progress={value.PROJECT_COMPLETE *0.01}
                                       initialAnimate={true}
                                       options={{
                                       strokeWidth: 3,

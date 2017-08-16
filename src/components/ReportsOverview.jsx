@@ -5,11 +5,28 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select , Input, BarChart, LineChart, Checkbox, TableNew, Header } from './Components.jsx';
+import {Cell} from 'recharts'
+import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header } from './Components.jsx';
 
 
 class ReportsOverview extends Component {
   render() {
+    const data = [
+      { name: 'BSD', value: 0.86 },
+      { name: 'CEM', value: 0.36 },
+      { name: 'CISD', value: 0.56 },
+      { name: 'DCES', value: 0.92 },
+      { name: 'FSD', value: 0.25 },
+      { name: 'GT', value: 0.84 },
+      { name: 'ITPBS', value: 0.85 },
+      { name: 'NITSM', value: 0.78 },
+      { name: 'SMS', value: 0.69 },
+      { name: 'SSI', value: 0.88 },
+      { name: 'SP', value: 0.89 },
+      { name: 'TBSDMO', value: 0.86 },
+  ]
+  const COLORS = ['greem','red']
+
     return (
       <div>
         <div className="grid wrap wider reports">
@@ -56,49 +73,26 @@ class ReportsOverview extends Component {
               <TabPanel>
               <div className="grid wrap narrow">
                 <div className="unit whole">
-                 <BarChart
+                 <BarChartSPI
                 fill = '#65bdf4'       
                  label="SPI Graph"
                  labelStyle={{padding:'0 40%'}}
                  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                 data={[
-                  { name: 'BSD', value: 20 },
-                  { name: 'CEM', value: 10 },
-                  { name: 'CISD', value: 14 },
-                  { name: 'DCES', value: 32 },
-                  { name: 'FSD', value: 16 },
-                  { name: 'GT', value: 4 },
-                  { name: 'ITPBS', value: 7 },
-                  { name: 'NITSM', value: 9 },
-                  { name: 'SMS', value: 12 },
-                  { name: 'SSI', value: 40 },
-                  { name: 'SP', value: 54 },
-                  { name: 'TBSDMO', value: 23 },
-              ]}
+                 data={data}
                  />
+                 
+                
                 </div>
-              <div className="unit whole" style={{marginTop:'50px'}}>
-                 <BarChart
-                            fill="#65bdf4"
-                            label="CPI Graph"
-                            labelStyle={{padding:'0 39%'}}
-                            ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                            data={[
-                                { name: 'BSD', value: 20 },
-                                { name: 'CEM', value: 10 },
-                                { name: 'CISD', value: 14 },
-                                { name: 'DCES', value: 32 },
-                                { name: 'FSD', value: 16 },
-                                { name: 'GT', value: 4 },
-                                { name: 'ITPBS', value: 7 },
-                                { name: 'NITSM', value: 9 },
-                                { name: 'SMS', value: 12 },
-                                { name: 'SSI', value: 40 },
-                                { name: 'SP', value: 54 },
-                                { name: 'TBSDMO', value: 23 },
-                            ]}
 
-                          />
+
+              <div className="unit whole" style={{marginTop:'50px'}}>
+                  <BarChartCPI
+                  fill = '#65bdf4'       
+                  label="CPI Graph"
+                  labelStyle={{padding:'0 40%'}}
+                  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                  data={data}
+                  />
 
                 </div>
               </div>

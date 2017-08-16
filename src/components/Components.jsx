@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Circle, Line} from 'react-progressbar.js'
 import FileInput from 'react-file-input';
-import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
+import {BarChart as ChartBar,LineChart as ChartLine, Line as LineGraph, Cell, XAxis, YAxis, CartesianGrid,Tooltip, Legend, Bar, ResponsiveContainer} from 'recharts'
 import {Table as MaterialTable, TableBody, TableHeader, TableHeaderColumn,TableRow,TableRowColumn,MuiThemeProvider} from 'material-ui'
 import store from '../reducers/combineReducers.jsx'
 import {RadioButtonGroup} from 'material-ui/RadioButton'
@@ -354,6 +354,8 @@ export class BarChart extends Component {
             <Tooltip />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
+              
+          
           </ChartBar>
         </ResponsiveContainer>
 
@@ -361,6 +363,63 @@ export class BarChart extends Component {
     )
   }
 }
+
+export class BarChartSPI extends Component {
+  render() {
+    const COLORS = ['#42C878', '#CF000F'];
+    return(
+      <div className='bar-chart-container'>
+        <large style={this.props.labelStyle}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+        <ChartBar width={600} height={250} data={this.props.data}>
+        <XAxis dataKey="name"/>
+        <Tooltip />
+        <Bar dataKey="value" fill="#8884d8">
+            {
+              this.props.data.map((entry, index) => {
+                const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
+                return <Cell key={index} fill={color} />;
+              })
+            }
+   </Bar>
+  </ChartBar>
+        </ResponsiveContainer>
+
+      </div>
+    )
+  }
+}
+
+
+
+export class BarChartCPI extends Component {
+  
+  render() {
+    const customLabel = "yee";
+    const COLORS = ['#42C878', '#CF000F'];
+    return(
+      <div className='bar-chart-container'>
+        <large style={this.props.labelStyle}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+        <ChartBar width={600} height={250} data={this.props.data}>
+        <XAxis dataKey="name" name="value" />
+        <Tooltip />
+        <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
+            {
+              this.props.data.map((entry, index) => {
+                const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
+                return <Cell key={index} fill={color} />;
+              })
+            }
+        </Bar>
+        </ChartBar>
+        </ResponsiveContainer>
+
+      </div>
+    )
+  }
+}
+
 
 export class LineChart extends Component{
   render(){

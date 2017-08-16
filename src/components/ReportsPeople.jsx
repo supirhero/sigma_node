@@ -72,10 +72,9 @@ class ReportsPeople extends Component {
                     {value:'Utilization'},
                     {value:'Utilization Status'},
 									]} 
-									tableData = {[{column:[                
-										
-										  {value: 'Dwi Syifa'},
-										  {value: 'dwi.syifa@sigma.co.id'},
+									tableData = {[{column:[       
+                    {value: 'Abdurachim'},
+                    {value: 'abdurachim@sigma.co.id'},         
                       {value:'10'},
                       {value:'UNDER'},
                       {value:'20'},
@@ -83,27 +82,27 @@ class ReportsPeople extends Component {
 
 										]},{
                       column:[
-
-											{value: 'Ivan Gita Pribadi'},
-											{value: 'ivan.gita.pribadi@sigma.co.id'},
+                        {value: 'Akmal Ritaudin'},
+                        {value: 'akmal.ritaudin@sigma.co.id'},
+											
                       {value:'90'},
                       {value:'NORMAL'},
                       {value:'90'},
                       {value:'NORMAL'},
                       ]},{
                       column:[
-
-											{value: 'Paula Cintya'},
-											{value: 'paula.cintya@sigma.co.id'},
+                        {value: 'Dwi Syifa'},
+                        {value: 'dwi.syifa@sigma.co.id'},
+										
                       {value:'80'},
                       {value:'NORMAL'},
                       {value:'150'},
                       {value:'OVERLOAD'},
                       ]},{
                       column:[
-
-											{value: 'Akmal Ritaudin'},
-											{value: 'akmal.ritaudin@sigma.co.id'},
+                        {value: 'Ivan Gita Pribadi'},
+                        {value: 'ivan.gita.pribadi@sigma.co.id'},
+                   
                       {value:'40'},
                       {value:'UNDER'},
                       {value:'20'},
@@ -111,8 +110,8 @@ class ReportsPeople extends Component {
                       ]},{
                       column:[
 
-											{value: 'Abdurachim'},
-											{value: 'abdurachim@sigma.co.id'},
+												{value: 'Paula Cintya'},
+                        {value: 'paula.cintya@sigma.co.id'},
                       {value:'50'},
                       {value:'UNDER'},
                       {value:'50'},
