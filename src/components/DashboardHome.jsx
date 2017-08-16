@@ -102,7 +102,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
                 text={auth.datatimesheet ? auth.datatimesheet.b : '-'}
                 title='Utilization'
-                status={auth.datatimesheet.status}
+                status={auth.datatimesheet.status_utilization}
               />
             </div>
             <div className='unit half'>
@@ -110,7 +110,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.c *0.01 : '-'}
                 text={auth.datatimesheet ? auth.datatimesheet.c : '-'}
                 title='Entry'
-                status={auth.datatimesheet.status_utilization}
+                status={auth.datatimesheet.status}
               />
             </div>
           </div>
