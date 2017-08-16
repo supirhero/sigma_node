@@ -21,7 +21,7 @@ class ProjectTeamMember extends Component {
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='OVERVIEW'/>
+              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='TEAM MEMBER'/>
             </div>
           </div>
           <div className='grid padding-left'>

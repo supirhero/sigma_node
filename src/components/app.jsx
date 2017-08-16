@@ -56,6 +56,8 @@ import ManageAccess from './ManageAccess.jsx'
 
 
 
+import {muiTheme} from './Components.jsx'
+import {MuiThemeProvider } from 'material-ui'
 
 import {store, saveState} from '../reducers/combineReducers.jsx'
 import '../sass/app.scss'
@@ -80,6 +82,8 @@ const history = syncHistoryWithStore(browserHistory, store)
 // import Store from '/Store.jsx'
 render(
   <Provider store={store}>
+    <MuiThemeProvider muiTheme={muiTheme}>
+
     <Router history={history}>
       {/* <Route path="/" component={MainPage}>
         <IndexRoute component={DashboardHome}/>
@@ -108,7 +112,7 @@ render(
           <IndexRoute component={ProjectOverview}></IndexRoute>
           <Route path='edit-project' component={ProjectSetting}></Route>
           <Route path='activities' component={ProjectActivities}></Route>
-          <Route path='people' component={ProjectTeamMember}></Route>
+          <Route path='team-member' component={ProjectTeamMember}></Route>
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
           <Route path='workplan' component={ProjectWorkplan}></Route>
@@ -161,6 +165,7 @@ render(
 
     </Route>
     </Router>
+  </MuiThemeProvider>
   </Provider>,
   document.getElementById('app')
 )

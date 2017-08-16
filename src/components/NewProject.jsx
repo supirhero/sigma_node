@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
@@ -17,42 +18,81 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getProjectView, pop} from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader} from './Components.jsx'
 
 
 
 class NewProject extends Component {
-  handleInitialize() {
-  const initData = {
-    "IWO_NO": 'NONE',
-    "PM": 'NONE',
-    "AM_ID": 'NONE',
-    "TYPE_OF_EFFORT": 'NONE',
-    "PROJECT_STATUS": 'NOT STARTED',
-    // "START": '2017-1-1',
-    // "END": '2017-1-1',
-    "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
-  };
+  constructor(){
+    super();
+    this.state = {
+      iwo_index : 0
+
+    };
+  }
+  handleInitialize(data, iwo) {
+    const initData = {
+      "IWO_NO": iwo[0].IWO_NO,
+      "END_CUST_ID": iwo[0].END_CUSTOMER,
+      "AMOUNT": iwo[0].AMOUNT,
+      "PROJECT_NAME": iwo[0].PROJECT_NAME,
+      "RELATED": iwo[0].RELATED_BU,
+      "CUST_ID": iwo[0].CUSTOMER_ID,
+      "MARGIN": iwo[0].MARGIN,
+      "BU": data.BU_NAME,
+      "PM": 'NONE',
+      "AM_ID": 'NONE',
+      "TYPE_OF_EFFORT": 'NONE',
+      "PROJECT_STATUS": 'NOT STARTED',
+      // "START": '2017-1-1',
+      // "END": '2017-1-1',
+      "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
+    };
 
   this.props.initialize(initData);
 }
+
   componentDidMount(){
-    this.handleInitialize();
+    // store.dispatch(getIWO(30)).then(()=> {
+    //
+    // })
     const state = store.getState()
-    const id = state.data.page.new_project.bu_code
-    store.dispatch(getProjectView(id))
+    const id = this.props.state.data.page.new_project ? this.props.state.data.page.new_project.bu_code : null
+    const iwo = this.props.state.data.new_project ? this.props.state.data.new_project.iwo : null
+
+    store.dispatch(getAddProjectView(id)).then(
+      (res) => {
+      
+        // const data = this.props.state.data.new_project.business_unit
+        store.dispatch(getIWO(30)).then((res2)=> {
+          this.handleInitialize(res.data.business_unit,res2.data.iwo);
+
+        })
+
+      }
+    )
+
   }
   componentWillUnmount(){
-    store.dispatch(pop())
+    store.dispatch(pop('new_project'))
   }
   onSubmit(props){
     alert(props)
     this.props.addNewProject(props)
   }
     render(){
+      // const projectSetting = this.props.state.data.project.project_setting
+      // const projectManager = this.props.state.data.project.project_manajer_list
+      // const accountManager = this.props.state.data.project.account_manager_list
+      const new_project = this.props.state.data.new_project
+      const iwo = new_project ? new_project.iwo : null
+
+
+
       const {handleSubmit} = this.props;
+
       const projectStatus = [
         {value: 'Not Started'},
         {value: 'In Progress'},
@@ -68,8 +108,8 @@ class NewProject extends Component {
         {value: 'Dedutible Expense'},
       ]
       return(
+        !iwo ? <PageLoader/> :
         <div>
-          <MuiThemeProvider muiTheme={muiTheme}>
 
           <form
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
@@ -105,11 +145,55 @@ class NewProject extends Component {
                   inputName="IWO NUMBER"
                   name="IWO_NO"
                   component={ReduxSelect}
+                  onChange={(e,value)=> {
+                    var iwo_no = this.props.formValues.values.IWO_NO
+                    var i = _.findIndex(iwo, { 'IWO_NO' : value});
+                    var arr =iwo[i]
+                    var fields = [
+                      {
+                        field: 'AMOUNT',
+                        value: arr.AMOUNT
+                      },
+                      {
+                        field: 'PROJECT_NAME',
+                        value: arr.PROJECT_NAME
+                      },
+                      {
+                        field: 'RELATED',
+                        value: arr.RELATED_BU
+                      },
+                      {
+                        field: 'CUST_ID',
+                        value: arr.CUSTOMER_ID
+                      }
+                      ,
+                      {
+                        field: 'MARGIN',
+                        value: arr.MARGIN
+                      },
+                      {
+                        field: 'END_CUST_ID',
+                        value: arr.END_CUSTOMER
+                      }
+                    ]
 
+                    fields.map((value, index) => {
+                      this.props.change(
+                        value.field, value.value
+                      )
+
+                    })
+                    // e.preventDefault()
+                  }}
+                  // onChange={(event, index, value)=>{
+                  //
+                  //   // alert(this.state.iwo_index)
+                  // }}
                 >
                   {
-                    projectStatus.map((value, index)=> (
-                      <option value={value.value} {...this.props.option}>{value.value}</option>
+                    iwo &&
+                    iwo.map((value, index) => (
+                      <option key ={index} value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
 
                     ))
                   }
@@ -120,21 +204,23 @@ class NewProject extends Component {
                   name="PROJECT_NAME"
                   type='input'
                   style={{width:'100%'}}
-                  component={ReduxInput}
-                />
+                  component={ReduxInputDisabled}
+                >
+
+                </Field>
                 <Field
                   inputName="BUSINESS UNIT"
                   name="BU"
                   type="BU"
                   style={{width:'100%'}}
-                  component={ReduxInput}
+                  component={ReduxInputDisabled}
                 />
                 <Field
                   inputName="RELATED BUSINESS UNIT"
                   name="RELATED"
                   type="RELATED"
                   style={{width:'100%'}}
-                  component={ReduxInput}
+                  component={ReduxInputDisabled}
                 />
 
               </div>
@@ -146,7 +232,7 @@ class NewProject extends Component {
                     name="CUST_ID"
                     type="CUST_ID"
                     style={{width:'88%'}}
-                    component={ReduxInput}
+                    component={ReduxInputDisabled}
                   />
                 </div>
                 <div className='unit two-thirds'>
@@ -155,7 +241,7 @@ class NewProject extends Component {
                     name="END_CUST_ID"
                     type="END_CUST_ID"
                     style={{width:'100%'}}
-                    component={ReduxInput}
+                    component={ReduxInputDisabled}
                   />
                 </div>
               </div>
@@ -166,7 +252,7 @@ class NewProject extends Component {
                     name="AMOUNT"
                     type="AMOUNT"
                     style={{width:'94%'}}
-                    component={ReduxInput}
+                    component={ReduxInputDisabled}
                   />
                 </div>
                 <div className='unit one-third'>
@@ -175,7 +261,7 @@ class NewProject extends Component {
                     name="MARGIN"
                     type="MARGIN"
                     style={{width:'100%'}}
-                    component={ReduxInput}
+                    component={ReduxInputDisabled}
                   />
                 </div>
 
@@ -371,7 +457,7 @@ class NewProject extends Component {
 
                 </div>
               </div> */}
-              <div className='grid wrap narrow'>
+              {/* <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <h1 className='input-name'>VISIBILITY</h1>
                 </div>
@@ -382,16 +468,16 @@ class NewProject extends Component {
                     <RadioButton value="BUSINESS_MEMBER" label='Owning Busniness Member'/>
                   </Field>
                 </div>
-              </div>
-              <div className='grid wrap narrow'>
+              </div> */}
+              {/* <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Field name="VISIBILITY" component={RadioButtonGroup}>
                     <RadioButton value="PROJECT_MEMBER" label='Project Members Only'/>
                   </Field>
                 </div>
-              </div>
+              </div> */}
 
-              <div className='grid wrap narrow'>
+              {/* <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='FINANCE'></Divider>
                 </div>
@@ -456,7 +542,7 @@ class NewProject extends Component {
                   </div>
 
                 </div>
-              </div>
+              </div> */}
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='PROJECT CHARTER FORM'></Divider>
@@ -498,7 +584,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnText='COMPLETE FORM'>
+                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 41px'}} btnText='VIEW FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
@@ -536,7 +622,7 @@ class NewProject extends Component {
                       </div>
                       <div className='grid wrap narrow'>
                         <div className='unit half'>
-                          <Select inputName='WU DELIVERY' items={{
+                          <Select inputName='PROJECT START DATE' items={{
                             items : [
                               {title : 'TBWS21312'},
                               {title : 'TBWS21312'}
@@ -544,7 +630,7 @@ class NewProject extends Component {
                           }}></Select>
                         </div>
                         <div className='unit half'>
-                          <Select inputName='WU RELATED' items={{
+                          <Select inputName='PROJECT END DATE' items={{
                             items : [
                               {title : 'TBWS21312'},
                               {title : 'TBWS21312'}
@@ -552,6 +638,141 @@ class NewProject extends Component {
                           }}></Select>
                         </div>
                       </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='PROJECT DESCRIPTION'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='SCOPE OF WORK' placeholder='Uraian terkait pekerjaan yang akan dideliver (hardware/software/services, dll)'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='CONSTRAINTS' placeholder='Sebutkan constraints (keterbatasan kondisi) yang ada di dalam project' ></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='ASSUMPTIONS' placeholder='Sebutkan asumsi-asumsi yang digunakan untuk menjalankan project'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='RISKS' placeholder='Sebutkan resiko-resiko yang mungkin terjadi di dalam project'></Input>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName='DELIVERABLES' placeholder='Dokumen yang harus dideliver untuk penyelesaian project'></Input>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className= "input-name">MILESTONES</h2>
+                        </div>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0'}}>
+                          <h2 className= "input-desc"><i>Tahapan penting dan tanggal penting dalam project</i></h2>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input inputName='DATE' style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input inputName='MILESTONE' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input inputName='DESCRIPTION' style={{width:'70%',display:'inline-block'}}></Input>
+                      </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input style={{width:'70%',display:'inline-block'}}></Input>
+                          <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
+                      </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD MILESTONES</button>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className= "input-name">ROLES AND RESPONSIBILITIES</h2>
+                        </div>
+                        <div className="unit whole" style={{paddingLeft:'0', paddingTop:'0'}}>
+                          <h2 className= "input-desc"><i>Daftar role and responsibilities tim member </i></h2>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input inputName='NAME' style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input inputName='ROLES' style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input inputName='RESPONSIBILITIES' style={{width:'70%',display:'inline-block'}}></Input>
+                      </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit half">
+                          <Input style={{width:'40%', display:'inline-block'}} ></Input>
+                          <Input style={{width:'54%',display:'inline-block',marginLeft:'20px'}} ></Input>
+                        </div>
+                        <div className="unit half">
+                          <Input style={{width:'70%',display:'inline-block'}}></Input>
+                          <button className='btn-primary' style={{padding:'11px 14px',float:'right'}} ><span className="fa fa-trash fa-2x" style={{color:'white'}}></span></button>
+                      </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <button className='btn-primary' style={{padding:'16px 25px',marginTop:'5px'}}>ADD ROLES AND RESPONSIBILITIES</button>
+                        </div>
+                      </div>
+                      <div className='grid wrap narrow'>
+                        <div className='unit whole'>
+                          <Input inputName="PROJECT MANAGER'S RESPONSIBILITIES" placeholder='Uraian tanggung jawab PM'style={{width:'80%'}}></Input>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <div className='divider' style={{margin:'15px 0', borderColor:'#cccccc'}}></div>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole">
+                          <h2 className='input-desc'>SUPPORTING DOCUMENT</h2>
+                          <h2 className='input-desc'><i>You can attach one of these documents (Proposal, SPK/Contract, IWO, Change Management, Service Request, Others). If you want to add 2 or more, you can upload the compressed file (.zip). Max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                        </div>
+                        <div className="unit whole no-gutters">
+                          <InputFile placeholder="Select file from your computer"/>
+                        </div>
+                      </div>
+                      <div className="grid wrap narrow">
+                        <div className='unit whole' style={{textAlign:'center',marginTop:'50px'}}>
+                          <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CLOSE </button>
+                          <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} className='btn-primary'> PRINT </button>
+                        </div>
+                      </div>
+
 
 
                     </div>
@@ -573,7 +794,7 @@ class NewProject extends Component {
               </div>
 
             </form>
-          </MuiThemeProvider>
+
 
             </div>
       )
@@ -583,6 +804,7 @@ class NewProject extends Component {
 
 function mapStateToProps(state) {
   return {
+    formValues : state.form.add_project,
     state
     // filter: ownProps.location.query.filter
   }
