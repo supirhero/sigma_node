@@ -82,16 +82,7 @@ const page = (state = Immutable.List(), action) => {
       action.page
     )
 
-    case 'POP':
-    if (action.name != null) {
-      return Object.assign({}, state,{
-        [action.name] : null
-      })
-    }
-    else {
-      return state
-    }
-    break;
+
     default: return state
 
   }
@@ -122,6 +113,16 @@ const data = (state = Immutable.List(), action) => {
     //   store.dispatch({type: 'LOADER', show: true})
     // }
     switch (action.type) {
+
+      case 'POP':
+      // if (action.name != null) {
+        return Object.assign({}, undefined
+        )
+      // }
+      // else {
+      //   return state
+      // }
+      break;
 
 
       case 'LOGOUT':

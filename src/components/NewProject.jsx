@@ -59,14 +59,16 @@ class NewProject extends Component {
     //
     // })
     const state = store.getState()
-    const id = this.props.state.data.new_project ? this.props.state.data.new_project.bu_code : null
-    const iwo = this.props.state.data.new_project ? this.props.state.data.new_project.iwo : null
+    const id = this.props.state.page ? this.props.state.page.new_project.bu_code : null
+    const iwo = this.props.state.page ? this.props.state.page.new_project.iwo : null
 
     store.dispatch(getAddProjectView(id)).then(
       (res) => {
-
-        // const data = this.props.state.data.new_project.business_unit
+        console.log("VIEW", res);
+        // const data = this.props.state.data.business_unit
         store.dispatch(getIWO(30)).then((res2)=> {
+          console.log("IWO", res2);
+
           this.handleInitialize(res.data.business_unit,res2.data.iwo);
 
         })
@@ -84,10 +86,10 @@ class NewProject extends Component {
   }
     render(){
       // const projectSetting = this.props.state.data.project.project_setting
-      // const projectManager = this.props.state.data.project.project_manajer_list
+      const projectManager = this.props.state.data.project_manager
       // const accountManager = this.props.state.data.project.account_manager_list
-      const new_project = this.props.state.data.new_project
-      const iwo = new_project ? new_project.iwo : null
+      const new_project = this.props.state.data
+      const iwo = new_project.iwo ? new_project.iwo : null
 
 
 
@@ -102,13 +104,22 @@ class NewProject extends Component {
         // {value: 'In Planning'},
         // {value: 'Cancelled'},
       ]
+      const typeOfEffort = [
+        {value: 'Project'},
+        {value: 'CR'},
+        {value: 'Manage'},
+        {value: 'Operation'},
+        {value: 'Maintenance'},
+        {value: 'Manage Service'},
+        {value: 'Non Project'},
+      ]
       const typeOfExpense = [
         {value: 'Capital Expense'},
         {value: 'Current Expense'},
         {value: 'Dedutible Expense'},
       ]
       return(
-        !iwo ? <PageLoader/> :
+        !iwo && !projectManager ? <PageLoader/> :
         <div>
 
           <form
@@ -326,8 +337,8 @@ class NewProject extends Component {
                         component={ReduxSelect}
                       >
                         {
-                          projectStatus.map((value, index)=> (
-                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                          projectManager.map((value, index)=> (
+                            <option value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
                           ))
                         }
                       </Field>
@@ -344,7 +355,7 @@ class NewProject extends Component {
 
                       >
                         {
-                          projectStatus.map((value, index)=> (
+                          typeOfEffort.map((value, index)=> (
                             <option value={value.value} {...this.props.option}>{value.value}</option>
                           ))
                         }
