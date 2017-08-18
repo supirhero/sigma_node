@@ -442,7 +442,7 @@ export function taskList(project_id) {
             (res) => {
               alert('fetched tasklist');
               store.dispatch({ type: 'API', name: 'timesheet' ,
-                data: res.data, append: true}
+                data: res, append: true}
               );
             },
 

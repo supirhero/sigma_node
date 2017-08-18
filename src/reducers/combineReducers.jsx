@@ -133,7 +133,6 @@ const data = (state = Immutable.List(), action) => {
         // console.log("API DATA", action.data.data);
 
         if (action.append) {
-        alert('VA')
         return Object.assign({},state,
           action.data.data
         )
