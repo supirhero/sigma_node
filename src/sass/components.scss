@@ -697,3 +697,11 @@ th {
     // background-color: rgba(255, 255, 255, 0.91);
   }
 }
+
+:global .react-datepicker__input-container {
+  width: 100%;
+}
+
+:global .react-datepicker-wrapper{
+  width:100%;
+}

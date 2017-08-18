@@ -39,15 +39,38 @@ class Timesheet extends Component {
     const timesheet = state.data.timesheet;
 
     // console.log(timesheet.task);
-    function status(){
-      if (timesheet.user_activities.IS_APPROVED == 1){
-        return <b>DITERIMA</b>
-      } else if (timesheet.user_activities.IS_APPROVED == -1){
-        return <b>BELUM DIKONFIRMASI</b>
-      } else{
-        return <b>DITOLAK</b>
+    // function status(){
+    //   if (timesheet.user_activities.IS_APPROVED == '1'){
+    //     return <b>DITERIMA</b>
+    //   } else if (timesheet.user_activities.IS_APPROVED == '-1'){
+    //     return <b>BELUM DIKONFIRMASI</b>
+    //   } else{
+    //     return <b>DITOLAK</b>
+    //   }
+    //  }
+
+     function pill(value){
+      var text = 'PENDING'
+      var resubmit = ''
+      switch (value) {
+        case "0":
+        text = "DENIED"
+        resubmit = 'RE-SUBMIT TIMESHEET'
+        break;
+        case "1":
+        text = "APPROVED"
+        resubmit = ''
+        break;
+        case "-1":
+        text = "WAITING FOR APPROVAL"
+        resubmit = ''
+        break;
+        default:
       }
-     }
+      return(<div className={className} style={{float:'right'}}>{text}</div>)
+      return(<div></div>)
+    }
+
 
     const auth = state.data.login;
 
@@ -112,8 +135,9 @@ class Timesheet extends Component {
                         inputName="PROJECT NAME"
                         name="PROJECT_ID"
                         onChange={
-                          (e)=>{
-                            store.dispatch(taskList(this.props.formValues.values.PROJECT_ID))
+                          (e,value)=>{
+                            store.dispatch(taskList(value))
+                          
                             // store.dispatch(pop());
                             // e.preventDefault()
                           }
@@ -242,6 +266,7 @@ class Timesheet extends Component {
                                     <div className="unit whole" >
                                       <medium style={{ display: 'inline-block', marginLeft: '50px' }}>
                                       {
+
                                         timesheet.user_activities.IS_APPROVED == "1" ? <b>ACCEPTED</b> : <b>WAITING FOR APPROVAL</b>
                                       }
                                       </medium>

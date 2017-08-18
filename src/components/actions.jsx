@@ -58,8 +58,7 @@ export function getProjectDetail(id) {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              store.dispatch({type:'API', name: 'project', data: res})
-
+              store.dispatch({type:'API', name: 'project', data: res})              
             },
 
           )
@@ -154,13 +153,16 @@ export const addDocsAndFiles = (data, id ) => {
 
   return function (dispatch) {
     return axios({
-            method: 'GET',
+            method: 'POST',
             url: `${baseURL}/dev/test/documentupload/${id}` ,
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
             },
-            data: data
+            data:{
+              'desc':data.desc,
+              'document':data.document
+            }
 
           }).then(
             res => {
@@ -172,6 +174,60 @@ export const addDocsAndFiles = (data, id ) => {
   }
 }
 
+export const getIssue = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/test/projectissue/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
+
+export const addIssue = (data, id ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/test/addissue/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{
+              'PROJECT_ID':id,
+              'SUBJECT':data.SUBJECT,
+              'MESSAGE':data.MESSAGE,
+              'PRIORITY':data.PRIORITY,
+              'file_upload':data.file_upload
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+            },
+          )
+  }
+}
 
 
 export const addNewProject = (data) => {
@@ -398,6 +454,81 @@ export const getAddProjectView = (id) => {
 
 }
 
+export const getSPI = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/projecttest/spi/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+export const getCPI = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/projecttest/cpi/${id}` ,
+            headers: {
+              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+export const getSCurve = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/project/s_curve/${id}` ,
+            headers: {
+              'token': {token},
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+
+             }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
 
 
 export function viewTimesheet(date) {
@@ -417,7 +548,13 @@ export function viewTimesheet(date) {
               store.dispatch({ type: 'API', name: 'timesheet', append: true, data: res });
             },
 
-          );
+          )
+          .catch(error => {
+            if (error.response) {
+              alert('error');
+            }
+          });
+          
   };
 }
 
@@ -519,6 +656,7 @@ export function confirmationTimesheet(ts_id,confirm) {
     }).then(
       (res)=>{
         store.dispatch(getMyActivities());
+        alert('clicked')
       }
     )
   }

@@ -4,10 +4,14 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Header, ProjectHeader, LineChart ,TableNew} from  './Components.jsx'
-
+import {getSCurve,pop} from './actions.jsx'
 
 
 class ProjectSCurve extends Component {
+  componentWillMount(){
+    const id = store.getState().data.page.id
+    store.dispatch(getSCurve(id))
+  }
     render(){
       return(
         <div className='project-DocsFiles'>

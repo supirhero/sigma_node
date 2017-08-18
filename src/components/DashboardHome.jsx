@@ -99,18 +99,18 @@ class DashboardHome extends Component {
 
 
               <Meter
-                progress={auth.datatimesheet ? auth.datatimesheet.b *0.01 : '-'}
-                text={auth.datatimesheet ? auth.datatimesheet.b : '-'}
+                progress={auth.datatimesheet ? auth.datatimesheet.entry  : '-'}
+                text={auth.datatimesheet ? auth.datatimesheet.entry : '-'}
                 title='Utilization'
-                status={auth.datatimesheet.status_utilization}
+                status={auth.datatimesheet.status}
               />
             </div>
             <div className='unit half'>
               <Meter
-                progress={auth.datatimesheet ? auth.datatimesheet.c *0.01 : '-'}
-                text={auth.datatimesheet ? auth.datatimesheet.c : '-'}
+                progress={auth.datatimesheet ? auth.datatimesheet.utilization  : '-'}
+                text={auth.datatimesheet ? auth.datatimesheet.utilization : '-'}
                 title='Entry'
-                status={auth.datatimesheet.status}
+                status={auth.datatimesheet.status_utilization}
               />
             </div>
           </div>

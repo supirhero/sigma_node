@@ -4,11 +4,18 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, Header, ProjectHeader, Input, BarChart, Table, InputFile, TableNew } from './Components.jsx';
+import { Divider, Header, ProjectHeader, Input, BarChart, Table, InputFile, TableNew,PageLoader } from './Components.jsx';
+import {pop,getSPI,getCPI} from './actions.jsx'
 
 
 
 class ProjectSpiCpi extends Component {
+  componentDidMount(){
+    const id = store.getState().data.page.id
+    store.dispatch(getSPI(id))
+    store.dispatch(getCPI(id))
+  }
+
   render() {
     return (
       <div className="project-DocsFiles">
