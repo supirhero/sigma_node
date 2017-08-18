@@ -9,6 +9,7 @@ import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
+// import Dropzone from 'react-dropzone';
 
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
@@ -821,6 +822,7 @@ export class InputFile extends Component {
     )
   }
 }
+
 export class ReduxFileInput extends Component {
   render(){
     return(
@@ -835,6 +837,21 @@ export class ReduxFileInput extends Component {
     )
   }
 }
+
+
+// export class ReduxDropZone extends Component{
+//   render(){
+//     return (
+//       <div>
+//       <Dropzone
+//       onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+//       >
+//       <div>TARO FILE</div>
+//       </Dropzone>
+//       </div>
+//     )
+//   }
+// }
 
 export class LoaderLogin extends Component {
   render(){

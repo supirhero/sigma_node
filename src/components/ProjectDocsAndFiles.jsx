@@ -16,7 +16,9 @@ class ProjectDocsAndFiles extends Component {
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){
+
     const id = store.getState().page.id
+
 
     this.props.addDocsAndFiles(props, id)
   }
@@ -95,8 +97,8 @@ class ProjectDocsAndFiles extends Component {
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>
                         <div className='unit four-fifths'>
-                          <a style={{ display:'inline'}}>Project Timeline.xls</a>
-                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by Kara Gray at June 2, 13:23</small>
+                          <a style={{ display:'inline'}}>{value.url}</a>
+                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by Kara Gray at {value.date_upload}, 13:23</small>
                         </div>
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right'}}><span className='icon-trash' style={{color:'#D62431'}}></span></medium>
@@ -104,7 +106,7 @@ class ProjectDocsAndFiles extends Component {
                       </div>
                       <div className='grid'>
                         <div className='unit whole'>
-                          <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</small>
+                          <small>{value.doc_desc}</small>
                         </div>
 
                       </div>
