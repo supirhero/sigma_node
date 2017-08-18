@@ -11,7 +11,7 @@ import {getMyActivities,confirmationTimesheet,pop} from './actions.jsx'
 class ProjectActivities extends Component {
   componentWillMount(){
     store.dispatch(getMyActivities());
-    const myActivity = store.getState().data.myActivity;
+    const myActivity = store.getState().data;
   }
 
   componentWillUnmount() {
@@ -37,10 +37,10 @@ class ProjectActivities extends Component {
         default:
       }
       return(<div className={className} style={{float:'right'}}>{text}</div>)
-     
+
     }
-    const myActivity = store.getState().data.myActivity;
-    if(!myActivity){
+    const myActivity = store.getState().data;
+    if(!myActivity.activity_timesheet){
       return <PageLoader></PageLoader>
     }
     return (
@@ -91,7 +91,7 @@ class ProjectActivities extends Component {
                   </div>
                 </div>
               </div>
-              
+
               <div className="grid wrap">
                 <div className="unit whole" style={{marginLeft:'95px'}}>
                   <small style={{display:'inline-block',marginLeft:'50px'}}>Tue,Jun 6 at 4:55 PM via web</small>
@@ -103,7 +103,7 @@ class ProjectActivities extends Component {
               </div>
             </div>
           </div>
-        
+
 
         {
           myActivity.activity_timesheet.map((value,index)=>{
@@ -112,22 +112,22 @@ class ProjectActivities extends Component {
               <div className="grid wrap">
               <div className="unit whole" style={{paddingBottom:'0'}}>
                 <div className="card project">
-        
+
                   <div className="grid wrap">
                     <div className="unit whole">
                       <medium style={{display:'inline'}}>
                         <a href="">{value.project_name}</a>
                       </medium>
-        
+
                       {pill(value.is_approved)}
-        
+
                     </div>
-        
+
                     <small className="project-info" style={{margin:'auto'}}>
                       (<b>{value.hour_total} hours</b>) - {value.wbs_name}
                     </small>
                   </div>
-        
+
                   <div className="grid wrap">
                     <div className="unit whole">
                       <div className="person">
@@ -149,18 +149,18 @@ class ProjectActivities extends Component {
                       <small style={{fontSize:'12px'}}>Tue,Jun 6 at 4:55 PM via web</small>
                       <medium style={{display:'inline',marginLeft:'170px'}}>
                       {
-                        value.is_approved === "-1"  && 
+                        value.is_approved === "-1"  &&
                         <span>
                           <a onClick={(e)=>{
                             store.dispatch(confirmationTimesheet(myActivity.activity_timesheet.ts_id,0))
-                    
-                          }}>DENY</a> 
+
+                          }}>DENY</a>
                           <a style={{marginLeft:'20px'}} onClick={(e)=>{
                             store.dispatch(confirmationTimesheet(myActivity.activity_timesheet.ts_id,1))
-                    
-                          }}>APPROVE</a> 
+
+                          }}>APPROVE</a>
                         </span>
-                        
+
                       }
                       </medium>
                     </div>
@@ -171,9 +171,9 @@ class ProjectActivities extends Component {
               </div>
           )
           })
-        
+
         }
-        
+
 
 
         <div className="grid wrap padding-left">

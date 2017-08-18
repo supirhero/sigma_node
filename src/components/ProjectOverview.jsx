@@ -11,7 +11,7 @@ import { Line } from 'react-progressbar.js'
 class ProjectOverview extends Component {
     render(){
       const appStore = store.getState()
-      const overview = appStore.data.project ? appStore.data.project.overview : null
+      const overview = appStore.data.overview ? appStore.data.overview : null
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>

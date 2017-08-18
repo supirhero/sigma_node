@@ -10,13 +10,13 @@ import { getProjectTeamMember, pop } from './actions.jsx'
 
 class ProjectTeamMember extends Component {
   componentDidMount() {
-    const id = store.getState().data.page.id
+    const id = store.getState().page.id
     store.dispatch(getProjectTeamMember(id))
   }
 
     render(){
       const appStore = store.getState();
-      const projectMember = appStore.data.project.project_member
+      const projectMember = appStore.data.project_member
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>

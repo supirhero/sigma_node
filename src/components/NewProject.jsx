@@ -54,17 +54,17 @@ class NewProject extends Component {
   this.props.initialize(initData);
 }
 
-  componentDidMount(){
+  componentWillMount(){
     // store.dispatch(getIWO(30)).then(()=> {
     //
     // })
     const state = store.getState()
-    const id = this.props.state.data.page.new_project ? this.props.state.data.page.new_project.bu_code : null
+    const id = this.props.state.data.new_project ? this.props.state.data.new_project.bu_code : null
     const iwo = this.props.state.data.new_project ? this.props.state.data.new_project.iwo : null
 
     store.dispatch(getAddProjectView(id)).then(
       (res) => {
-      
+
         // const data = this.props.state.data.new_project.business_unit
         store.dispatch(getIWO(30)).then((res2)=> {
           this.handleInitialize(res.data.business_unit,res2.data.iwo);

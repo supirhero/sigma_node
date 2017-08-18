@@ -41,10 +41,10 @@ class EditProject extends Component {
 
     }
 
-      componentDidMount(){
+      componentWillMount(){
 
-      const id = store.getState().data.page.id
-      const iwo = this.props.state.data.project ? this.props.state.data.project.iwo : null
+      const id = store.getState().page.id
+      const iwo = this.props.state ? this.props.state : null
 
       store.dispatch(getEditProjectView(id)).then(
         (res) => {
@@ -74,11 +74,11 @@ class EditProject extends Component {
         // {value: 'Cancelled'},
       ]
       const {handleSubmit} = this.props;
-      const projectSetting = this.props.state.data.project.project_setting
-      const projectManager = this.props.state.data.project.project_manajer_list
-      const accountManager = this.props.state.data.project.account_manager_list
-      const project = this.props.state.data.project
-      const iwo = project ? project.iwo : null
+      const project = this.props.state.data
+      const projectSetting = project.project_setting ? project.project_setting : null
+      const projectManager = project.project_manajer_list ? project.project_manajer_list : null
+      const accountManager = project.account_manager_list ? project.account_manager_list : null
+      const iwo = project.iwo ? project.iwo : null
 
       return(
 

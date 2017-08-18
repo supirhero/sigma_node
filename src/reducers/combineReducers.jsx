@@ -1,4 +1,4 @@
- import auth from './authReducer.jsx'
+ // import auth from './authReducer.jsx'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import axios from 'axios'
@@ -53,8 +53,51 @@ export const saveState = (state) => {
     // console.log('changed: ', serializedState);
 
 }
+var auth = (state = Immutable.List(), action) => {
+  switch (action.type) {
+    case 'LOGIN_DATA':
+      return Object.assign({}, state, action.data.data)
+    break;
 
-var data = (state = Immutable.List(), action) => {
+    case 'LOGIN':
+      return Object.assign({}, state, {
+        isloggedin: action.isloggedin
+
+      })
+    break;
+
+    case 'LOGOUT':
+    return Object.assign({}, null, {
+      isloggedin: false
+    })
+      break;
+    default:
+      return state
+  }
+}
+const page = (state = Immutable.List(), action) => {
+  switch (action.type) {
+    case 'PUSH':
+    return Object.assign({}, state,
+      action.page
+    )
+
+    case 'POP':
+    if (action.name != null) {
+      return Object.assign({}, state,{
+        [action.name] : null
+      })
+    }
+    else {
+      return state
+    }
+    break;
+    default: return state
+
+  }
+}
+const data = (state = Immutable.List(), action) => {
+  const prevState = state;
   // state = {
   console.log('json',action);
   //   isLoggedIn : false
@@ -79,58 +122,26 @@ var data = (state = Immutable.List(), action) => {
     //   store.dispatch({type: 'LOADER', show: true})
     // }
     switch (action.type) {
-      case 'PUSH':
-      return Object.assign({}, state, {
-        page: action.page
-      })
 
-      case 'POP':
-      if (action.name != null) {
-        return Object.assign({}, state,{
-          [action.name] : null
-        })
-      }
-      else {
-        return state
-      }
-      break;
-
-      case 'LOGIN':
-      return Object.assign({}, state, {
-        isloggedin: action.isloggedin
-      })
-      break;
 
       case 'LOGOUT':
-      return Object.assign({}, null, {
-        isloggedin: false
-      })
-        break;
+      return Object.assign({},state, null)
+
       case 'API':
         console.log("API CALLED FOR", action.name );
         console.log("APPEND?", action.append );
-        console.log("API DATA", action.data.data);
+        // console.log("API DATA", action.data.data);
 
-        if (!action.append) {
-        return _.mergeWith({}, state,{
-            [action.name] :action.data.data
-          })
+        if (action.append) {
+        alert('VA')
+        return Object.assign({},state,
+          action.data.data
+        )
 
         }
         else {
-          return _.mergeWith({},state,{
-            [action.name] : action.data.data
-          }
-
-          )
-          // console.log("BLAAAA", newState);
-          // return state
-          // return Object.assign({},state,
-          //   {
-          //
-          //   }
-
-          // )
+          return Object.assign({},state, action.data.data)
+          // return action.data.data
         }
 
         break;
@@ -152,17 +163,25 @@ var data = (state = Immutable.List(), action) => {
 }
 
 }
-
-
-
-const allReducers = combineReducers({
+const appReducer = combineReducers({
+  auth,
   data,
+  page,
   routing : routerReducer,
   form: reduxForm
 })
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
+
+
+
 const routeMiddleware = routerMiddleware(browserHistory)
 
-export const store = createStore(allReducers, loadState(), applyMiddleware(thunk, routeMiddleware))
+export const store = createStore(rootReducer, loadState(), applyMiddleware(thunk, routeMiddleware))
 // const reducer = storage.reducer(allReducers);
 //
 // const middleware = storage.createMiddleware(engine);

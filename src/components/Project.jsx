@@ -18,7 +18,7 @@ class Project extends Component {
   }
 
   componentWillMount(){
-    const id = store.getState().data.page.id
+    const id = store.getState().page.id
     store.dispatch(getProjectDetail(id)).then(
       (res)=>{
         console.log('detail project');
@@ -32,7 +32,7 @@ class Project extends Component {
   }
 
   render(){
-    const id = store.getState().data.page.id
+    const id = store.getState().page.id
     const sidebar = [
       {type:'menu', name : 'Overview', path: `/project/${id}`},
       {type:'menu', name : 'Edit Project', path: `/project/${id}/edit-project`},
@@ -148,7 +148,7 @@ class Project extends Component {
         <div className='unit four-fifths'>
 
           {
-            store.getState().data.project ?
+            store.getState().data.overview ?
             this.props.children:
             <PageLoader></PageLoader>
 
