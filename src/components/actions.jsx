@@ -25,8 +25,8 @@ export function login(email, password) {
           }).then(
             res => {
               // browserHistory.replace('/')
-              store.dispatch({type:'API', name: 'login', data: res, append: false})
-              if (store.getState().data.login.token != undefined) {
+              store.dispatch({type:'LOGIN_DATA', data: res})
+              if (store.getState().auth.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
                 store.dispatch(replace('/'))
               }
@@ -114,7 +114,7 @@ export const getProjectTeamMember = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'project', append: true, data: res})
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
 
             },
           )
@@ -150,7 +150,7 @@ export const getDocsFiles = (id) => {
 
 export const addDocsAndFiles = (data, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
+  console.log("DOCS",data);
   return function (dispatch) {
     return axios({
             method: 'POST',
@@ -159,9 +159,11 @@ export const addDocsAndFiles = (data, id ) => {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
             },
-            data:{
-              'desc':data.desc,
-              'document':data.document
+
+            data: {
+              'desc': data.desc,
+              'document': data.document
+
             }
 
           }).then(
@@ -320,9 +322,10 @@ export const getIWOEditProject = (offset) => {
 
           }).then(
             res => {
-              store.dispatch({type:'API', name: 'project', append:true, data: res})
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
 
               console.log(res.data);
+              return res
 
             },
           )
@@ -343,7 +346,7 @@ export const getIWO = (offset) => {
 
           }).then(
             res => {
-              store.dispatch({type:'API', name: 'new_project', data: res})
+              store.dispatch({type:'API', name: 'new_project', data: res, append: true})
 
               console.log(res.data);
               return res
@@ -417,7 +420,8 @@ export const getEditProjectView = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'project',data: res})
+              store.dispatch({type:'API', name: 'project', append: true, data: res})
+              return res
             },
             req => {
 
@@ -545,7 +549,7 @@ export function viewTimesheet(date) {
     }).then(
             (res) => {
               // alert('timesheed fetched');
-              store.dispatch({ type: 'API', name: 'timesheet', append: true, data: res });
+              store.dispatch({ type: 'API', name: 'timesheet', data: res });
             },
 
           )
@@ -572,8 +576,10 @@ export function taskList(project_id) {
 
     }).then(
             (res) => {
-              // alert('fetched tasklist');
-              store.dispatch({ type: 'API', name: 'timesheet', append: true, data: res });
+              alert('fetched tasklist');
+              store.dispatch({ type: 'API', name: 'timesheet' ,
+                data: res, append: true}
+              );
             },
 
           );
@@ -671,7 +677,7 @@ export function myPerformance(bulan,tahun){
       data: {bulan,tahun}
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'myPerformance', append: true, data: res });
+        store.dispatch({ type: 'API', name: 'myPerformance',  data: res });
       }
     )
   }
@@ -685,7 +691,7 @@ export function getMyAssignment(){
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'myAssignment', append: true, data: res });
+        store.dispatch({ type: 'API', name: 'myAssignment',  data: res });
       }
     )
   }
@@ -699,7 +705,7 @@ export function getMyActivities(){
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'myActivity', append: true, data: res });
+        store.dispatch({ type: 'API', name: 'myActivity', append: true,  data: res });
       }
     )
   }

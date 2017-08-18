@@ -12,18 +12,21 @@ import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
 
 class ProjectDocsAndFiles extends Component {
   componentDidMount(){
-    const id = store.getState().data.page.id
+    const id = store.getState().page.id
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){
-    const id = store.getState().data.page.id
+
+    const id = store.getState().page.id
+
+
     this.props.addDocsAndFiles(props, id)
   }
     render(){
       const {handleSubmit} = this.props;
 
       const appStore = store.getState()
-      const project_doc_list = appStore.data.project.project_doc_list
+      const project_doc_list = appStore.data.project_doc_list
       return(
         <div className='project-DocsFiles'>
           <div className='grid padding-left'>
@@ -89,7 +92,7 @@ class ProjectDocsAndFiles extends Component {
             typeof project_doc_list[0] !== 'undefined'?
             project_doc_list.map((value, index) => {
               return (
-                <div className='grid padding-left'>
+                <div className='grid padding-left' key={index}>
                   <div className='unit whole'>
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>

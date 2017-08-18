@@ -11,7 +11,7 @@ import { getMyActivities, confirmationTimesheet, pop } from './actions.jsx';
 class ProjectActivities extends Component {
   componentWillMount() {
     store.dispatch(getMyActivities());
-    const myActivity = store.getState().data.myActivity;
+    const myActivity = store.getState().data;
   }
 
   componentWillUnmount() {
@@ -37,11 +37,13 @@ class ProjectActivities extends Component {
           break;
         default:
       }
+
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
     const myActivity = store.getState().data.myActivity;
     if (!myActivity) {
       return <PageLoader />;
+
     }
     return (
       <div>
@@ -105,11 +107,14 @@ class ProjectActivities extends Component {
           </div>
 
 
+
+
           {
           myActivity.activity_timesheet.map((value, index) => (
             <div key={index}>
               <div className="grid wrap">
-                <div className="unit whole" style={{ paddingBottom: '0' }}>
+
+        {/* <div className="unit whole" style={{ paddingBottom: '0' }}>
                   <div className="card project">
 
                     <div className="grid wrap">
@@ -138,11 +143,44 @@ class ProjectActivities extends Component {
                           <div style={{ display: 'inline-block', marginLeft: '55px', marginTop: '-25px' }}>
                             <small>
                               <b>{value.subject}</b> "{value.message}"
+                              */}
+
+              <div className="unit whole" style={{paddingBottom:'0'}}>
+                <div className="card project">
+
+                  <div className="grid wrap">
+                    <div className="unit whole">
+                      <medium style={{display:'inline'}}>
+                        <a href="">{value.project_name}</a>
+                      </medium>
+
+                      {pill(value.is_approved)}
+
+                    </div>
+
+                    <small className="project-info" style={{margin:'auto'}}>
+                      (<b>{value.hour_total} hours</b>) - {value.wbs_name}
+                    </small>
+                  </div>
+
+                  <div className="grid wrap">
+                    <div className="unit whole">
+                      <div className="person">
+                        <div className="person-image" style={{margin:'auto'}} />
+                        <div className="person-info" style={{marginLeft:'55px'}}>
+                          <medium style={{float:'left'}}><b>{value.user_name}</b></medium>
+                          <small style={{display:'inline'}}>, Project Manager</small>
+                        </div>
+                      <div style={{display: 'inline-block',marginLeft:'55px',marginTop:'-25px'}}>
+                          <small>
+                            <b>{value.subject}</b> "{value.message}"
+
                           </small>
                           </div>
                         </div>
                       </div>
                     </div>
+
                     <div className="grid wrap">
                       <div className="unit whole" style={{ marginLeft: '104px' }}>
                         <small style={{ fontSize: '12px' }}>Tue,Jun 6 at 4:55 PM via web</small>
@@ -165,7 +203,6 @@ class ProjectActivities extends Component {
                             }}
                           >APPROVE</a>
                         </span>
-
                       }
                         </medium>
                       </div>

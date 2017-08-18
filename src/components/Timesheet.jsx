@@ -22,9 +22,10 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     // store.dispatch(taskList('8790874'));
     const timesheet = state.data.timesheet;
-    const auth = state.data.login;
+    const auth = state.auth;
 
   }
+  
 
 
   componentWillUnmount() {
@@ -36,7 +37,7 @@ class Timesheet extends Component {
     const { handleSubmit } = this.props;
     const currentDate = moment().format("ddd,MMM DD");
     const state = store.getState();
-    const timesheet = state.data.timesheet;
+    const timesheet = state.data;
 
     // console.log(timesheet.task);
     // function status(){
@@ -72,14 +73,15 @@ class Timesheet extends Component {
     }
 
 
-    const auth = state.data.login;
+    const auth = state.auth;
 
 
 
-     if(!timesheet){
-     return <PageLoader></PageLoader>
-   }
+  //    if(!timesheet){
+  //    return <PageLoader></PageLoader>
+  //  }
     return (
+      !timesheet.user_project? <PageLoader></PageLoader>:
       <div>
         <div className="grid wrap">
           <div className="unit whole">
@@ -135,9 +137,10 @@ class Timesheet extends Component {
                         inputName="PROJECT NAME"
                         name="PROJECT_ID"
                         onChange={
-                          (e,value)=>{
+
+                          (e, value)=>{
                             store.dispatch(taskList(value))
-                          
+
                             // store.dispatch(pop());
                             // e.preventDefault()
                           }
@@ -156,13 +159,13 @@ class Timesheet extends Component {
                   <div className="grid wrap narrow">
                   <div className="unit three-quarters">
                                       {
-                                        timesheet.task && 
+                                        timesheet.task &&
                                         <Field
                                         name="WP_ID"
                                         type="WP_ID"
                                           inputName="TASK"
                                           component={ReduxSelectNew}>
-                                              {                              
+                                              {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
                                                 }
@@ -172,7 +175,7 @@ class Timesheet extends Component {
                                       }
 
                                       {
-                                        !timesheet.task && 
+                                        !timesheet.task &&
                                         <Field
                                         name="WP_ID"
                                         type="WP_ID"
@@ -182,7 +185,7 @@ class Timesheet extends Component {
                                        </Field>
                                       }
                                       </div>
-                  
+
                     <div className="unit one-quarter">
                       <Field
                         inputName="WORK HOURS"
