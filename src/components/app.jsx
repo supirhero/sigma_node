@@ -64,7 +64,7 @@ import '../sass/app.scss'
 
 window.store = store
 function requireAuth(nextState, replace) {
-   if (!store.getState().data.isloggedin) {
+   if (!store.getState().auth.isloggedin) {
    replace({
    pathname: '/auth',
    state: { nextPathname: nextState.location.pathname }
