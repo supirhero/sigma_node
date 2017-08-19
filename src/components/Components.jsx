@@ -591,7 +591,7 @@ export class TableNew extends Component{
           <tr>
             {
               this.props.tableHeader.map((value,index)=>(
-                <th>{value.value}</th>
+                <th key={index}>{value.value}</th>
               ))
             }
           </tr>
@@ -603,7 +603,7 @@ export class TableNew extends Component{
                 <tr className='items' key={index}>
                   {
                     row.column.map((column,index)=>(
-                      <td>{column.value}</td>
+                      <td key={index}>{column.value}</td>
                     ))
                   }
                 </tr>

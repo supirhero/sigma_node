@@ -9,7 +9,7 @@ import {getSCurve,pop} from './actions.jsx'
 
 class ProjectSCurve extends Component {
   componentWillMount(){
-    const id = store.getState().data.page.id
+    const id = store.getState().page.id
     store.dispatch(getSCurve(id))
   }
     render(){

@@ -11,7 +11,8 @@ import { getMyActivities, confirmationTimesheet, pop } from './actions.jsx';
 class ProjectActivities extends Component {
   componentWillMount() {
     store.dispatch(getMyActivities());
-    const myActivity = store.getState().data;
+    const state = store.getState();
+    const activity_timesheet = state.data.activity_timesheet;
   }
 
   componentWillUnmount() {
@@ -40,8 +41,9 @@ class ProjectActivities extends Component {
 
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
-    const myActivity = store.getState().data.myActivity;
-    if (!myActivity) {
+    const state = store.getState();
+    const activity_timesheet = state.data.activity_timesheet;
+    if (!activity_timesheet) {
       return <PageLoader />;
 
     }
@@ -110,7 +112,7 @@ class ProjectActivities extends Component {
 
 
           {
-          myActivity.activity_timesheet.map((value, index) => (
+          activity_timesheet.map((value, index) => (
             <div key={index}>
               <div className="grid wrap">
 

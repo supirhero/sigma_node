@@ -338,7 +338,7 @@ class NewProject extends Component {
                       >
                         {
                           projectManager.map((value, index)=> (
-                            <option value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
+                            <option key={index} value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
                           ))
                         }
                       </Field>
@@ -356,7 +356,7 @@ class NewProject extends Component {
                       >
                         {
                           typeOfEffort.map((value, index)=> (
-                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                            <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
                           ))
                         }
                       </Field>

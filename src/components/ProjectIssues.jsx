@@ -10,12 +10,12 @@ import { getIssue, addIssue, pop } from './actions.jsx';
 
 class ProjectIssues extends Component {
   componentWillMount() {
-    const id = store.getState().data.page.id;
+    const id = store.getState().page.id;
     store.dispatch(getIssue(id));
   }
 
   onSubmit(props) {
-    const id = store.getState().data.page.id;
+    const id = store.getState().page.id;
     this.props.addIssue(props,id);
   }
 
@@ -23,9 +23,9 @@ class ProjectIssues extends Component {
   render() {
     const { handleSubmit } = this.props;
     const priority = [
-        { value: 'high' },
-        { value: 'medium' },
-        { value: 'low' },
+        { value: 'High' },
+        { value: 'Medium' },
+        { value: 'Low' },
     ]
     function status(value) {
       let className = 'resolved';
@@ -45,7 +45,7 @@ class ProjectIssues extends Component {
     }
 
     const state = store.getState()
-    const projectIssueList = state.data.project.project_issue_list
+    const projectIssueList = state.data.project_issue_list
 
     return (
       <div className="project-DocsFiles">
@@ -86,13 +86,18 @@ class ProjectIssues extends Component {
                       inputName="PRIORITY"
                       name="PRIORITY"
                       style={{ width: '96%' }}
-                      component={ReduxInput}
-                    />
+                      component={ReduxSelect}>
+                      {
+                        priority.map((value, index)=> (
+                          <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
+                        ))
+                      }
+
+                    </Field>
                   </div>
+                  
                   <div className="unit golden-large">
-                    <h2 className="input-desc">EVIDENCE</h2>
-                  </div>
-                  <div className="unit golden-large">
+                  <h2 className="input-desc" style={{marginTop:'25px'}}>EVIDENCE</h2>
                     <Field
                       inputName="EVIDENCE"
                       name="file_upload"
@@ -123,7 +128,7 @@ class ProjectIssues extends Component {
   projectIssueList ?
   projectIssueList.map((value,index)=>{
     return(
-      <div className="grid padding-left">
+      <div className="grid padding-left" key={index}>
         <div className="unit whole">
           <div className="card" style={{ padding: '15px' }}>
             <div className="grid">

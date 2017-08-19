@@ -13,7 +13,7 @@ import store from '../reducers/combineReducers.jsx';
 class BusinessUnit extends Component {
   componentWillMount(){
     var state = store.getState();
-    const id = state.data.page.business_unit.bu_code
+    const id = state.auth.project.bu_code
     store.dispatch(getBusinessUnitDetail(id))
   }
 
@@ -22,11 +22,12 @@ class BusinessUnit extends Component {
   }
   render() {
     var state = store.getState();
-    const id = state.data.page.business_unit.bu_code
+    const id = state.auth.project.bu_code
+    // const id = state.data.page.business_unit.bu_code
     
       // var projects = state.data.projects ? state.data.projects : null
-    var bu = state.data.business_unit;
-    if(!bu){
+    var project = state.auth.project;
+    if(!project){
       return <PageLoader></PageLoader>
     }
     return (
@@ -36,7 +37,7 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={bu.project.BU_NAME}
+            text={project.BU_NAME}
             btnLeftClick={
               e => {
                 browserHistory.goBack('/')
@@ -79,8 +80,8 @@ class BusinessUnit extends Component {
                   </div>
 
                       {
-                        bu &&
-                        bu.project.map((value,index) => {
+                        project &&
+                        project.map((value,index) => {
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>

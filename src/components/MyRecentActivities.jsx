@@ -9,7 +9,7 @@ import { getMyActivities, pop } from './actions.jsx';
 
 class MyRecentActivities extends Component {
   componentWillMount() {
-    const myActivity = store.getState().data.myActivity;
+    const myActivity = store.getState().data.activity_timesheet;
     store.dispatch(getMyActivities());
   }
 
@@ -18,7 +18,7 @@ class MyRecentActivities extends Component {
   }
 
   render() {
-    const myActivity = store.getState().data.myActivity;
+    const myActivity = store.getState().data.activity_timesheet;
     if (!myActivity) {
       return <PageLoader />;
     }
@@ -137,7 +137,7 @@ class MyRecentActivities extends Component {
           </div>
         </div>
         {
-  myActivity.activity_timesheet.map((value, index) => (
+  myActivity.map((value, index) => (
     <div key={index}>
       <div className="grid wrap">
         <div className="unit whole" style={{ paddingBottom: '0' }}>

@@ -20,8 +20,8 @@ class MyAssignments extends Component {
   }
     render(){
       const state = store.getState();
-      const myAssignment = state.data.myAssignment;
-      if(!myAssignment){
+      const assignment = state.data.assignment;
+      if(!assignment){
         return <PageLoader></PageLoader>
       }
       return(
@@ -39,7 +39,7 @@ class MyAssignments extends Component {
           </div>
           {/* MAP THIS */}
           {
-            myAssignment.assignment.map((value,index)=>{
+            assignment.map((value,index)=>{
               return (
               <div key={index}>
               
