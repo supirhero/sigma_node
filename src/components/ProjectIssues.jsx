@@ -4,9 +4,9 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Divider, Header, ProjectHeader, PopUp, Input, Select, InputFile, ReduxInput, ReduxFileInput, ReduxFileInput3,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile, ReduxInput, ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
 import { getIssue, addIssue, pop } from './actions.jsx';
-
+import DropZone from 'react-dropzone'
 
 class ProjectIssues extends Component {
   componentWillMount() {
@@ -43,9 +43,10 @@ class ProjectIssues extends Component {
       }
       return(<medium style={{ textAlign: 'right'}} className={className}>{text}</medium>)
     }
+    
 
     const state = store.getState()
-    const projectIssueList = state.data.project_issue_list
+    const projectIssueList = state.data.project_issue_list;
 
     return (
       <div className="project-DocsFiles">
@@ -96,16 +97,19 @@ class ProjectIssues extends Component {
                     </Field>
                   </div>
                   
-                  <div className="unit golden-large">
+                <div className="unit golden-large">
                   <h2 className="input-desc" style={{marginTop:'25px'}}>EVIDENCE</h2>
-                    <Field
-                      inputName="EVIDENCE"
-                      name="file_upload"
-                      type="file"
-                   
-                      component={ReduxFileInput}
-                    />
-                  </div>
+                </div>
+                <div className="unit golden-large">
+                
+                  <Field
+                  inputName="EVIDENCE"
+                  name="file_upload"
+                  type='file'
+                  component = {ReduxDrop}                  
+                />
+                </div>
+                 
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
                       <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
@@ -147,7 +151,7 @@ class ProjectIssues extends Component {
             </div>
             <div className="grid">
               <div className="unit half">
-                <medium>PRIORITY: {(value.priority).toUpperCase()}</medium>
+                <medium>PRIORITY: {value.priority ? (value.priority).toUpperCase():''}</medium>
               </div>
               <div className="unit half">
                 <medium style={{ textAlign: 'right' }}>{status(value.status)}</medium>

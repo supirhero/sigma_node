@@ -98,7 +98,7 @@ class ProjectDocsAndFiles extends Component {
                       <div className='grid'>
                         <div className='unit four-fifths'>
                           <a style={{ display:'inline'}}>{value.url}</a>
-                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by Kara Gray at {value.date_upload}, 13:23</small>
+                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
                         </div>
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right'}}><span className='icon-trash' style={{color:'#D62431'}}></span></medium>

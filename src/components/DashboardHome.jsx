@@ -17,8 +17,7 @@ class DashboardHome extends Component {
     console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
     var auth = state.auth
-
-
+    console.log(state.auth.token)
     // console.log(projects);
     return(
       <div>
@@ -100,7 +99,7 @@ class DashboardHome extends Component {
 
               <Meter
                 progress={auth.datatimesheet ? auth.datatimesheet.entry  : '-'}
-                text={auth.datatimesheet ? auth.datatimesheet.entry : '-'}
+                text={auth.datatimesheet ? Math.floor(auth.datatimesheet.entry) : '-'}
                 title='Utilization'
                 status={auth.datatimesheet.status}
               />
@@ -108,7 +107,7 @@ class DashboardHome extends Component {
             <div className='unit half'>
               <Meter
                 progress={auth.datatimesheet ? auth.datatimesheet.utilization  : '-'}
-                text={auth.datatimesheet ? auth.datatimesheet.utilization : '-'}
+                text={auth.datatimesheet ? Math.floor(auth.datatimesheet.utilization) : '-'}
                 title='Entry'
                 status={auth.datatimesheet.status_utilization}
               />

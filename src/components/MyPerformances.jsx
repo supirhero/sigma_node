@@ -4,8 +4,8 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input,Select,Meter, BarChart} from './Components.jsx'
-
+import {Divider, Input,Select,Meter, BarChart,PageLoader} from './Components.jsx'
+import {myPerformance,pop} from './actions.jsx'
 
 
 
@@ -13,7 +13,32 @@ import {Divider, Input,Select,Meter, BarChart} from './Components.jsx'
 
 class MyPerformances extends Component {
 
+    componentWillMount(){
+      store.dispatch(myPerformance("8","2017"))
+    }
+
     render(){
+      const month= [
+        {name:'JANUARY',number:'1'},
+        {name:'FEBRUARY',number:'2'},
+        {name:'MARCH',number:'3'},
+        {name:'APRIL',number:'4'},
+        {name:'MAY',number:'5'},
+        {name:'JUNE',number:'6'},
+        {name:'JULY',number:'7'},
+        {name:'AUGUST',number:'8'},
+        {name:'SEPTEMBER',number:'9'},
+        {name:'OCTOBER',number:'10'},
+        {name:'NOVEMBER',number:'11'},
+        {name:'DEECMBER',number:'12'},
+      ]
+    
+      const year = [
+        {year:'2017'},
+        {year:'2016'},
+        {year:'2015'},
+      ]
+
       function statusCom(){
         if (completeProgress == 100){
            return "COMPLETE"
@@ -37,7 +62,12 @@ class MyPerformances extends Component {
        const completeProgress = 100;
        const underProgress = 80;
 
-      return(
+       const state = store.getState();
+       const myperformance = state.data;
+
+       
+       return(
+        !myperformance ? <PageLoader/>:
         <div>
           <div className='grid wrap'>
             <div className='unit whole'>
@@ -89,20 +119,21 @@ class MyPerformances extends Component {
                 </div>
                 <div className='grid'>
                   <div className='unit one-third'>
-                    <Meter
-                      progress={completeProgress}
-                      text={completeProgress}
-                      title='Entry'
-                      status={statusCom()}
-                    />
+                  <Meter
+                  progress={myperformance ? myperformance.utilization  : '-'}
+                  text={myperformance ? Math.floor(myperformance.utilization) : '-'}
+                  title='Utilization'
+                  status={myperformance.status_utilization}
+                />
+                  
                   </div>
                   <div className='unit one-third'>
-                    <Meter
-                      progress={underProgress}
-                      text={underProgress}
-                      title='Utilization'
-                      status={statusUn()}
-                    />
+                  <Meter
+                  progress={myperformance ? myperformance.entry  : '-'}
+                  text={myperformance ? Math.floor(myperformance.entry) : '-'}
+                  title='Entry'
+                  status={myperformance.status}
+                />
                   </div>
                   <div className='unit one-third'>
 
@@ -140,7 +171,7 @@ class MyPerformances extends Component {
                   </div>
                 </div>
                 <div className='grid'>
-                  <div className='unit whole'>
+                  <div className='unit whole'>                 
                     <BarChart
                       data={[
                         {name: 'Jan', value: 20},
