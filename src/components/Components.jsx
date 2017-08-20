@@ -673,9 +673,7 @@ export class WorkplanRow extends Component {
   constructor(){
     super();
     this.state = {
-      clicked : false,
-      working : false,
-      non_working : false
+      clicked : false
 
     };
   }
@@ -685,86 +683,41 @@ export class WorkplanRow extends Component {
       <tbody>
         <tr onClick={
           e => {
-            if (this.state.clicked) {
-              this.setState({clicked:false})
+              if (this.state.clicked) {
+                this.setState({clicked:false})
+              }
+              else {
+                this.setState({clicked:true})
+              }
+              e.preventDefault()
             }
-            else {
-              this.setState({clicked:true})
-
-            }
-            e.preventDefault()
-          }
-        }>
-        <td style={{paddingLeft: '20px'}}>{value.task}</td>
-        <td>{value.work}</td>
-        <td>{value.work_total}</td>
-        <td>{value.duration}</td>
-        <td>{value.start_date}</td>
-        <td>{value.end_date}</td>
-        <td>{value.work_complete}</td>
-        <td>{value.resources}</td>
-      </tr>
-      {
-        this.state.clicked &&
-        <tr onClick={
-          e => {
-            if (this.state.working) {
-              this.setState({working:false})
-            }
-            else {
-              this.setState({working:true})
-
-            }
-            e.preventDefault()
-            }
-          }>
-          <td style={{paddingLeft: '40px'}}>{value.working_activity.task}</td>
-          <td>{value.working_activity.work}</td>
-          <td>{value.working_activity.work_total}</td>
-          <td>{value.working_activity.duration}</td>
-          <td>{value.working_activity.start_date}</td>
-          <td>{value.working_activity.end_date}</td>
-          <td>{value.working_activity.work_complete}</td>
-          <td>{value.working_activity.resources}</td>
-      </tr>
-      }
-      {
-        this.state.working && this.state.clicked &&
-        <ActivityRow data={value.working_activity}></ActivityRow>
-      }
-
-      {
-        this.state.clicked &&
-        <tr onClick={
-          e => {
-            if (this.state.non_working) {
-              this.setState({non_working:false})
-            }
-            else {
-              this.setState({non_working:true})
-
-            }
-            e.preventDefault()
-            }
-          }>
-          <td style={{paddingLeft: '40px'}}>{value.non_working_activity.task}</td>
-          <td>{value.non_working_activity.work}</td>
-          <td>{value.non_working_activity.work_total}</td>
-          <td>{value.non_working_activity.duration}</td>
-          <td>{value.non_working_activity.start_date}</td>
-          <td>{value.non_working_activity.end_date}</td>
-          <td>{value.non_working_activity.work_complete}</td>
-          <td>{value.non_working_activity.resources}</td>
-      </tr>
-      }
-
-
-
-      {
-        this.state.non_working && this.state.clicked &&
-        <ActivityRow data={value.non_working_activity}></ActivityRow>
-      }
+      }>
+          <td style={{paddingLeft: '40px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+          <td>{value.WORK}</td>
+          <td>{value.WORK_TOTAL}</td>
+          <td>{value.DURATION}</td>
+          <td>{value.START_DATE}</td>
+          <td>{value.END_DATE}</td>
+          <td>{value.WORK_PERCENT_COMPLETE}</td>
+          <td>{value.LEAF}</td>
+        </tr>
+        {
+          value.children.length !=0 && this.state.clicked &&
+          value.children.map((value, index) => (
+            <tr key={index}>
+              <td style ={{paddingLeft: '60px'}}>{value.WBS_NAME}</td>
+              <td>{value.WORK}</td>
+              <td>{value.WORK_TOTAL}</td>
+              <td>{value.DURATION}</td>
+              <td>{value.START_DATE}</td>
+              <td>{value.END_DATE}</td>
+              <td>{value.WORK_PERCENT_COMPLETE}</td>
+              <td>{value.LEAF}</td>
+            </tr>
+          ))
+        }
       </tbody>
+
     )
   }
 }
@@ -940,7 +893,7 @@ export class PageLoader extends Component {
   }
 }
 
-export class datepicker extends Component {
+export class ReactDatePicker extends Component {
 
     static defaultProps(){
       placeholder: ''

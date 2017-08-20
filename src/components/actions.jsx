@@ -51,12 +51,12 @@ export function getProjectDetail(id) {
             method: 'GET',
             url: `${baseURL}/dev/test/detailproject/${id}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-           
+
 
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              store.dispatch({type:'API', name: 'project', data: res})              
+              store.dispatch({type:'API', name: 'project', data: res})
             },
 
           )
@@ -105,7 +105,7 @@ export const getProjectTeamMember = (id) => {
             method: 'GET',
             url: `${baseURL}/dev/test/p_teammember/${id}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-           
+
 
           }).then(
             res => {
@@ -175,7 +175,7 @@ export const getIssue = (id) => {
             method: 'POST',
             url: `${baseURL}/dev/test/projectissue/${id}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -276,7 +276,7 @@ export const getBusinessUnitDetail = (id) => {
               bu_code: id,
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -482,7 +482,7 @@ export const getSCurve = (id) => {
             method: 'GET',
             url: `${baseURL}/dev/projecttest/s_curve/${id}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -522,7 +522,7 @@ export function viewTimesheet(date) {
               alert('error');
             }
           });
-          
+
   };
 }
 
@@ -657,6 +657,21 @@ export function getMyAssignment(){
       (res)=>{
         store.dispatch({ type: 'API', name: 'myAssignment',  data: res });
         console.log(token);
+      }
+    )
+  }
+}
+
+export function getWorkplanView(id){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/tasktest/workplan_view/${id}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'myAssignment',  data: res });
+        return res
       }
     )
   }

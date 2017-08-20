@@ -4,17 +4,28 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 // <<<<<<< HEAD
-import {Divider, Header, ProjectHeader,PopUp,Input,Select, WorkplanRow} from  './Components.jsx'
-// =======
-// import {Divider, Header, ProjectHeader,PopUp,Input,Select} from  './Components.jsx'
-//
-// >>>>>>> master
+import {Divider, Header, ProjectHeader,PopUp,Input,Select, WorkplanRow,PageLoader, ReactDatePicker} from  './Components.jsx'
+
+import {getWorkplanView} from './actions.jsx'
+
 
 
 class ProjectWorkplan extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
 
+    };
+  }
+    componentWillMount() {
+      const id =  this.props.state.page.id
+      store.dispatch(getWorkplanView(id))
+
+    }
     render(){
-      const workplan=[
+      const workplan = this.props.state.data.workplan
+      const workplan2=[
         {
           task: 'Transaction Based Managed Service 2017',
           work: 258,
@@ -24,7 +35,8 @@ class ProjectWorkplan extends Component {
           end_date: '23 Apr 2017',
           complete: 0.41,
           resources: '2 people',
-          working_activity: {
+          sub: [
+            {
                 task: 'Working Activity',
                 work: 258,
                 work_total: 55328,
@@ -56,7 +68,7 @@ class ProjectWorkplan extends Component {
                   }
                 ]
               },
-              non_working_activity: {
+              {
                     task: 'Non Working Activity',
                     work: 258,
                     work_total: 55328,
@@ -88,81 +100,85 @@ class ProjectWorkplan extends Component {
                       }
                     ]
                   }
-            },
-            {
-              task: 'Transaction Aptitude 2018',
-              work: 258,
-              work_total: 55328,
-              duration: 12,
-              start_date: '08 Apr 2017',
-              end_date: '23 Apr 2017',
-              complete: 0.41,
-              resources: '2 people',
-              working_activity: {
-                    task: 'Working Activity',
-                    work: 258,
-                    work_total: 55328,
-                    duration: 12,
-                    start_date: '08 Apr 2017',
-                    end_date: '23 Apr 2017',
-                    complete: 0.41,
-                    resources: '2 people',
-                    sub: [
-                      {
-                        task: 'Annual Working',
-                        work: 258,
-                        work_total: 55328,
-                        duration: 12,
-                        start_date: '08 Apr 2017',
-                        end_date: '23 Apr 2017',
-                        complete: 0.41,
-                        resources: '2 people',
-                      },
-                      {
-                        task: 'Overtime',
-                        work: 258,
-                        work_total: 55328,
-                        duration: 12,
-                        start_date: '08 Apr 2017',
-                        end_date: '23 Apr 2017',
-                        complete: 0.41,
-                        resources: '2 people',
-                      }
-                    ]
-                  },
-                  non_working_activity: {
-                        task: 'Non Working Activity',
-                        work: 258,
-                        work_total: 55328,
-                        duration: 12,
-                        start_date: '08 Apr 2017',
-                        end_date: '23 Apr 2017',
-                        complete: 0.41,
-                        resources: '2 people',
-                        sub: [
-                          {
-                            task: 'Annual Leave',
-                            work: 258,
-                            work_total: 55328,
-                            duration: 12,
-                            start_date: '08 Apr 2017',
-                            end_date: '23 Apr 2017',
-                            complete: 0.41,
-                            resources: '2 people',
-                          },
-                          {
-                            task: 'Sick Leave',
-                            work: 258,
-                            work_total: 55328,
-                            duration: 12,
-                            start_date: '08 Apr 2017',
-                            end_date: '23 Apr 2017',
-                            complete: 0.41,
-                            resources: '2 people',
-                          }
-                        ]
-                      }
-                }
+            ]
+          },
+          {
+            task: 'Transaction Based Managed Service 2017',
+            work: 258,
+            work_total: 55328,
+            duration: 12,
+            start_date: '08 Apr 2017',
+            end_date: '23 Apr 2017',
+            complete: 0.41,
+            resources: '2 people',
+            sub: [
+              {
+                  task: 'Working Activity',
+                  work: 258,
+                  work_total: 55328,
+                  duration: 12,
+                  start_date: '08 Apr 2017',
+                  end_date: '23 Apr 2017',
+                  complete: 0.41,
+                  resources: '2 people',
+                  sub: [
+                    {
+                      task: 'Annual Working',
+                      work: 258,
+                      work_total: 55328,
+                      duration: 12,
+                      start_date: '08 Apr 2017',
+                      end_date: '23 Apr 2017',
+                      complete: 0.41,
+                      resources: '2 people',
+                    },
+                    {
+                      task: 'Overtime',
+                      work: 258,
+                      work_total: 55328,
+                      duration: 12,
+                      start_date: '08 Apr 2017',
+                      end_date: '23 Apr 2017',
+                      complete: 0.41,
+                      resources: '2 people',
+                    }
+                  ]
+                },
+                {
+                      task: 'Non Working Activity',
+                      work: 258,
+                      work_total: 55328,
+                      duration: 12,
+                      start_date: '08 Apr 2017',
+                      end_date: '23 Apr 2017',
+                      complete: 0.41,
+                      resources: '2 people',
+                      sub: [
+                        {
+                          task: 'Annual Leave',
+                          work: 258,
+                          work_total: 55328,
+                          duration: 12,
+                          start_date: '08 Apr 2017',
+                          end_date: '23 Apr 2017',
+                          complete: 0.41,
+                          resources: '2 people',
+                        },
+                        {
+                          task: 'Sick Leave',
+                          work: 258,
+                          work_total: 55328,
+                          duration: 12,
+                          start_date: '08 Apr 2017',
+                          end_date: '23 Apr 2017',
+                          complete: 0.41,
+                          resources: '2 people',
+                        }
+                      ]
+                    }
+              ]
+            }
+
           ]
       return(
         <div className='project-workplan'>
@@ -197,20 +213,22 @@ class ProjectWorkplan extends Component {
                       </div>
                       <div className="grid wrap ">
                         <div className="unit half">
-                          <Select inputName='START DATE' style={{width:'96%'}} items={{
-                            items : [
-                              {title : 'TBWS21312'},
-                              {title : 'TBWS21312'}
-                            ]
-                          }} />
+                          <Field
+                            inputName="DATE"
+                            name="START_DATE"
+
+                            component={ReactDatePicker}
+                          />
+
                         </div>
                         <div className="unit half">
-                          <Select inputName='END DATE' style={{width:'96%'}} items={{
-                            items : [
-                              {title : 'TBWS21312'},
-                              {title : 'TBWS21312'}
-                            ]
-                          }} />
+                          <Field
+                            inputName="DATE"
+                            name="FINISH_DATE"
+
+                            component={ReactDatePicker}
+                          />
+
                         </div>
                       </div>
 
@@ -255,7 +273,9 @@ class ProjectWorkplan extends Component {
                 </div> */}
                 <div className='grid wrap'>
                   <div className='unit whole'>
-                    <table className='table workplan'>
+                    {
+                      !workplan ? <PageLoader/> :
+                      <table className='table workplan'>
                       <thead>
                         <Header style={{padding: '20px 0 0 20px'}} text='Project Detail'/>
 
@@ -270,15 +290,42 @@ class ProjectWorkplan extends Component {
                           <th>RESOURCES<br/></th>
                         </tr>
                       </thead>
+                      <tbody>
+                        <tr onClick={
+                          e => {
+                              if (this.state.clicked) {
+                                this.setState({clicked:false})
+                              }
+                              else {
+                                this.setState({clicked:true})
+                              }
+                              e.preventDefault()
+                            }
+                          }>
+
+                          <td  style={{paddingLeft: '20px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{workplan.children.length!=0 && this.state.clicked ? 'expand_more': 'expand_less'}</span>&nbsp;&nbsp;&nbsp;&nbsp;{workplan.WBS_NAME}</td>
+                          <td>{workplan.WORK}</td>
+                          <td>{workplan.WORK_TOTAL}</td>
+                          <td>{workplan.DURATION}</td>
+                          <td>{workplan.START_DATE}</td>
+                          <td>{workplan.END_DATE}</td>
+                          <td>{workplan.WORK_PERCENT_COMPLETE}</td>
+                          <td>{workplan.LEAF}</td>
+                        </tr>
+                      </tbody>
                       {
-                      workplan.map((value,index) => {
-                        return(
-                          <WorkplanRow data={value}></WorkplanRow>
-                      )
-                    })
+                        workplan.children.length !=0 && this.state.clicked &&
+
+                        workplan.children.map((value,index) => {
+                          return(
+
+                              <WorkplanRow  key={index} data={value}></WorkplanRow>
+
+                        )
+                      })
                   }
 
-                    </table>
+                    </table>}
                   </div>
                 </div>
               </div>

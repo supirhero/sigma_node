@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepicker } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,ReactDatePicker } from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import moment from 'moment';
@@ -25,7 +25,7 @@ class Timesheet extends Component {
     const auth = state.auth;
 
   }
-  
+
 
 
   componentWillUnmount() {
@@ -127,7 +127,7 @@ class Timesheet extends Component {
                         inputName="DATE"
                         name="TS_DATE"
 
-                        component={datepicker}
+                        component={ReactDatePicker}
                       />
                     </div>
                   </div>
