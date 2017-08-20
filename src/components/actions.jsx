@@ -7,7 +7,7 @@ import moment from 'moment';
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
-const token = store.getState().data.login ? store.getState().data.login : null
+const token = store.getState().auth ? store.getState().auth.token : null
 
 export function login(email, password) {
 
@@ -16,7 +16,7 @@ export function login(email, password) {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: baseURL + "/dev/login/login",
+            url:`${baseURL}/dev/login/login`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {user_id: email,
                     password: password,
@@ -49,11 +49,9 @@ export function getProjectDetail(id) {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: baseURL + "/dev/test/detailproject/" + id,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
+            url: `${baseURL}/dev/test/detailproject/${id}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+           
 
           }).then(
             res => {
@@ -98,17 +96,16 @@ export function logout() {
   }
 }
 
+
 export const getProjectTeamMember = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/test/p_teammember/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
+            url: `${baseURL}/dev/test/p_teammember/${id}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+           
 
           }).then(
             res => {
@@ -131,10 +128,7 @@ export const getDocsFiles = (id) => {
     return axios({
             method: 'GET',
             url: `${baseURL}/dev/test/projectdoc/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
             res => {
@@ -155,10 +149,7 @@ export const addDocsAndFiles = (data, id ) => {
     return axios({
             method: 'POST',
             url: `${baseURL}/dev/test/documentupload/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
             data: {
               'desc': data.desc,
@@ -181,12 +172,10 @@ export const getIssue = (id) => {
 
   return function (dispatch) {
     return axios({
-            method: 'GET',
+            method: 'POST',
             url: `${baseURL}/dev/test/projectissue/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            
 
           }).then(
             res => {
@@ -209,10 +198,7 @@ export const addIssue = (data, id ) => {
     return axios({
             method: 'POST',
             url: `${baseURL}/dev/test/addissue/${id}` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
               'PROJECT_ID':id,
               'SUBJECT':data.SUBJECT,
@@ -239,11 +225,8 @@ export const addNewProject = (data) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_acion/` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+            url: `${baseURL}/dev/project/addProject_acion` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
               AMOUNT:data.AMOUNT,
@@ -288,14 +271,12 @@ export const getBusinessUnitDetail = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/buDetail/`,
+            url: `${baseURL}/dev/test/buDetail`,
             data: {
               bu_code: id,
             },
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            
 
           }).then(
             res => {
@@ -314,11 +295,6 @@ export const getIWOEditProject = (offset) => {
     return axios({
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
-
-            headers: {
-              // 'token': "9b753c9902fe3025e8d3229b1e369bb2",
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
 
           }).then(
             res => {
@@ -339,10 +315,6 @@ export const getIWO = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
 
-            headers: {
-              // 'token': "9b753c9902fe3025e8d3229b1e369bb2",
-              'Content-Type': 'application/x-www-form-urlencoded'
-             }
 
           }).then(
             res => {
@@ -362,11 +334,7 @@ export const editProject = (data) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/editProject_action/` ,
-            headers: {
-              // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+            url: `${baseURL}/dev/projecttest/editProject_action` ,
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
               AMOUNT:data.AMOUNT,
@@ -438,7 +406,7 @@ export const getAddProjectView = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_view/`,
+            url: `${baseURL}/dev/projecttest/addProject_view`,
             data: {
               bu_code: id,
             },
@@ -512,13 +480,9 @@ export const getSCurve = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/s_curve/${id}` ,
-            headers: {
-              'token': {token},
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-
-             }
+            url: `${baseURL}/dev/projecttest/s_curve/${id}` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            
 
           }).then(
             res => {
@@ -566,7 +530,7 @@ export function viewTimesheet(date) {
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheettest/view/`,
+      url: `${baseURL}/dev/timesheettest/view`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -594,7 +558,7 @@ export function taskList(project_id) {
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheettest/taskList/`,
+      url: `${baseURL}/dev/timesheettest/taskList`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -639,7 +603,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/addTimesheet/`,
+      url:`${baseURL}/dev/timesheettest/addTimesheet?`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: { WP_ID,
               TS_DATE,
@@ -682,7 +646,7 @@ export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/confirmationTimesheet/`,
+      url:`${baseURL}/dev/timesheettest/confirmationTimesheet`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {ts_id,confirm}
     }).then(
@@ -714,10 +678,11 @@ export function getMyAssignment(){
     return axios({
       method:'GET',
       url:`${baseURL}/dev/test/myassignment`,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'myAssignment',  data: res });
+        console.log(token);
       }
     )
   }
