@@ -11,6 +11,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import DropZone from 'react-dropzone'
 
+export const required = value => value ? undefined : 'Required'
+
+export const validate = () => {
+  const required = value => value ? undefined : 'Required'
+}
+
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
     fontSize: '17px',
@@ -180,12 +186,16 @@ export class ReduxInput extends Component {
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <input
+            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
+
+            // {...this.props.field}
           >
           </input>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
         </div>
     )
   }
