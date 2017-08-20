@@ -18,7 +18,7 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO} from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO,checkAM} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader} from './Components.jsx'
 
@@ -76,6 +76,8 @@ class NewProject extends Component {
       }
     )
 
+    store.dispatch(checkAM('S201204162'));
+
   }
   componentWillUnmount(){
     store.dispatch(pop('new_project'))
@@ -97,10 +99,10 @@ class NewProject extends Component {
 
       const projectStatus = [
         {value: 'Not Started'},
-        {value: 'In Progress'},
+        // {value: 'In Progress'},
         // {value: 'On Hold'},
-        {value: 'Cancel'},
-        {value: 'Complete'},
+        // {value: 'Cancel'},
+        // {value: 'Complete'},
         // {value: 'In Planning'},
         // {value: 'Cancelled'},
       ]
@@ -119,7 +121,7 @@ class NewProject extends Component {
         {value: 'Dedutible Expense'},
       ]
       return(
-        !iwo && !projectManager ? <PageLoader/> :
+        !iwo ? <PageLoader/> :
         <div>
 
           <form
@@ -160,6 +162,10 @@ class NewProject extends Component {
                     var iwo_no = this.props.formValues.values.IWO_NO
                     var i = _.findIndex(iwo, { 'IWO_NO' : value});
                     var arr =iwo[i]
+                  
+                    
+                    // var am = store.getState().data.iwo.ACCOUNT_MANAGER_ID
+                    
                     var fields = [
                       {
                         field: 'AMOUNT',
@@ -185,7 +191,8 @@ class NewProject extends Component {
                       {
                         field: 'END_CUST_ID',
                         value: arr.END_CUSTOMER
-                      }
+                      },
+                    
                     ]
 
                     fields.map((value, index) => {
@@ -194,7 +201,10 @@ class NewProject extends Component {
                       )
 
                     })
+                    
                     // e.preventDefault()
+                   
+                  
                   }}
                   // onChange={(event, index, value)=>{
                   //
@@ -377,22 +387,27 @@ class NewProject extends Component {
                       <Field name="H/O" component={RadioButtonGroup}>
                         <RadioButton value="no" label="NO"/>
                       </Field>
-
+                     
                     </div>
                   </div>
                   <div className='grid wrap'>
                     <div className='unit whole'>
                       <Field
                         inputName="ACCOUNT MANAGER"
+                        type ="AM_ID"
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}
                       >
+                     
+
+                    {/* 
                         {
                           projectStatus.map((value, index)=> (
                             <option value={value.value} {...this.props.option}>{value.value}</option>
                           ))
                         }
+                    */}
                       </Field>
 
                     </div>
