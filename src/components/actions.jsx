@@ -330,25 +330,6 @@ export const getIWO = (offset) => {
 
 }
 
-export const checkAM=(AM_ID)=>{
-  return function (dispatch){
-    return axios({
-      method:'POST',
-      url: `${baseURL}/dev/projecttest/checkAM`,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data:{
-        AM_ID
-      }
-
-    }).then(
-      res => {
-        store.dispatch({type:'API', name: 'new_project', data: res, append: true})
-        console.log(res.data);
-        return res
-      },
-    )
-  }
-}
 
 export const editProject = (data) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
