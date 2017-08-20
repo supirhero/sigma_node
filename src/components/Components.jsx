@@ -9,7 +9,7 @@ import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
-// import Dropzone from 'react-dropzone';
+import DropZone from 'react-dropzone'
 
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
@@ -376,8 +376,6 @@ export class BarChart extends Component {
             <Tooltip />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
-
-
           </ChartBar>
         </ResponsiveContainer>
 
@@ -830,7 +828,7 @@ export class ReduxFileInput extends Component {
         name={this.props.name}
         placeholder={this.props.placeholder}
         accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-        onChange={(event)=> this.props.input.onChange(event.target.files[0])}
+        onDrop={(event)=> this.props.input.onDrop(event.target.files[0])}
         {...this.props.custom}
         >
       </FileInput>
@@ -838,20 +836,68 @@ export class ReduxFileInput extends Component {
   }
 }
 
+// export class ReduxFileInput2 extends Component {
+//   render(){
+//     return(
+//       <FileField
+//         name={this.props.name}
+//         placeholder={this.props.placeholder}
+//         accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+//         onChange={(event)=> this.props.input.onChange(event.target.files[0])}
+//         {...this.props.custom}
+//         >
+//       </FileField>
+//     )
+//   }
+// }
+
 
 // export class ReduxDropZone extends Component{
 //   render(){
 //     return (
 //       <div>
-//       <Dropzone
-//       onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+//       <DropZone
+//       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+//       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
+//       // onDrop={(event)=> this.props.input.onChange(event.target.files[0])}
+//       {...this.props.custom}
 //       >
 //       <div>TARO FILE</div>
-//       </Dropzone>
+//       </DropZone>
 //       </div>
 //     )
 //   }
 // }
+
+export class ReduxDropZone2 extends Component {
+  render(){
+    return(
+      <DropZone
+        name={this.props.name}
+        placeholder={this.props.placeholder}
+        accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+        onChange={(event)=> this.props.input.onChange(event.target.files[0])}
+        {...this.props.custom}
+        >
+      </DropZone>
+    )
+  }
+}
+
+export class ReduxDrop extends Component {
+  render(){
+    return(
+      <DropZone
+      name={this.props.name}
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
+      >
+      <div>Try dropping some files here, or click to select files to upload.</div>
+      </DropZone>
+    )
+  }
+}
+
 
 export class LoaderLogin extends Component {
   render(){

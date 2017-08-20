@@ -7,9 +7,12 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import {Cell} from 'recharts'
 import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header } from './Components.jsx';
-
+import {myPerformance,pope} from './actions.jsx'
 
 class ReportsOverview extends Component {
+
+
+
   render() {
     const data = [
       { name: 'BSD', value: 0.86 },
@@ -25,8 +28,28 @@ class ReportsOverview extends Component {
       { name: 'SP', value: 0.89 },
       { name: 'TBSDMO', value: 0.86 },
   ]
-  const COLORS = ['greem','red']
 
+  const COLORS = ['greem','red']
+  const month= [
+    {name:'JANUARY',number:'1'},
+    {name:'FEBRUARY',number:'2'},
+    {name:'MARCH',number:'3'},
+    {name:'APRIL',number:'4'},
+    {name:'MAY',number:'5'},
+    {name:'JUNE',number:'6'},
+    {name:'JULY',number:'7'},
+    {name:'AUGUST',number:'8'},
+    {name:'SEPTEMBER',number:'9'},
+    {name:'OCTOBER',number:'10'},
+    {name:'NOVEMBER',number:'11'},
+    {name:'DEECMBER',number:'12'},
+  ]
+
+  const year = [
+    {year:'2017'},
+    {year:'2016'},
+    {year:'2015'},
+  ]
     return (
       <div>
         <div className="grid wrap wider reports">

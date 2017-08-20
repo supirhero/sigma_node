@@ -10,11 +10,13 @@ import {pop,getSPI,getCPI} from './actions.jsx'
 
 
 class ProjectSpiCpi extends Component {
-  componentDidMount(){
+  componentWillMount(){
     const id = store.getState().page.id
     store.dispatch(getSPI(id))
     store.dispatch(getCPI(id))
   }
+  
+  
 
   render() {
     return (

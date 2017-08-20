@@ -81,7 +81,7 @@ class Timesheet extends Component {
   //    return <PageLoader></PageLoader>
   //  }
     return (
-      !timesheet.user_project? <PageLoader></PageLoader>:
+      !timesheet.user_project ? <PageLoader></PageLoader>:
       <div>
         <div className="grid wrap">
           <div className="unit whole">
