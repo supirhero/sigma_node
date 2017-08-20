@@ -58,7 +58,7 @@ export function getProjectDetail(id) {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              store.dispatch({type:'API', name: 'project', data: res})              
+              store.dispatch({type:'API', name: 'project', data: res})
             },
 
           )
@@ -529,7 +529,33 @@ export const getSCurve = (id) => {
             },
           )
   }
+}
 
+export const getAccountManager = (am_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'post',
+            url: `${baseURL}/dev/projecttest/checkAM/` ,
+            headers: {
+              // 'token': {token},
+              'Content-Type': 'application/x-www-form-urlencoded',
+              // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            },
+            data: {
+              AM_ID: am_id
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', data: res, append:true})
+
+            },
+          )
+  }
 }
 
 
@@ -558,7 +584,7 @@ export function viewTimesheet(date) {
               alert('error');
             }
           });
-          
+
   };
 }
 

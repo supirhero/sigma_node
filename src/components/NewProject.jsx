@@ -18,9 +18,9 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO} from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required} from './Components.jsx'
 
 
 
@@ -68,7 +68,6 @@ class NewProject extends Component {
         // const data = this.props.state.data.business_unit
         store.dispatch(getIWO(30)).then((res2)=> {
           console.log("IWO", res2);
-
           this.handleInitialize(res.data.business_unit,res2.data.iwo);
 
         })
@@ -90,6 +89,7 @@ class NewProject extends Component {
       // const accountManager = this.props.state.data.project.account_manager_list
       const new_project = this.props.state.data
       const iwo = new_project.iwo ? new_project.iwo : null
+
 
 
 
@@ -157,9 +157,11 @@ class NewProject extends Component {
                   name="IWO_NO"
                   component={ReduxSelect}
                   onChange={(e,value)=> {
+                    // store.dispatch(getAccountManager(res2.data))
                     var iwo_no = this.props.formValues.values.IWO_NO
                     var i = _.findIndex(iwo, { 'IWO_NO' : value});
                     var arr =iwo[i]
+                    store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
                     var fields = [
                       {
                         field: 'AMOUNT',
@@ -204,7 +206,7 @@ class NewProject extends Component {
                   {
                     iwo &&
                     iwo.map((value, index) => (
-                      <option key ={index} value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
+                      <option key ={index} am_id={value.ACCOUNT_MANAGER_ID} value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
 
                     ))
                   }
@@ -296,6 +298,7 @@ class NewProject extends Component {
                   name="DESC"
                   type="DESC"
                   style={{width:'100%'}}
+                  validate={[required]}
                   component={ReduxInput}
                 />
               </div>
@@ -389,7 +392,8 @@ class NewProject extends Component {
                         component={ReduxSelect}
                       >
                         {
-                          projectStatus.map((value, index)=> (
+                          this.props.state.data.AM_ID &&
+                          this.props.state.data.AM_ID.map((value, index)=> (
                             <option value={value.value} {...this.props.option}>{value.value}</option>
                           ))
                         }
@@ -405,6 +409,7 @@ class NewProject extends Component {
                         style={{width:'96%', float:'right'}}
                         type="input"
                         // style={{width:'100%'}}
+                        validate={[required]}
                         component={ReduxInput}
                       />
                     </div>
@@ -423,14 +428,14 @@ class NewProject extends Component {
                     inputName='PROJECT STATUS'
                     name="PROJECT_STATUS"
                     style={{width:'100%'}}
-                    component={ReduxSelect}
+                    component={ReduxInputDisabled}
                   >
-                    {
+                    {/* {
                       projectStatus.map((value, index)=> (
                         <option value={value.value} {...this.props.option}>{value.value}</option>
 
                       ))
-                    }
+                    } */}
 
                   </Field>
 
@@ -561,8 +566,8 @@ class NewProject extends Component {
               </div>
               <div className='grid wrap narrow'>
                 <div className='unit three-quarters'>
-                  <large style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></large>
-                  <large style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
+                  <medium style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></medium>
+                  <medium style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</medium>
 
                   <div className='completion-bar' style ={{display:'inline-block'}}>
 
@@ -595,7 +600,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 41px'}} btnText='VIEW FORM'>
+                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 19px'}} btnText='COMPLETE FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
