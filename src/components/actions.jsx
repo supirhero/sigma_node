@@ -225,7 +225,7 @@ export const addNewProject = (data) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/project/addProject_acion` ,
+            url: `${baseURL}/dev/projecttest/addProject_acion` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
@@ -295,7 +295,8 @@ export const getIWOEditProject = (offset) => {
     return axios({
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
-
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            
           }).then(
             res => {
               store.dispatch({type:'API', name: 'project', data: res, append:true})
@@ -314,7 +315,8 @@ export const getIWO = (offset) => {
     return axios({
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
-
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            
 
           }).then(
             res => {
@@ -326,6 +328,26 @@ export const getIWO = (offset) => {
           )
   }
 
+}
+
+export const checkAM=(AM_ID)=>{
+  return function (dispatch){
+    return axios({
+      method:'POST',
+      url: `${baseURL}/dev/projecttest/checkAM`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        AM_ID
+      }
+
+    }).then(
+      res => {
+        store.dispatch({type:'API', name: 'new_project', data: res, append: true})
+        console.log(res.data);
+        return res
+      },
+    )
+  }
 }
 
 export const editProject = (data) => {
@@ -356,7 +378,10 @@ export const editProject = (data) => {
               RELATED:data.RELATED,
               TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
               TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
-              VISIBILITY:data.VISIBILITY
+              VISIBILITY:data.VISIBILITY,
+              START:data.START,
+              END:data.END
+              
             }
           }).then(
             res => {
@@ -480,7 +505,7 @@ export const getSCurve = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/projecttest/s_curve/${id}` ,
+            url: `${baseURL}/dev/projecttest/s_curve/` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             
 
@@ -603,7 +628,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/addTimesheet?`,
+      url:`${baseURL}/dev/timesheettest/addTimesheet`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: { WP_ID,
               TS_DATE,
@@ -646,7 +671,7 @@ export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/confirmationTimesheet`,
+      url:`${baseURL}/dev/timesheet/confirmationTimesheet`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {ts_id,confirm}
     }).then(
@@ -662,7 +687,7 @@ export function myPerformance(bulan,tahun){
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/reporttest/myperformances`,
+      url:`${baseURL}/dev/report/myperformances`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {bulan,tahun}
     }).then(

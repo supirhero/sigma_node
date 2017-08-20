@@ -5,9 +5,9 @@ import { Link, browserHistory } from 'react-router'
 
 
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, PopUp, Input, InputFile, Select, PageLoader} from  './components.jsx'
-import { getProjectDetail, pop } from './actions.jsx'
-
+import { Divider, TimeSheetTimeButton, PopUpTimesheet, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepickerTimesheet } from './components.jsx';
+import { getProjectDetail, pop,addTimesheet } from './actions.jsx'
+import { Field, reduxForm } from 'redux-form';
 
 class Project extends Component {
   constructor(){
@@ -15,6 +15,10 @@ class Project extends Component {
     this.state = {
       active : 'Overview'
     };
+  }
+
+  onSubmit(props){
+    this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
   }
 
   componentWillMount(){
@@ -32,6 +36,7 @@ class Project extends Component {
   }
 
   render(){
+    const { handleSubmit } = this.props;
     const id = store.getState().page.id
     const sidebar = [
       {type:'menu', name : 'Overview', path: `/project/${id}`},
@@ -55,47 +60,80 @@ class Project extends Component {
               <div className='grid wrap'>
                 <div className='unit whole no-gutters'>
 
-                  <PopUp id="updateTimesheet" dividerText="UPDATE TIMESHEET" btnText="UPDATE TIMESHEET"  btnStyle={{padding: '15px 25px'}} btnClass='btn-primary'>
-                    <div>
-                      <div className="grid wrap narrow">
-                        <div className="unit whole">
-                          <Input inputName="DATE" />
-                        </div>
-                      </div>
-                      <div className="grid wrap narrow">
-                        <div className="unit whole">
-                          <Input inputName="PROJECT" />
-                        </div>
-                      </div>
+                <PopUpTimesheet id="updateTimesheet" dividerText="UPDATE TIMESHEET" btnClass="btn-primary" btnText="UPDATE TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
+                <div>
+                  <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                        inputName="DATE"
+                        name="TS_DATE"
 
-                      <div className="grid wrap narrow">
-                        <div className="unit golden-large">
-                          <Select
-                            inputName="TASK"
-                            items={{
-                              items: [
-                                { title: 'small' },
-                                { title: 'medium' },
-                              ],
-                            }}
-                          />
-                        </div>
-                        <div className="unit golden-small">
-                          <Input inputName="WORK HOURS" />
-
-                        </div>
-                        <div className="unit golden-large" style={{paddingTop:'0',paddingRight:'0'}}>
-                            <InputFile placeholder="choose a file" />
-                        </div>
-                        <div className="grid wrap narrow">
-                          <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-                            <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-                            <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD </button>
-                          </div>
-                        </div>
-                      </div>
+                        component={datepickerTimesheet}
+                      />
                     </div>
-                </PopUp>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                    <Field
+                    inputName="PROJECT NAME"
+                    name="PROJECT_ID"
+                    type="PROJECT NAME"
+                    component={ReduxInput}
+                  />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                  <div className="unit three-quarters">
+                  <Field
+                  style={{width:'96%'}}
+                  inputName="TASK"
+                  name="WP_ID"
+                  type="WP_ID"
+                  component={ReduxInput}
+                />
+                  </div>
+
+                    <div className="unit one-quarter">
+                      <Field
+                        inputName="WORK HOURS"
+                        name="HOUR"
+                        type="HOUR"
+                        component={ReduxInput}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field 
+                        inputName="SUBJECT"
+                        name="TS_SUBJECT"
+                        type="TS_SUBJECT"
+                        component={ReduxInput}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                        style={{marginBottom:'20px'}}
+                          inputName="MESSAGE"
+                          name="TS_MESSAGE"
+                          // type="TS_MESSAGE"
+                          component={ReduxInput}
+                        />
+                    </div>
+                  </div>
+   
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center' }}>
+     {/*   <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"> ADD NEW</button> */}
+                    </div>
+                  </div>
+
+                </form>
+                </div>
+              </PopUpTimesheet>
 
                 </div>
               </div>
@@ -165,10 +203,19 @@ class Project extends Component {
 
 }
 
+
 function mapStateToProps(state) {
   return {
-    state
-  }
+    formValues: state.form.updateTimesheet,
+
+    state,
+    // filter: ownProps.location.query.filter
+  };
 }
-export default connect(mapStateToProps)(Project)
-// export default Login
+
+export default reduxForm({
+  // Must be unique, this will be the name for THIS PARTICULAR FORM
+  form: 'updateTimesheet',
+})(
+  connect(mapStateToProps, { addTimesheet })(Project),
+);
