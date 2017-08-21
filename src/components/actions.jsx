@@ -330,25 +330,6 @@ export const getIWO = (offset) => {
 
 }
 
-export const checkAM=(AM_ID)=>{
-  return function (dispatch){
-    return axios({
-      method:'POST',
-      url: `${baseURL}/dev/projecttest/checkAM`,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data:{
-        AM_ID
-      }
-
-    }).then(
-      res => {
-        store.dispatch({type:'API', name: 'new_project', data: res, append: true})
-        console.log(res.data);
-        return res
-      },
-    )
-  }
-}
 
 export const editProject = (data) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -714,13 +695,13 @@ export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheet/confirmationTimesheet`,
+      url:`${baseURL}/dev/timesheettest/confirmationTimesheet`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {ts_id,confirm}
     }).then(
       (res)=>{
         store.dispatch(getMyActivities());
-        alert('clicked')
+        alert('updated')
       }
     )
   }
@@ -730,7 +711,7 @@ export function myPerformance(bulan,tahun){
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/report/myperformances`,
+      url:`${baseURL}/dev/reporttest/myperformances`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {bulan,tahun}
     }).then(

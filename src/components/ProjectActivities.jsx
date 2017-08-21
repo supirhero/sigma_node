@@ -61,56 +61,6 @@ class ProjectActivities extends Component {
         </div>
 
         <div className="grid wrap padding-left">
-          <div className="unit whole">
-            <div className="card">
-
-              <div className="grid wrap">
-                <div className="unit whole">
-                  <medium style={{ display: 'inline' }}>
-                    <a href="">Transaction Based Managed Services 2017</a>
-                  </medium>
-                  <div className="pill denied" style={{ float: 'right' }}>DENIED</div>
-                </div>
-
-                <small className="project-info" style={{ margin: 'auto' }}>
-                  (<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra
-                </small>
-              </div>
-
-              <div className="grid wrap">
-                <div className="unit whole">
-                  <div className="person">
-                    <div className="person-image" style={{ margin: 'auto' }} />
-                    <div className="person-info" style={{ marginLeft: '46px' }}>
-                      <large style={{ float: 'left' }}><b>Kara Gray</b></large>
-                      <small style={{ display: 'inline' }}>, Project Manager</small>
-                    </div>
-                    <div style={{ display: 'inline-block', marginLeft: '95px', marginTop: '-25px' }}>
-                      <small>
-                        <b>Timesheet UI #2.</b> "Ini tampilan yang aku improve seperti ini.
-                        Tapi seperti yang kubilang kemarin, untuk development timeline nya aku
-                        ngikut aja"
-                      </small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid wrap">
-                <div className="unit whole" style={{ marginLeft: '95px' }}>
-                  <small style={{ display: 'inline-block', marginLeft: '50px' }}>Tue,Jun 6 at 4:55 PM via web</small>
-                  <medium style={{ display: 'inline-block', marginLeft: '70px' }}>
-                    <a>DENY</a>
-                    <a style={{ marginLeft: '30px' }}>APPROVE</a>
-                  </medium>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-
           {
           activity_timesheet.map((value, index) => (
             <div key={index}>
@@ -153,7 +103,7 @@ class ProjectActivities extends Component {
                   <div className="grid wrap">
                     <div className="unit whole">
                       <medium style={{display:'inline'}}>
-                        <a href="">{value.project_name}</a>
+                        <a href="" style={{display:'block'}}>{value.project_name}</a>
                       </medium>
 
                       {pill(value.is_approved)}
@@ -191,7 +141,7 @@ class ProjectActivities extends Component {
                         value.is_approved === '-1' &&
                         <span>
                           <a onClick={(e) => {
-                            store.dispatch(confirmationTimesheet(value.ts_id, '0'));
+                            store.dispatch(confirmationTimesheet(value.ts_id, "0"));
                             // e.preventDefault()
                             // console.log(myActivity)
                           }}
@@ -199,7 +149,7 @@ class ProjectActivities extends Component {
                           <a
                             style={{ marginLeft: '20px' }}
                             onClick={(e) => {
-                              store.dispatch(confirmationTimesheet(value.ts_id, '1'));
+                              store.dispatch(confirmationTimesheet(value.ts_id, "1"));
                             // e.preventDefault()
                             // console.log(myActivity.activity_timesheet.ts_id)
                             }}
