@@ -614,6 +614,23 @@ export function getTaskView(id) {
     )
   }
 }
+export function getDashboardHomeView(id) {
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/tasktest/test`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'DashboardHome',  data: res });
+
+        return res
+
+      }
+    )
+  }
+}
 
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
    const currentDate = moment().format("YYYY-MM-DD");

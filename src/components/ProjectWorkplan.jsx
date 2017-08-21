@@ -40,7 +40,7 @@ class ProjectWorkplan extends Component {
 
       // const workplan = this.props.state.data.workplan
       const workplan_view = this.props.state.data.parent ? this.props.state.data.parent : null
-      const treeData = {
+      const data = {
           root: {
               id: -1,
               'Name': 'Root',
@@ -138,11 +138,63 @@ class ProjectWorkplan extends Component {
           }
       };
 
+      const complexData = {
+    showTreeRootNode: false,
+    // dataSource: treeData,
+    gridType: 'tree',
+    dragAndDrop: true,
+    store,
+    data,
+    columns: [
+        {
+            name: 'Name',
+            width: '30%',
+            className: 'additional-class',
+            dataIndex: 'Name',
+            sortable: false,
+            expandable: true
+        },
+        {
+            name: 'Phone Number',
+            dataIndex: 'Phone Number',
+            sortable: false,
+            className: 'additional-class'
+        },
+        {
+            name: 'Email',
+            dataIndex: 'Email',
+            sortable: false,
+            className: 'additional-class',
+            defaultSortDirection: 'descend'
+        },
+        {
+            name: 'Address',
+            dataIndex: 'Address',
+            sortable: false,
+            className: 'additional-class'
+        }
+    ],
+    plugins: {
+        GRID_ACTIONS: null,
+        SELECTION_MODEL: {
+            mode: 'single'
+        },
+        PAGER: {
+            enabled: false
+        },
+        BULK_ACTIONS: {
+            enabled: false
+        }
+    },
+
+    stateKey: 'test'
+};
+
       const treeConfig = {
         stateKey: 'workplan-grid',
          showTreeRootNode: false,
         gridType: 'tree', // either `tree` or `grid`,
-        data: treeData,
+        data: data,
         stateful: true,
         plugins:{
           BULK_ACTIONS: {
@@ -343,7 +395,7 @@ class ProjectWorkplan extends Component {
                   <div className='unit whole'>
                       {/* // !workplan ? <PageLoader></PageLoader> : */}
                       <Grid
-                        {...treeConfig}
+                        {...complexData}
                         ></Grid>
                   </div>
                 </div>
