@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,ReactDatePicker } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet } from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import moment from 'moment';
@@ -127,7 +127,7 @@ class Timesheet extends Component {
                         inputName="DATE"
                         name="TS_DATE"
 
-                        component={ReactDatePicker}
+                        component={datepickerTimesheet}
                       />
                     </div>
                   </div>
@@ -159,10 +159,10 @@ class Timesheet extends Component {
                   <div className="grid wrap narrow">
                   <div className="unit three-quarters">
                                       {
-                                        timesheet.task &&
+                                        timesheet.task ?
                                         <Field
                                         name="WP_ID"
-                                        type="WP_ID"
+                                        // type="WP_ID"
                                           inputName="TASK"
                                           component={ReduxSelectNew}>
                                               {
@@ -172,17 +172,10 @@ class Timesheet extends Component {
                                               )
                                               }
                                        </Field>
-                                      }
-
-                                      {
-                                        !timesheet.task &&
-                                        <Field
-                                        name="WP_ID"
-                                        type="WP_ID"
-                                          inputName="TASK"
-                                          component={ReduxSelectNew}>
-                                            <option> </option>
-                                       </Field>
+                                       :
+                                        <ReduxSelectNew inputName="TASK">
+                                        <options> </options>
+                                        </ReduxSelectNew>
                                       }
                                       </div>
 
@@ -216,8 +209,8 @@ class Timesheet extends Component {
                     </div>
                   </div>
                   <div className="grid wrap narrow">
-                    <div className="unit whole" style={{ textAlign: 'center' }}>
-                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                    <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
                       <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
                     </div>
                   </div>

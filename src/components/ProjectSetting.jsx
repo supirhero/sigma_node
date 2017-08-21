@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import { Line} from 'react-progressbar.js'
-import {Divider, Input, RadioButton, Select, PopUp, ProjectHeader,InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ProjectHeader,InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader,datepicker,datepickerUniversal} from './Components.jsx'
 import {Field, reduxForm} from 'redux-form';
 import {
   Checkbox,
@@ -15,7 +15,7 @@ import {
   DatePicker
 } from 'redux-form-material-ui'
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
-import {getEditProjectView, editProject, getIWOEditProject} from './actions.jsx'
+import {getEditProjectView, editProject, getIWOEditProject,checkAM} from './actions.jsx'
 
 
 class EditProject extends Component {
@@ -33,9 +33,10 @@ class EditProject extends Component {
         "AM_ID": 'NONE',
         "TYPE_OF_EFFORT": 'NONE',
         "PROJECT_STATUS": 'NOT STARTED',
-        // "START": '2017-1-1',
-        // "END": '2017-1-1',
+        "START": iwo[0].PROJECT_DATE_START,
+        "END": iwo[0].PROJECT_DATE_STOP,
         "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
+        
       };
       this.props.initialize(initData);
 
@@ -60,7 +61,8 @@ class EditProject extends Component {
 
     }
     onSubmit(props){
-      alert(props)
+      console.log(props)
+      alert('Successful')
       this.props.editProject(props)
     }
 
@@ -78,11 +80,11 @@ class EditProject extends Component {
       const projectSetting = project.project_setting ? project.project_setting : null
       const projectManager = project.project_manajer_list ? project.project_manajer_list : null
       const accountManager = project.account_manager_list ? project.account_manager_list : null
+      const projectEffort = project.type_of_effort ? project.type_of_effort : null
       const iwo = project.iwo ? project.iwo : null
 
       return(
-
-        !projectSetting && !projectManager && !accountManager && !iwo ? <PageLoader/> :
+        !projectSetting && !projectManager && !accountManager && !iwo && !projectEffort ? <PageLoader/> :
           <div>
 
 
@@ -148,6 +150,14 @@ class EditProject extends Component {
                       {
                         field: 'END_CUST_ID',
                         value: arr.END_CUSTOMER
+                      },
+                      {
+                        field:'START',
+                        value:arr.PROJECT_DATE_START
+                      },
+                      {
+                        field:'END',
+                        value:arr.PROJECT_DATE_STOP
                       }
                     ]
 
@@ -300,7 +310,7 @@ class EditProject extends Component {
                       >
                         {
                           projectManager.map((value, index)=> (
-                            <option value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
+                            <option value={value.user_id} {...this.props.option}>{value.user_name}</option>
                           ))
                         }
                       </Field>
@@ -314,13 +324,12 @@ class EditProject extends Component {
                         name="TYPE_OF_EFFORT"
                         style={{width:'96%'}}
                         component={ReduxSelect}
-
                       >
-                        {/* {
-                          projectStatus.map((value, index)=> (
-                            <option value={value.value} {...this.props.option}>{value.value}</option>
+                       {
+                          projectEffort.map((value, index)=> (
+                            <option key= {index} value={value.name} {...this.props.option}>{value.name}</option>
                           ))
-                        } */}
+                        } 
                       </Field>
 
                     </div>
@@ -352,7 +361,7 @@ class EditProject extends Component {
                       >
                         {
                           accountManager.map((value, index)=> (
-                            <option value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
+                            <option value={value.user_id} {...this.props.option}>{value.user_name}</option>
                           ))
                         }
                       </Field>
@@ -415,7 +424,7 @@ class EditProject extends Component {
                     inputName='END DATE'
                     name="END"
                     style={{width:'96%', float:'right'}}
-                    component={ReduxInputDisabled}
+                    component={datepickerUniversal}
                   >
                     {/* {
                       projectStatus.map((value, index)=> (

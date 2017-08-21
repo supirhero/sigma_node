@@ -11,6 +11,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import DropZone from 'react-dropzone'
 
+export const required = value => value ? undefined : 'Required'
+
+export const validate = () => {
+  const required = value => value ? undefined : 'Required'
+}
+
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
     fontSize: '17px',
@@ -180,12 +186,16 @@ export class ReduxInput extends Component {
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <input
+            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
+
+            // {...this.props.field}
           >
           </input>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
         </div>
     )
   }
@@ -519,6 +529,201 @@ export class PopUp extends Component {
             <div className='tint'></div>
 
         </div>
+        <button style={this.props.btnStyle} className={this.props.btnClass}
+          onClick={
+            e => {
+              document.body.style.overflow = 'hidden';
+              document.body.scrollTop = 0; // For Chrome, Safari and Opera
+            document.documentElement.scrollTop = 0; // For IE and Firefox
+              // if (window.addEventListener) // older FF
+              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+              //     window.onwheel = preventDefault; // modern standard
+              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+              //     window.ontouchmove  = preventDefault; // mobile
+              //     document.onkeydown  = preventDefaultForScrollKeys;
+
+              this.setState({
+                clicked:true
+              })
+              e.preventDefault()
+            }}
+          >{this.props.btnText}</button>
+      </div>
+
+    )
+  }
+}
+
+
+export class PopUpTimesheet extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
+
+    };
+  }
+
+  render() {
+    // const dom = store.getState().dom
+    // console.log('dom : ',dom);
+    return(
+      <div style={this.props.style}>
+
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+            <div className='grid wrap' style={{position:'relative'}}>
+              <div className='unit whole'>
+                <div className='card shadow' style={{marginTop:'6%'}}>
+                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                        document.documentElement.scrollTop = 0; // For IE and Firefox
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }
+                    }></Divider>
+                    {this.props.children}
+
+            <div className="grid wrap narrow">
+                <div className="unit whole" style={{ textAlign: 'center', display:'inline-block' }}>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+                    onClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                      document.documentElement.scrollTop = 0; // For IE and Firefox
+                        // if (window.addEventListener) // older FF
+                        //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+                        //     window.onwheel = preventDefault; // modern standard
+                        //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+                        //     window.ontouchmove  = preventDefault; // mobile
+                        //     document.onkeydown  = preventDefaultForScrollKeys;
+
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }}
+                    >CANCEL</button>
+
+                    <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"
+                    onClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                      document.documentElement.scrollTop = 0; // For IE and Firefox
+                        // if (window.addEventListener) // older FF
+                        //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+                        //     window.onwheel = preventDefault; // modern standard
+                        //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+                        //     window.ontouchmove  = preventDefault; // mobile
+                        //     document.onkeydown  = preventDefaultForScrollKeys;
+
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }}
+                    >ADD NEW</button>
+
+
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+            <div className='tint'></div>
+        </div>
+
+        <button style={this.props.btnStyle} className={this.props.btnClass}
+          onClick={
+            e => {
+              document.body.style.overflow = 'hidden';
+              document.body.scrollTop = 0; // For Chrome, Safari and Opera
+            document.documentElement.scrollTop = 0; // For IE and Firefox
+              // if (window.addEventListener) // older FF
+              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+              //     window.onwheel = preventDefault; // modern standard
+              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+              //     window.ontouchmove  = preventDefault; // mobile
+              //     document.onkeydown  = preventDefaultForScrollKeys;
+
+              this.setState({
+                clicked:true
+              })
+              e.preventDefault()
+            }}
+          >{this.props.btnText}</button>
+      </div>
+
+    )
+  }
+}
+
+export class PopUpTimesheet2 extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
+
+    };
+  }
+
+  render() {
+    // const dom = store.getState().dom
+    // console.log('dom : ',dom);
+    return(
+      <div style={this.props.style}>
+
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+            <div className='grid wrap' style={{position:'relative'}}>
+              <div className='unit whole'>
+                <div className='card shadow' style={{marginTop:'6%'}}>
+                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                        document.documentElement.scrollTop = 0; // For IE and Firefox
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }
+                    }></Divider>
+                    <div className="wrap narrow">
+                    {this.props.children}
+                    <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+                    onClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                      document.documentElement.scrollTop = 0; // For IE and Firefox
+                        // if (window.addEventListener) // older FF
+                        //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+                        //     window.onwheel = preventDefault; // modern standard
+                        //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+                        //     window.ontouchmove  = preventDefault; // mobile
+                        //     document.onkeydown  = preventDefaultForScrollKeys;
+
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }}
+                    >CANCEL</button>
+                    </div>
+                    </div>
+
+                    </div>
+                  </div>
+                </div>
+            <div className='tint'></div>
+        </div>
+
         <button style={this.props.btnStyle} className={this.props.btnClass}
           onClick={
             e => {
@@ -931,7 +1136,53 @@ export class PageLoader extends Component {
   }
 }
 
-export class ReactDatePicker extends Component {
+export class datepickerUniversal extends Component {
+
+    static defaultProps(){
+      placeholder: ''
+    }
+
+    constructor (props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange (date) {
+      this.props.input.onChange(moment(date).format('DD-MMM-YY'))
+      // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
+    }
+
+    render () {
+      const {
+        input, placeholder,
+        meta: {touched, error}
+      } = this.props
+
+      return (
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <DatePicker
+          {...input}
+          placeholder={placeholder}
+          dateFormat="DD-MMM-YY"
+          // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
+          selected={input.value ? moment(input.value, 'DD-MMM-YY') : null}
+          onChange={this.handleChange}
+         >
+          {this.props.children}
+          </DatePicker>
+
+
+
+
+      </div>
+
+      )
+    }
+  }
+
+export class datepickerTimesheet extends Component {
 
     static defaultProps(){
       placeholder: ''
@@ -944,6 +1195,7 @@ export class ReactDatePicker extends Component {
 
     handleChange (date) {
       this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+      // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 
     render () {
@@ -960,10 +1212,12 @@ export class ReactDatePicker extends Component {
           {...input}
           placeholder={placeholder}
           dateFormat="YYYY-MM-DD"
+          // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
           onChange={this.handleChange}
           minDate={moment().subtract(2,'month')}
-          maxDate={moment()}>
+          maxDate={moment()}
+         >
           {this.props.children}
           </DatePicker>
 

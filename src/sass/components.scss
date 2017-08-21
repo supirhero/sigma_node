@@ -4,6 +4,16 @@ label {
   font-weight: 300 !important;
   font-size: $font-size !important
 }
+input.error {
+  border-color: $color-secondary;
+}
+.error-alert {
+  color: $color-secondary;
+  margin-top: 10px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+}
 .divider {
 
   border: 1px solid #CCCCCC;
