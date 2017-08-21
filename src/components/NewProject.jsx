@@ -389,8 +389,7 @@ class NewProject extends Component {
                         inputName="ACCOUNT MANAGER"
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
-                        component={ReduxSelect}
-                      >
+                        component={ReduxSelect}>
                            <option> {store.getState().data.username} </option>   
                        {/*
                           this.props.state.data.AM_ID &&

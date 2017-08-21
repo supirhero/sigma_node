@@ -50,27 +50,28 @@ class Timesheet extends Component {
     //   }
     //  }
 
-     function pill(value){
-      var text = 'PENDING'
-      var resubmit = ''
+    function status(value) {
+      let resubmit = '' ;
+      let status = 'PENDING';
       switch (value) {
-        case "0":
-        text = "DENIED"
-        resubmit = 'RE-SUBMIT TIMESHEET'
-        break;
-        case "1":
-        text = "APPROVED"
-        resubmit = ''
-        break;
-        case "-1":
-        text = "WAITING FOR APPROVAL"
-        resubmit = ''
-        break;
+        case '0':
+          status = 'DENIED';
+          resubmit = "RE-SUBMIT TIMESHEET"
+          break;
+        case '1':
+          status = 'APPROVED';
+          resubmit =  ''
+          break;
+        case '-1':
+          status = 'WAITING FOR APPROVAL';
+          resubmit = ''
+          break;
         default:
       }
-      return(<div className={className} style={{float:'right'}}>{text}</div>)
-      return(<div></div>)
+      return(<div style={{float:'right'}}><a style={{marginRight:'20px'}}>{resubmit}</a>{status}</div>)
     }
+    
+  
 
 
     const auth = state.auth;
@@ -263,7 +264,7 @@ class Timesheet extends Component {
                                       <medium style={{ display: 'inline-block', marginLeft: '50px' }}>
                                       {
 
-                                        timesheet.user_activities.IS_APPROVED == "1" ? <b>ACCEPTED</b> : <b>WAITING FOR APPROVAL</b>
+                                        status(value.IS_APPROVED)
                                       }
                                       </medium>
                                     </div>

@@ -9,7 +9,7 @@ import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
-import DropZone from 'react-dropzone'
+import Dropzone from 'react-dropzone'
 
 export const required = value => value ? undefined : 'Required'
 
@@ -1003,6 +1003,7 @@ export class ActivityRow extends Component {
     )
   }
 }
+
 export class InputFile extends Component {
 
   handleChange(event) {
@@ -1057,48 +1058,72 @@ export class ReduxFileInput extends Component {
 // }
 
 
-// export class ReduxDropZone extends Component{
-//   render(){
-//     return (
-//       <div>
-//       <DropZone
-//       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-//       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
-//       // onDrop={(event)=> this.props.input.onChange(event.target.files[0])}
-//       {...this.props.custom}
-//       >
-//       <div>TARO FILE</div>
-//       </DropZone>
-//       </div>
-//     )
-//   }
-// }
-
-export class ReduxDropZone2 extends Component {
+export class ReduxDropZone extends Component{
   render(){
-    return(
-      <DropZone
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-        onChange={(event)=> this.props.input.onChange(event.target.files[0])}
-        {...this.props.custom}
-        >
-      </DropZone>
+    return (
+      <div>
+      <Dropzone
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
+      // onDrop={(event)=> this.props.input.onChange(event.target.files[0])}
+      {...this.props.custom}
+      >
+      <div>TARO FILE</div>
+      </Dropzone>
+      </div>
     )
   }
 }
 
+// export default class FileField extends Component {
+  
+// handleDropOrClick = (acceptedFiles, rejectedFiles, e) => {
+//   let eventOrValue = e;
+//   let {input: {onChange, onBlur}} = this.props;
+//   if (e.type === 'drop') {
+//     if (acceptedFiles.length) {
+//       // FileList or [File]
+//       eventOrValue = (e.dataTransfer && e.dataTransfer.files) || acceptedFiles;
+//     } else {
+//       eventOrValue = null;
+//     }
+//   }
+//   onBlur(eventOrValue); // update touched
+//   onChange(eventOrValue); // update value
+// }
+
+
+// render() {
+//   let {input, meta: {touched, error}} = this.props;
+//   let {accept, multiple} = this.props;
+//   let selectedFile = (input && input.value && input.value[0]) || null;
+//   let dropzoneProps = {
+//     accept,
+//     multiple,
+//     onDrop: this.handleDropOrClick,
+//   };
+//   return (
+//     <div>
+//       <input type='hidden' disabled {...input} />
+//       {selectedFile? <span>{selectedFile.name}</span> : null}
+//       <DropZone {...dropzoneProps} />  
+//     </div>
+//     );
+// }
+// }
+
+
+
 export class ReduxDrop extends Component {
   render(){
     return(
-      <DropZone
+      <Dropzone
       name={this.props.name}
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
       <div>Try dropping some files here, or click to select files to upload.</div>
-      </DropZone>
+      </Dropzone>
     )
   }
 }
