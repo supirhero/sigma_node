@@ -4,9 +4,10 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 // <<<<<<< HEAD
-import {Divider, Header, ProjectHeader,PopUp,Input,Select, WorkplanRow,PageLoader, ReactDatePicker} from  './Components.jsx'
+import {Divider, Header, ProjectHeader,PopUp,ReduxInput,ReduxSelectNew, WorkplanRow,PageLoader, ReactDatePicker} from  './Components.jsx'
+import { Field, reduxForm } from 'redux-form';
 
-import {getWorkplanView} from './actions.jsx'
+import {getWorkplanView, addTaskWorkplan, getTaskView} from './actions.jsx'
 
 
 
@@ -18,13 +19,24 @@ class ProjectWorkplan extends Component {
 
     };
   }
+  onSubmit(props){
+    const id =  this.props.state.page.id
+
+    this.props.addTaskWorkplan(id,props)
+  }
     componentWillMount() {
       const id =  this.props.state.page.id
       store.dispatch(getWorkplanView(id))
+      store.dispatch(getTaskView(id))
+
 
     }
     render(){
+      const { handleSubmit } = this.props;
+
       const workplan = this.props.state.data.workplan
+      const workplan_view = this.props.state.data.parent
+
       const workplan2=[
         {
           task: 'Transaction Based Managed Service 2017',
@@ -195,52 +207,66 @@ class ProjectWorkplan extends Component {
           <div className='grid wrap narrow'>
             <div className='unit one-third no-gutters'>
               <PopUp id='createTask' dividerText='CREATE TASK' btnText='CREATE TASK' btnClass="btn-primary" btnStyle={{width:'200px', float:'right'}}>
-                    <div>
-                      <div className="grid wrap ">
-                        <div className="unit whole">
-                          <Input inputName='NAME' />
+                    <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                      <div>
+                        <div className="grid wrap">
+                          <div className="unit whole">
+                            <Field
+                              inputName="NAME"
+                              name="WBS_NAME"
+                              type='input'
+                              component={ReduxInput}
+                            />
+                          </div>
                         </div>
+                        <div className='grid wrap'>
+                          <div className='unit whole'>
+                            <Field
+                              inputName="PARENT"
+                              name="WBS_PARENT_ID"
+                              component={ReduxSelectNew}>
+                                {
+                                  workplan_view &&
+                                  workplan_view.map((value,index) => (
+                                    <option key={index} value={value.WBS_ID}>{value.WBS_NAME}</option>
+
+                                  ))
+                                }
+                              </Field>
+                          </div>
+                        </div>
+                        <div className="grid wrap">
+                          <div className="unit half">
+                            <Field
+                              inputName="DATE"
+                              name="START_DATE"
+
+                              component={ReactDatePicker}
+                            />
+
+                          </div>
+                          <div className="unit half">
+                            <Field
+                              inputName="DATE"
+                              name="FINISH_DATE"
+
+                              component={ReactDatePicker}
+                            />
+
+                          </div>
+                        </div>
+
+                        <div className="grid wrap">
+                          <div className='unit whole' style={{textAlign:'center',marginTop:'40px'}}>
+                            <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CANCEL </button>
+                            <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} type='submit' className='btn-primary'> ADD </button>
+                          </div>
+                        </div>
+
+
                       </div>
-                      <div className='grid wrap '>
-                        <div className='unit whole'>
-                          <Select inputName='PARENT' items={{
-                            items : [
-                              {title : 'TBWS21312'},
-                              {title : 'TBWS21312'}
-                            ]
-                          }} />
-                        </div>
-                      </div>
-                      <div className="grid wrap ">
-                        <div className="unit half">
-                          <Field
-                            inputName="DATE"
-                            name="START_DATE"
 
-                            component={ReactDatePicker}
-                          />
-
-                        </div>
-                        <div className="unit half">
-                          <Field
-                            inputName="DATE"
-                            name="FINISH_DATE"
-
-                            component={ReactDatePicker}
-                          />
-
-                        </div>
-                      </div>
-
-                      <div className="grid wrap">
-                        <div className='unit whole' style={{textAlign:'center',marginTop:'40px'}}>
-                          <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CANCEL </button>
-                          <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} className='btn-primary'> ADD </button>
-                        </div>
-                      </div>
-
-
-                    </div>
+                    </form>
                   </PopUp>
 
             </div>
@@ -252,7 +278,12 @@ class ProjectWorkplan extends Component {
               <PopUp id='createTask' dividerText='UPLOAD WORKPLAN' btnText='UPLOAD' btnClass="btn-secondary" btnStyle={{width:'200px', float:'left'}}>
                   <div>
                     <small>You can upload your project workplan to generate task automatically on PRouDs. Please download the project workplan template <a>here</a></small>
-                    <Input inputName="SELECT FILE" inputDesc="max file size is 5 MB allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png"></Input>
+                    <Field
+                      inputName="WORK HOURS"
+                      name="HOUR"
+                      inputDesc="max file size is 5 MB allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png"
+                      component={ReduxInput}
+                    />
                   </div>
                       <div className='btn-wrapper'>
                         <button className='btn-secondary' style={{float:'left', display:'inline-block'}}>CANCEL</button>
@@ -319,7 +350,17 @@ class ProjectWorkplan extends Component {
                         workplan.children.map((value,index) => {
                           return(
 
-                              <WorkplanRow  key={index} data={value}></WorkplanRow>
+                              <WorkplanRow  key={index} data={value}>
+                                {
+                                  value.children.map((value, index) => (
+                                  <WorkplanRow key={index} data={value}>
+                                    {
+                                      value.children.map((value, index) => (
+                                      <WorkplanRow key={index} data={value}></WorkplanRow>
+                                    ))}
+                                  </WorkplanRow>
+                                ))}
+                              </WorkplanRow>
 
                         )
                       })
@@ -340,8 +381,14 @@ class ProjectWorkplan extends Component {
 
 function mapStateToProps(state) {
   return {
+    formValues: state.form.add_task,
     state
   }
 }
-export default connect(mapStateToProps)(ProjectWorkplan)
+export default reduxForm({
+  // Must be unique, this will be the name for THIS PARTICULAR FORM
+  form: 'add_task',
+})(
+  connect(mapStateToProps, { addTaskWorkplan })(ProjectWorkplan),
+);
 // export default Login
