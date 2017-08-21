@@ -146,7 +146,7 @@ class MyRecentActivities extends Component {
             <div className="grid wrap">
               <div className="unit whole">
                 <medium style={{ display: 'inline' }}>
-                  <a href="">{value.project_name}</a>
+                  <a href="" style={{display:'block'}}>{value.project_name}</a>
                 </medium>
 
                 {pill(value.is_approved)}
@@ -180,7 +180,7 @@ class MyRecentActivities extends Component {
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                   {
                 value.is_approved == 0 &&
-                <a href="">RE-SUBMIT TIMESHEET</a>
+                <a href="" style={{marginLeft:'45px'}}>RE-SUBMIT TIMESHEET</a>
               }
                 </medium>
               </div>

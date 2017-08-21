@@ -103,7 +103,7 @@ class ProjectActivities extends Component {
                   <div className="grid wrap">
                     <div className="unit whole">
                       <medium style={{display:'inline'}}>
-                        <a href="">{value.project_name}</a>
+                        <a href="" style={{display:'block'}}>{value.project_name}</a>
                       </medium>
 
                       {pill(value.is_approved)}
