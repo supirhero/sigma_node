@@ -522,7 +522,7 @@ export class PopUp extends Component {
 
 
                     {this.props.children}
-                  
+
                 </div>
               </div>
             </div>
@@ -586,7 +586,7 @@ export class PopUpTimesheet extends Component {
                       }
                     }></Divider>
                     {this.props.children}
-                     
+
             <div className="grid wrap narrow">
                 <div className="unit whole" style={{ textAlign: 'center', display:'inline-block' }}>
                     <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
@@ -601,14 +601,14 @@ export class PopUpTimesheet extends Component {
                         //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
                         //     window.ontouchmove  = preventDefault; // mobile
                         //     document.onkeydown  = preventDefaultForScrollKeys;
-          
+
                         this.setState({
                           clicked:false
                         })
                         e.preventDefault()
                       }}
                     >CANCEL</button>
- 
+
                     <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"
                     onClick={
                       e => {
@@ -621,14 +621,14 @@ export class PopUpTimesheet extends Component {
                         //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
                         //     window.ontouchmove  = preventDefault; // mobile
                         //     document.onkeydown  = preventDefaultForScrollKeys;
-          
+
                         this.setState({
                           clicked:false
                         })
                         e.preventDefault()
                       }}
                     >ADD NEW</button>
-                    
+
 
                     </div>
                   </div>
@@ -708,13 +708,13 @@ export class PopUpTimesheet2 extends Component {
                         //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
                         //     window.ontouchmove  = preventDefault; // mobile
                         //     document.onkeydown  = preventDefaultForScrollKeys;
-          
+
                         this.setState({
                           clicked:false
                         })
                         e.preventDefault()
                       }}
-                    >CANCEL</button> 
+                    >CANCEL</button>
                     </div>
                     </div>
 
@@ -874,13 +874,21 @@ export class ProjectHeader extends Component {
 //   }
 // }
 
+function renderAdjacent(onWhatever){
+    return [
+        <tr><td>Item 1</td></tr>,
+        <tr><td>Item 2</td></tr>
+    ];
+}
+
+
 export class WorkplanRow extends Component {
   constructor(){
     super();
     this.state = {
       clicked : false,
-      working : false,
-      non_working : false
+      clicked_child : false
+
 
     };
   }
@@ -890,86 +898,69 @@ export class WorkplanRow extends Component {
       <tbody>
         <tr onClick={
           e => {
-            if (this.state.clicked) {
-              this.setState({clicked:false})
+              if (this.state.clicked) {
+                this.setState({clicked:false})
+              }
+              else {
+                this.setState({clicked:true})
+              }
+              e.preventDefault()
             }
-            else {
-              this.setState({clicked:true})
-
-            }
-            e.preventDefault()
-          }
+      }>
+          <td style={{paddingLeft: '40px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+          <td>{value.WORK}</td>
+          <td>{value.WORK_TOTAL}</td>
+          <td>{value.DURATION}</td>
+          <td>{value.START_DATE}</td>
+          <td>{value.END_DATE}</td>
+          <td>{value.WORK_PERCENT_COMPLETE}</td>
+          <td>{value.LEAF}</td>
+        </tr>
+        {
+          this.state.clicked &&
+          value.children.map((value, index) => [
+          <tr key={index} onClick={
+            e => {
+                if (this.state.clicked_child) {
+                  this.setState({clicked_child:false})
+                }
+                else {
+                  this.setState({clicked_child:true})
+                }
+                e.preventDefault()
+              }
         }>
-        <td style={{paddingLeft: '20px'}}>{value.task}</td>
-        <td>{value.work}</td>
-        <td>{value.work_total}</td>
-        <td>{value.duration}</td>
-        <td>{value.start_date}</td>
-        <td>{value.end_date}</td>
-        <td>{value.work_complete}</td>
-        <td>{value.resources}</td>
-      </tr>
-      {
-        this.state.clicked &&
-        <tr onClick={
-          e => {
-            if (this.state.working) {
-              this.setState({working:false})
-            }
-            else {
-              this.setState({working:true})
+            <td style={{paddingLeft: '60px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
 
-            }
-            e.preventDefault()
-            }
-          }>
-          <td style={{paddingLeft: '40px'}}>{value.working_activity.task}</td>
-          <td>{value.working_activity.work}</td>
-          <td>{value.working_activity.work_total}</td>
-          <td>{value.working_activity.duration}</td>
-          <td>{value.working_activity.start_date}</td>
-          <td>{value.working_activity.end_date}</td>
-          <td>{value.working_activity.work_complete}</td>
-          <td>{value.working_activity.resources}</td>
-      </tr>
-      }
-      {
-        this.state.working && this.state.clicked &&
-        <ActivityRow data={value.working_activity}></ActivityRow>
-      }
+            <td>{value.WORK}</td>
+            <td>{value.WORK_TOTAL}</td>
+            <td>{value.DURATION}</td>
+            <td>{value.START_DATE}</td>
+            <td>{value.END_DATE}</td>
+            <td>{value.WORK_PERCENT_COMPLETE}</td>
+            <td>{value.LEAF}</td>
+          </tr>,
 
-      {
-        this.state.clicked &&
-        <tr onClick={
-          e => {
-            if (this.state.non_working) {
-              this.setState({non_working:false})
-            }
-            else {
-              this.setState({non_working:true})
+          this.state.clicked_child &&
+          value.children.map((value, index) => (
+          <tr key={index}>
+            <td style={{paddingLeft: '80px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked_child ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
 
-            }
-            e.preventDefault()
-            }
-          }>
-          <td style={{paddingLeft: '40px'}}>{value.non_working_activity.task}</td>
-          <td>{value.non_working_activity.work}</td>
-          <td>{value.non_working_activity.work_total}</td>
-          <td>{value.non_working_activity.duration}</td>
-          <td>{value.non_working_activity.start_date}</td>
-          <td>{value.non_working_activity.end_date}</td>
-          <td>{value.non_working_activity.work_complete}</td>
-          <td>{value.non_working_activity.resources}</td>
-      </tr>
-      }
+            <td>{value.WORK}</td>
+            <td>{value.WORK_TOTAL}</td>
+            <td>{value.DURATION}</td>
+            <td>{value.START_DATE}</td>
+            <td>{value.END_DATE}</td>
+            <td>{value.WORK_PERCENT_COMPLETE}</td>
+            <td>{value.LEAF}</td>
+          </tr>
+        ))
+      ])
 
+        }
 
-
-      {
-        this.state.non_working && this.state.clicked &&
-        <ActivityRow data={value.non_working_activity}></ActivityRow>
-      }
       </tbody>
+
     )
   }
 }

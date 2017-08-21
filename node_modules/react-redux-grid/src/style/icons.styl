@@ -1,0 +1,21 @@
+icondictionary = {
+  'arrows-v': '\F07D',
+  'search': '\F002',
+  'close': '\F00D',
+  'chevron-down': '\F078',
+  'chevron-right': '\F054',
+  'filter': '\F0b0',
+  'action': '\F142',
+  'sort-up': '\F0D8',
+  'sort-down': '\F0D7',
+}
+
+icon(type)
+  cursor pointer
+
+  &::before
+    font-family FontAwesome
+    font-size 12px
+    font-style normal
+    font-weight normal
+    content icondictionary[type]

@@ -1,0 +1,47 @@
++prefix-classes($prefix)
+
+  .filter-container
+    background-color $lightcolor
+    border-radius(3px 3px 0 0)
+    padding 5px 0
+    position relative
+    text-align center
+    width 100%
+
+    .filter-input
+      input()
+      width 99%
+
+    &:hover
+      .filter-input
+        color darken($editcolor, 20%)
+
+    .filter-button-container
+      display inline-block
+      position absolute
+      right 5px
+
+      > i
+        padding 0 3px 0 0
+
+        &::before
+          color $editcolor
+          transition(color)
+
+        &:hover
+          &::before
+            color darken($editcolor, 20%)
+
+        &.{$activeclass}
+          &::before
+            color $actioncolor
+
+
+      .filter-search-button
+        icon('search')
+
+      .filter-clear-button
+        icon('close')
+
+      .filter-menu-button
+        icon('filter')

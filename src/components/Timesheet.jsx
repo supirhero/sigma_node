@@ -25,7 +25,7 @@ class Timesheet extends Component {
     const auth = state.auth;
 
   }
-  
+
 
 
   componentWillUnmount() {
@@ -176,7 +176,7 @@ class Timesheet extends Component {
                                        :
                                         <ReduxSelectNew inputName="TASK">
                                         <options> </options>
-                                        </ReduxSelectNew>    
+                                        </ReduxSelectNew>
                                       }
                                       </div>
 
@@ -210,8 +210,8 @@ class Timesheet extends Component {
                     </div>
                   </div>
                   <div className="grid wrap narrow">
-                    <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>       
-                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>           
+                    <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
                       <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
                     </div>
                   </div>
