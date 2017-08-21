@@ -296,7 +296,7 @@ export const getIWOEditProject = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
           }).then(
             res => {
               store.dispatch({type:'API', name: 'project', data: res, append:true})
@@ -316,7 +316,7 @@ export const getIWO = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -362,7 +362,7 @@ export const editProject = (data) => {
               VISIBILITY:data.VISIBILITY,
               START:data.START,
               END:data.END
-              
+
             }
           }).then(
             res => {
@@ -521,6 +521,28 @@ export const getAccountManager = (am_id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
+              store.dispatch({type:'API', data: res, append:true})
+
+            },
+          )
+  }
+}
+
+export const getDashboardHomeView = () => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/test/` ,
+            headers: {
+              // 'token': {token},
+              'Content-Type': 'application/x-www-form-urlencoded',
+              // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            },
+
+          }).then(
+            res => {
               store.dispatch({type:'API', data: res, append:true})
 
             },

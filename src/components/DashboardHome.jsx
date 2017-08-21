@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
-import { changeRoute } from './actions.jsx'
+import { changeRoute, getDashboardHomeView } from './actions.jsx'
 
 import {Meter, Search} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
@@ -12,6 +12,9 @@ import store from '../reducers/combineReducers.jsx'
 
 
 class DashboardHome extends Component {
+  componentWillMount(){
+    store.dispatch(getDashboardHomeView())
+  }
   render() {
     var state = store.getState()
     console.log(state);

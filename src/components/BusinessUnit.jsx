@@ -13,7 +13,7 @@ import store from '../reducers/combineReducers.jsx';
 class BusinessUnit extends Component {
   componentWillMount(){
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     store.dispatch(getBusinessUnitDetail(id))
   }
 
@@ -22,11 +22,11 @@ class BusinessUnit extends Component {
   }
   render() {
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     // const id = state.data.page.business_unit.bu_code
-    
-      // var projects = state.data.projects ? state.data.projects : null
-    var project = state.auth.project;
+
+      var project = state.project ? state.project : null
+    // var project = state.auth.project;
     if(!project){
       return <PageLoader></PageLoader>
     }

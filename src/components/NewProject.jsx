@@ -203,9 +203,11 @@ class NewProject extends Component {
                   //   // alert(this.state.iwo_index)
                   // }}
                 >
+                  <option value='No IWO' {...this.props.option}>No IWO</option>
                   {
                     iwo &&
                     iwo.map((value, index) => (
+
                       <option key ={index} am_id={value.ACCOUNT_MANAGER_ID} value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
 
                     ))
@@ -390,13 +392,13 @@ class NewProject extends Component {
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}>
-                           <option> {store.getState().data.username} </option>   
+                           <option> {store.getState().data.username} </option>
                        {/*
                           this.props.state.data.AM_ID &&
                           this.props.state.data.AM_ID.map((value, index)=> (
                             <option value={value.value} {...this.props.option}>{value.value}</option>
                           ))
-                   */} 
+                   */}
                       </Field>
 
                     </div>
