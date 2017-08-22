@@ -11,6 +11,304 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import DropZone from 'react-dropzone'
 
+export const pageSize = 20;
+
+
+export const height = '';
+
+export const stateful = true;
+
+
+export const plugins = {
+    COLUMN_MANAGER: {
+        resizable: true,
+        moveable: true,
+        sortable: {
+            enabled: true,
+            method: 'local',
+            sortingSource: 'http://react-redux-grid.herokuapp.com/getfakeData'
+        }
+    },
+    STICKY_HEADER: {
+        enabled: true
+    },
+    STICKY_FOOTER: {
+        enabled: true
+    },
+    EDITOR: {
+        type: 'inline',
+        enabled: true,
+        focusOnEdit: true
+    },
+    PAGER: {
+        enabled: true,
+        pagingType: 'remote'
+    },
+    LOADER: {
+        enabled: true
+    },
+    SELECTION_MODEL: {
+        mode: 'checkbox-multi',
+        enabled: true,
+        allowDeselect: true,
+        activeCls: 'active',
+        selectionEvent: 'singleclick',
+        editEvent: 'none'
+    },
+    ERROR_HANDLER: {
+        defaultErrorMessage: 'AN ERROR OCURRED',
+        enabled: true
+    },
+    BULK_ACTIONS: {
+        enabled: false,
+        actions: [
+            {
+                text: 'Move',
+                EVENT_HANDLER: () => {
+
+                }
+            },
+            {
+                text: 'Add',
+                EVENT_HANDLER: () => {
+
+                }
+            }
+        ]
+    },
+    GRID_ACTIONS: {
+        iconCls: 'action-icon',
+        menu: [
+            {
+                text: 'Delete',
+                key: 'delete',
+                EVENT_HANDLER: ({ metaData }) => {
+                    const rowIndex = metaData.rowIndex;
+
+                    store.dispatch(
+                        Actions.EditorActions.removeRow({
+                            stateKey,
+                            rowIndex
+                        })
+                    );
+                }
+            }
+        ]
+    }
+};
+
+export const columns = [
+    {
+        name: 'Name',
+        dataIndex: 'Name',
+        sortable: true,
+
+        width: '60%',
+        className: 'additional-class',
+        expandable: true,
+        sortFn: (direction, previousRow, currentRow) => {
+            // do custom sort
+        },
+        HANDLE_CLICK: () => { console.log('Header Click'); }
+    },
+    {
+        name: 'Phone Number',
+        dataIndex: 'Phone Number',
+        editable: ({ isRowSelected }) => {
+            return isRowSelected;
+        },
+        sortable: true,
+        className: 'additional-class',
+        editor: (
+            /* eslint-disable  react/prop-types */
+            { column, columnIndex, row, stateKey, store, value }
+            /* eslint-enable  react/prop-types */
+        ) => {
+
+            return (
+                <input
+                    onChange= {
+                        editorFunc.bind(
+                            null, value, row, column, columns, columnIndex, stateKey
+                        )
+                    }
+                    type="tel"
+                    value={ value }
+                />
+                );
+        }
+    },
+    {
+        name: 'Email',
+        dataIndex: 'Email',
+        sortable: true,
+        className: 'additional-class',
+        defaultSortDirection: 'descend',
+        /* eslint-disable react/prop-types */
+        renderer: ({ value }) => {
+            return <span>'Email:' { value } </span>;
+        }
+    },
+    {
+        name: 'Address',
+        dataIndex: 'Address',
+        sortable: true,
+        className: 'additional-class'
+    }
+];
+
+export const treeData ={
+    root: {
+        id: -1,
+        'Name': 'Root',
+        children: [
+            {
+                id: 1,
+                parentId: -1,
+                Name: 'Category 1',
+                GUID: '8f7152dc-fed7-4a65-afcf-527fceb99865',
+                Email: 'hgardnero6@ed.gov',
+                Gender: 'Male',
+                Address: '605 Manley Park',
+                'Phone Number': '31-(678)495-4134',
+                children: [
+                    {
+                        id: 11,
+                        parentId: 1,
+                        Name: 'Category 11',
+                        GUID: '8f7152dc-fed7-4a65-afcf-527fceb991865',
+                        Email: 'hgardneross6@ed.gov',
+                        Gender: 'Male',
+                        Address: '12 Manley Park',
+                        'Phone Number': '31-(678)495-4134',
+                    },
+                    {
+                        id: 12,
+                        parentId: 1,
+                        Name: 'Category 12',
+                        GUID: '8f7152dc-fed7-4acf-527fceb991865',
+                        Email: 'hgardneross6@ed.gov',
+                        Gender: 'Male',
+                        Address: '12 Manley Park',
+                        'Phone Number': '31-(678)495-4134',
+                        children: [
+                             {
+                                id: 121,
+                                parentId: 12,
+                                Name: 'Category 121',
+                                GUID: '8f7q2dc-fedsss7-4acf-527fceb991865',
+                                Email: 'hgoss6@eds.gov',
+                                Gender: 'Male',
+                                Address: '21 fake Park',
+                                'Phone Number': '31-(678)495-4134',
+                            },
+                            {
+                                id: 122,
+                                parentId: 12,
+                                Name: 'Category 122',
+                                GUID: '8f7q2dc-fed7-4acf-527fceb991865',
+                                Email: 'hgoss6@ed.gov',
+                                Gender: 'Male',
+                                Address: '21 fake Park',
+                                'Phone Number': '31-(678)495-4134',
+                                children: [
+                                    {
+                                        id: 1221,
+                                        parentId: 122,
+                                        Name: 'Category 1211',
+                                        GUID: '8f7q2dc-facf-527fceb991865',
+                                        Email: 'hgossjdjdjdj6@ed.gov',
+                                        Gender: 'Male',
+                                        Address: '21 fdjdjake Park',
+                                        'Phone Number': '31-(678)495-4134'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {id: 13, parentId: 1, "GUID":"284c0699-b868-4c30-b12a-8d72079958a3","Name":"Diane","Email":"dphillipsrh@cam.ac.uk","Gender":"Female","Address":"4992 Anzinger Court","Phone Number":"355-(171)817-3888"},
+                    {id: 14, parentId: 1, "GUID":"47fb332b-102a-4521-b40e-b3d5ca14620b","Name":"Lois","Email":"lstoneri@timesonline.co.uk","Gender":"Female","Address":"488 Sachtjen Way","Phone Number":"351-(134)781-3030"},
+                    {id: 15, parentId: 1, "GUID":"68b4c1a2-e388-4970-b226-d49622531fbb","Name":"Sharon","Email":"shamiltonrj@yahoo.co.jp","Gender":"Female","Address":"81 Dottie Hill","Phone Number":"232-(410)229-9101"},
+                    {id: 16, parentId: 1, "GUID":"bb003723-bd3f-43f7-b247-5cfe2c005e9a","Name":"Adam","Email":"ashawrk@cargocollective.com","Gender":"Male","Address":"97846 Arrowood Trail","Phone Number":"62-(682)423-7816"},
+                    {id: 17, parentId: 1, "GUID":"5b6f3ca6-76fa-40c8-8571-5316d75d91c9","Name":"Linda","Email":"lwatkinsrl@tmall.com","Gender":"Female","Address":"1896 Forest Dale Point","Phone Number":"86-(818)985-7044"}
+                ]
+            },
+            {
+                id: 2,
+                parentId: -1,
+                Name: 'Category 2',
+                GUID: '8f7q2dc-facf-527fcebdk=-jdjd991865',
+                Email: 'hehehe@ed.gov',
+                Gender: 'Male',
+                Address: '212 Park',
+                'Phone Number': '31-(678)495-4134',
+                children: [
+                    {
+                        id: 21,
+                        parentId: 2,
+                        Name: 'Category 21',
+                        GUID: '8f7q2dc-facf-527fcsw-jdjd991865',
+                        Email: 'hehehe@ed.gov',
+                        Gender: 'Male',
+                        Address: '21112 Park',
+                        'Phone Number': '31-(678)495-4134',
+                        leaf: false
+                    }
+                ]
+            }
+        ]
+    }
+};
+export const events = {
+    HANDLE_CELL_CLICK: (cell, reactEvent, id, browserEvent) => {
+        console.log('On Cell Click Event');
+    },
+    HANDLE_CELL_DOUBLE_CLICK: (cell, reactEvent, id, browserEvent) => {
+        console.log('On Cell Double Click Event');
+    },
+    HANDLE_ROW_CLICK: (row, reactEvent, id, browserEvent) => {
+        console.log('On Row Click Event');
+    },
+    HANDLE_ROW_DOUBLE_CLICK: (row, reactEvent, id, browserEvent) => {
+        console.log('On Row Double Click Event');
+    },
+    HANDLE_BEFORE_SELECTION: () => {
+        console.log('On Before Selection');
+    },
+    HANDLE_AFTER_SELECTION: () => {
+        console.log('On After Selection');
+    },
+    HANDLE_AFTER_INLINE_EDITOR_SAVE: () => {
+        console.log('On After Save Inline Editor Event');
+    },
+    HANDLE_BEFORE_BULKACTION_SHOW: () => {
+        console.log('On Before Bulk Action Show');
+    },
+    HANDLE_AFTER_BULKACTION_SHOW: () => {
+        console.log('On After Bulk Action Show');
+    },
+    HANDLE_BEFORE_SORT: () => {
+        console.log('before sort event');
+    },
+    HANDLE_AFTER_SELECT_ALL: () => {
+        console.log('Handle after select all');
+    },
+    HANDLE_AFTER_DESELECT_ALL: () => {
+        console.log('Handle after deselect all');
+    },
+    HANDLE_AFTER_ROW_DROP: ({ treeData, row }) => {
+        console.log('After drag and drop of row event');
+    },
+    HANDLE_EDITOR_FOCUS: (a) => {
+        console.log(a)
+        console.log('Handle editor focus');
+    },
+    HANDLE_EDITOR_BLUR: () => {
+        console.log('Handle editor blur');
+    }
+};
+
+
 export const muiTheme = getMuiTheme({
     fontFamily: 'lato, sans-serif',
     fontSize: '17px',
