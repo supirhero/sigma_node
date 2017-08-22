@@ -1067,7 +1067,7 @@ export class ReduxDropZone extends Component{
 }
 
 // export default class FileField extends Component {
-  
+
 // handleDropOrClick = (acceptedFiles, rejectedFiles, e) => {
 //   let eventOrValue = e;
 //   let {input: {onChange, onBlur}} = this.props;
@@ -1097,7 +1097,7 @@ export class ReduxDropZone extends Component{
 //     <div>
 //       <input type='hidden' disabled {...input} />
 //       {selectedFile? <span>{selectedFile.name}</span> : null}
-//       <DropZone {...dropzoneProps} />  
+//       <DropZone {...dropzoneProps} />
 //     </div>
 //     );
 // }
@@ -1188,6 +1188,7 @@ export class datepickerUniversal extends Component {
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <DatePicker
+            style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
           dateFormat="DD-MMM-YY"
@@ -1197,6 +1198,8 @@ export class datepickerUniversal extends Component {
          >
           {this.props.children}
           </DatePicker>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+
 
 
 

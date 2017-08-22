@@ -20,7 +20,7 @@ import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'mate
 
 import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal} from './Components.jsx'
 
 
 
@@ -390,13 +390,13 @@ class NewProject extends Component {
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}>
-                           <option> {store.getState().data.username} </option>   
+                           <option> {store.getState().data.username} </option>
                        {/*
                           this.props.state.data.AM_ID &&
                           this.props.state.data.AM_ID.map((value, index)=> (
                             <option value={value.value} {...this.props.option}>{value.value}</option>
                           ))
-                   */} 
+                   */}
                       </Field>
 
                     </div>
@@ -441,19 +441,15 @@ class NewProject extends Component {
 
                 </div>
               </div>
-              {/* <div className='grid wrap narrow'>
+              <div className='grid wrap narrow'>
                 <div className='unit half'>
                   <Field
                     inputName='START DATE'
                     name="START"
                     style={{width:'96%'}}
-                    component={ReduxSelect}
+                    component={datepickerUniversal}
+                    validate={[required]}
                   >
-                    {
-                      projectStatus.map((value, index)=> (
-                        <option value={value.value} {...this.props.option}>{value.value}</option>
-                      ))
-                    }
                   </Field>
 
                 </div>
@@ -461,18 +457,15 @@ class NewProject extends Component {
                   <Field
                     inputName='END DATE'
                     name="END"
-                    style={{width:'96%', float:'right'}}
-                    component={ReduxSelect}
+                    style={{width:'100%', float:'right'}}
+                    component={datepickerUniversal}
+                    validate={[required]}
+
                   >
-                    {
-                      projectStatus.map((value, index)=> (
-                        <option value={value.value} {...this.props.option}>{value.value}</option>
-                      ))
-                    }
                   </Field>
 
                 </div>
-              </div> */}
+              </div>
               {/* <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <h1 className='input-name'>VISIBILITY</h1>
