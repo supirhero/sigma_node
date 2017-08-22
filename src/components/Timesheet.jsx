@@ -4,13 +4,20 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select, ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
+import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import DayPicker from 'react-day-picker';
 
 class Timesheet extends Component {
-
+  constructor(props){
+    super(props)
+    this.state = {
+      selectedDay : null
+    };
+  }
 
   onSubmit(props){
     this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
@@ -20,7 +27,6 @@ class Timesheet extends Component {
     const currentDate = moment().format("YYYY-MM-DD");
     const state = store.getState();
     store.dispatch(viewTimesheet(currentDate));
-    // store.dispatch(taskList('8790874'));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
 
@@ -31,6 +37,8 @@ class Timesheet extends Component {
   componentWillUnmount() {
     store.dispatch(pop());
   }
+
+ 
 
 
   render() {
@@ -77,6 +85,14 @@ class Timesheet extends Component {
     const auth = state.auth;
 
 
+    const handleDayClick = (day, { selected }) => {
+      this.setState({
+        selectedDay: selected ? undefined : day,      
+      });
+      const selectedDay = moment(day).format('YYYY-MM-DD')
+    store.dispatch(viewTimesheet(selectedDay))
+    };
+    
 
   //    if(!timesheet){
   //    return <PageLoader></PageLoader>
@@ -99,21 +115,15 @@ class Timesheet extends Component {
           </div>
         </div>
 
-        <Tabs>
-          <TabList>
+       
             <div className="grid wrap">
-              <div className="unit whole" style={{ textAlign: 'center' }}>
-                <span className="icon-arrow-left-circle" />
+              <div className="unit whole" style={{ textAlign: 'center' }}>            
                 <div style={{ marginTop: '20px', display: 'inline-block' }}>
-
-                  <Tab style={{ listStyle: 'none', display: 'inline-block', float: 'left' }}><TimeSheetTimeButton  text={currentDate} hours="4 Hours" /></Tab>
-                  <Tab style={{ listStyle: 'none', display: 'inline-block', float: 'left' }}><TimeSheetTimeButton text="Sat, Jun 12" hours="DAY OFF" /></Tab>
-
-                  <span className="icon-arrow-right-circle" />
+               <DayPicker onDayClick={handleDayClick} selectedDays={this.state.selectedDay}></DayPicker>
                 </div>
               </div>
             </div>
-          </TabList>
+    
 
 
           <div className="grid wrap">
@@ -127,7 +137,6 @@ class Timesheet extends Component {
                       <Field
                         inputName="DATE"
                         name="TS_DATE"
-
                         component={datepickerTimesheet}
                       />
                     </div>
@@ -225,10 +234,10 @@ class Timesheet extends Component {
 
 
 
-          <TabPanel>
+      
             <div className="grid wrap">
               <div className="unit whole" style={{ marginBottom: '42px' }}>
-                <Divider text="FRIDAY, AUGUST 11" />
+                <Divider text={timesheet.user_activities[0]?timesheet.user_activities[0].TS_DATE:null} />
               </div>
             </div>
 
@@ -281,9 +290,7 @@ class Timesheet extends Component {
               </div>
             </div>
 
-          </TabPanel>
-
-          <TabPanel>
+       
             <div className="grid wrap">
               <div className="unit whole" style={{ marginBottom: '42px' }}>
                 <Divider text="SATURDAY, AUGUST 12" />
@@ -297,13 +304,6 @@ class Timesheet extends Component {
                 <img src={require('../img/day-off.png')} style={{ margin: '0 auto', display: 'block' }} />
               </div>
             </div>
-
-          </TabPanel>
-
-
-
-
-        </Tabs>
       </div>
 
     );

@@ -648,7 +648,6 @@ export function getTaskView(id) {
 }
 
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
-   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
@@ -666,7 +665,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       (res)=>{
         console.log("ADDTIMESHEET");
         alert('successful')
-        store.dispatch(viewTimesheet(currentDate));
+      
 
       }
     )
@@ -690,8 +689,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 
 
-export function confirmationTimesheet(ts_id,confirm) {
-   const currentDate = moment().format("YYYY-MM-DD");
+export function confirmationTimesheet(ts_id,confirm) {   
   return function(dispatch){
     return axios({
       method:'POST',

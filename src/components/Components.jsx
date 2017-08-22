@@ -9,7 +9,9 @@ import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import DatePicker from 'react-datepicker';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
+import DayPicker from 'react-day-picker';
+
 
 export const required = value => value ? undefined : 'Required'
 
@@ -1248,12 +1250,9 @@ export class datepickerTimesheet extends Component {
          >
           {this.props.children}
           </DatePicker>
-
-
-
-
       </div>
 
       )
     }
   }
+ 
