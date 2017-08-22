@@ -608,7 +608,7 @@ export function addTaskWorkplan(id,data) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/tasktest/createTask/`,
+      url:`${baseURL}/dev/task/createTask/?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
@@ -633,7 +633,7 @@ export function getTaskView(id) {
   return function(dispatch){
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/tasktest/createTask_view/${id}`,
+      url:`${baseURL}/dev/task/createTask_view/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
     }).then(
@@ -737,11 +737,27 @@ export function getMyAssignment(){
   }
 }
 
+// export function getWorkplanView(id){
+//   return function(dispatch){
+//     return axios({
+//       method:'GET',
+//       url:`${baseURL}/dev/tasktest/workplan_view/${id}`,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//     }).then(
+//       (res)=>{
+//         store.dispatch({ type: 'API', name: 'myAssignment',  data: res });
+//         return res
+//       }
+//     )
+//   }
+// }
+
+
 export function getWorkplanView(id){
   return function(dispatch){
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/tasktest/workplan_view/${id}`,
+      url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
