@@ -271,7 +271,7 @@ export const getBusinessUnitDetail = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/buDetail`,
+            url: `${baseURL}/dev/home/buDetail?token=${token}`,
             data: {
               bu_code: id,
             },

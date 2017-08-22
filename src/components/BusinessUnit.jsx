@@ -13,7 +13,7 @@ import store from '../reducers/combineReducers.jsx';
 class BusinessUnit extends Component {
   componentWillMount(){
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     store.dispatch(getBusinessUnitDetail(id))
   }
 
@@ -22,11 +22,11 @@ class BusinessUnit extends Component {
   }
   render() {
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     // const id = state.data.page.business_unit.bu_code
     
       // var projects = state.data.projects ? state.data.projects : null
-    var project = state.auth.project;
+    var project = state.data.project;
     if(!project){
       return <PageLoader></PageLoader>
     }
@@ -37,7 +37,7 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={project.BU_NAME}
+            text={project[0].BU_NAME}
             btnLeftClick={
               e => {
                 browserHistory.goBack('/')
