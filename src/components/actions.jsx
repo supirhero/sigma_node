@@ -209,9 +209,8 @@ export const addIssue = (data, id ) => {
 
           }).then(
             res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              dispatch(getIssue(id))
               console.log(res.data);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
             },
           )
   }
@@ -296,7 +295,7 @@ export const getIWOEditProject = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
           }).then(
             res => {
               store.dispatch({type:'API', name: 'project', data: res, append:true})
@@ -316,7 +315,7 @@ export const getIWO = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -362,7 +361,7 @@ export const editProject = (data) => {
               VISIBILITY:data.VISIBILITY,
               START:data.START,
               END:data.END
-              
+
             }
           }).then(
             res => {

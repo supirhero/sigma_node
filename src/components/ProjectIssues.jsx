@@ -43,7 +43,7 @@ class ProjectIssues extends Component {
       }
       return(<medium style={{ textAlign: 'right'}} className={className}>{text}</medium>)
     }
-    
+
 
     const state = store.getState()
     const projectIssueList = state.data.project_issue_list;
@@ -96,20 +96,20 @@ class ProjectIssues extends Component {
 
                     </Field>
                   </div>
-                  
+
                 <div className="unit golden-large">
                   <h2 className="input-desc" style={{marginTop:'25px'}}>EVIDENCE</h2>
                 </div>
                 <div className="unit golden-large">
-                
+
                   <Field
                   inputName="EVIDENCE"
                   name="file_upload"
                   type='file'
-                  component = {ReduxDrop}                  
+                  component = {ReduxDrop}
                 />
                 </div>
-                 
+
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
                       <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
@@ -146,7 +146,8 @@ class ProjectIssues extends Component {
             </div>
             <div className="grid">
               <div className="unit whole">
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</small>
+                <small>{value.note}</small>
+                {/* <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</small> */}
               </div>
             </div>
             <div className="grid">
@@ -155,7 +156,7 @@ class ProjectIssues extends Component {
               </div>
               <div className="unit half">
                 <medium style={{ textAlign: 'right' }}>{status(value.status)}</medium>
-      
+
               </div>
             </div>
           </div>
@@ -163,7 +164,7 @@ class ProjectIssues extends Component {
       </div>
     )
   }):
- 
+
   <div className='grid padding-left'>
   <div className='unit whole'>
     <PageLoader></PageLoader>

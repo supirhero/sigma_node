@@ -12,10 +12,26 @@ import {myPerformance,pop} from './actions.jsx'
 
 
 class MyPerformances extends Component {
-
+    constructor(){
+      super();
+      this.state = {
+        month : 0,
+        year: 0
+      };
+    }
     componentWillMount(){
       store.dispatch(myPerformance("8","2017"))
     }
+
+    handleMonthChange (e) {
+      this.setState({month: e.target.value});
+      console.log(e.target.value);
+     }
+     handleYearChange (e) {
+       this.setState({year: e.target.value});
+       console.log(e.target.value);
+      }
+
 
     render(){
       const month= [
@@ -32,7 +48,7 @@ class MyPerformances extends Component {
         {name:'NOVEMBER',number:'11'},
         {name:'DEECMBER',number:'12'},
       ]
-    
+
       const year = [
         {year:'2017'},
         {year:'2016'},
@@ -65,7 +81,7 @@ class MyPerformances extends Component {
        const state = store.getState();
        const myperformance = state.data;
 
-       
+
        return(
         !myperformance ? <PageLoader/>:
         <div>
@@ -91,27 +107,30 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select
-                          style={{width:'48%', display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : 'JUN'},
-                              {title : 'JUL'}
-                            ]
-                           }}
-                        />
-                        <Select
+                        <select onChange={this.handleMonthChange.bind(this)}
+                          className='select' style={{height:'49px', width:'48%', display:'inline-block'}}>
+                          {
+                            month.map((value,index) => {
+                            return(
+                              <option key={index} value={value.number}>{value.name}</option>
+
+                            )
+                          })}
+                        </select>
+                        <input placeholder='ex. 2017' onChange={this.handleYearChange.bind(this)} style={{width:'48%', display:'inline-block', float:'right'}}></input>
+{/*
+                        <Input
+                          onChange={this.handleYearChange.bind(this)}
                           style={{width:'48%', display:'inline-block', float:'right'}}
-                          items={{
-                            items : [
-                              {title : '2017'},
-                              {title : '2016'}
-                            ]
-                           }}
-                          />
+
+                          /> */}
                       </div>
                       <div className='unit one-fifth'>
-                        <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
+                        <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
+                          store.dispatch(myPerformance(this.state.month,this.state.year))
+
+                          e.preventDefault()
+                        }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
 
                       </div>
                     </div>
@@ -125,7 +144,7 @@ class MyPerformances extends Component {
                   title='Utilization'
                   status={myperformance.status_utilization}
                 />
-                  
+
                   </div>
                   <div className='unit one-third'>
                   <Meter
@@ -171,7 +190,7 @@ class MyPerformances extends Component {
                   </div>
                 </div>
                 <div className='grid'>
-                  <div className='unit whole'>                 
+                  <div className='unit whole'>
                     <BarChart
                       data={[
                         {name: 'Jan', value: 20},

@@ -261,13 +261,8 @@ export class Select extends Component {
       <div style={this.props.style}>
         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select className='select'>
-          {this.props.items.items.map((value,index) => {
-            return(
-              <option key={index} value={value.title}>{value.title}</option>
-
-            )
-          })}
+        <select onChange={this.props.onChange} className='select' style={{height: '49px'}}>
+          {this.props.children}
         </select>
 
       </div>
