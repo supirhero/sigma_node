@@ -32,6 +32,7 @@
     "react-contextmenu": "^2.6.3",
     "react-data-components": "^1.1.0",
     "react-datepicker": "^0.53.0",
+    "react-day-picker": "^6.1.0",
     "react-dom": "^15.6.1",
     "react-dropzone": "^4.0.1",
     "react-file-input": "^0.2.5",

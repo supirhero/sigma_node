@@ -32,7 +32,6 @@ class BusinessUnit extends Component {
     }
     return (
       <div>
-
         <div className='grid wrap'>
           <div className='unit whole'>
             <Divider
@@ -62,7 +61,7 @@ class BusinessUnit extends Component {
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"orange"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"yellow"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"30px"}}>
-
+            
             </div>
             </div>
           </div>

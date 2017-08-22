@@ -120,7 +120,7 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit one-third'>
                   <Meter
-                  progress={myperformance ? myperformance.utilization  : '-'}
+                  progress={myperformance ? myperformance.utilization * 0.01 : '-'}
                   text={myperformance ? Math.floor(myperformance.utilization) : '-'}
                   title='Utilization'
                   status={myperformance.status_utilization}
@@ -129,7 +129,7 @@ class MyPerformances extends Component {
                   </div>
                   <div className='unit one-third'>
                   <Meter
-                  progress={myperformance ? myperformance.entry  : '-'}
+                  progress={myperformance ? myperformance.entry * 0.01 : '-'}
                   text={myperformance ? Math.floor(myperformance.entry) : '-'}
                   title='Entry'
                   status={myperformance.status}
