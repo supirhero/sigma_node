@@ -144,7 +144,7 @@ class ProjectWorkplan extends Component {
     gridType: 'tree',
     dragAndDrop: true,
     store,
-    data,
+    data: data,
     columns: [
         {
             name: 'Name',

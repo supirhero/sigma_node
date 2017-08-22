@@ -436,7 +436,7 @@ class NewProject extends Component {
 
                 </div>
               </div>
-              {/* <div className='grid wrap narrow'>
+              <div className='grid wrap narrow'>
                 <div className='unit half'>
                   <Field
                     inputName='START DATE'
@@ -467,7 +467,7 @@ class NewProject extends Component {
                   </Field>
 
                 </div>
-              </div> */}
+              </div>
               {/* <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <h1 className='input-name'>VISIBILITY</h1>
