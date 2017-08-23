@@ -289,8 +289,8 @@ class Timesheet extends Component {
 
               </div>
             </div>
-
-       
+     
+        {/*       
             <div className="grid wrap">
               <div className="unit whole" style={{ marginBottom: '42px' }}>
                 <Divider text="SATURDAY, AUGUST 12" />
@@ -304,6 +304,7 @@ class Timesheet extends Component {
                 <img src={require('../img/day-off.png')} style={{ margin: '0 auto', display: 'block' }} />
               </div>
             </div>
+          */}
       </div>
 
     );

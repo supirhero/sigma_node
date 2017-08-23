@@ -648,6 +648,7 @@ export function getTaskView(id) {
 }
 
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
+  const currentDate = moment().format("YYYY-MM-DD"); 
   return function(dispatch){
     return axios({
       method:'POST',
@@ -665,6 +666,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       (res)=>{
         console.log("ADDTIMESHEET");
         alert('successful')
+        store.dispatch(viewTimesheet(TS_DATE)); 
       
 
       }
