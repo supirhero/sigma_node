@@ -491,7 +491,7 @@ export const getSCurve = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/s_curve?token=${token}` ,
+            url: `${baseURL}/dev/project/s_curve/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -537,7 +537,7 @@ export const getAccountManager = (am_id) => {
 
 
 export function viewTimesheet(date) {
-  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+  // store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
   return function (dispatch) {
     return axios({
       method: 'POST',
