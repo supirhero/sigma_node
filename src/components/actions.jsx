@@ -486,6 +486,7 @@ export const getCPI = (id) => {
 
 export const getSCurve = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // store.dispatch({type:'API', data: null, append:true})
 
   return function (dispatch) {
     return axios({
@@ -498,7 +499,7 @@ export const getSCurve = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'project', data: res, append:true})
+              store.dispatch({type:'API', name: 'project', data: res})
 
             },
           )
@@ -720,7 +721,7 @@ export function myPerformance(bulan,tahun){
       data: {bulan,tahun}
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'myPerformance',  data: res });
+        dispatch({ type: 'API', name: 'myPerformance',  data: res });
       }
     )
   }

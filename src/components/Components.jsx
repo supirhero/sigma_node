@@ -346,21 +346,25 @@ export class Meter extends Component {
   render(){
     return(
       <div className='circle-container'>
-        <Circle
-          progress={this.props.progress}
-          initialAnimate={true}
-          text= {this.props.text}
-          options={{
-            strokeWidth: 12,
-            color: '#F48165',
-            trailWidth: 12,
-            fontSize: 30,
-            easing: 'easeInOut',
-            duration: 700,
-          }}
-          containerClassName={'circle-bar'}
-          >
-          </Circle>
+        <div className='meter-container'>
+          <small>{this.props.text}</small>
+
+          <Circle
+            progress={this.props.progress > 100 ? 100 : this.props.progress}
+            // initialAnimate={true}
+            // text= {this.props.text}
+            options={{
+              strokeWidth: 12,
+              color: '#F48165',
+              trailWidth: 12,
+              fontSize: 30,
+              easing: 'easeInOut',
+              duration: 700,
+            }}
+            containerClassName={'circle-bar'}
+            >
+            </Circle>
+        </div>
           <div className='circle-desc'>
             <medium>{this.props.title}</medium>
             <small className='status'>{this.props.status}</small>
@@ -1250,4 +1254,3 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
- 

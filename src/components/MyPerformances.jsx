@@ -26,10 +26,14 @@ class MyPerformances extends Component {
     handleMonthChange (e) {
       this.setState({month: e.target.value});
       console.log(e.target.value);
+      e.preventDefault()
+
      }
      handleYearChange (e) {
        this.setState({year: e.target.value});
        console.log(e.target.value);
+       e.preventDefault()
+
       }
 
 
@@ -78,7 +82,7 @@ class MyPerformances extends Component {
        const completeProgress = 100;
        const underProgress = 80;
 
-       const state = store.getState();
+       const state = this.props.state;
        const myperformance = state.data;
 
 
@@ -103,6 +107,7 @@ class MyPerformances extends Component {
                   <div className='unit golden-small'>
                     <large>Timesheet</large>
 
+
                   </div>
                   <div className='unit golden-large'>
                     <div className='grid'>
@@ -118,7 +123,7 @@ class MyPerformances extends Component {
                           })}
                         </select>
                         <input placeholder='ex. 2017' onChange={this.handleYearChange.bind(this)} style={{width:'48%', display:'inline-block', float:'right'}}></input>
-{/*
+                        {/*
                         <Input
                           onChange={this.handleYearChange.bind(this)}
                           style={{width:'48%', display:'inline-block', float:'right'}}
@@ -127,7 +132,9 @@ class MyPerformances extends Component {
                       </div>
                       <div className='unit one-fifth'>
                         <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
+                          console.log(this.state.month,this.state.year);
                           store.dispatch(myPerformance(this.state.month,this.state.year))
+                          // store.dispatch(myPerformance('1','2017'))
 
                           e.preventDefault()
                         }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -274,6 +281,7 @@ class MyPerformances extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   }
 }
