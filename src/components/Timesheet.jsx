@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import DatePicker from 'react-datepicker';
@@ -138,6 +138,7 @@ class Timesheet extends Component {
                         inputName="DATE"
                         name="TS_DATE"
                         component={datepickerTimesheet}
+                        validate={[required]}
                       />
                     </div>
                   </div>
@@ -155,13 +156,15 @@ class Timesheet extends Component {
                             // e.preventDefault()
                           }
                         }
-                        component={ReduxSelectNew}>
+                        component={ReduxSelectNew}
+                        validate={[required]}>
                         {
                               timesheet.user_project.map((value,index)=>{
                                 return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
                               }
                             )
                         }
+                        
 
                         </Field>
                     </div>
@@ -174,7 +177,8 @@ class Timesheet extends Component {
                                         name="WP_ID"
                                         // type="WP_ID"
                                           inputName="TASK"
-                                          component={ReduxSelectNew}>
+                                          component={ReduxSelectNew}
+                                          validate={[required]}>
                                               {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
@@ -195,6 +199,7 @@ class Timesheet extends Component {
                         name="HOUR"
                         type="HOUR"
                         component={ReduxInput}
+                        validate={[required]}
                       />
                     </div>
                   </div>
@@ -205,6 +210,7 @@ class Timesheet extends Component {
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
                         component={ReduxInput}
+                        validate={[required]}
                       />
                     </div>
                   </div>
@@ -215,6 +221,7 @@ class Timesheet extends Component {
                           name="TS_MESSAGE"
                           // type="TS_MESSAGE"
                           component={ReduxInput}
+                          validate={[required]}
                         />
                     </div>
                   </div>
@@ -314,8 +321,8 @@ class Timesheet extends Component {
 
 function mapStateToProps(state) {
   return {
+    
     formValues: state.form.AddNewTimesheet,
-
     state,
     // filter: ownProps.location.query.filter
   };
