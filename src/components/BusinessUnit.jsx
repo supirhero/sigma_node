@@ -13,7 +13,7 @@ import store from '../reducers/combineReducers.jsx';
 class BusinessUnit extends Component {
   componentWillMount(){
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     store.dispatch(getBusinessUnitDetail(id))
   }
 
@@ -22,22 +22,21 @@ class BusinessUnit extends Component {
   }
   render() {
     var state = store.getState();
-    const id = state.auth.project.bu_code
+    const id = state.page.business_unit.bu_code
     // const id = state.data.page.business_unit.bu_code
     
       // var projects = state.data.projects ? state.data.projects : null
-    var project = state.auth.project;
+    var project = state.data.project;
     if(!project){
       return <PageLoader></PageLoader>
     }
     return (
       <div>
-
         <div className='grid wrap'>
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={project.BU_NAME}
+            text={project[0].BU_NAME}
             btnLeftClick={
               e => {
                 browserHistory.goBack('/')
@@ -62,7 +61,7 @@ class BusinessUnit extends Component {
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"orange"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"-5px",backgroundColor:"yellow"}}></div>
             <div className="person-image" style={{margin:"0 auto",marginLeft:"30px"}}>
-
+            
             </div>
             </div>
           </div>

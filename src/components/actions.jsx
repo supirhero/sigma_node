@@ -2,13 +2,15 @@ import store from '../reducers/combineReducers.jsx'
 import { Link, browserHistory } from 'react-router'
 import { push, replace } from 'react-router-redux'
 import moment from 'moment';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
-const token = store.getState().auth ? store.getState().auth.token : null
-
+// const token = store.getState().auth ? store.getState().auth.token : null
+const token = cookies.get('token')
 export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
@@ -25,6 +27,8 @@ export function login(email, password) {
           }).then(
             res => {
               // browserHistory.replace('/')
+              console.log("TOKEN", res);
+              cookies.set('token', res.data.token, { path: '/' });
               store.dispatch({type:'LOGIN_DATA', data: res})
               if (store.getState().auth.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
@@ -91,6 +95,7 @@ export function changeRoute(params) {
 }
 
 export function logout() {
+  cookies.remove('token')
   return {
     type: 'LOGOUT'
   }
@@ -270,7 +275,7 @@ export const getBusinessUnitDetail = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/buDetail`,
+            url: `${baseURL}/dev/home/buDetail?token=${token}`,
             data: {
               bu_code: id,
             },
@@ -485,7 +490,7 @@ export const getSCurve = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/projecttest/s_curve/` ,
+            url: `${baseURL}/dev/project/s_curve/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -531,11 +536,11 @@ export const getAccountManager = (am_id) => {
 
 
 export function viewTimesheet(date) {
-  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+  // store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheettest/view`,
+      url: `${baseURL}/dev/timesheet/view?token=${token}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -647,7 +652,7 @@ export function getTaskView(id) {
 }
 
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
-   const currentDate = moment().format("YYYY-MM-DD");
+  const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
@@ -665,7 +670,8 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       (res)=>{
         console.log("ADDTIMESHEET");
         alert('successful')
-        store.dispatch(viewTimesheet(currentDate));
+        store.dispatch(viewTimesheet(TS_DATE));
+
 
       }
     )
@@ -690,7 +696,6 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 
 export function confirmationTimesheet(ts_id,confirm) {
-   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     return axios({
       method:'POST',
