@@ -32,7 +32,7 @@ class DashboardHome extends Component {
                   </div>
                   <div className='unit three-fifths'>
                     <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>
-                    <small>{auth.userdata.profile_name}, {auth.userdata.position}</small>
+                    <small>{auth.userdata.profile_name}</small>
                     <ul>
                       <li>
                         <span className='icon-speedometer'>&nbsp;&nbsp;</span>
@@ -212,7 +212,7 @@ class DashboardHome extends Component {
                                 }
                               }>
                                 <div className='unit two-fifths'>
-                                  <medium className='project-name'>
+                                  <medium className='project-name list-pointer'>
                                     {value.project_name}
                                   </medium>
                                 </div>

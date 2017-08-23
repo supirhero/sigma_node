@@ -9,8 +9,12 @@
       li {
         margin-top: 22px;
         small.active {
-          color: $color-secondary;
+          color: $color-secondary;        
         }
+        small:hover{
+          cursor: pointer;
+        }
+      
       }
     }
   }
