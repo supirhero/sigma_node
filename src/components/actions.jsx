@@ -258,6 +258,7 @@ export const addNewProject = (data) => {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              dispatch(goBack())
               console.log("RES",res.data);
               // store.dispatch({type:'API', name: 'project', data: res, append:true})
             },

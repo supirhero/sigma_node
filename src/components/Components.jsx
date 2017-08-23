@@ -13,7 +13,7 @@ import Dropzone from 'react-dropzone';
 import DayPicker from 'react-day-picker';
 
 
-export const required = value => value ? undefined : 'Required'
+export const required = value => value || value != '' ? undefined : 'Required'
 
 export const validate = () => {
   const required = value => value ? undefined : 'Required'
@@ -1255,4 +1255,3 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
- 
