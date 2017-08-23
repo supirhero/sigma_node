@@ -2,13 +2,15 @@ import store from '../reducers/combineReducers.jsx'
 import { Link, browserHistory } from 'react-router'
 import { push, replace } from 'react-router-redux'
 import moment from 'moment';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
-const token = store.getState().auth ? store.getState().auth.token : null
-
+// const token = store.getState().auth ? store.getState().auth.token : null
+const token = cookies.get('token')
 export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
@@ -25,6 +27,8 @@ export function login(email, password) {
           }).then(
             res => {
               // browserHistory.replace('/')
+              console.log("TOKEN", res);
+              cookies.set('token', res.data.token, { path: '/' });
               store.dispatch({type:'LOGIN_DATA', data: res})
               if (store.getState().auth.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
@@ -91,6 +95,7 @@ export function changeRoute(params) {
 }
 
 export function logout() {
+  cookies.remove('token')
   return {
     type: 'LOGOUT'
   }
@@ -296,7 +301,7 @@ export const getIWOEditProject = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
           }).then(
             res => {
               store.dispatch({type:'API', name: 'project', data: res, append:true})
@@ -316,7 +321,7 @@ export const getIWO = (offset) => {
             method: 'GET',
             url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            
+
 
           }).then(
             res => {
@@ -362,7 +367,7 @@ export const editProject = (data) => {
               VISIBILITY:data.VISIBILITY,
               START:data.START,
               END:data.END
-              
+
             }
           }).then(
             res => {
@@ -536,7 +541,7 @@ export function viewTimesheet(date) {
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheettest/view`,
+      url: `${baseURL}/dev/timesheet/view?token=${token}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -665,7 +670,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       (res)=>{
         console.log("ADDTIMESHEET");
         alert('successful')
-      
+
 
       }
     )
@@ -689,7 +694,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 
 
-export function confirmationTimesheet(ts_id,confirm) {   
+export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     return axios({
       method:'POST',
