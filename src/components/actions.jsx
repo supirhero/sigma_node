@@ -336,53 +336,54 @@ export const getIWO = (offset) => {
 }
 
 
-export const editProject = (data) => {
-  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+export const editProject = (data, id) => 
+// store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
-  return function (dispatch) {
-    return axios({
-            method: 'POST',
-            url: `${baseURL}/dev/projecttest/editProject_action` ,
-            data: {
-              ACTUAL_COST:data.ACTUAL_COST,
-              AMOUNT:data.AMOUNT,
-              AM_ID:data.AM_ID,
-              BU:'TMS',
-              COGS:data.COGS,
-              CUST_ID:data.CUST_ID,
-              DESC:data.DESC,
-              END_CUST_ID:data.END_CUST_ID,
-              // H/O:"yes",
-              IWO_NO:data.IWO_NO,
-              MARGIN:data.MARGIN,
-              OVERHEAD:data.OVERHEAD,
-              PM:data.PM,
-              PRODUCT_TYPE:data.PRODUCT_TYPE,
-              PROJECT_NAME:data.PROJECT_NAME,
-              PROJECT_STATUS:data.PROJECT_STATUS,
-              PROJECT_TYPE_ID:data.PROJECT_TYPE_ID,
-              RELATED:data.RELATED,
-              TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
-              TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
-              VISIBILITY:data.VISIBILITY,
-              START:data.START,
-              END:data.END
+ function (dispatch) {
+  return axios({
+          method: 'POST',
+          url: `${baseURL}/dev/projecttest/editProject_action` ,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          data: {
+            PROJECT_ID:id,
+            ACTUAL_COST:data.ACTUAL_COST,
+            AMOUNT:data.AMOUNT,
+            AM_ID:data.AM_ID,
+            BU:'TMS',
+            COGS:data.COGS,
+            CUST_ID:data.CUST_ID,
+            DESC:data.DESC,
+            END_CUST_ID:data.END_CUST_ID,
+            // H/O:"yes",
+            IWO_NO:data.IWO_NO,
+            MARGIN:data.MARGIN,
+            OVERHEAD:data.OVERHEAD,
+            PM:data.PM,
+            PRODUCT_TYPE:data.PRODUCT_TYPE,
+            PROJECT_NAME:data.PROJECT_NAME,
+            PROJECT_STATUS:data.PROJECT_STATUS,
+            PROJECT_TYPE_ID:data.PROJECT_TYPE_ID,
+            RELATED:data.RELATED,
+            TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
+            TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
+            VISIBILITY:data.VISIBILITY,
+            START:data.START,
+            END:data.END
 
-            }
-          }).then(
-            res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log("RES",res.data);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-            req => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log("REQ",req);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-          )
-  }
-}
+          }
+        }).then(
+          res => {
+            // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+            console.log("RES",res.data);
+            // store.dispatch({type:'API', name: 'project', data: res, append:true})
+          },
+          req => {
+            // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+            console.log("REQ",req);
+            // store.dispatch({type:'API', name: 'project', data: res, append:true})
+          },
+        )
+};
 
 export const getEditProjectView = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
