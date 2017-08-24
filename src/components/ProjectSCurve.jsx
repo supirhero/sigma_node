@@ -14,10 +14,10 @@ class ProjectSCurve extends Component {
   }
     render(){
       const state = store.getState()
-      const s_curve = state.data.s_curve;
-      console.log(s_curve)
+      const s_curve = state.data.s_curve ? state.data.s_curve : null
       
-      const dataSCurve =s_curve.map((value,index)=>{
+      
+      const dataSCurve = s_curve.map((value,index)=>{
         return {name:value.Week,Target:value.pv_percent, Actual:value.ev_percent}
       })
 

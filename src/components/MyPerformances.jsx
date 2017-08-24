@@ -49,7 +49,7 @@ class MyPerformances extends Component {
         {name:'NOVEMBER',number:'11'},
         {name:'DEECMBER',number:'12'},
       ]
-      const data = state.data
+      const data = state.data ? state.data : null
       const allentry =data.allentry.map((value,index)=>{
         return {name:value.label,value:parseFloat(value.value)}
       })
@@ -88,11 +88,12 @@ class MyPerformances extends Component {
        const underProgress = 80;
 
 
-       const myperformance = state.data;
+       const myperformance = state.data ? state.data : null;
 
 
        return(
-        !myperformance && !data ? <PageLoader/>:
+        !myperformance || !data ? <PageLoader />:
+        
         <div>
           <div className='grid wrap'>
             <div className='unit whole'>

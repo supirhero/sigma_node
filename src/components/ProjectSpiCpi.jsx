@@ -13,8 +13,8 @@ class ProjectSpiCpi extends Component {
   componentWillMount(){
     const state = store.getState()
     const id = store.getState().page.id
-    const spi = state.data.spi
-    const cpi = state.data.cpi
+    const spi = state.data.spi ? state.data.spi : null
+    const cpi = state.data.cpi ? state.data.cpi : null
     store.dispatch(getSPI(6992115))
     store.dispatch(getCPI(6992115))
   }
@@ -22,8 +22,8 @@ class ProjectSpiCpi extends Component {
   
   render() {
     const state = store.getState()
-    const spi = state.data.spi
-    const cpi = state.data.cpi
+    const spi = state.data.spi ? state.data.spi : null
+    const cpi = state.data.cpi ? state.data.cpi : null
     const dataSPI = spi.map((value,index)=>{
       return {name:value.Week , value:parseFloat(value.SPI)}
     })
