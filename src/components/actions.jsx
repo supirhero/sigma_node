@@ -788,3 +788,20 @@ export function getMyActivities(){
     )
   }
 }
+
+
+export function getListBU(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/report/r_list_bu?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+
+

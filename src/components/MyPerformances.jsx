@@ -7,10 +7,6 @@ import store from '../reducers/combineReducers.jsx'
 import {Divider, Input,Select,Meter, BarChart,PageLoader} from './Components.jsx'
 import {myPerformance,pop} from './actions.jsx'
 
-
-
-
-
 class MyPerformances extends Component {
     constructor(){
       super();
@@ -38,6 +34,7 @@ class MyPerformances extends Component {
 
 
     render(){
+      const state = store.getState()
       const month= [
         {name:'JANUARY',number:'1'},
         {name:'FEBRUARY',number:'2'},
@@ -52,6 +49,14 @@ class MyPerformances extends Component {
         {name:'NOVEMBER',number:'11'},
         {name:'DEECMBER',number:'12'},
       ]
+      const data = state.data
+      const allentry =data.allentry.map((value,index)=>{
+        return {name:value.label,value:parseFloat(value.value)}
+      })
+      
+      const allhour = data.allhour.map((value,index)=>{
+        return {name:value.label,value:parseFloat(value.value)}
+      })
 
       const year = [
         {year:'2017'},
@@ -78,16 +83,16 @@ class MyPerformances extends Component {
           return "OVER"
         }
        }
-
+       
        const completeProgress = 100;
        const underProgress = 80;
 
-       const state = this.props.state;
+
        const myperformance = state.data;
 
 
        return(
-        !myperformance ? <PageLoader/>:
+        !myperformance && !data ? <PageLoader/>:
         <div>
           <div className='grid wrap'>
             <div className='unit whole'>
@@ -199,20 +204,7 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit whole'>
                     <BarChart
-                      data={[
-                        {name: 'Jan', value: 20},
-                        {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 5},
-                        {name: 'Apr', value: 3},
-                        {name: 'May', value: 6},
-                        {name: 'Jun', value: 8},
-                        {name: 'Jul', value: 7},
-                        {name: 'Aug', value: 9},
-                        {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 300},
-                        {name: 'Nov', value: 54},
-                        {name: 'Des', value: 1}
-                      ]}/>
+                      data={allentry}/>
 
                   </div>
                 </div>
@@ -250,20 +242,7 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit whole'>
                     <BarChart
-                      data={[
-                        {name: 'Jan', value: 20},
-                        {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 5},
-                        {name: 'Apr', value: 3},
-                        {name: 'May', value: 6},
-                        {name: 'Jun', value: 8},
-                        {name: 'Jul', value: 7},
-                        {name: 'Aug', value: 9},
-                        {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 300},
-                        {name: 'Nov', value: 54},
-                        {name: 'Des', value: 1}
-                      ]}/>
+                      data={allhour}/>
 
                   </div>
                 </div>

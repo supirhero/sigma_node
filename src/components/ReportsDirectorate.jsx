@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
-import { deleteAuthentication } from './actions.jsx';
+import { deleteAuthentication ,getListBU} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx';
 
+
 class ReportsDirectorate extends Component {
+  componentWillMount(){
+    store.dispatch(getListBU())
+  }
+  
   render() {
     return (
 			<div>

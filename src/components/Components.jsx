@@ -457,7 +457,7 @@ export class BarChart extends Component {
         <large style={this.props.labelStyle}>{this.props.label}</large>
         <ResponsiveContainer width='100%' height={250}>
           <ChartBar width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" interval="preserveStart" />
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />

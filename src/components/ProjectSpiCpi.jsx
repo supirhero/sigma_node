@@ -20,7 +20,6 @@ class ProjectSpiCpi extends Component {
   }
   
   
-
   render() {
     const state = store.getState()
     const spi = state.data.spi
@@ -56,8 +55,7 @@ class ProjectSpiCpi extends Component {
 
    
 
-    return (
-      
+    return (  
       !spi && !cpi ? <PageLoader /> :
       <div className="project-DocsFiles">
         <div className="grid padding-left">
@@ -67,8 +65,8 @@ class ProjectSpiCpi extends Component {
         </div>
         <Tabs>
           <TabList>
-            <Tab style={{ listStyle: 'none', display: 'inline-block' }}><Header text="SPI" /></Tab>
-            <Tab style={{ listStyle: 'none', display: 'inline-block', marginLeft: '50px' }}><Header text="CPI" /></Tab>
+            <Tab style={{ listStyle: 'none', display: 'inline-block' }}><Header text="SPI" className="list-pointer" /></Tab>
+            <Tab style={{ listStyle: 'none', display: 'inline-block', marginLeft: '50px' }}><Header text="CPI" className="list-pointer" /></Tab>
           </TabList>
           <div className="grid padding-left">
             <div className="unit whole">
