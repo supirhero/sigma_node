@@ -68,6 +68,18 @@ input.error {
 }
 .circle-container{
   position: relative;
+  .meter-container {
+    position: relative;
+    display: inline-block;
+    small {
+      position: absolute;
+      top: 49px;
+      left: 10px;
+      width: 39px;
+      text-align: center;
+      font-size: 16px;
+    }
+  }
   .circle-bar{
     display: inline-block;
     height: 58px;
