@@ -37,6 +37,7 @@
     "react-dropzone": "^4.0.1",
     "react-file-input": "^0.2.5",
     "react-menu": "0.0.10",
+    "react-password-mask": "^2.4.6",
     "react-progressbar.js": "^0.2.0",
     "react-redux": "^5.0.5",
     "react-redux-grid": "^5.4.1",

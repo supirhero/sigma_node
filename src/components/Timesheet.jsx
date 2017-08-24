@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import DatePicker from 'react-datepicker';
@@ -148,7 +148,6 @@ class Timesheet extends Component {
                         inputName="PROJECT NAME"
                         name="PROJECT_ID"
                         onChange={
-
                           (e, value)=>{
                             store.dispatch(taskList(value))
 
@@ -227,7 +226,12 @@ class Timesheet extends Component {
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
-                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                      e => {
+                        browserHistory.push('/')
+                        e.preventDefault()
+                      }
+                    }> CANCEL </button>
                       <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
                     </div>
                   </div>
@@ -318,6 +322,7 @@ class Timesheet extends Component {
   }
 
 }
+
 
 function mapStateToProps(state) {
   return {

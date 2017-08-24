@@ -11,8 +11,10 @@ import {pop,getSPI,getCPI} from './actions.jsx'
 
 class ProjectSpiCpi extends Component {
   componentWillMount(){
+    const state = store.getState()
     const id = store.getState().page.id
-
+    const spi = state.data.spi
+    const cpi = state.data.cpi
     store.dispatch(getSPI(6992115))
     store.dispatch(getCPI(6992115))
   }
@@ -55,6 +57,7 @@ class ProjectSpiCpi extends Component {
    
 
     return (
+      
       !spi && !cpi ? <PageLoader /> :
       <div className="project-DocsFiles">
         <div className="grid padding-left">

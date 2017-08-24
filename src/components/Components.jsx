@@ -11,10 +11,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import DayPicker from 'react-day-picker';
+import PasswordMask from 'react-password-mask';
 
 
 export const required = value => value ? undefined : 'Required'
-
+export const maxHours = value => Number(value.HOURS) > 24 ? 'Cant be max than 24' : null 
 export const validate = () => {
   const required = value => value ? undefined : 'Required'
 }
@@ -203,6 +204,32 @@ export class ReduxInput extends Component {
   }
 }
 
+
+export class ReduxInputMask extends Component {
+  render(){
+    return(
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <PasswordMask
+            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+            style={{width:'100%'}}
+            placeholder={this.props.placeholder}
+            type='text'
+            buttonStyles = {{display:'none'}}
+            {...this.props.input}
+
+            // {...this.props.field}
+          >
+          </PasswordMask>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        </div>
+    )
+  }
+}
+
+
+
 export class ReduxInputDisabled extends Component {
   render(){
     return(
@@ -287,6 +314,7 @@ export class ReduxSelect extends Component {
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <select className='select' {...this.props.select} {...this.props.custom}
           onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+          placeholder={this.props.placeholder}
         >
           {this.props.children}
         </select>
@@ -1175,7 +1203,7 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
-      this.props.input.onChange(moment(date).format('DD-MMM-YY'))
+      this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 
@@ -1193,7 +1221,7 @@ export class datepickerUniversal extends Component {
             style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
-          dateFormat="DD-MMM-YY"
+          dateFormat="YYYY-MM-DD"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, 'DD-MMM-YY') : null}
           onChange={this.handleChange}

@@ -21,15 +21,15 @@ class Profile extends Component {
                     <medium onClick={
                       e => {
                         browserHistory.replace('/profile')
-
                       }
                     }>Basic Information</medium>
-                    <medium onClick={
+                  {/*          <medium onClick={
                       e => {
                         browserHistory.replace('/profile/change-password')
 
                       }
                     }>Change Password</medium>
+                    */}
                   </div>
 
 

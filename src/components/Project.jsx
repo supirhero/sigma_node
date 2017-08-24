@@ -50,7 +50,7 @@ class Project extends Component {
       {type:'title', name : 'REPORTS'},
       {type:'menu', name : 'SPI & CPI', path: `/project/${id}/spi-and-cpi`},
       {type:'menu', name : 'S-Curve', path: `/project/${id}/s-curve`},
-      {type:'menu', name : 'Gantt Chart', path: `/project/${id}/gantt-chart`},
+      // {type:'menu', name : 'Gantt Chart', path: `/project/${id}/gantt-chart`},
     ]
     return(
       <div className='project'>
