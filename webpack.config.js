@@ -36,7 +36,7 @@ console.log('** Compile mode = ' + process.env.NODE_ENV + " **\n")
 
 module.exports = {
     cache: true,
-    entry: "./src/components/app.jsx",
+    entry: ["./src/components/app.jsx"],
     // output: {
     //     // publicPath: "/dist/",
     //     path: path.resolve(__dirname,  "dist"),

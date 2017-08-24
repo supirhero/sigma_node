@@ -1,5 +1,7 @@
 const express = require('express')
 const path = require('path')
+// require('babel-polyfill');
+
 
 const app = express()
 const port = 8089

@@ -6,7 +6,6 @@ import { Router, Route,IndexRoute, browserHistory, Redirect } from 'react-router
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 
-
 import MainPage from './MainPage.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'

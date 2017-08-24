@@ -18,9 +18,9 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager} from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager, } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, isIWOUsed, ReduxInputAsync} from './Components.jsx'
 
 
 
@@ -32,23 +32,29 @@ class NewProject extends Component {
 
     };
   }
-  handleInitialize(data, iwo) {
+
+  handleInitialize(data) {
     const initData = {
-      "IWO_NO": iwo[0].IWO_NO,
-      "END_CUST_ID": iwo[0].END_CUSTOMER,
-      "AMOUNT": iwo[0].AMOUNT,
-      "PROJECT_NAME": iwo[0].PROJECT_NAME,
-      "RELATED": iwo[0].RELATED_BU,
-      "CUST_ID": iwo[0].CUSTOMER_ID,
-      "MARGIN": iwo[0].MARGIN,
+      "IWO_AVAILABLE": 'true',
+
+      "IWO_NO": null,
+      // "END_CUST_ID": iwo[0].END_CUSTOMER,
+      // "AMOUNT": iwo[0].AMOUNT,
+      // "PROJECT_NAME": iwo[0].PROJECT_NAME,
+      // "RELATED": iwo[0].RELATED_BU,
+      // "CUST_ID": iwo[0].CUSTOMER_ID,
+      // "MARGIN": iwo[0].MARGIN,
       "BU": data.BU_NAME,
-      "PM": 'NONE',
-      "AM_ID": 'NONE',
-      "TYPE_OF_EFFORT": 'NONE',
-      "PROJECT_STATUS": 'NOT STARTED',
-      // "START": '2017-1-1',
-      // "END": '2017-1-1',
-      "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
+      // // "PM": 'NONE',
+      // // "AM_ID": 'NONE',
+      // // "TYPE_OF_EFFORT": 'NONE',
+      // "PROJECT_STATUS": 'NOT STARTED',
+      "H/O": 'yes',
+      "PROJECT_TYPE_ID": 'project',
+      //
+      // // "START": '2017-1-1',
+      // // "END": '2017-1-1',
+      // "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
     };
 
   this.props.initialize(initData);
@@ -62,22 +68,32 @@ class NewProject extends Component {
     const id = this.props.state.page ? this.props.state.page.new_project.bu_code : null
     const iwo = this.props.state.page ? this.props.state.page.new_project.iwo : null
 
-    store.dispatch(getAddProjectView(id)).then(
+    const err = store.dispatch(getAddProjectView(id)).then(
       (res) => {
+        this.handleInitialize(res.data.business_unit);
         console.log("VIEW", res);
         // const data = this.props.state.data.business_unit
-        store.dispatch(getIWO(30)).then((res2)=> {
-          console.log("IWO", res2);
-          this.handleInitialize(res.data.business_unit,res2.data.iwo);
-
-        })
+        // store.dispatch(getIWO(30)).then((res2)=> {
+        //   // this.handleInitialize(res.data.business_unit,res2.data.iwo);
+        //   console.log("IWO", res2);
+        //
+        // })
 
       }
     )
+    store.dispatch(getIWO(30)).then((res2)=> {
+      // this.handleInitialize(res.data.business_unit,res2.data.iwo);
+      console.log("IWO", res2);
+
+    })
+
+    console.log("ERORRRRRRR",err);
+
 
   }
   componentWillUnmount(){
     store.dispatch(pop('new_project'))
+
   }
   onSubmit(props){
     alert("submitted")
@@ -88,8 +104,8 @@ class NewProject extends Component {
       const projectManager = this.props.state.data.project_manager
       // const accountManager = this.props.state.data.project.account_manager_list
       const new_project = this.props.state.data
-      const iwo = new_project.iwo ? new_project.iwo : null
-
+      const iwo = new_project.iwo ? new_project.iwo : false
+      const form_values = this.props.formValues  ? this.props.formValues.values : false
 
 
 
@@ -118,8 +134,10 @@ class NewProject extends Component {
         {value: 'Current Expense'},
         {value: 'Dedutible Expense'},
       ]
+
       return(
-        !iwo && !projectManager ? <PageLoader/> :
+
+        !iwo && !projectManager && !form_values ? <PageLoader/> :
         <div>
 
           <form
@@ -150,52 +168,140 @@ class NewProject extends Component {
               <Divider text='IWO'></Divider>
             </div>
           </div>
+          <div className='grid wrap narrow'>
+
+              <div className='unit whole'>
+                <h2 className='input-name'>IWO AVAILABLE?</h2>
+
+                  <div className='grid'>
+                    <div className='unit one-third'>
+                      <Field name="IWO_AVAILABLE"
+                       component={RadioButtonGroup}>
+                        <RadioButton value='true' label="Yes"/>
+                      </Field>
+                    </div>
+                    <div className='unit two-thirds'>
+                      <Field name="IWO_AVAILABLE" component={RadioButtonGroup} onChange={(e,value)=>{
+                        var fields = [
+                          {
+                            field: 'IWO_NO',
+                            value: ''
+                          },
+                          {
+                            field: 'AMOUNT',
+                            value: ''
+                          },
+                          {
+                            field: 'PROJECT_NAME',
+                            value: ''
+                          },
+                          {
+                            field: 'RELATED',
+                            value: ''
+                          },
+                          {
+                            field: 'CUST_ID',
+                            value: ''
+                          }
+                          ,
+                          {
+                            field: 'MARGIN',
+                            value: ''
+                          },
+                          {
+                            field: 'END_CUST_ID',
+                            value: ''
+                          }
+                        ]
+
+                        fields.map((value, index) => {
+                          this.props.change(
+                            value.field, value.value
+                          )
+
+                        })
+
+                        }}
+                        >
+                        <RadioButton value='false' label="No"/>
+                      </Field>
+                    </div>
+                  </div>
+
+
+              </div>
+            </div>
               <div className= 'grid wrap narrow'>
               <div className='unit whole'>
-                <Field
+
+                {
+                  form_values &&
+                  form_values.IWO_AVAILABLE == 'false'  ?
+
+                  <Field
+                    inputName="IWO NUMBER"
+                    name="IWO_NO"
+                    type='input'
+                    style={{width:'100%'}}
+                    // asyncValidate= {isIWOUsed()}
+                    component={ReduxInputAsync}
+                    validate={[required]}
+
+                    // }}
+                  >
+                </Field>
+                  :
+
+
+                  <Field
                   inputName="IWO NUMBER"
                   name="IWO_NO"
                   component={ReduxSelect}
+                  validate={[required]}
+
                   onChange={(e,value)=> {
                     // store.dispatch(getAccountManager(res2.data))
-                    var iwo_no = this.props.formValues.values.IWO_NO
-                    var i = _.findIndex(iwo, { 'IWO_NO' : value});
-                    var arr =iwo[i]
-                    store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
-                    var fields = [
-                      {
-                        field: 'AMOUNT',
-                        value: arr.AMOUNT
-                      },
-                      {
-                        field: 'PROJECT_NAME',
-                        value: arr.PROJECT_NAME
-                      },
-                      {
-                        field: 'RELATED',
-                        value: arr.RELATED_BU
-                      },
-                      {
-                        field: 'CUST_ID',
-                        value: arr.CUSTOMER_ID
-                      }
-                      ,
-                      {
-                        field: 'MARGIN',
-                        value: arr.MARGIN
-                      },
-                      {
-                        field: 'END_CUST_ID',
-                        value: arr.END_CUSTOMER
-                      }
-                    ]
+                    if (value != '' ) {
+                      var iwo_no = this.props.formValues.values.IWO_NO
+                      var i = _.findIndex(iwo, { 'IWO_NO' : value});
+                      var arr =iwo[i]
+                      store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
+                      var fields = [
+                        {
+                          field: 'AMOUNT',
+                          value: arr.AMOUNT
+                        },
+                        {
+                          field: 'PROJECT_NAME',
+                          value: arr.PROJECT_NAME
+                        },
+                        {
+                          field: 'RELATED',
+                          value: arr.RELATED_BU
+                        },
+                        {
+                          field: 'CUST_ID',
+                          value: arr.CUSTOMER_ID
+                        }
+                        ,
+                        {
+                          field: 'MARGIN',
+                          value: arr.MARGIN
+                        },
+                        {
+                          field: 'END_CUST_ID',
+                          value: arr.END_CUSTOMER
+                        }
+                      ]
 
-                    fields.map((value, index) => {
-                      this.props.change(
-                        value.field, value.value
-                      )
+                      fields.map((value, index) => {
+                        this.props.change(
+                          value.field, value.value
+                        )
 
-                    })
+                      })
+                    }
+
                     // e.preventDefault()
                   }}
                   // onChange={(event, index, value)=>{
@@ -203,6 +309,8 @@ class NewProject extends Component {
                   //   // alert(this.state.iwo_index)
                   // }}
                 >
+                  <option value='' >Select IWO</option>
+
                   {
                     iwo &&
                     iwo.map((value, index) => (
@@ -211,13 +319,15 @@ class NewProject extends Component {
                     ))
                   }
                 </Field>
+              }
 
                 <Field
                   inputName="NAME"
                   name="PROJECT_NAME"
                   type='input'
                   style={{width:'100%'}}
-                  component={ReduxInputDisabled}
+                  component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
+                  validate={[required]}
                 >
 
                 </Field>
@@ -226,14 +336,19 @@ class NewProject extends Component {
                   name="BU"
                   type="BU"
                   style={{width:'100%'}}
+                  // component={form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
                   component={ReduxInputDisabled}
+                  validate={[required]}
+
                 />
                 <Field
                   inputName="RELATED BUSINESS UNIT"
                   name="RELATED"
                   type="RELATED"
                   style={{width:'100%'}}
-                  component={ReduxInputDisabled}
+                  component={form_values && form_values.IWO_AVAILABLE == 'true' ? ReduxInputDisabled : ReduxInput}
+                  validate={required}
+
                 />
 
               </div>
@@ -245,7 +360,9 @@ class NewProject extends Component {
                     name="CUST_ID"
                     type="CUST_ID"
                     style={{width:'88%'}}
-                    component={ReduxInputDisabled}
+                    component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
+                    validate={[required]}
+
                   />
                 </div>
                 <div className='unit two-thirds'>
@@ -254,7 +371,9 @@ class NewProject extends Component {
                     name="END_CUST_ID"
                     type="END_CUST_ID"
                     style={{width:'100%'}}
-                    component={ReduxInputDisabled}
+                    component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
+                    validate={[required]}
+
                   />
                 </div>
               </div>
@@ -265,7 +384,9 @@ class NewProject extends Component {
                     name="AMOUNT"
                     type="AMOUNT"
                     style={{width:'94%'}}
-                    component={ReduxInputDisabled}
+                    component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
+                    validate={[required]}
+
                   />
                 </div>
                 <div className='unit one-third'>
@@ -274,7 +395,9 @@ class NewProject extends Component {
                     name="MARGIN"
                     type="MARGIN"
                     style={{width:'100%'}}
-                    component={ReduxInputDisabled}
+                    component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
+                    validate={[required]}
+
                   />
                 </div>
 
@@ -339,6 +462,8 @@ class NewProject extends Component {
                         style={{width:'96%'}}
                         component={ReduxSelect}
                       >
+                        <option value=''>Select Project Manager</option>
+
                         {
                           projectManager.map((value, index)=> (
                             <option key={index} value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
@@ -355,8 +480,11 @@ class NewProject extends Component {
                         name="TYPE_OF_EFFORT"
                         style={{width:'96%'}}
                         component={ReduxSelect}
+                        validate={[required]}
 
                       >
+                        <option value='' >Select type of effort</option>
+
                         {
                           typeOfEffort.map((value, index)=> (
                             <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
@@ -390,7 +518,9 @@ class NewProject extends Component {
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}>
-                           <option> {store.getState().data.username} </option>
+                        <option value='' >Select Account Manager</option>
+
+                           <option value={this.props.state.data.username != null ? this.props.state.data.username: null }> {this.props.state.data.username } </option>
                        {/*
                           this.props.state.data.AM_ID &&
                           this.props.state.data.AM_ID.map((value, index)=> (
@@ -593,7 +723,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 19px'}} btnText='COMPLETE FORM'>
+                  {/* <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 19px'}} btnText='COMPLETE FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
@@ -786,7 +916,7 @@ class NewProject extends Component {
 
                     </div>
 
-                  </PopUp>
+                  </PopUp> */}
                 </div>
 
 
@@ -828,6 +958,9 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
+        // isIWOUsed,
+        // validate,
+        // asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login
