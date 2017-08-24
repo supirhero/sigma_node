@@ -18,22 +18,33 @@ class ProjectSpiCpi extends Component {
     store.dispatch(getSPI(6992115))
     store.dispatch(getCPI(6992115))
   }
+
+  componentWillUnmount() {
+    store.dispatch(pop());
+  }
   
   
   render() {
     const state = store.getState()
-    const spi = state.data.spi ? state.data.spi : null
-    const cpi = state.data.cpi ? state.data.cpi : null
-    const dataSPI = spi.map((value,index)=>{
+    const spi = state.data.spi ? state.data.spi.map((value,index)=>{
       return {name:value.Week , value:parseFloat(value.SPI)}
-    })
-    const dataCPI = cpi.map((value,index)=>{
+    }) : null
+    
+    const cpi = state.data.cpi ? state.data.cpi.map((value,index)=>{
       return {name:value.Week , value:parseFloat(value.SPI)}
-    })
+    }) : null
+
+    // const dataSPI = spi.map((value,index)=>{
+    //   return {name:value.Week , value:parseFloat(value.SPI)}
+    // })
+    
+    // const dataCPI = cpi.map((value,index)=>{
+    //   return {name:value.Week , value:parseFloat(value.SPI)}
+    // })
 
 
 
-    const tableSPI = spi.map((value,index)=>{
+    const tableSPI = store.getState().data.spi.map((value,index)=>{
       return {column:[
         {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
         {value:value.EV == null ? '0' : value.EV},
@@ -42,7 +53,7 @@ class ProjectSpiCpi extends Component {
       ]}
     })
 
-    const tableCPI = cpi.map((value,index)=>{
+    const tableCPI = store.getState().data.cpi.map((value,index)=>{
       return {column:[
         {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
         {value:value.EV == null ? '0' : value.EV},
@@ -75,7 +86,7 @@ class ProjectSpiCpi extends Component {
                   <div className="grid padding-left">
                     <div className="unit whole">
                       <BarChart fill= "#D2E5FA"
-                        data={dataSPI}
+                        data={spi}
                       />
                     </div>
                     <div className="unit whole">
@@ -98,7 +109,7 @@ class ProjectSpiCpi extends Component {
                     <div className="unit whole">
                       <BarChart
                         fill= "#D2E5FA"
-                        data={dataCPI}
+                        data={cpi}
                       />
                     </div>
 

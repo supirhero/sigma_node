@@ -180,7 +180,7 @@ class Timesheet extends Component {
                                           validate={[required]}>
                                               {
                                                 timesheet.task.map((value,index)=>{
-                                                  return <option key={index} value={value.WP_ID}>{value.TASK_NAME}</option>
+                                                  return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
                                                 }
                                               )
                                               }

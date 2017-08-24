@@ -8,14 +8,15 @@ import {getSCurve,pop} from './actions.jsx'
 
 
 class ProjectSCurve extends Component {
-  componentWillMount(){
+  componentDidMount(){
     const id = store.getState().page.id
     store.dispatch(getSCurve(6992115))
+    // const state = store.getState()
+    // const s_curve = state.data.s_curve ? state.data.s_curve : null
   }
     render(){
       const state = store.getState()
       const s_curve = state.data.s_curve ? state.data.s_curve : null
-      
       
       const dataSCurve = s_curve.map((value,index)=>{
         return {name:value.Week,Target:value.pv_percent, Actual:value.ev_percent}
