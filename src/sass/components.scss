@@ -1,5 +1,5 @@
 * {
-  
+
   a:hover{
     color:#A2513D;
   }
@@ -10,7 +10,7 @@
     -o-transition: background-color 0.2s ease-out;
     transition: background-color 0.2s ease-out;
   }
-  
+
   .btn-primary:hover{
     background-color: #d64a52;
     cursor: pointer;
@@ -41,6 +41,10 @@ label {
 }
 input.error {
   border-color: $color-secondary;
+  background-color: #F6EAEA;
+}
+input.okay {
+  border-color: $green;
 }
 .error-alert {
   color: $color-secondary;

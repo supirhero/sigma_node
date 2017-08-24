@@ -25,7 +25,8 @@ import PasswordMask from 'react-password-mask';
 
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-export const required = value => (value || value != '' ? undefined : 'Required')
+// export const required = value => (value || value != '' || value !=null ? undefined : 'Required')
+export const required = value => value ? undefined : 'Required'
 
 // export const isIWOUsed = (values /*, dispatch */) => {
 //   return sleep(1000).then(() => {
@@ -38,8 +39,8 @@ export const required = value => (value || value != '' ? undefined : 'Required')
 // }
 export const isIWOUsed = (value) =>{
     console.log('VALUEE',value);
-    return new Promise ((resolve, reject) => {
-     axios({
+    // return new Promise ((resolve, reject) => {
+      return axios({
       method: 'POST',
       url: `${baseURL}/dev/project/checkiwoused`+token_string,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -48,16 +49,22 @@ export const isIWOUsed = (value) =>{
       }
 
     }).then(
-      ()=> {
-        const res = resolve('BLa')
+      (res)=> {
+        // resolve('BLa')
+        if (res.data.jumlah > 0) {
+          return 'IWO already used'
+        }
+        else {
+          return null
+        }
       }
     )
 
-  })
+  // })
 }
 
 
-export const required = value => value ? undefined : 'Required'
+// export const required = value => value ? undefined : 'Required'
 export const maxHours = value => Number(value.HOURS) > 24 ? 'Cant be max than 24' : null
 export const validate = () => {
   const required = value => value ? undefined : 'Required'
@@ -238,7 +245,6 @@ export class ReduxInput extends Component {
           <input
             className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
-            onC
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
@@ -247,6 +253,76 @@ export class ReduxInput extends Component {
           >
           </input>
           {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        </div>
+    )
+  }
+}
+
+export class ReduxInputAsync extends Component {
+  constructor(){
+    super();
+    this.state = {
+      error : null
+
+    };
+  }
+
+  componentDidUpdate() {
+
+    console.log('PROPS', this.props);
+  }
+
+  render(){
+    return(
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <input
+            // className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+            className= {
+               this.state.error != null &&
+              this.props.input.value == '' || this.state.error == 'IWO already used'? 'error' : ''
+
+            }
+            style={{width:'100%'}}
+            onFocus = {e=> {
+              this.setState({error : null})
+            }}
+            placeholder={this.props.placeholder}
+            type='text'
+            {...this.props.input}
+
+
+            onBlur={
+              (e)=> {
+              // alert(e.target.value)
+              console.log()
+              // if (e.target.value == '') {
+              //   this.setState({error : 'Required'})
+              // }
+              // else if (e.target.value != '') {
+              //   this.setState({error : null})
+              //
+              // }
+              // else {
+                isIWOUsed(e.target.value).then(
+                  res => this.setState({error : res})
+
+                )
+              // }
+            }}
+
+            // {...this.props.field}
+          >
+          </input>
+          {/* {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))} */}
+
+          {
+            this.props.input.value == '' && this.state.error !=null? <span className='error-alert'>Required</span> :
+            this.state.error!=null && this.props.input.value != '' &&
+              <span className='error-alert'>{this.state.error}</span>
+          }
+
         </div>
     )
   }
@@ -354,7 +430,15 @@ export class Select extends Component {
 
 
 export class ReduxSelect extends Component {
+  constructor(){
+    super();
+    this.state = {
+      error : null
+
+    };
+  }
   render() {
+    console.log('SELECT PROPS',this.props);
     return (
       <div style={this.props.style}>
 
@@ -363,10 +447,14 @@ export class ReduxSelect extends Component {
         <select className='select' {...this.props.select} {...this.props.custom}
           onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
           placeholder={this.props.placeholder}
+          onBlur = {e=> {
+
+          }}
         >
           {this.props.children}
         </select>
-
+        {/* {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )} */}
+        {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>}
       </div>
     )
   }
@@ -1251,11 +1339,7 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
-<<<<<<< HEAD
-      this.props.input.onChange(moment(date).format("YYYY-MM-DD"))
-=======
       this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
->>>>>>> master
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 

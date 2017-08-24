@@ -38,7 +38,7 @@ class Timesheet extends Component {
     store.dispatch(pop());
   }
 
- 
+
 
 
   render() {
@@ -78,8 +78,8 @@ class Timesheet extends Component {
       }
       return(<div style={{float:'right'}}><a style={{marginRight:'20px'}}>{resubmit}</a>{status}</div>)
     }
-    
-  
+
+
 
 
     const auth = state.auth;
@@ -87,12 +87,12 @@ class Timesheet extends Component {
 
     const handleDayClick = (day, { selected }) => {
       this.setState({
-        selectedDay: selected ? undefined : day,      
+        selectedDay: selected ? undefined : day,
       });
       const selectedDay = moment(day).format('YYYY-MM-DD')
     store.dispatch(viewTimesheet(selectedDay))
     };
-    
+
 
   //    if(!timesheet){
   //    return <PageLoader></PageLoader>
@@ -115,15 +115,15 @@ class Timesheet extends Component {
           </div>
         </div>
 
-       
+
             <div className="grid wrap">
-              <div className="unit whole" style={{ textAlign: 'center' }}>            
+              <div className="unit whole" style={{ textAlign: 'center' }}>
                 <div style={{ marginTop: '20px', display: 'inline-block' }}>
                <DayPicker onDayClick={handleDayClick} selectedDays={this.state.selectedDay}></DayPicker>
                 </div>
               </div>
             </div>
-    
+
 
 
           <div className="grid wrap">
@@ -155,7 +155,7 @@ class Timesheet extends Component {
                             // e.preventDefault()
                           }
                         }
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         validate={[required]}>
                         {
                               timesheet.user_project.map((value,index)=>{
@@ -163,7 +163,7 @@ class Timesheet extends Component {
                               }
                             )
                         }
-                        
+
 
                         </Field>
                     </div>
@@ -176,7 +176,7 @@ class Timesheet extends Component {
                                         name="WP_ID"
                                         // type="WP_ID"
                                           inputName="TASK"
-                                          component={ReduxSelectNew}
+                                          component={ReduxSelect}
                                           validate={[required]}>
                                               {
                                                 timesheet.task.map((value,index)=>{
@@ -186,9 +186,9 @@ class Timesheet extends Component {
                                               }
                                        </Field>
                                        :
-                                        <ReduxSelectNew inputName="TASK">
+                                        <ReduxSelect inputName="TASK">
                                         <options> </options>
-                                        </ReduxSelectNew>
+                                        </ReduxSelect>
                                       }
                                       </div>
 
@@ -245,7 +245,7 @@ class Timesheet extends Component {
 
 
 
-      
+
             <div className="grid wrap">
               <div className="unit whole" style={{ marginBottom: '42px' }}>
                 <Divider text={timesheet.user_activities[0]?timesheet.user_activities[0].TS_DATE:null} />
@@ -300,8 +300,8 @@ class Timesheet extends Component {
 
               </div>
             </div>
-     
-        {/*       
+
+        {/*
             <div className="grid wrap">
               <div className="unit whole" style={{ marginBottom: '42px' }}>
                 <Divider text="SATURDAY, AUGUST 12" />
@@ -326,7 +326,7 @@ class Timesheet extends Component {
 
 function mapStateToProps(state) {
   return {
-    
+
     formValues: state.form.AddNewTimesheet,
     state,
     // filter: ownProps.location.query.filter

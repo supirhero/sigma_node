@@ -20,7 +20,7 @@ import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'mate
 
 import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager, } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, isIWOUsed} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, isIWOUsed, ReduxInputAsync} from './Components.jsx'
 
 
 
@@ -33,28 +33,28 @@ class NewProject extends Component {
     };
   }
 
-  handleInitialize(data, iwo) {
+  handleInitialize(data) {
     const initData = {
       "IWO_AVAILABLE": 'true',
 
-      "IWO_NO": iwo[0].IWO_NO,
-      "END_CUST_ID": iwo[0].END_CUSTOMER,
-      "AMOUNT": iwo[0].AMOUNT,
-      "PROJECT_NAME": iwo[0].PROJECT_NAME,
-      "RELATED": iwo[0].RELATED_BU,
-      "CUST_ID": iwo[0].CUSTOMER_ID,
-      "MARGIN": iwo[0].MARGIN,
+      "IWO_NO": null,
+      // "END_CUST_ID": iwo[0].END_CUSTOMER,
+      // "AMOUNT": iwo[0].AMOUNT,
+      // "PROJECT_NAME": iwo[0].PROJECT_NAME,
+      // "RELATED": iwo[0].RELATED_BU,
+      // "CUST_ID": iwo[0].CUSTOMER_ID,
+      // "MARGIN": iwo[0].MARGIN,
       "BU": data.BU_NAME,
-      // "PM": 'NONE',
-      // "AM_ID": 'NONE',
-      // "TYPE_OF_EFFORT": 'NONE',
-      "PROJECT_STATUS": 'NOT STARTED',
+      // // "PM": 'NONE',
+      // // "AM_ID": 'NONE',
+      // // "TYPE_OF_EFFORT": 'NONE',
+      // "PROJECT_STATUS": 'NOT STARTED',
       "H/O": 'yes',
       "PROJECT_TYPE_ID": 'project',
-
-      // "START": '2017-1-1',
-      // "END": '2017-1-1',
-      "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
+      //
+      // // "START": '2017-1-1',
+      // // "END": '2017-1-1',
+      // "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
     };
 
   this.props.initialize(initData);
@@ -68,22 +68,32 @@ class NewProject extends Component {
     const id = this.props.state.page ? this.props.state.page.new_project.bu_code : null
     const iwo = this.props.state.page ? this.props.state.page.new_project.iwo : null
 
-    store.dispatch(getAddProjectView(id)).then(
+    const err = store.dispatch(getAddProjectView(id)).then(
       (res) => {
+        this.handleInitialize(res.data.business_unit);
         console.log("VIEW", res);
         // const data = this.props.state.data.business_unit
-        store.dispatch(getIWO(30)).then((res2)=> {
-          console.log("IWO", res2);
-          this.handleInitialize(res.data.business_unit,res2.data.iwo);
-
-        })
+        // store.dispatch(getIWO(30)).then((res2)=> {
+        //   // this.handleInitialize(res.data.business_unit,res2.data.iwo);
+        //   console.log("IWO", res2);
+        //
+        // })
 
       }
     )
+    store.dispatch(getIWO(30)).then((res2)=> {
+      // this.handleInitialize(res.data.business_unit,res2.data.iwo);
+      console.log("IWO", res2);
+
+    })
+
+    console.log("ERORRRRRRR",err);
+
 
   }
   componentWillUnmount(){
     store.dispatch(pop('new_project'))
+
   }
   onSubmit(props){
     alert("submitted")
@@ -233,11 +243,10 @@ class NewProject extends Component {
                     name="IWO_NO"
                     type='input'
                     style={{width:'100%'}}
-                    component={ReduxInput}
+                    // asyncValidate= {isIWOUsed()}
+                    component={ReduxInputAsync}
                     validate={[required]}
-                    // onBlur={(e,value) => {
-                    //   store.dispatch(checkIWOUsed(value))
-                    //   alert(value)
+
                     // }}
                   >
                 </Field>
@@ -248,46 +257,51 @@ class NewProject extends Component {
                   inputName="IWO NUMBER"
                   name="IWO_NO"
                   component={ReduxSelect}
+                  validate={[required]}
+
                   onChange={(e,value)=> {
                     // store.dispatch(getAccountManager(res2.data))
-                    var iwo_no = this.props.formValues.values.IWO_NO
-                    var i = _.findIndex(iwo, { 'IWO_NO' : value});
-                    var arr =iwo[i]
-                    store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
-                    var fields = [
-                      {
-                        field: 'AMOUNT',
-                        value: arr.AMOUNT
-                      },
-                      {
-                        field: 'PROJECT_NAME',
-                        value: arr.PROJECT_NAME
-                      },
-                      {
-                        field: 'RELATED',
-                        value: arr.RELATED_BU
-                      },
-                      {
-                        field: 'CUST_ID',
-                        value: arr.CUSTOMER_ID
-                      }
-                      ,
-                      {
-                        field: 'MARGIN',
-                        value: arr.MARGIN
-                      },
-                      {
-                        field: 'END_CUST_ID',
-                        value: arr.END_CUSTOMER
-                      }
-                    ]
+                    if (value != '' ) {
+                      var iwo_no = this.props.formValues.values.IWO_NO
+                      var i = _.findIndex(iwo, { 'IWO_NO' : value});
+                      var arr =iwo[i]
+                      store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
+                      var fields = [
+                        {
+                          field: 'AMOUNT',
+                          value: arr.AMOUNT
+                        },
+                        {
+                          field: 'PROJECT_NAME',
+                          value: arr.PROJECT_NAME
+                        },
+                        {
+                          field: 'RELATED',
+                          value: arr.RELATED_BU
+                        },
+                        {
+                          field: 'CUST_ID',
+                          value: arr.CUSTOMER_ID
+                        }
+                        ,
+                        {
+                          field: 'MARGIN',
+                          value: arr.MARGIN
+                        },
+                        {
+                          field: 'END_CUST_ID',
+                          value: arr.END_CUSTOMER
+                        }
+                      ]
 
-                    fields.map((value, index) => {
-                      this.props.change(
-                        value.field, value.value
-                      )
+                      fields.map((value, index) => {
+                        this.props.change(
+                          value.field, value.value
+                        )
 
-                    })
+                      })
+                    }
+
                     // e.preventDefault()
                   }}
                   // onChange={(event, index, value)=>{
@@ -295,6 +309,8 @@ class NewProject extends Component {
                   //   // alert(this.state.iwo_index)
                   // }}
                 >
+                  <option value='' >Select IWO</option>
+
                   {
                     iwo &&
                     iwo.map((value, index) => (
@@ -331,7 +347,7 @@ class NewProject extends Component {
                   type="RELATED"
                   style={{width:'100%'}}
                   component={form_values && form_values.IWO_AVAILABLE == 'true' ? ReduxInputDisabled : ReduxInput}
-                  validate={[required]}
+                  validate={required}
 
                 />
 
@@ -943,7 +959,8 @@ export default connect(mapStateToProps, { addNewProject })
       reduxForm({
         form: 'add_project',
         // isIWOUsed,
-        asyncBlurFields: [ 'IWO_NO' ],
+        // validate,
+        // asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login
