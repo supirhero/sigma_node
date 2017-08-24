@@ -215,9 +215,8 @@ export const addIssue = (data, id ) => {
 
           }).then(
             res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              dispatch(getIssue(id))
               console.log(res.data);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
             },
           )
   }
@@ -513,6 +512,7 @@ export const getCPI = (id) => {
 
 export const getSCurve = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // store.dispatch({type:'API', data: null, append:true})
 
   return function (dispatch) {
     return axios({
@@ -525,7 +525,7 @@ export const getSCurve = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'project', data: res, append:true})
+              store.dispatch({type:'API', name: 'project', data: res})
 
             },
           )
@@ -747,7 +747,7 @@ export function myPerformance(bulan,tahun){
       data: {bulan,tahun}
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'myPerformance',  data: res });
+        dispatch({ type: 'API', name: 'myPerformance',  data: res });
       }
     )
   }
@@ -812,3 +812,20 @@ export function getMyActivities(){
     )
   }
 }
+
+
+export function getListBU(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/report/r_list_bu?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+
+

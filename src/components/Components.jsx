@@ -25,8 +25,7 @@ import PasswordMask from 'react-password-mask';
 
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-// export const required = value => (value || value != '' || value !=null ? undefined : 'Required')
-export const required = value => value ? undefined : 'Required'
+export const required = value => (value  ? undefined : 'Required')
 
 // export const isIWOUsed = (values /*, dispatch */) => {
 //   return sleep(1000).then(() => {
@@ -245,6 +244,7 @@ export class ReduxInput extends Component {
           <input
             className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
+            onC
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
@@ -414,13 +414,8 @@ export class Select extends Component {
       <div style={this.props.style}>
         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select className='select'>
-          {this.props.items.items.map((value,index) => {
-            return(
-              <option key={index} value={value.title}>{value.title}</option>
-
-            )
-          })}
+        <select onChange={this.props.onChange} className='select' style={{height: '49px'}}>
+          {this.props.children}
         </select>
 
       </div>
@@ -515,21 +510,25 @@ export class Meter extends Component {
   render(){
     return(
       <div className='circle-container'>
-        <Circle
-          progress={this.props.progress}
-          initialAnimate={true}
-          text= {this.props.text}
-          options={{
-            strokeWidth: 12,
-            color: '#F48165',
-            trailWidth: 12,
-            fontSize: 30,
-            easing: 'easeInOut',
-            duration: 700,
-          }}
-          containerClassName={'circle-bar'}
-          >
-          </Circle>
+        <div className='meter-container'>
+          <small>{this.props.text}</small>
+
+          <Circle
+            progress={this.props.progress > 100 ? 100 : this.props.progress}
+            // initialAnimate={true}
+            // text= {this.props.text}
+            options={{
+              strokeWidth: 12,
+              color: '#F48165',
+              trailWidth: 12,
+              fontSize: 30,
+              easing: 'easeInOut',
+              duration: 700,
+            }}
+            containerClassName={'circle-bar'}
+            >
+            </Circle>
+        </div>
           <div className='circle-desc'>
             <medium>{this.props.title}</medium>
             <small className='status'>{this.props.status}</small>
@@ -546,7 +545,7 @@ export class BarChart extends Component {
         <large style={this.props.labelStyle}>{this.props.label}</large>
         <ResponsiveContainer width='100%' height={250}>
           <ChartBar width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" interval="preserveStart" />
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
@@ -1339,7 +1338,10 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
+
+
       this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 

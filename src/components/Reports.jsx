@@ -16,6 +16,7 @@ class Reports extends Component {
             <div style={{ marginTop: '20px' }}>
               <medium
                 style={{ display: 'inline-block' }}
+                className="list-pointer"
                 onClick={
 									(e) => {
                   browserHistory.replace('/reports');
@@ -23,7 +24,7 @@ class Reports extends Component {
               > Overview </medium>
 
               <medium
-                className="heading"
+                className="heading list-pointer"
                 onClick={
                   (e) => {
                   browserHistory.replace('/reports/directorate');
@@ -31,14 +32,14 @@ class Reports extends Component {
                 }
               > Directorate / BU </medium>
               <medium
-              className="heading"
+              className="heading list-pointer"
               onClick={
                 (e) => {
                   browserHistory.replace('/reports/people');
                 }
               }
               > Team Member </medium>
-              <medium className="heading"
+              <medium className="heading list-pointer"
               onClick={
                 (e) => {
                   browserHistory.replace('/reports/find-project');
