@@ -276,7 +276,7 @@ export const getBusinessUnitDetail = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/home/buDetail?token=${token}`,
+            url: `${baseURL}/dev/test/buDetail`,
             data: {
               bu_code: id,
             },
@@ -491,7 +491,7 @@ export const getSCurve = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/s_curve/${id}?token=${token}` ,
+            url: `${baseURL}/dev/projecttest/s_curve/${id}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -541,7 +541,7 @@ export function viewTimesheet(date) {
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheet/view?token=${token}`,
+      url: `${baseURL}/dev/timesheettest/view`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -613,7 +613,7 @@ export function addTaskWorkplan(id,data) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/task/createTask/?token=${token}`,
+      url:`${baseURL}/dev/tasktest/createTask`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
@@ -638,7 +638,7 @@ export function getTaskView(id) {
   return function(dispatch){
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/task/createTask_view/${id}?token=${token}`,
+      url:`${baseURL}/dev/tasktest/createTask_view/${id}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
     }).then(
