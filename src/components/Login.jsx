@@ -8,7 +8,7 @@ import {Field, reduxForm} from 'redux-form';
 
 import store from '../reducers/combineReducers.jsx'
 import {getData, login} from './actions.jsx'
-import {Input, LoaderLogin, ReduxInput} from './Components.jsx'
+import {Input, LoaderLogin, ReduxInput,ReduxInputMask} from './Components.jsx'
 
 
 
@@ -63,7 +63,7 @@ class Login extends Component {
                       inputName="PASSWORD"
                       name="password"
                       type='password'
-                      component={ReduxInput}
+                      component={ReduxInputMask}
                     />
                     <button className='btn-primary' type='submit' style={{display:'inline-block',marginTop:'30px'}}>LOG IN</button>
                     <medium>or <a onClick={()=> {

@@ -20,6 +20,8 @@ const baseURL = "http://45.77.45.126"
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
 const token_string = `?token=${token}`
+import PasswordMask from 'react-password-mask';
+
 
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -53,6 +55,10 @@ export const isIWOUsed = (value) =>{
 
   })
 }
+
+
+export const required = value => value ? undefined : 'Required'
+export const maxHours = value => Number(value.HOURS) > 24 ? 'Cant be max than 24' : null
 export const validate = () => {
   const required = value => value ? undefined : 'Required'
 }
@@ -246,6 +252,32 @@ export class ReduxInput extends Component {
   }
 }
 
+
+export class ReduxInputMask extends Component {
+  render(){
+    return(
+        <div style={this.props.style}>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+          <PasswordMask
+            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+            style={{width:'100%'}}
+            placeholder={this.props.placeholder}
+            type='text'
+            buttonStyles = {{display:'none'}}
+            {...this.props.input}
+
+            // {...this.props.field}
+          >
+          </PasswordMask>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        </div>
+    )
+  }
+}
+
+
+
 export class ReduxInputDisabled extends Component {
   render(){
     return(
@@ -330,6 +362,7 @@ export class ReduxSelect extends Component {
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <select className='select' {...this.props.select} {...this.props.custom}
           onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+          placeholder={this.props.placeholder}
         >
           {this.props.children}
         </select>
@@ -1218,7 +1251,11 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
+<<<<<<< HEAD
       this.props.input.onChange(moment(date).format("YYYY-MM-DD"))
+=======
+      this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+>>>>>>> master
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 

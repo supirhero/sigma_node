@@ -11,15 +11,54 @@ import {pop,getSPI,getCPI} from './actions.jsx'
 
 class ProjectSpiCpi extends Component {
   componentWillMount(){
+    const state = store.getState()
     const id = store.getState().page.id
-    store.dispatch(getSPI(id))
-    store.dispatch(getCPI(id))
+    const spi = state.data.spi
+    const cpi = state.data.cpi
+    store.dispatch(getSPI(6992115))
+    store.dispatch(getCPI(6992115))
   }
   
   
 
   render() {
+    const state = store.getState()
+    const spi = state.data.spi
+    const cpi = state.data.cpi
+    const dataSPI = spi.map((value,index)=>{
+      return {name:value.Week , value:parseFloat(value.SPI)}
+    })
+    const dataCPI = cpi.map((value,index)=>{
+      return {name:value.Week , value:parseFloat(value.SPI)}
+    })
+
+
+
+    const tableSPI = spi.map((value,index)=>{
+      return {column:[
+        {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
+        {value:value.EV == null ? '0' : value.EV},
+        {value:value.PV == null ? '0' : value.PV},
+        {value:value.SPI == null ? '0' : parseFloat(value.SPI).toFixed(2)}
+      ]}
+    })
+
+    const tableCPI = cpi.map((value,index)=>{
+      return {column:[
+        {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
+        {value:value.EV == null ? '0' : value.EV},
+        {value:value.PV == null ? '0' : value.PV},
+        {value:value.SPI == null ? '0' : parseFloat(value.SPI).toFixed(2)}
+      ]}
+    })
+
+
+
+   
+
     return (
+      
+      !spi && !cpi ? <PageLoader /> :
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">
@@ -38,19 +77,7 @@ class ProjectSpiCpi extends Component {
                   <div className="grid padding-left">
                     <div className="unit whole">
                       <BarChart fill= "#D2E5FA"
-                        data={[
-													{ name: 'W2', value: 20 },
-													{ name: 'W4', value: 10 },
-													{ name: 'W6', value: 14 },
-													{ name: 'W8', value: 32 },
-													{ name: 'W10', value: 16 },
-													{ name: 'W12', value: 4 },
-													{ name: 'W14', value: 7 },
-													{ name: 'W16', value: 9 },
-													{ name: 'W18', value: 12 },
-													{ name: 'W20', value: 40 },
-													{ name: 'W22', value: 54 },
-                        ]}
+                        data={dataSPI}
                       />
                     </div>
                     <div className="unit whole">
@@ -62,24 +89,7 @@ class ProjectSpiCpi extends Component {
 													{ value: 'SPI' }
 
                         ]}
-                        tableData={[
-                          {
-                            column : [
-                              {value : 'WEEK 1 (APRIL 1 2017 - APRIL 5 2017)'},
-                              {value : '102'},
-                              {value : '112'},
-                              {value : '0.92'},
-                            ]
-                          },
-                          {
-                            column : [
-                              {value : 'WEEK 2 (APRIL 1 2017 - APRIL 5 2017)'},
-                              {value : '104'},
-                              {value : '152'},
-                              {value : '0.12'},
-                            ]
-                          }
-                        ]}
+                        tableData={tableSPI}
                       />
                     </div>
                   </div>
@@ -90,19 +100,7 @@ class ProjectSpiCpi extends Component {
                     <div className="unit whole">
                       <BarChart
                         fill= "#D2E5FA"
-                        data={[
-													{ name: 'W2', value: 54 },
-													{ name: 'W4', value: 40 },
-													{ name: 'W6', value: 12 },
-													{ name: 'W8', value: 9 },
-													{ name: 'W10', value: 7 },
-													{ name: 'W12', value: 4 },
-													{ name: 'W14', value: 16 },
-													{ name: 'W16', value: 32 },
-													{ name: 'W18', value: 14 },
-													{ name: 'W20', value: 10 },
-													{ name: 'W22', value: 20 },
-                        ]}
+                        data={dataCPI}
                       />
                     </div>
 
@@ -114,24 +112,7 @@ class ProjectSpiCpi extends Component {
 													{ value: 'AC' },
 													{ value: 'CPI' }
                         ]}
-                        tableData={[
-                          {
-                            column : [
-                              {value : 'WEEK 1 (APRIL 1 2017 - APRIL 5 2017)'},
-                              {value : '102'},
-                              {value : '112'},
-                              {value : '0.92'},
-                            ]
-                          },
-                          {
-                            column : [
-                              {value : 'WEEK 2 (APRIL 1 2017 - APRIL 5 2017)'},
-                              {value : '104'},
-                              {value : '152'},
-                              {value : '0.12'},
-                            ]
-                          }
-                        ]}
+                        tableData={tableCPI}
                       />
                     </div>
                   </div>

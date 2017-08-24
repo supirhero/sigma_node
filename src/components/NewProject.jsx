@@ -86,7 +86,7 @@ class NewProject extends Component {
     store.dispatch(pop('new_project'))
   }
   onSubmit(props){
-    alert(props)
+    alert("submitted")
     this.props.addNewProject(props)
   }
     render(){
@@ -908,7 +908,12 @@ class NewProject extends Component {
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                    <button className='btn-secondary' style={{display:'inline-block'}}>CANCEL</button>
+                    <button className='btn-secondary' style={{display:'inline-block'}} onClick={
+                      e => {
+                        browserHistory.push('/')
+                        e.preventDefault()
+                      }
+                    }>CANCEL</button>
                     <button className='btn-primary' type='submit' style={{float:'right', display:'inline-block'}}>CREATE PROJECT</button>
 
                   </div>

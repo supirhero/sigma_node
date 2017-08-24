@@ -1,3 +1,38 @@
+* {
+  
+  a:hover{
+    color:#A2513D;
+  }
+
+  .btn-primary{
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+  }
+  
+  .btn-primary:hover{
+    background-color: #d64a52;
+    cursor: pointer;
+  }
+
+  .btn-secondary{
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+  }
+  .btn-secondary:hover{
+    background-color: #EEEEEE;
+    cursor: pointer;
+  }
+
+  .list-pointer{
+    cursor: pointer;
+  }
+
+}
+
 
 $font-size : 17px;
 label {

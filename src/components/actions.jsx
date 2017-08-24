@@ -54,7 +54,7 @@ export function getProjectDetail(id) {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/test/detailproject/${id}`,
+            url: `${baseURL}/dev/home/detailproject/${id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -109,7 +109,7 @@ export const getProjectTeamMember = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/test/p_teammember/${id}`,
+            url: `${baseURL}/dev/home/p_teammember/${id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -133,7 +133,7 @@ export const getDocsFiles = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/test/projectdoc/${id}` ,
+            url: `${baseURL}/dev/home/projectdoc/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
@@ -154,7 +154,7 @@ export const addDocsAndFiles = (data, id ) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/documentupload/${id}` ,
+            url: `${baseURL}/dev/home/documentupload/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
             data: {
@@ -179,7 +179,7 @@ export const getIssue = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/projectissue/${id}` ,
+            url: `${baseURL}/dev/home/projectissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -203,7 +203,7 @@ export const addIssue = (data, id ) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/test/addissue/${id}` ,
+            url: `${baseURL}/dev/home/addissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
               'PROJECT_ID':id,
@@ -301,7 +301,7 @@ export const getIWOEditProject = (offset) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
+            url: `${baseURL}/dev/iwo/getIwo/${offset}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
@@ -323,7 +323,7 @@ export const getIWO = (offset) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/iwotest/getIwo/${offset}`,
+            url: `${baseURL}/dev/iwo/getIwo/${offset}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -360,53 +360,55 @@ export const checkIWOUsed = (iwo) => {
 }
 
 
-export const editProject = (data) => {
-  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+export const editProject = (data, id) => 
+// store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
-  return function (dispatch) {
-    return axios({
-            method: 'POST',
-            url: `${baseURL}/dev/projecttest/editProject_action` ,
-            data: {
-              ACTUAL_COST:data.ACTUAL_COST,
-              AMOUNT:data.AMOUNT,
-              AM_ID:data.AM_ID,
-              BU:'TMS',
-              COGS:data.COGS,
-              CUST_ID:data.CUST_ID,
-              DESC:data.DESC,
-              END_CUST_ID:data.END_CUST_ID,
-              // H/O:"yes",
-              IWO_NO:data.IWO_NO,
-              MARGIN:data.MARGIN,
-              OVERHEAD:data.OVERHEAD,
-              PM:data.PM,
-              PRODUCT_TYPE:data.PRODUCT_TYPE,
-              PROJECT_NAME:data.PROJECT_NAME,
-              PROJECT_STATUS:data.PROJECT_STATUS,
-              PROJECT_TYPE_ID:data.PROJECT_TYPE_ID,
-              RELATED:data.RELATED,
-              TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
-              TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
-              VISIBILITY:data.VISIBILITY,
-              START:data.START,
-              END:data.END
+ function (dispatch) {
+  return axios({
+          method: 'POST',
+          url: `${baseURL}/dev/project/editProject_action?token=${token}` ,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          data: {
+            PROJECT_ID:id,
+            ACTUAL_COST:data.ACTUAL_COST,
+            AMOUNT:data.AMOUNT,
+            AM_ID:data.AM_ID,
+            BU:'TMS',
+            COGS:data.COGS,
+            CUST_ID:data.CUST_ID,
+            DESC:data.DESC,
+            END_CUST_ID:data.END_CUST_ID,
+            // H/O:"yes",
+            IWO_NO:data.IWO_NO,
+            MARGIN:data.MARGIN,
+            OVERHEAD:data.OVERHEAD,
+            PM:data.PM,
+            PRODUCT_TYPE:data.PRODUCT_TYPE,
+            PROJECT_NAME:data.PROJECT_NAME,
+            PROJECT_STATUS:data.PROJECT_STATUS,
+            PROJECT_TYPE_ID:data.PROJECT_TYPE_ID,
+            RELATED:data.RELATED,
+            TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
+            TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
+            VISIBILITY:data.VISIBILITY,
+            START:moment(data.START).format('YYYY-MM-DD'),
+            END:moment(data.END).format('YYYY-MM-DD')
+            
 
-            }
-          }).then(
-            res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log("RES",res.data);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-            req => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log("REQ",req);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-          )
-  }
-}
+          }
+        }).then(
+          res => {
+            // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+            console.log("RES",res.data);
+            // store.dispatch({type:'API', name: 'project', data: res, append:true})
+          },
+          req => {
+            // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+            console.log("REQ",req);
+            // store.dispatch({type:'API', name: 'project', data: res, append:true})
+          },
+        )
+};
 
 export const getEditProjectView = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -414,7 +416,7 @@ export const getEditProjectView = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/editProject_view/${id}`,
+            url: `${baseURL}/dev/project/editProject_view/${id}?token=${token}`,
 
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -441,7 +443,7 @@ export const getAddProjectView = (id) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_view`,
+            url: `${baseURL}/dev/project/addProject_view?token=${token}`,
             data: {
               bu_code: id,
             },
@@ -467,7 +469,7 @@ export const getSPI = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/projecttest/spi/${id}` ,
+            url: `${baseURL}/dev/project/spi/${id}?token=${token}` ,
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -491,7 +493,7 @@ export const getCPI = (id) => {
   return function (dispatch) {
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/projecttest/cpi/${id}` ,
+            url: `${baseURL}/dev/project/cpi/${id}?token=${token}` ,
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -536,7 +538,7 @@ export const getAccountManager = (am_id) => {
   return function (dispatch) {
     return axios({
             method: 'post',
-            url: `${baseURL}/dev/projecttest/checkAM/` ,
+            url: `${baseURL}/dev/project/checkAM?token=${token}` ,
             headers: {
               // 'token': {token},
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -593,7 +595,7 @@ export function taskList(project_id) {
   return function (dispatch) {
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheettest/taskList`,
+      url: `${baseURL}/dev/timesheet/taskList?token=${token}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -637,7 +639,7 @@ export function addTaskWorkplan(id,data) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/task/createTask/?token=${token}`,
+      url:`${baseURL}/dev/task/createTask?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
@@ -681,7 +683,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/addTimesheet`,
+      url:`${baseURL}/dev/timesheet/addTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: { WP_ID,
               TS_DATE,
@@ -707,7 +709,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 //   return function(dispatch){
 //     return axios({
 //       method:'POST',
-//       url:`${baseURL}/dev/timesheettest/addTimesheet/`,
+//       url:`${baseURL}/dev/timesheet/addTimesheet/`,
 //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //       data: {values}
 //     }).then(
@@ -724,7 +726,7 @@ export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheettest/confirmationTimesheet`,
+      url:`${baseURL}/dev/timesheet/confirmationTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {ts_id,confirm}
     }).then(
@@ -740,7 +742,7 @@ export function myPerformance(bulan,tahun){
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/reporttest/myperformances`,
+      url:`${baseURL}/dev/report/myperformances?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {bulan,tahun}
     }).then(
@@ -755,7 +757,7 @@ export function getMyAssignment(){
   return function(dispatch){
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/test/myassignment`,
+      url:`${baseURL}/dev/home/myassignment?token=${token}`,
       // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -770,7 +772,7 @@ export function getMyAssignment(){
 //   return function(dispatch){
 //     return axios({
 //       method:'GET',
-//       url:`${baseURL}/dev/tasktest/workplan_view/${id}`,
+//       url:`${baseURL}/dev/task/workplan_view/${id}`,
 //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //     }).then(
 //       (res)=>{
@@ -801,7 +803,7 @@ export function getMyActivities(){
   return function(dispatch){
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/test/myactivities`,
+      url:`${baseURL}/dev/home/myactivities?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
