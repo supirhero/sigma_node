@@ -17,6 +17,15 @@ class ProjectIssues extends Component {
   onSubmit(props) {
     const id = store.getState().page.id;
     this.props.addIssue(props,id);
+    // console.log(store.getState().form.add_issue.values.file_upload.preview)
+    const preview = store.getState().form.add_issue.values.file_upload.map((value,index)=>{
+      return value.preview
+    })
+    console.log(preview.toString())
+    console.log(String(preview))
+    
+
+    // console.log(store.getState().form.add_issue.values.file_upload.size)
   }
 
 
@@ -184,6 +193,7 @@ function mapStateToProps(state) {
     state,
   };
 }
+
 
 export default connect(mapStateToProps, { addIssue })(
   reduxForm({
