@@ -11,10 +11,48 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import DayPicker from 'react-day-picker';
+import {checkIWOUsed} from './actions.jsx'
+import axios from 'axios'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+const baseURL = "http://45.77.45.126"
+// const token = store.getState().auth ? store.getState().auth.token : null
+const token = cookies.get('token')
+const token_string = `?token=${token}`
 
 
-export const required = value => value || value != '' ? undefined : 'Required'
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+export const required = value => (value || value != '' ? undefined : 'Required')
 
+// export const isIWOUsed = (values /*, dispatch */) => {
+//   return sleep(1000).then(() => {
+//     // simulate server latency
+//     // if (['john', 'paul', 'george', 'ringo'].includes(values.username)) {
+//     //   throw { username: 'That username is taken' }
+//     // }
+//     throw 'bla'
+//   })
+// }
+export const isIWOUsed = (value) =>{
+    console.log('VALUEE',value);
+    return new Promise ((resolve, reject) => {
+     axios({
+      method: 'POST',
+      url: `${baseURL}/dev/project/checkiwoused`+token_string,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        IWO_NO: value
+      }
+
+    }).then(
+      ()=> {
+        const res = resolve('BLa')
+      }
+    )
+
+  })
+}
 export const validate = () => {
   const required = value => value ? undefined : 'Required'
 }
@@ -182,6 +220,10 @@ export class RenderRadioGroup extends Component {
 }}
 
 export class ReduxInput extends Component {
+  componentDidUpdate() {
+
+    console.log('PROPS', this.props);
+  }
   render(){
     return(
         <div style={this.props.style}>
@@ -190,6 +232,7 @@ export class ReduxInput extends Component {
           <input
             className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
+            onC
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
@@ -1175,7 +1218,7 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
-      this.props.input.onChange(moment(date).format('DD-MMM-YY'))
+      this.props.input.onChange(moment(date).format("YYYY-MM-DD"))
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 
@@ -1193,9 +1236,9 @@ export class datepickerUniversal extends Component {
             style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
-          dateFormat="DD-MMM-YY"
+          dateFormat="YYYY-MM-DD"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
-          selected={input.value ? moment(input.value, 'DD-MMM-YY') : null}
+          selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
           onChange={this.handleChange}
          >
           {this.props.children}

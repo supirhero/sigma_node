@@ -18,9 +18,9 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager} from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager, } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, isIWOUsed} from './Components.jsx'
 
 
 
@@ -32,6 +32,7 @@ class NewProject extends Component {
 
     };
   }
+
   handleInitialize(data, iwo) {
     const initData = {
       "IWO_AVAILABLE": 'true',
@@ -123,7 +124,9 @@ class NewProject extends Component {
         {value: 'Current Expense'},
         {value: 'Dedutible Expense'},
       ]
+
       return(
+
         !iwo && !projectManager && !form_values ? <PageLoader/> :
         <div>
 
@@ -232,6 +235,10 @@ class NewProject extends Component {
                     style={{width:'100%'}}
                     component={ReduxInput}
                     validate={[required]}
+                    // onBlur={(e,value) => {
+                    //   store.dispatch(checkIWOUsed(value))
+                    //   alert(value)
+                    // }}
                   >
                 </Field>
                   :
@@ -497,7 +504,7 @@ class NewProject extends Component {
                         component={ReduxSelect}>
                         <option value='' >Select Account Manager</option>
 
-                           <option> {store.getState().data.username} </option>
+                           <option value={this.props.state.data.username != null ? this.props.state.data.username: null }> {this.props.state.data.username } </option>
                        {/*
                           this.props.state.data.AM_ID &&
                           this.props.state.data.AM_ID.map((value, index)=> (
@@ -700,7 +707,7 @@ class NewProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                  <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 19px'}} btnText='COMPLETE FORM'>
+                  {/* <PopUp id='complete' dividerText='PROJECT CHARTER FORM' btnClass='btn-primary' btnStyle={{padding:'15px 19px'}} btnText='COMPLETE FORM'>
                     <div>
                       <div className='grid wrap narrow'>
                         <div className='unit whole'>
@@ -893,7 +900,7 @@ class NewProject extends Component {
 
                     </div>
 
-                  </PopUp>
+                  </PopUp> */}
                 </div>
 
 
@@ -930,6 +937,8 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
+        // isIWOUsed,
+        asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login

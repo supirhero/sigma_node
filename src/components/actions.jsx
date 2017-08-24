@@ -1,6 +1,6 @@
 import store from '../reducers/combineReducers.jsx'
 import { Link, browserHistory } from 'react-router'
-import { push, replace } from 'react-router-redux'
+import { push, replace, goBack } from 'react-router-redux'
 import moment from 'moment';
 import Cookies from 'universal-cookie';
 
@@ -11,6 +11,7 @@ var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
+const token_string = `?token=${token}`
 export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
@@ -230,7 +231,7 @@ export const addNewProject = (data) => {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/projecttest/addProject_acion` ,
+            url: `${baseURL}/dev/project/addProject_acion?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
@@ -316,6 +317,8 @@ export const getIWOEditProject = (offset) => {
 
 }
 
+
+
 export const getIWO = (offset) => {
   return function (dispatch) {
     return axios({
@@ -329,6 +332,26 @@ export const getIWO = (offset) => {
               store.dispatch({type:'API', name: 'new_project', data: res, append: true})
 
               console.log(res.data);
+              return res
+            },
+          )
+  }
+
+}
+
+export const checkIWOUsed = (iwo) => {
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/project/checkiwoused`+token_string,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+              IWO_NO: iwo
+            }
+
+          }).then(
+            res => {
+
               return res
             },
           )

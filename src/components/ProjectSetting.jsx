@@ -36,7 +36,7 @@ class EditProject extends Component {
         "START": iwo[0].PROJECT_DATE_START,
         "END": iwo[0].PROJECT_DATE_STOP,
         "TYPE_OF_EXPENSE": 'CAPITAL EXPENSE',
-        
+
       };
       this.props.initialize(initData);
 
@@ -329,7 +329,7 @@ class EditProject extends Component {
                           projectEffort.map((value, index)=> (
                             <option key= {index} value={value.name} {...this.props.option}>{value.name}</option>
                           ))
-                        } 
+                        }
                       </Field>
 
                     </div>
