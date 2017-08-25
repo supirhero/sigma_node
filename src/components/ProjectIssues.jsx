@@ -115,7 +115,7 @@ class ProjectIssues extends Component {
                   inputName="EVIDENCE"
                   name="file_upload"
                   type='file'
-                  component = {ReduxDrop}
+                  component = {ReduxFileInput}
                 />
                 </div>
 

@@ -10,7 +10,27 @@ import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, 
 import {myPerformance,pope} from './actions.jsx'
 
 class ReportsOverview extends Component {
+  constructor(){
+    super();
+    this.state = {
+      month : 0,
+      year: 0
+    };
+  }
 
+  handleMonthChange (e) {
+    this.setState({month: e.target.value});
+    console.log(e.target.value);
+    e.preventDefault()
+   }
+
+      
+   handleYearChange (e) {
+    this.setState({year: e.target.value});
+    console.log(e.target.value);
+    e.preventDefault()
+
+   }
 
 
   render() {
@@ -66,26 +86,37 @@ class ReportsOverview extends Component {
                 <div className="unit half">
                   <div className="grid">
                     <div className="unit four-fifths">
-                      <Select
-                        style={{ width: '48%', display: 'inline-block' }}
-                        items={{
-                        items : [
-                          {title : 'JANUARY'},
-                          {title : 'FEBRUARY'}
-                        ]
-                      }}
-                      />
-                      <Select
-                        style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                        items={{
-                        items : [
-                          {title : '2017'},
-                          {title : '2018'}
-                        ]
-                      }}/>
+                    <select onChange={this.handleMonthChange.bind(this)}
+                    className='select' style={{height:'49px', width:'48%', display:'inline-block'}}>
+                    {
+                      month.map((value,index) => {
+                      return(
+                        <option key={index} value={value.number}>{value.name}</option>
+
+                      )
+                    })}
+                  </select>
+                     
+                  <select onChange={this.handleYearChange.bind(this)}
+                  className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}>
+                  {
+                    year.map((value,index) => {
+                    return(
+                      <option key={index} value={value.year}>{value.year}</option>
+
+                    )
+                  })}
+                </select>
                     </div>
                     <div className="unit one-fifth">
-                      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
+                      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }} 
+                      onClick={(e)=> {
+                        console.log(this.state.month,this.state.year);
+                        store.dispatch(myPerformance(this.state.month,this.state.year))
+                        // store.dispatch(myPerformance('1','2017'))
+
+                        e.preventDefault()
+                      }}>search</span></button>
                     </div>
                   </div>
 
@@ -371,6 +402,7 @@ class ReportsOverview extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   };
 }

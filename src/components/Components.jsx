@@ -1186,14 +1186,17 @@ export class InputFile extends Component {
 export class ReduxFileInput extends Component {
   render(){
     return(
+      <div style={this.props.style} className={this.props.className}>
       <FileInput
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-        onDrop={(event)=> this.props.input.onDrop(event.target.files[0])}
-        {...this.props.custom}
-        >
+      name={this.props.name}
+      style={this.props.style}
+      placeholder={this.props.placeholder}
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onDrop={(event)=> this.props.input.onDrop(event.target.files[0])}
+      {...this.props.custom}
+      >
       </FileInput>
+      </div>
     )
   }
 }

@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
-import { deleteAuthentication ,getListBU} from './actions.jsx';
+import { getListBU,getDirectoratBU} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx';
 
 
 class ReportsDirectorate extends Component {
   componentWillMount(){
+    const id = store.getState().data.business_unit.BU_ID
     store.dispatch(getListBU())
+    store.dispatch(getDirectoratBU(id,"2017"))
   }
   
   render() {
+    const state = store.getState()
+    const project = state.data.project
+    const finance = state.data.finance
     return (
 			<div>
 				<div className="grid wrap">
@@ -63,14 +68,14 @@ class ReportsDirectorate extends Component {
                   <div className="grid wrap">
                     <div className="unit half">
                       <medium className="project-value-label completed">Completed</medium>
-                      <large className="project-value-number completed">10</large>
+                      <large className="project-value-number completed">{project.completed}</large>
 
                       <medium className="project-value-label not-started">Not Started</medium>
-                      <large className="project-value-number not-started">6</large>
+                      <large className="project-value-number not-started">{project.not_started}</large>
                      </div>
                      <div className="unit half">
                       <medium className="project-value-label in-progress"> In Progress</medium>
-                      <large className="project-value-number in-progress"> 24</large>
+                      <large className="project-value-number in-progress"> {project.in_progress}</large>
                      </div>
                    </div>
                 </div>
@@ -84,7 +89,7 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <medium className="project-value-label">Total Project Value</medium>
-                  <large className="project-value-number">10 M</large>
+                  <large className="project-value-number">{finance.total_project_value}</large>
 
                   <medium className="project-value-label">Invoiced</medium>
                   <large className="project-value-number">1 M</large>

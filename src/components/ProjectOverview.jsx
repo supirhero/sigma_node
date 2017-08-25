@@ -10,6 +10,27 @@ import { Line } from 'react-progressbar.js'
 
 class ProjectOverview extends Component {
     render(){
+      const state = store.getState()
+      const month= [
+        {name:'JANUARY',number:'1'},
+        {name:'FEBRUARY',number:'2'},
+        {name:'MARCH',number:'3'},
+        {name:'APRIL',number:'4'},
+        {name:'MAY',number:'5'},
+        {name:'JUNE',number:'6'},
+        {name:'JULY',number:'7'},
+        {name:'AUGUST',number:'8'},
+        {name:'SEPTEMBER',number:'9'},
+        {name:'OCTOBER',number:'10'},
+        {name:'NOVEMBER',number:'11'},
+        {name:'DEECMBER',number:'12'},
+      ]
+      const year = [
+        {year:'2017'},
+        {year:'2016'},
+        {year:'2015'},
+      ]
+
       const appStore = store.getState()
       const overview = appStore.data.overview ? appStore.data.overview : null
       return(

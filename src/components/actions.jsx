@@ -675,6 +675,84 @@ export function getTaskView(id) {
   }
 }
 
+export function getEditTaskView(id,data) {
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/task/edittask_view?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'edittaskView',  data: res });
+
+        return res
+
+      }
+    )
+  }
+}
+
+export function editTaskPercent(id) {
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/task/editTaskPercent?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        PROJECT_ID:data.PROJECT_ID,
+        WBS_ID:data.WBS_ID,
+        WORK_PERCENT_COMPLETE:data.WORK_PERCENT_COMPLETE,
+        START_DATE: data.START_DATE,
+        FINISH_DATE: data.FINISH_DATE
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'edittask',  data: res });
+
+        return res
+
+      }
+    )
+  }
+}
+
+
+
+export function getAssignTaskMemberView(id,data) {
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/task/assignTaskMember_view?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'edittaskView',  data: res });
+
+        return res
+
+      }
+    )
+  }
+}
+
+export function AssignTaskMember(id,data) {
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/task/assignTaskMemberProject/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },     
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'edittaskView',  data: res });
+
+        return res
+
+      }
+    )
+  }
+}
+
+
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
@@ -695,8 +773,6 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
         console.log("ADDTIMESHEET");
         alert('successful')
         store.dispatch(viewTimesheet(TS_DATE));
-
-
       }
     )
   }
@@ -817,6 +893,26 @@ export function getListBU(){
       method:'GET',
       url:`${baseURL}/dev/report/r_list_bu?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
+
+export function getDirectoratBU(bu,tahun){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/report/r_directoratbu?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        bu: bu,
+        tahun:tahun
+      }
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
