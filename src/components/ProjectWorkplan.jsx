@@ -225,6 +225,7 @@ class ProjectWorkplan extends Component {
                               inputName="PARENT"
                               name="WBS_PARENT_ID"
                               component={ReduxSelectNew}>
+                              <option></option>
                                 {
                                   workplan_view &&
                                   workplan_view.map((value,index) => (

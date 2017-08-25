@@ -9,12 +9,12 @@
       li {
         margin-top: 22px;
         small.active {
-          color: $color-secondary;        
+          color: $color-secondary;
         }
         small:hover{
           cursor: pointer;
         }
-      
+
       }
     }
   }
@@ -33,21 +33,7 @@
 }
 
 
-.table.workplan {
-  width: 100%;
-  th:first-child {
-  padding-left:20px;
-  padding-right:0;
-}
-  th {
-    text-align: left;
-    font-family: 'lato', sans-serif;
-    font-weight: 400;
-    font-size: 13px;
 
-    color: #777777;
-  }
-}
 
 .resolved{
   font-family: 'OpenSans',sans-serif;
