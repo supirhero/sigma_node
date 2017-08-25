@@ -359,7 +359,7 @@ export const checkIWOUsed = (iwo) => {
 }
 
 
-export const editProject = (data, id) => 
+export const editProject = (data, id) =>
 // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
  function (dispatch) {
@@ -392,7 +392,7 @@ export const editProject = (data, id) =>
             VISIBILITY:data.VISIBILITY,
             START:moment(data.START).format('YYYY-MM-DD'),
             END:moment(data.END).format('YYYY-MM-DD')
-            
+
 
           }
         }).then(
@@ -785,7 +785,9 @@ export function getWorkplanView(id){
   return function(dispatch){
     return axios({
       method:'GET',
+      // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
       url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
+
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -824,5 +826,3 @@ export function getListBU(){
     )
   }
 }
-
-

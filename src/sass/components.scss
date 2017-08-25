@@ -698,15 +698,25 @@ Tabs {
     }
 }
 
-th {
-  padding: 20px 0;
-  text-align: left;
-  font-family: 'lato',sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-
-  color:#777777;
+.table.workplan {
+  width: 100%;
+  th:first-child {
+  padding-left:20px;
+  padding-right:0;
 }
+  th {
+    text-align: left;
+    font-family: 'lato', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+
+    color: #777777;
+  }
+  td {
+    font-size: 11px;
+  }
+}
+
 
 .table{
   border-collapse: collapse;
@@ -722,6 +732,10 @@ th {
     font-family: 'lato',sans-serif;
     font-weight: 400;
     color: #777777;
+  }
+
+  th {
+    font-size: 12px;
   }
 
   td{

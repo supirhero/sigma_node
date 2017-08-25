@@ -306,7 +306,7 @@ class ProjectWorkplan extends Component {
                   <div className='unit whole'>
                     {
                       !workplan ? <PageLoader/> :
-                      <table className='table workplan'>
+                      <table className='table workplan' >
                       <thead>
                         <Header style={{padding: '20px 0 0 20px'}} text='Project Detail'/>
 
@@ -321,42 +321,12 @@ class ProjectWorkplan extends Component {
                           <th>RESOURCES<br/></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr onClick={
-                          e => {
-                              if (this.state.clicked) {
-                                this.setState({clicked:false})
-                              }
-                              else {
-                                this.setState({clicked:true})
-                              }
-                              e.preventDefault()
-                            }
-                          }>
 
-                          <td  style={{paddingLeft: '20px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{workplan.children.length!=0 && this.state.clicked ? 'expand_more': 'expand_less'}</span>&nbsp;&nbsp;&nbsp;&nbsp;{workplan.WBS_NAME}</td>
-                          <td>{workplan.WORK}</td>
-                          <td>{workplan.WORK_TOTAL}</td>
-                          <td>{workplan.DURATION}</td>
-                          <td>{workplan.START_DATE}</td>
-                          <td>{workplan.END_DATE}</td>
-                          <td>{workplan.WORK_PERCENT_COMPLETE}</td>
-                          <td>{workplan.LEAF}</td>
-                        </tr>
-                      </tbody>
-                      {
-                        workplan.children.length !=0 && this.state.clicked &&
+                          <WorkplanRow data={workplan}>
 
-                        workplan.children.map((value,index) => {
-                          return(
+                          </WorkplanRow>
 
-                              <WorkplanRow  key={index} data={value}>
 
-                              </WorkplanRow>
-
-                        )
-                      })
-                    }
 
                     </table>}
                   </div>
