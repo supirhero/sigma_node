@@ -38,6 +38,12 @@ class ReportsOverview extends Component {
     e.preventDefault() 
    } 
 
+   handleYearlyChange (e) { 
+    this.setState({year: e.target.value}); 
+    store.dispatch(reportYearly(e.target.value));
+    e.preventDefault() 
+   } 
+
   render() {
     const r_monthly = store.getState().data.r_monthly
     const r_yearly_cpi = store.getState().data.r_yearly_cpi
@@ -211,26 +217,26 @@ class ReportsOverview extends Component {
           </div>
         </div>
 
-        <div className="grid wrap wider reports" style={{paddingRight:'24px'}} >
+        <div className="grid wrap wider reports" >
           <div className="unit whole" style={{paddingBottom:0}}>
             <div className="card" style={{ padding: '35px' }}>
               <div className="unit whole" style={{paddingLeft:'10px'}}>
                 <Header text='Yearly Performance' style={{display:'inline-block'}} />
                 <a href="" style={{float:'right'}}>hide advanced filter</a>
               </div>
-              {/* 
+       
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
                 <Checkbox id='test1' label='BSD' group='working' />
               </div>
-              */}
+         
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
                 <div className="unit half">
                
                   
-              <select onChange={this.handleYearChange.bind(this)} 
-              className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+              <select onChange={this.handleYearlyChange.bind(this)} 
+              className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'left'}}> 
               { 
                 year.map((value,index) => { 
                 return( 
@@ -241,13 +247,13 @@ class ReportsOverview extends Component {
             </select> 
                 </div>
                 <div className="unit half">
-                <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
+               {/* <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
                 onClick={(e)=> { 
                   console.log(this.state.month,this.state.year); 
                   store.dispatch(reportYearly(this.state.month,this.state.year)) 
                   // store.dispatch(myPerformance('1','2017')) 
                   e.preventDefault() 
-                }}>search</span></button> 
+                }}>search</span></button> */}
                 <button style={{display:'inline-block',float:'right'}} className='btn-primary'>DOWNLOAD</button>
                 </div>
               </div>
