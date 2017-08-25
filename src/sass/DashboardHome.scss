@@ -24,20 +24,36 @@
   .btn-secondary {
     float: right;
   }
+
   .card {
-    padding: 23px 32px;
+    height: 40px;
+    padding: 10px 20px;
+    margin-bottom: 0;
+    cursor:pointer;
+
+    &:hover{
+      background: #f6f6f6;
+    }
+
     .project-name {
+      font-size: 14px;
+      line-height: 38px;
       color: #333333;
     }
+
     .project-status {
+      font-size: 14px;
+      line-height: 38px;
       text-transform: uppercase;
       font-weight: 400;
       font-family: 'Open Sans', sans-serif;
     }
+
     .line-bar {
       overflow: hidden;
       border-radius: 10px;
       border: 1px solid #EEEEEE;
+      margin: 15px 0;
     }
   }
 }

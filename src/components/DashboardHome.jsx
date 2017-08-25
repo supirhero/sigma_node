@@ -21,8 +21,8 @@ class DashboardHome extends Component {
     // console.log(projects);
     return(
       <div>
-      <div className='grid wrap'>
-        <div className='unit half'>
+      <div className='grid wrap wider'>
+        <div className='unit two-fifths'>
           <div className='card profile'>
               <div className='grid'>
 
@@ -65,14 +65,15 @@ class DashboardHome extends Component {
 
                   </div>
                 </div>
-
-
-
             <div>
           </div>
         </div>
       </div>
-      <div className='unit half'>
+
+      <div className='unit one-fifth'>
+      </div>
+
+      <div className='unit two-fifths'>
         <div className='margin' style={{paddingTop:'20px'}}>
         <div className='grid'>
           <div className='unit half'>
@@ -95,8 +96,6 @@ class DashboardHome extends Component {
         </div>
         <div className='grid'>
             <div className='unit half'>
-
-
               <Meter
                 progress={auth.datatimesheet ? auth.datatimesheet.entry * 0.01 : '-'}
                 text={auth.datatimesheet ? Math.floor(auth.datatimesheet.entry) : '-'}
@@ -104,6 +103,7 @@ class DashboardHome extends Component {
                 status={auth.datatimesheet.status}
               />
             </div>
+
             <div className='unit half'>
               <Meter
                 progress={auth.datatimesheet ? auth.datatimesheet.utilization * 0.01 : '-'}
@@ -117,16 +117,17 @@ class DashboardHome extends Component {
 
       </div>
     </div>
-    <div className='grid wrap'>
+
+    <div className='grid wrap wider'>
       <div className='unit whole'>
         <div className='divider'>
         </div>
       </div>
     </div>
-    <div className='grid wrap '>
+
+    <div className='grid wrap wider'>
       <div className='unit whole'>
         <Search placeholder='search business units or project'></Search>
-
 
       </div>
     </div>
@@ -135,10 +136,10 @@ class DashboardHome extends Component {
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
-                    <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap' key={index}>
+                    <div style={{margin: '50px auto 10px'}} className='grid wrap wider' key={index}>
                       <div className='unit whole'>
 
-                    <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
+                    <large style={{display:'inline-block',color:'#AAA'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'18px',lineHeight:'50px'}} onClick={
                       e=> {
                         // browserHistory.push('/business-unit')
                         store.dispatch(changeRoute({
@@ -195,44 +196,45 @@ class DashboardHome extends Component {
 
                         }
                         return(
-                          <div className='grid wrap' key={index}>
-                            <div className='unit whole no-gutters'>
-                              <div className='card' onClick={
-                                e => {
-                                  store.dispatch(changeRoute({
-                                    type: 'PUSH',
-                                    page: {
-                                      name: 'project',
-                                      id : value.project_id
+                          <div className='grid wrap wider' key={index}>
+                            <div className='unit whole' onClick={
+                              e => {
+                                store.dispatch(changeRoute({
+                                  type: 'PUSH',
+                                  page: {
+                                    name: 'project',
+                                    id : value.project_id
 
-                                    }
-                                  }))
+                                  }
+                                }))
 
-                                  e.preventDefault()
-                                }
-                              }>
-                                <div className='unit two-fifths'>
+                                e.preventDefault()
+                              }
+                            }>
+                              <div className='card'>
+                                <div className='unit half'>
                                   <medium className='project-name list-pointer'>
                                     {value.project_name}
                                   </medium>
                                 </div>
-                                <div className='unit one-fifth'>
-                                  <small style={{fontSize:'15px'}} className='project-status'>
+                                <div className='unit one-quarter'>
+                                  <small className='project-status'>
                                     {
                                       value.project_status
                                     }
-                                    &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
+                                    &nbsp;(<small style={{color: color, display:'inline-block'}}>{value.project_complete}%</small>)
                                   </small>
                                 </div>
-                                <div className='unit two-fifths'>
+                                <div className='unit one-quarter'>
                                   <Line
                                     progress={value.project_complete *0.01}
                                     initialAnimate={true}
                                     options={{
-                                      strokeWidth: 3,
+                                      strokeWidth: 4,
                                       color: color,
                                       trailColor:'#EEEEEE',
                                       trailWidth: 12,
+
                                       fontSize: 30,
                                       easing: 'easeInOut',
                                       duration: 700,

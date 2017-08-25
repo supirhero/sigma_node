@@ -14,7 +14,7 @@
 @import "project";
 @import "ProjectOverview";
 @import "loader";
-@import '../../node_modules/react-datepicker/dist/react-datepicker.min.css'; 
+@import '../../node_modules/react-datepicker/dist/react-datepicker.min.css';
 @import '../../node_modules/react-day-picker/lib/style.css';
 
 
@@ -22,5 +22,11 @@
 
 body {
   background-color: $color-background;
-  margin: 0
+  margin: 0 0 50px 0;
+
+  .grid{
+    .unit{
+      padding:2px 10px;
+    }
+  }
 }
