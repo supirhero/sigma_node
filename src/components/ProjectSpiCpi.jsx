@@ -15,8 +15,8 @@ class ProjectSpiCpi extends Component {
     const id = store.getState().page.id
     const spi = state.data.spi ? state.data.spi : null
     const cpi = state.data.cpi ? state.data.cpi : null
-    store.dispatch(getSPI(id))
-    store.dispatch(getCPI(id))
+    store.dispatch(getSPI(6992115))
+    store.dispatch(getCPI(6992115))
   }
 
   componentWillUnmount() {
