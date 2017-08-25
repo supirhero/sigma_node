@@ -111,7 +111,7 @@ export class Menu extends Component {
                 this.setState({clicked:true})
               }
             }
-          }>
+          }>{this.props.icon}
         </div>
 
             <div onMouseLeave = {
@@ -120,7 +120,7 @@ export class Menu extends Component {
                   clicked : false
                 })
               }
-            } className={this.state.clicked ? 'menu active' : 'menu'}>
+            } style={this.props.menuStyle} className={this.state.clicked ? 'menu active' : 'menu'}>
               {this.props.children}
 
             </div>
@@ -1082,88 +1082,257 @@ function renderAdjacent(onWhatever){
 }
 
 
+
+
 export class WorkplanRow extends Component {
   constructor(){
     super();
     this.state = {
       clicked : false,
       clicked_child : false
-
-
     };
   }
+  renderRow(value){
+    var padding =(value.LEVEL * 20 + 20).toString()
+    // var padding = num.toString();
+    console.log('PADDING', padding);
+    return(
+      value.children.map((value,index)=> [
+
+        <tr onClick={
+          e => {
+            var key = (value.WBS_ID).toString()
+            if (this.state[key]) {
+              this.setState({[key]:false})
+            }
+            else {
+              this.setState({[key]:true})
+            }
+            e.preventDefault()
+          }
+        }>
+        <td style={{paddingLeft: padding+'px', wordBreak:'break-word'}}>
+          {/* <div style={{width:'200px', overflow:'hidden'}}> */}
+            <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
+              {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
+          {/* </div> */}
+          </td>
+        <td>{value.WORK}</td>
+        <td>{value.WORK_TOTAL}</td>
+        <td>{value.DURATION}</td>
+        <td>{value.START_DATE}</td>
+        <td>{value.END_DATE}</td>
+        <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
+        <td>{value.LEAF}</td>
+        <td>
+
+          {/* <Menu style={{display:'inline'}} triggerClass='profile'>
+            <MenuSection>
+              <MenuHeader title='Kara Cray' subTitle='@karagay'/>
+              <MenuItem title='Home' onClick={
+                e => {
+                  browserHistory.push('/')
+                }
+
+              }/>
+              <MenuItem title='Profile' onClick={
+                e => {
+                  browserHistory.push('/profile')
+                }
+              }/>
+            </MenuSection>
+            <MenuSection>
+              <MenuHeader title='ADMIN CONSOLE'/>
+              <MenuItem title='Master Data' onClick={
+                e => {
+                  browserHistory.push('/dataset')
+                }
+              }/>
+              <MenuItem title='Manage Role & Access' onClick={
+                e => {
+                  browserHistory.push('/manage')
+                }
+                }/>
+            </MenuSection>
+            <MenuSection>
+              <MenuItem onClick={
+                e => {
+                  console.log('work');
+                  browserHistory.replace('/auth')
+                  //
+                  store.dispatch(logout())
+                  e.preventDefault()
+                }
+              } title='LogOut'/>
+            </MenuSection>
+
+          </Menu> */}
+
+        </td>
+
+      </tr>,
+
+        this.state[(value.WBS_ID).toString()] && this.state[(value.WBS_ID).toString()] !=false &&
+        this.renderRow(value)
+
+      ])
+    )
+  }
+
   render(){
     var value = this.props.data
     return (
       <tbody>
-        <tr onClick={
-          e => {
-              if (this.state.clicked) {
-                this.setState({clicked:false})
+        <tr >
+
+          <td  style={{paddingLeft: '20px'}}
+
+            onClick={
+              e => {
+                  if (this.state[(value.WBS_ID).toString()]) {
+                    this.setState({[(value.WBS_ID).toString()]:false})
+                  }
+                  else {
+                    this.setState({[(value.WBS_ID).toString()]:true})
+                  }
+                  e.preventDefault()
+                }
               }
-              else {
-                this.setState({clicked:true})
-              }
-              e.preventDefault()
-            }
-      }>
-          <td style={{paddingLeft: '40px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+            >
+            <span style={{verticalAlign:'middle', fontSize:'16px', color:'black', wordBreak:'break-word'}} className='material-icons'>{value.children.length!=0 && this.state[(value.WBS_ID)] ? 'expand_more': 'expand_less'}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
+
+          </td>
           <td>{value.WORK}</td>
           <td>{value.WORK_TOTAL}</td>
           <td>{value.DURATION}</td>
           <td>{value.START_DATE}</td>
           <td>{value.END_DATE}</td>
-          <td>{value.WORK_PERCENT_COMPLETE}</td>
+          <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
           <td>{value.LEAF}</td>
+          <td style={{position:'relative'}}>
+            <Menu menuStyle={{top:'0', right:'0'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
+              <MenuSection>
+                <MenuHeader title='Kara Cray' subTitle='@karagay'/>
+                <MenuItem title='Home' onClick={
+                  e => {
+                    browserHistory.push('/')
+                  }
+
+                }/>
+                <MenuItem title='Profile' onClick={
+                  e => {
+                    browserHistory.push('/profile')
+                  }
+                }/>
+              </MenuSection>
+
+            </Menu>
+
+          </td>
+
         </tr>
         {
-          this.state.clicked &&
-          value.children.map((value, index) => [
-          <tr key={index} onClick={
-            e => {
-                if (this.state.clicked_child) {
-                  this.setState({clicked_child:false})
-                }
-                else {
-                  this.setState({clicked_child:true})
-                }
-                e.preventDefault()
-              }
-        }>
-            <td style={{paddingLeft: '60px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
-
-            <td>{value.WORK}</td>
-            <td>{value.WORK_TOTAL}</td>
-            <td>{value.DURATION}</td>
-            <td>{value.START_DATE}</td>
-            <td>{value.END_DATE}</td>
-            <td>{value.WORK_PERCENT_COMPLETE}</td>
-            <td>{value.LEAF}</td>
-          </tr>,
-
-          this.state.clicked_child &&
-          value.children.map((value, index) => (
-          <tr key={index}>
-            <td style={{paddingLeft: '80px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked_child ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
-
-            <td>{value.WORK}</td>
-            <td>{value.WORK_TOTAL}</td>
-            <td>{value.DURATION}</td>
-            <td>{value.START_DATE}</td>
-            <td>{value.END_DATE}</td>
-            <td>{value.WORK_PERCENT_COMPLETE}</td>
-            <td>{value.LEAF}</td>
-          </tr>
-        ))
-      ])
-
+          value.children.length !=0 && this.state[(value.WBS_ID).toString()] &&
+          this.renderRow(value)
         }
-
       </tbody>
+
 
     )
   }
 }
+
+{/* // export class WorkplanRow extends Component {
+//   constructor(){
+//     super();
+//     this.state = {
+//       clicked : false,
+//       clicked_child : false
+//
+//
+//     };
+//   }
+//   render(){
+//     var value = this.props.data
+//     return (
+//       <tbody>
+//         <tr onClick={
+//           e => {
+//               if (this.state.clicked) {
+//                 this.setState({clicked:false})
+//               }
+//               else {
+//                 this.setState({clicked:true})
+//               }
+//               e.preventDefault()
+//             }
+//       }>
+//           <td style={{paddingLeft: '40px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+//           <td>{value.WORK}</td>
+//           <td>{value.WORK_TOTAL}</td>
+//           <td>{value.DURATION}</td>
+//           <td>{value.START_DATE}</td>
+//           <td>{value.END_DATE}</td>
+//           <td>{value.WORK_PERCENT_COMPLETE}</td>
+//           <td>{value.LEAF}</td>
+//         </tr>
+//         {
+//           this.state.clicked && value.children.length != 0 &&
+//           value.children.map((value, index) => (
+//             <WorkplanRow key={index} data={value}></WorkplanRow>
+//
+//           ))
+//         }
+//         {/* {
+//           this.state.clicked &&
+//           value.children.map((value, index) => [
+//           <tr key={index} onClick={
+//             e => {
+//                 if (this.state.clicked_child) {
+//                   this.setState({clicked_child:false})
+//                 }
+//                 else {
+//                   this.setState({clicked_child:true})
+//                 }
+//                 e.preventDefault()
+//               }
+//             }>
+//             <td style={{paddingLeft: '60px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+//
+//             <td>{value.WORK}</td>
+//             <td>{value.WORK_TOTAL}</td>
+//             <td>{value.DURATION}</td>
+//             <td>{value.START_DATE}</td>
+//             <td>{value.END_DATE}</td>
+//             <td>{value.WORK_PERCENT_COMPLETE}</td>
+//             <td>{value.LEAF}</td>
+//           </tr>,
+//
+//           this.state.clicked_child &&
+//           value.children.map((value, index) => (
+//           <tr key={index}>
+//             <td style={{paddingLeft: '80px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked_child ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
+//
+//             <td>{value.WORK}</td>
+//             <td>{value.WORK_TOTAL}</td>
+//             <td>{value.DURATION}</td>
+//             <td>{value.START_DATE}</td>
+//             <td>{value.END_DATE}</td>
+//             <td>{value.WORK_PERCENT_COMPLETE}</td>
+//             <td>{value.LEAF}</td>
+//           </tr>
+//         ))
+//       ])
+//
+//         }
+//
+//       </tbody>
+//
+//     )
+//   }
+// } */}
 
 export class ActivityRow extends Component {
   constructor(){
