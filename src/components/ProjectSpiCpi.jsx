@@ -15,8 +15,8 @@ class ProjectSpiCpi extends Component {
     const id = store.getState().page.id
     const spi = state.data.spi ? state.data.spi : null
     const cpi = state.data.cpi ? state.data.cpi : null
-    store.dispatch(getSPI(6992115))
-    store.dispatch(getCPI(6992115))
+    store.dispatch(getSPI(id))
+    store.dispatch(getCPI(id))
   }
 
   componentWillUnmount() {
@@ -65,9 +65,10 @@ class ProjectSpiCpi extends Component {
 
 
    
-
+if (!spi && !cpi) {
+      return <PageLoader />;
+    }
     return (  
-      !spi && !cpi ? <PageLoader /> :
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">

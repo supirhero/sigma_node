@@ -45,7 +45,6 @@ class ProjectActivities extends Component {
     const activity_timesheet = state.data.activity_timesheet;
     if (!activity_timesheet) {
       return <PageLoader />;
-
     }
     return (
       <div>

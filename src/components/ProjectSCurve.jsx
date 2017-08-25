@@ -8,9 +8,9 @@ import {getSCurve,pop} from './actions.jsx'
 
 
 class ProjectSCurve extends Component {
-  componentDidMount(){
+  componentWillMount(){
     const id = store.getState().page.id
-    store.dispatch(getSCurve(6992115))
+    store.dispatch(getSCurve(id))
     // const state = store.getState()
     // const s_curve = state.data.s_curve ? state.data.s_curve : null
   }
@@ -30,8 +30,11 @@ class ProjectSCurve extends Component {
         ]}
       })
 
+      if (!s_curve) {
+        return <PageLoader />;
+      }
+
       return(
-        !s_curve ? <PageLoader></PageLoader> :
         <div className='project-DocsFiles'>
           <div className='grid padding-left'>
             <div className='unit whole'>
