@@ -37,7 +37,7 @@ class NewProject extends Component {
     const initData = {
       "IWO_AVAILABLE": 'true',
 
-      "IWO_NO": null,
+      // "IWO_NO": null,
       // "END_CUST_ID": iwo[0].END_CUSTOMER,
       // "AMOUNT": iwo[0].AMOUNT,
       // "PROJECT_NAME": iwo[0].PROJECT_NAME,
@@ -245,7 +245,7 @@ class NewProject extends Component {
                     style={{width:'100%'}}
                     // asyncValidate= {isIWOUsed()}
                     component={ReduxInput}
-                    validate={[required, ]}
+                    validate={[required ]}
 
                     // }}
                   >
@@ -309,7 +309,7 @@ class NewProject extends Component {
                   //   // alert(this.state.iwo_index)
                   // }}
                 >
-                  <option value='' >Select IWO</option>
+                  <option></option>
 
                   {
                     iwo &&
@@ -461,8 +461,10 @@ class NewProject extends Component {
                         name="PM"
                         style={{width:'96%'}}
                         component={ReduxSelect}
+                        validate={[required]}
+
                       >
-                        <option value=''>Select Project Manager</option>
+                        <option></option>
 
                         {
                           projectManager.map((value, index)=> (
@@ -483,7 +485,7 @@ class NewProject extends Component {
                         validate={[required]}
 
                       >
-                        <option value='' >Select type of effort</option>
+                        <option></option>
 
                         {
                           typeOfEffort.map((value, index)=> (
@@ -517,8 +519,11 @@ class NewProject extends Component {
                         inputName="ACCOUNT MANAGER"
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
-                        component={ReduxSelect}>
-                        <option value='' >Select Account Manager</option>
+                        component={ReduxSelect}
+                        validate={[required]}
+
+                        >
+                        <option></option>
 
                            <option value={this.props.state.data.username != null ? this.props.state.data.username: null }> {this.props.state.data.username } </option>
                        {/*
@@ -958,7 +963,7 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
-        asyncValidate: isIWOUsed,
+        asyncValidate:  isIWOUsed,
         // validate,
         asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));

@@ -39,7 +39,7 @@ label {
   font-weight: 300 !important;
   font-size: $font-size !important
 }
-input.error {
+.error {
   border-color: $color-secondary;
   background-color: #F6EAEA;
 }
@@ -454,7 +454,7 @@ input:disabled {
   //       -webkit-transform: scale(1);
   //       transform: scale(1);
   //   }
-.select {
+select {
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
   font-family: 'lato', sans-serif;

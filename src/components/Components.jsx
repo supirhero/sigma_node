@@ -25,7 +25,8 @@ import PasswordMask from 'react-password-mask';
 
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-export const required = value => (value  ? undefined : 'Required')
+export const required = value => (value ? undefined : 'Required')
+// export const required = value => (console.log("REQUIRED",value))
 
 // export const isIWOUsed = (value /*, dispatch */) => {
 //   return sleep(1000).then(() => {
@@ -45,20 +46,21 @@ export const isIWOUsed = (value) =>{
       url: `${baseURL}/dev/project/checkiwoused`+token_string,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
-        IWO_NO: value
+        IWO_NO: value.IWO_NO
       }
 
     }).then(
       (res)=> {
         // resolve('BLa')
         console.log(res);
-        if (res.data.jumlah == '0') {
+        console.log('JUMLAH',res.data.jumlah);
+        if (res.data.jumlah <= '0' || res.data.jumlah <=0) {
           // return 'IWO already used'
-              throw { IWO_NO: 'IWO is already used' };
+          throw { IWO_NO: undefined };
 
         }
         else {
-          throw { IWO_NO: 'IWO is not used' };
+          throw { IWO_NO: 'IWO is already used' };
 
           // return null
         }
@@ -450,24 +452,39 @@ export class ReduxSelect extends Component {
 
     };
   }
+  componentDidUpdate() {
+
+    console.log('PROPS', this.props);
+  }
   render() {
+    if(this.props.meta.error == 'IWO is already used'){
+      console.log("ERRORRR",this.props.meta.error );
+      this.props.meta.error = undefined
+    }
     console.log('SELECT PROPS',this.props);
     return (
       <div style={this.props.style}>
 
         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select className='select' {...this.props.select} {...this.props.custom}
-          onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
-          placeholder={this.props.placeholder}
-          onBlur = {e=> {
+        <select
+          // className='select'
+          className= {'select ' + this.props.meta.touched && ((this.props.meta.error && 'error'))}
 
-          }}
+          {...this.props.select}
+          {...this.props.custom}
+          {...this.props.input}
+
+          // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+          placeholder={this.props.placeholder}
+          // onBlur = {e=> {
+          //
+          // }}
         >
           {this.props.children}
         </select>
-        {/* {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )} */}
-        {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>}
+        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
       </div>
     )
   }
@@ -1380,7 +1397,7 @@ export class datepickerUniversal extends Component {
           dateFormat="YYYY-MM-DD"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
-          onChange={this.handleChange}
+          // onChange={this.handleChange}
          >
           {this.props.children}
           </DatePicker>
