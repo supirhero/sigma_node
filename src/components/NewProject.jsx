@@ -244,8 +244,8 @@ class NewProject extends Component {
                     type='input'
                     style={{width:'100%'}}
                     // asyncValidate= {isIWOUsed()}
-                    component={ReduxInputAsync}
-                    validate={[required]}
+                    component={ReduxInput}
+                    validate={[required, ]}
 
                     // }}
                   >
@@ -958,9 +958,9 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
-        // isIWOUsed,
+        asyncValidate: isIWOUsed,
         // validate,
-        // asyncBlurFields: [ 'IWO_NO' ],
+        asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login
