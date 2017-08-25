@@ -21,8 +21,8 @@ class DashboardHome extends Component {
     // console.log(projects);
     return(
       <div>
-      <div className='grid wrap wider'>
-        <div className='unit two-fifths'>
+      <div className='grid wrap'>
+        <div className='unit half'>
           <div className='card profile'>
               <div className='grid'>
 
@@ -70,10 +70,7 @@ class DashboardHome extends Component {
         </div>
       </div>
 
-      <div className='unit one-fifth'>
-      </div>
-
-      <div className='unit two-fifths'>
+      <div className='unit half'>
         <div className='margin' style={{paddingTop:'20px'}}>
         <div className='grid'>
           <div className='unit half'>
@@ -118,14 +115,14 @@ class DashboardHome extends Component {
       </div>
     </div>
 
-    <div className='grid wrap wider'>
+    <div className='grid wrap'>
       <div className='unit whole'>
         <div className='divider'>
         </div>
       </div>
     </div>
 
-    <div className='grid wrap wider'>
+    <div className='grid wrap'>
       <div className='unit whole'>
         <Search placeholder='search business units or project'></Search>
 
@@ -136,7 +133,7 @@ class DashboardHome extends Component {
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
-                    <div style={{margin: '50px auto 10px'}} className='grid wrap wider' key={index}>
+                    <div style={{margin: '50px auto 10px'}} className='grid wrap' key={index}>
                       <div className='unit whole'>
 
                     <large style={{display:'inline-block',color:'#AAA'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'18px',lineHeight:'50px'}} onClick={
@@ -196,7 +193,7 @@ class DashboardHome extends Component {
 
                         }
                         return(
-                          <div className='grid wrap wider' key={index}>
+                          <div className='grid wrap' key={index}>
                             <div className='unit whole' onClick={
                               e => {
                                 store.dispatch(changeRoute({
