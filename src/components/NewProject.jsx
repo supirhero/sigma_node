@@ -48,7 +48,7 @@ class NewProject extends Component {
       // // "PM": 'NONE',
       // // "AM_ID": 'NONE',
       // // "TYPE_OF_EFFORT": 'NONE',
-      // "PROJECT_STATUS": 'NOT STARTED',
+      "PROJECT_STATUS": 'NOT STARTED',
       "H/O": 'yes',
       "PROJECT_TYPE_ID": 'project',
       //
@@ -525,7 +525,8 @@ class NewProject extends Component {
                         >
                         <option></option>
 
-                           <option value={this.props.state.data.username != null ? this.props.state.data.username: null }> {this.props.state.data.username } </option>
+
+                           <option value={this.props.state.data.username != null ? this.props.state.data.username: 'none' }> {this.props.state.data.username != null ? this.props.state.data.username: 'none' } </option>
                        {/*
                           this.props.state.data.AM_ID &&
                           this.props.state.data.AM_ID.map((value, index)=> (
