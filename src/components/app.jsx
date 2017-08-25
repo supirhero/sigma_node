@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { Router, Route,IndexRoute, browserHistory, Redirect } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-
 import MainPage from './MainPage.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
@@ -51,10 +50,6 @@ import ManageRoleAccess from './ManageRoleAccess.jsx'
 import ManageRoles from './ManageRoles.jsx'
 import ManageAccess from './ManageAccess.jsx'
 
-
-
-
-
 import {muiTheme} from './Components.jsx'
 import {MuiThemeProvider } from 'material-ui'
 
@@ -72,7 +67,6 @@ function requireAuth(nextState, replace) {
 }
 
 store.subscribe(()=> {
-
   saveState(store.getState())
 })
 

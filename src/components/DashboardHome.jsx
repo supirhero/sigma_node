@@ -125,9 +125,9 @@ class DashboardHome extends Component {
     <div className='grid wrap'>
       <div className='unit whole'>
         <Search placeholder='search business units or project'></Search>
-
       </div>
     </div>
+
     <div className='projects'>
       {
               auth.project.map((value, index) => {
@@ -251,8 +251,17 @@ class DashboardHome extends Component {
             })
           }
     </div>
-  </div>
 
+    <div className="footer">
+      <div className='grid wrap'>
+        <div className='unit whole'>
+          <p>
+            © 2016 - Project Management & Resources Delivery System. All rights reserved
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   )
   }

@@ -54,7 +54,7 @@ class Project extends Component {
     ]
     return(
       <div className='project'>
-          <div className='grid wrap'>
+          <div className='grid wrap wider'>
             <div className='unit one-fifth no-gutters'>
               <div className='sidebar'>
               <div className='grid wrap'>
@@ -105,7 +105,7 @@ class Project extends Component {
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Field 
+                      <Field
                         inputName="SUBJECT"
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
@@ -124,7 +124,7 @@ class Project extends Component {
                         />
                     </div>
                   </div>
-   
+
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' }}>
      {/*   <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"> ADD NEW</button> */}
@@ -144,7 +144,7 @@ class Project extends Component {
                       sidebar.map((value, index) => {
                         if (value.type == 'menu') {
                           return(
-                            <li key={index}><small className={ this.state.active == value.name ? 'active' : '' } onClick={
+                            <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
                               e => {
                                 const name = value.name
                                 this.setState({
@@ -159,7 +159,7 @@ class Project extends Component {
                                 }
                                 e.preventDefault()
                               }
-                            }>{value.name}</small></li>
+                            }>{value.name}</a></li>
                           )
                         }
                         else {

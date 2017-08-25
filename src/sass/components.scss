@@ -34,7 +34,7 @@
 }
 
 
-$font-size : 17px;
+$font-size : 14px;
 label {
   font-weight: 300 !important;
   font-size: $font-size !important
@@ -792,4 +792,19 @@ Tabs {
 
 :global .react-datepicker-wrapper{
   width:100%;
+}
+
+.footer{
+  background: #FFF;
+  text-align: center;
+  height: auto;
+
+  p{
+    display: block;
+    font-size: 14px;
+    padding:20px 0;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: lighter;
+    margin:auto;
+  }
 }

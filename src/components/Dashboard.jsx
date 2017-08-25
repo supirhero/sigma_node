@@ -112,7 +112,7 @@ class Dashboard extends Component {
 =======
         <div>
           <div className='navbar'>
-            <div className='grid wrap' style={{position:'relative'}}>
+            <div className='grid wrap wider' style={{position:'relative'}}>
               <div className='unit whole no-gutters'>
                 <div id='prouds-logo'></div>
                 <ul>

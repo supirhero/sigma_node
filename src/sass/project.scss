@@ -4,17 +4,38 @@
       width: 100%;
     }
     ul {
+      margin-top:50px;
       padding-left: 28px;
       list-style: none;
       li {
+<<<<<<< HEAD
         margin-top: 22px;
         small.active {
           color: $color-secondary;
-        }
-        small:hover{
-          cursor: pointer;
+=======
+        margin-top: 15px;
+
+        a{
+            text-decoration: none;
+            color:#333;
+
+            -webkit-transition: padding-left 0.25s; /* Safari */
+            transition: padding-left 0.25s;
+
+            &:hover{
+              padding-left: 10px;
+              color:$color-accent;
+            }
+>>>>>>> add sidebar animation
         }
 
+        a.active{
+          color:$color-accent;
+        }
+<<<<<<< HEAD
+
+=======
+>>>>>>> add sidebar animation
       }
     }
   }
