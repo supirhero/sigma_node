@@ -65,9 +65,10 @@ class ProjectSpiCpi extends Component {
 
 
    
-
+if (!spi && !cpi) {
+      return <PageLoader />;
+    }
     return (  
-      !spi && !cpi ? <PageLoader /> :
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">

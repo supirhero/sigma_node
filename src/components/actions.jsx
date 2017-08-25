@@ -463,8 +463,6 @@ export const getAddProjectView = (id) => {
 }
 
 export const getSPI = (id) => {
-  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
   return function (dispatch) {
     return axios({
             method: 'GET',
@@ -483,7 +481,6 @@ export const getSPI = (id) => {
             },
           )
   }
-
 }
 
 export const getCPI = (id) => {
