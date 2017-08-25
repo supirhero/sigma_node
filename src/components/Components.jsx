@@ -27,13 +27,14 @@ import PasswordMask from 'react-password-mask';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 export const required = value => (value  ? undefined : 'Required')
 
-// export const isIWOUsed = (values /*, dispatch */) => {
+// export const isIWOUsed = (value /*, dispatch */) => {
 //   return sleep(1000).then(() => {
 //     // simulate server latency
 //     // if (['john', 'paul', 'george', 'ringo'].includes(values.username)) {
 //     //   throw { username: 'That username is taken' }
 //     // }
-//     throw 'bla'
+//     console.log('VALUE IWO',value);
+//     throw { IWO_NO: 'That username is taken' };
 //   })
 // }
 export const isIWOUsed = (value) =>{
@@ -50,11 +51,16 @@ export const isIWOUsed = (value) =>{
     }).then(
       (res)=> {
         // resolve('BLa')
-        if (res.data.jumlah > 0) {
-          return 'IWO already used'
+        console.log(res);
+        if (res.data.jumlah == '0') {
+          // return 'IWO already used'
+              throw { IWO_NO: 'IWO is already used' };
+
         }
         else {
-          return null
+          throw { IWO_NO: 'IWO is not used' };
+
+          // return null
         }
       }
     )
@@ -244,7 +250,6 @@ export class ReduxInput extends Component {
           <input
             className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
             style={{width:'100%'}}
-            onC
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
@@ -256,7 +261,20 @@ export class ReduxInput extends Component {
         </div>
     )
   }
+
 }
+
+export const ReduxInputAsync2 = (
+  { input, label, type, meta: { asyncValidating, touched, error } },
+) => (
+  <div>
+    <label>{label}</label>
+    <div className={asyncValidating ? 'async-validating' : ''}>
+      <input {...input} type={type} placeholder={label} />
+      {touched && error && <span>{error}</span>}
+    </div>
+  </div>
+);
 
 export class ReduxInputAsync extends Component {
   constructor(){
@@ -285,43 +303,43 @@ export class ReduxInputAsync extends Component {
 
             }
             style={{width:'100%'}}
-            onFocus = {e=> {
-              this.setState({error : null})
-            }}
+            // onFocus = {e=> {
+            //   this.setState({error : null})
+            // }}
             placeholder={this.props.placeholder}
             type='text'
             {...this.props.input}
 
 
-            onBlur={
-              (e)=> {
-              // alert(e.target.value)
-              console.log()
-              // if (e.target.value == '') {
-              //   this.setState({error : 'Required'})
-              // }
-              // else if (e.target.value != '') {
-              //   this.setState({error : null})
-              //
-              // }
-              // else {
-                isIWOUsed(e.target.value).then(
-                  res => this.setState({error : res})
-
-                )
-              // }
-            }}
+            // onBlur={
+            //   (e)=> {
+            //   // alert(e.target.value)
+            //   console.log()
+            //   // if (e.target.value == '') {
+            //   //   this.setState({error : 'Required'})
+            //   // }
+            //   // else if (e.target.value != '') {
+            //   //   this.setState({error : null})
+            //   //
+            //   // }
+            //   // else {
+            //     isIWOUsed(e.target.value).then(
+            //       res => this.setState({error : res})
+            //
+            //     )
+            //   // }
+            // }}
 
             // {...this.props.field}
           >
           </input>
-          {/* {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))} */}
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))}
 
-          {
+          {/* {
             this.props.input.value == '' && this.state.error !=null? <span className='error-alert'>Required</span> :
             this.state.error!=null && this.props.input.value != '' &&
               <span className='error-alert'>{this.state.error}</span>
-          }
+          } */}
 
         </div>
     )
