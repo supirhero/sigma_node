@@ -4,14 +4,14 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton,PageLoader} from  './components.jsx'
-import {getMyAssignment,pop,viewTimesheet} from './actions.jsx'
+import {getMyAssignment,pop,viewTimesheet,reportYearly} from './actions.jsx'
 
 class MyAssignments extends Component {
  
   componentWillMount(){
     const myAssignment = store.getState().data.myAssignment
     store.dispatch(getMyAssignment())
-
+  store.dispatch(reportYearly("2017"));
   }
 
 
@@ -24,6 +24,8 @@ class MyAssignments extends Component {
       if(!assignment){
         return <PageLoader></PageLoader>
       }
+
+
       return(
 
         <div>

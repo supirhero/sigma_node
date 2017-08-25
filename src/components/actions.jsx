@@ -12,6 +12,7 @@ const baseURL = "http://45.77.45.126"
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
 const token_string = `?token=${token}`
+console.log(token)
 export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
@@ -241,7 +242,7 @@ export const addNewProject = (data) => {
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
               END_CUST_ID:data.END_CUST_ID,
-              // H/O:"yes",
+              HO:"yes",
               IWO_NO:data.IWO_NO,
               MARGIN:data.MARGIN,
               OVERHEAD:data.OVERHEAD,
@@ -253,7 +254,9 @@ export const addNewProject = (data) => {
               RELATED:data.RELATED,
               TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
               TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
-              VISIBILITY:data.VISIBILITY
+              VISIBILITY:data.VISIBILITY,
+              START:moment(data.START).format('YYYY-MM-DD'),
+              END:moment(data.END).format('YYYY-MM-DD')
             }
           }).then(
             res => {
@@ -392,7 +395,6 @@ export const editProject = (data, id) =>
             VISIBILITY:data.VISIBILITY,
             START:moment(data.START).format('YYYY-MM-DD'),
             END:moment(data.END).format('YYYY-MM-DD')
-            
 
           }
         }).then(
@@ -504,8 +506,79 @@ export const getCPI = (id) => {
             },
           )
   }
+}
+
+
+
+export const reportMonthly = (bulan,tahun) => {
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/report/r_month?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+               bulan:bulan,
+               tahun:tahun
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
 
 }
+
+
+export const reportYearly = (tahun) => {
+  return function (dispatch) {
+    return axios({
+            method: 'GET',
+            url: `${baseURL}/dev/report/r_yearly/${tahun}?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
+
+}
+
+export const reportPeople = (BU_ID,BULAN,TAHUN) => {
+  return function (dispatch) {
+    return axios({
+            method: 'POST',
+            url: `${baseURL}/dev/report/r_people?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+              BU_ID,
+              BULAN,
+              TAHUN
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
 
 export const getSCurve = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -824,5 +897,36 @@ export function getListBU(){
     )
   }
 }
+
+
+export function rDirectorat(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/report/r_directoratbu?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+
+export function getData(){
+  return function(dispatch){
+    return axios({
+      method:'GET',
+      url:`${baseURL}/dev/Datamaster/getData/holiday?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
 
 

@@ -611,8 +611,8 @@ export class BarChartSPI extends Component {
                 return <Cell key={index} fill={color} />;
               })
             }
-   </Bar>
-  </ChartBar>
+        </Bar>
+        </ChartBar>
         </ResponsiveContainer>
 
       </div>
@@ -664,7 +664,7 @@ export class LineChart extends Component{
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
             {this.props.lines.map((props)=>
-              <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
+              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
       </div>

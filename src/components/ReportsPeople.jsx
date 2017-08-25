@@ -4,12 +4,77 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header } from './Components.jsx';
-
+import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header,PageLoader } from './Components.jsx';
+import {reportPeople} from './actions.jsx'
 
 class ReportsPeople extends Component {
-  render() {
-		
+  constructor(){ 
+    super(); 
+    this.state = { 
+      month : 0, 
+      year: 0 
+    }; 
+  } 
+
+  componentWillMount(){
+    store.dispatch(reportPeople("6","6","2017"));
+  }
+
+  
+  handleMonthChange (e) { 
+    this.setState({month: e.target.value}); 
+    console.log(e.target.value); 
+    e.preventDefault() 
+   } 
+ 
+       
+   handleYearChange (e) { 
+    this.setState({year: e.target.value}); 
+    console.log(e.target.value); 
+    e.preventDefault() 
+   } 
+  
+
+  render() {	
+
+    const report_people = store.getState().data.report_people
+    if (!report_people) {
+      return <PageLoader />;
+    }
+
+    const tablePeople = report_people.map((value,index)=>{
+      return {column:[
+        {value:value.USER_NAME},
+        {value:value.EMAIL},
+        {value:value.entry},
+        {value:value.status_entry},
+        {value:value.utilisasi},
+        {value:value.status_utilisasi}
+      ]}
+    })
+
+    const month= [
+      {name:'JANUARY',number:'1'},
+      {name:'FEBRUARY',number:'2'},
+      {name:'MARCH',number:'3'},
+      {name:'APRIL',number:'4'},
+      {name:'MAY',number:'5'},
+      {name:'JUNE',number:'6'},
+      {name:'JULY',number:'7'},
+      {name:'AUGUST',number:'8'},
+      {name:'SEPTEMBER',number:'9'},
+      {name:'OCTOBER',number:'10'},
+      {name:'NOVEMBER',number:'11'},
+      {name:'DEECMBER',number:'12'},
+    ]
+  
+    const year = [
+      {year:'2017'},
+      {year:'2016'},
+      {year:'2015'},
+    ]
+  
+
     return (
       <div>
         <div className="grid wrap">
@@ -25,27 +90,34 @@ class ReportsPeople extends Component {
             />
           </div>
 					<div className="unit golden-small">
-					<Select
-              style={{ width: '30%', display: 'inline-block', float: 'left', marginLeft: '33px' }}
-              items={{
-                items: [
-              { title: 'Jun' },
-              { title: 'Jul' },
-                ],
-              }}
-            />
-            <Select
-              style={{ width: '30%', display: 'inline-block', float: 'left', marginLeft:'33px' }}
-              items={{
-                items: [
-              { title: '2017' },
-              { title: '2018' },
-                ],
-              }}
-            />
-            <button className="btn-primary"style={{ padding: '11px 14px', marginLeft: '20px', float:'right' }} >
-              <span className="material-icons" style={{ color: 'white' }}>search</span>
-            </button>
+          <select onChange={this.handleMonthChange.bind(this)} 
+          className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
+          { 
+            month.map((value,index) => { 
+            return( 
+              <option key={index} value={value.number}>{value.name}</option> 
+
+            ) 
+          })} 
+        </select> 
+            
+        <select onChange={this.handleYearChange.bind(this)} 
+        className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+        { 
+          year.map((value,index) => { 
+          return( 
+            <option key={index} value={value.year}>{value.year}</option> 
+
+          ) 
+        })} 
+      </select> 
+      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
+      onClick={(e)=> { 
+        console.log(this.state.month,this.state.year); 
+        store.dispatch(reportPeople(this.state.month,this.state.year)) 
+        // store.dispatch(myPerformance('1','2017')) 
+        e.preventDefault() 
+      }}>search</span></button> 
           </div>
 				</div>    
 				
@@ -72,53 +144,7 @@ class ReportsPeople extends Component {
                     {value:'Utilization'},
                     {value:'Utilization Status'},
 									]} 
-									tableData = {[{column:[       
-                    {value: 'Abdurachim'},
-                    {value: 'abdurachim@sigma.co.id'},         
-                      {value:'10'},
-                      {value:'UNDER'},
-                      {value:'20'},
-                      {value:'UNDER'},
-
-										]},{
-                      column:[
-                        {value: 'Akmal Ritaudin'},
-                        {value: 'akmal.ritaudin@sigma.co.id'},
-											
-                      {value:'90'},
-                      {value:'NORMAL'},
-                      {value:'90'},
-                      {value:'NORMAL'},
-                      ]},{
-                      column:[
-                        {value: 'Dwi Syifa'},
-                        {value: 'dwi.syifa@sigma.co.id'},
-										
-                      {value:'80'},
-                      {value:'NORMAL'},
-                      {value:'150'},
-                      {value:'OVERLOAD'},
-                      ]},{
-                      column:[
-                        {value: 'Ivan Gita Pribadi'},
-                        {value: 'ivan.gita.pribadi@sigma.co.id'},
-                   
-                      {value:'40'},
-                      {value:'UNDER'},
-                      {value:'20'},
-                      {value:'UNDER'},
-                      ]},{
-                      column:[
-
-												{value: 'Paula Cintya'},
-                        {value: 'paula.cintya@sigma.co.id'},
-                      {value:'50'},
-                      {value:'UNDER'},
-                      {value:'50'},
-                      {value:'UNDER'},
-                      ]},
-										
-									]}>
+									tableData = {tablePeople}>
 									</TableNew>
 							
 								</div>
