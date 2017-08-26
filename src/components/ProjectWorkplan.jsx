@@ -259,7 +259,13 @@ class ProjectWorkplan extends Component {
 
                         <div className="grid wrap">
                           <div className='unit whole' style={{textAlign:'center',marginTop:'40px'}}>
-                            <button style={{ display:'inline-block', width:'200px'}} className='btn-secondary'> CANCEL </button>
+                          <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                            e => {
+                              browserHistory.push('/')
+                              e.preventDefault()
+                            }
+                          }> CANCEL </button>
+                           
                             <button style={{ display:'inline-block',width:'200px',marginLeft:'40px'}} type='submit' className='btn-primary'> ADD </button>
                           </div>
                         </div>

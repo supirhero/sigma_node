@@ -153,35 +153,24 @@ export const getDocsFiles = (id) => {
 
 }
 
-export const addDocsAndFiles = (data, id ) => {
+
+
+export const addDocsAndFiles = (desc,files, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-  console.log("DOCS",data);
-  return function (dispatch) {
-    const token = cookies.get('token')
-    return axios({
-            method: 'POST',
-            url: `${baseURL}home/documentupload/${id}?token=${token}` ,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-
-            data: {
-              'desc': data.desc,
-              'document': data.document
-
-            }
-
-          }).then(
-            res => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log(res.data);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-          )
+  // console.log("DOCS",data);
+  return function(dispatch){
+    const formData = new FormData();
+    formData.append('desc',data.desc);
+    formData.append('document',files[0])
+    fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
+      method:'POST',
+      body:formData
+    })
   }
 }
 
 export const getIssue = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -203,6 +192,24 @@ export const getIssue = (id) => {
 }
 
 
+
+
+    // const token = cookies.get('token')
+    // return axios({
+    //   method:'POST',
+    //   url:`${baseURL}home/edit_user?token=${token}`,
+    //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //   data:{
+    //     no_hp:no_hp,
+    //     address:address,
+    //     image:image,
+    //   }
+    // }).then(
+    //   (res)=>{
+    //     store.dispatch({ type: 'API', name: 'profile', append: true,  data: res });
+    //   }
+    // )
+ 
 
 export const addIssue = (data, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -774,7 +781,7 @@ export function getTaskView(id) {
   }
 }
 
-export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
+export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     const token = cookies.get('token')
@@ -782,7 +789,9 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
       method:'POST',
       url:`${baseURL}timesheet/addTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: { WP_ID,
+      data: {
+                PROJECT_ID,
+               WP_ID,
               TS_DATE,
              HOUR,
              TS_SUBJECT,
@@ -802,27 +811,13 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   }
 }
 
-// export function addTimesheet(values) {
-//   return function(dispatch){
-//     return axios({
-//       method:'POST',
-//       url:`${baseURL}timesheet/addTimesheet/`,
-//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-//       data: {values}
-//     }).then(
-//       (res)=>{
-//         alert('timesheet updated');
-//       }
-//     )
-//   }
-// }
-
 
 
 export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
+      
       method:'POST',
       url:`${baseURL}timesheet/confirmationTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1045,7 +1040,18 @@ export function updateHoliday(data){
 // }
 
 
-
+export function editProfile(no_hp,address,files){
+  return function(dispatch){
+    const formData = new FormData();
+    formData.append('no_hp',no_hp);
+    formData.append('address',address);
+    formData.append('image',files[0])
+    fetch(`${baseURL}home/edit_user?token=${token}`,{
+      method:'POST',
+      body:formData
+    })
+  }
+}
 
 
 
