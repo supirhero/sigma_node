@@ -1,3 +1,9 @@
+## 0.3.2 (Aug 21, 2017)
+
+### fix
+
+- fix `getNiceTickValues` when the number is a scientific notation
+
 ## 0.3.1 (Jun 11, 2017)
 
 ### fix

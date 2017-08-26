@@ -24,92 +24,6 @@ class Dashboard extends Component {
 
     render(){
       return(
-<<<<<<< HEAD
-              <div>
-                <div className='navbar'>
-                  <div className='grid wrap' style={{position:'relative'}}>
-                    <div className='unit whole no-gutters'>
-                      <div id='prouds-logo'></div>
-                      <ul>
-                        <li><a onClick={
-                          e => {
-                            browserHistory.push('/')
-                            e.preventDefault()
-                          }}>HOME</a></li>
-                        <li><a onClick={
-                          e => {
-                            browserHistory.push('/reports')
-                            e.preventDefault()
-                          }}>REPORTS</a></li>
-                      </ul>
-                      <div id='sigma-logo'></div>
-
-                        <Menu style={{display:'inline'}} triggerClass='profile'>
-                          <MenuSection>
-                            <MenuHeader title='Kara Cray' subTitle='@karagay'/>
-                            <MenuItem title='Home' onClick={
-                              e => {
-                                browserHistory.push('/')
-                              }
-
-                            }/>
-                            <MenuItem title='Profile' onClick={
-                              e => {
-                                browserHistory.push('/profile')
-                              }
-                            }/>
-                          </MenuSection>
-                          <MenuSection>
-                            <MenuHeader title='ADMIN CONSOLE'/>
-                            <MenuItem title='Master Data' onClick={
-                              e => {
-                                browserHistory.push('/dataset')
-                              }
-                            }/>
-                            <MenuItem title='Manage Role & Access' onClick={
-                              e => {
-                                browserHistory.push('/manage')
-                              }
-                              }/>
-                          </MenuSection>
-                          <MenuSection>
-                            <MenuItem onClick={
-                              e => {
-                                console.log('work');
-                                browserHistory.replace('/auth')
-                                //
-                                store.dispatch(logout())
-                                e.preventDefault()
-                              }
-                            } title='LogOut'/>
-                          </MenuSection>
-
-                        </Menu>
-
-                        <Menu style={{display:'inline'}} triggerClass='notif'>
-                        <MenuSection>
-                          <MenuNotifItem onClick={
-                            e => {
-                              browserHistory.push('/project/activities')
-                            }}>
-                            <div className="person">
-                            <div className="person-image" style={{marginLeft:'0',marginBottom:'20px'}} />
-                            <div className="person-info" style={{position:'inherit'}}>
-                              <small className="notif-info">
-                                <a>Denise Becker</a> has updated timesheet <br/>
-                                You need to approve it
-                              </small>
-                              <small><i>1h ago</i></small>
-
-                            </div>
-                          </div>
-                          </MenuNotifItem>
-
-                        </MenuSection>
-
-
-                      </Menu>
-=======
         <div>
           <div className='navbar'>
             <div className='grid wrap wider' style={{position:'relative'}}>
@@ -121,7 +35,6 @@ class Dashboard extends Component {
                       browserHistory.push('/')
                       e.preventDefault()
                     }}>HOME</a></li>
->>>>>>> add wider to wrap at header and dashboard, polishing UI for dashboard home
 
                   <li><a onClick={
                     e => {

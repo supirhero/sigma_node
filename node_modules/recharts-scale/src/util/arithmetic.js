@@ -6,6 +6,17 @@
 import { curry } from './utils';
 
 /**
+ * 把错误的数据转正
+ * strip(0.09999999999999998)=0.1
+ * @param {Number} num       输入值
+ * @param {Number} precision 精度
+ * @return {Number} 数值
+ */
+function strip(num, precision = 12) {
+  return +parseFloat(num.toPrecision(precision));
+}
+
+/**
  * 判断数据是否为浮点类型
  *
  * @param {Number} num 输入值
@@ -43,6 +54,11 @@ function getDigitCount(value) {
  */
 function getDecimalDigitCount(a) {
   const str = a ? `${a}` : '';
+
+  // scientific notation
+  if (str.indexOf('e') >= 0) {
+    return Math.abs(parseInt(str.slice(str.indexOf('e') + 1), 10));
+  }
   const ary = str.split('.');
 
   return ary.length > 1 ? ary[1].length : 0;
@@ -70,7 +86,6 @@ function sum(a, b) {
   let count = Math.max(getDecimalDigitCount(a), getDecimalDigitCount(b));
 
   count = Math.pow(10, count);
-
   return (multiply(a, count) + multiply(b, count)) / count;
 }
 /**
@@ -185,6 +200,7 @@ export default {
   multiply,
   divide,
   modulo,
+  strip,
 
   interpolateNumber,
   uninterpolateNumber,

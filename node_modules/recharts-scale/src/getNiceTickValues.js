@@ -106,6 +106,7 @@ function getTickOfSingleValue(value, tickCount, allowDecimals) {
 function calculateStep(min, max, tickCount, allowDecimals, correctionFactor = 0) {
   // The step which is easy to understand between two ticks
   const step = getFormatStep((max - min) / (tickCount - 1), allowDecimals, correctionFactor);
+
   // A medial value of ticks
   let middle;
 
@@ -113,8 +114,12 @@ function calculateStep(min, max, tickCount, allowDecimals, correctionFactor = 0)
   if (min <= 0 && max >= 0) {
     middle = 0;
   } else {
+    // calculate the middle value
     middle = Arithmetic.divide(Arithmetic.sum(min, max), 2);
+    // minus modulo value
     middle = Arithmetic.minus(middle, Arithmetic.modulo(middle, step));
+    // strip
+    middle = Arithmetic.strip(middle, 16);
   }
 
   let belowCount = Math.ceil((middle - min) / step);
