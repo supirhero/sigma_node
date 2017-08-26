@@ -615,10 +615,11 @@ export class BarChart extends Component {
         <large style={this.props.labelStyle}>{this.props.label}</large>
         <ResponsiveContainer width='100%' height={250}>
           <ChartBar width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" interval="preserveStart" />
+            <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
+            <Text scaleToFit={true} />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
           </ChartBar>

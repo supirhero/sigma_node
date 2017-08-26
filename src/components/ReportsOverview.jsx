@@ -63,7 +63,7 @@ class ReportsOverview extends Component {
     {name:'SEPTEMBER',number:'9'},
     {name:'OCTOBER',number:'10'},
     {name:'NOVEMBER',number:'11'},
-    {name:'DEECMBER',number:'12'},
+    {name:'DECEMBER',number:'12'},
   ]
 
   const year = [

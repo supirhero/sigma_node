@@ -5,11 +5,23 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
-
+import { Select, Input, Table,TableNew,Header,Search,PageLoader } from './Components.jsx';
+import {getDataMasterMIS} from './actions.jsx'
+import { Field, reduxForm } from 'redux-form';
 
 class DatasetCustomer extends Component {
+  componentWillMount(){
+    const user = store.getState().data.user
+    store.dispatch(getDataMasterMIS("vendor"))
+  }
   render() {
+    // const state = store.getState()
+    // const project_type = state.data.project_type
+
+    // if (!project_type){
+    //   <PageLoader />
+    // }
+    
     return (
       <div>
         <div className="grid wrap dataset">
@@ -160,4 +172,3 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps)(DatasetCustomer);
-// export default Login

@@ -755,7 +755,7 @@ class EditProject extends Component {
             </div>
             <div className="grid wrap">
               <div className="unit whole">
-                <button type="submit" className="btn-primary"style={{ float: 'right', width: '18%' }}>SAVE</button>
+                <button type="submit" className="btn-primary" style={{ float: 'right', width: '18%' }}>SAVE</button>
               </div>
             </div>
 

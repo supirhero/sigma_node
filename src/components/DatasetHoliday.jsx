@@ -6,7 +6,9 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TableNew,Header,Search,PopUp ,PageLoader} from './Components.jsx';
-import {getDataMaster} from './actions.jsx'
+import {getDataMaster,manageHoliday} from './actions.jsx'
+import { routerMiddleware, push } from 'react-router-redux'
+import {Field, reduxForm} from 'redux-form';
 
 class DatasetHoliday extends Component {
   componentWillMount(){
@@ -36,7 +38,7 @@ class DatasetHoliday extends Component {
 									<Header text='Holiday' style={{display:'inline-block'}} />
 								</div>
 
-								<div className="unit three-quarters">
+                <div className="unit three-quarters">
 									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
 										<div>
 											<div className="grid wrap narrow">

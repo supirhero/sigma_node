@@ -966,6 +966,87 @@ export function getDataMaster(data){
   }
 }
 
+export function getDataMasterMIS(data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`http://10.210.20.2/api/index.php/mis/${data}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
+export function addHoliday(data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}Datamaster/manage/holiday/add?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        HOLIDAY:data.HOLIDAY,
+        HOLIDAY_START:data.HOLIDAY_START,
+        HOLIDAY_END:data.HOLIDAY_END
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+export function updateHoliday(data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}Datamaster/manage/holiday/update?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        HOLIDAY_ID:data.HOLIDAY_ID,
+        HOLIDAY_START:data.HOLIDAY_START,
+        HOLIDAY_END:data.HOLIDAY_END,
+        HOLIDAY:data.HOLIDAY
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
+// export function addHoliday(data){
+//   return function(dispatch){
+//     const token = cookies.get('token')
+//     return axios({
+//       method:'POST',
+//       url:`${baseURL}Datamaster/manage/holiday/add?token=${token}`,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data:{
+//         HOLIDAY:data.HOLIDAY,
+//         HOLIDAY_START:data.HOLIDAY_START,
+//         HOLIDAY_END:data.HOLIDAY_END
+//       }
+//     }).then(
+//       (res)=>{
+//         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+//       }
+//     )
+//   }
+// }
+
+
+
+
 
 
 

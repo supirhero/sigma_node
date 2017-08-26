@@ -55,7 +55,7 @@ class DatasetProjectType extends Component {
                 <div className="unit whole">
                   <TableNew
                   tableHeader={[{value:'NO'},{value:'NAME'}]}
-                  tableData={bu?bu.map((value,index)=>{
+                  tableData={project_type?project_type.map((value,index)=>{
                     return {column:[
                       {value:value.ID},
                       {value:value.PROJECT_TYPE},

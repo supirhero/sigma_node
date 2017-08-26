@@ -9,7 +9,7 @@ import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, Men
 
 class ReportsDirectorate extends Component {
   componentWillMount(){
-    store.dispatch(getListBU())
+  store.dispatch(getListBU())
   }
   
   render() {
