@@ -123,7 +123,6 @@ class Dashboard extends Component {
           </div>
           {this.props.children}
         </div>
-
       )
     }
 }

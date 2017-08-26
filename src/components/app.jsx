@@ -38,7 +38,6 @@ import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSpiCpi from './ProjectSpiCpi.jsx'
 import ProjectSCurve from './ProjectSCurve.jsx'
 
-
 import Dataset from './Dataset.jsx'
 import DatasetUser from './DatasetUser.jsx'
 import DatasetCustomer from './DatasetCustomer.jsx'
@@ -142,9 +141,6 @@ render(
           <IndexRoute component={ManageRoles} />
           <Route path='access' component={ManageAccess} />
         </Route>
-
-
-
 
       </Route>
 
