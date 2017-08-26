@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelectNew, Input, ReduxSelect,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelect, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop } from './actions.jsx';
 import DatePicker from 'react-datepicker';
@@ -29,7 +29,6 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-
   }
 
 
@@ -128,7 +127,7 @@ class Timesheet extends Component {
 
           <div className="grid wrap">
             <div className="unit whole">
-              <PopUp id="addNew" dividerText="UPDATE TIMESHEET" btnClass="btn-primary" btnText="ADD NEW" btnStyle={{ display: 'block', margin: 'auto' }}>
+              <PopUp id="addNew" dividerText="INPUT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
                 <div>
 
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -150,12 +149,12 @@ class Timesheet extends Component {
                         onChange={
                           (e, value)=>{
                             store.dispatch(taskList(value))
-
+                            console.log(value)
                             // store.dispatch(pop());
                             // e.preventDefault()
                           }
                         }
-                        component={ReduxSelect}
+                        component={ReduxSelectNew}
                         validate={[required]}>
                         {
                               timesheet.user_project.map((value,index)=>{
@@ -176,7 +175,7 @@ class Timesheet extends Component {
                                         name="WP_ID"
                                         // type="WP_ID"
                                           inputName="TASK"
-                                          component={ReduxSelect}
+                                          component={ReduxSelectNew}
                                           validate={[required]}>
                                               {
                                                 timesheet.task.map((value,index)=>{
@@ -186,9 +185,9 @@ class Timesheet extends Component {
                                               }
                                        </Field>
                                        :
-                                        <ReduxSelect inputName="TASK">
+                                        <ReduxSelectNew inputName="TASK">
                                         <options> </options>
-                                        </ReduxSelect>
+                                        </ReduxSelectNew>
                                       }
                                       </div>
 
@@ -232,7 +231,7 @@ class Timesheet extends Component {
                         e.preventDefault()
                       }
                     }> CANCEL </button>
-                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
+                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SUBMIT</button>
                     </div>
                   </div>
 

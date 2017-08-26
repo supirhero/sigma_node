@@ -7,7 +7,7 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import {Cell} from 'recharts'
 import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header ,PageLoader} from './Components.jsx';
-import {reportMonthly,reportYearly,pope} from './actions.jsx'
+import {reportMonthly,reportYearly,pop} from './actions.jsx'
 
 class ReportsOverview extends Component {
   constructor(){ 
@@ -21,8 +21,8 @@ class ReportsOverview extends Component {
   componentWillMount(){
     const r_monthly = store.getState().data.r_monthly
     const r_yearly = store.getState().data.r_yearly
-    store.dispatch(reportMonthly("7","2017"));
-    store.dispatch(reportYearly("2017"));
+    this.props.reportMonthly("7","2017");
+    this.props.reportYearly("2017");
   }
  
   handleMonthChange (e) { 
@@ -40,7 +40,7 @@ class ReportsOverview extends Component {
 
    handleYearlyChange (e) { 
     this.setState({year: e.target.value}); 
-    store.dispatch(reportYearly(e.target.value));
+    this.props.reportYearly(e.target.value);
     e.preventDefault() 
    } 
 
@@ -49,9 +49,7 @@ class ReportsOverview extends Component {
     const r_yearly_cpi = store.getState().data.r_yearly_cpi
     const r_yearly_spi = store.getState().data.r_yearly_spi
     
-  if (!r_monthly && !r_yearly_cpi && !r_yearly_spi) {
-      return <PageLoader />;
-    }
+  
   const COLORS = ['greem','red']
   const month= [
     {name:'JANUARY',number:'1'},
@@ -77,26 +75,26 @@ class ReportsOverview extends Component {
 
 
 
-  const spiYearly =r_yearly_spi.map((value,index)=>{
-    return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
-  }) 
+  // const spiYearly =r_yearly_spi.map((value,index)=>{
+  //   return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+  // }) 
 
-  const cpiYearly =r_yearly_cpi.map((value,index)=>{
-    return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
-  }) 
-
-
-  const spiMonthlyGraph = r_monthly ? r_monthly.map((value,index)=>{
-    return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
-  }) : null
+  // const cpiYearly =r_yearly_cpi.map((value,index)=>{
+  //   return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+  // }) 
 
 
-  const cpiMonthlyGraph = r_monthly ? r_monthly.map((value,index)=>{
-    return {name:value.BU_ALIAS , value:parseFloat(value.CPI)}
-  }) : null
+  // const spiMonthlyGraph = r_monthly ? r_monthly.map((value,index)=>{
+  //   return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
+  // }) : null
 
 
-  const tableMonthly = r_monthly.map((value,index)=>{
+  // const cpiMonthlyGraph = r_monthly ? r_monthly.map((value,index)=>{
+  //   return {name:value.BU_ALIAS , value:parseFloat(value.CPI)}
+  // }) : null
+
+
+  const tableMonthly = r_monthly ? r_monthly.map((value,index)=>{
     return {column:[
       {value:value.BU_NAME},
       {value:value.EV},
@@ -105,9 +103,11 @@ class ReportsOverview extends Component {
       {value:value.SPI},
       {value:value.CPI}
     ]}
-  })
+  }) : null
 
-  
+  if (!r_monthly && !r_yearly_cpi && !r_yearly_spi) {
+    return <PageLoader />;
+  }
   return (
     
       <div>
@@ -151,7 +151,7 @@ class ReportsOverview extends Component {
                     <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
                     onClick={(e)=> { 
                       console.log(this.state.month,this.state.year); 
-                      store.dispatch(reportMonthly(this.state.month,this.state.year)) 
+                      this.props.reportMonthly(this.state.month,this.state.year)
                       // store.dispatch(myPerformance('1','2017')) 
                       e.preventDefault() 
                     }}>search</span></button> 
@@ -170,7 +170,10 @@ class ReportsOverview extends Component {
                  label="SPI Graph"
                  labelStyle={{padding:'0 40%'}}
                 //  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                 data={spiMonthlyGraph}
+                 data={ r_monthly ? r_monthly.map((value,index)=>{
+                  return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
+                }) : null
+              }
                  />
                  
                 
@@ -183,7 +186,10 @@ class ReportsOverview extends Component {
                   label="CPI Graph"
                   labelStyle={{padding:'0 40%'}}
                   // ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                  data={cpiMonthlyGraph}
+                  data={r_monthly ? r_monthly.map((value,index)=>{
+                    return {name:value.BU_ALIAS , value:parseFloat(value.CPI)}
+                  }) : null
+                }
                   />
 
                 </div>
@@ -268,7 +274,9 @@ class ReportsOverview extends Component {
                 <div className="unit whole">
                   <LineChart
                     label="SPI HISTORY"
-                    data={spiYearly}
+                    data={r_yearly_spi.map((value,index)=>{
+                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+                    }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
                             {key:'CIA1', stroke:'#94dea9'},
                             {key:'DCES', stroke:'#795548'},
@@ -290,7 +298,9 @@ class ReportsOverview extends Component {
                 <div className="unit whole">
                   <LineChart
                     label="CPI HISTORY"
-                    data={cpiYearly}
+                    data={ r_yearly_cpi.map((value,index)=>{
+                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+                    }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
                     {key:'CIA1', stroke:'#94dea9'},
                     {key:'DCES', stroke:'#795548'},
@@ -323,5 +333,5 @@ function mapStateToProps(state) {
     state
   };
 }
-export default connect(mapStateToProps)(ReportsOverview);
+export default connect(mapStateToProps,{reportMonthly,reportYearly})(ReportsOverview);
 // export default Login

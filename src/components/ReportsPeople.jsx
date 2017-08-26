@@ -38,11 +38,8 @@ class ReportsPeople extends Component {
   render() {	
 
     const report_people = store.getState().data.report_people
-    if (!report_people) {
-      return <PageLoader />;
-    }
-
-    const tablePeople = report_people.map((value,index)=>{
+   
+    const tablePeople = report_people ? report_people.map((value,index)=>{
       return {column:[
         {value:value.USER_NAME},
         {value:value.EMAIL},
@@ -51,7 +48,7 @@ class ReportsPeople extends Component {
         {value:value.utilisasi},
         {value:value.status_utilisasi}
       ]}
-    })
+    }) : <PageLoader></PageLoader>
 
     const month= [
       {name:'JANUARY',number:'1'},
@@ -74,6 +71,9 @@ class ReportsPeople extends Component {
       {year:'2015'},
     ]
   
+    if (!report_people) {
+      return <PageLoader />;
+    }
 
     return (
       <div>
@@ -90,7 +90,7 @@ class ReportsPeople extends Component {
             />
           </div>
 					<div className="unit golden-small">
-          <select onChange={this.handleMonthChange.bind(this)} 
+          <select onClick={this.handleMonthChange.bind(this)} 
           className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
           { 
             month.map((value,index) => { 
@@ -101,7 +101,7 @@ class ReportsPeople extends Component {
           })} 
         </select> 
             
-        <select onChange={this.handleYearChange.bind(this)} 
+        <select onClick={this.handleYearChange.bind(this)} 
         className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
         { 
           year.map((value,index) => { 

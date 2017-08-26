@@ -26,12 +26,13 @@ class ProjectSpiCpi extends Component {
   
   render() {
     const state = store.getState()
+    
     const spi = state.data.spi ? state.data.spi.map((value,index)=>{
       return {name:value.Week , value:parseFloat(value.SPI)}
     }) : null
     
     const cpi = state.data.cpi ? state.data.cpi.map((value,index)=>{
-      return {name:value.Week , value:parseFloat(value.SPI)}
+      return {name:value.Week , value:parseFloat(value.CPI)}
     }) : null
 
     // const dataSPI = spi.map((value,index)=>{
@@ -44,23 +45,23 @@ class ProjectSpiCpi extends Component {
 
 
 
-    const tableSPI = store.getState().data.spi.map((value,index)=>{
+    const tableSPI = store.getState().data.spi?store.getState().data.spi.map((value,index)=>{
       return {column:[
         {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
         {value:value.EV == null ? '0' : value.EV},
         {value:value.PV == null ? '0' : value.PV},
         {value:value.SPI == null ? '0' : parseFloat(value.SPI).toFixed(2)}
       ]}
-    })
+    }):null
 
-    const tableCPI = store.getState().data.cpi.map((value,index)=>{
+    const tableCPI = store.getState().data.cpi?store.getState().data.cpi.map((value,index)=>{
       return {column:[
         {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
         {value:value.EV == null ? '0' : value.EV},
-        {value:value.PV == null ? '0' : value.PV},
-        {value:value.SPI == null ? '0' : parseFloat(value.SPI).toFixed(2)}
+        {value:value.AC == null ? '0' : value.AC},
+        {value:value.CPI == null ? '0' : parseFloat(value.CPI).toFixed(2)}
       ]}
-    })
+    }):null
 
 
 
@@ -91,6 +92,7 @@ if (!spi && !cpi) {
                       />
                     </div>
                     <div className="unit whole">
+                    {!spi ? 
                       <TableNew
                         tableHeader={[
 													{ value: 'Time Period' },
@@ -101,6 +103,7 @@ if (!spi && !cpi) {
                         ]}
                         tableData={tableSPI}
                       />
+                      :<PageLoader></PageLoader>}
                     </div>
                   </div>
                 </TabPanel>
