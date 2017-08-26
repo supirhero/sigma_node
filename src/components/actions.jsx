@@ -374,7 +374,7 @@ export const checkIWOUsed = (iwo) => {
 }
 
 
-export const editProject = (data, id) => 
+export const editProject = (data, id) =>
 // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
  function (dispatch) {

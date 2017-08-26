@@ -95,25 +95,25 @@ class Dashboard extends Component {
 
                         <Menu style={{display:'inline'}} triggerClass='notif'>
                         <MenuSection>
-                          <MenuNotifItem onClick={ 
-                            e => { 
-                              browserHistory.push('/project/activities') 
+                          <MenuNotifItem onClick={
+                            e => {
+                              browserHistory.push('/project/activities')
                             }}>
-                            <div className="person"> 
-                            <div className="person-image" style={{marginLeft:'0',marginBottom:'20px'}} /> 
-                            <div className="person-info" style={{position:'inherit'}}> 
-                              <small className="notif-info"> 
-                                <a>Denise Becker</a> has updated timesheet <br/> 
-                                You need to approve it 
-                              </small> 
-                              <small><i>1h ago</i></small> 
-                               
-                            </div> 
-                          </div> 
+                            <div className="person">
+                            <div className="person-image" style={{marginLeft:'0',marginBottom:'20px'}} />
+                            <div className="person-info" style={{position:'inherit'}}>
+                              <small className="notif-info">
+                                <a>Denise Becker</a> has updated timesheet <br/>
+                                You need to approve it
+                              </small>
+                              <small><i>1h ago</i></small>
+
+                            </div>
+                          </div>
                           </MenuNotifItem>
-                         
+
                         </MenuSection>
-                        
+
 
                       </Menu>
 
