@@ -3,27 +3,33 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
-import { changeRoute } from './actions.jsx'
+import { changeRoute, getDashboardView } from './actions.jsx'
 
-import {Meter, Search} from './Components.jsx'
+import {Meter, Search, PageLoader} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 
 
 
 
 class DashboardHome extends Component {
+  componentWillMount() {
+    this.props.dispatch(getDashboardView())
+  }
   render() {
     var state = store.getState()
     console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var auth = state.auth
+    var auth = state.data
     console.log(state.auth.token)
     // console.log(projects);
     return(
+      !auth.userdata ? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
           <div className='card profile'>
+            {
+
               <div className='grid'>
 
                   <div className='unit two-fifths'>
@@ -64,7 +70,7 @@ class DashboardHome extends Component {
                     </ul>
 
                   </div>
-                </div>
+                </div>}
 
 
 

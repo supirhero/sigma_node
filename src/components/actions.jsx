@@ -8,7 +8,7 @@ const cookies = new Cookies();
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
-// const baseURL = "http://45.77.45.126/dev/" 
+// const baseURL = "http://45.77.45.126/dev/"
 const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/"
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
@@ -33,6 +33,9 @@ export function login(email, password) {
               console.log("TOKEN", res);
               cookies.set('token', res.data.token, { path: '/' });
               store.dispatch({type:'LOGIN_DATA', data: res})
+              store.dispatch({type:'API', name: 'home', data: res})
+
+
               if (store.getState().auth.token != undefined) {
                 store.dispatch({type:'LOGIN', isloggedin: true})
                 store.dispatch(replace('/'))
@@ -57,7 +60,7 @@ export function getProjectDetail(id) {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}home/detailproject/${id}?token=${token}`,
+            url: `${baseURL}home/`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -65,6 +68,27 @@ export function getProjectDetail(id) {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               store.dispatch({type:'API', name: 'project', data: res})
+            },
+
+          )
+  }
+}
+export function getDashboardView() {
+
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}home?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              store.dispatch({type:'API', name: 'home', data: res})
             },
 
           )
@@ -231,10 +255,10 @@ export const addIssue = (data, id ) => {
 }
 
 
-export const addNewProject = (data) => {
+export const addNewProject = (data,id) => {
   console.log('DATA', data);
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
+  const iwo = data.IWO_NO2 != undefined || data.IWO_NO2 != null ? data.IWO_NO2 : data.IWO_NO
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -245,13 +269,13 @@ export const addNewProject = (data) => {
               ACTUAL_COST:data.ACTUAL_COST,
               AMOUNT:data.AMOUNT,
               AM_ID:data.AM_ID,
-              BU:'TMS',
+              BU:id,
               COGS:data.COGS,
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
               END_CUST_ID:data.END_CUST_ID,
               HO:"yes",
-              IWO_NO:data.IWO_NO,
+              IWO_NO:iwo,
               MARGIN:data.MARGIN,
               OVERHEAD:data.OVERHEAD,
               PM:data.PM,
@@ -313,7 +337,7 @@ export const getIWOEditProject = (offset) => {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}iwo/getIwo/${offset}?token=${token}`,
+            url: `${baseURL}iwo/getIwo?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
@@ -533,7 +557,7 @@ export const reportMonthly = (bulan,tahun) => {
     return axios({
             method: 'POST',
             url: `${baseURL}report/r_month?token=${token}` ,
-            headers: {            
+            headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
              },
              data:{
@@ -558,7 +582,7 @@ export const reportYearly = (tahun) => {
     return axios({
             method: 'GET',
             url: `${baseURL}report/r_yearly/${tahun}?token=${token}` ,
-            headers: {            
+            headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
              }
           }).then(
@@ -578,7 +602,7 @@ export const reportPeople = (BU_ID,BULAN,TAHUN) => {
     return axios({
             method: 'POST',
             url: `${baseURL}report/r_people?token=${token}` ,
-            headers: {            
+            headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
              },
              data:{
@@ -1043,10 +1067,3 @@ export function updateHoliday(data){
 //     )
 //   }
 // }
-
-
-
-
-
-
-

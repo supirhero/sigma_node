@@ -38,37 +38,47 @@ export const required = value => (value ? undefined : 'Required')
 //     throw { IWO_NO: 'That username is taken' };
 //   })
 // }
-export const isIWOUsed = (value) =>{
-    console.log('VALUEE',value);
-    // return new Promise ((resolve, reject) => {
-      return axios({
-      method: 'POST',
-      url: `${baseURL}/dev/project/checkiwoused`+token_string,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {
-        IWO_NO: value.IWO_NO
-      }
-
-    }).then(
-      (res)=> {
-        // resolve('BLa')
-        console.log(res);
-        console.log('JUMLAH',res.data.jumlah);
-        if (res.data.jumlah <= '0' || res.data.jumlah <=0) {
-          // return 'IWO already used'
-          throw { IWO_NO: undefined };
-
-        }
-        else {
-          throw { IWO_NO: 'IWO is already used' };
-
-          // return null
-        }
-      }
-    )
+// export const isIWOUsed = (value) =>{
+//
+//     console.log('VALUEE',value);
+//     // return new Promise ((resolve, reject) => {
+//     return axios({
+//       method: 'POST',
+//       url: `${baseURL}/dev/project/checkiwoused`+token_string,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data: {
+//         IWO_NO: value.IWO_NO
+//       }
+//
+//     }).then(
+//       (res)=> {
+//         // resolve('BLa')
+//         console.log(res);
+//         console.log('JUMLAH',res.data.jumlah);
+//         if (value.IWO_AVAILABLE != 'false' ) {
+//           alert('asyc')
+//           if (res.data.jumlah <= '0' || res.data.jumlah <=0) {
+//             // return 'IWO already used'
+//             throw undefined;
+//
+//
+//           }
+//           else {
+//             throw { IWO_NO: 'IWO is already used' };
+//
+//             // return null
+//           }
+//         }
+//         else {
+//           alert('bla')
+//           throw undefined;
+//
+//         }
+//       }
+//     )
+//   }
 
   // })
-}
 
 
 // export const required = value => value ? undefined : 'Required'
@@ -245,6 +255,10 @@ export class ReduxInput extends Component {
     console.log('PROPS', this.props);
   }
   render(){
+    if(this.props.meta.error == 'IWO is already used'){
+      console.log("ERRORRR",this.props.meta.error );
+      this.props.meta.error = undefined
+    }
     return(
         <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
@@ -457,10 +471,11 @@ export class ReduxSelect extends Component {
     console.log('PROPS', this.props);
   }
   render() {
-    if(this.props.meta.error == 'IWO is already used'){
-      console.log("ERRORRR",this.props.meta.error );
-      this.props.meta.error = undefined
-    }
+    // if(this.props.input.value == undefined){
+    //   console.log("ERRORRR",this.props.meta.error );
+    //   this.props.meta.error = undefined
+    // }
+
     console.log('SELECT PROPS',this.props);
     return (
       <div style={this.props.style}>
@@ -468,8 +483,9 @@ export class ReduxSelect extends Component {
         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
         <select
+          style={this.props.selectStyle}
           // className='select'
-          className= {'select ' + this.props.meta.touched && ((this.props.meta.error && 'error'))}
+          className={'select ' +  this.props.meta.touched && ((this.props.meta.error && 'error'))}
 
           {...this.props.select}
           {...this.props.custom}
@@ -1038,7 +1054,7 @@ export class TableNew extends Component{
 
         <tbody>
             {
-              this.props.tableData && 
+              this.props.tableData &&
               this.props.tableData.map((row,index)=>(
                 <tr className='items' key={index}>
                   {
