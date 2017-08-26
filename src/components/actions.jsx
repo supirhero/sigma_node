@@ -49,8 +49,9 @@ export function login(email, password) {
 
 export function getProjectDetail(id) {
 
-  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  const token_string = `?token=${token}`
   return function (dispatch) {
     return axios({
             method: 'GET',

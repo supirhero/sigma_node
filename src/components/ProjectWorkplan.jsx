@@ -194,6 +194,76 @@ class ProjectWorkplan extends Component {
           ]
       return(
         <div className='project-workplan'>
+          <PopUp id="addTimesheetWorkplan" dividerText="UPDATE TIMESHEET" btnText="UPLOAD FILE" btnClass='btn-primary' btnStyle={{display:'block', margin: 'auto'}}>
+            <form >
+              <div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Field
+                      inputName="FILE DESCRIPTION"
+                      name="desc"
+                      type='input'
+                      component={ReduxInput}
+                    />
+                    {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+                  </div>
+                </div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <h2 className="input-desc">SELECT FILE</h2>
+                    <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                  </div>
+                  <div className="unit whole no-gutters">
+
+                   {/* <InputFile name="selectFile" /> */}
+                  </div>
+                </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
+                    </div>
+                  </div>
+
+              </div>
+            </form>
+
+          </PopUp>
+          <PopUp id="manualUpdate" dividerText="TASK PROGRESS" btnText="UPLOAD FILE" btnClass='btn-primary' btnStyle={{display:'block', margin: 'auto'}}>
+            <form >
+              <div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <Field
+                      inputName="FILE DESCRIPTION"
+                      name="desc"
+                      type='input'
+                      component={ReduxInput}
+                    />
+                    {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+                  </div>
+                </div>
+                <div className="grid wrap narrow">
+                  <div className="unit whole">
+                    <h2 className="input-desc">SELECT FILE</h2>
+                    <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                  </div>
+                  <div className="unit whole no-gutters">
+
+                   {/* <InputFile name="selectFile" /> */}
+                  </div>
+                </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
+                    </div>
+                  </div>
+
+              </div>
+            </form>
+
+          </PopUp>
           <div className='grid wrap'>
             <div className='unit whole'>
               <Divider text='WORKPLAN' btnLeftText='BACK' btnLeftClick={
@@ -206,6 +276,21 @@ class ProjectWorkplan extends Component {
           </div>
           <div className='grid wrap narrow'>
             <div className='unit one-third no-gutters'>
+              <button className='btn-primary'
+                style={{width:'200px', float:'right'}}
+                onClick={
+                e => {
+                  console.log('PROPS', this.props);
+                  this.props.dispatch({
+                    type: 'POPUP',
+                    name:'createTask',
+                    data: {
+                      active:true
+                    }
+                  })
+                  e.preventDefault()
+                }
+              }>CREATE TASK</button>
               <PopUp id='createTask' dividerText='CREATE TASK' btnText='CREATE TASK' btnClass="btn-primary" btnStyle={{width:'200px', float:'right'}}>
                     <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                       <div>
@@ -276,7 +361,22 @@ class ProjectWorkplan extends Component {
 
             </div>
             <div className='unit one-third no-gutters'>
-              <PopUp id='createTask' dividerText='UPLOAD WORKPLAN' btnText='UPLOAD' btnClass="btn-secondary" btnStyle={{width:'200px', float:'left'}}>
+              <button className='btn-primary'
+                style={{width:'200px', float:'left'}}
+                onClick={
+                e => {
+                  console.log('PROPS', this.props);
+                  this.props.dispatch({
+                    type: 'POPUP',
+                    name:'uploadWorkplan',
+                    data: {
+                      active:true
+                    }
+                  })
+                  e.preventDefault()
+                }
+              }>UPLOAD</button>
+              <PopUp id='uploadWorkplan' dividerText='UPLOAD WORKPLAN' btnText='UPLOAD' btnClass="btn-secondary" btnStyle={{width:'200px', float:'left'}}>
                   <div>
                     <small>You can upload your project workplan to generate task automatically on PRouDs. Please download the project workplan template <a>here</a></small>
                     <Field
@@ -298,7 +398,7 @@ class ProjectWorkplan extends Component {
           </div>
           <div className='grid wrap'>
             <div className='unit whole'>
-              <div className='card' style={{padding:'0'}}>
+              <div className='card' style={{padding:'0', overflow:'visible'}}>
                 {/* <div className='grid wrap'>
                   <div className='unit whole'>
                   </div>
