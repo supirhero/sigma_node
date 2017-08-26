@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { Grid } from 'react-redux-grid';
 import store from '../reducers/combineReducers.jsx'
-// <<<<<<< HEAD
+
 import {Divider, Header, ProjectHeader,PopUp,ReduxInput,ReduxSelectNew, WorkplanRow,PageLoader, datepickerUniversal} from  './Components.jsx'
 import { Field, reduxForm } from 'redux-form';
 import {getWorkplanView, addTaskWorkplan, getTaskView} from './actions.jsx'

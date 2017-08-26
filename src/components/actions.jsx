@@ -8,10 +8,12 @@ const cookies = new Cookies();
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
-const baseURL = "http://45.77.45.126"
+// const baseURL = "http://45.77.45.126/dev/" 
+const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/"
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
 const token_string = `?token=${token}`
+console.log(token)
 export function login(email, password) {
 
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
@@ -19,7 +21,7 @@ export function login(email, password) {
   return function (dispatch) {
     return axios({
             method: 'POST',
-            url:`${baseURL}/dev/login/login`,
+            url:`${baseURL}login/login`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {user_id: email,
                     password: password,
@@ -52,9 +54,10 @@ export function getProjectDetail(id) {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/home/detailproject/${id}?token=${token}`,
+            url: `${baseURL}home/detailproject/${id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -107,9 +110,10 @@ export const getProjectTeamMember = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/home/p_teammember/${id}?token=${token}`,
+            url: `${baseURL}home/p_teammember/${id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -131,9 +135,10 @@ export const getDocsFiles = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/home/projectdoc/${id}?token=${token}` ,
+            url: `${baseURL}home/projectdoc/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
@@ -152,9 +157,10 @@ export const addDocsAndFiles = (data, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   console.log("DOCS",data);
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/home/documentupload/${id}?token=${token}` ,
+            url: `${baseURL}home/documentupload/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
             data: {
@@ -177,9 +183,10 @@ export const getIssue = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/home/projectissue/${id}?token=${token}` ,
+            url: `${baseURL}home/projectissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -201,9 +208,10 @@ export const addIssue = (data, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/home/addissue/${id}?token=${token}` ,
+            url: `${baseURL}home/addissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
               'PROJECT_ID':id,
@@ -228,9 +236,10 @@ export const addNewProject = (data) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/project/addProject_acion?token=${token}` ,
+            url: `${baseURL}project/addProject_acion?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
@@ -241,7 +250,7 @@ export const addNewProject = (data) => {
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
               END_CUST_ID:data.END_CUST_ID,
-              // H/O:"yes",
+              HO:"yes",
               IWO_NO:data.IWO_NO,
               MARGIN:data.MARGIN,
               OVERHEAD:data.OVERHEAD,
@@ -253,7 +262,9 @@ export const addNewProject = (data) => {
               RELATED:data.RELATED,
               TYPE_OF_EFFORT:data.TYPE_OF_EFFORT,
               TYPE_OF_EXPENSE:data.TYPE_OF_EXPENSE,
-              VISIBILITY:data.VISIBILITY
+              VISIBILITY:data.VISIBILITY,
+              START:moment(data.START).format('YYYY-MM-DD'),
+              END:moment(data.END).format('YYYY-MM-DD')
             }
           }).then(
             res => {
@@ -275,9 +286,10 @@ export const getBusinessUnitDetail = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/home/buDetail?token=${token}`,
+            url: `${baseURL}home/buDetail?token=${token}`,
             data: {
               bu_code: id,
             },
@@ -298,9 +310,10 @@ export const getBusinessUnitDetail = (id) => {
 
 export const getIWOEditProject = (offset) => {
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/iwo/getIwo/${offset}?token=${token}`,
+            url: `${baseURL}iwo/getIwo/${offset}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
           }).then(
@@ -320,9 +333,10 @@ export const getIWOEditProject = (offset) => {
 
 export const getIWO = (offset) => {
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/iwo/getIwo/${offset}?token=${token}`,
+            url: `${baseURL}iwo/getIwo/${offset}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -340,9 +354,10 @@ export const getIWO = (offset) => {
 
 export const checkIWOUsed = (iwo) => {
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/project/checkiwoused`+token_string,
+            url: `${baseURL}project/checkiwoused`+token_string,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               IWO_NO: iwo
@@ -363,9 +378,10 @@ export const editProject = (data, id) =>
 // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
  function (dispatch) {
+  const token = cookies.get('token')
   return axios({
           method: 'POST',
-          url: `${baseURL}/dev/project/editProject_action?token=${token}` ,
+          url: `${baseURL}project/editProject_action?token=${token}` ,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           data: {
             PROJECT_ID:id,
@@ -393,7 +409,6 @@ export const editProject = (data, id) =>
             START:moment(data.START).format('YYYY-MM-DD'),
             END:moment(data.END).format('YYYY-MM-DD')
 
-
           }
         }).then(
           res => {
@@ -413,9 +428,10 @@ export const getEditProjectView = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/project/editProject_view/${id}?token=${token}`,
+            url: `${baseURL}project/editProject_view/${id}?token=${token}`,
 
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -440,9 +456,10 @@ export const getAddProjectView = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}/dev/project/addProject_view?token=${token}`,
+            url: `${baseURL}project/addProject_view?token=${token}`,
             data: {
               bu_code: id,
             },
@@ -464,9 +481,10 @@ export const getAddProjectView = (id) => {
 
 export const getSPI = (id) => {
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/spi/${id}?token=${token}` ,
+            url: `${baseURL}project/spi/${id}?token=${token}` ,
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -487,9 +505,10 @@ export const getCPI = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/cpi/${id}?token=${token}` ,
+            url: `${baseURL}project/cpi/${id}?token=${token}` ,
             headers: {
               // 'token': '369e1dc5052347b7f5118cdc66f34fdd',
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -504,17 +523,92 @@ export const getCPI = (id) => {
             },
           )
   }
+}
+
+
+
+export const reportMonthly = (bulan,tahun) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/r_month?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+               bulan:bulan,
+               tahun:tahun
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
 
 }
+
+
+export const reportYearly = (tahun) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}report/r_yearly/${tahun}?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
+
+}
+
+export const reportPeople = (BU_ID,BULAN,TAHUN) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/r_people?token=${token}` ,
+            headers: {            
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+              BU_ID,
+              BULAN,
+              TAHUN
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
 
 export const getSCurve = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // store.dispatch({type:'API', data: null, append:true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}/dev/project/s_curve/${id}?token=${token}` ,
+            url: `${baseURL}project/s_curve/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -533,9 +627,10 @@ export const getAccountManager = (am_id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
             method: 'post',
-            url: `${baseURL}/dev/project/checkAM?token=${token}` ,
+            url: `${baseURL}project/checkAM?token=${token}` ,
             headers: {
               // 'token': {token},
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -562,9 +657,10 @@ export const getAccountManager = (am_id) => {
 export function viewTimesheet(date) {
   // store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheet/view?token=${token}`,
+      url: `${baseURL}timesheet/view?token=${token}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -590,9 +686,10 @@ export function viewTimesheet(date) {
 export function taskList(project_id) {
   console.log('PROJECT_ID',project_id)
   return function (dispatch) {
+    const token = cookies.get('token')
     return axios({
       method: 'POST',
-      url: `${baseURL}/dev/timesheet/taskList?token=${token}`,
+      url: `${baseURL}timesheet/taskList?token=${token}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -615,7 +712,7 @@ export function taskList(project_id) {
 //   return function(dispatch){
 //     return axios({
 //       method:'POST',
-//       url:`${baseURL}/dev/timesheet/addTimesheet/`,
+//       url:`${baseURL}timesheet/addTimesheet/`,
 //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //       data: {TS_DATE: TS_DATE,
 //                     HOUR: HOUR,
@@ -634,9 +731,10 @@ export function taskList(project_id) {
 
 export function addTaskWorkplan(id,data) {
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/task/createTask?token=${token}`,
+      url:`${baseURL}task/createTask?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
@@ -659,9 +757,10 @@ export function addTaskWorkplan(id,data) {
 
 export function getTaskView(id) {
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/task/createTask_view/${id}?token=${token}`,
+      url:`${baseURL}task/createTask_view/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
     }).then(
@@ -678,9 +777,10 @@ export function getTaskView(id) {
 export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheet/addTimesheet?token=${token}`,
+      url:`${baseURL}timesheet/addTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: { WP_ID,
               TS_DATE,
@@ -706,7 +806,7 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 //   return function(dispatch){
 //     return axios({
 //       method:'POST',
-//       url:`${baseURL}/dev/timesheet/addTimesheet/`,
+//       url:`${baseURL}timesheet/addTimesheet/`,
 //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //       data: {values}
 //     }).then(
@@ -721,9 +821,10 @@ export function addTimesheet(WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
 
 export function confirmationTimesheet(ts_id,confirm) {
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/timesheet/confirmationTimesheet?token=${token}`,
+      url:`${baseURL}timesheet/confirmationTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {ts_id,confirm}
     }).then(
@@ -737,9 +838,10 @@ export function confirmationTimesheet(ts_id,confirm) {
 
 export function myPerformance(bulan,tahun){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/report/myperformances?token=${token}`,
+      url:`${baseURL}report/myperformances?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {bulan,tahun}
     }).then(
@@ -752,9 +854,10 @@ export function myPerformance(bulan,tahun){
 
 export function getMyAssignment(){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/home/myassignment?token=${token}`,
+      url:`${baseURL}home/myassignment?token=${token}`,
       // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -769,7 +872,7 @@ export function getMyAssignment(){
 //   return function(dispatch){
 //     return axios({
 //       method:'GET',
-//       url:`${baseURL}/dev/task/workplan_view/${id}`,
+//       url:`${baseURL}task/workplan_view/${id}`,
 //       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 //     }).then(
 //       (res)=>{
@@ -783,11 +886,10 @@ export function getMyAssignment(){
 
 export function getWorkplanView(id){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'GET',
-      // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
-      url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
-
+      url:`${baseURL}task/workplan_view/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -800,9 +902,10 @@ export function getWorkplanView(id){
 
 export function getMyActivities(){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/home/myactivities?token=${token}`,
+      url:`${baseURL}home/myactivities?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -815,9 +918,10 @@ export function getMyActivities(){
 
 export function getListBU(){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'GET',
-      url:`${baseURL}/dev/report/r_list_bu?token=${token}`,
+      url:`${baseURL}report/r_list_bu?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{
@@ -826,3 +930,42 @@ export function getListBU(){
     )
   }
 }
+
+
+export function rDirectorat(){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}report/r_directoratbu?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
+
+
+export function getDataMaster(data){
+
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}Datamaster/getData/${data}?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+
+
+

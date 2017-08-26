@@ -490,6 +490,41 @@ export class ReduxSelect extends Component {
   }
 }
 
+export class ReduxSelectTimesheet extends Component {
+  componentDidUpdate() {
+    console.log('PROPS', this.props);
+  }
+  render() {
+    console.log('SELECT PROPS',this.props);
+    return (
+      <div style={this.props.style}>
+
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <select
+          // className='select'
+          className= {'select ' + this.props.meta.touched && ((this.props.meta.error && 'error'))}
+
+          {...this.props.select}
+          {...this.props.custom}
+          {...this.props.input}
+
+          // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+          placeholder={this.props.placeholder}
+          // onBlur = {e=> {
+          //
+          // }}
+        >
+          {this.props.children}
+        </select>
+        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
+      </div>
+    )
+  }
+}
+
+
 export class ReduxSelectNew extends Component {
   render() {
     return (
@@ -611,8 +646,8 @@ export class BarChartSPI extends Component {
                 return <Cell key={index} fill={color} />;
               })
             }
-   </Bar>
-  </ChartBar>
+        </Bar>
+        </ChartBar>
         </ResponsiveContainer>
 
       </div>
@@ -664,7 +699,7 @@ export class LineChart extends Component{
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
             {this.props.lines.map((props)=>
-              <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
+              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
       </div>
@@ -1002,6 +1037,7 @@ export class TableNew extends Component{
 
         <tbody>
             {
+              this.props.tableData && 
               this.props.tableData.map((row,index)=>(
                 <tr className='items' key={index}>
                   {

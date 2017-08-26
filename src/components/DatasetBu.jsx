@@ -5,11 +5,23 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header, Search, PopUp } from './Components.jsx';
-
+import { Select, Input, Table,TableNew,Header, Search, PopUp,PageLoader } from './Components.jsx';
+import {getDataMaster} from './actions.jsx'
 
 class DatasetProjectType extends Component {
+  componentWillMount(){
+    const bu = store.getState().data.bu
+    store.dispatch(getDataMaster("bu"))
+  }
+  
+
   render() {
+    const state = store.getState()
+    const bu = state.data.bu
+
+    if (!bu){
+      <PageLoader />
+    }
     return (
       <div>
         <div className="grid dataset">
@@ -72,54 +84,14 @@ class DatasetProjectType extends Component {
                 </div>
                 <div className="unit whole">
                   <TableNew
-                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'},{value:'   '}]}
-                  tableData={[{column:[
-                    {value:'1'},
-                    {value:'Telkomsigma'},
-                    {value:' '},
-                    {value:'  '}
-                  ]},{column:[
-                    {value:'2'},
-                    {value:'Business Data Center and Managed Services'},
-                    {value:'ANDREUW TH. A.F'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'3'},
-                    {value:'Business System Integration'},
-                    {value:'SYARIF ALI IDRUS'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'4'},
-                    {value:'Solution Operation'},
-                    {value:'ERA KAMALI NASUTION'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'5'},
-                    {value:'Human Capital & Finance'},
-                    {value:'BAKHTIAR ROSYIDI'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'6'},
-                    {value:'Billing and Collection'},
-                    {value:'ANDREUW TH. A.F'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'7'},
-                    {value:'Financial Accounting'},
-                    {value:'NUSIRWAN'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'8'},
-                    {value:'Human Capital'},
-                    {value:'IR. R. ADAM KAMIL KHUSNUN. M'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'9'},
-                    {value:'Legal & Compliance'},
-                    {value:'KURNIAWAN, SH'},
-                     {value:'  '}
-                  ]},
-                  ]}>
+                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'}]}
+                  tableData={bu?bu.map((value,index)=>{
+                    return {column:[
+                      {value:value.LEVEL},
+                      {value:value.BU_NAME},
+                      {value:value.BU_HEAD},
+                    ]}
+                  }):null}>
                 </TableNew>       
                 
                 </div>

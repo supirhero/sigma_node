@@ -5,11 +5,26 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUp } from './Components.jsx';
-
+import { Select, Input, Table,TableNew,Header,Search,PopUp ,PageLoader} from './Components.jsx';
+import {getDataMaster} from './actions.jsx'
 
 class DatasetHoliday extends Component {
+  componentWillMount(){
+    const state = store.getState()
+    const holiday = state.data.holiday
+    // const holiday = store.getState().data.holiday
+    store.dispatch(getDataMaster("holiday"))
+  }
+
   render() {
+    const state = store.getState()
+    const holiday = state.data.holiday
+
+
+    if (!holiday){
+      <PageLoader />
+    }
+    
     return (
       <div>
         <div className="grid dataset">
@@ -52,59 +67,14 @@ class DatasetHoliday extends Component {
 
 								<div className="unit whole">
 									 <TableNew
-                  tableHeader={[{value:'NO'},{value:'NAME'},{value:'START'},{value:'END'}]}
-                  tableData={[{column:[
-                    {value:'1'},
-                    {value:'Hari Raya Nyepi 1938'},
-                    {value:'10 May 2017'},
-                    {value:'13 Oct 2017'},                                                       
-										]},{column:[
-											{value:'2'},
-											{value:'Wafat Isa Al-Masih'},
-											{value:'06 Nov 2017'},
-											{value:'23 Apr 2017'},                                     
-										]},{column:[
-                    {value:'3'},
-                    {value:'Hari Buruh Internasional'},
-                    {value:'16 Dec 2017'},
-                    {value:'29 Oct 2017'},                 
-									]},{column:[
-                    {value:'4'},
-                    {value:'Tahun Baru 2016'},
-                    {value:'08 Apt 2017'},
-                    {value:'17 Feb 2017'},                 
-									]},{column:[
-                    {value:'5'},
-                    {value:'Imlek 2567'},
-                    {value:'29 Mar 2017'},
-                    {value:'21 Feb 2017'},                 
-									]},{column:[
-                    {value:'6'},
-                    {value:'Tahun Baru Masehi'},
-                    {value:'2 Feb 2017'},
-                    {value:'11 Feb 2017'},                 
-									]},{column:[
-                    {value:'7'},
-                    {value:'Cuti Bersama'},
-                    {value:'11 Aug 2017'},
-                    {value:'12 Jun 2017'},                 
-									]},{column:[
-                    {value:'8'},
-                    {value:'Jumat Agung'},
-                    {value:'27 Feb 2017'},
-                    {value:'12 Dec 2017'},                 
-									]},{column:[
-                    {value:'9'},
-                    {value:'Tahun Baru Imlek'},
-                    {value:'2 Jan 2017'},
-                    {value:'11 Mar 2017'},                 
-									]},{column:[
-                    {value:'10'},
-                    {value:'Hari Raya Nyepi'},
-                    {value:'23 Feb 2017'},
-                    {value:'27 Feb 2017'},                 
-									]}
-                ]}>
+                  tableHeader={[{value:'NAME'},{value:'START'},{value:'END'}]}
+                  tableData={holiday?holiday.map((value,index)=>{
+                    return {column:[
+                      {value:value.HOLIDAY},
+                      {value:value.HOLIDAY_START},
+                      {value:value.HOLIDAY_END},
+                    ]}
+                  }):null}>
                 
                 </TableNew>															
 								</div>
@@ -146,5 +116,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DatasetHoliday);
+export default connect(mapStateToProps,{getDataMaster})(DatasetHoliday);
 // export default Login

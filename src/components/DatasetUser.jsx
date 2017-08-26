@@ -5,11 +5,22 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
-
+import { Select, Input, Table,TableNew,Header,Search ,PageLoader} from './Components.jsx';
+import {getDataMaster} from './actions.jsx'
 
 class DatasetUser extends Component {
+  componentWillMount(){
+    const user = store.getState().data.user
+    store.dispatch(getDataMaster("user"))
+  }
   render() {
+    const state = store.getState()
+    const user = state.data.user
+
+
+    if (!user){
+      <PageLoader />
+    }
     return (
       <div>
         <div className="grid wrap dataset">
@@ -21,79 +32,15 @@ class DatasetUser extends Component {
               </div>
               <div className="unit whole">
                 <TableNew
-                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'LAST LOGIN'}]}
-                  tableData={[{column:[
-                    {value:'1'},
-                    {value:'4100001'},
-                    {value:'Joshua Howard'},
-                    {value:'huel_cora@hotmail.com'},
-                    {value:'08 Apr 2017'},
-                                
-                  ]},{
-                    column:[
-                    {value:'2'},
-                    {value:'4100002'},
-                    {value:'Luella Perry'},
-                    {value:'maya_kutch@hotmail.com'},
-                    {value:'28 Nov 2017'}
-                    ]},{
-                    column:[
-                    {value:'3'},
-                    {value:'4100003'},
-                    {value:'Genevieve Wells '},
-                    {value:'genevieve_wells@hotmail.com'},
-                    {value:'20 Mar 2017'}
-                    ]},{
-                    column:[
-                    {value:'4'},
-                    {value:'4100004'},
-                    {value:'Eugene Chandler'},
-                    {value:'eugene_chandler@hotmail.com'},
-                    {value:'09 May 2017'}
-                    ]},{
-                    column:[
-                    {value:'5'},
-                    {value:'4100005'},
-                    {value:'Adele Canon'},
-                    {value:'adele_canon@hotmail.com'},
-                    {value:'04 May 2017'}
-                    ]},{
-                    column:[
-                    {value:'6'},
-                    {value:'4100006'},
-                    {value:'Maud Berry'},
-                    {value:'maud_berry@hotmail.com'},
-                    {value:'25 Jun 2017'}
-                    ]},{
-                    column:[
-                    {value:'7'},
-                    {value:'4100007'},
-                    {value:'Grace Perez'},
-                    {value:'grace_perez@hotmail.com'},
-                    {value:'02 Feb 2017'}
-                    ]},{
-                    column:[
-                    {value:'8'},
-                    {value:'4100007'},
-                    {value:'Garreth Welch'},
-                    {value:'garreth_welch@hotmail.com'},
-                    {value:'03 Feb 2017'}
-                    ]},{
-                    column:[
-                    {value:'9'},
-                    {value:'4100007'},
-                    {value:'Rebecca Jackson'},
-                    {value:'rebecca_jackson@hotmail.com'},
-                    {value:'25 Jan 2017'}
-                    ]},{
-                    column:[
-                    {value:'10'},
-                    {value:'4100007'},
-                    {value:'Isabelle Riley'},
-                    {value:'isabelle_riley@hotmail.com'},
-                    {value:'29 Mar 2017'}
+                  tableHeader={[{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'LAST LOGIN'}]}
+                  tableData={user?user.map((value,index)=>{
+                    return {column:[
+                      {value:value.USER_ID},
+                      {value:value.USER_NAME},
+                      {value:value.EMAIL},
+                      {value:value.LAST_LOGIN}
                     ]}
-                  ]}>
+                  }):null}>
                 </TableNew>                            
               </div>
               <div className="unit whole">

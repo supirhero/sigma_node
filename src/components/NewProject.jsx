@@ -49,7 +49,7 @@ class NewProject extends Component {
       // // "AM_ID": 'NONE',
       // // "TYPE_OF_EFFORT": 'NONE',
       "PROJECT_STATUS": 'NOT STARTED',
-      "H/O": 'yes',
+      "HO": 'yes',
       "PROJECT_TYPE_ID": 'project',
       //
       // // "START": '2017-1-1',
@@ -97,7 +97,7 @@ class NewProject extends Component {
   }
   onSubmit(props){
     alert("submitted")
-    this.props.addNewProject(props)
+    this.props.addNewProject(props);
   }
     render(){
       // const projectSetting = this.props.state.data.project.project_setting
@@ -141,9 +141,7 @@ class NewProject extends Component {
         <div>
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
-
-            >
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
@@ -502,12 +500,12 @@ class NewProject extends Component {
                     <h2 className='input-name'>H/O OPERATION</h2>
 
                     <div className='unit half'>
-                      <Field name="H/O" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup}>
                         <RadioButton value="yes" label="YES"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="H/O" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup}>
                         <RadioButton value="no" label="NO"/>
                       </Field>
 
@@ -521,7 +519,6 @@ class NewProject extends Component {
                         style={{width:'96%', float:'right'}}
                         component={ReduxSelect}
                         validate={[required]}
-
                         >
                         <option></option>
 
@@ -930,12 +927,7 @@ class NewProject extends Component {
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                    <button className='btn-secondary' style={{display:'inline-block'}} onClick={
-                      e => {
-                        browserHistory.push('/')
-                        e.preventDefault()
-                      }
-                    }>CANCEL</button>
+                    <button className='btn-secondary' style={{display:'inline-block'}} >CANCEL</button>
                     <button className='btn-primary' type='submit' style={{float:'right', display:'inline-block'}}>CREATE PROJECT</button>
 
                   </div>
@@ -955,6 +947,7 @@ class NewProject extends Component {
 function mapStateToProps(state) {
   return {
     formValues : state.form.add_project,
+    
     state
     // filter: ownProps.location.query.filter
   }

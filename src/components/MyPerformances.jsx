@@ -15,6 +15,7 @@ class MyPerformances extends Component {
         year: 0
       };
     }
+
     componentWillMount(){
       store.dispatch(myPerformance("8","2017"))
     }
@@ -49,14 +50,15 @@ class MyPerformances extends Component {
         {name:'NOVEMBER',number:'11'},
         {name:'DEECMBER',number:'12'},
       ]
+
       const data = state.data ? state.data : null
-      const allentry =data.allentry.map((value,index)=>{
+      const allentry =data.allentry?data.allentry.map((value,index)=>{
         return {name:value.label,value:parseFloat(value.value)}
-      })
+      }) : null
       
-      const allhour = data.allhour.map((value,index)=>{
+      const allhour = data.allhour?data.allhour.map((value,index)=>{
         return {name:value.label,value:parseFloat(value.value)}
-      })
+      }):null
 
       const year = [
         {year:'2017'},
@@ -152,20 +154,21 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit one-third'>
                   <Meter
+                  progress={myperformance ? myperformance.entry * 0.01 : '-'}
+                  text={myperformance ? Math.floor(myperformance.entry) : '-'}
+                  title='Entry'
+                  status={myperformance.status}
+                />
+                  
+                  </div>
+                  <div className='unit one-third'>
+                  <Meter
                   progress={myperformance ? myperformance.utilization * 0.01 : '-'}
                   text={myperformance ? Math.floor(myperformance.utilization) : '-'}
                   title='Utilization'
                   status={myperformance.status_utilization}
                 />
 
-                  </div>
-                  <div className='unit one-third'>
-                  <Meter
-                  progress={myperformance ? myperformance.entry * 0.01 : '-'}
-                  text={myperformance ? Math.floor(myperformance.entry) : '-'}
-                  title='Entry'
-                  status={myperformance.status}
-                />
                   </div>
                   <div className='unit one-third'>
 

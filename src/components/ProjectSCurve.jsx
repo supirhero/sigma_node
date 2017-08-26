@@ -18,17 +18,17 @@ class ProjectSCurve extends Component {
       const state = store.getState()
       const s_curve = state.data.s_curve ? state.data.s_curve : null
       
-      const dataSCurve = s_curve.map((value,index)=>{
+      const dataSCurve = s_curve?s_curve.map((value,index)=>{
         return {name:value.Week,Target:value.pv_percent, Actual:value.ev_percent}
-      })
+      }):null
 
-      const tableSCurve = s_curve.map((value,index)=>{
+      const tableSCurve = s_curve?s_curve.map((value,index)=>{
         return {column:[
           {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
           {value:value.PV == null ? '0' : value.PV},
           {value:value.EV == null ? '0' : value.EV},
         ]}
-      })
+      }):null
 
       if (!s_curve) {
         return <PageLoader />;
