@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
-import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput, ReduxFileInput, EmptyData} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxFileInput, EmptyData} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
 
 
@@ -16,15 +16,11 @@ class ProjectDocsAndFiles extends Component {
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){
-
     const id = store.getState().page.id
-
-
-    this.props.addDocsAndFiles(props, id)
+    store.dispatch(addDocsAndFiles(props.desc, props.document, id))
   }
     render(){
       const {handleSubmit} = this.props;
-
       const appStore = store.getState()
       const project_doc_list = appStore.data.project_doc_list
       return(
@@ -62,7 +58,7 @@ class ProjectDocsAndFiles extends Component {
                           inputName="Select File"
                           name="document"
                           type='file'
-                          component={ReduxFileInput}
+                          component={ReduxDrop}
                         />
                        {/* <InputFile name="selectFile" /> */}
                       </div>
@@ -149,5 +145,3 @@ export default connect(mapStateToProps, { addDocsAndFiles })
   reduxForm({
     form: 'add_docs_files',
   })(ProjectDocsAndFiles));
-// export default connect(mapStateToProps)(ProjectDocsAndFiles)
-// export default Login

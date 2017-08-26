@@ -11,8 +11,8 @@ class MyPerformances extends Component {
     constructor(){
       super();
       this.state = {
-        month : 0,
-        year: 0
+        month : 8,
+        year: 2017
       };
     }
 
