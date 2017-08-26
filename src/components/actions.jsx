@@ -55,12 +55,13 @@ export function login(email, password) {
 export function getProjectDetail(id) {
 
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
+  const token = cookies.get('token')
+  const token_string = `?token=${token}`
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}home/`,
+            url: `${baseURL}home/detailproject/${id}`+token_string,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
