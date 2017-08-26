@@ -1162,9 +1162,42 @@ export class WorkplanRow extends Component {
 
               e.preventDefault()
             }}/>
-            <MenuItem title='Edit'/>
-            <MenuItem title='Assign'/>
-            <MenuItem title='Delete'/>
+            <MenuItem title='Edit' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'edit',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+            <MenuItem title='Assign' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'assign',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+
+            <MenuItem title='Delete' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'delete',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+
+            
 
           </MenuSection>
 

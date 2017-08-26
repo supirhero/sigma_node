@@ -9,6 +9,7 @@ const cookies = new Cookies();
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 const baseURL = "http://45.77.45.126"
+
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
 const token_string = `?token=${token}`
@@ -799,6 +800,47 @@ export function getWorkplanView(id){
   }
 }
 
+export function getTaskMemberView(project_id,wbs_id){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
+      url:`${baseURL}/dev/task/assignTaskMember_view?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        PROJECT_ID:project_id,
+        WBS_ID:wbs_id
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+        return res
+      }
+    )
+  }
+}
+
+export function assignTaskMember(data){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/task/assignTaskMemberProject?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        WBS_ID:data.WBS_ID,
+        MEMBER:data.MEMBER,
+        EMAIL:data.EMAIL,
+        NAME:data.NAME,
+        WBS_NAME:data.WBS_NAME,
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+      }
+    )
+  }
+}
+
 export function getMyActivities(){
   return function(dispatch){
     return axios({
@@ -812,6 +854,7 @@ export function getMyActivities(){
     )
   }
 }
+
 
 
 export function getListBU(){

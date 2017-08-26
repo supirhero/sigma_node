@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
-import {Input,ReduxInput,ReduxInputDisabled} from './Components.jsx'
+import {Input,ReduxInput,ReduxInputDisabled,ReduxFileInput} from './Components.jsx'
 
 
 
@@ -42,7 +42,7 @@ onSubmit(props){
               </div>
             </div>
             <div className='unit two-thirds'>           
-              <button className='btn-primary'>UPLOAD NEW PICTURE</button>
+            <ReduxFileInput className="btn-primary" style={{width:'200px',height:'35px',cursor:'pointer'}} />   
               <small style={{marginTop:'10px'}}><i>max file size is 1 MB</i></small>
 
             </div>
