@@ -42,7 +42,6 @@ class ProfileBasicInformation extends Component {
             <div className="pic-wrapper" />
           </div>
           <div className="unit two-thirds">
-            <button className="btn-primary">UPLOAD NEW PICTURE</button>
             <Field
             inputName="EVIDENCE"
             name="image"

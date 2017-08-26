@@ -1478,6 +1478,8 @@ export class ReduxDrop extends Component {
     return(
       <Dropzone
       name={this.props.name}
+      className="btn-primary"
+      style={{width:'170px',height:'30px'}}
       placeholder={this.props.placeholder}
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
