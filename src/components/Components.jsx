@@ -1145,7 +1145,7 @@ export class TableNew extends Component{
                   {
                     row.column.map((column,index)=>(
                       <td key={index}>{column.value}</td>
-                      
+
                     ))
                   }
                 </tr>
@@ -1236,7 +1236,7 @@ export class TableNewMasterData extends Component{
                       <td key={index}>{column.value}</td>
                     ))
                   }
-                  <td style={{position:'relative'}}>  
+                  <td style={{position:'relative'}}>
                   <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
                     <MenuSection>
                       <MenuItem title='Edit' onClick={e => {
@@ -1248,7 +1248,7 @@ export class TableNewMasterData extends Component{
                           }
                         })
                         e.preventDefault()
-                      }}/> 
+                      }}/>
                       <MenuItem title='Delete' onClick={e => {
                         store.dispatch({
                           type: 'POPUP',
@@ -1259,7 +1259,7 @@ export class TableNewMasterData extends Component{
                         })
                         store.dispatch(deleteHoliday(this.props.id))
                         e.preventDefault()
-                      }}/> 
+                      }}/>
                     </MenuSection>
                   </Menu>
                 </td>
@@ -1363,7 +1363,7 @@ export class WorkplanRow extends Component {
           e.preventDefault()
         }
       }>
-      <td style={{paddingLeft: padding+'px', wordBreak:'break-word'}}>
+      <td style={{paddingLeft: padding+'px', wordBreak:'break-word', width:'370px', paddingRight:'15px'}}>
         {/* <div style={{width:'200px', overflow:'hidden'}}> */}
           <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
             {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
@@ -1439,7 +1439,7 @@ export class WorkplanRow extends Component {
               e.preventDefault()
             }}/>
 
-            
+
 
           </MenuSection>
 
@@ -1660,7 +1660,7 @@ export class ReduxDrop extends Component {
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
-      
+
       </Dropzone>
     )
   }
@@ -1678,7 +1678,7 @@ export class ReduxUploadWorkplam extends Component {
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
-      
+
       </Dropzone>
     )
   }
