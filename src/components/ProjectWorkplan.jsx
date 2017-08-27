@@ -5,9 +5,9 @@ import { Link, browserHistory } from 'react-router';
 import { Grid } from 'react-redux-grid';
 import store from '../reducers/combineReducers.jsx';
 // <<<<<<< HEAD
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplam } from './Components.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember} from './actions.jsx';
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan} from './actions.jsx';
 
 
 class ProjectWorkplan extends Component {
@@ -20,16 +20,20 @@ class ProjectWorkplan extends Component {
   }
   onSubmit(props) {
     const id = this.props.state.page.id;
-
     this.props.addTaskWorkplan(id, props);
   }
+
+  onSubmitWorkplan(props){
+    const id = this.props.state.page.id
+    this.props.uploadWorkplan(id,props.document)
+  }
+
   componentWillMount() {
     const id = this.props.state.page.id;
     store.dispatch(getWorkplanView(id));
     store.dispatch(getTaskView(id));
-
-
   }
+
   render() {
     const { handleSubmit } = this.props;
 
@@ -600,21 +604,27 @@ class ProjectWorkplan extends Component {
               }
             >UPLOAD</button>
             <PopUp id="uploadWorkplan" dividerText="UPLOAD WORKPLAN" btnText="UPLOAD" btnClass="btn-secondary" btnStyle={{ width: '200px', float: 'left' }}>
+            <form onSubmit={handleSubmit(this.onSubmitWorkplan.bind(this))}>
               <div>
-                <small>You can upload your project workplan to generate task automatically on PRouDs. Please download the project workplan template <a>here</a></small>
-                <Field
-                  inputName="WORK HOURS"
-                  name="HOUR"
-                  inputDesc="max file size is 5 MB allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png"
-                  component={ReduxInput}
-                />
+              <h2 className='input-desc'>You can upload your project workplan to generate task automatically on PRouDS. Please download the project workplan template <a>here</a></h2>
+              <h2 className='input-desc'><i>SELECT FILE</i></h2>
+              {/*  <h2 className='input-desc'><i>You can attach one of these documents (Proposal, SPK/Contract, IWO, Change Management, Service Request, Others). If you want to add 2 or more, you can upload the compressed file (.zip). Max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>  */}
+              <h2 className='input-desc'><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+              <div className="grid wrap">
+              <Field
+              inputName="SELECT FILE"
+              name="document"
+              component={ReduxUploadWorkplam}
+              />
+              </div>
               </div>
               <div className="btn-wrapper">
                 <button className="btn-secondary" style={{ float: 'left', display: 'inline-block' }}>CANCEL</button>
-                <button className="btn-primary"style={{ float: 'right', display: 'inline-block' }}>UPLOAD</button>
+                <button type="submit" className="btn-primary"style={{ float: 'right', display: 'inline-block' }}>UPLOAD</button>
 
               </div>
 
+              </form>
             </PopUp>
           </div>
 
@@ -665,13 +675,15 @@ class ProjectWorkplan extends Component {
 function mapStateToProps(state) {
   return {
     formValues: state.form.add_task,
+    formValues: state.form.upload_workplan,
     state,
   };
 }
 export default reduxForm({
   // Must be unique, this will be the name for THIS PARTICULAR FORM
   form: 'add_task',
+  form: 'upload_workplan'
 })(
-  connect(mapStateToProps, { addTaskWorkplan })(ProjectWorkplan),
+  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan })(ProjectWorkplan),
 );
 // export default Login

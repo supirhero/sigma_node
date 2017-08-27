@@ -800,6 +800,18 @@ export function getWorkplanView(id){
   }
 }
 
+export function uploadWorkplan(project_id,files){ 
+  return function(dispatch){ 
+    const formData = new FormData() 
+    formData.append('project_id',project_id) 
+    formData.append('document',files[0]) 
+    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{ 
+      method:'POST', 
+      body:formData 
+    }) 
+  } 
+} 
+
 export function getTaskMemberView(project_id,wbs_id){
   return function(dispatch){
     return axios({
