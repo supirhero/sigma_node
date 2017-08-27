@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
+import { push, replace, goBack } from 'react-router-redux'
+
 import store from '../reducers/combineReducers.jsx';
 import { Line } from 'react-progressbar.js';
 import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal } from './Components.jsx';
@@ -24,11 +26,11 @@ class EditProject extends Component {
     const initData = {
       IWO_NO: data.iwo_no,
       END_CUST_ID: data.cust_end_id,
-      AMOUNT: data.amount,
+      AMOUNT: data.amount ? data.amount : 0,
       PROJECT_NAME: data.project_name,
       RELATED: data.related_bu,
       CUST_ID: data.cust_id,
-      MARGIN: data.margin,
+      MARGIN: data.margin ? data.margin : 0,
       BU: data.bu_code,
       DESC: data.project_desc,
       AM_ID: data.am_id,
@@ -70,7 +72,9 @@ class EditProject extends Component {
     const id = this.props.state.page.id
     const bu_code = store.getState().page.project.bu_code;
 
-    this.props.editProject(props, id, bu_code);
+    this.props.editProject(props, id, bu_code).then(res=> {
+      this.props.dispatch(replace(`/project/${id}`))
+    });
   }
 
   render() {
@@ -254,11 +258,11 @@ class EditProject extends Component {
               </div>
 
             </div>
-            <div className="grid wrap narrow padding-left">
+            {/* <div className="grid wrap narrow padding-left">
               <div className="unit whole">
                 <small>You have to fill this <a>project charter form</a> because your project value exceed Rp 10 Billion</small>
               </div>
-            </div>
+            </div> */}
 
             <div className="grid wrap narrow padding-left">
               <div className="unit whole">
@@ -400,7 +404,7 @@ class EditProject extends Component {
                   style={{ width: '100%' }}
                   component={ReduxSelect}
                 >
-                
+
                   {
                       projectStatus.map((value, index) => (
                         <option value={value.value} {...this.props.option}>{value.value}</option>
@@ -531,8 +535,8 @@ class EditProject extends Component {
             </div>
             <div className="grid wrap narrow padding-left">
               <div className="unit three-quarters">
-                <large style={{ display: 'block', marginBottom: '11px' }}>FORM STATUS:&nbsp;<span style={{ color: '#65BDF4' }}>DRAFTED</span></large>
-                <large style={{ display: 'inline-block' }}>COMPLETION:&nbsp;<span style={{ color: '#65BDF4' }}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</large>
+                <medium style={{ display: 'block', marginBottom: '11px' }}>FORM STATUS:&nbsp;<span style={{ color: '#65BDF4' }}>DRAFTED</span></medium>
+                <medium style={{ display: 'inline-block' }}>COMPLETION:&nbsp;<span style={{ color: '#65BDF4' }}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</medium>
 
                 <div className="completion-bar" style={{ display: 'inline-block' }}>
 
@@ -564,7 +568,7 @@ class EditProject extends Component {
                       e.preventDefault()
                     }
                   }>COMPLETE FORM</button> */}
-                <PopUp id="complete" dividerText="PROJECT CHARTER FORM" btnClass="btn-primary" btnStyle={{ padding: '15px 41px' }} btnText="VIEW FORM">
+                {/* <PopUp id="complete" dividerText="PROJECT CHARTER FORM" btnClass="btn-primary" btnStyle={{ padding: '15px 41px' }} btnText="VIEW FORM">
                   <div>
                     <div className="grid wrap narrow">
                       <div className="unit whole">
@@ -762,7 +766,7 @@ class EditProject extends Component {
 
                   </div>
 
-                </PopUp>
+                </PopUp> */}
               </div>
 
 
