@@ -201,7 +201,12 @@ export class Divider extends Component {
         {
           this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
         }
-        <h2><span>{this.props.text}</span></h2>
+        <h2>
+        {
+            this.props.text &&
+            <span>{this.props.text}</span>
+        }
+      </h2>
         {
           this.props.btnRightText && <button className='btn-secondary btn-right' style={this.props.btnRightStyle} onClick={this.props.btnRightClick}>{this.props.btnRightText}</button>
         }
@@ -1665,7 +1670,9 @@ export class datepickerUniversal extends Component {
     handleChange (date) {
 
 
-      this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+      // this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+      this.props.input.onChange(moment(date).format('DD-MMM-YYYY'))
+
 
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
@@ -1686,7 +1693,9 @@ export class datepickerUniversal extends Component {
           placeholder={placeholder}
           dateFormat="YYYY-MM-DD"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
-          selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
+          selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
+          // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
+
           // onChange={this.handleChange}
          >
           {this.props.children}

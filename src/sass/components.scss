@@ -725,6 +725,7 @@ Tabs {
     color: #777777;
   }
   td {
+    padding: 13px 0;
     font-size: 11px;
   }
 }
@@ -780,7 +781,7 @@ Tabs {
   height: 400px;
   .load {
     z-index: 2;
-    
+
     position: absolute;
     width: 100%;
     height: 100%;

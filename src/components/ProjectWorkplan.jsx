@@ -10,7 +10,7 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 
 
 import { Field, reduxForm } from 'redux-form';
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction} from './actions.jsx';
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline} from './actions.jsx';
 
 
 class ProjectWorkplan extends Component {
@@ -27,7 +27,7 @@ class ProjectWorkplan extends Component {
   }
 
   menu(value) {
-    var padding =(value.LEVEL * 20 + 20).toString()
+    var padding =(value.LEVEL * 20).toString()
 
     return(
       <tr onClick={
@@ -60,7 +60,8 @@ class ProjectWorkplan extends Component {
       <td>{value.FINISH_DATE}</td>
       <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
-      <td style={{position:'relative', paddingRight:'20px'}} >
+      <td style={{position:'relative', paddingRight:'10px'}} >
+
       {
         value.LEAF == 1 &&
         // React.cloneElement(this.props.children, { data: value })
@@ -151,6 +152,12 @@ class ProjectWorkplan extends Component {
       }
 
       </td>
+      <td style={{position:'relative'}} >
+        {
+          value.REBASELINE == 'yes' &&
+          <i className='material-icons' style={{color:'#cf000f'}}>error</i>}
+      </td>
+
 
     </tr>
     )
@@ -578,6 +585,21 @@ class ProjectWorkplan extends Component {
     }
 
         </PopUp>
+        <PopUp id="request_rebaseline"  btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+          <large style={{textAlign:'center', color:'#F48165'}}>Your Re-Baseline Request has been sent</large>
+          <small style={{textAlign:'center', marginTop: '20px'}}>This request has been sent to you project manager and leader. Please wait for their approval</small>
+          <button style={{margin:'auto', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
+            this.props.dispatch({
+              type: 'POPUP',
+              name: 'request_rebaseline',
+              data: {
+                active: false,
+              },
+            });
+
+            e.preventDefault()
+          }}>CLOSE</button>
+        </PopUp>
         <PopUp id="assign_task" dividerText="ASSIGN TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           {
             !this.props.state.data.available_to_assign && !this.props.state.data.task_name ? <PageLoader/> :
@@ -763,7 +785,17 @@ class ProjectWorkplan extends Component {
 }
           </div>
           <div className="unit one-third no-gutters">
-            <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} >RE-BASELINE</button>
+            <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} onClick={e=> {
+              this.props.dispatch(requestRebaseline(this.props.state.page.id)).then(res=>{
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name: 'request_rebaseline',
+                  data: {
+                    active: true,
+                  },
+                });
+              })
+            }}>RE-BASELINE</button>
 
           </div>
           <div className="unit one-third no-gutters">
@@ -846,6 +878,8 @@ class ProjectWorkplan extends Component {
                             <th>% WORK<br />COMPLETE</th>
                             <th>RESOURCES<br /></th>
                             <th></th>
+                            <th></th>
+
 
                           </tr>
                         </thead>
