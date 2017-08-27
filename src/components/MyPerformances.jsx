@@ -17,7 +17,8 @@ class MyPerformances extends Component {
     }
 
     componentWillMount(){
-      store.dispatch(myPerformance("8","2017"))
+      
+      store.dispatch(myPerformance(this.state.month,this.state.year)) 
     }
 
     handleMonthChange (e) {
@@ -136,7 +137,7 @@ class MyPerformances extends Component {
                             )
                           })}
                         </select>
-                        <select onClick={this.handleYearChange.bind(this)} 
+                        <select onChange={this.handleYearChange.bind(this)} 
                         className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
                         { 
                           year.map((value,index) => { 

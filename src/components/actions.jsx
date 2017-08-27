@@ -945,7 +945,7 @@ export function uploadWorkplan(project_id,files){
     const formData = new FormData()
     formData.append('project_id',project_id)
     formData.append('document',files[0])
-    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{
+    fetch(`${baseURL}task/upload_wbs?token=${token}`,{
       method:'POST',
       body:formData
     })
@@ -1237,4 +1237,27 @@ export function editProfile(no_hp,address,files){
       body:formData
     })
   }
+}
+
+export function weekTimesheet(click){
+  var date = moment()
+  date = date.subtract(click*7, 'days');
+  date = date.format("YYYY-MM-DD")
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+      method: 'GET',
+      url: `${baseURL}home/timesheet/${date}?token=${token}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: {date:date}
+
+    }).then(
+            (res) => {
+              // alert('timesheed fetched');
+              store.dispatch({ type: 'API', name: 'timesheet', data: res });
+            },
+          )
+  };
 }
