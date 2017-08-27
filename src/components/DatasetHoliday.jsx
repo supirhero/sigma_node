@@ -5,8 +5,8 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUpBARU,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp} from './Components.jsx';
-import {getDataMaster,addHoliday} from './actions.jsx'
+import { Select, Input, Table,TableNew,Header,Search,PopUp,PopUpBaruBisa,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp} from './Components.jsx';
+import {getDataMaster,addHoliday,updateHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
 
@@ -19,6 +19,17 @@ class DatasetHoliday extends Component {
     };
   }
 
+
+  handleInitialize(data) {
+    const initData = {
+      "HOLIDAY_START":data.HOLIDAY_START,
+      "HOLIDAY_END":data.HOLIDAY_END,
+      "HOLIDAY_ID":data.HOLIDAY_ID,
+    };
+
+  this.props.initialize(initData);
+}
+
   componentWillMount(){
     const state = store.getState()
     const holiday = state.data.holiday
@@ -29,6 +40,12 @@ class DatasetHoliday extends Component {
   onSubmit(props){
     store.dispatch(addHoliday(props))
   }
+
+  onSubmitUpdateHoliday(props){
+    store.dispatch(updateHoliday(props))
+  }
+
+  
 
   render() {
     const {handleSubmit} = this.props;
@@ -42,39 +59,50 @@ class DatasetHoliday extends Component {
     
     return (
       <div> 
-      <PopUpBARU id="deleteHoliday" dividerText="REPORT AN ISSUE" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
-      <div>
-        <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Input />
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Input />
-          </div>
-        </div>
-
-        <div className="grid wrap narrow">
-          <div className="unit golden-small">
-            <Input />
-          </div>
-          <div className="unit golden-large">
-            <h2 className="input-desc" style={{ marginTop: '25px' }}>EVIDENCE</h2>
-          </div>
-          <div className="unit golden-large">
-            <Input />
-          </div>
+      <PopUpBaruBisa id="edit" dividerText="EDIT HOLIDAY" btnClass='btn-primary' style={{display:'inline-block', marginLeft:'35px'}}>
+      <form onSubmit={handleSubmit(this.onSubmitUpdateHoliday.bind(this))}>
+        <div>
           <div className="grid wrap narrow">
-            <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-              <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD </button>
+            <div className="unit whole">
+                <Field
+                inputName="HOLIDAY"
+                name="HOLIDAY_ID"
+                type='input'
+                component={ReduxInput}
+              />
             </div>
           </div>
+          <div className="grid wrap narrow">
+            <div className="unit whole">
+              <Field
+              inputName="START DATE"
+              name="HOLIDAY_START"
+              type='input'
+              component={datepickerUniversal}
+            />
+            
+            </div>
+          </div>
+          <div className="grid wrap narrow">
+            <div className="unit whole">
+            <Field
+            inputName="END DATE"
+            name="HOLIDAY_END"
+            type='input'
+            component={datepickerUniversal}
+          />
+              
+            </div>
+          </div>
+            <div className="grid wrap narrow">
+              <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
+              </div>
+            </div>
         </div>
-      </div>
-
-    </PopUpBARU>
+        </form>
+      </PopUpBaruBisa>
         <div className="grid dataset">
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
@@ -86,7 +114,7 @@ class DatasetHoliday extends Component {
 
                 <div className="unit three-quarters">
              
-									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
+									<PopUp id="delete" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <div>
 											<div className="grid wrap narrow">
@@ -143,7 +171,6 @@ class DatasetHoliday extends Component {
                       {value:value.HOLIDAY_END},
                     ]}
                   }):null}>
-                
                 </TableNewMasterDataPopUp>															
 								</div>
 

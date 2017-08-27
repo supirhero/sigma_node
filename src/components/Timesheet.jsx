@@ -6,16 +6,16 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelect, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { addTimesheet, viewTimesheet, taskList, pop,getDay } from './actions.jsx';
+import { addTimesheet, viewTimesheet, taskList, pop,getDay,weekTimesheet } from './actions.jsx';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
 
 class Timesheet extends Component {
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
     this.state = {
-      selectedDay : null
+      click : 1
     };
   }
 
@@ -24,8 +24,10 @@ class Timesheet extends Component {
   }
 
   componentWillMount(){
+    
     const currentDate = moment().format("YYYY-MM-DD");
     const state = store.getState();
+    store.dispatch(weekTimesheet(this.state.click));
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
@@ -47,6 +49,7 @@ class Timesheet extends Component {
     const currentDate = moment().format("ddd,MMM DD");
     const state = store.getState();
     const timesheet = state.data;
+    const weekdays = state.data.weekdays;
 
     // const startOfWeek = moment().startOf('week');
     // const endOfWeek = moment().endOf('week');
@@ -104,12 +107,12 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(selectedDay))
     };
 
-
+    
   //    if(!timesheet){
   //    return <PageLoader></PageLoader>
   //  }
     return (
-      !timesheet.user_project ? <PageLoader></PageLoader>:
+      !timesheet.user_project && !weekdays ? <PageLoader></PageLoader>:
       <div>
         <div className="grid wrap">
           <div className="unit whole">
@@ -130,7 +133,45 @@ class Timesheet extends Component {
             <div className="grid wrap">
               <div className="unit whole" style={{ textAlign: 'center' }}>
                 <div style={{ marginTop: '20px', display: 'inline-block' }}>
-               <DayPicker onDayClick={handleDayClick} selectedDays={this.state.selectedDay}></DayPicker>
+               
+                <div className='unit whole' style={{textAlign:'center'}}>
+                <span className="icon-arrow-left-circle list-pointer" onClick={
+                  e => {
+                    this.setState({
+                      click: this.state.click + 1
+                    });
+                    console.log(this.state.click,"kiri")
+                    e.preventDefault()
+                    store.dispatch(weekTimesheet(this.state.click))
+                    
+                  }
+                }> </span>
+                  <div style={{marginTop:'20px', display:'inline-block'}}>
+                  {
+                    state.data.weekdays ? state.data.weekdays.map((value,index)=>{
+                      return  <TimeSheetTimeButton text={moment(value.day).format("ddd, MMM D")} hours={value.holiday == false ? `${value.work_hour} Hours` : "Day Off"} 
+                      onClick={
+                        e => {
+                          store.dispatch(viewTimesheet(value.day))
+                          
+                        }}
+                      />
+                    }
+                  ) : <PageLoader />
+                  }
+                  <span className="icon-arrow-right-circle list-pointer" onClick={
+                    e => {
+                      this.setState({
+                        click: this.state.click - 1
+                      });
+                      console.log(this.state.click,"kanan")
+                      store.dispatch(weekTimesheet(this.state.click))
+                      e.preventDefault()
+                    }
+                  } />
+                  </div>
+                </div>
+
                 </div>
               </div>
             </div>

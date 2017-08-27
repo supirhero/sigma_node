@@ -799,3 +799,23 @@ Tabs {
   background-color: #ffffff;
   border: solid 1px #eeeeee;
 }
+
+.btn-primary-data-master {
+  /* Rectangle 4: */
+  background: $color-secondary;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  color: white;
+  
+  padding: 15px 42px;
+  font-weight: 300;
+  font-family: 'lato', sans-serif;
+  font-size: 15px;
+  
+}
+
+.btn-primary-data-master:hover{
+  display: block;
+  cursor: pointer;
+}
