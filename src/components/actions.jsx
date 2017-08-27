@@ -1091,7 +1091,22 @@ export function rDirectorat(bu,tahun){
 }
 
 
+export function requestRebaseline(id){
 
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}project/rebaseline?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        return res
+        // store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
 
 export function getDataMaster(data){
 
