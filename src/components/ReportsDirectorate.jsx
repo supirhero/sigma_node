@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
-import { deleteAuthentication ,getListBU} from './actions.jsx';
+import { deleteAuthentication ,getListBU,rDirectorat} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx';
 
@@ -10,6 +10,7 @@ import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, Men
 class ReportsDirectorate extends Component {
   componentWillMount(){
   store.dispatch(getListBU())
+  store.dispatch(rDirectorat("44","2017"))
   }
   
   render() {

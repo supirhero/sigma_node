@@ -145,7 +145,9 @@ class NewProject extends Component {
         <div>
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            onSubmit={handleSubmit(this.onSubmit.bind(this))
+        
+            }>
           <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
@@ -331,7 +333,7 @@ class NewProject extends Component {
                         {
                           field: 'AM_ID',
                           // value: arr.END_CUSTOMER
-                          value: arr.AM_ID == null ? '' : arr.AM_ID
+                          value: arr.AM_ID == null ? 'none' : arr.AM_ID
 
                         }
                       ]

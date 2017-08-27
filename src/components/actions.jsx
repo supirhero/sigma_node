@@ -952,13 +952,17 @@ export function getListBU(){
 }
 
 
-export function rDirectorat(){
+export function rDirectorat(bu,tahun){
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
+      method:'POST',
       url:`${baseURL}report/r_directoratbu?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        bu,
+        tahun
+      }
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
@@ -989,10 +993,8 @@ export function getDataMaster(data){
 export function getDataMasterMIS(data){
   return function(dispatch){
     const token = cookies.get('token')
-    return axios({
-      method:'GET',
-      url:`http://10.210.20.2/api/index.php/mis/${data}`,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    return fetch(`http://10.210.20.2/api/index.php/mis/${data}`,{
+      mode : 'no-cors',
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });

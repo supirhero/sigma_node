@@ -12,9 +12,10 @@ import { Field, reduxForm } from 'redux-form';
 class DatasetCustomer extends Component {
   componentWillMount(){
     const user = store.getState().data.user
-    store.dispatch(getDataMasterMIS("vendor"))
+    store.dispatch(getDataMasterMIS("customer"))
   }
   render() {
+    
     // const state = store.getState()
     // const project_type = state.data.project_type
 
