@@ -5,11 +5,30 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header, Search, PopUp } from './Components.jsx';
+import { Select, Input, Table,TableNew,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,required} from './Components.jsx';
+import {getDataMaster,addBU} from './actions.jsx'
+import {Field, reduxForm} from 'redux-form';
 
 
-class DatasetProjectType extends Component {
+
+class DatasetBu extends Component {
+  componentWillMount(){
+    const bu = store.getState().data.bu
+    store.dispatch(getDataMaster("bu"))
+  }
+  
+  onSubmit(props){
+    store.dispatch(addBU(props))
+  }
+
   render() {
+    const {handleSubmit} = this.props;
+    const state = store.getState()
+    const bu = state.data.bu
+
+    if (!bu){
+      <PageLoader />
+    }
     return (
       <div>
         <div className="grid dataset">
@@ -23,41 +42,61 @@ class DatasetProjectType extends Component {
 
                 <div className="unit three-quarters">
                   <PopUp id="createBusinessUnit" dividerText="CREATE BUSINESS UNIT" btnClass='btn-primary' btnText="ADD NEW" style={{ display: 'inline-block', marginLeft: '35px' }}>
+                  <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                          <Input inputName="NAME" />
+                          <Field
+                          inputName="NAME"
+                          name="BU_NAME"
+                          type='input'
+                          component={ReduxInput}
+                        />
                         </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                          <Input inputName="CODE" />
+                            <Field
+                            inputName="CODE"
+                            name="BU_CODE"
+                            type='input'
+                            component={ReduxInput}
+                          />
                         </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                           <Select
+
+                        <Field
                         inputName="HEAD"
-                        items={{
-                          items: [
-                              { title: 'TBWS21312' },
-                              { title: 'TBWS21312' },
-                          ],
-                        }}
-                      />
+                        name="BU_HEAD"                      
+                        component={ReduxSelectNew}
+                        validate={[required]}>
+                        {
+                              bu?bu.map((value,index)=>{
+                                return <option key={index} value={value.BU_HEAD}>{value.BU_HEAD_NAME}</option>
+                              }
+                            ):null
+                        }
+
+
+                        </Field>
                         </div>
                       </div>
                       <div className="grid wrap narrow">
                         <div className="unit whole">
-                           <Select
+                        <Field
                         inputName="PARENT"
-                        items={{
-                          items: [
-                              { title: 'TBWS21312' },
-                              { title: 'TBWS21312' },
-                          ],
-                        }}
-                      />
+                        name="BU_PARENT_ID"
+                        component={ReduxSelectNew}
+                        validate={[required]}>
+                        {
+                          bu?bu.map((value,index)=>{
+                            return <option key={index} value={value.BU_PARENT_ID}>{value.BU_PARENT_ID}</option>
+                          }
+                        ):null
+                        }
+                        </Field>
                         </div>
                       </div>
                       <div className="grid wrap narrow">
@@ -67,59 +106,20 @@ class DatasetProjectType extends Component {
                         </div>
                       </div>
                     </div>
+                    </form>
                   </PopUp>
                   <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
                 </div>
                 <div className="unit whole">
                   <TableNew
-                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'},{value:'   '}]}
-                  tableData={[{column:[
-                    {value:'1'},
-                    {value:'Telkomsigma'},
-                    {value:' '},
-                    {value:'  '}
-                  ]},{column:[
-                    {value:'2'},
-                    {value:'Business Data Center and Managed Services'},
-                    {value:'ANDREUW TH. A.F'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'3'},
-                    {value:'Business System Integration'},
-                    {value:'SYARIF ALI IDRUS'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'4'},
-                    {value:'Solution Operation'},
-                    {value:'ERA KAMALI NASUTION'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'5'},
-                    {value:'Human Capital & Finance'},
-                    {value:'BAKHTIAR ROSYIDI'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'6'},
-                    {value:'Billing and Collection'},
-                    {value:'ANDREUW TH. A.F'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'7'},
-                    {value:'Financial Accounting'},
-                    {value:'NUSIRWAN'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'8'},
-                    {value:'Human Capital'},
-                    {value:'IR. R. ADAM KAMIL KHUSNUN. M'},
-                     {value:'  '}
-                  ]},{column:[
-                    {value:'9'},
-                    {value:'Legal & Compliance'},
-                    {value:'KURNIAWAN, SH'},
-                     {value:'  '}
-                  ]},
-                  ]}>
+                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'}]}
+                  tableData={bu ? bu.map((value,index)=>{
+                    return {column:[
+                      {value:value.LEVEL},
+                      {value:value.BU_NAME},
+                      {value:value.BU_HEAD},
+                    ]}
+                  }):null}>
                 </TableNew>       
                 
                 </div>
@@ -134,11 +134,16 @@ class DatasetProjectType extends Component {
 }
 
 
+
+
 function mapStateToProps(state) {
   return {
+    state
 		// filter: ownProps.location.query.filter
   };
 }
 
-export default connect(mapStateToProps)(DatasetProjectType);
-// export default Login
+export default connect(mapStateToProps, { addBU,getDataMaster })(
+  reduxForm({
+    form: 'add_holiday',
+  })(DatasetBu))

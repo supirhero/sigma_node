@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+import { push, replace, goBack } from 'react-router-redux'
+
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './components.jsx'
 
@@ -88,7 +90,10 @@ class ProjectOverview extends Component {
                     </div>
                   </div>
                   <div className=' unit one-fifth no-gutters'>
-                    <a>View Workplan</a>
+                    <a onClick={e => {
+                      this.props.dispatch(push(`/${this.props.state.page.id}/Workplan`))
+                      e.preventDefault()
+                    }}>View Workplan</a>
                   </div>
 
                 </div>
@@ -133,7 +138,7 @@ class ProjectOverview extends Component {
                 </div>
 
               </div>
-            <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnClass='btn-primary' btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>
+            {/* <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnClass='btn-primary' btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>
               <div>
                 <div className="grid wrap narrow">
                   <div className="unit whole">
@@ -153,7 +158,7 @@ class ProjectOverview extends Component {
                   </div>
 
               </div>
-            </PopUp>
+            </PopUp> */}
 
             </div>
           </div>

@@ -11,10 +11,11 @@ class MyPerformances extends Component {
     constructor(){
       super();
       this.state = {
-        month : 0,
-        year: 0
+        month : 8,
+        year: 2017
       };
     }
+
     componentWillMount(){
       store.dispatch(myPerformance("8","2017"))
     }
@@ -47,23 +48,30 @@ class MyPerformances extends Component {
         {name:'SEPTEMBER',number:'9'},
         {name:'OCTOBER',number:'10'},
         {name:'NOVEMBER',number:'11'},
-        {name:'DEECMBER',number:'12'},
+        {name:'DECEMBER',number:'12'},
       ]
+    
+
+  const year = [
+    {year:'2017'},
+    {year:'2016'},
+    {year:'2015'},
+    {year:'2014'},
+    {year:'2013'},
+    {year:'2012'},
+
+  ]
+
       const data = state.data ? state.data : null
-      const allentry =data.allentry.map((value,index)=>{
+      const allentry =data.allentry?data.allentry.map((value,index)=>{
         return {name:value.label,value:parseFloat(value.value)}
-      })
+      }) : null
       
-      const allhour = data.allhour.map((value,index)=>{
+      const allhour = data.allhour?data.allhour.map((value,index)=>{
         return {name:value.label,value:parseFloat(value.value)}
-      })
+      }):null
 
-      const year = [
-        {year:'2017'},
-        {year:'2016'},
-        {year:'2015'},
-      ]
-
+      
       function statusCom(){
         if (completeProgress == 100){
            return "COMPLETE"
@@ -128,8 +136,18 @@ class MyPerformances extends Component {
                             )
                           })}
                         </select>
-                        <input placeholder='ex. 2017' onChange={this.handleYearChange.bind(this)} style={{width:'48%', display:'inline-block', float:'right'}}></input>
-                        {/*
+                        <select onClick={this.handleYearChange.bind(this)} 
+                        className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+                        { 
+                          year.map((value,index) => { 
+                          return( 
+                            <option key={index} value={value.year}>{value.year}</option> 
+                
+                          ) 
+                        })} 
+                      </select> 
+                       {/* <input placeholder='ex. 2017' onChange={this.handleYearChange.bind(this)} style={{width:'48%', display:'inline-block', float:'right'}}></input>
+                        
                         <Input
                           onChange={this.handleYearChange.bind(this)}
                           style={{width:'48%', display:'inline-block', float:'right'}}
@@ -152,20 +170,21 @@ class MyPerformances extends Component {
                 <div className='grid'>
                   <div className='unit one-third'>
                   <Meter
+                  progress={myperformance ? myperformance.entry * 0.01 : '-'}
+                  text={myperformance ? Math.floor(myperformance.entry) : '-'}
+                  title='Entry'
+                  status={myperformance.status}
+                />
+                  
+                  </div>
+                  <div className='unit one-third'>
+                  <Meter
                   progress={myperformance ? myperformance.utilization * 0.01 : '-'}
                   text={myperformance ? Math.floor(myperformance.utilization) : '-'}
                   title='Utilization'
                   status={myperformance.status_utilization}
                 />
 
-                  </div>
-                  <div className='unit one-third'>
-                  <Meter
-                  progress={myperformance ? myperformance.entry * 0.01 : '-'}
-                  text={myperformance ? Math.floor(myperformance.entry) : '-'}
-                  title='Entry'
-                  status={myperformance.status}
-                />
                   </div>
                   <div className='unit one-third'>
 

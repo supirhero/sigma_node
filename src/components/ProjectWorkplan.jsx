@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Grid } from 'react-redux-grid';
+
 import store from '../reducers/combineReducers.jsx';
-// <<<<<<< HEAD
+
 import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplam } from './Components.jsx';
+
+
 import { Field, reduxForm } from 'redux-form';
 import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan} from './actions.jsx';
 
@@ -335,10 +338,12 @@ class ProjectWorkplan extends Component {
               </div>
             </div>
 
+
             <div className="grid wrap narrow">
             <div className="unit one-third">
               <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}><b>Admin</b></h2>
             </div>
+
 
             <div className="unit two-thirds">
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0</h2></div>

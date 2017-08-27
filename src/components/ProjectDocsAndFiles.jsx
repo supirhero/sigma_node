@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
-import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput, ReduxFileInput, EmptyData} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxFileInput, EmptyData} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
 
 
@@ -16,15 +16,11 @@ class ProjectDocsAndFiles extends Component {
     store.dispatch(getDocsFiles(id))
   }
   onSubmit(props){
-
     const id = store.getState().page.id
-
-
-    this.props.addDocsAndFiles(props, id)
+    store.dispatch(addDocsAndFiles(props.desc, props.document, id))
   }
     render(){
       const {handleSubmit} = this.props;
-
       const appStore = store.getState()
       const project_doc_list = appStore.data.project_doc_list
       return(
@@ -99,6 +95,47 @@ class ProjectDocsAndFiles extends Component {
               </button>
 
 
+              <PopUp id="uploadFile" dividerText="UPLOAD FILE" btnText="UPLOAD FILE" btnClass='btn-primary' btnStyle={{display:'block', margin: 'auto'}}>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                  <div>
+                    <div className="grid wrap narrow">
+                      <div className="unit whole">
+                        <Field
+                          inputName="FILE DESCRIPTION"
+                          name="desc"
+                          type='input'
+                          component={ReduxInput}
+                        />
+                        {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+                      </div>
+                    </div>
+                    <div className="grid wrap narrow">
+                      <div className="unit whole">
+                        <h2 className="input-desc">SELECT FILE</h2>
+                        <h2 className="input-desc" style={{margin:'0'}}><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+                      </div>
+                      <div className="unit whole no-gutters">
+                        <Field
+                          inputName="Select File"
+                          name="document"
+                          type='file'
+                          component={ReduxDrop}
+                        />
+                       {/* <InputFile name="selectFile" /> */}
+                      </div>
+                    </div>
+                      <div className="grid wrap narrow">
+                        <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                          <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                          <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
+                        </div>
+                      </div>
+
+                  </div>
+                </form>
+
+            </PopUp>
+
             </div>
           </div>
           <div className='grid padding-left'>
@@ -169,5 +206,3 @@ export default connect(mapStateToProps, { addDocsAndFiles })
   reduxForm({
     form: 'add_docs_files',
   })(ProjectDocsAndFiles));
-// export default connect(mapStateToProps)(ProjectDocsAndFiles)
-// export default Login

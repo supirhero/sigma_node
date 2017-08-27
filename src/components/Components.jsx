@@ -40,37 +40,47 @@ export const required = value => (value ? undefined : 'Required')
 //     throw { IWO_NO: 'That username is taken' };
 //   })
 // }
-export const isIWOUsed = (value) =>{
-    console.log('VALUEE',value);
-    // return new Promise ((resolve, reject) => {
-      return axios({
-      method: 'POST',
-      url: `${baseURL}/dev/project/checkiwoused`+token_string,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {
-        IWO_NO: value.IWO_NO
-      }
-
-    }).then(
-      (res)=> {
-        // resolve('BLa')
-        console.log(res);
-        console.log('JUMLAH',res.data.jumlah);
-        if (res.data.jumlah <= '0' || res.data.jumlah <=0) {
-          // return 'IWO already used'
-          throw { IWO_NO: undefined };
-
-        }
-        else {
-          throw { IWO_NO: 'IWO is already used' };
-
-          // return null
-        }
-      }
-    )
+// export const isIWOUsed = (value) =>{
+//
+//     console.log('VALUEE',value);
+//     // return new Promise ((resolve, reject) => {
+//     return axios({
+//       method: 'POST',
+//       url: `${baseURL}/dev/project/checkiwoused`+token_string,
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data: {
+//         IWO_NO: value.IWO_NO
+//       }
+//
+//     }).then(
+//       (res)=> {
+//         // resolve('BLa')
+//         console.log(res);
+//         console.log('JUMLAH',res.data.jumlah);
+//         if (value.IWO_AVAILABLE != 'false' ) {
+//           alert('asyc')
+//           if (res.data.jumlah <= '0' || res.data.jumlah <=0) {
+//             // return 'IWO already used'
+//             throw undefined;
+//
+//
+//           }
+//           else {
+//             throw { IWO_NO: 'IWO is already used' };
+//
+//             // return null
+//           }
+//         }
+//         else {
+//           alert('bla')
+//           throw undefined;
+//
+//         }
+//       }
+//     )
+//   }
 
   // })
-}
 
 
 // export const required = value => value ? undefined : 'Required'
@@ -251,6 +261,10 @@ export class ReduxInput extends Component {
     console.log('PROPS', this.props);
   }
   render(){
+    if(this.props.meta.error == 'IWO is already used'){
+      console.log("ERRORRR",this.props.meta.error );
+      this.props.meta.error = undefined
+    }
     return(
         <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
@@ -463,10 +477,46 @@ export class ReduxSelect extends Component {
     console.log('PROPS', this.props);
   }
   render() {
-    if(this.props.meta.error == 'IWO is already used'){
-      console.log("ERRORRR",this.props.meta.error );
-      this.props.meta.error = undefined
-    }
+    // if(this.props.input.value == undefined){
+    //   console.log("ERRORRR",this.props.meta.error );
+    //   this.props.meta.error = undefined
+    // }
+
+    console.log('SELECT PROPS',this.props);
+    return (
+      <div style={this.props.style}>
+
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <select
+          style={this.props.selectStyle}
+          // className='select'
+          className={'select ' +  this.props.meta.touched && ((this.props.meta.error && 'error'))}
+
+          {...this.props.select}
+          {...this.props.custom}
+          {...this.props.input}
+
+          // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+          placeholder={this.props.placeholder}
+          // onBlur = {e=> {
+          //
+          // }}
+        >
+          {this.props.children}
+        </select>
+        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
+      </div>
+    )
+  }
+}
+
+export class ReduxSelectTimesheet extends Component {
+  componentDidUpdate() {
+    console.log('PROPS', this.props);
+  }
+  render() {
     console.log('SELECT PROPS',this.props);
     return (
       <div style={this.props.style}>
@@ -495,6 +545,7 @@ export class ReduxSelect extends Component {
     )
   }
 }
+
 
 export class ReduxSelectNew extends Component {
   render() {
@@ -586,10 +637,11 @@ export class BarChart extends Component {
         <large style={this.props.labelStyle}>{this.props.label}</large>
         <ResponsiveContainer width='100%' height={250}>
           <ChartBar width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" interval="preserveStart" />
+            <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
             {/* <YAxis /> */}
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Tooltip />
+            <Text scaleToFit={true} />
 
             <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
           </ChartBar>
@@ -617,8 +669,8 @@ export class BarChartSPI extends Component {
                 return <Cell key={index} fill={color} />;
               })
             }
-   </Bar>
-  </ChartBar>
+        </Bar>
+        </ChartBar>
         </ResponsiveContainer>
 
       </div>
@@ -670,7 +722,7 @@ export class LineChart extends Component{
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
             {this.props.lines.map((props)=>
-              <LineGraph type="monotone" key={props.key} dataKey={props.key} stroke={props.stroke} />)}
+              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
           </ChartLine>
         </ResponsiveContainer>
       </div>
@@ -1015,6 +1067,7 @@ export class TableNew extends Component{
 
         <tbody>
             {
+              this.props.tableData &&
               this.props.tableData.map((row,index)=>(
                 <tr className='items' key={index}>
                   {
@@ -1424,6 +1477,7 @@ export class ReduxDrop extends Component {
   }
 }
 
+
 export class ReduxUploadWorkplam extends Component {
   render(){
     return(
@@ -1454,7 +1508,6 @@ export class ReduxDropProfilePicture extends Component {
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
-      
       </Dropzone>
     )
   }

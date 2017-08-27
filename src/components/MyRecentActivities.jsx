@@ -180,7 +180,7 @@ class MyRecentActivities extends Component {
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                   {
                 value.is_approved == 0 &&
-                <a href="" style={{marginLeft:'45px'}} onClick={store.dispatch(addTimesheet())}>RE-SUBMIT TIMESHEET</a>
+                <a href="" style={{marginLeft:'45px'}}>RE-SUBMIT TIMESHEET</a>
               }
                 </medium>
               </div>

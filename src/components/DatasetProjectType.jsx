@@ -5,11 +5,24 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew ,Header, Search, PopUp } from './Components.jsx';
+import { Select, Input, Table,TableNew ,Header, Search, PopUp,PageLoader } from './Components.jsx';
+import {getDataMaster} from './actions.jsx'
 
 
 class DatasetProjectType extends Component {
+  componentWillMount(){
+    const project_type = store.getState().data.project_type
+    store.dispatch(getDataMaster("project_type"))
+  }
+  
+
   render() {
+    const state = store.getState()
+    const project_type = state.data.project_type
+
+    if (!project_type){
+      <PageLoader />
+    }
     return (
       <div>
         <div className="grid dataset">
@@ -42,14 +55,12 @@ class DatasetProjectType extends Component {
                 <div className="unit whole">
                   <TableNew
                   tableHeader={[{value:'NO'},{value:'NAME'}]}
-                  tableData={[{column:[
-                    {value:'1'},
-                    {value:'Project'},
-                  ]},{column:[
-                    {value:'2'},
-                    {value:'Non Project'},
-                  ]},
-                  ]}>
+                  tableData={project_type?project_type.map((value,index)=>{
+                    return {column:[
+                      {value:value.ID},
+                      {value:value.PROJECT_TYPE},
+                    ]}
+                  }):null}>
                 </TableNew>       
                 
                 </div>

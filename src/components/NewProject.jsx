@@ -4,8 +4,9 @@ import _ from 'lodash'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, unregisterField,stopAsyncValidation} from 'redux-form';
 // import { pop } from 'react-router-redux'
+import { push, replace, goBack } from 'react-router-redux'
 
 import {
   Checkbox,
@@ -18,9 +19,9 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager, } from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, isIWOUsed, ReduxInputAsync} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync} from './Components.jsx'
 
 
 
@@ -43,13 +44,13 @@ class NewProject extends Component {
       // "PROJECT_NAME": iwo[0].PROJECT_NAME,
       // "RELATED": iwo[0].RELATED_BU,
       // "CUST_ID": iwo[0].CUSTOMER_ID,
-      // "MARGIN": iwo[0].MARGIN,
+      // "MARGIN": ,
       "BU": data.BU_NAME,
       // // "PM": 'NONE',
-      // // "AM_ID": 'NONE',
+      "AM_ID": this.props.state.data.username,
       // // "TYPE_OF_EFFORT": 'NONE',
       "PROJECT_STATUS": 'NOT STARTED',
-      "H/O": 'yes',
+      "HO": 'yes',
       "PROJECT_TYPE_ID": 'project',
       //
       // // "START": '2017-1-1',
@@ -96,8 +97,12 @@ class NewProject extends Component {
 
   }
   onSubmit(props){
-    alert("submitted")
-    this.props.addNewProject(props)
+    alert('triggered')
+    const id = this.props.state.page.new_project.bu_code
+    this.props.dispatch(getDashboardView())
+
+    // alert("submitted")
+    store.dispatch(addNewProject(props, id));
   }
     render(){
       // const projectSetting = this.props.state.data.project.project_setting
@@ -141,9 +146,9 @@ class NewProject extends Component {
         <div>
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            onSubmit={handleSubmit(this.onSubmit.bind(this))
 
-            >
+            }>
           <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
@@ -182,11 +187,17 @@ class NewProject extends Component {
                     </div>
                     <div className='unit two-thirds'>
                       <Field name="IWO_AVAILABLE" component={RadioButtonGroup} onChange={(e,value)=>{
+                        console.log('formval', this.props.formValues);
+                        // this.props.unregisterField(
+                        // // this.props.formValues.asyncErrors = undefined
+                        //   'IWO_NO'
+                        // )
                         var fields = [
                           {
-                            field: 'IWO_NO',
-                            value: ''
+                            field:'IWO_NO',
+                            value: 'NONE'
                           },
+
                           {
                             field: 'AMOUNT',
                             value: ''
@@ -220,6 +231,9 @@ class NewProject extends Component {
                           )
 
                         })
+                        // this.props.dispatch(unregisterField('add_project','IWO_NO'))
+                        // this.props.dispatch(stopAsyncValidation('add_project',{'IWO_NO':  'IWO is already used'}))
+
 
                         }}
                         >
@@ -244,7 +258,7 @@ class NewProject extends Component {
                     type='input'
                     style={{width:'100%'}}
                     // asyncValidate= {isIWOUsed()}
-                    component={ReduxInput}
+                    component={ReduxInputDisabled}
                     validate={[required ]}
 
                     // }}
@@ -257,8 +271,21 @@ class NewProject extends Component {
                   inputName="IWO NUMBER"
                   name="IWO_NO"
                   component={ReduxSelect}
-                  validate={[required]}
+                  validate={iwo && [required]}
+                  selectStyle={
+                    !iwo ?
+                    {
+                    backgroundColor:'white',
+                    backgroundSize: '33px',
+                    backgroundImage:'url(http://www.xiconeditor.com/image/icons/loading.gif)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right',
+                  }:
+                  {
 
+                }
+
+                }
                   onChange={(e,value)=> {
                     // store.dispatch(getAccountManager(res2.data))
                     if (value != '' ) {
@@ -269,28 +296,46 @@ class NewProject extends Component {
                       var fields = [
                         {
                           field: 'AMOUNT',
-                          value: arr.AMOUNT
+                          // value: arr.AMOUNT
+                          value: arr.AMOUNT == null ? 'none' : arr.AMOUNT
+
                         },
                         {
                           field: 'PROJECT_NAME',
-                          value: arr.PROJECT_NAME
+                          // value: arr.PROJECT_NAME
+                          value: arr.PROJECT_NAME == null ? 'none' : arr.PROJECT_NAME
+
                         },
                         {
                           field: 'RELATED',
-                          value: arr.RELATED_BU
+                          // value: arr.RELATED_BU
+                          value: arr.RELATED_BU == null ? 'none' : arr.RELATED_BU
+
                         },
                         {
                           field: 'CUST_ID',
-                          value: arr.CUSTOMER_ID
+                          // value: arr.CUSTOMER_ID
+                          value: arr.CUSTOMER_ID == null ? 'none' : arr.CUSTOMER_ID
+
                         }
                         ,
                         {
                           field: 'MARGIN',
-                          value: arr.MARGIN
+                          // value: arr.MARGIN == null ? 'none' : arr.MARGIN
+                          value: arr.MARGIN == null ? 'none' : arr.MARGIN
+
                         },
                         {
                           field: 'END_CUST_ID',
-                          value: arr.END_CUSTOMER
+                          // value: arr.END_CUSTOMER
+                          value: arr.END_CUSTOMER == null ? 'none' : arr.END_CUSTOMER
+
+                        },
+                        {
+                          field: 'AM_ID',
+                          // value: arr.END_CUSTOMER
+                          value: arr.AM_ID == null ? 'none' : arr.AM_ID
+
                         }
                       ]
 
@@ -467,6 +512,7 @@ class NewProject extends Component {
                         <option></option>
 
                         {
+                          projectManager &&
                           projectManager.map((value, index)=> (
                             <option key={index} value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
                           ))
@@ -502,12 +548,12 @@ class NewProject extends Component {
                     <h2 className='input-name'>H/O OPERATION</h2>
 
                     <div className='unit half'>
-                      <Field name="H/O" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup}>
                         <RadioButton value="yes" label="YES"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="H/O" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup}>
                         <RadioButton value="no" label="NO"/>
                       </Field>
 
@@ -519,9 +565,8 @@ class NewProject extends Component {
                         inputName="ACCOUNT MANAGER"
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
-                        component={ReduxSelect}
+                        component={form_values && form_values.IWO_AVAILABLE == 'true' ? ReduxInputDisabled : ReduxInput}
                         validate={[required]}
-
                         >
                         <option></option>
 
@@ -930,12 +975,10 @@ class NewProject extends Component {
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                    <button className='btn-secondary' style={{display:'inline-block'}} onClick={
-                      e => {
-                        browserHistory.push('/')
-                        e.preventDefault()
-                      }
-                    }>CANCEL</button>
+                 <button className='btn-secondary' style={{display:'inline-block'}} onClick={ e => {
+                   this.props.dispatch(goBack())
+                   e.preventDefault()
+                 }}>CANCEL</button>
                     <button className='btn-primary' type='submit' style={{float:'right', display:'inline-block'}}>CREATE PROJECT</button>
 
                   </div>
@@ -955,6 +998,7 @@ class NewProject extends Component {
 function mapStateToProps(state) {
   return {
     formValues : state.form.add_project,
+
     state
     // filter: ownProps.location.query.filter
   }
@@ -964,9 +1008,13 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
-        asyncValidate:  isIWOUsed,
-        // validate,
-        asyncBlurFields: [ 'IWO_NO' ],
+      //   asyncValidate:  isIWOUsed,
+      //   persistentSubmitErrors : true,
+      //   shouldAsyncValidate: ({syncValidationPasses, trigger}) => {
+      //   if (!syncValidationPasses) return false;
+      //   return trigger !== 'submit';
+      // },
+      //   asyncBlurFields: [ 'IWO_NO' ],
       })(NewProject));
 // export default connect(mapStateToProps)(NewProject)
 // export default Login
