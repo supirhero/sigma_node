@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, ReactDOM} from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import axios from 'axios'
@@ -6,6 +6,7 @@ import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
 import {Field, reduxForm, unregisterField,stopAsyncValidation} from 'redux-form';
 // import { pop } from 'react-router-redux'
+import {animateScroll} from 'react-scroll';
 import { push, replace, goBack } from 'react-router-redux'
 
 import {
@@ -100,7 +101,7 @@ class NewProject extends Component {
     alert('triggered')
     const id = this.props.state.page.new_project.bu_code
     this.props.dispatch(getDashboardView())
-
+    console.log('ONSUBMIT PROPS', props);
     // alert("submitted")
     store.dispatch(addNewProject(props, id));
   }
@@ -140,15 +141,29 @@ class NewProject extends Component {
         {value: 'Dedutible Expense'},
       ]
 
+
+
       return(
 
         !iwo && !projectManager && !form_values ? <PageLoader/> :
         <div>
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))
-
-            }>
+            onSubmit={
+              // e=> {
+                // console.log('ERRO');
+                handleSubmit(this.onSubmit.bind(this))
+              // }
+            }
+            // onSubmit = {event =>
+            //   handleSubmit(this.onSubmit.bind(this))(event)// <---- this is the promise returned from handleSubmit()
+            //   // console.log();
+            //     .catch(errors => {
+            //         alert('error')
+            //         // submission was unsuccessful
+            //       })
+            //     }
+            >
           <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
@@ -1008,6 +1023,12 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
+        // RejectedSubmitPromise: true
+        onSubmitFail: errors => {
+          // window.scrollTo(0, 0)
+          animateScroll.scrollToTop()
+          // ReactDOM.findDOMNode(this).scrollTop = 0
+        }
       //   asyncValidate:  isIWOUsed,
       //   persistentSubmitErrors : true,
       //   shouldAsyncValidate: ({syncValidationPasses, trigger}) => {

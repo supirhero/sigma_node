@@ -899,7 +899,6 @@ export class PopUpBaruBisa extends Component {
     const popup = store.getState().data.popup
     return(
       <div style={this.props.style}>
-
         <div className={popup && popup[this.props.id] && popup[this.props.id].active ? this.props.id + ' popup-container active' : this.props.id +  ' popup-container'} style={{zIndex:'2'}}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
@@ -1223,70 +1222,6 @@ export class TableNew extends Component{
     )
   }
 }
-
-
-
-export class TableNewMasterDataPopUp extends Component {
-  render() {
-    return (
-      <table className="table" style={{ width: '100%' }}>
-        <thead>
-          <tr>
-            {
-                this.props.tableHeader.map((value, index) => (
-                  <th key={index}>{value.value}</th>
-                ))
-              }
-          </tr>
-        </thead>
-
-        <tbody>
-          {
-                this.props.tableData &&
-                this.props.tableData.map((row, index) => (
-                  <tr className="items" key={index}>
-                    {
-                      row.column.map((column, index) => (
-                    <td key={index}>{column.value}</td>
-                      ))
-                    }
-                    <td style={{ position: 'relative' }}>
-                      <button className="btn-primary-data-master" onClick={
-                        e=>{
-                          store.dispatch({
-                            type:'POPUP',
-                            name:'edit',
-                            data:{
-                              active:true
-                            }
-                          })
-                          e.preventDefault()
-                        }
-                      }>EDIT</button>
-                    </td>
-                    <td style={{ position: 'relative' }}>
-                    <button onClick={
-                      e=>{
-                        store.dispatch({
-                          type:'POPUP',
-                          name:'delete',
-                          data:{
-                            active:true
-                          }
-                        })
-                        e.preventDefault()
-                      }
-                    }>DELETE</button>
-                  </td>
-                  </tr>
-                ))
-              }
-
-        </tbody>
-      </table>
-    );
-  }
-  }
 
 
 

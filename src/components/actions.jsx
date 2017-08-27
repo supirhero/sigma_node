@@ -271,7 +271,7 @@ export const addIssue = (data, id ) => {
 export const addNewProject = (data,id) => {
   console.log('DATA', data);
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-  const iwo = data.IWO_NO2 != undefined || data.IWO_NO2 != null ? data.IWO_NO2 : data.IWO_NO
+  // const iwo = data.IWO_NO2 != undefined || data.IWO_NO2 != null ? data.IWO_NO2 : data.IWO_NO
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
