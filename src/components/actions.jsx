@@ -195,7 +195,7 @@ export const addDocsAndFiles = (desc,files, id ) => {
   // console.log("DOCS",data);
   return function(dispatch){
     const formData = new FormData();
-    formData.append('desc',data.desc);
+    formData.append('desc',desc);
     formData.append('document',files[0])
     fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
       method:'POST',
@@ -203,6 +203,7 @@ export const addDocsAndFiles = (desc,files, id ) => {
     })
   }
 }
+
 
 export const getIssue = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -271,6 +272,7 @@ export const addIssue = (data, id ) => {
           )
   }
 }
+
 
 
 export const addNewProject = (data,id) => {

@@ -15,7 +15,9 @@ class Timesheet extends Component {
   constructor(){
     super()
     this.state = {
-      click : 1 
+      click : 1 ,
+      holiday: null,
+      selected:moment().format("YYYY-MM-DD")
     };
   }
 
@@ -97,20 +99,13 @@ class Timesheet extends Component {
     const auth = state.auth;
 
 
-    const handleDayClick = (day, { selected }) => {
-      this.setState({
-        selectedDay: selected ? undefined : day,
-      });
-      const selectedDay = moment(day).format('YYYY-MM-DD')
-    store.dispatch(viewTimesheet(selectedDay))
-    };
 
 
   //    if(!timesheet){
   //    return <PageLoader></PageLoader>
   //  }
     return (
-      !timesheet.user_project ? <PageLoader></PageLoader>:
+      !timesheet.user_project ? <PageLoader></PageLoader> :
       <div>
         <div className="grid wrap">
           <div className="unit whole">
@@ -132,6 +127,7 @@ class Timesheet extends Component {
               <div className="unit whole" style={{ textAlign: 'center' }}>
                 <div style={{ marginTop: '20px', display: 'inline-block' }}>
                 <div className='unit whole' style={{textAlign:'center'}}> 
+               
                 <span className="icon-arrow-left-circle list-pointer" onClick={ 
                   e => { 
                     this.setState({ 
@@ -150,7 +146,15 @@ class Timesheet extends Component {
                       onClick={ 
                         e => { 
                           store.dispatch(viewTimesheet(value.day)) 
-                           
+                          value.holiday == true ?  this.setState({
+                            holiday : true
+                          }) : this.setState({
+                            holiday : false
+                          })
+                          this.setState({
+                            selected:value.day
+                          })
+                          
                         }} 
                       /> 
                     } 
@@ -166,6 +170,8 @@ class Timesheet extends Component {
                       e.preventDefault() 
                     } 
                   } /> 
+
+                  
                   </div> 
                 </div> 
                 </div>
@@ -308,14 +314,14 @@ class Timesheet extends Component {
 
 
 
-
-            <div className="grid wrap">
-              <div className="unit whole" style={{ marginBottom: '42px' }}>
-                <Divider text={timesheet.user_activities[0]?timesheet.user_activities[0].TS_DATE:null} />
-              </div>
+          <div className="grid wrap">
+            <div className="unit whole" style={{ marginBottom: '42px' }}>
+              
+              <Divider text={this.state.selected} />
             </div>
+          </div>
 
-
+          { this.state.holiday == false ? 
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -359,26 +365,25 @@ class Timesheet extends Component {
                         })
 
                       }
-
-
               </div>
-            </div>
-
-        {/*
-            <div className="grid wrap">
-              <div className="unit whole" style={{ marginBottom: '42px' }}>
-                <Divider text="SATURDAY, AUGUST 12" />
-              </div>
-            </div>
-            <div className="grid wrap">
-              <div className="unit whole">
-                <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
-              </div>
-              <div className="unit whole" style={{ margin: 'absolute' }}>
-                <img src={require('../img/day-off.png')} style={{ margin: '0 auto', display: 'block' }} />
-              </div>
-            </div>
-          */}
+            </div> : 
+            <div>
+            
+                <div className="grid wrap">
+                  <div className="unit whole">
+                    <large style={{ textAlign: 'center' }}><b>Enjoy your day-off!! <br /> You don't have to update anything today</b></large>
+                  </div>
+                  <div className="unit whole" style={{ margin: 'absolute' }}>
+                    <img src={require('../img/day-off.png')} style={{ margin: '0 auto', display: 'block' }} />
+                  </div>
+                </div>
+                </div>
+        
+        
+        
+        
+          }
+      
       </div>
 
     );

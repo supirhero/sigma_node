@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
-import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxFileInput, EmptyData} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
 
 
@@ -51,7 +51,8 @@ class ProjectDocsAndFiles extends Component {
                       inputName="Select File"
                       name="document"
                       type='file'
-                      component={ReduxFileInput}
+                      style={{width:'780px'}}
+                      component={ReduxUploadWorkplan}
                     />
                    {/* <InputFile name="selectFile" /> */}
                   </div>
