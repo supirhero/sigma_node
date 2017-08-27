@@ -6,6 +6,7 @@ import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
 import {Field, reduxForm, unregisterField,stopAsyncValidation} from 'redux-form';
 // import { pop } from 'react-router-redux'
+import { push, replace, goBack } from 'react-router-redux'
 
 import {
   Checkbox,
@@ -146,7 +147,7 @@ class NewProject extends Component {
 
           <form
             onSubmit={handleSubmit(this.onSubmit.bind(this))
-        
+
             }>
           <div className='grid wrap narrow'>
             <div className='unit whole'>
@@ -511,6 +512,7 @@ class NewProject extends Component {
                         <option></option>
 
                         {
+                          projectManager &&
                           projectManager.map((value, index)=> (
                             <option key={index} value={value.USER_ID} {...this.props.option}>{value.USER_NAME}</option>
                           ))
@@ -973,7 +975,10 @@ class NewProject extends Component {
               <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <div className='btn-wrapper'>
-                 <button className='btn-secondary' style={{display:'inline-block'}} >CANCEL</button>
+                 <button className='btn-secondary' style={{display:'inline-block'}} onClick={ e => {
+                   this.props.dispatch(goBack())
+                   e.preventDefault()
+                 }}>CANCEL</button>
                     <button className='btn-primary' type='submit' style={{float:'right', display:'inline-block'}}>CREATE PROJECT</button>
 
                   </div>
