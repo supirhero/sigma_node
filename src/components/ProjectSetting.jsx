@@ -41,7 +41,7 @@ class EditProject extends Component {
       PM: data.pm_id,
       // AM_ID: 'NONE',
       TYPE_OF_EFFORT: 'NONE',
-      PROJECT_STATUS: 'NOT STARTED',
+      PROJECT_STATUS: data.project_status,
       START: data.schedule_start,
       END: data.schedule_end,
       TYPE_OF_EXPENSE: 'CAPITAL EXPENSE',

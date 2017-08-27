@@ -100,7 +100,7 @@ class NewProject extends Component {
     alert('triggered')
     const id = this.props.state.page.new_project.bu_code
     this.props.dispatch(getDashboardView())
-
+    console.log('ONSUBMIT PROPS', props);
     // alert("submitted")
     store.dispatch(addNewProject(props, id));
   }
@@ -140,15 +140,29 @@ class NewProject extends Component {
         {value: 'Dedutible Expense'},
       ]
 
+
+
       return(
 
         !iwo && !projectManager && !form_values ? <PageLoader/> :
         <div>
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))
-
-            }>
+            onSubmit={
+              // e=> {
+                // console.log('ERRO');
+                handleSubmit(this.onSubmit.bind(this))
+              // }
+            }
+            // onSubmit = {event =>
+            //   handleSubmit(this.onSubmit.bind(this))(event)// <---- this is the promise returned from handleSubmit()
+            //   // console.log();
+            //     .catch(errors => {
+            //         alert('error')
+            //         // submission was unsuccessful
+            //       })
+            //     }
+            >
           <div className='grid wrap narrow'>
             <div className='unit whole'>
               <Divider btnLeftText='BACK' style={{marginTop:'0'}} btnLeftClick={ e => {
@@ -1008,6 +1022,8 @@ export default connect(mapStateToProps, { addNewProject })
     (
       reduxForm({
         form: 'add_project',
+        // RejectedSubmitPromise: true
+        submit: error => {console.log('ERRORRRRRR', error);}
       //   asyncValidate:  isIWOUsed,
       //   persistentSubmitErrors : true,
       //   shouldAsyncValidate: ({syncValidationPasses, trigger}) => {
