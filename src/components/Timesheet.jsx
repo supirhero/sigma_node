@@ -20,7 +20,7 @@ class Timesheet extends Component {
   }
 
   onSubmit(props){
-    this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
+    this.props.addTimesheet(props.PROJECT_ID,props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
   }
 
   componentWillMount(){
@@ -30,6 +30,7 @@ class Timesheet extends Component {
     const timesheet = state.data.timesheet;
     const auth = state.auth;
   }
+
 
 
 
@@ -45,6 +46,16 @@ class Timesheet extends Component {
     const currentDate = moment().format("ddd,MMM DD");
     const state = store.getState();
     const timesheet = state.data;
+
+    // const startOfWeek = moment().startOf('week');
+    // const endOfWeek = moment().endOf('week');
+    // var days = [];
+    // var day = startOfWeek;
+    // while (day < endOfWeek){
+    //   days.push(day.toDate());
+    //   day=day.clone().add(1,'d')
+    //   console.log(days)
+    // }
 
     // console.log(timesheet.task);
     // function status(){
@@ -137,7 +148,7 @@ class Timesheet extends Component {
                         inputName="DATE"
                         name="TS_DATE"
                         component={datepickerTimesheet}
-                        validate={[required]}
+                        // validate={[required]}
                       />
                     </div>
                   </div>
@@ -155,7 +166,8 @@ class Timesheet extends Component {
                           }
                         }
                         component={ReduxSelectNew}
-                        validate={[required]}>
+                        // validate={[required]}
+                        >
                         {
                               timesheet.user_project.map((value,index)=>{
                                 return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
@@ -176,7 +188,8 @@ class Timesheet extends Component {
                                         // type="WP_ID"
                                           inputName="TASK"
                                           component={ReduxSelectNew}
-                                          validate={[required]}>
+                                          // validate={[required]}
+                                          >
                                               {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
@@ -197,7 +210,7 @@ class Timesheet extends Component {
                         name="HOUR"
                         type="HOUR"
                         component={ReduxInput}
-                        validate={[required]}
+                        // validate={[required]}
                       />
                     </div>
                   </div>
@@ -208,7 +221,7 @@ class Timesheet extends Component {
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
                         component={ReduxInput}
-                        validate={[required]}
+                        // validate={[required]}
                       />
                     </div>
                   </div>
@@ -219,18 +232,13 @@ class Timesheet extends Component {
                           name="TS_MESSAGE"
                           // type="TS_MESSAGE"
                           component={ReduxInput}
-                          validate={[required]}
+                          // validate={[required]}
                         />
                     </div>
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
-                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
-                      e => {
-                        browserHistory.push('/')
-                        e.preventDefault()
-                      }
-                    }> CANCEL </button>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
                       <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SUBMIT</button>
                     </div>
                   </div>

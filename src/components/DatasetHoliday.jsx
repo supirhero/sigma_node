@@ -5,8 +5,8 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUp ,PageLoader} from './Components.jsx';
-import {getDataMaster,manageHoliday} from './actions.jsx'
+import { Select, Input, Table,TableNew,Header,Search,PopUp ,PageLoader,ReduxInput,datepickerUniversal} from './Components.jsx';
+import {getDataMaster,addHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
 
@@ -18,7 +18,12 @@ class DatasetHoliday extends Component {
     store.dispatch(getDataMaster("holiday"))
   }
 
+  onSubmit(props){
+    store.dispatch(addHoliday(props))
+  }
+
   render() {
+    const {handleSubmit} = this.props;
     const state = store.getState()
     const holiday = state.data.holiday
 
@@ -39,21 +44,40 @@ class DatasetHoliday extends Component {
 								</div>
 
                 <div className="unit three-quarters">
+             
 									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
-										<div>
+                  <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <div>
 											<div className="grid wrap narrow">
-												<div className="unit whole">
-													<Input inputName="HOLIDAY" />
+                        <div className="unit whole">
+                            <Field
+                            inputName="HOLIDAY"
+                            name="HOLIDAY"
+                            type='input'
+                            component={ReduxInput}
+                          />
 												</div>
 											</div>
 											<div className="grid wrap narrow">
-												<div className="unit whole">
-													<Input inputName="START DATE" />
+                        <div className="unit whole">
+                          <Field
+                          inputName="START DATE"
+                          name="HOLIDAY_START"
+                          type='input'
+                          component={datepickerUniversal}
+                        />
+												
 												</div>
 											</div>
 											<div className="grid wrap narrow">
-												<div className="unit whole">
-													<Input inputName="END DATE" />
+                        <div className="unit whole">
+                        <Field
+                        inputName="END DATE"
+                        name="HOLIDAY_END"
+                        type='input'
+                        component={datepickerUniversal}
+                      />
+													
 												</div>
 											</div>
 												<div className="grid wrap narrow">
@@ -62,7 +86,8 @@ class DatasetHoliday extends Component {
 														<button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
 													</div>
 												</div>
-										</div>
+                    </div>
+                    </form>
 									</PopUp>
 									<Search placeholder='search holiday' style={{float:'right',width:'400px'}} />
 								</div>
@@ -114,9 +139,12 @@ class DatasetHoliday extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
 		// filter: ownProps.location.query.filter
   };
 }
 
-export default connect(mapStateToProps,{getDataMaster})(DatasetHoliday);
-// export default Login
+export default connect(mapStateToProps, { addHoliday,getDataMaster })(
+  reduxForm({
+    form: 'add_holiday',
+  })(DatasetHoliday));
