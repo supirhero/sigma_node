@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, ReactDOM} from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import axios from 'axios'
@@ -6,6 +6,7 @@ import { Link, browserHistory } from 'react-router'
 import { Line} from 'react-progressbar.js'
 import {Field, reduxForm, unregisterField,stopAsyncValidation} from 'redux-form';
 // import { pop } from 'react-router-redux'
+import {animateScroll} from 'react-scroll';
 import { push, replace, goBack } from 'react-router-redux'
 
 import {
@@ -1023,7 +1024,11 @@ export default connect(mapStateToProps, { addNewProject })
       reduxForm({
         form: 'add_project',
         // RejectedSubmitPromise: true
-        submit: error => {console.log('ERRORRRRRR', error);}
+        onSubmitFail: errors => {
+          // window.scrollTo(0, 0)
+          animateScroll.scrollToTop()
+          // ReactDOM.findDOMNode(this).scrollTop = 0
+        }
       //   asyncValidate:  isIWOUsed,
       //   persistentSubmitErrors : true,
       //   shouldAsyncValidate: ({syncValidationPasses, trigger}) => {
