@@ -217,29 +217,29 @@ class ProjectWorkplan extends Component {
             <Field
               inputName="PROJECT NAME"
               name="PROJECT_ID"
-              
+
               component={ReduxSelectNew}
               // validate={[required]}
               >
-             
+
 
 
               </Field>
           </div>
         </div>
         <div className="grid wrap narrow">
-        <div className="unit three-quarters"> 
+        <div className="unit three-quarters">
                 <Field
                               name="WP_ID"
-                              
+
                                 inputName="TASK"
                                 component={ReduxSelectNew}
                                 // validate={[required]}
                                 />
-                             
-                             
-                           
-                            
+
+
+
+
                             </div>
 
           <div className="unit one-quarter">
@@ -313,7 +313,7 @@ class ProjectWorkplan extends Component {
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>WORK</h2></div>
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>WORK TOTAL</h2></div>
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>% COMPLETE</h2></div>
-              
+
               </div>
             </div>
 
@@ -325,10 +325,10 @@ class ProjectWorkplan extends Component {
               <div className="unit two-thirds">
                   <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>13</h2></div>
                   <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>2371</h2></div>
-                  <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.54%</h2></div>          
+                  <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.54%</h2></div>
               </div>
             </div>
-            
+
             <div className="grid wrap narrow">
               <div className="unit whole no-gutters">
                 <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>Manual Update</h2>
@@ -348,7 +348,7 @@ class ProjectWorkplan extends Component {
             <div className="unit two-thirds">
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0</h2></div>
                 <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>3929</h2></div>
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.58%</h2></div>          
+                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.58%</h2></div>
             </div>
           </div>
 
@@ -385,9 +385,9 @@ class ProjectWorkplan extends Component {
             type="input"
             component={ReduxSelectNew}
           />
-             
+
             </div>
-          
+
           </div>
           <div className="grid wrap narrow">
             <div className="unit half">
@@ -397,7 +397,7 @@ class ProjectWorkplan extends Component {
               type="input"
               component={datepickerUniversal}
             />
-              
+
             </div>
             <div className="unit half">
             <Field
@@ -407,8 +407,8 @@ class ProjectWorkplan extends Component {
             component={datepickerUniversal}
           />
             </div>
-      
-        
+
+
         </div>
 
           <div className="grid wrap narrow">
@@ -574,7 +574,18 @@ class ProjectWorkplan extends Component {
 
                   <div className="grid wrap">
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '40px' }}>
-                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+                        onClick={e=>{
+                          store.dispatch({
+                            type: 'POPUP',
+                            name:'createTask',
+                            data: {
+                              active:false
+                            }
+                          })
+
+                          e.preventDefault()
+                        }}> CANCEL </button>
                       <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} type="submit" className="btn-primary"> ADD </button>
                     </div>
                   </div>
@@ -658,6 +669,8 @@ class ProjectWorkplan extends Component {
                             <th>END<br />DATE</th>
                             <th>% WORK<br />COMPLETE</th>
                             <th>RESOURCES<br /></th>
+                            <th></th>
+
                           </tr>
                         </thead>
 

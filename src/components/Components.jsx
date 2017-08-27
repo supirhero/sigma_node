@@ -113,7 +113,7 @@ export class Menu extends Component {
     render(){
       return(
         <div style={this.props.style}>
-        <div className={this.props.triggerClass} onClick={
+        <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
           () => {
               console.log('working');
               if (this.state.clicked) {
@@ -1363,12 +1363,16 @@ export class WorkplanRow extends Component {
           e.preventDefault()
         }
       }>
-      <td style={{paddingLeft: padding+'px', wordBreak:'break-word', width:'370px', paddingRight:'15px'}}>
-        {/* <div style={{width:'200px', overflow:'hidden'}}> */}
+
+      <td style={{overflow:'visible', width:'410px'}}>
+        <div style={{paddingLeft: padding+'px', wordBreak:'break-word', paddingRight:'15px'}}>
+          {/* <div style={{width:'200px', overflow:'hidden'}}> */}
           <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
             {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
           </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
-        {/* </div> */}
+          {/* </div> */}
+
+        </div>
         </td>
       <td>{value.WORK}</td>
       <td>{value.WORK_TOTAL}</td>
@@ -1377,10 +1381,10 @@ export class WorkplanRow extends Component {
       <td>{value.FINISH_DATE}</td>
       <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
-      <td style={{position:'relative'}}>
+      <td style={{position:'relative', paddingRight:'20px'}} >
       {
         value.LEAF == 1 &&
-        <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
+        <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
           <MenuSection>
             <MenuItem title='Add Timesheet' onClick={e => {
               store.dispatch({
