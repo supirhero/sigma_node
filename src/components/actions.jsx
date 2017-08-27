@@ -8,8 +8,11 @@ const cookies = new Cookies();
 // import {saveAuthentication} from './actions.jsx'
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
+
+
 // const baseURL = "http://45.77.45.126/dev/"
 const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/"
+
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
 const token_string = `?token=${token}`
@@ -54,7 +57,9 @@ export function login(email, password) {
 
 export function getProjectDetail(id) {
 
-  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
   const token = cookies.get('token')
   const token_string = `?token=${token}`
   return function (dispatch) {
@@ -920,6 +925,59 @@ export function getWorkplanView(id){
   }
 }
 
+export function uploadWorkplan(project_id,files){ 
+  return function(dispatch){ 
+    const formData = new FormData() 
+    formData.append('project_id',project_id) 
+    formData.append('document',files[0]) 
+    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{ 
+      method:'POST', 
+      body:formData 
+    }) 
+  } 
+} 
+
+export function getTaskMemberView(project_id,wbs_id){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
+      url:`${baseURL}/dev/task/assignTaskMember_view?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        PROJECT_ID:project_id,
+        WBS_ID:wbs_id
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+        return res
+      }
+    )
+  }
+}
+
+export function assignTaskMember(data){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      url:`${baseURL}/dev/task/assignTaskMemberProject?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        WBS_ID:data.WBS_ID,
+        MEMBER:data.MEMBER,
+        EMAIL:data.EMAIL,
+        NAME:data.NAME,
+        WBS_NAME:data.WBS_NAME,
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+      }
+    )
+  }
+}
+
 export function getMyActivities(){
   return function(dispatch){
     const token = cookies.get('token')
@@ -934,6 +992,7 @@ export function getMyActivities(){
     )
   }
 }
+
 
 
 export function getListBU(){

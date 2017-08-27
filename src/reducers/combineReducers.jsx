@@ -113,6 +113,13 @@ const data = (state = Immutable.List(), action) => {
     //   store.dispatch({type: 'LOADER', show: true})
     // }
     switch (action.type) {
+      case 'POPUP':
+        return Object.assign({},state,{
+          popup: {
+            [action.name] : action.data
+          }
+        })
+      break;
 
       case 'POP':
       // if (action.name != null) {

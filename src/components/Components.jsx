@@ -14,6 +14,8 @@ import DayPicker from 'react-day-picker';
 import {checkIWOUsed} from './actions.jsx'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
+import { connect } from 'react-redux'
+
 
 const cookies = new Cookies();
 const baseURL = "http://45.77.45.126"
@@ -154,7 +156,11 @@ export class MenuItem extends Component {
   render() {
     return(
       <div className='menu-item' onClick={this.props.onClick}>
-        <small className='menu-title'>{this.props.title}</small>
+        {this.props.children}
+        {
+          this.props.title &&
+          <small className='menu-title'>{this.props.title}</small>
+        }
       </div>
     )
   }
@@ -751,11 +757,12 @@ export class PopUp extends Component {
 
   render() {
     // const dom = store.getState().dom
-    // console.log('dom : ',dom);
+    console.log('POPUP PROPS',this.props);
+    const popup = store.getState().data.popup
     return(
       <div style={this.props.style}>
 
-        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+        <div className={popup && popup[this.props.id] && popup[this.props.id].active ? this.props.id + ' popup-container active' : this.props.id +  ' popup-container'} style={{zIndex:'2'}}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
                 <div className='card shadow' style={{marginTop:'6%'}}>
@@ -764,9 +771,14 @@ export class PopUp extends Component {
                         document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
-                        this.setState({
-                          clicked:false
+                        store.dispatch({
+                          type: 'POPUP',
+                          name:this.props.id,
+                          data: {
+                            active:false
+                          }
                         })
+
                         e.preventDefault()
                       }
                     }></Divider>
@@ -781,7 +793,7 @@ export class PopUp extends Component {
             <div className='tint'></div>
 
         </div>
-        <button style={this.props.btnStyle} className={this.props.btnClass}
+        {/* <button style={this.props.btnStyle} className={this.props.btnClass}
           onClick={
             e => {
               document.body.style.overflow = 'hidden';
@@ -799,11 +811,12 @@ export class PopUp extends Component {
               })
               e.preventDefault()
             }}
-          >{this.props.btnText}</button>
+          >{this.props.btnText}</button> */}
       </div>
 
     )
   }
+
 }
 
 
@@ -930,7 +943,7 @@ export class PopUpTimesheet2 extends Component {
     return(
       <div style={this.props.style}>
 
-        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'} style={{zIndex:'2'}}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
                 <div className='card shadow' style={{marginTop:'6%'}}>
@@ -1145,86 +1158,117 @@ export class WorkplanRow extends Component {
       clicked_child : false
     };
   }
-  renderRow(value){
+  menu(value) {
     var padding =(value.LEVEL * 20 + 20).toString()
+
+    return(
+      <tr onClick={
+        e => {
+          var key = (value.WBS_ID).toString()
+          if (this.state[key]) {
+            this.setState({[key]:false})
+          }
+          else {
+            this.setState({[key]:true})
+          }
+          e.preventDefault()
+        }
+      }>
+      <td style={{paddingLeft: padding+'px', wordBreak:'break-word'}}>
+        {/* <div style={{width:'200px', overflow:'hidden'}}> */}
+          <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
+            {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
+          </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
+        {/* </div> */}
+        </td>
+      <td>{value.WORK}</td>
+      <td>{value.WORK_TOTAL}</td>
+      <td>{value.DURATION}</td>
+      <td>{value.START_DATE}</td>
+      <td>{value.FINISH_DATE}</td>
+      <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
+      <td>{value.RESOURCE_WBS} people</td>
+      <td style={{position:'relative'}}>
+      {
+        value.LEAF == 1 &&
+        <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
+          <MenuSection>
+            <MenuItem title='Add Timesheet' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'addTimesheetWorkplan',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+            <MenuItem title='Manual Update' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'manualUpdate',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+            <MenuItem title='Edit' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'edit',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+            <MenuItem title='Assign' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'assign',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+
+            <MenuItem title='Delete' onClick={e => {
+              store.dispatch({
+                type: 'POPUP',
+                name:'delete',
+                data: {
+                  active:true
+                }
+              })
+
+              e.preventDefault()
+            }}/>
+
+            
+
+          </MenuSection>
+
+        </Menu>
+      }
+
+      </td>
+
+    </tr>
+    )
+  }
+  renderRow(value){
     // var padding = num.toString();
-    console.log('PADDING', padding);
+    // console.log('PADDING', padding);
     return(
       value.children.map((value,index)=> [
 
-        <tr onClick={
-          e => {
-            var key = (value.WBS_ID).toString()
-            if (this.state[key]) {
-              this.setState({[key]:false})
-            }
-            else {
-              this.setState({[key]:true})
-            }
-            e.preventDefault()
-          }
-        }>
-        <td style={{paddingLeft: padding+'px', wordBreak:'break-word'}}>
-          {/* <div style={{width:'200px', overflow:'hidden'}}> */}
-            <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
-              {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
-            </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
-          {/* </div> */}
-          </td>
-        <td>{value.WORK}</td>
-        <td>{value.WORK_TOTAL}</td>
-        <td>{value.DURATION}</td>
-        <td>{value.START_DATE}</td>
-        <td>{value.END_DATE}</td>
-        <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
-        <td>{value.LEAF}</td>
-        <td>
-
-          {/* <Menu style={{display:'inline'}} triggerClass='profile'>
-            <MenuSection>
-              <MenuHeader title='Kara Cray' subTitle='@karagay'/>
-              <MenuItem title='Home' onClick={
-                e => {
-                  browserHistory.push('/')
-                }
-
-              }/>
-              <MenuItem title='Profile' onClick={
-                e => {
-                  browserHistory.push('/profile')
-                }
-              }/>
-            </MenuSection>
-            <MenuSection>
-              <MenuHeader title='ADMIN CONSOLE'/>
-              <MenuItem title='Master Data' onClick={
-                e => {
-                  browserHistory.push('/dataset')
-                }
-              }/>
-              <MenuItem title='Manage Role & Access' onClick={
-                e => {
-                  browserHistory.push('/manage')
-                }
-                }/>
-            </MenuSection>
-            <MenuSection>
-              <MenuItem onClick={
-                e => {
-                  console.log('work');
-                  browserHistory.replace('/auth')
-                  //
-                  store.dispatch(logout())
-                  e.preventDefault()
-                }
-              } title='LogOut'/>
-            </MenuSection>
-
-          </Menu> */}
-
-        </td>
-
-      </tr>,
+        this.menu(value),
 
         this.state[(value.WBS_ID).toString()] && this.state[(value.WBS_ID).toString()] !=false &&
         this.renderRow(value)
@@ -1237,55 +1281,11 @@ export class WorkplanRow extends Component {
     var value = this.props.data
     return (
       <tbody>
-        <tr >
+        {this.props.children}
+        {
+          this.menu(value)
 
-          <td  style={{paddingLeft: '20px'}}
-
-            onClick={
-              e => {
-                  if (this.state[(value.WBS_ID).toString()]) {
-                    this.setState({[(value.WBS_ID).toString()]:false})
-                  }
-                  else {
-                    this.setState({[(value.WBS_ID).toString()]:true})
-                  }
-                  e.preventDefault()
-                }
-              }
-            >
-            <span style={{verticalAlign:'middle', fontSize:'16px', color:'black', wordBreak:'break-word'}} className='material-icons'>{value.children.length!=0 && this.state[(value.WBS_ID)] ? 'expand_more': 'expand_less'}</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
-
-          </td>
-          <td>{value.WORK}</td>
-          <td>{value.WORK_TOTAL}</td>
-          <td>{value.DURATION}</td>
-          <td>{value.START_DATE}</td>
-          <td>{value.END_DATE}</td>
-          <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
-          <td>{value.LEAF}</td>
-          <td style={{position:'relative'}}>
-            <Menu menuStyle={{top:'0', right:'0'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
-              <MenuSection>
-                <MenuHeader title='Kara Cray' subTitle='@karagay'/>
-                <MenuItem title='Home' onClick={
-                  e => {
-                    browserHistory.push('/')
-                  }
-
-                }/>
-                <MenuItem title='Profile' onClick={
-                  e => {
-                    browserHistory.push('/profile')
-                  }
-                }/>
-              </MenuSection>
-
-            </Menu>
-
-          </td>
-
-        </tr>
+        }
         {
           value.children.length !=0 && this.state[(value.WBS_ID).toString()] &&
           this.renderRow(value)
@@ -1455,41 +1455,49 @@ export class ReduxFileInput extends Component {
   }
 }
 
-// export class ReduxFileInput2 extends Component {
-//   render(){
-//     return(
-//       <FileField
-//         name={this.props.name}
-//         placeholder={this.props.placeholder}
-//         accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-//         onChange={(event)=> this.props.input.onChange(event.target.files[0])}
-//         {...this.props.custom}
-//         >
-//       </FileField>
-//     )
-//   }
-// }
 
 
-export class ReduxDropZone extends Component{
+
+
+
+export class ReduxDrop extends Component {
   render(){
-    return (
-      <div>
+    return(
       <Dropzone
+      name={this.props.name}
+      className="btn-primary"
+      style={{width:'170px',height:'30px'}}
+      placeholder={this.props.placeholder}
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
-      // onDrop={(event)=> this.props.input.onChange(event.target.files[0])}
-      {...this.props.custom}
       >
-      <div>TARO FILE</div>
+      
       </Dropzone>
-      </div>
     )
   }
 }
 
 
-export class ReduxDrop extends Component {
+export class ReduxUploadWorkplam extends Component {
+  render(){
+    return(
+      <Dropzone
+      name={this.props.name}
+      className="upload-workplan"
+      style={this.props.style}
+      placeholder={this.props.placeholder}
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
+      >
+      
+      </Dropzone>
+    )
+  }
+}
+
+
+
+export class ReduxDropProfilePicture extends Component {
   render(){
     return(
       <Dropzone
@@ -1504,7 +1512,6 @@ export class ReduxDrop extends Component {
     )
   }
 }
-
 
 export class LoaderLogin extends Component {
   render(){
@@ -1642,3 +1649,13 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
+  function mapStateToProps(state) {
+    return {
+      // formValues: state.form.add_task,
+      state,
+      data: state.data,
+      popup: state.data.popup,
+    }
+
+  }
+  // export connect(mapStateToProps)(PopUp)
