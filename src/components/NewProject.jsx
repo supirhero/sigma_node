@@ -215,7 +215,7 @@ class NewProject extends Component {
 
                           {
                             field: 'AMOUNT',
-                            value: ''
+                            value: 0
                           },
                           {
                             field: 'PROJECT_NAME',
@@ -232,7 +232,7 @@ class NewProject extends Component {
                           ,
                           {
                             field: 'MARGIN',
-                            value: ''
+                            value: 0
                           },
                           {
                             field: 'END_CUST_ID',
@@ -312,7 +312,7 @@ class NewProject extends Component {
                         {
                           field: 'AMOUNT',
                           // value: arr.AMOUNT
-                          value: arr.AMOUNT == null ? 'none' : arr.AMOUNT
+                          value: arr.AMOUNT == null ? 0 : arr.AMOUNT
 
                         },
                         {
@@ -337,7 +337,7 @@ class NewProject extends Component {
                         {
                           field: 'MARGIN',
                           // value: arr.MARGIN == null ? 'none' : arr.MARGIN
-                          value: arr.MARGIN == null ? 'none' : arr.MARGIN
+                          value: arr.MARGIN == null ? 0 : arr.MARGIN
 
                         },
                         {

@@ -12,7 +12,7 @@ import { Line } from 'react-progressbar.js'
 
 class ProjectOverview extends Component {
     render(){
-      const appStore = store.getState()
+      const appStore = this.props.state
       const overview = appStore.data.overview ? appStore.data.overview : null
       return(
         <div className='project-overview'>
