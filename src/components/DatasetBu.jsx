@@ -76,7 +76,7 @@ class DatasetBu extends Component {
                               bu?bu.map((value,index)=>{
                                 return <option key={index} value={value.BU_HEAD}>{value.BU_HEAD_NAME}</option>
                               }
-                            ):<PageLoader />
+                            ):null
                         }
 
 
@@ -91,10 +91,10 @@ class DatasetBu extends Component {
                         component={ReduxSelectNew}
                         validate={[required]}>
                         {
-                          bu.map((value,index)=>{
+                          bu?bu.map((value,index)=>{
                             return <option key={index} value={value.BU_PARENT_ID}>{value.BU_PARENT_ID}</option>
                           }
-                        )
+                        ):null
                         }
                         </Field>
                         </div>
