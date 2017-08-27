@@ -592,7 +592,7 @@ export class ReduxSelectNew extends Component {
 export class TimeSheetTimeButton extends Component {
   render(){
     return(
-    <button className ='btn-secondary' style={{float:'left'}} onClick={this.props.onClick}>
+    <button className ='btn-secondary' style={{float:'left', width:'163px', height:'100px'}} onClick={this.props.onClick}>
       {this.props.text}
       <small>{this.props.hours}</small>
     </button>
