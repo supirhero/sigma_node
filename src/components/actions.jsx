@@ -719,6 +719,29 @@ export function viewTimesheet(date) {
   };
 }
 
+export function weekTimesheet(click){
+  var date = moment()
+  date = date.subtract(click*7, 'days');
+  date = date.format("YYYY-MM-DD")
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+      method: 'GET',
+      url: `${baseURL}home/timesheet/${date}?token=${token}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: {date:date}
+
+    }).then(
+            (res) => {
+              // alert('timesheed fetched');
+              store.dispatch({ type: 'API', name: 'timesheet', data: res });
+            },
+          )   
+  };
+}
+
 
 export function taskList(project_id) {
   console.log('PROJECT_ID',project_id)
@@ -945,7 +968,7 @@ export function uploadWorkplan(project_id,files){
     const formData = new FormData() 
     formData.append('project_id',project_id) 
     formData.append('document',files[0]) 
-    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{ 
+    fetch(`${baseURL}task/upload_wbs?token=${token}`,{ 
       method:'POST', 
       body:formData 
     }) 
@@ -1064,14 +1087,15 @@ export function getDataMaster(data){
   }
 }
 
+
 export function getDataMasterMIS(data){
   return function(dispatch){
     const token = cookies.get('token')
     return fetch(`http://10.210.20.2/api/index.php/mis/${data}`,{
-      mode : 'no-cors',
     }).then(
-      (res)=>{
-        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      function(res){
+        store.dispatch({ type: 'API', name: 'datamasterMIS', append: true,  data: res });
+        console.log('FETCH', res)
       }
     )
   }

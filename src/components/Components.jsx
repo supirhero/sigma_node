@@ -816,9 +816,75 @@ export class PopUpBARU extends Component {
 
 }
 
-
-
 export class PopUp extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
+
+    };
+  }
+
+  render() {
+    // const dom = store.getState().dom
+    // console.log('dom : ',dom);
+    return(
+      <div style={this.props.style}>
+
+        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+            <div className='grid wrap' style={{position:'relative'}}>
+              <div className='unit whole'>
+                <div className='card shadow' style={{marginTop:'6%'}}>
+                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+                      e => {
+                        document.body.style.overflow = 'scroll';
+                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
+                        document.documentElement.scrollTop = 0; // For IE and Firefox
+                        this.setState({
+                          clicked:false
+                        })
+                        e.preventDefault()
+                      }
+                    }></Divider>
+
+
+
+                    {this.props.children}
+
+                </div>
+              </div>
+            </div>
+            <div className='tint'></div>
+
+        </div>
+        <button style={this.props.btnStyle} className={this.props.btnClass}
+          onClick={
+            e => {
+              document.body.style.overflow = 'hidden';
+              document.body.scrollTop = 0; // For Chrome, Safari and Opera
+            document.documentElement.scrollTop = 0; // For IE and Firefox
+              // if (window.addEventListener) // older FF
+              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
+              //     window.onwheel = preventDefault; // modern standard
+              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+              //     window.ontouchmove  = preventDefault; // mobile
+              //     document.onkeydown  = preventDefaultForScrollKeys;
+              this.setState({
+                clicked:true
+              })
+              e.preventDefault()
+            }}
+          >{this.props.btnText}</button>
+      </div>
+
+    )
+  }
+}
+
+
+
+
+export class PopUpBaruBisa extends Component {
   constructor(){
     super();
     this.state = {
@@ -1185,21 +1251,33 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                      <button onClick={
+                      <button className="btn-primary-data-master" onClick={
                         e=>{
                           store.dispatch({
                             type:'POPUP',
-                            name:'deleteHoliday',
+                            name:'edit',
                             data:{
                               active:true
                             }
                           })
                           e.preventDefault()
                         }
-                      }></button>
-
-
+                      }>EDIT</button>
                     </td>
+                    <td style={{ position: 'relative' }}>
+                    <button onClick={
+                      e=>{
+                        store.dispatch({
+                          type:'POPUP',
+                          name:'delete',
+                          data:{
+                            active:true
+                          }
+                        })
+                        e.preventDefault()
+                      }
+                    }>DELETE</button>
+                  </td>
                   </tr>
                 ))
               }
@@ -1794,6 +1872,7 @@ export class datepickerUniversal extends Component {
       )
     }
   }
+
 
 export class datepickerTimesheet extends Component {
 
