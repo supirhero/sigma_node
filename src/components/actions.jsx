@@ -280,7 +280,7 @@ export const addNewProject = (data,id) => {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
-              AMOUNT:data.AMOUNT,
+              AMOUNT:parseFloat(data.AMOUNT),
               AM_ID:data.AM_ID,
               BU:id,
               COGS:data.COGS,
@@ -288,8 +288,8 @@ export const addNewProject = (data,id) => {
               DESC:data.DESC,
               END_CUST_ID:data.END_CUST_ID,
               ho_operation:data.HO,
-              IWO_NO:iwo,
-              MARGIN:data.MARGIN,
+              IWO_NO:data.IWO_NO,
+              MARGIN:parseFloat(data.MARGIN),
               OVERHEAD:data.OVERHEAD,
               PM:data.PM,
               PRODUCT_TYPE:data.PRODUCT_TYPE,
@@ -423,7 +423,7 @@ export const editProject = (data, id) =>
           data: {
             PROJECT_ID:id,
             ACTUAL_COST:data.ACTUAL_COST,
-            AMOUNT:data.AMOUNT,
+            AMOUNT:parseFloat(data.AMOUNT),
             AM_ID:data.AM_ID,
             BU:data.BU,
             COGS:data.COGS,
@@ -432,7 +432,7 @@ export const editProject = (data, id) =>
             END_CUST_ID:data.END_CUST_ID,
             ho_operation:"yes",
             IWO_NO:data.IWO_NO,
-            MARGIN:data.MARGIN,
+            MARGIN:parseFloat(data.MARGIN),
             OVERHEAD:data.OVERHEAD,
             PM:data.PM,
             PRODUCT_TYPE:data.PRODUCT_TYPE,
@@ -940,17 +940,17 @@ export function getWorkplanView(id){
   }
 }
 
-export function uploadWorkplan(project_id,files){ 
-  return function(dispatch){ 
-    const formData = new FormData() 
-    formData.append('project_id',project_id) 
-    formData.append('document',files[0]) 
-    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{ 
-      method:'POST', 
-      body:formData 
-    }) 
-  } 
-} 
+export function uploadWorkplan(project_id,files){
+  return function(dispatch){
+    const formData = new FormData()
+    formData.append('project_id',project_id)
+    formData.append('document',files[0])
+    fetch(`${baseURL}/dev/task/upload_wbs?token=${token}`,{
+      method:'POST',
+      body:formData
+    })
+  }
+}
 
 export function getTaskMemberView(project_id,wbs_id){
   return function(dispatch){
@@ -1020,6 +1020,45 @@ export function getListBU(){
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'directorate', append: true,  data: res });
+      }
+    )
+  }
+}
+export function getEditTaskView(wbs_id){
+  console.log('VALUEE', wbs_id);
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}task/edittask_view/${wbs_id}?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: '', append: true,  data: res });
+        return res
+      }
+    )
+  }
+}
+export function editTaskAction(id,WBS_ID,data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}task/edittask_action?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        project_id: id,
+        wbs_id: WBS_ID,
+        wbs_parent_id: data.PARENT_EDIT,
+        wbs_name: data.NAME_EDIT,
+        start_date: data.START_DATE_EDIT,
+        finish_date: data.FINISH_DATE_EDIT
+      }
+    }).then(
+      (res)=>{
+        store.dispatch(getWorkplanView(id));
+        return res
       }
     )
   }
@@ -1184,6 +1223,7 @@ export function addBU(data){
 //     )
 //   }
 // }
+// export
 
 
 export function editProfile(no_hp,address,files){

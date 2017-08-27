@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 
 
 import store from '../reducers/combineReducers.jsx'
-import { Divider, TimeSheetTimeButton, PopUpTimesheet, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepickerTimesheet } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUpTimesheet, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepickerTimesheet, PopUp } from './components.jsx';
 import { getProjectDetail, pop,addTimesheet } from './actions.jsx'
 import { Field, reduxForm } from 'redux-form';
 
@@ -22,8 +22,8 @@ class Project extends Component {
   }
 
   componentWillMount(){
-    const id = store.getState().page.id
-    store.dispatch(getProjectDetail(id)).then(
+    const id = this.props.state.page.id
+    this.props.dispatch(getProjectDetail(id)).then(
       (res)=>{
         console.log('detail project');
       }
@@ -59,7 +59,87 @@ class Project extends Component {
               <div className='sidebar'>
               <div className='grid wrap'>
                 <div className='unit whole no-gutters'>
+                  <PopUp id="addTimesheetWorkplan" dividerText="UPDATE TIMESHEET" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+                    <form >
+                    <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                        inputName="DATE"
+                        name="TS_DATE"
+                        component={datepickerTimesheet}
+                        // validate={[required]}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                        inputName="PROJECT NAME"
+                        name="PROJECT_ID"
+                        component={ReduxSelectNew}
+                        // validate={[required]}
+                        >
+                        </Field>
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                  <div className="unit three-quarters">
+                  <Field
+                  name="WP_ID"
 
+                    inputName="TASK"
+                    component={ReduxSelectNew}
+                    // validate={[required]}
+                    />
+                    </div>
+
+                    <div className="unit one-quarter">
+                      <Field
+                        inputName="WORK HOURS"
+                        name="HOUR"
+                        type="HOUR"
+                        component={ReduxInput}
+                        // validate={[required]}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                        inputName="SUBJECT"
+                        name="TS_SUBJECT"
+                        type="TS_SUBJECT"
+                        component={ReduxInput}
+                        // validate={[required]}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole">
+                      <Field
+                          inputName="MESSAGE"
+                          name="TS_MESSAGE"
+                          // type="TS_MESSAGE"
+                          component={ReduxInput}
+                          // validate={[required]}
+                        />
+                    </div>
+                  </div>
+                  <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                      e => {
+                        browserHistory.push('/')
+                        e.preventDefault()
+                      }
+                    }> CANCEL </button>
+                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
+                    </div>
+                  </div>
+
+                    </form>
+
+                  </PopUp>
                 <PopUpTimesheet id="updateTimesheet" dividerText="UPDATE TIMESHEET" btnClass="btn-primary" btnText="UPDATE TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
                 <div>
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -105,7 +185,7 @@ class Project extends Component {
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole">
-                      <Field 
+                      <Field
                         inputName="SUBJECT"
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
@@ -124,7 +204,7 @@ class Project extends Component {
                         />
                     </div>
                   </div>
-   
+
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' }}>
      {/*   <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"> ADD NEW</button> */}

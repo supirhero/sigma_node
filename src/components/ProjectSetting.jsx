@@ -22,7 +22,7 @@ import moment from 'moment';
 
 
 class EditProject extends Component {
-  handleInitialize(data, iwo, bu_code, id) {
+  handleInitialize(data, bu_code, id) {
     const initData = {
       IWO_NO: data.iwo_no,
       END_CUST_ID: data.cust_end_id,
@@ -53,16 +53,16 @@ class EditProject extends Component {
   componentWillMount() {
     const id = this.props.state.page.id;
     const iwo = this.props.state ? this.props.state : null;
+    this.props.dispatch(getIWOEditProject(30)).then((res2) => {
+      // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
 
+    });
     this.props.dispatch(getEditProjectView(id)).then(
         (res) => {
           console.log('RES', res);
           // const data = this.props.state.data.new_project.business_unit
           this.handleInitialize(res.data.project_setting, res.data.project_business_unit_detail, id);
-          store.dispatch(getIWOEditProject(30)).then((res2) => {
-            // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
 
-          });
         },
       );
   }

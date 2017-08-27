@@ -28,6 +28,8 @@ import PasswordMask from 'react-password-mask';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 export const required = value => (value ? undefined : 'Required')
+export const isInt = value => (Number.isInteger(value) ? undefined : 'Wring input type')
+
 // export const required = value => (console.log("REQUIRED",value))
 
 // export const isIWOUsed = (value /*, dispatch */) => {
@@ -832,8 +834,12 @@ export class PopUp extends Component {
     console.log('POPUP PROPS',this.props);
     const popup = store.getState().data.popup
     return(
-      <div style={this.props.style}>
 
+      <div style={this.props.style}>
+        {
+          popup &&
+          popup[this.props.id] &&
+          popup[this.props.id].active == true &&
         <div className={popup && popup[this.props.id] && popup[this.props.id].active ? this.props.id + ' popup-container active' : this.props.id +  ' popup-container'} style={{zIndex:'2'}}>
             <div className='grid wrap' style={{position:'relative'}}>
               <div className='unit whole'>
@@ -862,28 +868,10 @@ export class PopUp extends Component {
                 </div>
               </div>
             </div>
-            <div className='tint'></div>
+            <div className='tint'></div>}
 
         </div>
-        {/* <button style={this.props.btnStyle} className={this.props.btnClass}
-          onClick={
-            e => {
-              document.body.style.overflow = 'hidden';
-              document.body.scrollTop = 0; // For Chrome, Safari and Opera
-            document.documentElement.scrollTop = 0; // For IE and Firefox
-              // if (window.addEventListener) // older FF
-              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
-              //     window.onwheel = preventDefault; // modern standard
-              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-              //     window.ontouchmove  = preventDefault; // mobile
-              //     document.onkeydown  = preventDefaultForScrollKeys;
-
-              this.setState({
-                clicked:true
-              })
-              e.preventDefault()
-            }}
-          >{this.props.btnText}</button> */}
+  }
       </div>
 
     )
@@ -1384,70 +1372,77 @@ export class WorkplanRow extends Component {
       <td style={{position:'relative', paddingRight:'20px'}} >
       {
         value.LEAF == 1 &&
-        <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
-          <MenuSection>
-            <MenuItem title='Add Timesheet' onClick={e => {
-              store.dispatch({
-                type: 'POPUP',
-                name:'addTimesheetWorkplan',
-                data: {
-                  active:true
-                }
-              })
+        // React.cloneElement(this.props.children, { data: value })
+        <WorkplanRow data={workplan} >
+          <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
+            <MenuSection>
+              <MenuItem title='Add Timesheet' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'addTimesheetWorkplan',
+                  data: {
+                    active:true
+                  }
+                })
 
-              e.preventDefault()
-            }}/>
-            <MenuItem title='Manual Update' onClick={e => {
-              store.dispatch({
-                type: 'POPUP',
-                name:'manualUpdate',
-                data: {
-                  active:true
-                }
-              })
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Manual Update' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'manualUpdate',
+                  data: {
+                    active:true
+                  }
+                })
 
-              e.preventDefault()
-            }}/>
-            <MenuItem title='Edit' onClick={e => {
-              store.dispatch({
-                type: 'POPUP',
-                name:'edit',
-                data: {
-                  active:true
-                }
-              })
-
-              e.preventDefault()
-            }}/>
-            <MenuItem title='Assign' onClick={e => {
-              store.dispatch({
-                type: 'POPUP',
-                name:'assign',
-                data: {
-                  active:true
-                }
-              })
-
-              e.preventDefault()
-            }}/>
-
-            <MenuItem title='Delete' onClick={e => {
-              store.dispatch({
-                type: 'POPUP',
-                name:'delete',
-                data: {
-                  active:true
-                }
-              })
-
-              e.preventDefault()
-            }}/>
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Edit' onClick={e => {
+                // this.props.dispatch(getEditTaskView(   props.data))
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'edit',
+                  data: {
+                    active:true
+                  }
+                })
 
 
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Assign' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'assign',
+                  data: {
+                    active:true
+                  }
+                })
 
-          </MenuSection>
+                e.preventDefault()
+              }}/>
 
-        </Menu>
+              <MenuItem title='Delete' onClick={e => {
+                // this.props.dispatch()
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'delete',
+                  data: {
+                    active:true
+                  }
+                })
+
+                e.preventDefault()
+              }}/>
+
+
+
+            </MenuSection>
+
+          </Menu>
+        </WorkplanRow>
+
       }
 
       </td>
@@ -1456,8 +1451,6 @@ export class WorkplanRow extends Component {
     )
   }
   renderRow(value){
-    // var padding = num.toString();
-    // console.log('PADDING', padding);
     return(
       value.children.map((value,index)=> [
 
@@ -1474,7 +1467,7 @@ export class WorkplanRow extends Component {
     var value = this.props.data
     return (
       <tbody>
-        {this.props.children}
+
         {
           this.menu(value)
 
@@ -1490,95 +1483,6 @@ export class WorkplanRow extends Component {
   }
 }
 
-{/* // export class WorkplanRow extends Component {
-//   constructor(){
-//     super();
-//     this.state = {
-//       clicked : false,
-//       clicked_child : false
-//
-//
-//     };
-//   }
-//   render(){
-//     var value = this.props.data
-//     return (
-//       <tbody>
-//         <tr onClick={
-//           e => {
-//               if (this.state.clicked) {
-//                 this.setState({clicked:false})
-//               }
-//               else {
-//                 this.setState({clicked:true})
-//               }
-//               e.preventDefault()
-//             }
-//       }>
-//           <td style={{paddingLeft: '40px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
-//           <td>{value.WORK}</td>
-//           <td>{value.WORK_TOTAL}</td>
-//           <td>{value.DURATION}</td>
-//           <td>{value.START_DATE}</td>
-//           <td>{value.END_DATE}</td>
-//           <td>{value.WORK_PERCENT_COMPLETE}</td>
-//           <td>{value.LEAF}</td>
-//         </tr>
-//         {
-//           this.state.clicked && value.children.length != 0 &&
-//           value.children.map((value, index) => (
-//             <WorkplanRow key={index} data={value}></WorkplanRow>
-//
-//           ))
-//         }
-//         {/* {
-//           this.state.clicked &&
-//           value.children.map((value, index) => [
-//           <tr key={index} onClick={
-//             e => {
-//                 if (this.state.clicked_child) {
-//                   this.setState({clicked_child:false})
-//                 }
-//                 else {
-//                   this.setState({clicked_child:true})
-//                 }
-//                 e.preventDefault()
-//               }
-//             }>
-//             <td style={{paddingLeft: '60px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
-//
-//             <td>{value.WORK}</td>
-//             <td>{value.WORK_TOTAL}</td>
-//             <td>{value.DURATION}</td>
-//             <td>{value.START_DATE}</td>
-//             <td>{value.END_DATE}</td>
-//             <td>{value.WORK_PERCENT_COMPLETE}</td>
-//             <td>{value.LEAF}</td>
-//           </tr>,
-//
-//           this.state.clicked_child &&
-//           value.children.map((value, index) => (
-//           <tr key={index}>
-//             <td style={{paddingLeft: '80px'}}><span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>{value.children.length!=0 ? this.state.clicked_child ? 'expand_more': 'expand_less' : ""}</span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}</td>
-//
-//             <td>{value.WORK}</td>
-//             <td>{value.WORK_TOTAL}</td>
-//             <td>{value.DURATION}</td>
-//             <td>{value.START_DATE}</td>
-//             <td>{value.END_DATE}</td>
-//             <td>{value.WORK_PERCENT_COMPLETE}</td>
-//             <td>{value.LEAF}</td>
-//           </tr>
-//         ))
-//       ])
-//
-//         }
-//
-//       </tbody>
-//
-//     )
-//   }
-// } */}
 
 export class ActivityRow extends Component {
   constructor(){
@@ -1671,7 +1575,7 @@ export class ReduxDrop extends Component {
 }
 
 
-export class ReduxUploadWorkplam extends Component {
+export class ReduxUploadWorkplan extends Component {
   render(){
     return(
       <Dropzone

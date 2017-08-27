@@ -6,11 +6,11 @@ import { Grid } from 'react-redux-grid';
 
 import store from '../reducers/combineReducers.jsx';
 
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplam } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection } from './Components.jsx';
 
 
 import { Field, reduxForm } from 'redux-form';
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan} from './actions.jsx';
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction} from './actions.jsx';
 
 
 class ProjectWorkplan extends Component {
@@ -18,9 +18,154 @@ class ProjectWorkplan extends Component {
     super();
     this.state = {
       clicked: false,
-
+      WBS_id: ''
     };
   }
+
+  handleInitialize(data) {
+    this.props.initialize(data ? data : null)
+  }
+
+  menu(value) {
+    var padding =(value.LEVEL * 20 + 20).toString()
+
+    return(
+      <tr onClick={
+        e => {
+          var key = (value.WBS_ID).toString()
+          if (this.state[key]) {
+            this.setState({[key]:false})
+          }
+          else {
+            this.setState({[key]:true})
+          }
+          e.preventDefault()
+        }
+      }>
+
+      <td style={{overflow:'visible', width:'410px'}}>
+        <div style={{paddingLeft: padding+'px', wordBreak:'break-word', paddingRight:'15px'}}>
+          {/* <div style={{width:'200px', overflow:'hidden'}}> */}
+          <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
+            {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
+          </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
+          {/* </div> */}
+
+        </div>
+        </td>
+      <td>{value.WORK}</td>
+      <td>{value.WORK_TOTAL}</td>
+      <td>{value.DURATION}</td>
+      <td>{value.START_DATE}</td>
+      <td>{value.FINISH_DATE}</td>
+      <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
+      <td>{value.RESOURCE_WBS} people</td>
+      <td style={{position:'relative', paddingRight:'20px'}} >
+      {
+        value.LEAF == 1 &&
+        // React.cloneElement(this.props.children, { data: value })
+          <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
+            <MenuSection>
+              <MenuItem title='Add Timesheet' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'addTimesheetWorkplan',
+                  data: {
+                    active:true
+                  }
+                })
+
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Manual Update' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'manualUpdate',
+                  data: {
+                    active:true
+                  }
+                })
+
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Edit' onClick={e => {
+                this.props.dispatch(getEditTaskView(value.WBS_ID)).then(
+                  res => {
+                    this.setState({WBS_id: value.WBS_ID})
+                    this.props.dispatch({
+                      type: 'POPUP',
+                      name:'edit_task',
+                      data: {
+                        active:true,
+                      }
+                    })
+                    console.log('POPUP',res);
+                    this.handleInitialize({
+                      NAME_EDIT : res.data.detail_task[0].WBS_NAME,
+                      PARENT_EDIT: res.data.detail_task[0].WBS_PARENT_ID,
+                      START_DATE_EDIT: res.data.detail_task[0].START_DATE,
+                      FINISH_DATE_EDIT: res.data.detail_task[0].FINISH_DATE,
+                    })
+
+
+                  }
+                )
+
+
+                e.preventDefault()
+              }}/>
+              <MenuItem title='Assign' onClick={e => {
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'assign',
+                  data: {
+                    active:true
+                  }
+                })
+
+                e.preventDefault()
+              }}/>
+
+              <MenuItem title='Delete' onClick={e => {
+                // this.props.dispatch()
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'delete',
+                  data: {
+                    active:true
+                  }
+                })
+
+                e.preventDefault()
+              }}/>
+
+
+
+            </MenuSection>
+
+          </Menu>
+
+      }
+
+      </td>
+
+    </tr>
+    )
+  }
+  renderRow(value){
+    return(
+      value.children.map((value,index)=> [
+
+        this.menu(value),
+
+        this.state[(value.WBS_ID).toString()] && this.state[(value.WBS_ID).toString()] !=false &&
+        this.renderRow(value)
+
+      ])
+    )
+  }
+
+
   onSubmit(props) {
     const id = this.props.state.page.id;
     this.props.addTaskWorkplan(id, props);
@@ -30,11 +175,15 @@ class ProjectWorkplan extends Component {
     const id = this.props.state.page.id
     this.props.uploadWorkplan(id,props.document)
   }
+  onSubmitEditTask(props){
+    const id = this.props.state.page.id
+    this.props.editTaskAction(id,this.state.WBS_id,props)
+  }
 
   componentWillMount() {
     const id = this.props.state.page.id;
-    store.dispatch(getWorkplanView(id));
-    store.dispatch(getTaskView(id));
+    this.props.dispatch(getWorkplanView(id));
+    this.props.dispatch(getTaskView(id));
   }
 
   render() {
@@ -217,30 +366,22 @@ class ProjectWorkplan extends Component {
             <Field
               inputName="PROJECT NAME"
               name="PROJECT_ID"
-
               component={ReduxSelectNew}
               // validate={[required]}
               >
-
-
-
               </Field>
           </div>
         </div>
         <div className="grid wrap narrow">
         <div className="unit three-quarters">
-                <Field
-                              name="WP_ID"
+        <Field
+        name="WP_ID"
 
-                                inputName="TASK"
-                                component={ReduxSelectNew}
-                                // validate={[required]}
-                                />
-
-
-
-
-                            </div>
+          inputName="TASK"
+          component={ReduxSelectNew}
+          // validate={[required]}
+          />
+          </div>
 
           <div className="unit one-quarter">
             <Field
@@ -363,14 +504,17 @@ class ProjectWorkplan extends Component {
         </form>
         </PopUp>
 
-        <PopUp id="edit" dividerText="EDIT TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
-        <form >
+        <PopUp id="edit_task" dividerText="EDIT TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+          {
+            !this.props.state.data.detail_task && !this.props.state.data.parent ? <PageLoader/> :
+            <form onSubmit={handleSubmit(this.onSubmitEditTask.bind(this))}>
+
         <div>
           <div className="grid wrap narrow">
             <div className="unit whole">
               <Field
                 inputName="NAME"
-                name="desc"
+                name="NAME_EDIT"
                 type="input"
                 component={ReduxInput}
               />
@@ -380,11 +524,19 @@ class ProjectWorkplan extends Component {
           <div className="grid wrap narrow">
             <div className="unit whole">
             <Field
-            inputName="START DATE"
-            name="desc"
+            inputName="PARENT"
+            name="PARENT_EDIT"
             type="input"
             component={ReduxSelectNew}
-          />
+          >
+            {
+
+              this.props.state.data.parent.map((value, index) => (
+                <option key={index} value={value.WBS_ID}>{value.WBS_NAME}</option>
+
+              ))
+            }
+          </Field>
 
             </div>
 
@@ -393,7 +545,7 @@ class ProjectWorkplan extends Component {
             <div className="unit half">
               <Field
               inputName="START DATE"
-              name="desc"
+              name="START_DATE_EDIT"
               type="input"
               component={datepickerUniversal}
             />
@@ -402,7 +554,7 @@ class ProjectWorkplan extends Component {
             <div className="unit half">
             <Field
             inputName="END DATE"
-            name="desc"
+            name="FINISH_DATE_EDIT"
             type="input"
             component={datepickerUniversal}
           />
@@ -420,6 +572,7 @@ class ProjectWorkplan extends Component {
 
         </div>
       </form>
+    }
 
         </PopUp>
         <PopUp id="assign" dividerText="ASSIGN TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
@@ -521,6 +674,7 @@ class ProjectWorkplan extends Component {
                 }
               }
             >CREATE TASK</button>
+            {
             <PopUp id="createTask" dividerText="CREATE TASK" btnText="CREATE TASK" btnClass="btn-primary" btnStyle={{ width: '200px', float: 'right' }}>
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <div>
@@ -543,12 +697,12 @@ class ProjectWorkplan extends Component {
                       >
                         <option />
                         {
-                                  workplan_view &&
-                                  workplan_view.map((value, index) => (
-                                    <option key={index} value={value.WBS_ID}>{value.WBS_NAME}</option>
+                          workplan_view &&
+                          workplan_view.map((value, index) => (
+                            <option key={index} value={value.WBS_ID}>{value.WBS_NAME}</option>
 
-                                  ))
-                                }
+                          ))
+                        }
                       </Field>
                     </div>
                   </div>
@@ -576,7 +730,7 @@ class ProjectWorkplan extends Component {
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '40px' }}>
                       <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
                         onClick={e=>{
-                          store.dispatch({
+                          this.props.dispatch({
                             type: 'POPUP',
                             name:'createTask',
                             data: {
@@ -595,7 +749,7 @@ class ProjectWorkplan extends Component {
 
               </form>
             </PopUp>
-
+}
           </div>
           <div className="unit one-third no-gutters">
             <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} >RE-BASELINE</button>
@@ -603,7 +757,7 @@ class ProjectWorkplan extends Component {
           </div>
           <div className="unit one-third no-gutters">
             <button
-              className="btn-primary"
+              className="btn-secondary"
               style={{ width: '200px', float: 'left' }}
               onClick={
                 (e) => {
@@ -630,7 +784,7 @@ class ProjectWorkplan extends Component {
               <Field
               inputName="SELECT FILE"
               name="document"
-              component={ReduxUploadWorkplam}
+              component={ReduxUploadWorkplan}
               />
               </div>
               </div>
@@ -674,7 +828,17 @@ class ProjectWorkplan extends Component {
                           </tr>
                         </thead>
 
-                        <WorkplanRow data={workplan} />
+                        <tbody>
+
+                          {
+                            this.menu(workplan)
+
+                          }
+                          {
+                            workplan.children.length !=0 && this.state[(workplan.WBS_ID).toString()] &&
+                            this.renderRow(workplan)
+                          }
+                        </tbody>
 
 
                       </table>}
@@ -702,6 +866,6 @@ export default reduxForm({
   form: 'add_task',
   form: 'upload_workplan'
 })(
-  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan })(ProjectWorkplan),
+  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction })(ProjectWorkplan),
 );
 // export default Login
