@@ -5,12 +5,20 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUp ,PageLoader,ReduxInput,datepickerUniversal} from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search,PopUpBARU,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp} from './Components.jsx';
 import {getDataMaster,addHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
 
 class DatasetHoliday extends Component {
+  constructor(){
+    super();
+    this.state = {
+      month : 8,
+      year: 2017
+    };
+  }
+
   componentWillMount(){
     const state = store.getState()
     const holiday = state.data.holiday
@@ -33,7 +41,40 @@ class DatasetHoliday extends Component {
     }
     
     return (
+      <div> 
+      <PopUpBARU id="deleteHoliday" dividerText="REPORT AN ISSUE" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
       <div>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Input />
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Input />
+          </div>
+        </div>
+
+        <div className="grid wrap narrow">
+          <div className="unit golden-small">
+            <Input />
+          </div>
+          <div className="unit golden-large">
+            <h2 className="input-desc" style={{ marginTop: '25px' }}>EVIDENCE</h2>
+          </div>
+          <div className="unit golden-large">
+            <Input />
+          </div>
+          <div className="grid wrap narrow">
+            <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+              <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </PopUpBARU>
         <div className="grid dataset">
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
@@ -93,7 +134,7 @@ class DatasetHoliday extends Component {
 								</div>
 
 								<div className="unit whole">
-									 <TableNew
+									 <TableNewMasterDataPopUp
                   tableHeader={[{value:'NAME'},{value:'START'},{value:'END'}]}
                   tableData={holiday?holiday.map((value,index)=>{
                     return {column:[
@@ -103,7 +144,7 @@ class DatasetHoliday extends Component {
                     ]}
                   }):null}>
                 
-                </TableNew>															
+                </TableNewMasterDataPopUp>															
 								</div>
 
 							 <div className="unit whole">

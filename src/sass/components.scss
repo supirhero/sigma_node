@@ -186,7 +186,17 @@ input {
 input:disabled {
   background-color: #F4F4F4;
 }
-
+.btn-menu {
+  font-family: Open Sans,sans-serif;
+  font-size: 17px;
+  color: #777;
+  font-weight: 300;
+  background: none;
+  outline: none;
+  border: none;
+  text-align: left;
+  padding: 15px 40px 15px 30px;
+}
 .btn-primary {
   /* Rectangle 4: */
   background: $color-secondary;
@@ -545,7 +555,7 @@ background-repeat: no-repeat;
   overflow: scroll;
   display: none;
   // background-color: aqua;
-  position: absolute;
+  position: fixed;
   .tint {
     width: 100%;
     position: fixed;
@@ -781,4 +791,11 @@ Tabs {
 
 :global .react-datepicker-wrapper{
   width:100%;
+}
+
+.upload-workplan{
+  width: 750px;
+  height: 50px;
+  background-color: #ffffff;
+  border: solid 1px #eeeeee;
 }

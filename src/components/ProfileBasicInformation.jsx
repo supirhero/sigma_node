@@ -1,3 +1,7 @@
+
+
+
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -7,6 +11,7 @@ import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { Input, ReduxInput, ReduxInputDisabled, ReduxDrop} from './Components.jsx';
 import {editProfile} from './actions.jsx'
+
 
 class ProfileBasicInformation extends Component {
   handleInitialize(data) {
@@ -28,9 +33,12 @@ class ProfileBasicInformation extends Component {
     this.handleInitialize();
   }
 
+
+
   onSubmit(props) {
     store.dispatch(editProfile(props.no_hp,props.address,props.image))
   }
+
 
   render() {
     const { handleSubmit } = this.props;
