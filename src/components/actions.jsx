@@ -815,8 +815,8 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
       url:`${baseURL}timesheet/addTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
-                PROJECT_ID,
-               WP_ID,
+            PROJECT_ID,
+            WP_ID,
               TS_DATE,
              HOUR,
              TS_SUBJECT,
@@ -1019,6 +1019,7 @@ export function addHoliday(data){
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        store.dispatch(getDataMasterMIS("holiday"))
       }
     )
   }
@@ -1044,6 +1045,32 @@ export function updateHoliday(data){
     )
   }
 }
+
+
+export function addBU(data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}Datamaster/manage/bu/add?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        BU_CODE:data.BU_CODE,
+        BU_PARENT_ID:data.BU_PARENT_ID,
+        BU_NAME:data.BU_NAME,
+        BU_ALIAS:data.BU_ALIAS,
+        BU_HEAD:data.BU_HEAD
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        store.dispatch(getDataMasterMIS("bu"))
+      }
+    )
+  }
+}
+
+
 
 
 // export function addHoliday(data){
