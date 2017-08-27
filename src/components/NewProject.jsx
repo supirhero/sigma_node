@@ -100,7 +100,7 @@ class NewProject extends Component {
   onSubmit(props){
     alert('triggered')
     const id = this.props.state.page.new_project.bu_code
-    this.props.dispatch(getDashboardView())
+    // this.props.dispatch(getDashboardView())
     console.log('ONSUBMIT PROPS', props);
     // alert("submitted")
     store.dispatch(addNewProject(props, id));

@@ -19,6 +19,21 @@ class DatasetHoliday extends Component {
     };
   }
 
+   
+  handleInitialize(data) { 
+    const initData = { 
+      "HOLIDAY_START":data.HOLIDAY_START, 
+      "HOLIDAY_END":data.HOLIDAY_END, 
+      "HOLIDAY_ID":data.HOLIDAY_ID, 
+    }; 
+ 
+  this.props.initialize(initData); 
+} 
+ 
+onSubmitUpdateHoliday(props){ 
+  store.dispatch(updateHoliday(props)) 
+} 
+
   componentWillMount(){
     const state = store.getState()
     const holiday = state.data.holiday
@@ -42,7 +57,23 @@ class DatasetHoliday extends Component {
     
     return (
       <div> 
-      <PopUpBARU id="deleteHoliday" dividerText="REPORT AN ISSUE" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
+      <button className='btn-primary'
+      style={{display:'block', margin: 'auto'}}
+      onClick={
+      e => {
+        console.log('PROPS', this.props);
+        this.props.dispatch({
+          type: 'POPUP',
+          name:'deleteHoliday',
+          data: {
+            active:true
+          }
+        })
+        e.preventDefault()}}>
+      INPUT TIMESHEET
+      
+    </button>
+      <PopUpBARU id="deleteHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
       <div>
         <div className="grid wrap narrow">
           <div className="unit whole">

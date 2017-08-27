@@ -11,13 +11,12 @@ class MyPerformances extends Component {
     constructor(){
       super();
       this.state = {
-        month : 8,
+        month : 1,
         year: 2017
       };
     }
 
     componentWillMount(){
-      
       store.dispatch(myPerformance(this.state.month,this.state.year)) 
     }
 
@@ -160,7 +159,6 @@ class MyPerformances extends Component {
                           console.log(this.state.month,this.state.year);
                           store.dispatch(myPerformance(this.state.month,this.state.year))
                           // store.dispatch(myPerformance('1','2017'))
-
                           e.preventDefault()
                         }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
 

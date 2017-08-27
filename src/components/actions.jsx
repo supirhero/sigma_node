@@ -52,6 +52,11 @@ export function login(email, password) {
               return res
             }
           )
+          .catch(
+            res=>{
+              alert('failed')
+            }
+          )
   }
 }
 
@@ -843,15 +848,14 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
 
 
 
-export function confirmationTimesheet(ts_id,confirm) {
+export function confirmationTimesheet(ts_id,project_id,confirm) {
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-
       method:'POST',
       url:`${baseURL}timesheet/confirmationTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {ts_id,confirm}
+      data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
         store.dispatch(getMyActivities());

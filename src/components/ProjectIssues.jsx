@@ -65,6 +65,24 @@ class ProjectIssues extends Component {
           </div>
         </div>
         <div className="grid padding-left">
+        <button className='btn-primary'
+        style={{display:'block', margin: 'auto'}}
+        onClick={
+        e => {
+          console.log('PROPS', this.props);
+          this.props.dispatch({
+            type: 'POPUP',
+            name:'addNewTimesheet',
+            data: {
+              active:true
+            }
+          })
+          e.preventDefault()
+        }
+      }
+        >
+        INPUT TIMESHEET
+      </button>
           <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <div>

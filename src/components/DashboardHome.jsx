@@ -31,7 +31,6 @@ class DashboardHome extends Component {
             {
 
               <div className='grid'>
-
                   <div className='unit two-fifths'>
                     <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://hardikmanktala.com/projects/themes/flatter/demo/assets/images/people/people-1.jpg)'}}>
                     </div>

@@ -176,9 +176,27 @@ class Timesheet extends Component {
 
           <div className="grid wrap">
             <div className="unit whole">
-              <PopUp id="addNew" dividerText="INPUT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
+            <button className='btn-primary'
+            style={{display:'block', margin: 'auto'}}
+            onClick={
+            e => {
+              console.log('PROPS', this.props);
+              this.props.dispatch({
+                type: 'POPUP',
+                name:'addNewTimesheet',
+                data: {
+                  active:true
+                }
+              })
+              e.preventDefault()
+            }
+          }
+            >
+            INPUT TIMESHEET
+            
+          </button>
+              <PopUp id="addNewTimesheet" dividerText="INPUT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
                 <div>
-
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                   <div className="grid wrap narrow">
                     <div className="unit whole">

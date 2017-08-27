@@ -140,7 +140,7 @@ class ProjectActivities extends Component {
                         value.is_approved === '-1' &&
                         <span>
                           <a onClick={(e) => {
-                            store.dispatch(confirmationTimesheet(value.ts_id, "0"));
+                            store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "0"));
                             // e.preventDefault()
                             // console.log(myActivity)
                           }}
@@ -148,7 +148,7 @@ class ProjectActivities extends Component {
                           <a
                             style={{ marginLeft: '20px' }}
                             onClick={(e) => {
-                              store.dispatch(confirmationTimesheet(value.ts_id, "1"));
+                              store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1"));
                             // e.preventDefault()
                             // console.log(myActivity.activity_timesheet.ts_id)
                             }}
