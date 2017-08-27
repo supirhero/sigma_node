@@ -856,6 +856,21 @@ export function confirmationTimesheet(ts_id,confirm) {
   }
 }
 
+export function getDay(tanggal) {
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}home/timesheet/${tanggal}?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        alert('updated')
+      }
+    )
+  }
+}
+
 export function myPerformance(bulan,tahun){
   return function(dispatch){
     const token = cookies.get('token')
@@ -1037,6 +1052,24 @@ export function updateHoliday(data){
         HOLIDAY_START:data.HOLIDAY_START,
         HOLIDAY_END:data.HOLIDAY_END,
         HOLIDAY:data.HOLIDAY
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+      }
+    )
+  }
+}
+
+export function deleteHoliday(HOLIDAY_ID){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}Datamaster/manage/holiday/delete?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        HOLIDAY_ID:HOLIDAY_ID
       }
     }).then(
       (res)=>{
