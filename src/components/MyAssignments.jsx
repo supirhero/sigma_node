@@ -11,7 +11,7 @@ class MyAssignments extends Component {
   componentWillMount(){
     const myAssignment = store.getState().data.myAssignment
     store.dispatch(getMyAssignment())
-  store.dispatch(reportYearly("2017"));
+  
   }
 
 
