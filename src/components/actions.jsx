@@ -957,7 +957,7 @@ export function getTaskMemberView(project_id,wbs_id){
     return axios({
       method:'POST',
       // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
-      url:`${baseURL}/dev/task/assignTaskMember_view?token=${token}`,
+      url:`${baseURL}task/assignTaskMember_view?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
         PROJECT_ID:project_id,

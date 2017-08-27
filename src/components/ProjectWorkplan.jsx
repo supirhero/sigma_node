@@ -117,11 +117,14 @@ class ProjectWorkplan extends Component {
               <MenuItem title='Assign' onClick={e => {
                 this.props.dispatch({
                   type: 'POPUP',
-                  name:'assign',
+                  name:'assign_task',
                   data: {
                     active:true
                   }
                 })
+                const id = this.props.state.page.id;
+
+                this.props.dispatch(getTaskMemberView(id,this.state.WBS_id))
 
                 e.preventDefault()
               }}/>
@@ -575,8 +578,11 @@ class ProjectWorkplan extends Component {
     }
 
         </PopUp>
-        <PopUp id="assign" dividerText="ASSIGN TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
-          <form >
+        <PopUp id="assign_task" dividerText="ASSIGN TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+          {
+            !this.props.state.data.available_to_assign && !this.props.state.data.task_name ? <PageLoader/> :
+
+            <form >
             <div>
               <div className="grid wrap narrow">
                 <div className="unit whole">
@@ -606,29 +612,34 @@ class ProjectWorkplan extends Component {
                 </div>
               </div>
               <div className="grid wrap narrow">
-                <div className="unit one-quarter">
-                  <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>WORKLOAD</h2>
+                <div className="unit one-fifth">
+                  <small style={{ display: 'inline-block', float: 'left' }}>WORKLOAD</small>
                 </div>
-                <div className="unit three-quarters">
-                  <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>RESOURCES</h2>
-                </div>
-              </div>
-              <div className="grid wrap narrow">
-                <div className="unit one-quarter">
-                  <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>60%</h2>
-                </div>
-                <div className="unit three-quarters">
-                  <div className="unit one-third">
-                    <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>Kara Gray</h2>
-                  </div>
-                  <div className="unit one-third">
-                    <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>karagray@gmail.com</h2>
-                  </div>
-                <div className="unit one-third">
-                    <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>icon</h2>
-                  </div>
+                <div className="unit four-fifths">
+                  <small style={{ display: 'inline-block', float: 'left' }}>RESOURCES</small>
                 </div>
               </div>
+              {
+                this.props.state.data.available_to_assign.map((value,index)=> (
+                  <div className="grid wrap narrow">
+                    <div className="unit one-fifth">
+                      <medium style={{ display: 'inline-block', float: 'left' }}>60%</medium>
+                    </div>
+                    <div className="unit four-fifths">
+                      <div className="unit two-fifths">
+                        <medium style={{ display: 'inline-block', float: 'left' }}>{value.USER_NAME}</medium>
+                      </div>
+                      <div className="unit two-fifths">
+                        <small style={{ display: 'inline-block', float: 'left' }}>{value.EMAIL}</small>
+                      </div>
+                      <div className="unit one-fifth">
+                        <h2 className="input-desc" style={{ display: 'inline-block', float: 'left', textAlign:'center' }}><i  style={{color:'#D62431'}} className='icon-trash'></i></h2>
+                      </div>
+                    </div>
+                  </div>
+
+                ))
+              }
 
               <div className="grid wrap narrow">
                 <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
@@ -639,7 +650,7 @@ class ProjectWorkplan extends Component {
 
             </div>
           </form>
-
+}
         </PopUp>
         <div className="grid wrap">
           <div className="unit whole">
