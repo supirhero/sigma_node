@@ -800,7 +800,18 @@ class ProjectWorkplan extends Component {
               </div>
               </div>
               <div className="btn-wrapper">
-                <button className="btn-secondary" style={{ float: 'left', display: 'inline-block' }}>CANCEL</button>
+              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+              onClick={e=>{
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'uploadWorkplan',
+                  data: {
+                    active:false
+                  }
+                })
+
+                e.preventDefault()
+              }}> CANCEL </button>
                 <button type="submit" className="btn-primary"style={{ float: 'right', display: 'inline-block' }}>UPLOAD</button>
 
               </div>
