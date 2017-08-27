@@ -23,7 +23,7 @@ class DashboardHome extends Component {
     console.log(state.auth.token)
     // console.log(projects);
     return(
-      !auth.userdata ? <PageLoader></PageLoader> :
+      !auth.userdata && !auth.datatimesheet? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
@@ -168,7 +168,6 @@ class DashboardHome extends Component {
                           name: 'new-project',
                           new_project: {
                             bu_code: value.bu_code
-
                           }
                         }
                       }))
@@ -209,8 +208,10 @@ class DashboardHome extends Component {
                                     type: 'PUSH',
                                     page: {
                                       name: 'project',
-                                      id : value.project_id
-
+                                      id: value.project_id,
+                                      project: {
+                                        bu_code: value.bu_code
+                                      }
                                     }
                                   }))
 

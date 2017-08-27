@@ -22,22 +22,26 @@ import moment from 'moment';
 class EditProject extends Component {
   handleInitialize(data, iwo, bu_code, id) {
     const initData = {
-      PROJECT_ID: id,
-      IWO_NO: iwo[0].IWO_NO,
-      END_CUST_ID: iwo[0].END_CUSTOMER,
-      AMOUNT: iwo[0].AMOUNT,
-      PROJECT_NAME: iwo[0].PROJECT_NAME,
-      RELATED: iwo[0].RELATED_BU,
-      CUST_ID: iwo[0].CUSTOMER_ID,
-      MARGIN: iwo[0].MARGIN,
-      BU: bu_code.bu_code,
+      IWO_NO: data.iwo_no,
+      END_CUST_ID: data.cust_end_id,
+      AMOUNT: data.amount,
+      PROJECT_NAME: data.project_name,
+      RELATED: data.related_bu,
+      CUST_ID: data.cust_id,
+      MARGIN: data.margin,
+      BU: data.bu_code,
+      DESC: data.project_desc,
+      AM_ID: data.am_id,
+      PROJECT_TYPE_ID: data.project_type_id,
         // "BU":"IMS",
-      PM: 'NONE',
-      AM_ID: 'NONE',
+      PRODUCT_TYPE: data.product_type,
+      HO: data.ho_operation ? data.ho_operation : 'yes',
+      PM: data.pm_id,
+      // AM_ID: 'NONE',
       TYPE_OF_EFFORT: 'NONE',
       PROJECT_STATUS: 'NOT STARTED',
-      START: iwo[0].PROJECT_DATE_START,
-      END: iwo[0].PROJECT_DATE_STOP,
+      START: data.schedule_start,
+      END: data.schedule_end,
       TYPE_OF_EXPENSE: 'CAPITAL EXPENSE',
 
     };
@@ -45,15 +49,17 @@ class EditProject extends Component {
   }
 
   componentWillMount() {
-    const id = store.getState().page.id;
+    const id = this.props.state.page.id;
     const iwo = this.props.state ? this.props.state : null;
 
-    store.dispatch(getEditProjectView(id)).then(
+    this.props.dispatch(getEditProjectView(id)).then(
         (res) => {
           console.log('RES', res);
           // const data = this.props.state.data.new_project.business_unit
+          this.handleInitialize(res.data.project_setting, res.data.project_business_unit_detail, id);
           store.dispatch(getIWOEditProject(30)).then((res2) => {
-            this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
+            // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
+
           });
         },
       );
@@ -61,8 +67,10 @@ class EditProject extends Component {
   onSubmit(props) {
     console.log(props);
     alert('Successful');
-    const id = store.getState().page.id;
-    this.props.editProject(props, id);
+    const id = this.props.state.page.id
+    const bu_code = store.getState().page.project.bu_code;
+
+    this.props.editProject(props, id, bu_code);
   }
 
   render() {
@@ -166,6 +174,12 @@ class EditProject extends Component {
                     });
                   }}
                 >
+                  {
+                    this.props.state.data.project_setting &&
+                    this.props.state.data.project_setting.iwo_no !='NONE' &&
+                    <option value={this.props.state.data.project_setting.iwo_no}{...this.props.option}>{this.props.state.data.project_setting.iwo_no}</option>
+
+                  }
                   {
                     iwo &&
                     iwo.map((value, index) => (
@@ -300,6 +314,7 @@ class EditProject extends Component {
                       component={ReduxSelect}
                     >
                       {
+                          projectManager &&
                           projectManager.map((value, index) => (
                             <option value={value.user_id} {...this.props.option}>{value.user_name}</option>
                           ))
@@ -316,7 +331,9 @@ class EditProject extends Component {
                       style={{ width: '96%' }}
                       component={ReduxSelect}
                     >
+
                       {
+                          projectEffort &&
                           projectEffort.map((value, index) => (
                             <option key={index} value={value.name} {...this.props.option}>{value.name}</option>
                           ))
@@ -331,12 +348,12 @@ class EditProject extends Component {
                   <h2 className="input-name">H/O OPERATION</h2>
 
                   <div className="unit half">
-                    <Field name="H/O" component={RadioButtonGroup}>
+                    <Field name="HO" component={RadioButtonGroup}>
                       <RadioButton value="yes" label="YES" />
                     </Field>
                   </div>
                   <div className="unit half">
-                    <Field name="H/O" component={RadioButtonGroup}>
+                    <Field name="HO" component={RadioButtonGroup}>
                       <RadioButton value="no" label="NO" />
                     </Field>
 
@@ -348,13 +365,9 @@ class EditProject extends Component {
                       inputName="ACCOUNT MANAGER"
                       name="AM_ID"
                       style={{ width: '96%', float: 'right' }}
-                      component={ReduxSelect}
+                      component={ReduxInput}
                     >
-                      {
-                          accountManager.map((value, index) => (
-                            <option value={value.user_id} {...this.props.option}>{value.user_name}</option>
-                          ))
-                        }
+
                     </Field>
 
                   </div>
@@ -387,6 +400,7 @@ class EditProject extends Component {
                   style={{ width: '100%' }}
                   component={ReduxSelect}
                 >
+                
                   {
                       projectStatus.map((value, index) => (
                         <option value={value.value} {...this.props.option}>{value.value}</option>
