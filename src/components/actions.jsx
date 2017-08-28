@@ -259,6 +259,31 @@ export const addDocsAndFiles = (desc,files, id ) => {
   }
 }
 
+export const deleteTask = (wbs_id ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}task/deleteTask?token=${token}` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+              wbs_id: wbs_id
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+              return res
+            },
+          )
+  }
+}
+
+
 
 export const getIssue = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -314,12 +339,14 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
     formData.append('MESSAGE',MESSAGE);
     formData.append('PRIORITY',PRIORITY);
     formData.append('file_upload',file_upload[0])
-    fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
       method:'POST',
       body:formData
     })
   }
 }
+
+
 
 export const addNewProject = (data,id) => {
   console.log('DATA', data);
@@ -828,11 +855,12 @@ export function addTaskWorkplan(id,wbs_id,data) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
-        WBS_ID: wbs_id,
+        // WBS_ID: wbs_id,
         WBS_NAME: data.WBS_NAME,
         WBS_PARENT_ID: data.WBS_PARENT_ID,
-        START_DATE: data.START_DATE,
-        FINISH_DATE: data.FINISH_DATE
+        
+        START_DATE: moment(data.START_DATE).format('YYYY-MM-DD'),
+        FINISH_DATE: moment(data.FINISH_DATE).format('YYYY-MM-DD')
         }
     }).then(
       (res)=>{
@@ -1121,8 +1149,9 @@ export function editTaskAction(id,WBS_ID,data){
         wbs_id: WBS_ID,
         wbs_parent_id: data.PARENT_EDIT,
         wbs_name: data.NAME_EDIT,
-        start_date: data.START_DATE_EDIT,
-        finish_date: data.FINISH_DATE_EDIT
+        start_date: moment(data.START_DATE_EDIT).format('YYYY-MM-DD'),
+        finish_date: moment(data.FINISH_DATE_EDIT).format('YYYY-MM-DD')
+        
       }
     }).then(
       (res)=>{
@@ -1154,14 +1183,20 @@ export function rDirectorat(bu,tahun){
 }
 
 
-export function requestRebaseline(id){
-
+export function requestRebaseline(id, props, array){
+  console.log('PROPSSSSSSS', props)
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
-      url:`${baseURL}project/rebaseline?token=${token}`,
+      method:'POST',
+      url:`${baseURL}project/rebaseline/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        array: array,
+        project_id: id ,
+        evidence: props.evidence ,
+        reason: props.reason ,
+      }
     }).then(
       (res)=>{
         return res
