@@ -310,7 +310,18 @@ class Timesheet extends Component {
                   </div>
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
-                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                    <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+                    onClick={e=>{
+                      this.props.dispatch({
+                        type: 'POPUP',
+                        name:'addNewTimesheet',
+                        data: {
+                          active:false
+                        }
+                      })
+
+                      e.preventDefault()
+                    }}> CANCEL </button>
                       <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SUBMIT</button>
                     </div>
                   </div>
