@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input, PageLoader,AutoComplete} from  './Components.jsx'
 import { getProjectTeamMember, pop } from './actions.jsx'
 
 
@@ -32,6 +32,7 @@ class ProjectTeamMember extends Component {
             </div>
             <div className='unit one-fifth'>
               <button className='btn-primary' style ={{marginTop:'60px'}}>INVITE</button>
+              <AutoComplete />
             </div>
           </div>
           <div className='grid padding-left'>
@@ -85,4 +86,3 @@ function mapStateToProps(state) {
   }
 }
 export default connect(mapStateToProps)(ProjectTeamMember)
-// export default Login

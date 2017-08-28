@@ -972,18 +972,18 @@ export function getTaskMemberView(project_id,wbs_id){
   }
 }
 
-export function assignTaskMember(data){
+export function assignTaskMember(props,RP_ID,EMAIL,NAME){
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/task/assignTaskMemberProject?token=${token}`,
+      url:`${baseURL}task/assignTaskMemberProject?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
-        WBS_ID:data.WBS_ID,
-        MEMBER:data.MEMBER,
-        EMAIL:data.EMAIL,
-        NAME:data.NAME,
-        WBS_NAME:data.WBS_NAME,
+        WBS_ID:props.WBS_ID,
+        MEMBER:RP_ID,
+        EMAIL:EMAIL,
+        NAME:NAME,
+        WBS_NAME:props.WBS_NAME,
       }
     }).then(
       (res)=>{
