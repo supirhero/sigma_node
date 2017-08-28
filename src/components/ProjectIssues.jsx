@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile, ReduxInput, ReduxUploadWorkplan,ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile,required ,ReduxInput, ReduxUploadWorkplan,ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
 import { getIssue, addIssue, pop } from './actions.jsx';
 import DropZone from 'react-dropzone'
 
@@ -93,6 +93,7 @@ class ProjectIssues extends Component {
                       name="SUBJECT"
                       type="input"
                       component={ReduxInput}
+                      validate={[required]}
                     />
 
                   </div>
@@ -104,6 +105,7 @@ class ProjectIssues extends Component {
                       name="MESSAGE"
                       type="input"
                       component={ReduxInput}
+                      validate={[required]}
                     />
                   </div>
                 </div>
@@ -120,16 +122,17 @@ class ProjectIssues extends Component {
                           <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
                         ))
                       }
+                      
 
                     </Field>
                   </div>
 
-                <div className="unit golden-large">
+                <div className="unit golden-large" style={{padding:'0'}}>
                   <h2 className="input-desc" style={{marginTop:'25px'}}>EVIDENCE</h2>
                 </div>
                 <div className="unit golden-large">
-
                   <Field
+                  style={{width:'473px'}}
                   inputName="EVIDENCE"
                   name="file_upload"
                   type='file'
@@ -139,7 +142,18 @@ class ProjectIssues extends Component {
 
                   <div className="grid wrap narrow">
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-                      <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+                     <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+                      onClick={e=>{
+                        this.props.dispatch({
+                          type: 'POPUP',
+                          name:'issue',
+                          data: {
+                            active:false
+                          }
+                        })
+  
+                        e.preventDefault()
+                      }}> CANCEL </button>
                       <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD </button>
                     </div>
                   </div>
