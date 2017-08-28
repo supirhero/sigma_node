@@ -1197,18 +1197,22 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                      <button className='btn-primary' onClick={
-                        e=>{
-                          store.dispatch({
-                            type:'POPUP',
-                            name:'editHoliday',
-                            data:{
-                              active:true
-                            }
-                          })
-                          e.preventDefault()
+                    <button className='btn-primary'
+                    style={{display:'block', margin: 'auto'}}
+                    onClick={
+                    e => {
+                      console.log('PROPS', this.props);
+                      this.props.dispatch({
+                        type: 'POPUP',
+                        name:'editHoliday',
+                        data: {
+                          active:true
                         }
-                      }>EDIT</button>
+                      })
+                      e.preventDefault()}}>
+                    EDIT
+                    
+                  </button>
 
 
                     </td>
@@ -1789,148 +1793,6 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
-
-
-  const languages = [
-    {
-      name: 'ahahhah',
-      year: 1972
-    },
-    {
-      name: 'C#',
-      year: 2000
-    },
-    {
-      name: 'C++',
-      year: 1983
-    },
-    {
-      name: 'Clojure',
-      year: 2007
-    },
-    {
-      name: 'Elm',
-      year: 2012
-    },
-    {
-      name: 'Go',
-      year: 2009
-    },
-    {
-      name: 'Haskell',
-      year: 1990
-    },
-    {
-      name: 'Java',
-      year: 1995
-    },
-    {
-      name: 'Javascript',
-      year: 1995
-    },
-    {
-      name: 'Perl',
-      year: 1987
-    },
-    {
-      name: 'PHP',
-      year: 1995
-    },
-    {
-      name: 'Python',
-      year: 1991
-    },
-    {
-      name: 'Ruby',
-      year: 1995
-    },
-    {
-      name: 'Scala',
-      year: 2003
-    }
-  ];
-  
-
-export class AutoComplete extends Component {
-    constructor() {
-      super();
-      this.state = {
-        value: '',
-        suggestions: []
-      };    
-    }
-  
-    onChange(event, { newValue, method }){
-      this.setState({
-        value: newValue
-      });
-    };
-
-   
-    
-    onSuggestionsFetchRequested({ value }){
-      this.setState({
-        suggestions: getSuggestions(value)
-      });
-    };
-  
-    onSuggestionsClearRequested() {
-      this.setState({
-        suggestions: []
-      });
-    };
-
-
-    render() {
-      const { value, suggestions } = this.state;
-      const inputProps = {
-        placeholder: "Search for team member",
-        value,
-        onChange: this.onChange
-      };
-  
-      function escapeRegexCharacters(str) {
-        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      }
-      
-      function getSuggestions(value) {
-        const escapedValue = escapeRegexCharacters(value.trim());
-        
-        if (escapedValue === '') {
-          return [];
-        }
-      
-        const regex = new RegExp('^' + escapedValue, 'i');
-      
-        return languages.filter(language => regex.test(language.name));
-      }
-      
-      function getSuggestionValue(suggestion) {
-        return suggestion.name;
-      }
-      
-      function renderSuggestion(suggestion) {
-        return (
-          <span>{suggestion.name}</span>
-        );
-      }
-
-      return (
-        <Autosuggest 
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps} />
-      );
-    }
-    
-  }
-
-
-
-  
 
   function mapStateToProps(state) {
     return {
