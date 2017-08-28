@@ -23,6 +23,19 @@ class Timesheet extends Component {
 
   onSubmit(props){
     this.props.addTimesheet(props.PROJECT_ID,props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
+    .then(
+      (res)=>{
+        this.props.dispatch({
+          type: 'POPUP',
+          name:'addNewTimesheet',
+          data: {
+            active:false
+          }
+        })
+        // res.preventDefault()
+        // console.log("closed")
+      }
+    )
   }
 
   componentWillMount(){
@@ -322,7 +335,7 @@ class Timesheet extends Component {
 
                       e.preventDefault()
                     }}> CANCEL </button>
-                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SUBMIT</button>
+                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary" > SUBMIT</button>
                     </div>
                   </div>
 

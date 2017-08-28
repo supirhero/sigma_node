@@ -161,8 +161,54 @@ export const getProjectTeamMember = (id) => {
             },
           )
   }
-
 }
+
+
+export const getAvailableProjectTeamMember = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/availableMember/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+            },
+          )
+  }
+}
+
+export const assignProjectTeamMember = (id,user_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/projectmemberadd/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              USER_ID:user_id
+            }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch(getAvailableProjectTeamMember(id))
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+              res.data.status == "Error" ? 
+              alert("Gagal, User sudah ada di dalam project") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+              }
+            },
+          )
+  }
+}
+
 
 
 
@@ -197,10 +243,19 @@ export const addDocsAndFiles = (desc,files, id ) => {
     const formData = new FormData();
     formData.append('desc',desc);
     formData.append('document',files[0])
-    fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        alert('document uploaded');
+        
+        store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+
+      },
+    )
   }
 }
 
@@ -880,7 +935,7 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(getMyActivities());
+        store.dispatch(getProjectActivities());
         alert('updated')
       }
     )
@@ -998,6 +1053,8 @@ export function getTaskMemberView(project_id,wbs_id){
   }
 }
 
+
+
 export function assignTaskMember(data){
   return function(dispatch){
     return axios({
@@ -1035,6 +1092,20 @@ export function getMyActivities(){
 }
 
 
+export function getProjectActivities(id){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}home/projectactivities/${id}/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'project', append: true,  data: res });
+      }
+    )
+  }
+}
 
 export function getListBU(){
   return function(dispatch){
