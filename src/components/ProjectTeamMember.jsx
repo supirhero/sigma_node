@@ -25,7 +25,7 @@ class ProjectTeamMember extends Component {
 
     render(){
       const appStore = store.getState();
-      const active_member = store.getState().data.project_team
+      const active_member = store.getState().data.exist
       const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
        return {id:value.USER_ID , label:value.USER_NAME}
       }) : null
@@ -47,24 +47,30 @@ class ProjectTeamMember extends Component {
             getItemValue={(label) => label.label}
             style={{width:'500px',marginTop:'60px'}}
             items={available_assign}
-            wrapperProps={{width:'899px'}}
+            wrapperProps={{
+              style:{width:'100%', zIndex:'3', position:'relative'}
+              }}
             menuStyle={{
               borderRadius: '3px',
               boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
               background: 'rgba(255, 255, 255, 5)',
-              padding: '2px 0',
+              left: 0,
+              width:'100%',
+              top:50,
               fontSize: '90%',
-              position: 'fixed',
+              position: 'absolute',
               overflow: 'auto',
-              maxHeight: '50%',
+              height:'200px',
               cursor:'pointer',
               display:'block'
             }}
-            shouldItemRender={(label, value) => label.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-            // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-            getItemValue={item => item.id}
+            shouldItemRender={(item, value) => item.label.indexOf(value) > -1}
+            getItemValue={item => item.label}
             renderItem={(item, highlighted) =>
-              <small key={item.id}>{item.label}</small>  
+              <div className="small-wrap">
+                <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
+
+              </div>
             }
             value={this.state.value}
             onChange={e => {
@@ -72,8 +78,11 @@ class ProjectTeamMember extends Component {
            
           }}
             onSelect={(id,label) => {
-              this.setState({ id:id})
-              this.setState({label:label})
+              console.log('LABELLLL',id)
+              this.setState({ id:label.id})
+              this.setState({label:label.label})
+              this.setState({ value: label.label})
+              
               // alert(`selected ${this.state.label}`)
               console.log(id)
           }}
@@ -82,12 +91,13 @@ class ProjectTeamMember extends Component {
        
             </div>
             <div className='unit one-fifth'>
-              <button className='btn-primary' style ={{marginTop:'60px'}}
+              <button className='btn-primary' 
                 onClick=
                 {
                   e => {
-                    store.dispatch(assignProjectTeamMember(store.getState().page.id,this.state.id))
-                    store.dispatch(getAvailableProjectTeamMember(id)) 
+                    this.props.dispatch(assignProjectTeamMember(store.getState().page.id,this.state.id)).then(()=>{
+                      this.props.dispatch(getAvailableProjectTeamMember(store.getState().page.id)) 
+                    })
                   }
                 }
               >INVITE</button>
@@ -109,12 +119,12 @@ class ProjectTeamMember extends Component {
                       <div className='unit three-fifths no-gutters'>
                         <div className='pic-wrapper' style={{height:'35px', width:'35px', display:'inline-block'}}></div>
                         <div style={{display:'inline-block', marginLeft:'17px'}}>
-                          <medium style={{fontSize:'15px'}}>{value.user_name}</medium>
-                          <small style={{fontSize:'15px'}}>{value.email}</small>
+                          <medium style={{fontSize:'15px'}}>{value.USER_NAME}</medium>
+                          <small style={{fontSize:'15px'}}>{value.EMAIL}</small>
                         </div>
                       </div>
                       <div className='unit one-fifth no-gutters'>
-                        <small style={{textAlign:'center', color:'#717171', marginTop:'7px'}}>{value.prof_name}</small>
+                        <small style={{textAlign:'center', color:'#717171', marginTop:'7px'}}>{value.USER_TYPE_ID}</small>
                       </div>
                       <div className='unit one-fifth no-gutters'>
                         <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}}></span></medium>

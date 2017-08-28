@@ -199,7 +199,7 @@ export const assignProjectTeamMember = (id,user_id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch(getAvailableProjectTeamMember(id))
+              // store.dispatch(getAvailableProjectTeamMember(id))
               store.dispatch({type:'API', name: 'project',  data: res, append: true})
               res.data.status == "Error" ? 
               alert("Gagal, User sudah ada di dalam project") : alert("Berhasil menambahkan user ke dalam project"),()=>{

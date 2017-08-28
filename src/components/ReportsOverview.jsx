@@ -170,9 +170,9 @@ class ReportsOverview extends Component {
                  label="SPI Graph"
                  labelStyle={{padding:'0 40%'}}
                 //  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                 data={ r_monthly ? r_monthly.map((value,index)=>{
+                 data={ r_monthly && r_monthly.map((value,index)=>{
                   return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
-                }) : null
+                }) 
               }
                  />
                  
@@ -274,7 +274,9 @@ class ReportsOverview extends Component {
                 <div className="unit whole">
                   <LineChart
                     label="SPI HISTORY"
-                    data={r_yearly_spi.map((value,index)=>{
+                    data={
+                      r_yearly_spi &&
+                      r_yearly_spi.map((value,index)=>{
                       return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
                     }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
