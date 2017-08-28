@@ -200,8 +200,10 @@ export const assignProjectTeamMember = (id,user_id) => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
               store.dispatch(getAvailableProjectTeamMember(id))
-              alert('invited')
               store.dispatch({type:'API', name: 'project',  data: res, append: true})
+              res.data.status == "Error" ? 
+              alert("Gagal, User sudah ada di dalam project") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+              }
             },
           )
   }
@@ -905,7 +907,7 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(getMyActivities());
+        store.dispatch(getProjectActivities());
         alert('updated')
       }
     )
@@ -1062,6 +1064,20 @@ export function getMyActivities(){
 }
 
 
+export function getProjectActivities(id){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}home/projectactivities/${id}/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'project', append: true,  data: res });
+      }
+    )
+  }
+}
 
 export function getListBU(){
   return function(dispatch){

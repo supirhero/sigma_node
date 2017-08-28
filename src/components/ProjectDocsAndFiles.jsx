@@ -113,8 +113,7 @@ class ProjectDocsAndFiles extends Component {
                     }
                   })
                   e.preventDefault()
-                }
-              }
+                }}
                 >
                 UPLOAD FILE
               </button>

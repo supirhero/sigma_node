@@ -40,14 +40,30 @@ class ProjectTeamMember extends Component {
             <div className='unit four-fifths'>
 
             <ReactAutocomplete
+            menuStyle={{
+              opacity:'1'
 
+            }}
+            getItemValue={(label) => label.label}
+            style={{width:'500px',marginTop:'60px'}}
             items={available_assign}
-            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            wrapperProps={{width:'899px'}}
+            menuStyle={{
+              borderRadius: '3px',
+              boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+              background: 'rgba(255, 255, 255, 5)',
+              padding: '2px 0',
+              fontSize: '90%',
+              position: 'fixed',
+              overflow: 'auto',
+              maxHeight: '50%',
+              cursor:'pointer'
+            }}
+            shouldItemRender={(label, value) => label.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
             // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
             getItemValue={item => item.id}
             renderItem={(item, highlighted) =>
-              <small key={item.id} className="input-desc">{item.label}</small>  
-  
+              <small key={item.id}>{item.label}</small>  
             }
             value={this.state.value}
             onChange={e => {
@@ -55,8 +71,9 @@ class ProjectTeamMember extends Component {
            
           }}
             onSelect={(id,label) => {
-              this.setState({ id })
-              this.setState({label})
+              this.setState({ id:id})
+              this.setState({label:label})
+              // alert(`selected ${this.state.label}`)
               console.log(id)
           }}
           />
