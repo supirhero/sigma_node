@@ -15,6 +15,8 @@ import {checkIWOUsed} from './actions.jsx'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux'
+import Autosuggest from 'react-autosuggest';
+
 
 
 const cookies = new Cookies();
@@ -1792,12 +1794,6 @@ export class datepickerTimesheet extends Component {
     }
   }
 
-       
-
-
-
-
-  
   function mapStateToProps(state) {
     return {
       // formValues: state.form.add_task,

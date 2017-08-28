@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
+
 import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
 import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
+
 
 
 class ProjectTeamMember extends Component {
@@ -82,6 +84,7 @@ class ProjectTeamMember extends Component {
        
             </div>
             <div className='unit one-fifth'>
+
               <button className='btn-primary' style ={{marginTop:'60px'}}
                 onClick=
                 {
@@ -91,6 +94,7 @@ class ProjectTeamMember extends Component {
                   }
                 }
               >INVITE</button>
+
             </div>
           </div>
           <div className='grid padding-left'>
@@ -144,4 +148,3 @@ function mapStateToProps(state) {
   }
 }
 export default connect(mapStateToProps)(ProjectTeamMember)
-// export default Login

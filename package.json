@@ -31,6 +31,9 @@
     "rc-menu": "^5.0.10",
     "react": "^15.6.1",
     "react-autocomplete": "^1.7.1",
+
+    "react-autosuggest": "^9.3.2",
+
     "react-contextmenu": "^2.6.3",
     "react-data-components": "^1.1.0",
     "react-datepicker": "^0.53.0",
