@@ -57,7 +57,8 @@ class ProjectTeamMember extends Component {
               position: 'fixed',
               overflow: 'auto',
               maxHeight: '50%',
-              cursor:'pointer'
+              cursor:'pointer',
+              display:'block'
             }}
             shouldItemRender={(label, value) => label.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
             // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}

@@ -143,7 +143,7 @@ class MyRecentActivities extends Component {
             </div>
             <div className="grid wrap">
               <div className="unit whole" style={{ marginLeft: '104px' }}>
-                <small style={{ fontSize: '12px' }}>Tue,Jun 6 at 4:55 PM via web</small>
+                <small style={{ fontSize: '12px' }}>{value.submit_date}</small>
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&
