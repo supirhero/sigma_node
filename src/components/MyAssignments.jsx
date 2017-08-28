@@ -7,7 +7,7 @@ import {Divider, TimeSheetTimeButton,PageLoader} from  './components.jsx'
 import {getMyAssignment,pop,viewTimesheet,reportYearly} from './actions.jsx'
 
 class MyAssignments extends Component {
- 
+
   componentWillMount(){
     const myAssignment = store.getState().data.myAssignment
     store.dispatch(getMyAssignment())
