@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile, ReduxInput, ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile, ReduxInput, ReduxUploadWorkplan,ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
 import { getIssue, addIssue, pop } from './actions.jsx';
 import DropZone from 'react-dropzone'
 
@@ -16,7 +16,7 @@ class ProjectIssues extends Component {
 
   onSubmit(props) {
     const id = store.getState().page.id;
-    store.dispatch(addIssue(props,id));
+    store.dispatch(addIssue(id,props.SUBJECT,props.MESSAGE,props.PRIORITY,props.file_upload));
     // console.log(store.getState().form.add_issue.values.file_upload.preview)
     // const preview = store.getState().form.add_issue.values.file_upload.map((value,index)=>{
     //   return value.preview
@@ -72,7 +72,7 @@ class ProjectIssues extends Component {
           console.log('PROPS', this.props);
           this.props.dispatch({
             type: 'POPUP',
-            name:'addNewTimesheet',
+            name:'issue',
             data: {
               active:true
             }
@@ -81,7 +81,7 @@ class ProjectIssues extends Component {
         }
       }
         >
-        INPUT TIMESHEET
+        UPLOAD ISSUE
       </button>
           <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -133,7 +133,7 @@ class ProjectIssues extends Component {
                   inputName="EVIDENCE"
                   name="file_upload"
                   type='file'
-                  component = {ReduxDrop}
+                  component = {ReduxUploadWorkplan}
                 />
                 </div>
 
