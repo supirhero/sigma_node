@@ -204,6 +204,31 @@ export const addDocsAndFiles = (desc,files, id ) => {
   }
 }
 
+export const deleteTask = (wbs_id ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}task/deleteTask?token=${token}` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+              wbs_id: wbs_id
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+              return res
+            },
+          )
+  }
+}
+
+
 
 export const getIssue = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -259,7 +284,7 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
     formData.append('MESSAGE',MESSAGE);
     formData.append('PRIORITY',PRIORITY);
     formData.append('file_upload',file_upload[0])
-    fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
       method:'POST',
       body:formData
     })

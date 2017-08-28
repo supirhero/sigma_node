@@ -11,7 +11,7 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 
 
 import { Field, reduxForm } from 'redux-form';
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline} from './actions.jsx';
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline, deleteTask} from './actions.jsx';
 
 
 class ProjectWorkplan extends Component {
@@ -152,13 +152,19 @@ class ProjectWorkplan extends Component {
 
               <MenuItem title='Delete' onClick={e => {
                 // this.props.dispatch()
-                this.props.dispatch({
+                {/* this.props.dispatch({
                   type: 'POPUP',
                   name:'delete',
                   data: {
                     active:true
                   }
-                })
+                }) */}
+                this.props.dispatch(deleteTask( value.WBS_ID)).then(
+                  res=> {
+                    const id = this.props.state.page.id;
+                    this.props.dispatch(getWorkplanView(id))
+                  }
+                )
 
                 e.preventDefault()
               }}/>
