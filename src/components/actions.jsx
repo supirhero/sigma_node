@@ -775,11 +775,12 @@ export function addTaskWorkplan(id,wbs_id,data) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
-        WBS_ID: wbs_id,
+        // WBS_ID: wbs_id,
         WBS_NAME: data.WBS_NAME,
         WBS_PARENT_ID: data.WBS_PARENT_ID,
-        START_DATE: data.START_DATE,
-        FINISH_DATE: data.FINISH_DATE
+        
+        START_DATE: moment(data.START_DATE).format('YYYY-MM-DD'),
+        FINISH_DATE: moment(data.FINISH_DATE).format('YYYY-MM-DD')
         }
     }).then(
       (res)=>{
@@ -1050,10 +1051,11 @@ export function editTaskAction(id,WBS_ID,data){
       data: {
         project_id: id,
         wbs_id: WBS_ID,
-        WBS_PARENT_ID: data.PARENT_EDIT,
+        wbs_parent_id: data.PARENT_EDIT,
         wbs_name: data.NAME_EDIT,
-        start_date: data.START_DATE_EDIT,
-        finish_date: data.FINISH_DATE_EDIT
+        start_date: moment(data.START_DATE_EDIT).format('YYYY-MM-DD'),
+        finish_date: moment(data.FINISH_DATE_EDIT).format('YYYY-MM-DD')
+        
       }
     }).then(
       (res)=>{
@@ -1085,8 +1087,8 @@ export function rDirectorat(bu,tahun){
 }
 
 
-export function requestRebaseline(id, props){
-
+export function requestRebaseline(id, props, array){
+  console.log('PROPSSSSSSS', props)
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
@@ -1094,10 +1096,10 @@ export function requestRebaseline(id, props){
       url:`${baseURL}project/rebaseline/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
-        array: props,
-        project_id: props ,
-        evidence: props ,
-        reason: props ,
+        array: array,
+        project_id: id ,
+        evidence: props.evidence ,
+        reason: props.reason ,
       }
     }).then(
       (res)=>{

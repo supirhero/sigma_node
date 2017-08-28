@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Grid } from 'react-redux-grid';
+import moment from 'moment';
 
 import store from '../reducers/combineReducers.jsx';
 
@@ -205,11 +206,36 @@ class ProjectWorkplan extends Component {
           active:false
         }
       })
+      var newState = this.state.array.new_task.concat(
+        {
+          project_id: id,
+          wbs_name: props.WBS_NAME,
+          wbs_parent_id: props.WBS_PARENT_ID,
+          start_date: props.START_DATE,
+          finish_date: props.FINISH_DATE
+        }
+      )
+      // Object.assign({},this.state.array, )
+      // console.log('BEFORE STATE', newState)
+      // this.setState({array : {
+      //   modified_task: this.state.array.modified_task,
+      //   new_task : newState}
+      // }, ()=>{
+      //   console.log('AFTER STATE', this.state)
+      // })
     });
   }
   onSubmitRebaseline(props){
+    alert('blaa')
     var id = this.props.state.page.id
-    this.props.requestRebaseline(id,props).then(res=> {
+    this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).then(res=> {
+      this.props.dispatch({
+        type: 'POPUP',
+        name: 'request_rebaseline',
+        data: {
+          active: false,
+        },
+      });
     })
     
   }
@@ -224,16 +250,19 @@ class ProjectWorkplan extends Component {
         {
           project_id: id,
           wbs_id: this.state.WBS_id,
-          WBS_PARENT_ID: props.PARENT_EDIT,
+          wbs_parent_id: props.PARENT_EDIT,
           wbs_name: props.NAME_EDIT,
           start_date: props.START_DATE_EDIT,
           finish_date: props.FINISH_DATE_EDIT
         }
       )
-      console.log('BEFORE STATE', newState)
-      this.setState({array: newState}, ()=>{
-        console.log('AFTER STATE', this.state)
-      })
+      // console.log('BEFORE STATE', newState)
+      // this.setState({array : {
+      //   new_task: this.state.array.new_task,
+      //   modified_task : newState}
+      // }, ()=>{
+      //   console.log('AFTER STATE', this.state)
+      // })
 
       
       this.props.dispatch({
@@ -337,7 +366,7 @@ class ProjectWorkplan extends Component {
               e.preventDefault()
             }
           }> CANCEL </button>
-            <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
+            <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
           </div>
         </div>
 
@@ -495,21 +524,21 @@ class ProjectWorkplan extends Component {
             <div className="grid wrap narrow">
               <div className="unit whole">
                 
-          <h2 className='input-name'>SELECT EVIDENCE</h2>
-             <div className="grid wrap">
-              <Field
-              style={{width:'100%'}}
-              inputName="SELECT FILE"
-              name="evidence"
-              component={ReduxUploadWorkplan}
-              />
-              </div>
-            <Field
-              inputName="REASON"
-              name="reason"
-              type="input"
-              component={ReduxInput}
-            />
+              <h2 className='input-name'>SELECT EVIDENCE</h2>
+                <div className="grid wrap">
+                  <Field
+                  style={{width:'100%'}}
+                  inputName="SELECT FILE"
+                  name="evidence"
+                  component={ReduxUploadWorkplan}
+                  />
+                  </div>
+                <Field
+                  inputName="REASON"
+                  name="reason"
+                  type="input"
+                  component={ReduxInput}
+                />
            
               <button style={{display:'inline-block', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
                 this.props.dispatch({
@@ -521,18 +550,8 @@ class ProjectWorkplan extends Component {
                 });
                 e.preventDefault()
               }}>CLOSE</button>
-              <button style={{display:'inline-block', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
-                this.props.dispatch(requestRebaseline(this.props.state.page.id)).then(res=>{
-                  this.props.dispatch({
-                  type: 'POPUP',
-                  name: 'request_rebaseline',
-                  data: {
-                    active: false,
-                  },
-                });
-                })
-                e.preventDefault()
-              }}>REQUEST</button>
+              <button type='submit' style={{display:'inline-block', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' 
+              >REQUEST</button>
               </div>
             </div>
             </form>
