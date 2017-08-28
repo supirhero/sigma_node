@@ -231,6 +231,7 @@ class ProjectWorkplan extends Component {
           active:false
         }
       })
+      this.props.dispatch(getWorkplanView(id))
     });
   }
   onSubmitRebaseline(props){
@@ -621,7 +622,7 @@ class ProjectWorkplan extends Component {
                       }
                       value={this.state.value}
                       onChange={e => {
-                        this.setState({ value: e.target.USER_NAME })
+                        this.setState({ value: e.target.value })
                     }}
                       onSelect={(USER_NAME,RP_ID,EMAIL) => {
                         console.log(RP_ID)
