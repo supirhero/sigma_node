@@ -247,33 +247,24 @@ export const getIssue = (id) => {
     // )
 
 
-export const addIssue = (data, id ) => {
+
+
+export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-
-  return function (dispatch) {
-    const token = cookies.get('token')
-    return axios({
-            method: 'POST',
-            url: `${baseURL}home/addissue/${id}?token=${token}` ,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data:{
-              'PROJECT_ID':id,
-              'SUBJECT':data.SUBJECT,
-              'MESSAGE':data.MESSAGE,
-              'PRIORITY':data.PRIORITY,
-              'file_upload':data.file_upload
-            }
-
-          }).then(
-            res => {
-              dispatch(getIssue(id))
-              console.log(res.data);
-            },
-          )
+  // console.log("DOCS",data);
+  return function(dispatch){
+    const formData = new FormData();
+    formData.append('PROJECT_ID',id);
+    formData.append('SUBJECT',SUBJECT);
+    formData.append('MESSAGE',MESSAGE);
+    formData.append('PRIORITY',PRIORITY);
+    formData.append('file_upload',file_upload[0])
+    fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
+      method:'POST',
+      body:formData
+    })
   }
 }
-
-
 
 export const addNewProject = (data,id) => {
   console.log('DATA', data);
@@ -840,7 +831,7 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
       (res)=>{
         console.log("ADDTIMESHEET");
         alert('successful')
-        store.dispatch(viewTimesheet(TS_DATE));
+        // store.dispatch(viewTimesheet(TS_DATE));
 
 
       }

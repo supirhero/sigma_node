@@ -22,7 +22,7 @@ class MyRecentActivities extends Component {
     if (!myActivity) {
       return <PageLoader />;
     }
-
+    
     function pill(value) {
       let className = 'pill pending';
       let text = 'PENDING';
@@ -178,9 +178,14 @@ class MyRecentActivities extends Component {
               <div className="unit whole" style={{ marginLeft: '104px' }}>
                 <small style={{ fontSize: '12px' }}>Tue,Jun 6 at 4:55 PM via web</small>
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
-                  {
+                {
                 value.is_approved == 0 &&
-                <a href="" style={{marginLeft:'45px'}}>RE-SUBMIT TIMESHEET</a>
+                <a style={{marginLeft:'45px'}} onClick={e => {
+                  store.dispatch(addTimesheet(value.project_id,value.wbs_id,value.ts_date,value.hour_total,value.subject,value.message))
+                  
+                }}
+                >
+                RE-SUBMIT TIMESHEET</a>
               }
                 </medium>
               </div>
@@ -203,4 +208,4 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   };
 }
-export default connect(mapStateToProps)(MyRecentActivities);
+export default connect(mapStateToProps,{addTimesheet})(MyRecentActivities);
