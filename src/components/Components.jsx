@@ -115,7 +115,23 @@ export class Menu extends Component {
     render(){
       return(
         <div style={this.props.style}>
-        <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
+        {
+          this.props.triggerInput=='true' ?
+          <input style={this.props.inputStyle}
+            onClick={
+              () => {
+                  console.log('working');
+                  if (this.state.clicked) {
+                    this.setState({clicked:false})
+                  }
+                  else {
+                    this.setState({clicked:true})
+                  }
+                }
+            }
+            ></input>
+          :
+          <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
           () => {
               console.log('working');
               if (this.state.clicked) {
@@ -126,7 +142,8 @@ export class Menu extends Component {
               }
             }
           }>{this.props.icon}
-        </div>
+        </div>}
+
 
             <div onMouseLeave = {
               () => {
@@ -1178,18 +1195,18 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                      <button onClick={
+                      <button className='btn-primary' onClick={
                         e=>{
                           store.dispatch({
                             type:'POPUP',
-                            name:'deleteHoliday',
+                            name:'editHoliday',
                             data:{
                               active:true
                             }
                           })
                           e.preventDefault()
                         }
-                      }></button>
+                      }>EDIT</button>
 
 
                     </td>

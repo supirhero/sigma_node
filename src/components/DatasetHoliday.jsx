@@ -19,20 +19,20 @@ class DatasetHoliday extends Component {
     };
   }
 
-   
-  handleInitialize(data) { 
-    const initData = { 
-      "HOLIDAY_START":data.HOLIDAY_START, 
-      "HOLIDAY_END":data.HOLIDAY_END, 
-      "HOLIDAY_ID":data.HOLIDAY_ID, 
-    }; 
- 
-  this.props.initialize(initData); 
-} 
- 
-onSubmitUpdateHoliday(props){ 
-  store.dispatch(updateHoliday(props)) 
-} 
+
+  handleInitialize(data) {
+    const initData = {
+      "HOLIDAY_START":data.HOLIDAY_START,
+      "HOLIDAY_END":data.HOLIDAY_END,
+      "HOLIDAY_ID":data.HOLIDAY_ID,
+    };
+
+  this.props.initialize(initData);
+}
+
+onSubmitUpdateHoliday(props){
+  store.dispatch(updateHoliday(props))
+}
 
   componentWillMount(){
     const state = store.getState()
@@ -54,26 +54,11 @@ onSubmitUpdateHoliday(props){
     if (!holiday){
       <PageLoader />
     }
-    
+
     return (
-      <div> 
-      <button className='btn-primary'
-      style={{display:'block', margin: 'auto'}}
-      onClick={
-      e => {
-        console.log('PROPS', this.props);
-        this.props.dispatch({
-          type: 'POPUP',
-          name:'deleteHoliday',
-          data: {
-            active:true
-          }
-        })
-        e.preventDefault()}}>
-      INPUT TIMESHEET
-      
-    </button>
-      <PopUpBARU id="deleteHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
+      <div>
+
+      <PopUpBARU id="editHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
       <div>
         <div className="grid wrap narrow">
           <div className="unit whole">
@@ -110,13 +95,13 @@ onSubmitUpdateHoliday(props){
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
 							<div className="table-wrap">
-								
+
 								<div className="unit one-quarter">
 									<Header text='Holiday' style={{display:'inline-block'}} />
 								</div>
 
                 <div className="unit three-quarters">
-             
+
 									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <div>
@@ -138,7 +123,7 @@ onSubmitUpdateHoliday(props){
                           type='input'
                           component={datepickerUniversal}
                         />
-												
+
 												</div>
 											</div>
 											<div className="grid wrap narrow">
@@ -149,7 +134,7 @@ onSubmitUpdateHoliday(props){
                         type='input'
                         component={datepickerUniversal}
                       />
-													
+
 												</div>
 											</div>
 												<div className="grid wrap narrow">
@@ -174,14 +159,14 @@ onSubmitUpdateHoliday(props){
                       {value:value.HOLIDAY_END},
                     ]}
                   }):null}>
-                
-                </TableNewMasterDataPopUp>															
+
+                </TableNewMasterDataPopUp>
 								</div>
 
 							 <div className="unit whole">
                   <div className="container" style={{float:'left'}}>
                     <small style={{display:'inline-block'}}>show entries</small>
-                     <Select 
+                     <Select
                           style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
                           items={{
                             items : [
@@ -190,9 +175,9 @@ onSubmitUpdateHoliday(props){
                             ]
                            }}
                         />
-                  
+
                   </div>
-                  <div className="container" style={{float:'right'}}>                  
+                  <div className="container" style={{float:'right'}}>
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
                     <button className="arrow"> <b> &gt; </b> </button>
