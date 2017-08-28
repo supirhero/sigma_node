@@ -115,7 +115,23 @@ export class Menu extends Component {
     render(){
       return(
         <div style={this.props.style}>
-        <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
+        {
+          this.props.triggerInput=='true' ?
+          <input style={this.props.inputStyle}
+            onClick={
+              () => {
+                  console.log('working');
+                  if (this.state.clicked) {
+                    this.setState({clicked:false})
+                  }
+                  else {
+                    this.setState({clicked:true})
+                  }
+                }
+            }
+            ></input>
+          :
+          <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
           () => {
               console.log('working');
               if (this.state.clicked) {
@@ -126,7 +142,8 @@ export class Menu extends Component {
               }
             }
           }>{this.props.icon}
-        </div>
+        </div>}
+
 
             <div onMouseLeave = {
               () => {
@@ -1660,6 +1677,18 @@ export class PageLoader extends Component {
   }
 }
 
+export class Pagination extends Component {
+  render(){
+    return(
+      <div className="container" style={{float:'right'}}>
+        <button className="arrow"> <b> &lt; </b> </button>
+        <button className="pagination"><b>1</b></button>
+        <button className="arrow"> <b> &gt; </b> </button>
+      </div>
+    )
+  }
+}
+
 export class datepickerUniversal extends Component {
 
     static defaultProps(){
@@ -1695,7 +1724,7 @@ export class datepickerUniversal extends Component {
             style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
-          dateFormat="YYYY-MM-DD"
+          dateFormat="DD-MMM-YYYY"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
           // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
@@ -1775,4 +1804,5 @@ export class datepickerTimesheet extends Component {
     }
 
   }
+
   // export connect(mapStateToProps)(PopUp)

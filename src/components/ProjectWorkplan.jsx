@@ -68,6 +68,18 @@ class ProjectWorkplan extends Component {
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
             <MenuSection>
               <MenuItem title='Add Timesheet' onClick={e => {
+
+                this.handleInitialize({
+                  TS_DATE: value.START_DATE,
+                  PROJECT_ID: value.PROJECT_ID,
+                  WBS_NAME: this.props.state.data.workplan.WBS_NAME,
+                  WP_ID: value.WBS_ID,
+                  TASK: value.WBS_NAME,
+
+                  HOUR: value.WORK ? value.WORK : 0,
+                  TS_SUBJECT: value.SUBJECT ? value.SUBJECT : 'none',
+                  TS_MESSAGE: value.MESSAGE ? value.MESSAGE : 'none'
+                })
                 this.props.dispatch({
                   type: 'POPUP',
                   name:'addTimesheetWorkplan',
@@ -75,6 +87,9 @@ class ProjectWorkplan extends Component {
                     active:true
                   }
                 })
+                // this.setState({value: value}, ()=> {
+                //   })
+                // })
 
                 e.preventDefault()
               }}/>
@@ -178,7 +193,15 @@ class ProjectWorkplan extends Component {
 
   onSubmit(props) {
     const id = this.props.state.page.id;
-    this.props.addTaskWorkplan(id, props);
+    this.props.addTaskWorkplan(id, this.state.WBS_id,props).then(res=> {
+      this.props.dispatch({
+        type: 'POPUP',
+        name:'addTimesheetWorkplan',
+        data: {
+          active:false
+        }
+      })
+    });
   }
 
   onSubmitWorkplan(props){
@@ -187,7 +210,15 @@ class ProjectWorkplan extends Component {
   }
   onSubmitEditTask(props){
     const id = this.props.state.page.id
-    this.props.editTaskAction(id,this.state.WBS_id,props)
+    this.props.editTaskAction(id,this.state.WBS_id,props).then(res=>{
+      this.props.dispatch({
+        type: 'POPUP',
+        name:'edit_task',
+        data: {
+          active:false
+        }
+      })
+    })
   }
 
   componentWillMount() {
@@ -202,161 +233,7 @@ class ProjectWorkplan extends Component {
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
 
-    const workplan2 = [
-      {
-        task: 'Transaction Based Managed Service 2017',
-        work: 258,
-        work_total: 55328,
-        duration: 12,
-        start_date: '08 Apr 2017',
-        end_date: '23 Apr 2017',
-        complete: 0.41,
-        resources: '2 people',
-        sub: [
-          {
-            task: 'Working Activity',
-            work: 258,
-            work_total: 55328,
-            duration: 12,
-            start_date: '08 Apr 2017',
-            end_date: '23 Apr 2017',
-            complete: 0.41,
-            resources: '2 people',
-            sub: [
-              {
-                task: 'Annual Working',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-              {
-                task: 'Overtime',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-            ],
-          },
-          {
-            task: 'Non Working Activity',
-            work: 258,
-            work_total: 55328,
-            duration: 12,
-            start_date: '08 Apr 2017',
-            end_date: '23 Apr 2017',
-            complete: 0.41,
-            resources: '2 people',
-            sub: [
-              {
-                task: 'Annual Leave',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-              {
-                task: 'Sick Leave',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        task: 'Transaction Based Managed Service 2017',
-        work: 258,
-        work_total: 55328,
-        duration: 12,
-        start_date: '08 Apr 2017',
-        end_date: '23 Apr 2017',
-        complete: 0.41,
-        resources: '2 people',
-        sub: [
-          {
-            task: 'Working Activity',
-            work: 258,
-            work_total: 55328,
-            duration: 12,
-            start_date: '08 Apr 2017',
-            end_date: '23 Apr 2017',
-            complete: 0.41,
-            resources: '2 people',
-            sub: [
-              {
-                task: 'Annual Working',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-              {
-                task: 'Overtime',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-            ],
-          },
-          {
-            task: 'Non Working Activity',
-            work: 258,
-            work_total: 55328,
-            duration: 12,
-            start_date: '08 Apr 2017',
-            end_date: '23 Apr 2017',
-            complete: 0.41,
-            resources: '2 people',
-            sub: [
-              {
-                task: 'Annual Leave',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-              {
-                task: 'Sick Leave',
-                work: 258,
-                work_total: 55328,
-                duration: 12,
-                start_date: '08 Apr 2017',
-                end_date: '23 Apr 2017',
-                complete: 0.41,
-                resources: '2 people',
-              },
-            ],
-          },
-        ],
-      },
 
-    ];
     return (
       <div className="project-workplan">
         <PopUp id="addTimesheetWorkplan" dividerText="UPDATE TIMESHEET" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
@@ -366,7 +243,7 @@ class ProjectWorkplan extends Component {
             <Field
               inputName="DATE"
               name="TS_DATE"
-              component={datepickerTimesheet}
+              component={datepickerUniversal}
               // validate={[required]}
             />
           </div>
@@ -375,8 +252,8 @@ class ProjectWorkplan extends Component {
           <div className="unit whole">
             <Field
               inputName="PROJECT NAME"
-              name="PROJECT_ID"
-              component={ReduxSelectNew}
+              name="WBS_NAME"
+              component={ReduxInputDisabled}
               // validate={[required]}
               >
               </Field>
@@ -385,10 +262,10 @@ class ProjectWorkplan extends Component {
         <div className="grid wrap narrow">
         <div className="unit three-quarters">
         <Field
-        name="WP_ID"
+        name="TASK"
 
           inputName="TASK"
-          component={ReduxSelectNew}
+          component={ReduxInputDisabled}
           // validate={[required]}
           />
           </div>

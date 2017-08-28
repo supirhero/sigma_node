@@ -12,13 +12,13 @@ class ReportsDirectorate extends Component {
   store.dispatch(getListBU())
   store.dispatch(rDirectorat("44","2017"))
   }
-  
+
   render() {
     return (
 			<div>
 				<div className="grid wrap">
           <div className="unit three-quarters">
-						<Select
+						{/* <Select
               style={{ width: '100%', display: 'inline-block', float: 'left' }}
               items={{
                 items : [
@@ -26,7 +26,38 @@ class ReportsDirectorate extends Component {
                 {title : 'BUSINESS UNIT'}
                 ]
 							}}/>
-					</div>
+					</div> */}
+
+              <Menu style={{position:'relative'}} menuStyle={{top:'41', right:'10', width:'200px'}} triggerInput='true'
+                inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
+
+                style={{display:'inline'}} >
+                <MenuSection>
+                  <MenuItem title='Edit' onClick={e => {
+                    store.dispatch({
+                      type: 'POPUP',
+                      name:'editHoliday',
+                      data: {
+                        active:true
+                      }
+                    })
+                    e.preventDefault()
+                  }}/>
+                  <MenuItem title='Delete' onClick={e => {
+                    store.dispatch({
+                      type: 'POPUP',
+                      name:'deleteHoliday',
+                      data: {
+                        active:true
+                      }
+                    })
+                    store.dispatch(deleteHoliday(this.props.id))
+                    e.preventDefault()
+                  }}/>
+                </MenuSection>
+              </Menu>
+          </div>
+
 					<div className="unit one-quarter">
 						<Select
               style={{ width: '60%',float:'left', display: 'inline-block',marginRight:'35px'}}
@@ -37,6 +68,7 @@ class ReportsDirectorate extends Component {
                 ],
               }}
             />
+
             <button className="btn-primary"style={{ padding: '11px 14px',marginLeft:'5px'}} >
               <span className="material-icons" style={{ color: 'white' }}>search</span>
             </button>
