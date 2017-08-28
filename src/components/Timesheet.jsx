@@ -15,9 +15,9 @@ class Timesheet extends Component {
   constructor(){
     super()
     this.state = {
-      click : 1 ,
+      jumlah : 0 ,
       holiday: null,
-      selected:moment().format("YYYY-MM-DD")
+      selected:moment().format("YYYY-MM-DD"),
     };
   }
 
@@ -51,6 +51,9 @@ class Timesheet extends Component {
     const state = store.getState();
     const timesheet = state.data;
     const weekdays = state.data.weekdays; 
+    // store.dispatch(weekTimesheet(this.state.click))
+    // console.log(this.state.click) 
+
     // const startOfWeek = moment().startOf('week');
     // const endOfWeek = moment().endOf('week');
     // var days = [];
@@ -97,7 +100,7 @@ class Timesheet extends Component {
 
 
     const auth = state.auth;
-
+    
 
 
 
@@ -131,11 +134,14 @@ class Timesheet extends Component {
                 <span className="icon-arrow-left-circle list-pointer" onClick={ 
                   e => { 
                     this.setState({ 
-                      click: this.state.click + 1 
+                      jumlah: this.state.jumlah + 1
+                    },()=>{
+                      store.dispatch(weekTimesheet(this.state.jumlah))
+                      // console.log(this.state.jumlah)
                     }); 
-                    console.log(this.state.click,"kiri") 
+                    // console.log(this.state.jumlah," kiri") 
                     e.preventDefault() 
-                    store.dispatch(weekTimesheet(this.state.click)) 
+                     
                      
                   } 
                 }> </span> 
@@ -162,11 +168,15 @@ class Timesheet extends Component {
                   } 
                   <span className="icon-arrow-right-circle list-pointer" onClick={ 
                     e => { 
+                     
                       this.setState({ 
-                        click: this.state.click - 1 
+                        jumlah: this.state.jumlah - 1
+                      },()=>{
+                        store.dispatch(weekTimesheet(this.state.jumlah))
+                        // console.log(this.state.jumlah)
                       }); 
-                      console.log(this.state.click,"kanan") 
-                      store.dispatch(weekTimesheet(this.state.click)) 
+                       
+                      
                       e.preventDefault() 
                     } 
                   } /> 
@@ -383,7 +393,8 @@ class Timesheet extends Component {
         
         
           }
-      
+         
+
       </div>
 
     );
