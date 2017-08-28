@@ -128,6 +128,7 @@ class ReportsOverview extends Component {
                     <select onChange={this.handleMonthChange.bind(this)} 
                     className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
                     { 
+                      month &&
                       month.map((value,index) => { 
                       return( 
                         <option key={index} value={value.number}>{value.name}</option> 
@@ -139,6 +140,7 @@ class ReportsOverview extends Component {
                   <select onChange={this.handleYearChange.bind(this)} 
                   className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
                   { 
+                    year &&
                     year.map((value,index) => { 
                     return( 
                       <option key={index} value={value.year}>{value.year}</option> 
@@ -244,6 +246,7 @@ class ReportsOverview extends Component {
               <select onChange={this.handleYearlyChange.bind(this)} 
               className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'left'}}> 
               { 
+                year &&
                 year.map((value,index) => { 
                 return( 
                   <option key={index} value={value.year}>{value.year}</option> 
@@ -300,7 +303,7 @@ class ReportsOverview extends Component {
                 <div className="unit whole">
                   <LineChart
                     label="CPI HISTORY"
-                    data={ r_yearly_cpi.map((value,index)=>{
+                    data={ r_yearly_cpi && r_yearly_cpi.map((value,index)=>{
                       return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
                     }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},

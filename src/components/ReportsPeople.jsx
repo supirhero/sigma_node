@@ -37,7 +37,7 @@ class ReportsPeople extends Component {
 
   render() {	
 
-    const report_people = store.getState().data.report_people
+    const report_people = this.props.state.data.report_people
    
     const tablePeople = report_people ? report_people.map((value,index)=>{
       return {column:[
@@ -71,11 +71,10 @@ class ReportsPeople extends Component {
       {year:'2015'},
     ]
   
-    if (!report_people) {
-      return <PageLoader />;
-    }
+  
 
     return (
+      !report_people ? <PageLoader/> :
       <div>
         <div className="grid wrap">
           <div className="unit golden-large">
@@ -163,6 +162,7 @@ class ReportsPeople extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   };
 }

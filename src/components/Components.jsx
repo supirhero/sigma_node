@@ -688,6 +688,7 @@ export class BarChartSPI extends Component {
         <Tooltip />
         <Bar dataKey="value" fill="#8884d8">
             {
+              this.props.data &&
               this.props.data.map((entry, index) => {
                 const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
                 return <Cell key={index} fill={color} />;
@@ -718,6 +719,7 @@ export class BarChartCPI extends Component {
         <Tooltip />
         <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
             {
+              this.props.data &&
               this.props.data.map((entry, index) => {
                 const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
                 return <Cell key={index} fill={color} />;
