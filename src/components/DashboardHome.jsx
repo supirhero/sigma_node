@@ -19,7 +19,7 @@ class DashboardHome extends Component {
     var state = store.getState()
     console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var auth = state.data
+    var auth = store.getState()
     console.log(state.auth.token)
     // console.log(projects);
     return(
