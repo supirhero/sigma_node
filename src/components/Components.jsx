@@ -1673,6 +1673,18 @@ export class PageLoader extends Component {
   }
 }
 
+export class Pagination extends Component {
+  render(){
+    return(
+      <div className="container" style={{float:'right'}}>
+        <button className="arrow"> <b> &lt; </b> </button>
+        <button className="pagination"><b>1</b></button>
+        <button className="arrow"> <b> &gt; </b> </button>
+      </div>
+    )
+  }
+}
+
 export class datepickerUniversal extends Component {
 
     static defaultProps(){
@@ -1708,7 +1720,7 @@ export class datepickerUniversal extends Component {
             style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
-          dateFormat="YYYY-MM-DD"
+          dateFormat="DD-MMM-YYYY"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
           // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
@@ -1772,6 +1784,7 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
+
   function mapStateToProps(state) {
     return {
       // formValues: state.form.add_task,
@@ -1781,4 +1794,5 @@ export class datepickerTimesheet extends Component {
     }
 
   }
+
   // export connect(mapStateToProps)(PopUp)

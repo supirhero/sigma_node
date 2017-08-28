@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUpBARU,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp} from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search,PopUpBARU,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp, Pagination} from './Components.jsx';
 import {getDataMaster,addHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
@@ -180,6 +180,7 @@ onSubmitUpdateHoliday(props){
                   <div className="container" style={{float:'right'}}>
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
+
                     <button className="arrow"> <b> &gt; </b> </button>
                   </div>
              	 </div>

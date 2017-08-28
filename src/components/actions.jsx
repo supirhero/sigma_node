@@ -764,7 +764,7 @@ export function taskList(project_id) {
 //   }
 // }
 
-export function addTaskWorkplan(id,data) {
+export function addTaskWorkplan(id,wbs_id,data) {
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
@@ -773,6 +773,7 @@ export function addTaskWorkplan(id,data) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
+        WBS_ID: wbs_id,
         WBS_NAME: data.WBS_NAME,
         WBS_PARENT_ID: data.WBS_PARENT_ID,
         START_DATE: data.START_DATE,
