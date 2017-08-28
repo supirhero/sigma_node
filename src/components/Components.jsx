@@ -1178,18 +1178,22 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                      <button onClick={
-                        e=>{
-                          store.dispatch({
-                            type:'POPUP',
-                            name:'deleteHoliday',
-                            data:{
-                              active:true
-                            }
-                          })
-                          e.preventDefault()
+                    <button className='btn-primary'
+                    style={{display:'block', margin: 'auto'}}
+                    onClick={
+                    e => {
+                      console.log('PROPS', this.props);
+                      this.props.dispatch({
+                        type: 'POPUP',
+                        name:'editHoliday',
+                        data: {
+                          active:true
                         }
-                      }></button>
+                      })
+                      e.preventDefault()}}>
+                    EDIT
+                    
+                  </button>
 
 
                     </td>
@@ -1755,6 +1759,13 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
+
+       
+
+
+
+
+  
   function mapStateToProps(state) {
     return {
       // formValues: state.form.add_task,

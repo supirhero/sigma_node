@@ -161,8 +161,52 @@ export const getProjectTeamMember = (id) => {
             },
           )
   }
-
 }
+
+
+export const getAvailableProjectTeamMember = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/availableMember/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+            },
+          )
+  }
+}
+
+export const assignProjectTeamMember = (id,user_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/projectmemberadd/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              USER_ID:user_id
+            }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch(getAvailableProjectTeamMember(id))
+              alert('invited')
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+            },
+          )
+  }
+}
+
 
 
 
@@ -197,10 +241,19 @@ export const addDocsAndFiles = (desc,files, id ) => {
     const formData = new FormData();
     formData.append('desc',desc);
     formData.append('document',files[0])
-    fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        alert('document uploaded');
+        
+        store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+
+      },
+    )
   }
 }
 
@@ -968,6 +1021,8 @@ export function getTaskMemberView(project_id,wbs_id){
     )
   }
 }
+
+
 
 export function assignTaskMember(data){
   return function(dispatch){

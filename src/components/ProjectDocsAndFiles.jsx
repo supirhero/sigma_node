@@ -17,7 +17,19 @@ class ProjectDocsAndFiles extends Component {
   }
   onSubmit(props){
     const id = store.getState().page.id
-    store.dispatch(addDocsAndFiles(props.desc, props.document, id))
+    store.dispatch(addDocsAndFiles(props.desc, props.document, id)).then(
+      (res)=>{
+        this.props.dispatch({
+          type: 'POPUP',
+          name:'uploadFileDocsFiles',
+          data: {
+            active:false
+          }
+        })
+        // res.preventDefault()
+        // console.log("closed")
+      }
+    )
   }
     render(){
       const {handleSubmit} = this.props;
@@ -72,7 +84,7 @@ class ProjectDocsAndFiles extends Component {
 
                       e.preventDefault()
                     }}> CANCEL </button>
-                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
+                      <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary" > UPLOAD </button>
                     </div>
                   </div>
 

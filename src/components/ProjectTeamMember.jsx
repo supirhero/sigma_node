@@ -4,19 +4,31 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
-import { getProjectTeamMember, pop } from './actions.jsx'
-
+import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop } from './actions.jsx'
+import ReactAutocomplete from 'react-autocomplete'
 
 
 class ProjectTeamMember extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      label: '',
+      id:''
+    }
+  }
+
   componentDidMount() {
     const id = store.getState().page.id
-    store.dispatch(getProjectTeamMember(id))
+    // store.dispatch(getProjectTeamMember(id))
+    store.dispatch(getAvailableProjectTeamMember(id))
   }
 
     render(){
       const appStore = store.getState();
-      const projectMember = appStore.data.project_member
+      const active_member = store.getState().data.project_team
+      const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
+       return {id:value.USER_ID , label:value.USER_NAME}
+      }) : null
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>
@@ -26,12 +38,41 @@ class ProjectTeamMember extends Component {
           </div>
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
-              <Input inputName='ADD NEW TEAM MEMBER' placeholder='enter name or email address'>
 
-              </Input>
+            <ReactAutocomplete
+
+            items={available_assign}
+            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            getItemValue={item => item.id}
+            renderItem={(item, highlighted) =>
+              <small key={item.id} className="input-desc">{item.label}</small>  
+  
+            }
+            value={this.state.value}
+            onChange={e => {
+              this.setState({ value: e.target.value })
+           
+          }}
+            onSelect={(id,label) => {
+              this.setState({ id })
+              this.setState({label})
+              console.log(id)
+          }}
+          />
+
+       
             </div>
             <div className='unit one-fifth'>
-              <button className='btn-primary' style ={{marginTop:'60px'}}>INVITE</button>
+              <button className='btn-primary' style ={{marginTop:'60px'}}
+                onClick=
+                {
+                  e => {
+                    store.dispatch(assignProjectTeamMember(store.getState().page.id,this.state.id))
+                    store.dispatch(getAvailableProjectTeamMember(id)) 
+                  }
+                }
+              >INVITE</button>
             </div>
           </div>
           <div className='grid padding-left'>
@@ -43,8 +84,8 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit whole'>
               {
-                projectMember ?
-                projectMember.map((value, index) => (
+                active_member ?
+                active_member.map((value, index) => (
                   <div className='card' style={{padding:'15px'}} key={index}>
                     <div className='grid'>
                       <div className='unit three-fifths no-gutters'>
