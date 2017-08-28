@@ -266,6 +266,8 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
   }
 }
 
+
+
 export const addNewProject = (data,id) => {
   console.log('DATA', data);
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -1048,7 +1050,7 @@ export function editTaskAction(id,WBS_ID,data){
       data: {
         project_id: id,
         wbs_id: WBS_ID,
-        wbs_parent_id: data.PARENT_EDIT,
+        WBS_PARENT_ID: data.PARENT_EDIT,
         wbs_name: data.NAME_EDIT,
         start_date: data.START_DATE_EDIT,
         finish_date: data.FINISH_DATE_EDIT
@@ -1083,14 +1085,20 @@ export function rDirectorat(bu,tahun){
 }
 
 
-export function requestRebaseline(id){
+export function requestRebaseline(id, props){
 
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
-      url:`${baseURL}project/rebaseline?token=${token}`,
+      method:'POST',
+      url:`${baseURL}project/rebaseline/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        array: props,
+        project_id: props ,
+        evidence: props ,
+        reason: props ,
+      }
     }).then(
       (res)=>{
         return res

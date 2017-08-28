@@ -1600,6 +1600,7 @@ export class ReduxDrop extends Component {
 export class ReduxUploadWorkplan extends Component {
   render(){
     return(
+      <div>
       <Dropzone
       name={this.props.name}
       className="upload-workplan"
@@ -1610,6 +1611,8 @@ export class ReduxUploadWorkplan extends Component {
       >
 
       </Dropzone>
+
+      </div>
     )
   }
 }

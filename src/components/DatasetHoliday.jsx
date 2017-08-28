@@ -177,12 +177,7 @@ onSubmitUpdateHoliday(props){
                         />
 
                   </div>
-                  <div className="container" style={{float:'right'}}>
-                    <button className="arrow"> <b> &lt; </b> </button>
-                    <button className="pagination"><b>1</b></button>
-
-                    <button className="arrow"> <b> &gt; </b> </button>
-                  </div>
+                  <Pagination data={holiday}></Pagination>
              	 </div>
 
         			</div>

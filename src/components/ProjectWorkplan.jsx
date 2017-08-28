@@ -6,7 +6,7 @@ import { Grid } from 'react-redux-grid';
 
 import store from '../reducers/combineReducers.jsx';
 
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
 
 
 import { Field, reduxForm } from 'redux-form';
@@ -18,7 +18,11 @@ class ProjectWorkplan extends Component {
     super();
     this.state = {
       clicked: false,
-      WBS_id: ''
+      WBS_id: '',
+      array: {
+        new_task :[],
+        modified_task:[]
+      }
     };
   }
 
@@ -203,7 +207,12 @@ class ProjectWorkplan extends Component {
       })
     });
   }
-
+  onSubmitRebaseline(props){
+    var id = this.props.state.page.id
+    this.props.requestRebaseline(id,props).then(res=> {
+    })
+    
+  }
   onSubmitWorkplan(props){
     const id = this.props.state.page.id
     this.props.uploadWorkplan(id,props.document)
@@ -211,6 +220,22 @@ class ProjectWorkplan extends Component {
   onSubmitEditTask(props){
     const id = this.props.state.page.id
     this.props.editTaskAction(id,this.state.WBS_id,props).then(res=>{
+      var newState = this.state.array.modified_task.concat(
+        {
+          project_id: id,
+          wbs_id: this.state.WBS_id,
+          WBS_PARENT_ID: props.PARENT_EDIT,
+          wbs_name: props.NAME_EDIT,
+          start_date: props.START_DATE_EDIT,
+          finish_date: props.FINISH_DATE_EDIT
+        }
+      )
+      console.log('BEFORE STATE', newState)
+      this.setState({array: newState}, ()=>{
+        console.log('AFTER STATE', this.state)
+      })
+
+      
       this.props.dispatch({
         type: 'POPUP',
         name:'edit_task',
@@ -236,6 +261,8 @@ class ProjectWorkplan extends Component {
 
     return (
       <div className="project-workplan">
+        <div className="grid wrap narrow">
+          <div className="unit whole">
         <PopUp id="addTimesheetWorkplan" dividerText="UPDATE TIMESHEET" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           <form >
           <div className="grid wrap narrow">
@@ -317,7 +344,6 @@ class ProjectWorkplan extends Component {
           </form>
 
         </PopUp>
-
         <PopUp id="manualUpdate" dividerText="TASK PROGRESS" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           <form >
           <div>
@@ -462,21 +488,60 @@ class ProjectWorkplan extends Component {
     }
 
         </PopUp>
-        <PopUp id="request_rebaseline"  btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
-          <large style={{textAlign:'center', color:'#F48165'}}>Your Re-Baseline Request has been sent</large>
-          <small style={{textAlign:'center', marginTop: '20px'}}>This request has been sent to you project manager and leader. Please wait for their approval</small>
-          <button style={{margin:'auto', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
-            this.props.dispatch({
-              type: 'POPUP',
-              name: 'request_rebaseline',
-              data: {
-                active: false,
-              },
-            });
+        <PopUp id="request_rebaseline" dividerText="RE-BASELINE" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+          {
+            !this.props.state.data.detail_task && !this.props.state.data.parent ? <PageLoader/> :
+            <form onSubmit={handleSubmit(this.onSubmitRebaseline.bind(this))}>
+            <div className="grid wrap narrow">
+              <div className="unit whole">
+                
+          <h2 className='input-name'>SELECT EVIDENCE</h2>
+             <div className="grid wrap">
+              <Field
+              style={{width:'100%'}}
+              inputName="SELECT FILE"
+              name="evidence"
+              component={ReduxUploadWorkplan}
+              />
+              </div>
+            <Field
+              inputName="REASON"
+              name="reason"
+              type="input"
+              component={ReduxInput}
+            />
+           
+              <button style={{display:'inline-block', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name: 'request_rebaseline',
+                  data: {
+                    active: false,
+                  },
+                });
+                e.preventDefault()
+              }}>CLOSE</button>
+              <button style={{display:'inline-block', marginTop: '30px', padding:'15px 65px'}} className='btn-secondary' onClick={e=>{
+                this.props.dispatch(requestRebaseline(this.props.state.page.id)).then(res=>{
+                  this.props.dispatch({
+                  type: 'POPUP',
+                  name: 'request_rebaseline',
+                  data: {
+                    active: false,
+                  },
+                });
+                })
+                e.preventDefault()
+              }}>REQUEST</button>
+              </div>
+            </div>
+            </form>
+          }
 
-            e.preventDefault()
-          }}>CLOSE</button>
         </PopUp>
+          </div>
+        </div>
+
         <PopUp id="assign_task" dividerText="ASSIGN TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           {
             !this.props.state.data.available_to_assign && !this.props.state.data.task_name ? <PageLoader/> :
@@ -663,7 +728,6 @@ class ProjectWorkplan extends Component {
           </div>
           <div className="unit one-third no-gutters">
             <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} onClick={e=> {
-              this.props.dispatch(requestRebaseline(this.props.state.page.id)).then(res=>{
                 this.props.dispatch({
                   type: 'POPUP',
                   name: 'request_rebaseline',
@@ -671,7 +735,7 @@ class ProjectWorkplan extends Component {
                     active: true,
                   },
                 });
-              })
+              
             }}>RE-BASELINE</button>
 
           </div>
@@ -799,6 +863,6 @@ export default reduxForm({
   form: 'add_task',
   form: 'upload_workplan'
 })(
-  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction })(ProjectWorkplan),
+  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline })(ProjectWorkplan),
 );
 // export default Login
