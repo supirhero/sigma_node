@@ -387,7 +387,7 @@ class NewProject extends Component {
                   type='input'
                   style={{width:'100%'}}
                   component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                  validate={[required]}
+                  validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
                 >
 
                 </Field>
@@ -407,7 +407,7 @@ class NewProject extends Component {
                   type="RELATED"
                   style={{width:'100%'}}
                   component={form_values && form_values.IWO_AVAILABLE == 'true' ? ReduxInputDisabled : ReduxInput}
-                  validate={required}
+                  validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
 
                 />
 
@@ -421,7 +421,7 @@ class NewProject extends Component {
                     type="CUST_ID"
                     style={{width:'88%'}}
                     component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                    validate={[required]}
+                    validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
 
                   />
                 </div>
@@ -432,7 +432,7 @@ class NewProject extends Component {
                     type="END_CUST_ID"
                     style={{width:'100%'}}
                     component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                    validate={[required]}
+                    validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
 
                   />
                 </div>
@@ -445,7 +445,7 @@ class NewProject extends Component {
                     type="AMOUNT"
                     style={{width:'94%'}}
                     component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                    validate={[required]}
+                    validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
 
                   />
                 </div>
@@ -456,7 +456,7 @@ class NewProject extends Component {
                     type="MARGIN"
                     style={{width:'100%'}}
                     component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                    validate={[required]}
+                    
 
                   />
                 </div>
@@ -481,7 +481,7 @@ class NewProject extends Component {
                   name="DESC"
                   type="DESC"
                   style={{width:'100%'}}
-                  validate={[required]}
+                  
                   component={ReduxInput}
                 />
               </div>
@@ -581,7 +581,7 @@ class NewProject extends Component {
                         name="AM_ID"
                         style={{width:'96%', float:'right'}}
                         component={form_values && form_values.IWO_AVAILABLE == 'true' ? ReduxInputDisabled : ReduxInput}
-                        validate={[required]}
+                        validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
                         >
                         <option></option>
 
@@ -605,7 +605,6 @@ class NewProject extends Component {
                         style={{width:'96%', float:'right'}}
                         type="input"
                         // style={{width:'100%'}}
-                        validate={[required]}
                         component={ReduxInput}
                       />
                     </div>

@@ -11,13 +11,14 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import moment from 'moment';
 import Dropzone from 'react-dropzone';
 import DayPicker from 'react-day-picker';
-import {checkIWOUsed} from './actions.jsx'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux'
 import Autosuggest from 'react-autosuggest';
+import {initialize} from 'redux-form';
 
 
+import {checkIWOUsed, deleteHoliday, getDataMaster} from './actions.jsx'
 
 const cookies = new Cookies();
 const baseURL = "http://45.77.45.126"
@@ -1104,6 +1105,7 @@ export class TableNew extends Component{
 
 
 
+
 export class TablePagination extends Component {
   constructor(props){
     super(props);
@@ -1111,7 +1113,6 @@ export class TablePagination extends Component {
       page : 1,
       ceiling: 10,
       floor: 0,
-      data : props.tableData.slice(0,10)
 
     };
   }
@@ -1136,6 +1137,8 @@ export class TablePagination extends Component {
       <div>
         <div className="grid">
           <div className="unit whole">
+
+            
         <table className="table" style={{ width: '100%' }}>
           <thead>
             <tr>
@@ -1165,23 +1168,25 @@ export class TablePagination extends Component {
                           name: this.props.editPopUp,
                           data: {
                             active:true,
-                            data: row
                           }
                         })
+                        store.dispatch(initialize(this.props.form,
+                          {
+                            HOLIDAY_ID_EDIT: row.column[3].value,
+                            HOLIDAY_START_EDIT: row.column[1].value,
+                            HOLIDAY_END_EDIT: row.column[2].value,
+                            HOLIDAY_EDIT: row.column[0].value,
+                          }
+                         ))
                         e.preventDefault()
                       }}> 
                       EDIT
                       </button>
                   
                       <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
-                        store.dispatch({
-                          type: 'POPUP',
-                          name: this.props.deletePopUp,
-                          data: {
-                            active:true,
-                            data: row
-                            
-                          }
+                        store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
+                          store.dispatch(getDataMaster("holiday"))
+
                         })
                         e.preventDefault()
                       }}> 

@@ -428,17 +428,17 @@ class Timesheet extends Component {
 
 
 function mapStateToProps(state) {
-  return {
+return {
 
-    formValues: state.form.AddNewTimesheet,
-    state,
-    // filter: ownProps.location.query.filter
-  };
+  formValues: state.form.AddNewTimesheet,
+  state,
+  // filter: ownProps.location.query.filter
+};
 }
 
 export default reduxForm({
-  // Must be unique, this will be the name for THIS PARTICULAR FORM
-  form: 'AddNewTimesheet',
+// Must be unique, this will be the name for THIS PARTICULAR FORM
+form: 'AddNewTimesheet',
 })(
-  connect(mapStateToProps, { addTimesheet })(Timesheet),
+connect(mapStateToProps, { addTimesheet })(Timesheet),
 );
