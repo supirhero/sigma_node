@@ -182,9 +182,10 @@ class EditProject extends Component {
                 >
                   {
                     this.props.state.data.project_setting &&
-                    this.props.state.data.project_setting.iwo_no !='NONE' &&
+                    this.props.state.data.project_setting.iwo_no !='NONE' ? 
                     <option value={this.props.state.data.project_setting.iwo_no}{...this.props.option}>{this.props.state.data.project_setting.iwo_no}</option>
-                      
+                      :
+                      <option>-----------------------------------------------</option>
                   }
                   {
                     iwo &&
