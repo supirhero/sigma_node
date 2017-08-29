@@ -27,7 +27,6 @@ class DatasetHoliday extends Component {
       "HOLIDAY_ID":data.HOLIDAY_ID,
     };
 
-  this.props.initialize(initData);
 }
 
 onSubmitUpdateHoliday(props){
@@ -190,7 +189,6 @@ onSubmitUpdateHoliday(props){
                 
                 </TableNewMasterDataPopUp>
 								</div>
-
 							 <div className="unit whole">
                   <div className="container" style={{float:'left'}}>
                     <small style={{display:'inline-block'}}>show entries</small>

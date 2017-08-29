@@ -387,7 +387,7 @@ class NewProject extends Component {
                   type='input'
                   style={{width:'100%'}}
                   component={form_values && form_values.IWO_AVAILABLE == 'true'  ? ReduxInputDisabled : ReduxInput}
-                  
+                  validate={form_values && form_values.IWO_AVAILABLE == 'true' && [required] }
                 >
 
                 </Field>

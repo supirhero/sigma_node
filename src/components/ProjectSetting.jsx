@@ -24,7 +24,7 @@ import moment from 'moment';
 class EditProject extends Component {
   handleInitialize(data, bu_code, id) {
     const initData = {
-      IWO_NO: data.iwo_no,
+      IWO_NO: data.iwo_no !== "NONE" ? data.iwo_no : "---------------------------------------------------------------------------------------------------------------------------" ,
       END_CUST_ID: data.cust_end_id,
       AMOUNT: data.amount ? data.amount : 0,
       PROJECT_NAME: data.project_name,
@@ -93,7 +93,7 @@ class EditProject extends Component {
     const accountManager = project.account_manager_list ? project.account_manager_list : null;
     const projectEffort = project.type_of_effort ? project.type_of_effort : null;
     const iwo = project.iwo ? project.iwo : null;
-
+    
     return (
         !projectSetting && !projectManager && !accountManager && !iwo && !projectEffort ? <PageLoader /> :
         <div>
@@ -131,7 +131,9 @@ class EditProject extends Component {
                 <Field
                   inputName="IWO NUMBER"
                   name="IWO_NO"
+                  // component = {store.getState().data.project_setting.iwo_no !== "NONE" ? ReduxSelect : ReduxInputDisabled}
                   component={ReduxSelect}
+                  // component={store.getState().data.project_setting.iwo_no !="NONE" ? ReduxInputDisabled : ReduxInput}
                   onChange={(e, value) => {
                     const iwo_no = this.props.formValues.values.IWO_NO;
                     const i = _.findIndex(iwo, { IWO_NO: value });
@@ -182,7 +184,7 @@ class EditProject extends Component {
                     this.props.state.data.project_setting &&
                     this.props.state.data.project_setting.iwo_no !='NONE' &&
                     <option value={this.props.state.data.project_setting.iwo_no}{...this.props.option}>{this.props.state.data.project_setting.iwo_no}</option>
-
+                      
                   }
                   {
                     iwo &&
