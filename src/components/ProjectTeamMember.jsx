@@ -95,7 +95,6 @@ class ProjectTeamMember extends Component {
             <div className='unit one-fifth'>
               <button className='btn-primary' 
 
-              {/* <button className='btn-primary' style ={{marginTop:'60px'}} */}
                 onClick=
                 {
                   e => {

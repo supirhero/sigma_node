@@ -4,17 +4,19 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication ,getListBU,rDirectorat} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader} from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader} from './Components.jsx';
 
 
 class ReportsDirectorate extends Component {
   componentWillMount(){
-  store.dispatch(getListBU())
-  store.dispatch(rDirectorat("44","2017"))
+  this.props.dispatch(getListBU())
+  this.props.dispatch(rDirectorat("44","2017"))
   }
 
   render() {
+    const state = store.getState()
     return (
+      // state.data ? <PageLoader></PageLoader> :
 			<div>
 				<div className="grid wrap">
           <div className="unit three-quarters">
@@ -28,33 +30,41 @@ class ReportsDirectorate extends Component {
 							}}/>
 					</div> */}
 
-              <Menu style={{position:'relative'}} menuStyle={{top:'41', right:'10', width:'200px'}} triggerInput='true'
+              <Menu
+                style={{position:'relative', display:'inline'}}
+                menuStyle={{ width:'500px', top:'50px', right:'auto'}}
+                triggerInput='true'
                 inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
+                >
+                  {
+                    this.props.state.data.list_bu &&
+                    this.props.state.data.list_bu[0].children.map((value,index)=> {
+                      console.log(index,value)
+                      return(
+                        <MenuHeader key={index} title={value.BU_NAME} onClick={e => {
+                        
 
-                style={{display:'inline'}} >
-                <MenuSection>
-                  <MenuItem title='Edit' onClick={e => {
-                    store.dispatch({
-                      type: 'POPUP',
-                      name:'editHoliday',
-                      data: {
-                        active:true
-                      }
-                    })
-                    e.preventDefault()
-                  }}/>
-                  <MenuItem title='Delete' onClick={e => {
-                    store.dispatch({
-                      type: 'POPUP',
-                      name:'deleteHoliday',
-                      data: {
-                        active:true
-                      }
-                    })
-                    store.dispatch(deleteHoliday(this.props.id))
-                    e.preventDefault()
-                  }}/>
-                </MenuSection>
+                            e.preventDefault()
+                          }}>
+                    
+                          
+                          {
+                            value.children != undefined  &&
+                            value.children.map((value,index) => (
+                              <MenuItem title={value.BU_NAME} onClick={e => {
+                            
+                                e.preventDefault()
+                              }}></MenuItem>
+                            ))
+                          }
+                          </MenuHeader>
+                      )
+                    }
+
+              
+                    )
+                  }
+
               </Menu>
           </div>
 
@@ -303,6 +313,7 @@ class ReportsDirectorate extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   };
 }
