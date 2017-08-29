@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search } from './Components.jsx';
+import { Select, Input, Table,TablePagination,Header,Search } from './Components.jsx';
 
 
 class DatasetPartner extends Component {
@@ -21,8 +21,8 @@ class DatasetPartner extends Component {
 									<Search placeholder='search partner' style={{float:'right',width:'400px'}} />
                 </div>
                 <div className="unit whole">
-                <TableNew
-                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'ADDRESS'},{value:'TELEPHONE'}]}
+                <TablePagination
+                  tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'ADDRESS'},{value:'TELEPHONE'},{value:null}]}
                   tableData={[{column:[
                     {value:'1'},
                     {value:'0063001676'},
@@ -95,28 +95,9 @@ class DatasetPartner extends Component {
                   
                 
                 ]}
-                ></TableNew>                
+                ></TablePagination>                
                 </div>
-                 <div className="unit whole">
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select 
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
-                  
-                  </div>
-                  <div className="container" style={{float:'right'}}>                  
-                    <button className="arrow"> <b> &lt; </b> </button>
-                    <button className="pagination"><b>1</b></button>
-                    <button className="arrow"> <b> &gt; </b> </button>
-                  </div>
-                </div>
+
         			</div>
             </div>
           </div>

@@ -1305,13 +1305,13 @@ export function addHoliday(data){
       url:`${baseURL}Datamaster/manage/holiday/add?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
+        HOLIDAY: data.HOLIDAY,
         HOLIDAY:data.HOLIDAY,
         HOLIDAY_START:moment(data.HOLIDAY_START).format('YYYY-MM-DD'),
         HOLIDAY_END:moment(data.HOLIDAY_END).format('YYYY-MM-DD')
       }
     }).then(
       (res)=>{
-        store.alert('New Holiday Added')
         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
         store.dispatch(getDataMasterMIS("holiday"))
       }
@@ -1327,14 +1327,15 @@ export function updateHoliday(data){
       url:`${baseURL}Datamaster/manage/holiday/update?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
-        HOLIDAY_ID:data.HOLIDAY_ID,
-        HOLIDAY_START:data.HOLIDAY_START,
-        HOLIDAY_END:data.HOLIDAY_END,
-        HOLIDAY:data.HOLIDAY
+        HOLIDAY_ID:data.HOLIDAY_ID_EDIT,
+        HOLIDAY_START:moment(data.HOLIDAY_START_EDIT).format('YYYY-MM-DD'),
+        HOLIDAY_END:moment(data.HOLIDAY_END_EDIT).format('YYYY-MM-DD'),
+        HOLIDAY:data.HOLIDAY_EDIT
       }
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        return res
       }
     )
   }
@@ -1352,7 +1353,7 @@ export function deleteHoliday(HOLIDAY_ID){
       }
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        // store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
       }
     )
   }

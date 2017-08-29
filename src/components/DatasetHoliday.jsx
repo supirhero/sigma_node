@@ -5,8 +5,8 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUp,ReduxInputDisabled,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp, Pagination} from './Components.jsx';
-import {getDataMaster,addHoliday} from './actions.jsx'
+import { Select, Input, Table,TableNew,Header,Search,PopUp,PageLoader,ReduxInput,datepickerUniversal,TablePagination, Pagination, ReduxInputDisabled} from './Components.jsx';
+import {getDataMaster,addHoliday, updateHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
 
@@ -20,36 +20,66 @@ class DatasetHoliday extends Component {
   }
 
 
-  handleInitialize(data) {
-    const initData = {
-      "HOLIDAY_START":data.HOLIDAY_START,
-      "HOLIDAY_END":data.HOLIDAY_END,
-      "HOLIDAY_ID":data.HOLIDAY_ID,
-    };
+//   handleInitialize(data) {
+//     const state = this.props.state.popup 
+//     const initData = {
+//       "HOLIDAY_START": state && state.editHoliday && state.editHoliday.data ? state.editHoliday.data.column[0].value : null,
+//       "HOLIDAY_END":state && state.editHoliday && state.editHoliday.data ? state.editHoliday.data.column[1].value : null,
+//       "HOLIDAY_ID":state && state.editHoliday && state.editHoliday.data ? state.editHoliday.data.column[2].value : null,
+//     };
+//     this.props.initialize(initData)
 
-}
+// }
 
 onSubmitUpdateHoliday(props){
-  store.dispatch(updateHoliday(props))
+  this.props.dispatch(updateHoliday(props)).then(res => {
+    this.props.dispatch(getDataMaster("holiday"))
+    store.dispatch({
+      type: 'POPUP',
+      name: 'editHoliday',
+      data: {
+        active:false,
+      }
+    })
+    
+  })
 }
-
+componentWillUpdate() {
+  
+}
+componentDidUpdate() {
+  
+}
 
   componentWillMount(){
     const state = store.getState()
     const holiday = state.data.holiday
     // const holiday = store.getState().data.holiday
-    store.dispatch(getDataMaster("holiday"))
+    this.props.dispatch(getDataMaster("holiday"))
   }
 
   onSubmit(props){
-    store.dispatch(addHoliday(props))
+    this.props.dispatch(addHoliday(props)).then(
+      ()=> {
+        store.dispatch({
+          type: 'POPUP',
+          name: 'createHoliday',
+          data: {
+            active:false,
+          }
+        })
+      }
+    )
   }
+
+
 
   render() {
     const {handleSubmit} = this.props;
     const state = store.getState()
     const holiday = state.data.holiday
-
+    // this.handleInitialize()
+    
 
     if (!holiday){
       <PageLoader />
@@ -58,14 +88,14 @@ onSubmitUpdateHoliday(props){
     return (
       <div>
 
-      <PopUp id="editHoliday" dividerText="EDIT HOLIDAY" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <PopUp id="editHoliday" context={this} dividerText="EDIT HOLIDAY" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
+      <form onSubmit={handleSubmit(this.onSubmitUpdateHoliday.bind(this))}>
         <div>
           <div className="grid wrap narrow">
             <div className="unit whole">
                 <Field
                 inputName="HOLIDAY"
-                name="HOLIDAY"
+                name="HOLIDAY_EDIT"
                 type='input'
                 component={ReduxInputDisabled}
               />
@@ -75,7 +105,7 @@ onSubmitUpdateHoliday(props){
             <div className="unit whole">
               <Field
               inputName="START DATE"
-              name="HOLIDAY_START"
+              name="HOLIDAY_START_EDIT"
               type='input'
               component={datepickerUniversal}
             />
@@ -86,7 +116,7 @@ onSubmitUpdateHoliday(props){
             <div className="unit whole">
             <Field
             inputName="END DATE"
-            name="HOLIDAY_END"
+            name="HOLIDAY_END_EDIT"
             type='input'
             component={datepickerUniversal}
           />
@@ -95,8 +125,19 @@ onSubmitUpdateHoliday(props){
           </div>
             <div className="grid wrap narrow">
               <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-                <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-                <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
+                <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                  e=> {
+                    store.dispatch({
+                      type: 'POPUP',
+                      name: 'editHoliday',
+                      data: {
+                        active:false,
+                      }
+                    })
+                  e.prevenDefault()
+                  }
+                  }> CANCEL </button>
+                <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary">EDIT</button>
               </div>
             </div>
         </div>
@@ -137,7 +178,7 @@ onSubmitUpdateHoliday(props){
                         <div className="unit whole">
                             <Field
                             inputName="HOLIDAY"
-                            name="HOLIDAY"
+                            name="HOLIDAY_ID"
                             type='input'
                             component={ReduxInput}
                           />
@@ -167,7 +208,16 @@ onSubmitUpdateHoliday(props){
 											</div>
 												<div className="grid wrap narrow">
 													<div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-														<button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+														<button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                              e=> {
+                                store.dispatch({
+                                  type: 'POPUP',
+                                  name: 'createHoliday',
+                                  data: {
+                                    active:false,
+                                  }
+                                })
+                              }}> CANCEL </button>
 														<button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
 													</div>
 												</div>
@@ -177,34 +227,30 @@ onSubmitUpdateHoliday(props){
 									<Search placeholder='search holiday' style={{float:'right',width:'400px'}} />
 								</div>
 								<div className="unit whole">
-                   <TableNewMasterDataPopUp
-                  tableHeader={[{value:'NAME'},{value:'START'},{value:'END'}]}
-                  tableData={holiday?holiday.map((value,index)=>{
+
+
+
+                   <TablePagination
+                   form='add_holiday'
+                   editPopUp='editHoliday'
+                   deletePopUp='deleteHoliday'
+                   
+                  tableHeader={[{value:'NAME'},{value:'START'},{value:'END'},{value:null}]}
+                  tableData={
+                    holiday.map((value,index)=>{
                     return {column:[
                       {value:value.HOLIDAY},
                       {value:value.HOLIDAY_START},
                       {value:value.HOLIDAY_END},
+                      {value:value.HOLIDAY_ID},
+                      
                     ]}
-                  }):null}>
+                  })}>
+                  
                 
-                </TableNewMasterDataPopUp>
+                </TablePagination>
 								</div>
-							 <div className="unit whole">
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
 
-                  </div>
-                  <Pagination data={holiday}></Pagination>
-             	 </div>
 
         			</div>
             </div>
