@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew ,Header, Search, PopUp,PageLoader } from './Components.jsx';
+import { Select, Input, Table,TablePagination ,Header, Search, PopUp,PageLoader } from './Components.jsx';
 import {getDataMaster} from './actions.jsx'
 
 
@@ -53,38 +53,19 @@ class DatasetProjectType extends Component {
                   <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
                 </div>
                 <div className="unit whole">
-                  <TableNew
-                  tableHeader={[{value:'NO'},{value:'NAME'}]}
+                  <TablePagination
+                  tableHeader={[{value:'NO'},{value:'NAME'},{value:null}]}
                   tableData={project_type?project_type.map((value,index)=>{
                     return {column:[
                       {value:value.ID},
                       {value:value.PROJECT_TYPE},
                     ]}
                   }):null}>
-                </TableNew>       
+                </TablePagination>       
                 
                 </div>
                 
-                <div className="unit whole">
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select 
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
-                  
-                  </div>
-                  <div className="container" style={{float:'right'}}>                  
-                    <button className="arrow"> <b> &lt; </b> </button>
-                    <button className="pagination"><b>1</b></button>
-                    <button className="arrow"> <b> &gt; </b> </button>
-                  </div>
-               </div>
+
               
               </div>
             </div>

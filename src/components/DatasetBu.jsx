@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,required} from './Components.jsx';
+import { Select, Input, Table,TablePagination,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,required} from './Components.jsx';
 import {getDataMaster,addBU} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -111,16 +111,17 @@ class DatasetBu extends Component {
                   <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
                 </div>
                 <div className="unit whole">
-                  <TableNew
-                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'}]}
+                  <TablePagination
+                  tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'}, {value: null}]}
                   tableData={bu ? bu.map((value,index)=>{
                     return {column:[
                       {value:value.LEVEL},
                       {value:value.BU_NAME},
                       {value:value.BU_HEAD},
+                      
                     ]}
                   }):null}>
-                </TableNew>       
+                </TablePagination>       
                 
                 </div>
 

@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp, Pagination} from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search,PopUp,PageLoader,ReduxInput,datepickerUniversal,TablePagination, Pagination} from './Components.jsx';
 import {getDataMaster,addHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
@@ -59,6 +59,7 @@ onSubmitUpdateHoliday(props){
       <div>
 
       <PopUp id="editHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
+        
       <div>
         <div className="grid wrap narrow">
           <div className="unit whole">
@@ -166,8 +167,11 @@ onSubmitUpdateHoliday(props){
 								</div>
 
 								<div className="unit whole">
-                   <TableNewMasterDataPopUp
-                  tableHeader={[{value:'NAME'},{value:'START'},{value:'END'}]}
+                   <TablePagination
+                   editPopUp='editHoliday'
+                   deletePopUp='deleteHoliday'
+                   
+                  tableHeader={[{value:'NAME'},{value:'START'},{value:'END'},{value:null}]}
                   tableData={holiday?holiday.map((value,index)=>{
                     return {column:[
                       {value:value.HOLIDAY},
@@ -175,26 +179,12 @@ onSubmitUpdateHoliday(props){
                       {value:value.HOLIDAY_END},
                     ]}
                   }):null}>
+                  
                 
-                </TableNewMasterDataPopUp>
+                </TablePagination>
 								</div>
 
-							 <div className="unit whole">
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
-
-                  </div>
-                  <Pagination data={holiday}></Pagination>
-             	 </div>
+							 
 
         			</div>
             </div>

@@ -31,9 +31,7 @@
     "rc-menu": "^5.0.10",
     "react": "^15.6.1",
     "react-autocomplete": "^1.7.1",
-
     "react-autosuggest": "^9.3.2",
-
     "react-contextmenu": "^2.6.3",
     "react-data-components": "^1.1.0",
     "react-datepicker": "^0.53.0",
@@ -68,6 +66,11 @@
     "babel-preset-react-hmre": "^1.1.1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.3.0",
     "extract-loader": "^0.1.0",
     "file-loader": "^0.11.2",
     "node-sass": "^4.5.3",
