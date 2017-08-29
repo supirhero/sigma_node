@@ -1617,7 +1617,6 @@ export class ReduxUploadWorkplan extends Component {
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
-
       </Dropzone>
 
       </div>

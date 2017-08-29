@@ -55,18 +55,16 @@ class ProjectTeamMember extends Component {
             menuStyle={{
               borderRadius: '3px',
               boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-              background: 'rgba(255, 255, 255, 5)',
-              left: 0,
-              width:'100%',
-              top:50,
+              background: 'rgba(255, 255, 255, 0.9)',
+              padding: '2px 0',
               fontSize: '90%',
-              position: 'absolute',
-              overflow: 'auto',
-              height:'200px',
+              position: 'fixed',
+              display:'block',
               cursor:'pointer',
-              display:'block'
+              overflow: 'auto',
+              maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
             }}
-            shouldItemRender={(item, value) => item.label.indexOf(value) > -1}
+            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
             getItemValue={item => item.label}
             renderItem={(item, highlighted) =>
               <div className="small-wrap">
