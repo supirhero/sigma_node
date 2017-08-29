@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PopUpBARU,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp, Pagination} from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search,PopUp,PageLoader,ReduxInput,datepickerUniversal,TableNewMasterDataPopUp, Pagination} from './Components.jsx';
 import {getDataMaster,addHoliday} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
@@ -58,7 +58,7 @@ onSubmitUpdateHoliday(props){
     return (
       <div>
 
-      <PopUpBARU id="editHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
+      <PopUp id="editHoliday" dividerText="EDIT HOLIDAY" btnText="EDIT" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
       <div>
         <div className="grid wrap narrow">
           <div className="unit whole">
@@ -90,7 +90,7 @@ onSubmitUpdateHoliday(props){
         </div>
       </div>
 
-    </PopUpBARU>
+    </PopUp>
         <div className="grid dataset">
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
@@ -101,7 +101,23 @@ onSubmitUpdateHoliday(props){
 								</div>
 
                 <div className="unit three-quarters">
-
+                <button className='btn-primary hover'
+                style={{display:'inline-block', marginRight: '20px',marginTop:'3px'}}
+                onClick={
+                e => {
+                  console.log('PROPS', this.props);
+                  this.props.dispatch({
+                    type: 'POPUP',
+                    name:'createHoliday',
+                    data: {
+                      active:true
+                    }
+                  })
+                  e.preventDefault()
+                }
+              }>
+                ADD NEW
+              </button>
 									<PopUp id="createHoliday" dividerText="CREATE HOLIDAY" btnClass='btn-primary' btnText="ADD NEW" style={{display:'inline-block', marginLeft:'35px'}}>
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <div>
@@ -150,7 +166,7 @@ onSubmitUpdateHoliday(props){
 								</div>
 
 								<div className="unit whole">
-									 <TableNewMasterDataPopUp
+                   <TableNewMasterDataPopUp
                   tableHeader={[{value:'NAME'},{value:'START'},{value:'END'}]}
                   tableData={holiday?holiday.map((value,index)=>{
                     return {column:[
@@ -159,7 +175,7 @@ onSubmitUpdateHoliday(props){
                       {value:value.HOLIDAY_END},
                     ]}
                   }):null}>
-
+                
                 </TableNewMasterDataPopUp>
 								</div>
 

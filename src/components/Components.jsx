@@ -773,76 +773,6 @@ export class Search extends Component {
   }
 }
 
-export class PopUpBARU extends Component {
-  constructor(){
-    super();
-    this.state = {
-      clicked : false
-
-    };
-  }
-
-  render() {
-    // const dom = store.getState().dom
-    console.log('POPUP PROPS',this.props);
-    const popup = store.getState().data.popup
-    return(
-      <div style={this.props.style}>
-
-        <div className={popup && popup[this.props.id] && popup[this.props.id].active ? this.props.id + ' popup-container active' : this.props.id +  ' popup-container'} style={{zIndex:'2'}}>
-            <div className='grid wrap' style={{position:'relative'}}>
-              <div className='unit whole'>
-                <div className='card shadow' style={{marginTop:'6%'}}>
-                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
-                      e => {
-                        document.body.style.overflow = 'scroll';
-                        document.body.scrollTop = 0; // For Chrome, Safari and Opera
-                        document.documentElement.scrollTop = 0; // For IE and Firefox
-                        store.dispatch({
-                          type: 'POPUP',
-                          name:this.props.id,
-                          data: {
-                            active:false
-                          }
-                        })
-                        e.preventDefault()
-                      }
-                    }></Divider>
-
-
-
-                    {this.props.children}
-
-                </div>
-              </div>
-            </div>
-            <div className='tint'></div>
-
-        </div>
-        {/* <button style={this.props.btnStyle} className={this.props.btnClass}
-          onClick={
-            e => {
-              document.body.style.overflow = 'hidden';
-              document.body.scrollTop = 0; // For Chrome, Safari and Opera
-            document.documentElement.scrollTop = 0; // For IE and Firefox
-              // if (window.addEventListener) // older FF
-              //     window.addEventListener('DOMMouseScroll', preventDefault, false);
-              //     window.onwheel = preventDefault; // modern standard
-              //     window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-              //     window.ontouchmove  = preventDefault; // mobile
-              //     document.onkeydown  = preventDefaultForScrollKeys;
-              this.setState({
-                clicked:true
-              })
-              e.preventDefault()
-            }}
-          >{this.props.btnText}</button> */}
-      </div>
-
-    )
-  }
-
-}
 
 
 
@@ -1199,24 +1129,32 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                    <button className='btn-primary'
-                    style={{display:'block', margin: 'auto'}}
-                    onClick={
-                    e => {
-                      console.log('PROPS', this.props);
-                      this.props.dispatch({
+                    <button className="btn-primary" title='Edit' style={{width:'100px',height:'30px',borderRadius:'2px'}} onClick={e => {
+                      store.dispatch({
                         type: 'POPUP',
                         name:'editHoliday',
                         data: {
                           active:true
                         }
                       })
-                      e.preventDefault()}}>
+                      e.preventDefault()
+                    }}> 
                     EDIT
-                    
-                  </button>
-
-
+                    </button>
+                    </td>
+                    <td style={{ position: 'relative' }}>
+                    <button className="btn-primary" title='Edit' style={{width:'30px',height:'30px',borderRadius:'2px'}} onClick={e => {
+                      store.dispatch({
+                        type: 'POPUP',
+                        name:'deleteHoliday',
+                        data: {
+                          active:true
+                        }
+                      })
+                      e.preventDefault()
+                    }}> 
+                    <span className="fa fa-trash fa-2x" style={{ color: 'white' ,paddingBottom:'50px'}} />
+                    </button>
                     </td>
                   </tr>
                 ))
@@ -1260,7 +1198,7 @@ export class TableNewMasterData extends Component{
                       <MenuItem title='Edit' onClick={e => {
                         store.dispatch({
                           type: 'POPUP',
-                          name:'editHoliday',
+                          name:'edit',
                           data: {
                             active:true
                           }
@@ -1586,23 +1524,6 @@ export class ReduxFileInput extends Component {
 
 
 
-
-export class ReduxDrop extends Component {
-  render(){
-    return(
-      <Dropzone
-      name={this.props.name}
-      className="btn-primary"
-      style={{width:'170px',height:'30px'}}
-      placeholder={this.props.placeholder}
-      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-      onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
-      >
-
-      </Dropzone>
-    )
-  }
-}
 
 
 export class ReduxUploadWorkplan extends Component {

@@ -923,6 +923,37 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
   }
 }
 
+export function resubmitTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
+  const currentDate = moment().format("YYYY-MM-DD");
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}timesheet/addTimesheet?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+            PROJECT_ID,
+            WP_ID,
+              TS_DATE,
+             HOUR,
+             TS_SUBJECT,
+             TS_MESSAGE,
+             LATITUDE:'38.898648',
+             LONGITUDE:'77.037692'
+            }
+    }).then(
+      (res)=>{
+        console.log("ADDTIMESHEET");
+        alert('timesheet re-submitted')
+        store.dispatch(getMyActivities())
+        // store.dispatch(viewTimesheet(TS_DATE));
+
+
+      }
+    )
+  }
+}
+
 
 
 export function confirmationTimesheet(ts_id,project_id,confirm) {
@@ -1245,8 +1276,8 @@ export function addHoliday(data){
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
         HOLIDAY:data.HOLIDAY,
-        HOLIDAY_START:data.HOLIDAY_START,
-        HOLIDAY_END:data.HOLIDAY_END
+        HOLIDAY_START:moment(data.HOLIDAY_START).format('YYYY-MM-DD'),
+        HOLIDAY_END:moment(data.HOLIDAY_END).format('YYYY-MM-DD')
       }
     }).then(
       (res)=>{
@@ -1380,3 +1411,22 @@ export function weekTimesheet(click){
           )
   };
 }
+
+
+export function baseline(id) {
+    store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+    const token = cookies.get('token')
+    return function (dispatch) {
+      const token = cookies.get('token')
+      return axios({
+              method: 'GET',
+              url: `${baseURL}project/baseline/${id}?token=${token}`,
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(
+              res => {
+                store.dispatch({type:'API', name: 'project', data: res})
+              },
+  
+            )
+    }
+  }

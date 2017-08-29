@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, PageLoader } from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, pop,addTimesheet } from './actions.jsx';
+import { getMyActivities, pop,resubmitTimesheet} from './actions.jsx';
 import moment from 'moment'
 class MyRecentActivities extends Component {
   componentWillMount() {
@@ -148,7 +148,9 @@ class MyRecentActivities extends Component {
                 {
                 value.is_approved == 0 &&
                 <a style={{marginLeft:'45px'}} onClick={e => {
-                  store.dispatch(addTimesheet(value.project_id,value.wbs_id,value.ts_date,value.hour_total,value.subject,value.message))
+                  store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
+                    store.dispatch(getMyActivities())
+                  })
                   
                 }}
                 >
@@ -175,4 +177,4 @@ function mapStateToProps(state) {
     // filter: ownProps.location.query.filter
   };
 }
-export default connect(mapStateToProps,{addTimesheet})(MyRecentActivities);
+export default connect(mapStateToProps,{resubmitTimesheet})(MyRecentActivities);
