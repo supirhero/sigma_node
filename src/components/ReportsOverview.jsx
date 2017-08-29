@@ -230,14 +230,16 @@ class ReportsOverview extends Component {
             <div className="card" style={{ padding: '35px' }}>
               <div className="unit whole" style={{paddingLeft:'10px'}}>
                 <Header text='Yearly Performance' style={{display:'inline-block'}} />
-                <a href="" style={{float:'right'}}>hide advanced filter</a>
+                <a href="" style={{float:'right',display:'none'}}>hide advanced filter</a>
               </div>
        
+              {/* 
               <div className="unit whole">
                 <medium style={{marginTop:'44px',marginBottom:'10px'}}><b>Working Unit</b></medium>
                 <Checkbox id='test1' label='BSD' group='working' />
               </div>
-         
+              */}
+
               <div className="unit whole">
                 <medium style={{marginTop:'20px',marginBottom:'10px'}}><b>Year</b></medium>
                 <div className="unit half">
@@ -263,7 +265,7 @@ class ReportsOverview extends Component {
                   // store.dispatch(myPerformance('1','2017')) 
                   e.preventDefault() 
                 }}>search</span></button> */}
-                <button style={{display:'inline-block',float:'right'}} className='btn-primary'>DOWNLOAD</button>
+                <button style={{display:'inline-block',float:'right',display:'none'}} className='btn-primary'>DOWNLOAD</button>
                 </div>
               </div>
             </div>
@@ -275,9 +277,13 @@ class ReportsOverview extends Component {
             <div className="card" style={{ padding: '35px' }}>
               <div className="grid wrap narrow" style={{marginTop:'55px'}}>
                 <div className="unit whole">
+                 {
+                  !r_yearly_spi ? <PageLoader /> :
+                
                   <LineChart
                     label="SPI HISTORY"
-                    data={
+                    data=
+                    {
                       r_yearly_spi &&
                       r_yearly_spi.map((value,index)=>{
                       return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
@@ -295,7 +301,7 @@ class ReportsOverview extends Component {
 													]}
                     style={{marginTop:'50px'}}
                   />
-
+                } 
                 </div>
               </div>
 

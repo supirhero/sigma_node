@@ -117,7 +117,7 @@ class DatasetBu extends Component {
                     return {column:[
                       {value:value.LEVEL},
                       {value:value.BU_NAME},
-                      {value:value.BU_HEAD},
+                      {value:value.BU_HEAD_NAME},
                     ]}
                   }):null}>
                 </TableNew>       

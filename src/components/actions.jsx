@@ -1281,6 +1281,7 @@ export function addHoliday(data){
       }
     }).then(
       (res)=>{
+        store.alert('New Holiday Added')
         store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
         store.dispatch(getDataMasterMIS("holiday"))
       }
