@@ -717,6 +717,36 @@ export const reportPeople = (BU_ID,BULAN,TAHUN) => {
 
 
 
+
+export const reportSearchProject = (props) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/report_filter?token=${token}` ,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+              value:props.value,
+              status:props.status,
+              schedule:props.schedule,
+              budget:props.budget
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
+
 export const getSCurve = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // store.dispatch({type:'API', data: null, append:true})
