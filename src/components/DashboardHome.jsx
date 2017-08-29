@@ -16,11 +16,8 @@ class DashboardHome extends Component {
     this.props.dispatch(getDashboardView())
   }
   render() {
-    var state = store.getState()
-    console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var auth = store.getState()
-    console.log(state.auth.token)
+    var auth = this.props.state.data
     // console.log(projects);
     return(
       !auth.userdata && !auth.datatimesheet? <PageLoader></PageLoader> :
@@ -138,7 +135,6 @@ class DashboardHome extends Component {
     <div className='projects'>
       {
               auth &&
-              auth.project &&
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
@@ -268,6 +264,6 @@ class DashboardHome extends Component {
 }
 
 function mapStateToProps(state) {
-  return state
+  return {state}
 }
 export default connect(mapStateToProps)(DashboardHome)

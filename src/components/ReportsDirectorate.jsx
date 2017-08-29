@@ -38,13 +38,31 @@ class ReportsDirectorate extends Component {
                 >
                   {
                     this.props.state.data.list_bu &&
-                    this.props.state.data.list_bu[0].children.map((value,index)=> (
+                    this.props.state.data.list_bu[0].children.map((value,index)=> {
+                      console.log(index,value)
+                      return(
+                        <MenuHeader key={index} title={value.BU_NAME} onClick={e => {
+                        
 
-                      <MenuItem title={value.bu_name} onClick={e => {
+                            e.preventDefault()
+                          }}>
+                    
+                          
+                          {
+                            value.children != undefined  &&
+                            value.children.map((value,index) => (
+                              <MenuItem title={value.BU_NAME} onClick={e => {
+                            
+                                e.preventDefault()
+                              }}></MenuItem>
+                            ))
+                          }
+                          </MenuHeader>
+                      )
+                    }
 
-                        e.preventDefault()
-                      }}/>
-                    ))
+              
+                    )
                   }
 
               </Menu>
@@ -295,6 +313,7 @@ class ReportsDirectorate extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   };
 }
