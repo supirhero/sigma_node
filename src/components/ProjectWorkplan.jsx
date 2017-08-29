@@ -11,7 +11,9 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 
 
 import { Field, reduxForm } from 'redux-form';
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline, deleteTask} from './actions.jsx';
+
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask} from './actions.jsx';
+import ReactAutocomplete from 'react-autocomplete'
 
 
 class ProjectWorkplan extends Component {
@@ -23,7 +25,14 @@ class ProjectWorkplan extends Component {
       array: {
         new_task :[],
         modified_task:[]
-      }
+      },
+      assignMember:{
+        MEMBER:'',
+        EMAIL:'',
+        NAME:'',
+      },
+      label: '',
+      id:''
     };
   }
 
@@ -136,6 +145,8 @@ class ProjectWorkplan extends Component {
                 e.preventDefault()
               }}/>
               <MenuItem title='Assign' onClick={e => {
+                // this.setState({WBS_id:value.WBS_id})
+                // this.setState({WBS_name:value.WBS_name})
                 this.props.dispatch({
                   type: 'POPUP',
                   name:'assign_task',
@@ -143,9 +154,13 @@ class ProjectWorkplan extends Component {
                     active:true
                   }
                 })
+                this.handleInitialize({
+                  WBS_NAME: value.WBS_NAME,
+                  WBS_ID: value.WBS_ID
+                })
                 const id = this.props.state.page.id;
 
-                this.props.dispatch(getTaskMemberView(id,this.state.WBS_id))
+                this.props.dispatch(getTaskMemberView(id,value.WBS_ID))
 
                 e.preventDefault()
               }}/>
@@ -231,6 +246,20 @@ class ProjectWorkplan extends Component {
       // })
     });
   }
+
+  onSubmitAssign(props){
+    const id = this.props.state.page.id;
+    this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
+      this.props.dispatch({
+        type: 'POPUP',
+        name:'assign_task',
+        data: {
+          active:false
+        }
+      })
+      this.props.dispatch(getWorkplanView(id))
+    });
+  }
   onSubmitRebaseline(props){
     alert('blaa')
     var id = this.props.state.page.id
@@ -292,8 +321,11 @@ class ProjectWorkplan extends Component {
 
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
+    const available_to_assign = store.getState().data.available_to_assign ? store.getState().data.available_to_assign.map((value,index)=>{
+      return {EMAIL:value.EMAIL , RP_ID:value.RP_ID, USER_NAME:value.USER_NAME}
+     }) : null
 
-
+    const currently_assigned = this.props.state.data.currently_assigned;
     return (
       <div className="project-workplan">
         <div className="grid wrap narrow">
@@ -571,13 +603,14 @@ class ProjectWorkplan extends Component {
           {
             !this.props.state.data.available_to_assign && !this.props.state.data.task_name ? <PageLoader/> :
 
-            <form >
+            <form onSubmit={handleSubmit(this.onSubmitAssign.bind(this))}>
+            
             <div>
               <div className="grid wrap narrow">
                 <div className="unit whole">
                   <Field
                     inputName="TASK"
-                    name="desc"
+                    name="WBS_NAME"
                     type="input"
                     component={ReduxInputDisabled}
                   />
@@ -587,16 +620,61 @@ class ProjectWorkplan extends Component {
               </div>
               <div className="grid wrap narrow">
                 <div className="unit three-fifths">
-                  <Field
-                    inputName="ASSIGNED TO"
-                    name="desc"
-                    type="input"
-                    component={ReduxInput}
-                  />
+                    <h2 className="input-desc">Test</h2>
+                      <ReactAutocomplete
+                      menuStyle={{
+                        opacity:'1'
+                      }}
+                      getItemValue={(label) => label.label}
+                      style={{width:'500px',marginTop:'60px'}}
+                      items={available_to_assign}
+                      wrapperProps={{width:'899px'}}
+                      menuStyle={{
+                        borderRadius: '3px',
+                        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                        background: 'rgba(255, 255, 255, 5)',
+                        padding: '2px 0',
+                        fontSize: '90%',
+                        position: 'fixed',
+                        overflow: 'auto',
+                        maxHeight: '50%',
+                        cursor:'pointer',
+                        display:'block'
+                      }}
+                      shouldItemRender={(item, value) => item.USER_NAME.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                      // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                      getItemValue={item => item.USER_NAME}
+                      renderItem={(item, highlighted) =>
+                        <small key={item.RP_ID}>{item.USER_NAME}</small>  
+                      }
+                      value={this.state.value}
+                      onChange={e => {
+                        this.setState({ value: e.target.value })
+                    }}
+                      onSelect={(USER_NAME,RP_ID,EMAIL) => {
+                        console.log(RP_ID)
+                        this.setState({value: USER_NAME})
+                        this.setState({data:RP_ID},()=>{
+                          console.log(this.state.data)
+                        })
+
+                       
+                       
+                    }}
+                    />
+
                 </div>
 
                 <div className="unit two-fifths">
-                  <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px', marginTop: '60px', float:'right' }} className="btn-primary"> ADD </button>
+                  <button type='submit' style={{ display: 'inline-block', width: '200px', marginLeft: '40px', marginTop: '60px', float:'right' }} className="btn-primary" 
+                  // onClick={
+                  //   e => {
+                  //     alert('BLAAAA')
+                  //     this.props.dispatch(assignTaskMember(this.state.WBS_id,this.state.data.RP_ID,this.state.data.EMAIL,this.state.data.USER_NAME,this.state.WBS_name))
+                  //     e.preventDefault()
+                  //   }
+                  >ADD
+                  </button>
 
                 </div>
               </div>
@@ -609,7 +687,7 @@ class ProjectWorkplan extends Component {
                 </div>
               </div>
               {
-                this.props.state.data.available_to_assign.map((value,index)=> (
+                this.props.state.data.currently_assigned.map((value,index)=> (
                   <div className="grid wrap narrow">
                     <div className="unit one-fifth">
                       <medium style={{ display: 'inline-block', float: 'left' }}>60%</medium>
@@ -630,12 +708,7 @@ class ProjectWorkplan extends Component {
                 ))
               }
 
-              <div className="grid wrap narrow">
-                <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-                  <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-                  <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> UPLOAD </button>
-                </div>
-              </div>
+              
 
             </div>
           </form>
@@ -883,11 +956,11 @@ function mapStateToProps(state) {
     state,
   };
 }
-export default reduxForm({
+export default reduxForm({ 
   // Must be unique, this will be the name for THIS PARTICULAR FORM
   form: 'add_task',
   form: 'upload_workplan'
 })(
-  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline })(ProjectWorkplan),
+  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline, assignTaskMember })(ProjectWorkplan),
 );
 // export default Login
