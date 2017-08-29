@@ -161,8 +161,54 @@ export const getProjectTeamMember = (id) => {
             },
           )
   }
-
 }
+
+
+export const getAvailableProjectTeamMember = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/availableMember/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+            },
+          )
+  }
+}
+
+export const assignProjectTeamMember = (id,user_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/projectmemberadd/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              USER_ID:user_id
+            }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch(getAvailableProjectTeamMember(id))
+              store.dispatch({type:'API', name: 'project',  data: res, append: true})
+              res.data.status == "Error" ? 
+              alert("Gagal, User sudah ada di dalam project") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+              }
+            },
+          )
+  }
+}
+
 
 
 
@@ -197,12 +243,46 @@ export const addDocsAndFiles = (desc,files, id ) => {
     const formData = new FormData();
     formData.append('desc',desc);
     formData.append('document',files[0])
-    fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/documentupload/${id}?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        alert('document uploaded');
+        
+        store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+
+      },
+    )
   }
 }
+
+export const deleteTask = (wbs_id ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}task/deleteTask?token=${token}` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: {
+              wbs_id: wbs_id
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'project', data: res, append:true})
+              return res
+            },
+          )
+  }
+}
+
 
 
 export const getIssue = (id) => {
@@ -259,12 +339,14 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
     formData.append('MESSAGE',MESSAGE);
     formData.append('PRIORITY',PRIORITY);
     formData.append('file_upload',file_upload[0])
-    fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
+    return fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
       method:'POST',
       body:formData
     })
   }
 }
+
+
 
 export const addNewProject = (data,id) => {
   console.log('DATA', data);
@@ -764,7 +846,7 @@ export function taskList(project_id) {
 //   }
 // }
 
-export function addTaskWorkplan(id,data) {
+export function addTaskWorkplan(id,wbs_id,data) {
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
@@ -773,10 +855,12 @@ export function addTaskWorkplan(id,data) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
         PROJECT_ID: id,
+        // WBS_ID: wbs_id,
         WBS_NAME: data.WBS_NAME,
         WBS_PARENT_ID: data.WBS_PARENT_ID,
-        START_DATE: data.START_DATE,
-        FINISH_DATE: data.FINISH_DATE
+        
+        START_DATE: moment(data.START_DATE).format('YYYY-MM-DD'),
+        FINISH_DATE: moment(data.FINISH_DATE).format('YYYY-MM-DD')
         }
     }).then(
       (res)=>{
@@ -851,7 +935,7 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(getMyActivities());
+        store.dispatch(getProjectActivities());
         alert('updated')
       }
     )
@@ -969,18 +1053,20 @@ export function getTaskMemberView(project_id,wbs_id){
   }
 }
 
-export function assignTaskMember(data){
+
+export function assignTaskMember(props,RP_ID,EMAIL,NAME){
+
   return function(dispatch){
     return axios({
       method:'POST',
-      url:`${baseURL}/dev/task/assignTaskMemberProject?token=${token}`,
+      url:`${baseURL}task/assignTaskMemberProject?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data:{
-        WBS_ID:data.WBS_ID,
-        MEMBER:data.MEMBER,
-        EMAIL:data.EMAIL,
-        NAME:data.NAME,
-        WBS_NAME:data.WBS_NAME,
+        WBS_ID:props.WBS_ID,
+        MEMBER:RP_ID,
+        EMAIL:EMAIL,
+        NAME:NAME,
+        WBS_NAME:props.WBS_NAME,
       }
     }).then(
       (res)=>{
@@ -1006,6 +1092,20 @@ export function getMyActivities(){
 }
 
 
+export function getProjectActivities(id){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'GET',
+      url:`${baseURL}home/projectactivities/${id}/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'project', append: true,  data: res });
+      }
+    )
+  }
+}
 
 export function getListBU(){
   return function(dispatch){
@@ -1049,8 +1149,9 @@ export function editTaskAction(id,WBS_ID,data){
         wbs_id: WBS_ID,
         wbs_parent_id: data.PARENT_EDIT,
         wbs_name: data.NAME_EDIT,
-        start_date: data.START_DATE_EDIT,
-        finish_date: data.FINISH_DATE_EDIT
+        start_date: moment(data.START_DATE_EDIT).format('YYYY-MM-DD'),
+        finish_date: moment(data.FINISH_DATE_EDIT).format('YYYY-MM-DD')
+        
       }
     }).then(
       (res)=>{
@@ -1082,14 +1183,20 @@ export function rDirectorat(bu,tahun){
 }
 
 
-export function requestRebaseline(id){
-
+export function requestRebaseline(id, props, array){
+  console.log('PROPSSSSSSS', props)
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
-      url:`${baseURL}project/rebaseline?token=${token}`,
+      method:'POST',
+      url:`${baseURL}project/rebaseline/${id}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        array: array,
+        project_id: id ,
+        evidence: props.evidence ,
+        reason: props.reason ,
+      }
     }).then(
       (res)=>{
         return res

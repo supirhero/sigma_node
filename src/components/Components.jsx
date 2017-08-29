@@ -15,6 +15,8 @@ import {checkIWOUsed} from './actions.jsx'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux'
+import Autosuggest from 'react-autosuggest';
+
 
 
 const cookies = new Cookies();
@@ -688,6 +690,7 @@ export class BarChartSPI extends Component {
         <Tooltip />
         <Bar dataKey="value" fill="#8884d8">
             {
+              this.props.data &&
               this.props.data.map((entry, index) => {
                 const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
                 return <Cell key={index} fill={color} />;
@@ -718,6 +721,7 @@ export class BarChartCPI extends Component {
         <Tooltip />
         <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
             {
+              this.props.data &&
               this.props.data.map((entry, index) => {
                 const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
                 return <Cell key={index} fill={color} />;
@@ -1195,18 +1199,22 @@ export class TableNewMasterDataPopUp extends Component {
                       ))
                     }
                     <td style={{ position: 'relative' }}>
-                      <button className='btn-primary' onClick={
-                        e=>{
-                          store.dispatch({
-                            type:'POPUP',
-                            name:'editHoliday',
-                            data:{
-                              active:true
-                            }
-                          })
-                          e.preventDefault()
+                    <button className='btn-primary'
+                    style={{display:'block', margin: 'auto'}}
+                    onClick={
+                    e => {
+                      console.log('PROPS', this.props);
+                      this.props.dispatch({
+                        type: 'POPUP',
+                        name:'editHoliday',
+                        data: {
+                          active:true
                         }
-                      }>EDIT</button>
+                      })
+                      e.preventDefault()}}>
+                    EDIT
+                    
+                  </button>
 
 
                     </td>
@@ -1600,6 +1608,7 @@ export class ReduxDrop extends Component {
 export class ReduxUploadWorkplan extends Component {
   render(){
     return(
+      <div>
       <Dropzone
       name={this.props.name}
       className="upload-workplan"
@@ -1610,6 +1619,8 @@ export class ReduxUploadWorkplan extends Component {
       >
 
       </Dropzone>
+
+      </div>
     )
   }
 }
@@ -1673,6 +1684,18 @@ export class PageLoader extends Component {
   }
 }
 
+export class Pagination extends Component {
+  render(){
+    return(
+      <div className="container" style={{float:'right'}}>
+        <button className="arrow"> <b> &lt; </b> </button>
+        <button className="pagination"><b>1</b></button>
+        <button className="arrow"> <b> &gt; </b> </button>
+      </div>
+    )
+  }
+}
+
 export class datepickerUniversal extends Component {
 
     static defaultProps(){
@@ -1708,7 +1731,7 @@ export class datepickerUniversal extends Component {
             style={{width:'100%'}}
           {...input}
           placeholder={placeholder}
-          dateFormat="YYYY-MM-DD"
+          dateFormat="DD-MMM-YYYY"
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
           // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
@@ -1772,6 +1795,7 @@ export class datepickerTimesheet extends Component {
       )
     }
   }
+
   function mapStateToProps(state) {
     return {
       // formValues: state.form.add_task,
@@ -1781,4 +1805,5 @@ export class datepickerTimesheet extends Component {
     }
 
   }
+
   // export connect(mapStateToProps)(PopUp)

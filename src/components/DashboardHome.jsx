@@ -20,7 +20,7 @@ class DashboardHome extends Component {
     var auth = this.props.state.data
     // console.log(projects);
     return(
-      !auth.userdata && !auth.datatimesheet? <PageLoader></PageLoader> :
+      !auth.userdata && !auth.datatimesheet ? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
@@ -103,7 +103,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.entry * 0.01 : '-'}
                 text={auth.datatimesheet ? Math.floor(auth.datatimesheet.entry) : '-'}
                 title='Entry'
-                status={auth.datatimesheet.status}
+                status={auth.datatimesheet ? auth.datatimesheet.status : null}
               />
             </div>
             <div className='unit half'>
@@ -111,7 +111,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.utilization * 0.01 : '-'}
                 text={auth.datatimesheet ? Math.floor(auth.datatimesheet.utilization) : '-'}
                 title='Utilization'
-                status={auth.datatimesheet.status_utilization}
+                status={auth.datatimesheet ? auth.datatimesheet.status_utilization : null}
               />
             </div>
           </div>

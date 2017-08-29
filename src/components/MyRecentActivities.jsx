@@ -6,7 +6,7 @@ import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, PageLoader } from './Components.jsx';
 import { Line } from 'react-progressbar.js';
 import { getMyActivities, pop,addTimesheet } from './actions.jsx';
-
+import moment from 'moment'
 class MyRecentActivities extends Component {
   componentWillMount() {
     const myActivity = store.getState().data.activity_timesheet;
@@ -94,46 +94,13 @@ class MyRecentActivities extends Component {
           </div>
         </div>
 
-        <div className="grid wrap">
-          <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text="WEDNESDAY, JUNE 7" />
-          </div>
-        </div>
+     
+
+     
 
         <div className="grid wrap">
           <div className="unit whole">
-
-            <div className="card">
-              <div className="person">
-                <div className="person-image" />
-                <div className="person-info">
-                  <large>Kara Gray</large>
-                  <small>Admin, Project Manager</small>
-                </div>
-              </div>
-            </div>
-
-            <div className="card project">
-              <small>4:55 PM</small>
-              <small className="project-info" >
-                Project <a href="">Transaction Based Managed Services 2017</a>
-                <p>(<b>4 Hours</b>) - Pengiriman data dana terdebet dan belum terdebet ke mitra</p>
-                <p>left a <b>Timesheet UI #1</b> message</p>
-                <p>"Ini interface yang lama seperti ini ya"</p>
-              </small>
-              <div className="grid wrap" style={{ float: 'right' }}>
-                <div className="unit whole" >
-                  <medium><b>WAITING FOR APPROVAL</b></medium>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div className="grid wrap">
-          <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text="TUESDAY , JUNE 6" />
+            <Divider style={{ marginTop: '0' }} text={moment().format("YYYY-MM-DD")} />
           </div>
         </div>
         {
@@ -176,7 +143,7 @@ class MyRecentActivities extends Component {
             </div>
             <div className="grid wrap">
               <div className="unit whole" style={{ marginLeft: '104px' }}>
-                <small style={{ fontSize: '12px' }}>Tue,Jun 6 at 4:55 PM via web</small>
+                <small style={{ fontSize: '12px' }}>{value.submit_date}</small>
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&

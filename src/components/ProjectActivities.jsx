@@ -6,13 +6,15 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, ProjectHeader, PageLoader } from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, confirmationTimesheet, pop } from './actions.jsx';
+import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyData } from './actions.jsx';
 
 class ProjectActivities extends Component {
   componentWillMount() {
+    const id = store.getState().page.id
     store.dispatch(getMyActivities());
+    store.dispatch(getProjectActivities(id))
     const state = store.getState();
-    const activity_timesheet = state.data.activity_timesheet;
+    const project_activity = state.data.project_activities;
   }
 
   componentWillUnmount() {
@@ -42,12 +44,13 @@ class ProjectActivities extends Component {
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
     const state = store.getState();
-    const activity_timesheet = state.data.activity_timesheet;
-    if (!activity_timesheet) {
+    const project_activity = state.data.project_activities;
+    if (!project_activity) {
       return <PageLoader />;
     }
     return (
       <div>
+      
         <div className="grid wrap padding-left">
           <div className="unit whole">
             <ProjectHeader projectName="Transaction Based Managed Services 2017" sectionName="ACTIVIES" />
@@ -55,13 +58,13 @@ class ProjectActivities extends Component {
         </div>
         <div className="grid wrap padding-left">
           <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text="TUESDAY , JUNE 6" />
+            <Divider style={{ marginTop: '0' }} text={project_activity.ts_date} />
           </div>
         </div>
 
         <div className="grid wrap padding-left">
           {
-          activity_timesheet.map((value, index) => (
+          project_activity.map((value, index) => (
             <div key={index}>
               <div className="grid wrap">
 
@@ -134,7 +137,7 @@ class ProjectActivities extends Component {
 
                     <div className="grid wrap">
                       <div className="unit whole" style={{ marginLeft: '104px' }}>
-                        <small style={{ fontSize: '12px' }}>Tue,Jun 6 at 4:55 PM via web</small>
+                        <small style={{ fontSize: '12px' }}>{`${value.bulan} ${value.tahun} via web`}</small>
                         <medium style={{ display: 'inline', marginLeft: '170px' }}>
                           {
                         value.is_approved === '-1' &&
@@ -150,7 +153,7 @@ class ProjectActivities extends Component {
                             onClick={(e) => {
                               store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1"));
                             // e.preventDefault()
-                            // console.log(myActivity.activity_timesheet.ts_id)
+                            // console.log(myActivity.project_activity.ts_id)
                             }}
                           >APPROVE</a>
                         </span>

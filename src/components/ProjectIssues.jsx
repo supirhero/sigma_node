@@ -11,12 +11,23 @@ import DropZone from 'react-dropzone'
 class ProjectIssues extends Component {
   componentWillMount() {
     const id = store.getState().page.id;
-    store.dispatch(getIssue(id));
+    this.props.dispatch(getIssue(id));
   }
 
   onSubmit(props) {
     const id = store.getState().page.id;
-    store.dispatch(addIssue(id,props.SUBJECT,props.MESSAGE,props.PRIORITY,props.file_upload));
+    this.props.dispatch(addIssue(id,props.SUBJECT,props.MESSAGE,props.PRIORITY,props.file_upload)).then(res=>{
+      this.props.dispatch(getIssue(id));
+     
+        this.props.dispatch({
+          type: 'POPUP',
+          name:'issue',
+          data: {
+            active:false
+          }
+        })
+    
+    });
     // console.log(store.getState().form.add_issue.values.file_upload.preview)
     // const preview = store.getState().form.add_issue.values.file_upload.map((value,index)=>{
     //   return value.preview
