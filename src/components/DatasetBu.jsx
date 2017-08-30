@@ -7,6 +7,7 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
 import {getDataMaster,addBU,editBU} from './actions.jsx'
+
 import {Field, reduxForm} from 'redux-form';
 
 
@@ -20,19 +21,8 @@ class DatasetBu extends Component {
   onSubmit(props){
     store.dispatch(addBU(props))
   }
-
   onSubmitEdit(props){
-    store.dispatch(editBU(props))
-    .then(abc=>{
-      store.dispatch(getDataMaster("bu"))
-      store.dispatch({
-        type: 'POPUP',
-        name: 'editBusinessUnit',
-        data: {
-          active:false,
-        }
-      })
-    })
+    store.dispatch(addBU(props))
   }
 
   render() {
@@ -195,7 +185,7 @@ class DatasetBu extends Component {
                       <div className="grid wrap narrow">
                         <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
                           <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
-                          <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
+                          <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
                         </div>
                       </div>
                     </div>
@@ -212,10 +202,12 @@ class DatasetBu extends Component {
                     return {column:[
                       {value:value.LEVEL},
                       {value:value.BU_NAME},
-                      {value:value.BU_HEAD_NAME},
-                      {value:value.BU_ID},
+                      {value:value.BU_PARENT_ID},
                       {value:value.BU_ALIAS},
+                      {value:value.BU_HEAD_NAME},
                       {value:value.BU_CODE},
+                      
+                      
                     ]}
                   }):null}>
                 </TablePaginationBU>       
