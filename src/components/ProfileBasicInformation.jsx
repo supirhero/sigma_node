@@ -9,7 +9,7 @@ import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Input, ReduxInput, ReduxInputDisabled, ReduxDrop} from './Components.jsx';
+import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan} from './Components.jsx';
 import {editProfile} from './actions.jsx'
 
 
@@ -47,14 +47,16 @@ class ProfileBasicInformation extends Component {
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className="grid wrap">
           <div className="unit one-third">
-            <div className="pic-wrapper" />
+            <div className="pic-wrapper" style={{ 
+              height: '160px',
+                width: '160px'}} />
           </div>
           <div className="unit two-thirds">
             <Field
             inputName="EVIDENCE"
             name="image"
             type='file'
-            component = {ReduxDrop}
+            component = {ReduxUploadWorkplan}
           />
     
             <small style={{ marginTop: '10px' }}><i>max file size is 1 MB</i></small>

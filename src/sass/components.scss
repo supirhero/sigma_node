@@ -772,17 +772,18 @@ Tabs {
 
 .alert-popup {
   position: fixed;
-  width: 440px;
+  width: 48%;
   border-radius: 6px;
   background-color: #e7666a;
   padding: 25px;
-  left: 33%;
+  left: 24%;
   margin: auto;
-  display: none;
-  top: 0px;
+  opacity: 0;
+  // display: none;
+  top: -100px;
   z-index: 3;
-  -webkit-transition: top 0.5s; /* For Safari 3.1 to 6.0 */
-  transition: top 0.5s;
+  -webkit-transition: all 0.5s; /* For Safari 3.1 to 6.0 */
+  transition: all 0.5s;
   small {
     color: white
   }
@@ -790,7 +791,7 @@ Tabs {
 
 .alert-popup.active {
   display: block;
-  
+  opacity: 1;
   top: 30px;
   
 }

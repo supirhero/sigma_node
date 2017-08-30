@@ -770,6 +770,52 @@ export const getSCurve = (id) => {
   }
 }
 
+export const acceptRebaseline = (id) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/accept_rebaseline?token=${token}` ,
+            headers: {
+              // 'token': {token},
+              'Content-Type': 'application/x-www-form-urlencoded',
+              // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            },
+            data: {
+              project_id: id
+            }
+       
+
+          }).then(
+            res => {
+              return res
+            },
+          )
+  }
+}
+
+export const denyRebaseline = (id) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/deny_rebaseline?token=${token}` ,
+            headers: {
+              // 'token': {token},
+              'Content-Type': 'application/x-www-form-urlencoded',
+              // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            },
+            data: {
+              project_id: id
+            }
+
+          }).then(
+            res => {
+              return res
+            },
+          )
+  }
+}
 export const getAccountManager = (am_id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
@@ -998,6 +1044,7 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       (res)=>{
         store.dispatch(getProjectActivities());
         alert('updated')
+        
       }
     )
   }
@@ -1243,23 +1290,44 @@ export function rDirectorat(bu,tahun){
   }
 }
 
-function hide() {
+function showNotification(message) {
   return {
-    type:'ALERT',
-    show: false,
-  }
-}
-export function alert(message) {
-
-  return{
     type:'ALERT',
     show: true,
     message: message
+    
   }
+}
+
+function hideNotification() {
+  return {
+    type:'ALERT',
+    show: false,
+    message: ''
+    
+  }
+}
+export function showNotif(message, color) {
+
+  store.dispatch({
+    type:'ALERT',
+    show: true,
+    color: color ? color : '#efefee',
+    message: message
+    
+  })
 
   setTimeout(
-    hide()
-    , 3000);
+    function() {
+      store.dispatch({
+        type:'ALERT',
+        show: false,
+        message: ''
+        
+      })
+
+    }
+    , 4000);
  
   
 }
@@ -1492,10 +1560,8 @@ export function weekTimesheet(click){
 
 
 export function baseline(id) {
-    store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-    const token = cookies.get('token')
+  const token = cookies.get('token')
     return function (dispatch) {
-      const token = cookies.get('token')
       return axios({
               method: 'GET',
               url: `${baseURL}project/baseline/${id}?token=${token}`,
