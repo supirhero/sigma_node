@@ -42,7 +42,6 @@ class ProjectWorkplan extends Component {
 
   menu(value) {
     var padding =(value.LEVEL * 20).toString()
-
     return(
       <tr onClick={
         e => {
@@ -318,7 +317,8 @@ class ProjectWorkplan extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
+    const status = (this.props.state.page.project.status).toUpperCase()
+    
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
     const available_to_assign = store.getState().data.available_to_assign ? store.getState().data.available_to_assign.map((value,index)=>{
@@ -555,7 +555,7 @@ class ProjectWorkplan extends Component {
     }
 
         </PopUp>
-        <PopUp id="request_rebaseline" dividerText="RE-BASELINE" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
+        <PopUp id="request_rebaseline" dividerText={status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "RE_BASELINE"} btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           {
             !this.props.state.data.detail_task && !this.props.state.data.parent ? <PageLoader/> :
             <form onSubmit={handleSubmit(this.onSubmitRebaseline.bind(this))}>
@@ -828,13 +828,13 @@ class ProjectWorkplan extends Component {
             <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} onClick={e=> {
                 this.props.dispatch({
                   type: 'POPUP',
-                  name: 'request_rebaseline',
+                  name: status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "RE_BASELINE",
                   data: {
                     active: true,
                   },
                 });
               
-            }}>RE-BASELINE</button>
+            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "RE_BASELINE"}</button>
 
           </div>
           <div className="unit one-third no-gutters">
