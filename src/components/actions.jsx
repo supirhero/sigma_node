@@ -1283,6 +1283,22 @@ export function getDataMaster(data){
   }
 }
 
+export function getDataMasterUser(){
+  
+    return function(dispatch){
+      const token = cookies.get('token')
+      return axios({
+        method:'GET',
+        url:`${baseURL}datamaster/getData/user?token=${token}`,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }).then(
+        (res)=>{
+          store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        }
+      )
+    }
+  }
+
 export function getDataMasterMIS(data){
   return function(dispatch){
     const token = cookies.get('token')
@@ -1487,3 +1503,174 @@ export function baseline(id) {
             )
     }
   }
+  
+
+
+export function getProfile() {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}role/getprofile?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+
+export function editProfileView(PROF_ID){
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}role/editprofile_view?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              PROF_ID
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+export function editProfileAction(profile_id,data){
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}role/editprofile_action?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              profile_id,
+              role_name:data.role_name,
+              role_desc:data.role_desc,
+              role_1:data.role_1,
+              role_2:data.role_2,
+              role_3:data.role_3,
+              role_4:data.role_4,
+              role_5:data.role_5,
+              role_6:data.role_6,
+              role_7:data.role_7,
+              role_8:data.role_8,
+              role_9:data.role_9,
+              role_10:data.role_10,
+              role_11:data.role_11,
+              role_12:data.role_12,
+              role_13:data.role_13,
+              role_14:data.role_14,
+              role_15:data.role_15,
+              role_16:data.role_16,
+              role_17:data.role_17,
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+
+
+
+export function createProfile(data){
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}role/createprofile?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              role_name:data.role_name,
+              role_desc:data.role_desc,
+              role_1:data.role_1,
+              role_2:data.role_2,
+              role_3:data.role_3,
+              role_4:data.role_4,
+              role_5:data.role_5,
+              role_6:data.role_6,
+              role_7:data.role_7,
+              role_8:data.role_8,
+              role_9:data.role_9,
+              role_10:data.role_10,
+              role_11:data.role_11,
+              role_12:data.role_12,
+              role_13:data.role_13,
+              role_14:data.role_14,
+              role_15:data.role_15,
+              role_16:data.role_16,
+              role_17:data.role_17,
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+export function getUserAccess() {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}role/useraccess_view?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+
+
+export function reportFindProject(value,status,schedule,budget) {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/report_filter?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              value,
+              status,
+              schedule,
+              budget
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'report', data: res})
+            },
+
+          )
+  }
+}
+
+
+

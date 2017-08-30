@@ -5,10 +5,17 @@ import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Search, Input, BarChart, Divider, Meter, TableExample } from './Components.jsx';
+import {reportFindProject} from './actions.jsx'
 
 
 class ReportsFindProject extends Component {
+
+  componentWillMount(){
+    store.dispatch(reportFindProject([3],[6],[2],[2]))
+  }
   render() {
+    const state = store.getState()
+    const project_list = state.data.project
     return (
       <div>
 
@@ -34,13 +41,18 @@ class ReportsFindProject extends Component {
             </div>
 
             {/* MAP THIS */}
+            {
+                project_list ?
+                project_list.map((value,index)=>{
+                  return(
+              <div key={index} style={{marginTop:'30px',marginBottom:'30px'}}>
             <div className="card" style={{ padding: '20px 35px' }}>
               <div className="grid">
                 <div className="unit golden-large">
-                  <medium>Transaction Based Managed Services 2017</medium>
+                  <medium>{value.PROJECT_NAME}</medium>
                 </div>
                 <div className="unit golden-small no-gutters">
-                  <medium style={{ float: 'right',marginRight:'55px'}}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b>
+                  <medium style={{ float: 'right',marginRight:'55px'}}><b>{value.PROJECT_STATUS}<span className='in-progress'> {value.PERCENT ? `${value.PERCENT} %` : null }</span></b>
                     <div className="dropdown"></div>
                   </medium>                 
                 </div>
@@ -49,28 +61,28 @@ class ReportsFindProject extends Component {
             <div className="card" style={{ padding: '10px 35px', margin: '0' }}>
               <div className="unit half">
                 <medium>Customer</medium>
-                <medium>PT ABC DEF</medium>
+                <medium>{value.CUSTOMER_NAME}</medium>
               </div>
               <div className="unit half">
                 <div style={{ float: 'right',marginRight:'55px' }}>
                   <medium style={{ float: 'right'}}>Value</medium>
-                  <medium>200.000.000</medium>
+                  <medium>{value.AMOUNT}</medium>
                 </div>
               </div>
             </div>
             <div className="card" style={{ padding: '10px 35px', margin: '0' }}>
               <div className="unit one-third">
                 <medium>Project Manager</medium>
-                <medium>Tofan Sofiansah</medium>
+                <medium>{value.PM}</medium>
               </div>
               <div className="unit two-thirds">
                 <div style={{ float: 'left', marginLeft: '50px' }}>
                   <medium >Schedule Status</medium>
-                  <medium style={{ float: 'right' }}>ON SCHEDULE</medium>
+                  <medium style={{ float: 'right' }}>{value.SCHEDULE_STATUS}</medium>
                 </div>
                 <div style={{ float: 'right',marginRight:'55px' }}>
                   <medium>Budget Status</medium>
-                  <medium style={{ float: 'right' }}>ON BUDGET</medium>
+                  <medium style={{ float: 'right' }}>{value.BUDGET_STATUS}</medium>
                 </div>
               </div>
             </div>
@@ -78,88 +90,37 @@ class ReportsFindProject extends Component {
               <div className="unit three-fifths">
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">EV</medium> <span className="fa fa-question-circle-o" />
-                  <medium>13346.05</medium>
+                  <medium>{value.EV}</medium>
                 </div>
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">PV</medium> <span className="fa fa-question-circle-o" />
-                  <medium>12717.19</medium>
+                  <medium>{value.PV}</medium>
                 </div>
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">AC</medium> <span className="fa fa-question-circle-o" />
-                  <medium>12681.02</medium>
+                  <medium>{value.AC}</medium>
                 </div>
               </div>
               <div className="unit two-fifths">
                 <div className="unit half" style={{ display: 'inline-block' }}>
                   <medium className="status">SPI</medium> <span className="fa fa-question-circle-o" />
-                  <medium>1.05</medium>
+                  <medium>{value.SPI}</medium>
                 </div>
                 <div className="unit half" >
                   <medium className="status">CPI</medium> <span className="fa fa-question-circle-o" />
-                  <medium style={{ display: 'block' }}>1.05</medium>
+                  <medium style={{ display: 'block' }}>{value.CPI}</medium>
                 </div>
               </div>
             </div>
+                    </div>
+          )
+          
+                            
+                          }) : null
+          }
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>DRC ACTIVITY 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>DUE IN 3 DAYS <span className='due-in'> (80%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>DATA CENTER BTIP - MAKASSAR 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>COMPLETED <span className="completed"> (100%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>Application Development LCM</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>OVERDUE <span className="overdue"> (85%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>Infra Activity 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px'}}><b>ON HOLD <span className="on-hold"> (85%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div className="container" style={{float:'right'}}>                  
               <button className="arrow"> <b> &lt; </b> </button>

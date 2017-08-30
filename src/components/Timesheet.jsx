@@ -253,6 +253,7 @@ class Timesheet extends Component {
                         component={ReduxSelectNew}
                         // validate={[required]}
                         >
+                      <option></option>
                         {
                               timesheet.user_project.map((value,index)=>{
                                 return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
@@ -269,12 +270,12 @@ class Timesheet extends Component {
                                       {
                                         timesheet.task ?
                                         <Field
-                                        name="WP_ID"
-                                        // type="WP_ID"
+                                        name="WP_ID"                                        
                                           inputName="TASK"
                                           component={ReduxSelectNew}
                                           // validate={[required]}
                                           >
+                                          <option></option>
                                               {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
@@ -355,7 +356,7 @@ class Timesheet extends Component {
             </div>
           </div>
 
-          { this.state.holiday == false ? 
+          { this.state.user_activities !== [] ? 
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">

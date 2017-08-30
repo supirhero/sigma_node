@@ -38,24 +38,25 @@ class ReportsDirectorate extends Component {
                 >
                   {
                     this.props.state.data.list_bu &&
-                    this.props.state.data.list_bu[0].children.map((value,index)=> {
+                    this.props.state.data.list_bu[1].children.map((value,index)=> {
                       console.log(index,value)
+                      console.log(value.children)
                       return(
-                        <MenuHeader key={index} title={value.BU_NAME} onClick={e => {
-                        
+                        <MenuHeader key={index} title={value.BU_NAME} onClick={e => {                        
 
                             e.preventDefault()
                           }}>
-                    
                           
                           {
-                            value.children != undefined  &&
-                            value.children.map((value,index) => (
+                            value.children != null  ?
+                            value.children.map((value,index) => {
+                              console.log(value.children)
+                              return(
                               <MenuItem title={value.BU_NAME} onClick={e => {
-                            
+                                
                                 e.preventDefault()
                               }}></MenuItem>
-                            ))
+                             ) }) : []
                           }
                           </MenuHeader>
                       )
