@@ -1346,7 +1346,7 @@ export class TablePagination extends Component {
                           console.log("SAFDSADADASD", row)
                           store.dispatch(initialize(this.props.form,
                             {
-                              BU_PARENT_ID_EDIT:row.column[0].value,
+                              BU_PARENT_ID_EDIT:row.column[3].value,
                               BU_NAME_EDIT:row.column[1].value,
                               BU_ALIAS_EDIT:row.column[4].value,
                               BU_HEAD_EDIT:row.column[2].value,

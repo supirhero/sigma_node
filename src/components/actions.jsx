@@ -1383,6 +1383,31 @@ export function addBU(data){
   }
 }
 
+export function editBU(data){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}Datamaster/manage/bu/update?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        BU_CODE:data.BU_CODE_EDIT,
+        BU_ID:data.BU_PARENT_ID_EDIT,
+        BU_NAME:data.BU_NAME_EDIT,
+        BU_ALIAS:data.BU_ALIAS_EDIT,
+        BU_HEAD:data.BU_HEAD_EDIT
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: 'datamaster', append: true,  data: res });
+        store.dispatch(getDataMasterMIS("bu"))
+        
+      }
+    )
+  }
+}
+
+
 
 
 

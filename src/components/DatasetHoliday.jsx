@@ -237,7 +237,7 @@ componentDidUpdate() {
                    
                   tableHeader={[{value:'NAME'},{value:'START'},{value:'END'},{value:null}]}
                   tableData={
-                    holiday.map((value,index)=>{
+                   holiday ?  holiday.map((value,index)=>{
                     return {column:[
                       {value:value.HOLIDAY},
                       {value:value.HOLIDAY_START},
@@ -245,7 +245,7 @@ componentDidUpdate() {
                       {value:value.HOLIDAY_ID},
                       
                     ]}
-                  })}>
+                  }) : [ ] }>
                   
                 
                 </TablePagination>
