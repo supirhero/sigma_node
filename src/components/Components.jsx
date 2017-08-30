@@ -1361,7 +1361,6 @@ export class TablePagination extends Component {
                         <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                           store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                             store.dispatch(getDataMaster("holiday"))
-  
                           })
                           e.preventDefault()
                         }}> 

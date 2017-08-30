@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,required} from './Components.jsx';
+import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
 import {getDataMaster,addBU,editBU} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -143,7 +143,7 @@ class DatasetBu extends Component {
                           inputName="NAME"
                           name="BU_NAME_EDIT"
                           type='input'
-                          component={ReduxInput}
+                          component={ReduxInputDisabled}
                         />
                         </div>
                       </div>
@@ -153,7 +153,7 @@ class DatasetBu extends Component {
                             inputName="CODE"
                             name="BU_CODE_EDIT"
                             type='input'
-                            component={ReduxInput}
+                            component={ReduxInputDisabled}
                           />
                         </div>
                       </div>
