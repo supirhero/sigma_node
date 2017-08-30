@@ -6,12 +6,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TablePagination,Header,Search ,PageLoader} from './Components.jsx';
-import {getDataMaster} from './actions.jsx'
+import {getDataMasterUser,getDataMaster} from './actions.jsx'
 
 class DatasetUser extends Component {
   componentWillMount(){
     const user = store.getState().data.user
+    // store.dispatch(getDataMasterUser())
     store.dispatch(getDataMaster("user"))
+    
   }
   render() {
     const state = store.getState()

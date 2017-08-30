@@ -6,7 +6,9 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
-import {getDataMaster,addBU,editBU, alert} from './actions.jsx'
+
+import {getDataMaster,addBU,editBU,getBusinessUnitDetail,alert} from './actions.jsx'
+
 
 import {Field, reduxForm} from 'redux-form';
 
@@ -22,7 +24,7 @@ class DatasetBu extends Component {
     store.dispatch(addBU(props))
   }
   onSubmitEdit(props){
-    store.dispatch(addBU(props))
+    store.dispatch(editBU(props))
   }
 
   render() {
@@ -196,6 +198,11 @@ class DatasetBu extends Component {
                 </div>
                 <div className="unit whole">
                   <TablePaginationBU
+                  // buCode={bu ? bu.map((value,index)=>{
+                  //   return value.BU_CODE
+                  //   console.log("WEEEEEE",value.BU_CODE)
+                  // }):null}
+                  // buCode="MSS"
                   form='dataset_bu'
                   editPopUp='editBusinessUnit'
                   tableHeader={[{value:'LEVEL'},{value:'NAME'},{value:'HEAD'}, {value: null}]}
@@ -203,11 +210,10 @@ class DatasetBu extends Component {
                     return {column:[
                       {value:value.LEVEL},
                       {value:value.BU_NAME},
-                      {value:value.BU_PARENT_ID},
-                      {value:value.BU_ALIAS},
                       {value:value.BU_HEAD_NAME},
+                      {value:value.BU_ALIAS},
+                      {value:value.BU_PARENT_ID},
                       {value:value.BU_CODE},
-                      
                       
                     ]}
                   }):null}>
