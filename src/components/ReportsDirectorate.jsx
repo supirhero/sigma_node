@@ -8,15 +8,27 @@ import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, Men
 
 
 class ReportsDirectorate extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      bu: '',
+      year: ''
+    }
+  }
   componentWillMount(){
   this.props.dispatch(getListBU())
   this.props.dispatch(rDirectorat("44","2017"))
   }
 
+
   render() {
-    const state = store.getState()
+    const state = this.props.state
+    const year = [
+      { value: '2017' },
+      { value: '2018' },
+    ]
     return (
-      // state.data ? <PageLoader></PageLoader> :
+      !state.data.list_bu ? <PageLoader></PageLoader> :
 			<div>
 				<div className="grid wrap">
           <div className="unit three-quarters">
@@ -29,37 +41,50 @@ class ReportsDirectorate extends Component {
                 ]
 							}}/>
 					</div> */}
-
+            
               <Menu
                 style={{position:'relative', display:'inline'}}
-                menuStyle={{ width:'500px', top:'50px', right:'auto'}}
+                menuStyle={{ 
+                  width:'500px', top:'50px', right:'auto',
+                  height:'300px', overflow:'scroll'
+                
+                }}
                 triggerInput='true'
                 inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
                 >
                   {
                     this.props.state.data.list_bu &&
-                    this.props.state.data.list_bu[1].children.map((value,index)=> {
-                      console.log(index,value)
-                      console.log(value.children)
-                      return(
-                        <MenuHeader key={index} title={value.BU_NAME} onClick={e => {                        
 
+                    this.props.state.data.list_bu[0].children.map((value,index)=> {
+                      console.log('------child' + index, value.BU_NAME)
+                      return[
+                        <MenuHeader style={{paddingLeft: '20px', paddingTop: '15px'}} key={index} title={value.BU_NAME} onClick={e => {
+                            console.log('working222')
+                            
+                            this.setState({bu:value.BU_ID})
                             e.preventDefault()
                           }}>
+                          </MenuHeader>,
                           
-                          {
-                            value.children != null  ?
-                            value.children.map((value,index) => {
-                              console.log(value.children)
+                            value.children !== null  &&
+                            value.children.map((value2,index) => {
+                            console.log('child.child' + index,value2.BU_NAME)
+                              
                               return(
-                              <MenuItem title={value.BU_NAME} onClick={e => {
-                                
-                                e.preventDefault()
-                              }}></MenuItem>
-                             ) }) : []
-                          }
-                          </MenuHeader>
-                      )
+                                <MenuItem key={index} style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} title={value2.BU_NAME} onClick={
+                                  e => {
+                                    
+                                    this.setState({bu:value2.BU_ID})
+                                    
+                                  }
+                                }/>
+                               
+                             
+                              )
+                          })
+                          
+                      ]
+
                     }
 
               
@@ -72,16 +97,28 @@ class ReportsDirectorate extends Component {
 					<div className="unit one-quarter">
 						<Select
               style={{ width: '60%',float:'left', display: 'inline-block',marginRight:'35px'}}
-              items={{
-                items: [
-              { title: '2017' },
-              { title: '2018' },
-                ],
-              }}
-            />
+              onChange={
+                e=> {
+                  this.setState({year:e.target.value})
+                }
+              }
+      
+            >
+            {
+              year.map((value,index)=> (
+                <option name="" value={value.value}>{value.value}</option>
+              ))
+            }
+            </Select>
 
-            <button className="btn-primary"style={{ padding: '11px 14px',marginLeft:'5px'}} >
-              <span className="material-icons" style={{ color: 'white' }}>search</span>
+            <button className="btn-primary"style={{ padding: '11px 14px',marginLeft:'5px'}} onClick={
+                e=> {
+                  this.props.dispatch(rDirectorat(this.state.bu,this.state.year))
+                  
+                  e.preventDefault()
+                }
+              }>
+              <span className="material-icons" style={{ color: 'white' }} >search</span>
             </button>
           </div>
         </div>
@@ -107,14 +144,14 @@ class ReportsDirectorate extends Component {
                   <div className="grid wrap">
                     <div className="unit half">
                       <medium className="project-value-label completed">Completed</medium>
-                      <large className="project-value-number completed">10</large>
+                      <large className="project-value-number completed">{ state.data.project.completed }</large>
 
                       <medium className="project-value-label not-started">Not Started</medium>
-                      <large className="project-value-number not-started">6</large>
+                      <large className="project-value-number not-started">{ state.data.project.not_started }</large>
                      </div>
                      <div className="unit half">
                       <medium className="project-value-label in-progress"> In Progress</medium>
-                      <large className="project-value-number in-progress"> 24</large>
+                      <large className="project-value-number in-progress">{ state.data.project.in_progress }</large>
                      </div>
                    </div>
                 </div>

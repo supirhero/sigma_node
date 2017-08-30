@@ -323,7 +323,7 @@ input:disabled {
 }
 
 .menu {
-  z-index: 1;
+  z-index: 10;
   display: none;
   background: #FFFFFF;
   border: 1px solid #EEEEEE;
@@ -351,15 +351,17 @@ input:disabled {
     .menu-notif-item{
       padding: 15px 40px 15px 30px;
     }
-    .menu-item:hover {
-      background-color: $color-secondary;
-      .menu-title {
-        color: white !important;
-      }
-    }
+    
+  }
+  .menu-item:hover {
+    background-color: #efeded;
+    // .menu-title {
+    //   color: white !important;
+    // }
   }
 }
 .menu.active {
+  z-index: 10;
   display: block;
 }
 .divider-wrapper {
@@ -766,6 +768,31 @@ Tabs {
     padding: 20px 0;
   }
 
+}
+
+.alert-popup {
+  position: fixed;
+  width: 440px;
+  border-radius: 6px;
+  background-color: #e7666a;
+  padding: 25px;
+  left: 33%;
+  margin: auto;
+  display: none;
+  top: 0px;
+  z-index: 3;
+  -webkit-transition: top 0.5s; /* For Safari 3.1 to 6.0 */
+  transition: top 0.5s;
+  small {
+    color: white
+  }
+}
+
+.alert-popup.active {
+  display: block;
+  
+  top: 30px;
+  
 }
 
 .loader-login-wrapper {

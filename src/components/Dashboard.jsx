@@ -33,6 +33,10 @@ class Dashboard extends Component {
     render(){
       return(
               <div>
+                <div className={this.props.state.data.alert && this.props.state.data.alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}>
+                  <small>testtingg</small>
+                </div>
+                
                 <div className='navbar'>
                   <div className='grid wrap' style={{position:'relative'}}>
                     <div className='unit whole no-gutters'>
@@ -139,6 +143,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   }
 }

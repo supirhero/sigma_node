@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import _ from 'lodash'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
 import { changeRoute, getDashboardView } from './actions.jsx'
@@ -12,8 +13,18 @@ import store from '../reducers/combineReducers.jsx'
 
 
 class DashboardHome extends Component {
+  constructor() {
+    super()
+    this.state= {
+      search : ''
+    }
+  }
   componentWillMount() {
     this.props.dispatch(getDashboardView())
+  }
+  toTitleCase(str)
+  {
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
   render() {
     // var projects = state.data.projects ? state.data.projects : null
@@ -127,7 +138,32 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-        <Search placeholder='search business units or project'></Search>
+      <div className='search' style={this.props.style}>
+        <div className='card'>
+          <input placeholder={this.props.placeholder} onChange= {
+            e => {
+              console.log(e.target.value)
+              this.setState({search: e.target.value})
+            }}
+            ></input>
+          <i className='icon-magnifier' onClick={e=> {
+            var project = this.props.state.data.project
+            var res_search = _.find(project, { 'bu_name': 
+            this.state.search.replace(/\b\w/g, l => l.toUpperCase())});
+            {/* console.log(this.toTitleCase(this.state.search)) */}
+            var res = {
+              data : {project: [res_search]}
+            }
+            console.log(res_search)
+            if(res_search != undefined) {
+            store.dispatch({type:'API', name: 'project', data: res})
+
+            }
+
+            }}></i>
+        </div>
+      </div>
+        {/* <Search placeholder='search business units or project'></Search> */}
 
 
       </div>
@@ -135,6 +171,7 @@ class DashboardHome extends Component {
     <div className='projects'>
       {
               auth &&
+              auth.project  &&
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
@@ -207,6 +244,7 @@ class DashboardHome extends Component {
                                       name: 'project',
                                       id: value.project_id,
                                       project: {
+                                        status:value.project_status,
                                         bu_code: value.bu_code
                                       }
                                     }

@@ -1243,6 +1243,27 @@ export function rDirectorat(bu,tahun){
   }
 }
 
+function hide() {
+  return {
+    type:'ALERT',
+    show: false,
+  }
+}
+export function alert(message) {
+
+  return{
+    type:'ALERT',
+    show: true,
+    message: message
+  }
+
+  setTimeout(
+    hide()
+    , 3000);
+ 
+  
+}
+
 
 export function requestRebaseline(id, props, array){
   console.log('PROPSSSSSSS', props)
