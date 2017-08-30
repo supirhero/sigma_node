@@ -134,7 +134,7 @@ class DashboardHome extends Component {
     </div>
     <div className='projects'>
       {
-              auth &&
+              auth.project &&
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>

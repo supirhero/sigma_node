@@ -55,7 +55,6 @@ class EditProject extends Component {
     const iwo = this.props.state ? this.props.state : null;
     this.props.dispatch(getIWOEditProject(30)).then((res2) => {
       // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
-
     });
     this.props.dispatch(getEditProjectView(id)).then(
         (res) => {

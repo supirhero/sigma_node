@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
-import {getDataMaster,addBU,editBU} from './actions.jsx'
+import {getDataMaster,addBU,editBU, alert} from './actions.jsx'
 
 import {Field, reduxForm} from 'redux-form';
 
@@ -48,6 +48,7 @@ class DatasetBu extends Component {
                   <button className='btn-primary'
                   style={{ display: 'inline-block', float:'left', marginLeft:'35px' }}
                    onClick={e=> {
+                    {/* this.props.dispatch(alert('blaaa')) */}
                     this.props.dispatch({
                       type: 'POPUP',
                       name: 'createBusinessUnit',

@@ -20,17 +20,17 @@ class ProjectTeamMember extends Component {
   }
 
   componentDidMount() {
-    const id = store.getState().page.id
+    const id = this.props.state.page.id
     // store.dispatch(getProjectTeamMember(id))
     store.dispatch(getAvailableProjectTeamMember(id))
   }
 
     render(){
-      const appStore = store.getState();
-      const active_member = store.getState().data.exist
-      const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
+      const appStore = this.props.state;
+      const active_member = this.props.state.data.exist
+      const available_assign = this.props.state.data.data ? this.props.state.data.data.map((value,index)=>{
        return {id:value.USER_ID , label:value.USER_NAME}
-      }) : null
+      }) : []
       return(
         <div className='project-overview'>
           <div className='grid padding-left'>
@@ -96,8 +96,8 @@ class ProjectTeamMember extends Component {
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(store.getState().page.id,this.state.id)).then(()=>{
-                      this.props.dispatch(getAvailableProjectTeamMember(store.getState().page.id)) 
+                    this.props.dispatch(assignProjectTeamMember(this.props.state.page.id,this.state.id)).then(()=>{
+                      this.props.dispatch(getAvailableProjectTeamMember(this.props.state.page.id)) 
                     })
                   }
                 }

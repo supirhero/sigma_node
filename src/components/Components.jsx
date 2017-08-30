@@ -121,6 +121,7 @@ export class Menu extends Component {
         {
           this.props.triggerInput=='true' ?
           <input style={this.props.inputStyle}
+
             onClick={
               () => {
                   console.log('working');
@@ -134,9 +135,10 @@ export class Menu extends Component {
             }
             ></input>
           :
-          <div className={this.props.triggerClass} style={this.props.triggerStyle} onClick={
+          <div className={this.props.triggerClass} style={this.props.triggerStyle} 
+
+          onClick={
           () => {
-              console.log('working');
               if (this.state.clicked) {
                 this.setState({clicked:false})
               }
@@ -148,7 +150,9 @@ export class Menu extends Component {
         </div>}
 
 
-            <div onMouseLeave = {
+            <div
+          
+            onMouseLeave = {
               () => {
                 this.setState({
                   clicked : false
@@ -177,7 +181,7 @@ export class MenuSection extends Component {
 export class MenuItem extends Component {
   render() {
     return(
-      <div className='menu-item' onClick={this.props.onClick}>
+      <div className='menu-item' style={this.props.style} onClick={this.props.onClick}>
         {this.props.children}
         {
           this.props.title &&
@@ -202,7 +206,7 @@ export class MenuNotifItem extends Component {
 export class MenuHeader extends Component {
   render() {
     return (
-      <div className='menu-header'>
+      <div className='menu-header' style={this.props.style}>
         <large className='title'>{this.props.title}</large>
         {
           this.props.subTitle != null ?
@@ -1126,7 +1130,8 @@ export class TablePagination extends Component {
   // }
   render() {
     var pages = [];
-    const pagesAmount = Math.ceil(this.props.tableData.length/10)
+    const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+    
     
     for (var i=1; i<=pagesAmount; i++) {
       pages.push(i);
@@ -1295,7 +1300,7 @@ export class TablePagination extends Component {
     // }
     render() {
       var pages = [];
-      const pagesAmount = Math.ceil(this.props.tableData.length/10)
+      const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
       
       for (var i=1; i<=pagesAmount; i++) {
         pages.push(i);

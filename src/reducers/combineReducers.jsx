@@ -130,10 +130,20 @@ const data = (state = Immutable.List(), action) => {
       //   return state
       // }
       break;
+          
 
-
+      case 'ALERT': 
+      return Object.assign({},state, {
+        alert:{
+          show: action.show,
+          message: action.message
+        }
+      })
+      break;
+      
       case 'LOGOUT':
       return Object.assign({},state, null)
+      break;
 
       case 'API':
         console.log("API CALLED FOR", action.name );
