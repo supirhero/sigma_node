@@ -4,16 +4,28 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Search, Input, BarChart, Divider, Meter, TableExample } from './Components.jsx';
+import { Select, Search, Input, BarChart, Divider, Meter, TableExample ,Checkbox} from './Components.jsx';
 import {reportFindProject} from './actions.jsx'
 
 
 class ReportsFindProject extends Component {
+  constructor(){ 
+    super(); 
+    this.state = { 
+        status:[ ]
+    } 
+  } 
 
   componentWillMount(){
     store.dispatch(reportFindProject([3],[6],[2],[2]))
   }
   render() {
+    const value = [
+      {label:"< 5M",value:"1"},
+      {label:"1M - 5M",value:"2"},
+      {label:"> 5M",value:"3"}
+    ]
+    
     const state = store.getState()
     const project_list = state.data.project
     return (
@@ -27,7 +39,27 @@ class ReportsFindProject extends Component {
               </div>
               <div className="unit whole no-gutters">
                 <medium><b>Value</b></medium>
-              </div>              
+              </div> 
+              <div className="unit whole no-gutters">
+                {
+                  value.map((value,index)=>{
+                   return <Checkbox id={index} label={value.label} group='status' 
+                    // onChange={
+                    //   e=>{                    
+                    //     this.setState({
+                    //     status: this.state.status.concat(
+                    //       {
+                    //         status:value.value
+                    //       }
+                    //     )
+                    //   },()=>{
+                    //     console.log(this.state.status)
+                    //   })
+                    // }}
+                  ></Checkbox>
+                  })
+                }
+            </div>              
             </div>
           </div>
           <div className="unit three-quarters">

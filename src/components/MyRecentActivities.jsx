@@ -60,7 +60,7 @@ class MyRecentActivities extends Component {
           </div>
         </div>
 
-        <div className="grid wrap">
+    {/*    <div className="grid wrap">
           <div className="unit whole">
             <h2 style={{ marginBottom: '0' }} className="input-desc">GENERATE REPORT</h2>
           </div>
@@ -93,7 +93,7 @@ class MyRecentActivities extends Component {
             <button className="btn-primary"style={{ float: 'right', padding: '17px 90px' }}>PRINT</button>
           </div>
         </div>
-
+*/} 
      
 
      
@@ -150,6 +150,8 @@ class MyRecentActivities extends Component {
                 <a style={{marginLeft:'45px'}} onClick={e => {
                   store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
                     store.dispatch(getMyActivities())
+                    // alert("YEEEE")
+                    console.log("UYEEEEEE")
                   })
                   
                 }}
