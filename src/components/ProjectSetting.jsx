@@ -41,7 +41,7 @@ class EditProject extends Component {
       PM: data.pm_id,
       // AM_ID: 'NONE',
       TYPE_OF_EFFORT: 'NONE',
-      PROJECT_STATUS: data.project_status,
+      PROJECT_STATUS: (data.project_status).toUpperCase(),
       START: data.schedule_start,
       END: data.schedule_end,
       TYPE_OF_EXPENSE: 'CAPITAL EXPENSE',
@@ -78,10 +78,12 @@ class EditProject extends Component {
 
   render() {
     const projectStatus = [
-        { value: 'In Progress' },
-        // {value: 'On Hold'},
-        { value: 'Cancelled' },
-        { value: 'Completed' },
+      { value: 'NOT STARTED' },
+      
+        { value: 'IN PROGRESS' },
+        {value: 'ON HOLD'},
+        { value: 'CANCELLED' },
+        { value: 'COMPLETED' },
         // {value: 'In Planning'},
         // {value: 'Cancelled'},
     ];

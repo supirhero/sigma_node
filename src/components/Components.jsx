@@ -472,7 +472,7 @@ export class Checkbox extends Component{
   render(){
     return (
       <p className='checkbox-button' style={this.props.style}>
-        <input type='checkbox' id={this.props.id} name={this.props.group} onChange={this.props.onChange} />
+        <input type='checkbox' id={this.props.id} name={this.props.group} onClick={this.props.onClick} />
         <label htmlFor={this.props.id}>{this.props.label}</label>
       </p>
     )

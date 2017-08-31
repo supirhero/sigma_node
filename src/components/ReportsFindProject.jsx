@@ -26,7 +26,7 @@ class ReportsFindProject extends Component {
 
 
   componentWillMount(){
-    store.dispatch(reportFindProject([3],[6],[2],[2]))
+    // store.dispatch(reportFindProject([0],[0],[0],[0],[0]))
   }
   render() {
     const value = [
@@ -52,7 +52,7 @@ class ReportsFindProject extends Component {
     return (
       
       <div>
-
+        
         <div className="grid wrap">
           <div className="unit one-quarter">
             <div className="card" style={{ padding: '35px' }}>
@@ -66,7 +66,7 @@ class ReportsFindProject extends Component {
                 {
                   value.map((value,index)=>{
                    return <Checkbox id={index} label={value.label} group='status' 
-                    onChange={
+                    onClick={
                       
                       e=>{
                         console.log(this.state,"WWERIRENANRI")
@@ -91,17 +91,18 @@ class ReportsFindProject extends Component {
                       //     })
                       //   ) 
                       //  }
-                      var arr = []
+                      {/* var arr = [] */}
                       if(this.state.status[index] == 1) {
                         var newstate = this.state.status[index] = 0
                         this.setState({
                           items: update(this.state.status,{ $set:{index: 0}})
                         }, ()=> { 
                           console.log(this.state.status)
-                         
-                         console.log(arr)
+                         console.log("SET TO 0--------")
                           this.props.dispatch(reportSearchProject(this.state.status))
-                          
+                          .then(res=> {
+                            this.forceUpdate()
+                          })                          
                           // console.log(this.state.status)
                         })
                       }
@@ -111,13 +112,16 @@ class ReportsFindProject extends Component {
                           items: update(this.state.status,{ $set:{index: 0}})
                         }, ()=> {
                           console.log(this.state.status)
+                         console.log("SET TO 1--------")
                           
-                          var i = 0;
+                          {/* var i = 0; */}
                           
-                         console.log(arr)
+                         {/* console.log(arr) */}
                          
                           this.props.dispatch(reportSearchProject(this.state.status))
-                          
+                          .then(res=> {
+                            this.forceUpdate()
+                          }) 
                           // this.props.dispatch(reportSearchProject(this.state.status))
                           // console.log(this.state.status)
                         })
@@ -134,7 +138,7 @@ class ReportsFindProject extends Component {
                       // })
                         
                         
-                          
+                          {/* e.preventDefault() */}
 
                        
                     }}
@@ -236,20 +240,21 @@ class ReportsFindProject extends Component {
           )
           
                             
-                          }) : null
+                          }) : <div></div>
           }
 
 
 
 
-            <div className="container" style={{float:'right'}}>                  
+            {/* <div className="container" style={{float:'right'}}>                  
               <button className="arrow"> <b> &lt; </b> </button>
               <button className="pagination"><b>1</b></button>
               <button className="arrow"> <b> &gt; </b> </button>
-            </div>
+            </div> */}
 
           </div>
         </div>
+        
       </div>
     );
   }
