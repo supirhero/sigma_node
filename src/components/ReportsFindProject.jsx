@@ -13,9 +13,12 @@ class ReportsFindProject extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-        status:[0,0,0],
-        status_fin:[0,0,0],
-        
+        status:[0,0,0,0,0,0],
+        status_fin:[0,0,0,0,0,0],
+        schedule:[0,0,0],
+        schedule_fin:[0,0,0],
+        budget:[0,0,0],
+        budget_head:[0,0,0],
     } 
   } 
 
@@ -27,10 +30,17 @@ class ReportsFindProject extends Component {
   }
   render() {
     const value = [
-      {label:"< 5M",value:"1"},
-      {label:"1M - 5M",value:"2"},
-      {label:"> 5M",value:"3"}
+      {label:"not started",value:"1"},
+      {label:"in progress",value:"2"},
+      {label:"on hold",value:"3"},
+      {label:"completed",value:"4"},
+      {label:"in planning",value:"5"},
+      {label:"cancelled",value:"6"}
     ]
+
+   
+
+
     
     
 
@@ -50,11 +60,9 @@ class ReportsFindProject extends Component {
                 <large><b>FILTERED BY</b></large>
               </div>
               <div className="unit whole no-gutters">
-                <medium><b>Value</b></medium>
+                <medium><b>Status</b></medium>
               </div> 
               <div className="unit whole no-gutters">
-
-              
                 {
                   value.map((value,index)=>{
                    return <Checkbox id={index} label={value.label} group='status' 
@@ -88,16 +96,11 @@ class ReportsFindProject extends Component {
                         var newstate = this.state.status[index] = 0
                         this.setState({
                           items: update(this.state.status,{ $set:{index: 0}})
-                        }, ()=> {
+                        }, ()=> { 
                           console.log(this.state.status)
-                          var i = 0;
-                          for(i; i<this.state.status.length; i++) {
-                            if(this.state.status[i] == 1) {
-                              arr.push(i+1)
-                            }
-                          }
+                         
                          console.log(arr)
-                          this.props.dispatch(reportSearchProject(arr))
+                          this.props.dispatch(reportSearchProject(this.state.status))
                           
                           // console.log(this.state.status)
                         })
@@ -110,14 +113,10 @@ class ReportsFindProject extends Component {
                           console.log(this.state.status)
                           
                           var i = 0;
-                          for(i; i<this.state.status.length; i++) {
-                            if(this.state.status[i] == 1) {
-                              arr.push(i+1)
-                            }
-                          }
+                          
                          console.log(arr)
                          
-                          this.props.dispatch(reportSearchProject(arr))
+                          this.props.dispatch(reportSearchProject(this.state.status))
                           
                           // this.props.dispatch(reportSearchProject(this.state.status))
                           // console.log(this.state.status)
@@ -142,7 +141,13 @@ class ReportsFindProject extends Component {
                   ></Checkbox>
                   })
                 }
-            </div>              
+            </div>      
+
+          
+       
+
+
+            
             </div>
           </div>
           <div className="unit three-quarters">

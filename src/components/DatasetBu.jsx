@@ -23,6 +23,7 @@ class DatasetBu extends Component {
  
 
   onSubmit(props){
+    alert("New Business Unit Added")
     this.props.dispatch(addBU(props)).then(
       ()=> {
         store.dispatch({
@@ -32,12 +33,13 @@ class DatasetBu extends Component {
             active:false,
           }
         })
-        alert('Business Unit Added')
+        
       }
     )
   }
 
   onSubmitEdit(props){
+    alert("Business Unit Updated")
     this.props.dispatch(editBU(props)).then(res => {
       this.props.dispatch(getDataMaster("bu"))
       store.dispatch({
