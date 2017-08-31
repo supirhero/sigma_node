@@ -30,6 +30,7 @@
     "material-ui": "^0.18.7",
     "rc-menu": "^5.0.10",
     "react": "^15.6.1",
+    "react-addons-update": "^15.6.0",
     "react-autocomplete": "^1.7.1",
     "react-autosuggest": "^9.3.2",
     "react-checkbox-group": "^3.3.1",

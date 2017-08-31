@@ -20,12 +20,38 @@ class DatasetBu extends Component {
     store.dispatch(getDataMaster("bu"))
   }
   
+ 
+
   onSubmit(props){
-    store.dispatch(addBU(props))
+    this.props.dispatch(addBU(props)).then(
+      ()=> {
+        store.dispatch({
+          type: 'POPUP',
+          name: 'createBusinessUnit',
+          data: {
+            active:false,
+          }
+        })
+        alert('Business Unit Added')
+      }
+    )
   }
+
   onSubmitEdit(props){
-    store.dispatch(editBU(props))
+    this.props.dispatch(editBU(props)).then(res => {
+      this.props.dispatch(getDataMaster("bu"))
+      store.dispatch({
+        type: 'POPUP',
+        name: 'editBusinessUnit',
+        data: {
+          active:false,
+        }
+      })
+      
+    })
   }
+  
+
 
   render() {
     const {handleSubmit} = this.props;

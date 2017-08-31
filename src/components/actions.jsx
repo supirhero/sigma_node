@@ -718,7 +718,7 @@ export const reportPeople = (BU_ID,BULAN,TAHUN) => {
 
 
 
-export const reportSearchProject = (props) => {
+export const reportSearchProject = (status, schedule, budget) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -728,10 +728,10 @@ export const reportSearchProject = (props) => {
               'Content-Type': 'application/x-www-form-urlencoded'
              },
              data:{
-              value:props.value,
-              status:props.status,
-              schedule:props.schedule,
-              budget:props.budget
+              // value:props.value,
+              status: status,
+              schedule: schedule,
+              budget: budget
              }
           }).then(
             res => {
@@ -976,6 +976,8 @@ export function resubmitTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_ME
         // alert("yeee ee")
         // console.log("ADDTIMESHEET");
         store.dispatch(getMyActivities())
+        // console.log("weoww")
+        alert("yess")
         // store.dispatch(viewTimesheet(TS_DATE));
         res.data.status == "success" ? 
         alert("TIMESHEET ADDED") : alert("Berhasil menambahkan user ke dalam project"),()=>{

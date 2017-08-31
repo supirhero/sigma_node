@@ -150,7 +150,6 @@ class MyRecentActivities extends Component {
                 <a style={{marginLeft:'45px'}} onClick={e => {
                   store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
                     store.dispatch(getMyActivities())
-                    // alert("YEEEE")
                     console.log("UYEEEEEE")
                   })
                   

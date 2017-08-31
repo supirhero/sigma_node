@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import update from 'react-addons-update';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Search, Input, BarChart, Divider, Meter, TableExample ,Checkbox} from './Components.jsx';
-import {reportFindProject} from './actions.jsx'
+import {reportFindProject, reportSearchProject} from './actions.jsx'
 
 
 class ReportsFindProject extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-        status:[ ]
+        status:[0,0,0],
+        status_fin:[0,0,0],
+        
     } 
   } 
+
+  //variable yang akan di send
+
 
   componentWillMount(){
     store.dispatch(reportFindProject([3],[6],[2],[2]))
@@ -26,9 +32,15 @@ class ReportsFindProject extends Component {
       {label:"> 5M",value:"3"}
     ]
     
+    
+
+   
+
     const state = store.getState()
     const project_list = state.data.project
+    
     return (
+      
       <div>
 
         <div className="grid wrap">
@@ -41,21 +53,92 @@ class ReportsFindProject extends Component {
                 <medium><b>Value</b></medium>
               </div> 
               <div className="unit whole no-gutters">
+
+              
                 {
                   value.map((value,index)=>{
                    return <Checkbox id={index} label={value.label} group='status' 
-                    // onChange={
-                    //   e=>{                    
-                    //     this.setState({
-                    //     status: this.state.status.concat(
-                    //       {
-                    //         status:value.value
-                    //       }
-                    //     )
-                    //   },()=>{
-                    //     console.log(this.state.status)
-                    //   })
-                    // }}
+                    onChange={
+                      
+                      e=>{
+                        console.log(this.state,"WWERIRENANRI")
+                      //  if ( this.state["checkbox"+index] == 1) {
+                      //    this.setState({
+                      //      ["checkbox" + index] : "0"
+                      //    }) 
+                      //     this.setState(
+                      //      this.state.status.concat({
+                      //        status:0
+                      //      })
+                      //    ) 
+
+                      //  }
+                      //  else {
+                      //   this.setState({
+                      //     ["checkbox" + index] : "1"
+                      //   }) 
+                      //    this.setState(
+                      //     this.state.statu`s.concat({
+                      //       status:1
+                      //     })
+                      //   ) 
+                      //  }
+                      var arr = []
+                      if(this.state.status[index] == 1) {
+                        var newstate = this.state.status[index] = 0
+                        this.setState({
+                          items: update(this.state.status,{ $set:{index: 0}})
+                        }, ()=> {
+                          console.log(this.state.status)
+                          var i = 0;
+                          for(i; i<this.state.status.length; i++) {
+                            if(this.state.status[i] == 1) {
+                              arr.push(i+1)
+                            }
+                          }
+                         console.log(arr)
+                          this.props.dispatch(reportSearchProject(arr))
+                          
+                          // console.log(this.state.status)
+                        })
+                      }
+                      else{
+                        var newstate = this.state.status[index] = 1
+                        this.setState({
+                          items: update(this.state.status,{ $set:{index: 0}})
+                        }, ()=> {
+                          console.log(this.state.status)
+                          
+                          var i = 0;
+                          for(i; i<this.state.status.length; i++) {
+                            if(this.state.status[i] == 1) {
+                              arr.push(i+1)
+                            }
+                          }
+                         console.log(arr)
+                         
+                          this.props.dispatch(reportSearchProject(arr))
+                          
+                          // this.props.dispatch(reportSearchProject(this.state.status))
+                          // console.log(this.state.status)
+                        })
+                        
+                        // this.setState(status[index] = 1)
+                      }
+
+                      // const arr = []
+                      // this.setState({
+                      //   items: update(this.state.status,{ $set:{index: 0}})
+                      // }, ()=> {
+                        
+                        
+                      // })
+                        
+                        
+                          
+
+                       
+                    }}
                   ></Checkbox>
                   })
                 }
