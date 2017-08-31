@@ -17,13 +17,6 @@ class MyRecentActivities extends Component {
     store.dispatch(pop());
   }
 
-  onSubmit() {
-    alert('Please Re-Login to See Updated Profile')
-    
-    
-    
-  }
-  
 
   render() {
     const myActivity = store.getState().data.activity_timesheet;
@@ -155,7 +148,12 @@ class MyRecentActivities extends Component {
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&
-                <a style={{marginLeft:'45px'}} onClick={this.onSubmit()}
+                <a style={{marginLeft:'45px'}} onClick={e => {
+                  store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
+                    store.dispatch(getMyActivities())
+                  })
+                  
+                }}
                 >
                 RE-SUBMIT TIMESHEET</a>
               }
