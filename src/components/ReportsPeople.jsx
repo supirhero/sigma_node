@@ -79,8 +79,9 @@ class ReportsPeople extends Component {
       <div>
         <div className="grid wrap">
           <div className="unit golden-large">
+            
           <Menu
-          style={{position:'relative', display:'inline'}}
+          style={{position:'relative', display:'inline' }}
           menuStyle={{ 
             width:'500px', top:'50px', right:'auto',
             height:'300px', overflow:'scroll'
@@ -132,7 +133,7 @@ class ReportsPeople extends Component {
           </div>
 					<div className="unit golden-small">
           <select onClick={this.handleMonthChange.bind(this)} 
-          className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
+          className='select' style={{height:'49px', width:'130px', display:'inline-block'}}> 
           { 
             month.map((value,index) => { 
             return( 
@@ -143,7 +144,7 @@ class ReportsPeople extends Component {
         </select> 
             
         <select onClick={this.handleYearChange.bind(this)} 
-        className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+        className='select' style={{height:'49px', width:'100px', display:'inline-block',marginLeft:'5px'}}> 
         { 
           year.map((value,index) => { 
           return( 
@@ -152,7 +153,7 @@ class ReportsPeople extends Component {
           ) 
         })} 
       </select> 
-      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
+      <button className="btn-primary" style={{ padding: '11px 14px',display:'inline-block' ,marginLeft:'30px',marginTop:'5px'}} ><span className="material-icons" style={{ color: 'white' }}  
       onClick={(e)=> { 
         console.log(this.state.month,this.state.year); 
         store.dispatch(reportPeople(this.state.month,this.state.year)) 

@@ -668,6 +668,57 @@ export const reportMonthly = (bulan,tahun) => {
 
 }
 
+export const reportEntryBu = (bu_id,tahun) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/r_entry_bu?token=${token}` ,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+               bu_id:bu_id,
+               tahun:tahun
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
+
+}
+
+
+export const reportUtilBu = (bu_id,tahun) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/r_util_bu?token=${token}` ,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             data:{
+               bu_id:bu_id,
+               tahun:tahun
+             }
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'report', data: res, append:true})
+            },
+          )
+  }
+
+}
+
+
+
 
 export const reportYearly = (tahun) => {
   return function (dispatch) {

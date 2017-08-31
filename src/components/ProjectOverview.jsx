@@ -18,7 +18,7 @@ class ProjectOverview extends Component {
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='OVERVIEW'/>
+              <ProjectHeader projectName={overview.project_name} sectionName='OVERVIEW'/>
             </div>
           </div>
           <div className='grid padding-left'>
