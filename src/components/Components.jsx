@@ -472,7 +472,7 @@ export class Checkbox extends Component{
   render(){
     return (
       <p className='checkbox-button' style={this.props.style}>
-        <input type='checkbox' id={this.props.id} name={this.props.group} />
+        <input type='checkbox' id={this.props.id} name={this.props.group} onChange={this.props.onChange} />
         <label htmlFor={this.props.id}>{this.props.label}</label>
       </p>
     )
@@ -1686,6 +1686,38 @@ export class TablePagination extends Component {
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
+                            
+                            console.log(row)
+                            store.dispatch(editProfileView(row.column[0].value)).then(
+                              res => {
+                                console.log(row.column[1].value,"NAMAA")
+                                store.dispatch(initialize('addNewRole',
+                                  {
+                                    profile_id:row.column[0].value,
+                                    role_name:row.column[1].value,
+                                    
+                                    role_desc:row.column[2].value,
+                                    role_1:res.data.profile_privilege[7].PRIVILEGE,
+                                    role_2:res.data.profile_privilege[8].PRIVILEGE,
+                                    role_3:res.data.profile_privilege[9].PRIVILEGE,
+                                    role_4:res.data.profile_privilege[10].PRIVILEGE,
+                                    role_5:res.data.profile_privilege[11].PRIVILEGE,
+                                    role_6:res.data.profile_privilege[12].PRIVILEGE,
+                                    role_7:res.data.profile_privilege[13].PRIVILEGE,
+                                    role_8:res.data.profile_privilege[14].PRIVILEGE,
+                                    role_9:res.data.profile_privilege[15].PRIVILEGE,
+                                    role_10:res.data.profile_privilege[3].PRIVILEGE,
+                                    role_11:res.data.profile_privilege[4].PRIVILEGE,
+                                    role_12:res.data.profile_privilege[5].PRIVILEGE,
+                                    role_13:res.data.profile_privilege[6].PRIVILEGE,
+                                    role_14:res.data.profile_privilege[0].PRIVILEGE,
+                                    role_15:res.data.profile_privilege[1].PRIVILEGE,
+                                    role_16:res.data.profile_privilege[2].PRIVILEGE,
+                                    role_17:res.data.profile_privilege[14].PRIVILEGE,
+                                  }
+                                 ))
+                              }
+                            )
                             store.dispatch({
                               type: 'POPUP',
                               name: this.props.editPopUp,
@@ -1693,17 +1725,6 @@ export class TablePagination extends Component {
                                 active:true,
                               }
                             })
-                            console.log("SAFDSADADASD", row)
-                            
-                            store.dispatch(initialize(this.props.form,
-                              {
-                                BU_PARENT_ID_EDIT:row.column[3].value,
-                                BU_NAME_EDIT:row.column[1].value,
-                                BU_ALIAS_EDIT:row.column[4].value,
-                                BU_HEAD_EDIT:row.column[2].value,
-                                BU_CODE_EDIT:row.column[5].value,
-                              }
-                             ))
                             e.preventDefault()
                           }}> 
                           EDIT

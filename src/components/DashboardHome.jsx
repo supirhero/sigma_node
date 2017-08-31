@@ -211,7 +211,7 @@ class DashboardHome extends Component {
                 </div>
 
                     {
-                      value.project_list.map((value,index) => {
+                      value.project_list ? value.project_list.map((value,index) => {
                         var color= '#F48165'
                         switch (value.project_status) {
                           case 'In Progress':
@@ -287,7 +287,7 @@ class DashboardHome extends Component {
                               </div>
                             </div>
                         )
-                      })
+                      }) : null
                     }
                   </div>
                 )

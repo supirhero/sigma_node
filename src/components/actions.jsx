@@ -718,7 +718,7 @@ export const reportPeople = (BU_ID,BULAN,TAHUN) => {
 
 
 
-export const reportSearchProject = (props) => {
+export const reportSearchProject = (status, schedule, budget) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -728,10 +728,10 @@ export const reportSearchProject = (props) => {
               'Content-Type': 'application/x-www-form-urlencoded'
              },
              data:{
-              value:props.value,
-              status:props.status,
-              schedule:props.schedule,
-              budget:props.budget
+              // value:props.value,
+              status: status,
+              schedule: schedule,
+              budget: budget
              }
           }).then(
             res => {
@@ -973,10 +973,15 @@ export function resubmitTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_ME
             }
     }).then(
       (res)=>{
-        console.log("ADDTIMESHEET");
-        alert('timesheet re-submitted')
+        // alert("yeee ee")
+        // console.log("ADDTIMESHEET");
         store.dispatch(getMyActivities())
+        // console.log("weoww")
+        alert("yess")
         // store.dispatch(viewTimesheet(TS_DATE));
+        res.data.status == "success" ? 
+        alert("TIMESHEET ADDED") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+        }
 
 
       }
@@ -1546,7 +1551,7 @@ export function getProfile() {
 }
 
 
-export function editProfileView(PROF_ID){
+export function editProfileView(profile_id){
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
@@ -1556,18 +1561,19 @@ export function editProfileView(PROF_ID){
             url: `${baseURL}role/editprofile_view?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
-              PROF_ID
+              profile_id
             }
           }).then(
             res => {
               store.dispatch({type:'API', name: 'roles', data: res})
+              return res
             },
 
           )
   }
 }
 
-export function editProfileAction(profile_id,data){
+export function editProfileAction(data){
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
@@ -1577,7 +1583,7 @@ export function editProfileAction(profile_id,data){
             url: `${baseURL}role/editprofile_action?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
-              profile_id,
+              profile_id:data.profile_id,
               role_name:data.role_name,
               role_desc:data.role_desc,
               role_1:data.role_1,

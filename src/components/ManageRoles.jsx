@@ -17,9 +17,17 @@ import {
 import { Field, reduxForm } from 'redux-form';
 
 class ManageRoles extends Component {
+  constructor(){
+    super();
+    this.state = {
+      id : 0
+
+    };
+  }
+
   componentWillMount(){
     store.dispatch(getProfile())
-    store.dispatch(editProfileView("3"))
+    // store.dispatch(editProfileView("3"))
   }
 
   onSubmit(props){
@@ -37,7 +45,7 @@ class ManageRoles extends Component {
   }
 
   onSubmitEdit(props){
-    this.props.dispatch(editProfileAction("3",props)).then(
+    this.props.dispatch(editProfileAction(props)).then(
       ()=> {
         store.dispatch({
           type: 'POPUP',
@@ -55,7 +63,7 @@ class ManageRoles extends Component {
     const BusinessLevel = [
 			{name:'Update personal timesheet',field:'update_personal_timesheet',no:'role_1'},
       {name:'Access business unit overview',field:'access_business_unit',no:'role_2'},
-      {name:'Create object',field:'create_object',field:'role_3'},
+      {name:'Create project',field:'create_project',no:'role_3'},
       {name:'Access all projects in business unit',field:'access_all_projects',no:'role_4'},
       {name:'Approve timesheet (non-project)',field:'approve_timesheet',no:'role_5'},
       {name:'See report overview',field:'see_report_overview',no:'role_6'},
@@ -85,7 +93,7 @@ class ManageRoles extends Component {
                 <Field
                 inputName="ROLE NAME"
                 name="role_name"
-                component={ReduxInput}
+                component={ReduxInputDisabled}
                 // validate={[required]}
               />
             </div>
@@ -95,7 +103,7 @@ class ManageRoles extends Component {
             <Field
             inputName="DESCRIPTION"
             name="role_desc"
-            component={ReduxInput}
+            component={ReduxInputDisabled}
             // validate={[required]}
           />
             </div>
@@ -128,23 +136,23 @@ class ManageRoles extends Component {
   {
       BusinessLevel.map((value,index)=>{
         return(
-          <div className="grid wrap narrow">
+          <div key={index} className="grid wrap narrow">
           <div className="unit half">
             <small className="label">{value.name}</small>
           </div>
           <div className="unit half">
             <div className="unit one-third">
-                <Field name={value.no} key={index} component={RadioButtonGroup}>
+                <Field name={value.no}  component={RadioButtonGroup}>
                   <RadioButton value="all_bu"/>
                 </Field>              
             </div>
             <div className="unit one-third">
-                <Field name={value.no} key={index} component={RadioButtonGroup}>
+                <Field name={value.no}  component={RadioButtonGroup}>
                   <RadioButton value="only_bu"/>
                 </Field>              
             </div>
             <div className="unit one-third">
-                <Field name={value.no} key={index} component={RadioButtonGroup}>
+                <Field name={value.no}  component={RadioButtonGroup}>
                 <RadioButton value="cant"/>
               </Field>              
           </div>
@@ -365,7 +373,7 @@ class ManageRoles extends Component {
                 </div>
                 <div className="unit whole">
                 <TablePaginationRoles
-                form='dataset_bu'
+                form='addNewRole'
                 editPopUp='editRole'
                 tableHeader={[{value:'ID'},{value:'NAME'},{value:'DESCRIPTION'}, {value: null}]}
                 tableData={ store.getState().data.profile ? store.getState().data.profile.map((value,index)=>{
