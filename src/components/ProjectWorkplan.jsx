@@ -12,7 +12,9 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 
 import { Field, reduxForm } from 'redux-form';
 
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask} from './actions.jsx';
+import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
+denyRebaseline,acceptRebaseline, baseline, showNotif
+} from './actions.jsx';
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -175,6 +177,7 @@ class ProjectWorkplan extends Component {
                 }) */}
                 this.props.dispatch(deleteTask( value.WBS_ID)).then(
                   res=> {
+                    showNotif('Task deleted', "GREEN")
                     const id = this.props.state.page.id;
                     this.props.dispatch(getWorkplanView(id))
                   }
@@ -304,7 +307,7 @@ class ProjectWorkplan extends Component {
         name:'edit_task',
         data: {
           active:false
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                           
       })
     })
   }
@@ -317,7 +320,9 @@ class ProjectWorkplan extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-    const status = (this.props.state.page.project.status).toUpperCase()
+    // console.log('STATUSSS',this.props.state.data.project_status)
+    const status = (this.props.state.data.project_status ? this.props.state.data.project_status : '').toUpperCase()
+    const id = this.props.state.page.id;
     
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
@@ -729,10 +734,10 @@ class ProjectWorkplan extends Component {
           </div>
         </div>
         <div className="grid wrap narrow">
-          <div className="unit one-third no-gutters">
+          <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
             <button
               className="btn-primary"
-              style={{ width: '200px', float: 'right' }}
+              style={status == 'ON HOLD' ? { width: '100%', float: 'left', padding:'15px 20px' } : { width: '200px', float: 'left' }}
               onClick={
                 (e) => {
                   console.log('PROPS', this.props);
@@ -803,6 +808,7 @@ class ProjectWorkplan extends Component {
                     <div className="unit whole" style={{ textAlign: 'center', marginTop: '40px' }}>
                       <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
                         onClick={e=>{
+
                           this.props.dispatch({
                             type: 'POPUP',
                             name:'createTask',
@@ -824,23 +830,54 @@ class ProjectWorkplan extends Component {
             </PopUp>
 }
           </div>
-          <div className="unit one-third no-gutters">
-            <button className="btn-secondary" style={{ width: '200px', display: 'block', margin: 'auto' }} onClick={e=> {
+          <div className={status == 'ON HOLD' ? "unit one-fourth": "unit one-third no-gutters" }>
+            <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+                if(status == "NOT STARTED") {
+                  this.props.dispatch(baseline(id)).then(res => {
+                    this.props.dispatch(getWorkplanView(id));
+                    showNotif('Baseline successful', 'GREEN')
+                  })
+                }
+                else if(status == "ON HOLD") {
+                  this.props.dispatch(denyRebaseline(id)).then(res => {
+                     showNotif('Rebaseline request denied', 'GREEN')
+                    
+                    this.props.dispatch(getWorkplanView(id));
+                    
+                  })
+                }
+                else {
                 this.props.dispatch({
                   type: 'POPUP',
-                  name: status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "RE_BASELINE",
+                  name: 'request_rebaseline',
                   data: {
                     active: true,
                   },
                 });
+
+                }
               
-            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "RE_BASELINE"}</button>
+            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "DENY"}</button>
 
           </div>
-          <div className="unit one-third no-gutters">
+          {
+            status == 'ON HOLD' &&
+            <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
+            <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+                this.props.dispatch(acceptRebaseline(id)).then(res => {
+                showNotif('Rebaseline request Accepted', 'GREEN')
+
+                this.props.dispatch(getWorkplanView(id));
+
+                })
+              
+            }}>ACCEPT</button>
+
+          </div>}
+          <div className={status == 'ON HOLD' ? "unit one-fourth": "unit one-third no-gutters" }>
             <button
               className="btn-secondary"
-              style={{ width: '200px', float: 'left' }}
+              style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }}
               onClick={
                 (e) => {
                   console.log('PROPS', this.props);
@@ -923,18 +960,19 @@ class ProjectWorkplan extends Component {
                           </tr>
                         </thead>
 
-                        <tbody>
+                        {
+                          workplan == null ? <tbody>EMPTY</tbody> : 
+                          <tbody>
 
-                          {
+                           { 
                             this.menu(workplan)
-
-                          }
-                          {
+                           }
+                           {
                             workplan.children.length !=0 && this.state[(workplan.WBS_ID).toString()] &&
                             this.renderRow(workplan)
-                          }
+                            }
                         </tbody>
-
+                        }
 
                       </table>}
                 </div>

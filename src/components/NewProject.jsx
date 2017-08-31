@@ -20,7 +20,7 @@ import {
 
 import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui'
 
-import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView } from './actions.jsx'
+import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView, showNotif } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync} from './Components.jsx'
 
@@ -98,12 +98,16 @@ class NewProject extends Component {
 
   }
   onSubmit(props){
-    alert('triggered')
     const id = this.props.state.page.new_project.bu_code
     // this.props.dispatch(getDashboardView())
     console.log('ONSUBMIT PROPS', props);
     // alert("submitted")
-    store.dispatch(addNewProject(props, id));
+    store.dispatch(addNewProject(props, id)).then(
+      res => {
+        showNotif('Successfully created a new project', 'GREEN')
+      }
+    )
+      
   }
     render(){
       // const projectSetting = this.props.state.data.project.project_setting
@@ -1024,6 +1028,8 @@ export default connect(mapStateToProps, { addNewProject })
         form: 'add_project',
         // RejectedSubmitPromise: true
         onSubmitFail: errors => {
+          showNotif('Failed to create project', 'RED')
+          
           // window.scrollTo(0, 0)
           animateScroll.scrollToTop()
           // ReactDOM.findDOMNode(this).scrollTop = 0

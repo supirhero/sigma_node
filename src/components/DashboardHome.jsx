@@ -4,7 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
-import { changeRoute, getDashboardView } from './actions.jsx'
+import { changeRoute, getDashboardView, showNotif } from './actions.jsx'
 
 import {Meter, Search, PageLoader} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
@@ -40,7 +40,7 @@ class DashboardHome extends Component {
 
               <div className='grid'>
                   <div className='unit two-fifths'>
-                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://hardikmanktala.com/projects/themes/flatter/demo/assets/images/people/people-1.jpg)'}}>
+                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')'}}>
                     </div>
                   </div>
                   <div className='unit three-fifths'>
@@ -181,6 +181,7 @@ class DashboardHome extends Component {
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
                         // browserHistory.push('/business-unit')
+
                         store.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {

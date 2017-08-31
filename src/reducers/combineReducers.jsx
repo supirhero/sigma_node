@@ -87,6 +87,22 @@ const page = (state = Immutable.List(), action) => {
 
   }
 }
+const alert = (state = Immutable.List(), action) => {
+  switch (action.type) {
+    case 'ALERT': 
+    return Object.assign({},state, {
+      alert:{
+        show: action.show,
+        message: action.message,
+        color: action.color
+      }
+    })
+    break;
+
+    default: return state
+
+  }
+}
 const data = (state = Immutable.List(), action) => {
   const prevState = state;
   // state = {
@@ -132,14 +148,7 @@ const data = (state = Immutable.List(), action) => {
       break;
           
 
-      case 'ALERT': 
-      return Object.assign({},state, {
-        alert:{
-          show: action.show,
-          message: action.message
-        }
-      })
-      break;
+      
       
       case 'LOGOUT':
       return Object.assign({},state, null)
@@ -184,6 +193,7 @@ const appReducer = combineReducers({
   auth,
   data,
   page,
+  alert,
   routing : routerReducer,
   form: reduxForm
 })
