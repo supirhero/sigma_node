@@ -232,8 +232,6 @@ class DashboardHome extends Component {
                                     }
                                     &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
                                   </small>
-                                </div>
-                                <div className='unit one-fifth'>
                                   <small className='project-name'>
                                     {
                                       value.project_type
@@ -245,6 +243,7 @@ class DashboardHome extends Component {
                                     }
                                     </small>
                                 </div>
+                  
                                 <div className='unit one-fifth'>
                                   <Line
                                     progress={value.project_complete *0.01}
