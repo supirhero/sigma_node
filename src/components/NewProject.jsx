@@ -51,8 +51,8 @@ class NewProject extends Component {
       "AM_ID": this.props.state.data.username,
       // // "TYPE_OF_EFFORT": 'NONE',
       "PROJECT_STATUS": 'NOT STARTED',
-      "HO": 'yes',
-      "PROJECT_TYPE_ID": 'project',
+      //"HO": 'yes',
+      //"PROJECT_TYPE_ID": 'project',
       //
       // // "START": '2017-1-1',
       // // "END": '2017-1-1',
@@ -491,9 +491,11 @@ class NewProject extends Component {
                 />
               </div>
               </div>
+             
               <div className='grid wrap narrow'>
                 <div className='unit half'>
-                  <div className='grid wrap'>
+
+                  {/* Yang Dipakai <div className='grid wrap'>sampai ini*/}
                     {/* <div className='unit half'>
                       <Field className='radio-button' name="PROJECT_TYPE_ID" component="input" type="radio" value="Project" label='PROJECT' />
                     </div>
@@ -501,23 +503,40 @@ class NewProject extends Component {
                       <Field className='radio-button' name="PROJECT_TYPE_ID" component="input" type="radio" value="Non Project" label='NON PROJECT' />
 
                     </div> */}
-                    <h2 className='input-name'>PROJECT TYPE</h2>
+                    {/* Yang Dipakai <h2 className='input-name'>PROJECT TYPE</h2>
                     <div className='unit half'>
 
-                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
+                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup} validate={[required]}>
                         <RadioButton value="project" label="Project"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
+                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup} validate={[required]}>
                         <RadioButton value="non project" label="Non-project"/>
                       </Field>
 
-                    </div>
+                    {/* Yang Dipakai </div> sampai ini*/}
                       {/* <Field name="projectType" component={RadioButtonGroup}>
                       </Field> */}
 
 
+                  {/* Yang Dipakai </div>sampai ini*/}
+                   <div className='grid wrap narrow'>
+                    <div className='unit whole'>
+                      <Field
+                        inputName="PROJECT TYPE"
+                        name="PROJECT_TYPE_ID"
+                        style={{width:'96%'}}
+                        component={ReduxSelect}
+                        validate={[required]}
+
+                      >
+                        <option></option>
+                        <option value="project" >Project</option>
+                        <option value="non project" >Non Project</option>
+                      </Field>
+
+                    </div>
                   </div>
                   <div className='grid wrap narrow'>
                     <div className='unit whole'>
@@ -564,7 +583,8 @@ class NewProject extends Component {
                   </div>
                 </div>
                 <div className='unit half'>
-                  <div className='grid wrap'>
+                
+                  {/* Yang Dipakai<div className='grid wrap'>
                     <h2 className='input-name'>H/O OPERATION</h2>
 
                     <div className='unit half'>
@@ -575,6 +595,23 @@ class NewProject extends Component {
                     <div className='unit half'>
                       <Field name="HO" component={RadioButtonGroup}>
                         <RadioButton value="no" label="NO"/>
+                      </Field>
+
+                    </div>
+                  </div>sampai ini*/}
+                  <div className='grid wrap narrow'>
+                    <div className='unit whole'>
+                      <Field
+                        inputName="H/O OPERATION<"
+                        name="HO"
+                        style={{width:'96%'}}
+                        component={ReduxSelect}
+                        validate={[required]}
+
+                      >
+                        <option></option>
+                        <option value="yes" >Yes</option>
+                        <option value="no" >No</option>
                       </Field>
 
                     </div>
