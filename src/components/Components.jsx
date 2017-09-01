@@ -522,7 +522,7 @@ export class ReduxSelect extends Component {
         <select
           style={this.props.selectStyle}
           // className='select'
-          className={'select ' +  this.props.meta.touched && ((this.props.meta.error && 'error'))}
+          className={'select ' + (this.props.meta.touched && this.props.meta.error && 'error')}
 
           {...this.props.select}
           {...this.props.custom}
@@ -543,39 +543,39 @@ export class ReduxSelect extends Component {
   }
 }
 
-export class ReduxSelectTimesheet extends Component {
-  componentDidUpdate() {
-    console.log('PROPS', this.props);
-  }
-  render() {
-    console.log('SELECT PROPS',this.props);
-    return (
-      <div style={this.props.style}>
+// export class ReduxSelectTimesheet extends Component {
+//   componentDidUpdate() {
+//     console.log('PROPS', this.props);
+//   }
+//   render() {
+//     console.log('SELECT PROPS',this.props);
+//     return (
+//       <div style={this.props.style}>
 
-        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select
-          // className='select'
-          className= {'select ' + this.props.meta.touched && ((this.props.meta.error && 'error'))}
+//         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+//         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+//         <select
+//           // className='select'
+//           className= {'select ' +  ((this.props.meta.error && 'error'))}
 
-          {...this.props.select}
-          {...this.props.custom}
-          {...this.props.input}
+//           {...this.props.select}
+//           {...this.props.custom}
+//           {...this.props.input}
 
-          // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
-          placeholder={this.props.placeholder}
-          // onBlur = {e=> {
-          //
-          // }}
-        >
-          {this.props.children}
-        </select>
-        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
-        {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
-      </div>
-    )
-  }
-}
+//           // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+//           placeholder={this.props.placeholder}
+//           // onBlur = {e=> {
+//           //
+//           // }}
+//         >
+//           {this.props.children}
+//         </select>
+//         {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+//         {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
+//       </div>
+//     )
+//   }
+// }
 
 
 export class ReduxSelectNew extends Component {
@@ -1824,7 +1824,7 @@ export class ReduxUploadWorkplan extends Component {
       name={this.props.name}
       className="upload-workplan"
       style={this.props.style}
-      placeholder={this.props.placeholder}
+      placeholder='Upload File'
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
@@ -1918,16 +1918,12 @@ export class datepickerUniversal extends Component {
     }
 
     handleChange (date) {
-
-
-      // this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
       this.props.input.onChange(moment(date).format('DD-MMM-YYYY'))
 
-
-      // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 
     render () {
+      console.log('DATE PICKER PROPS', this.props.meta)
       const {
         input, placeholder,
         meta: {touched, error}
@@ -1942,6 +1938,8 @@ export class datepickerUniversal extends Component {
           {...input}
           placeholder={placeholder}
           dateFormat="DD-MMM-YYYY"
+          className={ this.props.meta.touched && this.props.meta.error != null && 'error'}
+          
           // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
           selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
           // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
