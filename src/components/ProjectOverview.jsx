@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import { push, replace, goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './components.jsx'
+import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './Components.jsx'
 
 import { Line } from 'react-progressbar.js'
 

@@ -1,46 +1,33 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import _ from 'lodash'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
-import { changeRoute, getDashboardView, showNotif } from './actions.jsx'
+import { changeRoute } from './actions.jsx'
 
-import {Meter, Search, PageLoader} from './Components.jsx'
+import {Meter, Search} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 
 
 
 
 class DashboardHome extends Component {
-  constructor() {
-    super()
-    this.state= {
-      search : ''
-    }
-  }
-  componentWillMount() {
-    this.props.dispatch(getDashboardView())
-  }
-  toTitleCase(str)
-  {
-      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-  }
   render() {
+    var state = store.getState()
+    console.log(state);
     // var projects = state.data.projects ? state.data.projects : null
-    var auth = this.props.state.data
+    var auth = state.auth
+    console.log(state.auth.token)
     // console.log(projects);
     return(
-      !auth.userdata && !auth.datatimesheet ? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
           <div className='card profile'>
-            {
-
               <div className='grid'>
+
                   <div className='unit two-fifths'>
-                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')'}}>
+                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://hardikmanktala.com/projects/themes/flatter/demo/assets/images/people/people-1.jpg)'}}>
                     </div>
                   </div>
                   <div className='unit three-fifths'>
@@ -77,7 +64,7 @@ class DashboardHome extends Component {
                     </ul>
 
                   </div>
-                </div>}
+                </div>
 
 
 
@@ -114,7 +101,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.entry * 0.01 : '-'}
                 text={auth.datatimesheet ? Math.floor(auth.datatimesheet.entry) : '-'}
                 title='Entry'
-                status={auth.datatimesheet ? auth.datatimesheet.status : null}
+                status={auth.datatimesheet.status}
               />
             </div>
             <div className='unit half'>
@@ -122,7 +109,7 @@ class DashboardHome extends Component {
                 progress={auth.datatimesheet ? auth.datatimesheet.utilization * 0.01 : '-'}
                 text={auth.datatimesheet ? Math.floor(auth.datatimesheet.utilization) : '-'}
                 title='Utilization'
-                status={auth.datatimesheet ? auth.datatimesheet.status_utilization : null}
+                status={auth.datatimesheet.status_utilization}
               />
             </div>
           </div>
@@ -138,40 +125,19 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-      <div className='search' style={this.props.style}>
-        <div className='card'>
-          <input placeholder={this.props.placeholder} onChange= {
-            e => {
-              console.log(e.target.value)
-              this.setState({search: e.target.value})
-            }}
-            ></input>
-          <i className='icon-magnifier' onClick={e=> {
-            var project = this.props.state.data.project
-            var res_search = _.find(project, { 'bu_name': 
-            this.state.search.replace(/\b\w/g, l => l.toUpperCase())});
-            {/* console.log(this.toTitleCase(this.state.search)) */}
-            var res = {
-              data : {project: [res_search]}
-            }
-            console.log(res_search)
-            if(res_search != undefined) {
-            store.dispatch({type:'API', name: 'project', data: res})
+        <Search placeholder='search business units or project'></Search>
 
-            }
 
-            }}></i>
-        </div>
       </div>
-        {/* <Search placeholder='search business units or project'></Search> */}
-
+    </div>
+    <div className='grid wrap '>
+      <div className='unit whole'>
+        place holder untuk filter
 
       </div>
     </div>
     <div className='projects'>
       {
-              auth &&
-              auth.project  &&
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
@@ -181,7 +147,6 @@ class DashboardHome extends Component {
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
                         // browserHistory.push('/business-unit')
-
                         store.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {
@@ -203,6 +168,7 @@ class DashboardHome extends Component {
                           name: 'new-project',
                           new_project: {
                             bu_code: value.bu_code
+
                           }
                         }
                       }))
@@ -212,7 +178,7 @@ class DashboardHome extends Component {
                 </div>
 
                     {
-                      value.project_list ? value.project_list.map((value,index) => {
+                      value.project_list.map((value,index) => {
                         var color= '#F48165'
                         switch (value.project_status) {
                           case 'In Progress':
@@ -243,11 +209,8 @@ class DashboardHome extends Component {
                                     type: 'PUSH',
                                     page: {
                                       name: 'project',
-                                      id: value.project_id,
-                                      project: {
-                                        status:value.project_status,
-                                        bu_code: value.bu_code
-                                      }
+                                      id : value.project_id
+
                                     }
                                   }))
 
@@ -258,6 +221,9 @@ class DashboardHome extends Component {
                                   <medium className='project-name list-pointer'>
                                     {value.project_name}
                                   </medium>
+                                  <medium className='project-name list-pointer'>
+                                    ({value.iwo_no})
+                                  </medium>
                                 </div>
                                 <div className='unit one-fifth'>
                                   <small style={{fontSize:'15px'}} className='project-status'>
@@ -266,8 +232,19 @@ class DashboardHome extends Component {
                                     }
                                     &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
                                   </small>
+                                  <small className='project-name'>
+                                    {
+                                      value.project_type
+                                    }
+                                  </small>
+                                  <small  className='project-name'>
+                                    Type : {
+                                      value.type_effort
+                                    }
+                                    </small>
                                 </div>
-                                <div className='unit two-fifths'>
+                  
+                                <div className='unit one-fifth'>
                                   <Line
                                     progress={value.project_complete *0.01}
                                     initialAnimate={true}
@@ -283,12 +260,13 @@ class DashboardHome extends Component {
                                     containerClassName={'line-bar'}
                                     >
                                     </Line>
+
                                   </div>
                                 </div>
                               </div>
                             </div>
                         )
-                      }) : null
+                      })
                     }
                   </div>
                 )
@@ -303,6 +281,6 @@ class DashboardHome extends Component {
 }
 
 function mapStateToProps(state) {
-  return {state}
+  return state
 }
 export default connect(mapStateToProps)(DashboardHome)
