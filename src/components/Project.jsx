@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 
 
 import store from '../reducers/combineReducers.jsx'
-import { Divider, TimeSheetTimeButton, PopUpTimesheet, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepickerTimesheet, PopUp } from './components.jsx';
+import { Divider, TimeSheetTimeButton, PopUpTimesheet, Select, ReduxSelectNew, Input, ReduxInput,PageLoader,datepickerTimesheet, PopUp } from './Components.jsx';
 import { getProjectDetail, pop,addTimesheet } from './actions.jsx'
 import { Field, reduxForm } from 'redux-form';
 
