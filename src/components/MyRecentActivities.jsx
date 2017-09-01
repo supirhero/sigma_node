@@ -151,7 +151,7 @@ class MyRecentActivities extends Component {
             </div>
             <div className="grid wrap">
               <div className="unit whole" style={{ marginLeft: '104px' }}>
-                <small style={{ fontSize: '12px' }}>{value.submit_date}</small>
+                <small style={{ fontSize: '12px' }}>{value.submit_date ? `submitted on : ${(value.submit_date).substr(0,9)} | ${(value.submit_date).substr(10,5)} ${(value.submit_date).substr(26,2)}`:null}</small>
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&

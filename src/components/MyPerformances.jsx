@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import {deleteAuthentication} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Input,Select,Meter, BarChart,PageLoader} from './Components.jsx'
-import {myPerformance,pop} from './actions.jsx'
+import {myPerformance,pop,myPerformanceUserEntry} from './actions.jsx'
 
 class MyPerformances extends Component {
     constructor(){
@@ -59,7 +59,6 @@ class MyPerformances extends Component {
     {year:'2014'},
     {year:'2013'},
     {year:'2012'},
-
   ]
 
       const data = state.data ? state.data : null
@@ -203,19 +202,24 @@ class MyPerformances extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select
-                          style={{width:'48%', display:'inline-block', float:'right'}}
-                          items={{
-                            items : [
-                              {title : '2016'},
-                              {title : '2017'},
-                            ]
-                           }}
-                        />
+                      <select onChange={this.handleYearChange.bind(this)} 
+                      className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+                      { 
+                        year.map((value,index) => { 
+                        return( 
+                          <option key={index} value={value.year}>{value.year}</option> 
+              
+                        ) 
+                      })} 
+                    </select> 
                       </div>
                       <div className='unit one-fifth'>
-                        <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
-
+                      <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
+                        console.log(this.state.month,this.state.year);
+                        store.dispatch(myPerformance(this.state.month,this.state.year))
+                        // store.dispatch(myPerformance('1','2017'))
+                        e.preventDefault()
+                      }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
                       </div>
                     </div>
                   </div>

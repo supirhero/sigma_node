@@ -30,6 +30,10 @@ class ManageRoles extends Component {
     // store.dispatch(editProfileView("3"))
   }
 
+  componentDidUpdate(){
+    store.dispatch(getProfile())
+  }
+
   onSubmit(props){
     alert("New Role Created")
     this.props.dispatch(createProfile(props)).then(
@@ -43,6 +47,7 @@ class ManageRoles extends Component {
         })
       }
     )
+  
   }
 
   onSubmitEdit(props){

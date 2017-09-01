@@ -130,15 +130,16 @@ class NewProject extends Component {
         // {value: 'In Planning'},
         // {value: 'Cancelled'},
       ]
+
       const typeOfEffort = [
-        {value: 'Project'},
-        {value: 'CR'},
-        {value: 'Manage'},
-        {value: 'Operation'},
-        {value: 'Maintenance'},
-        {value: 'Manage Service'},
-        {value: 'Non Project'},
+        {name:'Project',value:'1'},
+        {name:'CR',value:'2'},
+        {name:'Manage Operation',value:'3'},
+        {name:'Maintenance',value:'4'},
+        {name:'Manage Service',value:'7'},
+        {name:'Non Project',value:'8'},
       ]
+
       const typeOfExpense = [
         {value: 'Capital Expense'},
         {value: 'Current Expense'},
@@ -373,7 +374,7 @@ class NewProject extends Component {
                   //   // alert(this.state.iwo_index)
                   // }}
                 >
-                  <option></option>
+                  <option>Choose IWO</option>
 
                   {
                     iwo &&
@@ -554,7 +555,7 @@ class NewProject extends Component {
 
                         {
                           typeOfEffort.map((value, index)=> (
-                            <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
+                            <option key={index} value={value.value} {...this.props.option}>{value.name}</option>
                           ))
                         }
                       </Field>

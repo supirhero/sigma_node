@@ -57,6 +57,8 @@ class ProfileBasicInformation extends Component {
             name="image"
             type='file'
             component = {ReduxUploadWorkplan}
+            style={{width:'470px'}}
+
           />
     
             <small style={{ marginTop: '10px' }}><i>max file size is 1 MB</i></small>

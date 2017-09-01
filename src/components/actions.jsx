@@ -412,7 +412,6 @@ export const getBusinessUnitDetail = (id) => {
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
-
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
@@ -1074,10 +1073,11 @@ export function resubmitTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_ME
         // console.log("ADDTIMESHEET");
         store.dispatch(getMyActivities())
         // console.log("weoww")
-        alert("yess")
+        alert("Timesheet Resubmitted")
         // store.dispatch(viewTimesheet(TS_DATE));
-        res.data.status == "success" ? 
-        alert("TIMESHEET ADDED") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+        // res.data.status == "success" ? 
+        // alert("TIMESHEET ADDED") : alert("Berhasil menambahkan user ke dalam project")
+        ,()=>{
         }
 
 
@@ -1766,6 +1766,7 @@ export function createProfile(data){
           }).then(
             res => {
               store.dispatch({type:'API', name: 'roles', data: res})
+              
             },
 
           )
