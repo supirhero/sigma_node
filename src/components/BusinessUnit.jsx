@@ -98,11 +98,26 @@ class BusinessUnit extends Component {
                                     <medium className='project-name'>
                                       {value.PROJECT_NAME}
                                     </medium>
+                                    <medium className='project-name'>
+                                      {value.IWO_NO}
+                                    </medium>
+                                  </div>
+                                  <div className='unit one-fifth'>
+                                  <small className='project-name'>
+                                    {
+                                      value.PROJECT_TYPE
+                                    }
+                                  </small>
+                                  <small  className='project-name'>
+                                    Type : {
+                                      value.EFFORT_TYPE
+                                    }
+                                    </small>
                                   </div>
                                   <div className='unit one-fifth'>
                                     <small style={{fontSize:'15px'}} className='project-status'>
                                       {
-                                        value.project_status
+                                        value.PROJECT_STATUS
                                       }
                                       &nbsp;({value.PROJECT_COMPLETE}%)
                                     </small>
