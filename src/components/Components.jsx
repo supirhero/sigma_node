@@ -262,29 +262,35 @@ export class RenderRadioGroup extends Component {
   // static childContextTypes: {
   //   muiTheme: React.PropTypes.object
   // }
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.constructor.childContextTypes = {
-      muiTheme: React.PropTypes.object
-    };
-  }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: this.state.muiTheme
+  //   this.constructor.childContextTypes = {
+  //     muiTheme: React.PropTypes.object
   //   };
   // }
-  getChildContext() {
-               return { muiTheme: getMuiTheme(baseTheme) };
-           }
+  // // getChildContext() {
+  // //   return {
+  // //     muiTheme: this.state.muiTheme
+  // //   };
+  // // }
+  // getChildContext() {
+  //              return { muiTheme: getMuiTheme(baseTheme) };
+  //          }
   render(){
     return(
+      <div style={this.props.style}>
       <RadioButtonGroup
         {...this.props.input}
         valueSelected={this.props.input.value}
         onChange={(event, value) => this.props.input.onChange(value)}
-      />
+      >
+      {this.props.children}
+      </RadioButtonGroup>
+      {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
 
+
+      </div>
     )
 }}
 
@@ -473,7 +479,7 @@ export class RadioButton extends Component {
 export class Checkbox extends Component{
   render(){
     return (
-      <p className='checkbox-button' style={this.props.style}>
+      <p className='checkbox-button' style={this.props.style} onClick={this.props.onClick}>
         <input type='checkbox' id={this.props.id} name={this.props.group} onChange={this.props.onChange} />
         <label htmlFor={this.props.id}>{this.props.label}</label>
       </p>

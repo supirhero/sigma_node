@@ -22,7 +22,7 @@ import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'mate
 
 import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView, showNotif } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync, RenderRadioGroup} from './Components.jsx'
 
 
 
@@ -150,7 +150,7 @@ class NewProject extends Component {
 
       return(
 
-        !iwo && !projectManager && !form_values ? <PageLoader/> :
+         !projectManager && !form_values ? <PageLoader/> :
         <div>
 
           <form
@@ -502,15 +502,19 @@ class NewProject extends Component {
 
                     </div> */}
                     <h2 className='input-name'>PROJECT TYPE</h2>
-                    <div className='unit half'>
+                    <div className='unit whole'>
 
-                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
-                        <RadioButton value="project" label="Project"/>
-                      </Field>
+                      <Field 
+                        name="PROJECT_TYPE_ID" 
+                        component={RenderRadioGroup} 
+                        validate={required}
+                        >
+                        <RadioButton style={{display:'inline-block', width:'50%'}} value="project" label="Project"/>
+                      {/* </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
-                        <RadioButton value="non project" label="Non-project"/>
+                      <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}> */}
+                        <RadioButton style={{display:'inline-block', width:'50%'}} value="non project" label="Non-project"/>
                       </Field>
 
                     </div>
@@ -567,14 +571,11 @@ class NewProject extends Component {
                   <div className='grid wrap'>
                     <h2 className='input-name'>H/O OPERATION</h2>
 
-                    <div className='unit half'>
-                      <Field name="HO" component={RadioButtonGroup} validate={required}>
-                        <RadioButton value="yes" label="YES"/>
-                      </Field>
-                    </div>
-                    <div className='unit half'>
-                      <Field name="HO" component={RadioButtonGroup} validate={required}>
-                        <RadioButton value="no" label="NO"/>
+                    <div className='unit whole'>
+                      <Field name="HO" component={RenderRadioGroup} validate={required}>
+                        <RadioButton style={{display:'inline-block', width:'50%'}} value="yes" label="YES"/>
+                 
+                        <RadioButton value="no" style={{display:'inline-block', width:'50%'}} label="NO"/>
                       </Field>
 
                     </div>

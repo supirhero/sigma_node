@@ -17,7 +17,7 @@ class DashboardHome extends Component {
       search : ''
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(getDashboardView())
   }
   toTitleCase(str)
@@ -255,7 +255,7 @@ class DashboardHome extends Component {
                                   }
                                 </medium>
                                 <small  style={{fontSize:'15px'}} className='project-name'>
-                                  Type : {
+                                  Effort : {
                                     value.type_effort
                                   }
                                   </small>
