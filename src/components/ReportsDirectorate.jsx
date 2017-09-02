@@ -26,6 +26,9 @@ class ReportsDirectorate extends Component {
   render() {
     const state = this.props.state
     const year = [
+      { value: '2014' },
+      { value: '2015' },
+      { value: '2016' },
       { value: '2017' },
       { value: '2018' },
     ]
@@ -227,7 +230,22 @@ class ReportsDirectorate extends Component {
                 <div className="unit golden-large">
                   <div className="grid">
                     <div className="unit four-fifths">
-                 
+                    <Select
+                    style={{ width: '48%', display: 'inline-block', float: 'right' }} 
+                    onChange={
+                      e=> {
+                        this.setState({year:e.target.value})
+                      }
+                    }
+            
+                  >
+                  <option value=''>choose year</option>
+                  {
+                    year.map((value,index)=> (
+                      <option name="" value={value.value}>{value.value}</option>
+                    ))
+                  }
+                  </Select>
                     </div>
                     <div className="unit one-fifth">
                       <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' } }onClick={
@@ -326,15 +344,7 @@ class ReportsDirectorate extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-                        <Select
-                        style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                        items={{
-                          items: [
-                          { title: 'JANUARY' },
-                          { title: 'FEBRUARY' },
-                          ],
-                        }}
-                      />
+                        
                       </div>
                       <div className='unit one-fifth'>
                         
