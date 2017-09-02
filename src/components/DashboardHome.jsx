@@ -31,7 +31,7 @@ class DashboardHome extends Component {
     var auth = this.props.state.data
     // console.log(projects);
     return(
-      !auth.userdata && !auth.datatimesheet ? <PageLoader></PageLoader> :
+      !auth.userdata && !auth.datatimesheet && !auth.project && !auth.userdata ? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
@@ -170,8 +170,7 @@ class DashboardHome extends Component {
     </div>
     <div className='projects'>
       {
-              auth &&
-              auth.project  &&
+             !auth.project ? <PageLoader/> : 
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>

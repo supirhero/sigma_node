@@ -51,8 +51,8 @@ class NewProject extends Component {
       "AM_ID": this.props.state.data.username,
       // // "TYPE_OF_EFFORT": 'NONE',
       "PROJECT_STATUS": 'NOT STARTED',
-      "HO": 'yes',
-      "PROJECT_TYPE_ID": 'project',
+      // "HO": 'yes',
+      // "PROJECT_TYPE_ID": 'project',
       //
       // // "START": '2017-1-1',
       // // "END": '2017-1-1',
@@ -568,12 +568,12 @@ class NewProject extends Component {
                     <h2 className='input-name'>H/O OPERATION</h2>
 
                     <div className='unit half'>
-                      <Field name="HO" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup} validate={required}>
                         <RadioButton value="yes" label="YES"/>
                       </Field>
                     </div>
                     <div className='unit half'>
-                      <Field name="HO" component={RadioButtonGroup}>
+                      <Field name="HO" component={RadioButtonGroup} validate={required}>
                         <RadioButton value="no" label="NO"/>
                       </Field>
 

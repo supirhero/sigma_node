@@ -16,9 +16,14 @@ const base_URL = "http://45.77.45.126"
 
 
 var initialState = {
-  isloggedin : false,
-  data: null
-}
+  
+    alert: {
+      color: "RED",
+      message:  '',
+      show: false
+      }
+  }
+
 
 // if (Object.keys(initialState).length === 0) {
 //   initialState = {
@@ -87,7 +92,7 @@ const page = (state = Immutable.List(), action) => {
 
   }
 }
-const alert = (state = Immutable.List(), action) => {
+const alert = (state = initialState, action) => {
   switch (action.type) {
     case 'ALERT': 
     return Object.assign({},state, {
