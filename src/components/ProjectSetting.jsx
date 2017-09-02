@@ -7,7 +7,7 @@ import { push, replace, goBack } from 'react-router-redux'
 import store from '../reducers/combineReducers.jsx';
 import { Line } from 'react-progressbar.js';
 import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal } from './Components.jsx';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, load } from 'redux-form';
 import {
   Checkbox,
   RadioButtonGroup,
@@ -17,11 +17,17 @@ import {
   DatePicker,
 } from 'redux-form-material-ui';
 import { MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui';
-import { getEditProjectView, editProject, getIWOEditProject, checkAM } from './actions.jsx';
+import { getEditProjectView, editProject, getIWOEditProject, checkAM, showNotif } from './actions.jsx';
 import moment from 'moment';
 
 
 class EditProject extends Component {
+  constructor() {
+    super()
+    this.state={
+      loaded: false
+    }
+  }
   handleInitialize(data, bu_code, id) {
     const initData = {
       IWO_NO: data.iwo_no !== "NONE" ? data.iwo_no : "---------------------------------------------------------------------------------------------------------------------------" ,
@@ -47,10 +53,12 @@ class EditProject extends Component {
       TYPE_OF_EXPENSE: 'CAPITAL EXPENSE',
 
     };
+    this.setState({loaded:true})
     this.props.initialize(initData);
   }
 
-  componentWillMount() {
+
+  componentDidMount() {
     const id = this.props.state.page.id;
     const iwo = this.props.state ? this.props.state : null;
     this.props.dispatch(getIWOEditProject(30)).then((res2) => {
@@ -59,20 +67,24 @@ class EditProject extends Component {
     this.props.dispatch(getEditProjectView(id)).then(
         (res) => {
           console.log('RES', res);
+          
           // const data = this.props.state.data.new_project.business_unit
+          // this.props.handleInitialize(res.data.project_setting, res.data.project_business_unit_detail, id)
           this.handleInitialize(res.data.project_setting, res.data.project_business_unit_detail, id);
-
+          // this.setState({
+          //   loaded:true
+          // })
         },
       );
   }
   onSubmit(props) {
     console.log(props);
-    alert('Successful');
     const id = this.props.state.page.id
     const bu_code = store.getState().page.project.bu_code;
 
     this.props.editProject(props, id, bu_code).then(res=> {
       this.props.dispatch(replace(`/project/${id}`))
+      this.props.dispatch(showNotif('Successfully edited project', 'GREEN'))
     });
   }
 
@@ -96,7 +108,7 @@ class EditProject extends Component {
     const iwo = project.iwo ? project.iwo : null;
     
     return (
-        !projectSetting && !projectManager && !accountManager && !iwo && !projectEffort ? <PageLoader /> :
+        !this.state.loaded  ? <PageLoader /> :
         <div>
 
 
@@ -132,6 +144,16 @@ class EditProject extends Component {
                 <Field
                   inputName="IWO NUMBER"
                   name="IWO_NO"
+                  selectStyle={
+                    !iwo ?
+                    {
+                    backgroundColor:'white',
+                    backgroundSize: '33px',
+                    backgroundImage:'url(http://www.xiconeditor.com/image/icons/loading.gif)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right',
+                    }:{}
+                  }
                   // component = {store.getState().data.project_setting.iwo_no !== "NONE" ? ReduxSelect : ReduxInputDisabled}
                   component={ReduxSelect}
                   // component={store.getState().data.project_setting.iwo_no !="NONE" ? ReduxInputDisabled : ReduxInput}

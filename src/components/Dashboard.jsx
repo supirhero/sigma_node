@@ -31,8 +31,10 @@ class Dashboard extends Component {
   }
 
     render(){
-      const auth = this.props.state.auth
+      const auth = this.props.state.data
       const alert = this.props.state.alert.alert
+      const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')' : null
+      
       const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == "GREEN" ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
       return(
                   <div className="unit whole" style={{position:'relative'}}>
@@ -65,14 +67,14 @@ class Dashboard extends Component {
 
                         <Menu style={{display:'inline'}} 
                         triggerStyle={{
-                          backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')',
+                          backgroundImage:imageURL,
                           backgroundRepeat: 'no-repeat',
                           backgroundSize: 'cover',
                           backgroundPosition: 'center'
                         
                         }} triggerClass='profile'>
                           <MenuSection>
-                            <MenuHeader title={auth.userdata.profile_name} subTitle={ this.props.state.auth.userdata.user_name}/>
+                            <MenuHeader title={auth.userdata ? auth.userdata.profile_name: null} subTitle={auth.userdata ?auth.userdata.user_name : null }/>
                             <MenuItem title='Home' onClick={
                               e => {
                                 browserHistory.push('/')
