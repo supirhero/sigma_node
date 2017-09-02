@@ -45,11 +45,14 @@ class ProjectOverview extends Component {
                   </div>
                 </div>
                 <div className='grid'>
-                  <div className='unit whole'>
+                  <div className='unit two-fifths'>
                     <medium>Description</medium>
                     <small>{overview.description ? overview.description : '-'}</small>
                   </div>
-
+                  <div className='unit two-fifths'>
+                    <medium>Effort Type</medium>
+                    <small>{overview.effort_type}</small>
+                  </div>
                 </div>
 
               </div>
