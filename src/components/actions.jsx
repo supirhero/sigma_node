@@ -1861,5 +1861,48 @@ export function reportFindProject(value,status,schedule,budget) {
   }
 }
 
+export function getCurrentProgress(wbs_id){
+  store.dispatch({type: 'LOADER', loader:'project-loader', show:true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}task/getCurrentProgresTask?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              wbs_id
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'task', data: res})
+            },
+
+          )
+  }
+}
+
+export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}task/editTaskPercent?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        PROJECT_ID,
+        WBS_ID,
+        WORK_PERCENT_COMPLETE:props.WORK_PERCENT_COMPLETE,
+        DESCRIPTION:props.DESCRIPTION
+        
+      }
+    }).then(
+      (res)=>{
+        return res
+      }
+    )
+  }
+}
+
 
 

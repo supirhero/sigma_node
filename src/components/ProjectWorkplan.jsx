@@ -13,7 +13,7 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 import { Field, reduxForm } from 'redux-form';
 
 import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
-denyRebaseline,acceptRebaseline, baseline, showNotif
+denyRebaseline,acceptRebaseline, baseline, showNotif, getCurrentProgress, editTaskPercentAction
 } from './actions.jsx';
 import ReactAutocomplete from 'react-autocomplete'
 
@@ -26,7 +26,8 @@ class ProjectWorkplan extends Component {
       WBS_id: '',
       array: {
         new_task :[],
-        modified_task:[]
+        modified_task:[],
+        manualUpdate:[]
       },
       assignMember:{
         MEMBER:'',
@@ -81,41 +82,28 @@ class ProjectWorkplan extends Component {
         value.LEAF == 1 &&
         // React.cloneElement(this.props.children, { data: value })
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
-            <MenuSection>
-              <MenuItem title='Add Timesheet' onClick={e => {
-
-                this.handleInitialize({
-                  TS_DATE: value.START_DATE,
-                  PROJECT_ID: value.PROJECT_ID,
-                  WBS_NAME: this.props.state.data.workplan.WBS_NAME,
-                  WP_ID: value.WBS_ID,
-                  TASK: value.WBS_NAME,
-
-                  HOUR: value.WORK ? value.WORK : 0,
-                  TS_SUBJECT: value.SUBJECT ? value.SUBJECT : 'none',
-                  TS_MESSAGE: value.MESSAGE ? value.MESSAGE : 'none'
-                })
-                this.props.dispatch({
-                  type: 'POPUP',
-                  name:'addTimesheetWorkplan',
-                  data: {
-                    active:true
-                  }
-                })
-                // this.setState({value: value}, ()=> {
-                //   })
-                // })
-
-                e.preventDefault()
-              }}/>
+            <MenuSection> 
               <MenuItem title='Manual Update' onClick={e => {
-                this.props.dispatch({
-                  type: 'POPUP',
-                  name:'manualUpdate',
-                  data: {
-                    active:true
+                   this.props.dispatch(getCurrentProgress(value.WBS_ID)).then(
+                  res => {
+                    this.setState({WBS_id: value.WBS_ID})
+                    this.props.dispatch({
+                      type: 'POPUP',
+                      name:'manualUpdate',
+                      data: {
+                        active:true,
+                      }
+                    })
+                    console.log('POPUP',res);
+                   this.handleInitialize({
+                      PROJECT_ID : res.data.manual_update[0].PROJECT_ID,
+                      WBS_ID :res.data.manual_update[0].WBS_ID,
+                      WORK_PERCENT_COMPLETE : res.data.manual_update[0].WORK_PERCENT_COMPLETE,
+                    })
+
+
                   }
-                })
+                )
 
                 e.preventDefault()
               }}/>
@@ -280,6 +268,32 @@ class ProjectWorkplan extends Component {
     const id = this.props.state.page.id
     this.props.uploadWorkplan(id,props.document)
   }
+  onSubmitManualUpdate(props){
+
+    const id = this.props.state.page.id
+    console.log(this.state.WBS_ID)
+    this.props.editTaskPercentAction(id,this.state.WBS_id,props).then(res=>{
+
+      var newState = this.state.array.manualUpdate.concat(
+
+        {
+
+          // PROJECT_ID: this.props.state.page.id,
+          PROJECT_ID:id,
+          WBS_ID: this.state.WBS_id,
+          DESCRIPTION:props.DESCRIPTION,
+          WORK_PERCENT_COMPLETE: props.WORK_PERCENT_COMPLETE
+        }
+      )
+      this.props.dispatch({
+        type: 'POPUP',
+        name:'manualUpdate',
+        data: {
+          active:false
+        }                                                                                                                                                                                                                                                                                                                                                                                                           
+      })
+    })
+  }
   onSubmitEditTask(props){
     const id = this.props.state.page.id
     this.props.editTaskAction(id,this.state.WBS_id,props).then(res=>{
@@ -417,76 +431,42 @@ class ProjectWorkplan extends Component {
 
         </PopUp>
         <PopUp id="manualUpdate" dividerText="TASK PROGRESS" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
-          <form >
-          <div>
-            <div className="grid wrap narrow">
-              <div className="unit whole">
-                <Field
-                  inputName="TASK"
-                  name="desc"
-                  type="input"
-                  component={ReduxInputDisabled}
-                />
-                {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+          {
+            !this.props.state.data.manualUpdate && !this.props.state.data.parent ? <PageLoader/> :
+            <form onSubmit={handleSubmit(this.onSubmitManualUpdate.bind(this))}>
+            <div>
+            <label></label>
+              <div className="grid wrap narrow">
+                <div className="unit whole">
+                  <Field
+                    inputName="ON PROGRESS %"
+                    name="WORK_PERCENT_COMPLETE"
+                    type="input"
+                    component={ReduxInput}
+
+
+                  />
+                  {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+                </div>
+                <div className="unit whole">
+                  <Field
+                    inputName="DESCRIPTION"
+                    name="DESCRIPTION"
+                    type="input"
+                    component={ReduxInput}
+                  />
+                  {/* <Input inputName="FILE DESCRIPTION" placeholder="max 160 characters" /> */}
+                </div>
               </div>
+              <div className="grid wrap narrow">
+                <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                  <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SAVE </button>
+                </div>
+              </div>
+
             </div>
-            <div className="grid wrap narrow">
-              <div className="unit one-third">
-               <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>RESOURCES</h2>
-              </div>
-
-              <div className="unit two-thirds">
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>WORK</h2></div>
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>WORK TOTAL</h2></div>
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>% COMPLETE</h2></div>
-
-              </div>
-            </div>
-
-            <div className="grid wrap narrow">
-              <div className="unit one-third">
-                <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}><b>Kara Gray</b></h2>
-              </div>
-
-              <div className="unit two-thirds">
-                  <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>13</h2></div>
-                  <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>2371</h2></div>
-                  <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.54%</h2></div>
-              </div>
-            </div>
-
-            <div className="grid wrap narrow">
-              <div className="unit whole no-gutters">
-                <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>Manual Update</h2>
-              </div>
-              <div className="unit whole no-gutters">
-                <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>Project manager or leader can update progress of a task manually. The work timesheet will be recorded as admin</h2>
-              </div>
-            </div>
-
-
-            <div className="grid wrap narrow">
-            <div className="unit one-third">
-              <h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}><b>Admin</b></h2>
-            </div>
-
-
-            <div className="unit two-thirds">
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0</h2></div>
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>3929</h2></div>
-                <div className="one-third" style={{display:'inline-block'}}><h2 className="input-desc" style={{ display: 'inline-block', float: 'left' }}>0.58%</h2></div>
-            </div>
-          </div>
-
-
-            <div className="grid wrap narrow">
-              <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-                <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SAVE </button>
-              </div>
-            </div>
-
-          </div>
-        </form>
+          </form>
+        }
         </PopUp>
 
         <PopUp id="edit_task" dividerText="EDIT TASK" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
@@ -991,14 +971,16 @@ function mapStateToProps(state) {
   return {
     formValues: state.form.add_task,
     formValues: state.form.upload_workplan,
+    formValues:state.form.manualUpdate,
     state,
   };
 }
 export default reduxForm({ 
   // Must be unique, this will be the name for THIS PARTICULAR FORM
   form: 'add_task',
-  form: 'upload_workplan'
+  form: 'upload_workplan',
+  form:'manualUpdate'
 })(
-  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline, assignTaskMember })(ProjectWorkplan),
+  connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline, assignTaskMember,getCurrentProgress, editTaskPercentAction})(ProjectWorkplan),
 );
 // export default Login
