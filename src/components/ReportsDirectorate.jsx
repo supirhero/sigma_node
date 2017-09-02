@@ -163,8 +163,8 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit golden-small">
                   <Meter
-                      progress={35}
-                      text='35'
+                      progress={state.data.project_dir.jumlah}
+                      text={state.data.project_dir.jumlah}
                     />
                 </div>
                 <div className="unit golden-large">
@@ -227,22 +227,7 @@ class ReportsDirectorate extends Component {
                 <div className="unit golden-large">
                   <div className="grid">
                     <div className="unit four-fifths">
-                    <Select
-                    style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                    input
-                    onChange={
-                        e=> {
-                          this.setState({year_timesheet:e.target.value})
-                        }
-                      }
-                    >
-                    <option value=''>choose year</option>
-                      {
-                        year.map((value,index)=> (
-                          <option name="" value={value.value}>{value.value}</option>
-                        ))
-                      }
-                    </Select>
+                 
                     </div>
                     <div className="unit one-fifth">
                       <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' } }onClick={
@@ -275,19 +260,20 @@ class ReportsDirectorate extends Component {
               </div>
               <div className="grid">
                 <div className="unit one-third">
+            
                   <Meter
-                    progress={75}
-                    text="75"
+                    progress={state.data.r_entry_bu.jml_entry * 0.01}
+                    text={Math.floor(state.data.r_entry_bu.jml_entry)}
                     title="Entry"
-                    status="Normal"
+                    status={state.data.r_entry_bu.status}
                   />
                 </div>
                 <div className="unit one-third">
                   <Meter
-                    progress={100}
-                    text="100"
+                    progress={state.data.r_util_bu.jml_util * 0.01}
+                    text={Math.floor(state.data.r_util_bu.jml_util)}
                     title="Utilization"
-                    status="OVERLOAD"
+                    status={state.data.r_util_bu.status_utilization}
                   />
                 </div>
                 <div className="unit one-third" />
@@ -307,21 +293,11 @@ class ReportsDirectorate extends Component {
                   <div className='unit golden-large'>
                     <div className='grid'>
                       <div className='unit four-fifths'>
-												<Select
-                        style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                  
-                      >
-                      <option value=''>choose year</option>
-                        {
-                          year.map((value,index)=> (
-                            <option name="" value={value.value}>{value.value}</option>
-                          ))
-                        }
-                      </Select>
+											
                       
                       </div>
                       <div className='unit one-fifth'>
-                        <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
+                        
 
                       </div>
                     </div>
@@ -361,7 +337,7 @@ class ReportsDirectorate extends Component {
                       />
                       </div>
                       <div className='unit one-fifth'>
-                        <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
+                        
 
                       </div>
                     </div>
