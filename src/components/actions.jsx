@@ -1599,7 +1599,7 @@ export function editProfile(no_hp,address,files){
     const formData = new FormData();
     formData.append('no_hp',no_hp);
     formData.append('address',address);
-    formData.append('image',files[0])
+    formData.append('image',files ? files[0] : null)
     fetch(`${baseURL}home/edit_user?token=${token}`,{
       method:'POST',
       body:formData

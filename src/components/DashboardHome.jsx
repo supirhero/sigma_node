@@ -8,8 +8,7 @@ import { changeRoute, getDashboardView, showNotif } from './actions.jsx'
 
 import {Meter, Search, PageLoader} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
-
-
+import moment from 'moment'
 
 
 class DashboardHome extends Component {
@@ -90,7 +89,7 @@ class DashboardHome extends Component {
         <div className='grid'>
           <div className='unit half'>
             <large>MY PERFORMANCE</large>
-            <small>This month, May</small>
+            <small>{`This month, ${moment().format("MMMM")}`}</small>
           </div>
           <div className='unit half'>
             <button className='btn-primary' style={{width:'100%'}} onClick={

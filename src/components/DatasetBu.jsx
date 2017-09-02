@@ -7,7 +7,7 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
 
-import {getDataMaster,addBU,editBU,getBusinessUnitDetail,alert} from './actions.jsx'
+import {getDataMaster,addBU,editBU,getBusinessUnitDetail} from './actions.jsx'
 
 
 import {Field, reduxForm} from 'redux-form';
@@ -23,7 +23,7 @@ class DatasetBu extends Component {
  
 
   onSubmit(props){
-    alert("New Business Unit Added")
+    // alert("New Business Unit Added")
     this.props.dispatch(addBU(props)).then(
       ()=> {
         store.dispatch({
