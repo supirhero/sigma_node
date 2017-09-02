@@ -399,7 +399,7 @@ export const addNewProject = (data,id) => {
   }
 }
 
-export const getBusinessUnitDetail = (id) => {
+export const getBusinessUnitDetail = (id,STATUS,PROJECT_TYPE,EFFORT_TYPE) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
@@ -409,6 +409,9 @@ export const getBusinessUnitDetail = (id) => {
             url: `${baseURL}home/buDetail?token=${token}`,
             data: {
               bu_code: id,
+              STATUS,
+              PROJECT_TYPE,
+              EFFORT_TYPE
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 

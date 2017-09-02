@@ -27,6 +27,26 @@ class BusinessUnit extends Component {
     
       // var projects = state.data.projects ? state.data.projects : null
     var project = state.data.project;
+    const projectStatus= [
+      {name:'Not Started'},
+      {name:'In Progress'},
+      {name:'Completed'},
+    ]
+    
+    const projectType= [
+      {name:'project'},
+      {name:'non project'},
+    ]
+
+    const typeOfEffort = [
+      {name:'Project'},
+      {name:'CR'},
+      {name:'Manage Operation'},
+      {name:'Maintenance'},
+      {name:'Manage Service'},
+      {name:'Non Project'},
+    ]
+
     if(!project){
       return <PageLoader></PageLoader>
     }

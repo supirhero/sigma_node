@@ -40,7 +40,7 @@ class EditProject extends Component {
       HO: data.ho_operation ? data.ho_operation : 'yes',
       PM: data.pm_id,
       // AM_ID: 'NONE',
-      TYPE_OF_EFFORT: 'NONE',
+      TYPE_OF_EFFORT: 6,
       PROJECT_STATUS: (data.project_status).toUpperCase(),
       START: data.schedule_start,
       END: data.schedule_end,
