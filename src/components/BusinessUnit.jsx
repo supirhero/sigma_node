@@ -11,6 +11,27 @@ import store from '../reducers/combineReducers.jsx';
 
 
 class BusinessUnit extends Component {
+  constructor(){
+    super();
+    this.state = {
+      status : null,
+      type: null,
+      effort:null,
+      search:null
+    };
+  }
+
+  handleStatusChange(e) {
+    // this.setState({status: e.target.value},()=>{
+    //   store.dispatch(getBusinessUnitDetail(id,this.state.status))
+    // });
+    store.dispatch(getBusinessUnitDetail(id,"Project"))
+    console.log(e.target.value);
+    e.preventDefault()
+
+   }
+
+
   componentWillMount(){
     var state = store.getState();
     const id = state.page.business_unit.bu_code
@@ -20,6 +41,11 @@ class BusinessUnit extends Component {
   componentWillUnmount() {
     store.dispatch(pop());
   }
+
+  componentWIllUpdate(){
+    store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
+  }
+
   render() {
     var state = store.getState();
     const id = state.page.business_unit.bu_code
@@ -34,8 +60,8 @@ class BusinessUnit extends Component {
     ]
     
     const projectType= [
-      {name:'project'},
-      {name:'non project'},
+      {name:'Project'},
+      {name:'Non project'},
     ]
 
     const typeOfEffort = [
@@ -56,7 +82,7 @@ class BusinessUnit extends Component {
           <div className='unit whole'>
             <Divider
             btnLeftText='BACK'
-            text={project[0].BU_NAME}
+            text={project[0] ? project[0].BU_NAME:null}
             btnLeftClick={
               e => {
                 browserHistory.goBack('/')
@@ -91,10 +117,75 @@ class BusinessUnit extends Component {
                 <div>
                   <div style={{marginBottom: '30px', margin: '20px auto 10px'}} className='grid wrap'>
                     <div className='unit whole'>
-                    <Search placeholder='search business units or project' style={{width:'55%', display:'inline-block'}}></Search>
+                    <Search placeholder='Search Business Units or Project' style={{width:'490px', display:'inline-block'}}
+                    onChange={e=>{
+                      this.setState({search:e.target.value},()=>{
+                        store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
+                      })
+                      e.preventDefault()
+                    }}
+                    >
+
+                    </Search>
                         <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                           browserHistory.push('/new-project')
                           }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
+                    </div>
+                    <div className="unit whole no-gutters">
+                        <select 
+                        className='select' style={{height:'49px', width:'150px',marginRight:'10px', display:'inline-block'}}
+                        onChange={e=>{
+                          this.setState({status:e.target.value},()=>{
+                            store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
+                          })
+                          e.preventDefault()
+                        }}
+                        >
+                        <option value="">- Project Status -</option>
+                        {
+                          projectStatus.map((value,index) => {
+                          return(
+                            <option key={index} value={value.name}>{value.name}</option>
+
+                          )
+                        })}
+                      </select>
+                      <select 
+                      className='select' style={{height:'49px', width:'150px',margin:'0 10px', display:'inline-block'}}
+                      onChange={e=>{
+                        this.setState({type:e.target.value},()=>{
+                          store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
+                        })
+                        e.preventDefault()
+                      }}
+                      >
+                      <option value="">- Project Type -</option>
+                      {
+                        projectType.map((value,index) => {
+                        return(
+                          <option key={index} value={value.name}>{value.name}</option>
+
+                        )
+                      })}
+                    </select>
+                    <select 
+                    className='select' style={{height:'49px', width:'150px',margin:'0 10px', display:'inline-block'}}
+                    onChange={e=>{
+                      this.setState({effort:e.target.value},()=>{
+                        store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
+                      })
+                      e.preventDefault()
+                    }}
+                    >
+                    <option value="">- Type of Effort -</option>
+                    {
+                      typeOfEffort.map((value,index) => {
+                      return(
+                        <option key={index} value={value.name}>{value.name}</option>
+
+                      )
+                    })}
+                  </select>
                     </div>
                   </div>
 

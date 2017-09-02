@@ -4,8 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { Link, browserHistory } from 'react-router'
 import {Circle, Line} from 'react-progressbar.js'
-import { changeRoute, getDashboardView, showNotif } from './actions.jsx'
-
+import { changeRoute, getDashboardView, showNotif ,searchHome} from './actions.jsx'
 import {Meter, Search, PageLoader} from './Components.jsx'
 import store from '../reducers/combineReducers.jsx'
 import moment from 'moment'
@@ -137,31 +136,16 @@ class DashboardHome extends Component {
     </div>
     <div className='grid wrap '>
       <div className='unit whole'>
-      <div className='search' style={this.props.style}>
-        <div className='card'>
-          <input placeholder={this.props.placeholder} onChange= {
-            e => {
-              console.log(e.target.value)
-              this.setState({search: e.target.value})
-            }}
-            ></input>
-          <i className='icon-magnifier' onClick={e=> {
-            var project = this.props.state.data.project
-            var res_search = _.find(project, { 'bu_name': 
-            this.state.search.replace(/\b\w/g, l => l.toUpperCase())});
-            {/* console.log(this.toTitleCase(this.state.search)) */}
-            var res = {
-              data : {project: [res_search]}
-            }
-            console.log(res_search)
-            if(res_search != undefined) {
-            store.dispatch({type:'API', name: 'project', data: res})
+      <Search placeholder='Search Business Units or Project' style={{width:'500px', display:'block', margin:'auto'}}
+      onChange={e=>{
+        this.setState({search:e.target.value},()=>{
+          store.dispatch(searchHome(this.state.search))
+        })
+        e.preventDefault()
+      }}
+      >
 
-            }
-
-            }}></i>
-        </div>
-      </div>
+      </Search>
         {/* <Search placeholder='search business units or project'></Search> */}
 
 

@@ -534,6 +534,9 @@ background-repeat: no-repeat;
 .search {
   width: 80%;
   margin: auto;
+  input:focus{
+    outline: none;
+  }
   .card {
     padding: 0px 0px 0px 25px;
     input {

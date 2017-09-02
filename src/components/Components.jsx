@@ -770,7 +770,7 @@ export class Search extends Component {
     return(
       <div className='search' style={this.props.style}>
         <div className='card'>
-          <input placeholder={this.props.placeholder}></input>
+          <input placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
           <i className='icon-magnifier'></i>
         </div>
       </div>
