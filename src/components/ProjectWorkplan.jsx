@@ -71,8 +71,8 @@ class ProjectWorkplan extends Component {
       <td>{value.WORK}</td>
       <td>{value.WORK_COMPLETE}</td>
       <td>{value.DURATION}</td>
-      <td>{value.START_DATE}</td>
-      <td>{value.FINISH_DATE}</td>
+      <td>{value.LEAF == "0" ? null : value.START_DATE}</td>
+      <td>{value.LEAF == "0" ? null:value.FINISH_DATE}</td>
       <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
       <td style={{position:'relative', paddingRight:'10px'}} >
@@ -82,32 +82,7 @@ class ProjectWorkplan extends Component {
         // React.cloneElement(this.props.children, { data: value })
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
             <MenuSection>
-              <MenuItem title='Add Timesheet' onClick={e => {
-
-                this.handleInitialize({
-                  TS_DATE: value.START_DATE,
-                  PROJECT_ID: value.PROJECT_ID,
-                  WBS_NAME: this.props.state.data.workplan.WBS_NAME,
-                  WP_ID: value.WBS_ID,
-                  TASK: value.WBS_NAME,
-
-                  HOUR: value.WORK ? value.WORK : 0,
-                  TS_SUBJECT: value.SUBJECT ? value.SUBJECT : 'none',
-                  TS_MESSAGE: value.MESSAGE ? value.MESSAGE : 'none'
-                })
-                this.props.dispatch({
-                  type: 'POPUP',
-                  name:'addTimesheetWorkplan',
-                  data: {
-                    active:true
-                  }
-                })
-                // this.setState({value: value}, ()=> {
-                //   })
-                // })
-
-                e.preventDefault()
-              }}/>
+             
               <MenuItem title='Manual Update' onClick={e => {
                 this.props.dispatch({
                   type: 'POPUP',
@@ -343,87 +318,6 @@ class ProjectWorkplan extends Component {
       <div className="project-workplan">
         <div className="grid wrap narrow">
           <div className="unit whole">
-        <PopUp id="addTimesheetWorkplan" dividerText="UPDATE TIMESHEET" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
-          <form >
-          <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Field
-              inputName="DATE"
-              name="TS_DATE"
-              component={datepickerUniversal}
-              // validate={[required]}
-            />
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Field
-              inputName="PROJECT NAME"
-              name="WBS_NAME"
-              component={ReduxInputDisabled}
-              // validate={[required]}
-              >
-              </Field>
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-        <div className="unit three-quarters">
-        <Field
-        name="TASK"
-
-          inputName="TASK"
-          component={ReduxInputDisabled}
-          // validate={[required]}
-          />
-          </div>
-
-          <div className="unit one-quarter">
-            <Field
-              inputName="WORK HOURS"
-              name="HOUR"
-              type="HOUR"
-              component={ReduxInput}
-              // validate={[required]}
-            />
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Field
-              inputName="SUBJECT"
-              name="TS_SUBJECT"
-              type="TS_SUBJECT"
-              component={ReduxInput}
-              // validate={[required]}
-            />
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-          <div className="unit whole">
-            <Field
-                inputName="MESSAGE"
-                name="TS_MESSAGE"
-                // type="TS_MESSAGE"
-                component={ReduxInput}
-                // validate={[required]}
-              />
-          </div>
-        </div>
-        <div className="grid wrap narrow">
-          <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
-          <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
-            e => {
-              browserHistory.push('/')
-              e.preventDefault()
-            }
-          }> CANCEL </button>
-            <button style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW</button>
-          </div>
-        </div>
-
-          </form>
-
-        </PopUp>
         <PopUp id="manualUpdate" dividerText="TASK PROGRESS" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           <form >
           <div>
@@ -540,7 +434,7 @@ class ProjectWorkplan extends Component {
               inputName="START DATE"
               name="START_DATE_EDIT"
               type="input"
-              component={datepickerUniversal}
+              component={this.props.state.data.project_status == "IN PROGRESS" ? ReduxInputDisabled : datepickerUniversal}
             />
 
             </div>
@@ -692,9 +586,7 @@ class ProjectWorkplan extends Component {
                 </div>
               </div>
               <div className="grid wrap narrow">
-                <div className="unit one-fifth">
-                  <small style={{ display: 'inline-block', float: 'left' }}>WORKLOAD</small>
-                </div>
+                
                 <div className="unit four-fifths">
                   <small style={{ display: 'inline-block', float: 'left' }}>RESOURCES</small>
                 </div>
@@ -702,9 +594,6 @@ class ProjectWorkplan extends Component {
               {
                 this.props.state.data.currently_assigned.map((value,index)=> (
                   <div className="grid wrap narrow">
-                    <div className="unit one-fifth">
-                      <medium style={{ display: 'inline-block', float: 'left' }}>60%</medium>
-                    </div>
                     <div className="unit four-fifths">
                       <div className="unit two-fifths">
                         <medium style={{ display: 'inline-block', float: 'left' }}>{value.USER_NAME}</medium>
