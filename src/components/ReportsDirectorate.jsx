@@ -54,6 +54,7 @@ class ReportsDirectorate extends Component {
                 >
                   {
                     this.props.state.data.list_bu &&
+
                     this.props.state.data.list_bu[0].children.map((value,index)=> {
                       console.log('------child' + index, value.BU_NAME)
                       return[
@@ -83,6 +84,7 @@ class ReportsDirectorate extends Component {
                           })
                           
                       ]
+
                     }
 
               

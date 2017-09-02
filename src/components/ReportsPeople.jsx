@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header,PageLoader } from './Components.jsx';
+import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header,PageLoader,Menu, MenuSection, MenuItem, MenuHeader } from './Components.jsx';
+
 import {reportPeople} from './actions.jsx'
 
 class ReportsPeople extends Component {
@@ -78,19 +79,61 @@ class ReportsPeople extends Component {
       <div>
         <div className="grid wrap">
           <div className="unit golden-large">
-            <Select
-              style={{ width: '100%', display: 'inline-block', float: 'left' }}
-              items={{
-                items: [
-                { title: 'IT OPERATION SERVICES' },
-                { title: 'CROSS-INDUSTRY APPLICATIONS SOLUTION' },
-                ],
-              }}
-            />
+            
+          <Menu
+          style={{position:'relative', display:'inline' }}
+          menuStyle={{ 
+            width:'500px', top:'50px', right:'auto',
+            height:'300px', overflow:'scroll'
+          
+          }}
+          triggerInput='true'
+          inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
+          >
+            {
+              this.props.state.data.list_bu &&
+
+              this.props.state.data.list_bu[0].children.map((value,index)=> {
+                console.log('------child' + index, value.BU_NAME)
+                return[
+                  <MenuHeader style={{paddingLeft: '20px', paddingTop: '15px'}} key={index} title={value.BU_NAME} onClick={e => {
+                      console.log('working222')
+                      
+                      this.setState({bu:value.BU_ID})
+                      e.preventDefault()
+                    }}>
+                    </MenuHeader>,
+                    
+                      value.children !== null  &&
+                      value.children.map((value2,index) => {
+                      console.log('child.child' + index,value2.BU_NAME)
+                        
+                        return(
+                          <MenuItem key={index} style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} title={value2.BU_NAME} onClick={
+                            e => {
+                              
+                              this.setState({bu:value2.BU_ID})
+                              
+                            }
+                          }/>
+                         
+                       
+                        )
+                    })
+                    
+                ]
+
+              }
+
+        
+              )
+            }
+
+        </Menu>
           </div>
 					<div className="unit golden-small">
           <select onClick={this.handleMonthChange.bind(this)} 
-          className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
+          className='select' style={{height:'49px', width:'130px', display:'inline-block'}}> 
           { 
             month.map((value,index) => { 
             return( 
@@ -101,7 +144,7 @@ class ReportsPeople extends Component {
         </select> 
             
         <select onClick={this.handleYearChange.bind(this)} 
-        className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+        className='select' style={{height:'49px', width:'100px', display:'inline-block',marginLeft:'5px'}}> 
         { 
           year.map((value,index) => { 
           return( 
@@ -110,7 +153,7 @@ class ReportsPeople extends Component {
           ) 
         })} 
       </select> 
-      <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
+      <button className="btn-primary" style={{ padding: '11px 14px',display:'inline-block' ,marginLeft:'30px',marginTop:'5px'}} ><span className="material-icons" style={{ color: 'white' }}  
       onClick={(e)=> { 
         console.log(this.state.month,this.state.year); 
         store.dispatch(reportPeople(this.state.month,this.state.year)) 

@@ -38,7 +38,7 @@ class Dashboard extends Component {
                   <div className="unit whole" style={{position:'relative'}}>
                 {
                   <div className={alert && alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}
-                  style={{backgroundColor: color}}
+                  style={{backgroundColor: "white" }}
                   >
                   <small>{alert && alert.message ? alert.message : '' }</small>
                 </div>

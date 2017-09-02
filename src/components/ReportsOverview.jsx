@@ -307,25 +307,31 @@ class ReportsOverview extends Component {
 
               <div className="grid wrap narrow" style={{marginTop:'55px'}}>
                 <div className="unit whole">
+                {
+                  !r_yearly_cpi ? <PageLoader /> :
+                
                   <LineChart
-                    label="CPI HISTORY"
-                    data={ r_yearly_cpi && r_yearly_cpi.map((value,index)=>{
+                    label="SPI HISTORY"
+                    data=
+                    {
+                      r_yearly_cpi &&
+                      r_yearly_cpi.map((value,index)=>{
                       return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
                     }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
-                    {key:'CIA1', stroke:'#94dea9'},
-                    {key:'DCES', stroke:'#795548'},
-                    {key:'FSD', stroke:'#0099ff'},
-                    {key:'ITPS', stroke:'#642bb6'},
-                    {key:'SGP', stroke:'#f8aa27'},
-                    {key:'SMS', stroke:'#94dea9'},
-                    {key:'SSI', stroke:'#795548'},
-                    {key:'TBSDM', stroke:'#0099ff'},
-                    {key:'TKDM', stroke:'#642bb6'},                              													
-                  ]}
+                            {key:'CIA1', stroke:'#94dea9'},
+                            {key:'DCES', stroke:'#795548'},
+                            {key:'FSD', stroke:'#0099ff'},
+                            {key:'ITPS', stroke:'#642bb6'},
+                            {key:'SGP', stroke:'#f8aa27'},
+                            {key:'SMS', stroke:'#94dea9'},
+                            {key:'SSI', stroke:'#795548'},
+                            {key:'TBSDM', stroke:'#0099ff'},
+                            {key:'TKDM', stroke:'#642bb6'},                              													
+													]}
                     style={{marginTop:'50px'}}
                   />
-
+                } 
                 </div>
               </div>
             </div>

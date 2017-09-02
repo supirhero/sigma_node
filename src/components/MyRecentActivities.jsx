@@ -17,6 +17,14 @@ class MyRecentActivities extends Component {
     store.dispatch(pop());
   }
 
+  onSubmit() {
+    alert('Please Re-Login to See Updated Profile')
+    
+    
+    
+  }
+  
+
   render() {
     const myActivity = store.getState().data.activity_timesheet;
     if (!myActivity) {
@@ -60,7 +68,7 @@ class MyRecentActivities extends Component {
           </div>
         </div>
 
-        <div className="grid wrap">
+    {/*    <div className="grid wrap">
           <div className="unit whole">
             <h2 style={{ marginBottom: '0' }} className="input-desc">GENERATE REPORT</h2>
           </div>
@@ -93,7 +101,7 @@ class MyRecentActivities extends Component {
             <button className="btn-primary"style={{ float: 'right', padding: '17px 90px' }}>PRINT</button>
           </div>
         </div>
-
+*/} 
      
 
      
@@ -143,13 +151,16 @@ class MyRecentActivities extends Component {
             </div>
             <div className="grid wrap">
               <div className="unit whole" style={{ marginLeft: '104px' }}>
-                <small style={{ fontSize: '12px' }}>{value.submit_date}</small>
+                <small style={{ fontSize: '12px' }}>{value.submit_date ? `submitted on : ${(value.submit_date).substr(0,9)} | ${(value.submit_date).substr(10,5)} ${(value.submit_date).substr(26,2)}`:null}</small>
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&
                 <a style={{marginLeft:'45px'}} onClick={e => {
                   store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
                     store.dispatch(getMyActivities())
+                      
+ 
+                       
                   })
                   
                 }}

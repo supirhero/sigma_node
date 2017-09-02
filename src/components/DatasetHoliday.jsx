@@ -32,6 +32,7 @@ class DatasetHoliday extends Component {
 // }
 
 onSubmitUpdateHoliday(props){
+  alert("Holiday Updated")
   this.props.dispatch(updateHoliday(props)).then(res => {
     this.props.dispatch(getDataMaster("holiday"))
     store.dispatch({
@@ -59,6 +60,7 @@ componentDidUpdate() {
   }
 
   onSubmit(props){
+    alert("New Holiday Added")
     this.props.dispatch(addHoliday(props)).then(
       ()=> {
         store.dispatch({

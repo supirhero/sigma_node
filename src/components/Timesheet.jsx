@@ -32,9 +32,12 @@ class Timesheet extends Component {
             active:false
           }
         })
+        
         // res.preventDefault()
         // console.log("closed")
+        store.dispatch(viewTimesheet(this.state.selected))
       }
+      
     )
   }
 
@@ -48,7 +51,12 @@ class Timesheet extends Component {
     // store.dispatch(getDay(""))
   }
 
-
+componentDidUpdate(){
+  e=>{
+  store.dispatch(viewTimesheet(this.state.selected))
+  e.preventDefault()
+}
+}
 
 
   componentWillUnmount() {
@@ -253,6 +261,7 @@ class Timesheet extends Component {
                         component={ReduxSelectNew}
                         // validate={[required]}
                         >
+                      <option></option>
                         {
                               timesheet.user_project.map((value,index)=>{
                                 return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
@@ -269,12 +278,12 @@ class Timesheet extends Component {
                                       {
                                         timesheet.task ?
                                         <Field
-                                        name="WP_ID"
-                                        // type="WP_ID"
+                                        name="WP_ID"                                        
                                           inputName="TASK"
                                           component={ReduxSelectNew}
                                           // validate={[required]}
                                           >
+                                          <option></option>
                                               {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
@@ -355,7 +364,7 @@ class Timesheet extends Component {
             </div>
           </div>
 
-          { this.state.holiday == false ? 
+          { this.state.user_activities !== [] ? 
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -380,7 +389,8 @@ class Timesheet extends Component {
                                   Project <a>{value.PROJECT_NAME}</a>
                                 <p>(<b>{value.HOUR_TOTAL} hours</b>) - {value.WBS_NAME}</p>
                                 <p>left a <b>{value.SUBJECT}</b> message</p>
-                                <p>{value.MESSAGE}</p>
+                                <p>{value.MESSAGE}</p>                                
+                                <small style={{ fontSize: '12px' }}>{value.SUBMIT_DATE ? `submitted on : ${(value.SUBMIT_DATE).substr(0,9)} | ${(value.SUBMIT_DATE).substr(10,5)} ${(value.SUBMIT_DATE).substr(26,2)}`:null}</small>
                                   </small>
                                   <div className="grid wrap" style={{ float: 'right' }}>
                                     <div className="unit whole" >

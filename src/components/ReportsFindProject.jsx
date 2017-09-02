@@ -1,17 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import update from 'react-addons-update';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Search, Input, BarChart, Divider, Meter, TableExample } from './Components.jsx';
+import { Select, Search, Input, BarChart, Divider, Meter, TableExample ,Checkbox} from './Components.jsx';
+import {reportFindProject, reportSearchProject} from './actions.jsx'
 
 
 class ReportsFindProject extends Component {
-  render() {
-    return (
-      <div>
+  constructor(){ 
+    super(); 
+    this.state = { 
+        status:[0,0,0,0,0,0],
+        status_fin:[0,0,0,0,0,0],
+        schedule:[0,0,0],
+        schedule_fin:[0,0,0],
+        budget:[0,0,0],
+        budget_head:[0,0,0],
+    } 
+  } 
 
+  //variable yang akan di send
+
+
+  componentWillMount(){
+    // store.dispatch(reportFindProject([0],[0],[0],[0],[0]))
+  }
+  render() {
+    const value = [
+      {label:"not started",value:"1"},
+      {label:"in progress",value:"2"},
+      {label:"on hold",value:"3"},
+      {label:"completed",value:"4"},
+      {label:"in planning",value:"5"},
+      {label:"cancelled",value:"6"}
+    ]
+
+   
+
+
+    
+    
+
+   
+
+    const state = store.getState()
+    const project_list = state.data.project
+    
+    return (
+      
+      <div>
+        
         <div className="grid wrap">
           <div className="unit one-quarter">
             <div className="card" style={{ padding: '35px' }}>
@@ -19,8 +60,96 @@ class ReportsFindProject extends Component {
                 <large><b>FILTERED BY</b></large>
               </div>
               <div className="unit whole no-gutters">
-                <medium><b>Value</b></medium>
-              </div>              
+                <medium><b>Status</b></medium>
+              </div> 
+              <div className="unit whole no-gutters">
+                {
+                  value.map((value,index)=>{
+                   return <Checkbox id={index} label={value.label} group='status' 
+                    onClick={
+                      
+                      e=>{
+                        console.log(this.state,"WWERIRENANRI")
+                      //  if ( this.state["checkbox"+index] == 1) {
+                      //    this.setState({
+                      //      ["checkbox" + index] : "0"
+                      //    }) 
+                      //     this.setState(
+                      //      this.state.status.concat({
+                      //        status:0
+                      //      })
+                      //    ) 
+
+                      //  }
+                      //  else {
+                      //   this.setState({
+                      //     ["checkbox" + index] : "1"
+                      //   }) 
+                      //    this.setState(
+                      //     this.state.statu`s.concat({
+                      //       status:1
+                      //     })
+                      //   ) 
+                      //  }
+                      {/* var arr = [] */}
+                      if(this.state.status[index] == 1) {
+                        this.setState({
+                          status: update(this.state.status,{[index] : {$set: 0}})
+                        }, ()=> { 
+                          console.log(this.state.status)
+                         console.log("SET TO 0--------")
+                          this.props.dispatch(reportSearchProject(this.state.status))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })                          
+                          // console.log(this.state.status)
+                        })
+                      }
+                      else{
+                        this.setState({
+                          status: update(this.state.status,{ [index]: {$set: 1}})
+                        }, ()=> {
+                          console.log(this.state.status)
+                         console.log("SET TO 1--------")
+                          
+                          {/* var i = 0; */}
+                          
+                         {/* console.log(arr) */}
+                         
+                          this.props.dispatch(reportSearchProject(this.state.status))
+                          .then(res=> {
+                            this.forceUpdate()
+                          }) 
+                          // this.props.dispatch(reportSearchProject(this.state.status))
+                          // console.log(this.state.status)
+                        })
+                        
+                        // this.setState(status[index] = 1)
+                      }
+
+                      // const arr = []
+                      // this.setState({
+                      //   items: update(this.state.status,{ $set:{index: 0}})
+                      // }, ()=> {
+                        
+                        
+                      // })
+                        
+                        
+                          {/* e.preventDefault() */}
+
+                       
+                    }}
+                  ></Checkbox>
+                  })
+                }
+            </div>      
+
+          
+       
+
+
+            
             </div>
           </div>
           <div className="unit three-quarters">
@@ -34,13 +163,18 @@ class ReportsFindProject extends Component {
             </div>
 
             {/* MAP THIS */}
+            {
+                project_list ?
+                project_list.map((value,index)=>{
+                  return(
+              <div key={index} style={{marginTop:'30px',marginBottom:'30px'}}>
             <div className="card" style={{ padding: '20px 35px' }}>
               <div className="grid">
                 <div className="unit golden-large">
-                  <medium>Transaction Based Managed Services 2017</medium>
+                  <medium>{value.PROJECT_NAME}</medium>
                 </div>
                 <div className="unit golden-small no-gutters">
-                  <medium style={{ float: 'right',marginRight:'55px'}}><b>IN PROGRESS <span className='in-progress'> (30%) </span></b>
+                  <medium style={{ float: 'right',marginRight:'55px'}}><b>{value.PROJECT_STATUS}<span className='in-progress'> {value.PERCENT ? `${value.PERCENT} %` : null }</span></b>
                     <div className="dropdown"></div>
                   </medium>                 
                 </div>
@@ -49,28 +183,28 @@ class ReportsFindProject extends Component {
             <div className="card" style={{ padding: '10px 35px', margin: '0' }}>
               <div className="unit half">
                 <medium>Customer</medium>
-                <medium>PT ABC DEF</medium>
+                <medium>{value.CUSTOMER_NAME}</medium>
               </div>
               <div className="unit half">
                 <div style={{ float: 'right',marginRight:'55px' }}>
                   <medium style={{ float: 'right'}}>Value</medium>
-                  <medium>200.000.000</medium>
+                  <medium>{value.AMOUNT}</medium>
                 </div>
               </div>
             </div>
             <div className="card" style={{ padding: '10px 35px', margin: '0' }}>
               <div className="unit one-third">
                 <medium>Project Manager</medium>
-                <medium>Tofan Sofiansah</medium>
+                <medium>{value.PM}</medium>
               </div>
               <div className="unit two-thirds">
                 <div style={{ float: 'left', marginLeft: '50px' }}>
                   <medium >Schedule Status</medium>
-                  <medium style={{ float: 'right' }}>ON SCHEDULE</medium>
+                  <medium style={{ float: 'right' }}>{value.SCHEDULE_STATUS}</medium>
                 </div>
                 <div style={{ float: 'right',marginRight:'55px' }}>
                   <medium>Budget Status</medium>
-                  <medium style={{ float: 'right' }}>ON BUDGET</medium>
+                  <medium style={{ float: 'right' }}>{value.BUDGET_STATUS}</medium>
                 </div>
               </div>
             </div>
@@ -78,97 +212,47 @@ class ReportsFindProject extends Component {
               <div className="unit three-fifths">
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">EV</medium> <span className="fa fa-question-circle-o" />
-                  <medium>13346.05</medium>
+                  <medium>{value.EV}</medium>
                 </div>
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">PV</medium> <span className="fa fa-question-circle-o" />
-                  <medium>12717.19</medium>
+                  <medium>{value.PV}</medium>
                 </div>
                 <div className="unit one-third" style={{ display: 'inline-block' }}>
                   <medium className="status">AC</medium> <span className="fa fa-question-circle-o" />
-                  <medium>12681.02</medium>
+                  <medium>{value.AC}</medium>
                 </div>
               </div>
               <div className="unit two-fifths">
                 <div className="unit half" style={{ display: 'inline-block' }}>
                   <medium className="status">SPI</medium> <span className="fa fa-question-circle-o" />
-                  <medium>1.05</medium>
+                  <medium>{value.SPI}</medium>
                 </div>
                 <div className="unit half" >
                   <medium className="status">CPI</medium> <span className="fa fa-question-circle-o" />
-                  <medium style={{ display: 'block' }}>1.05</medium>
+                  <medium style={{ display: 'block' }}>{value.CPI}</medium>
                 </div>
               </div>
             </div>
+                    </div>
+          )
+          
+                            
+                          }) : <div></div>
+          }
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>DRC ACTIVITY 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>DUE IN 3 DAYS <span className='due-in'> (80%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>DATA CENTER BTIP - MAKASSAR 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>COMPLETED <span className="completed"> (100%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>Application Development LCM</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px' }}><b>OVERDUE <span className="overdue"> (85%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="grid wrap">
-              <div className="unit whole">
-                <div className="card" style={{ padding: '20px 35px' }}>
-                  <div className="grid">
-                    <div className="unit golden-large">
-                      <medium>Infra Activity 2017</medium>
-                    </div>
-                    <div className="unit golden-small no-gutters">
-                      <medium style={{ float: 'right',marginRight:'55px'}}><b>ON HOLD <span className="on-hold"> (85%) </span></b></medium>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="container" style={{float:'right'}}>                  
+            {/* <div className="container" style={{float:'right'}}>                  
               <button className="arrow"> <b> &lt; </b> </button>
               <button className="pagination"><b>1</b></button>
               <button className="arrow"> <b> &gt; </b> </button>
-            </div>
+            </div> */}
 
           </div>
         </div>
+        
       </div>
     );
   }
