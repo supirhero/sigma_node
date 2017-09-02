@@ -6,7 +6,7 @@ import { push, replace, goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx';
 import { Line } from 'react-progressbar.js';
-import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal } from './Components.jsx';
+import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal, required } from './Components.jsx';
 import { Field, reduxForm, load } from 'redux-form';
 import {
   Checkbox,
@@ -17,7 +17,7 @@ import {
   DatePicker,
 } from 'redux-form-material-ui';
 import { MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'material-ui';
-import { getEditProjectView, editProject, getIWOEditProject, checkAM, showNotif } from './actions.jsx';
+import { getEditProjectView, editProject, getIWOEditProject, checkAM, showNotif,getProjectDetail } from './actions.jsx';
 import moment from 'moment';
 
 
@@ -30,7 +30,7 @@ class EditProject extends Component {
   }
   handleInitialize(data, bu_code, id) {
     const initData = {
-      IWO_NO: data.iwo_no !== "NONE" ? data.iwo_no : "---------------------------------------------------------------------------------------------------------------------------" ,
+      IWO_NO: data.iwo_no !== "NONE" ? data.iwo_no : "NONE" ,
       END_CUST_ID: data.cust_end_id,
       AMOUNT: data.amount ? data.amount : 0,
       PROJECT_NAME: data.project_name,
@@ -46,7 +46,7 @@ class EditProject extends Component {
       HO: data.ho_operation ? data.ho_operation : 'yes',
       PM: data.pm_id,
       // AM_ID: 'NONE',
-      TYPE_OF_EFFORT: 6,
+      TYPE_OF_EFFORT: data.type_of_effort ? data.type_of_effort : 6,
       PROJECT_STATUS: (data.project_status).toUpperCase(),
       START: data.schedule_start,
       END: data.schedule_end,
@@ -83,6 +83,12 @@ class EditProject extends Component {
     const bu_code = store.getState().page.project.bu_code;
 
     this.props.editProject(props, id, bu_code).then(res=> {
+      const id = this.props.state.page.id
+      this.props.dispatch(getProjectDetail(id)).then(
+        (res)=>{
+          console.log('detail project');
+        }
+      )
       this.props.dispatch(replace(`/project/${id}`))
       this.props.dispatch(showNotif('Successfully edited project', 'GREEN'))
     });
@@ -106,7 +112,7 @@ class EditProject extends Component {
     const accountManager = project.account_manager_list ? project.account_manager_list : null;
     const projectEffort = project.type_of_effort ? project.type_of_effort : null;
     const iwo = project.iwo ? project.iwo : null;
-    
+    const iwo_no = this.props.state.data.project_setting && (this.props.state.data.project_setting.iwo_no).toUpperCase()
     return (
         !this.state.loaded  ? <PageLoader /> :
         <div>
@@ -114,7 +120,7 @@ class EditProject extends Component {
 
           <div className="grid padding-left">
             <div className="unit whole">
-              <ProjectHeader projectName="Transaction Based Managed Services 2017" sectionName="EDIT PROJECT" />
+              <ProjectHeader projectName={this.props.state.data.overview.project_name} sectionName="EDIT PROJECT" />
 
             </div>
           </div>
@@ -208,7 +214,7 @@ class EditProject extends Component {
                     this.props.state.data.project_setting.iwo_no !='NONE' ? 
                     <option value={this.props.state.data.project_setting.iwo_no}{...this.props.option}>{this.props.state.data.project_setting.iwo_no}</option>
                       :
-                      <option>-----------------------------------------------</option>
+                      <option>NONE</option>
                   }
                   {
                     iwo &&
@@ -223,8 +229,9 @@ class EditProject extends Component {
                   inputName="NAME"
                   name="PROJECT_NAME"
                   type="input"
+                  validate={required}
                   style={{ width: '100%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
                 <Field
                   inputName="BUSINESS UNIT"
@@ -238,7 +245,7 @@ class EditProject extends Component {
                   name="RELATED"
                   type="RELATED"
                   style={{ width: '100%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
 
               </div>
@@ -250,7 +257,7 @@ class EditProject extends Component {
                   name="CUST_ID"
                   type="CUST_ID"
                   style={{ width: '88%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
               </div>
               <div className="unit two-thirds">
@@ -259,7 +266,7 @@ class EditProject extends Component {
                   name="END_CUST_ID"
                   type="END_CUST_ID"
                   style={{ width: '100%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
               </div>
             </div>
@@ -270,7 +277,7 @@ class EditProject extends Component {
                   name="AMOUNT"
                   type="AMOUNT"
                   style={{ width: '94%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
               </div>
               <div className="unit one-third">
@@ -279,7 +286,7 @@ class EditProject extends Component {
                   name="MARGIN"
                   type="MARGIN"
                   style={{ width: '100%' }}
-                  component={ReduxInputDisabled}
+                  component={iwo_no !='NONE' ?  ReduxInputDisabled : ReduxInput}
                 />
               </div>
 
@@ -361,7 +368,7 @@ class EditProject extends Component {
                       style={{ width: '96%' }}
                       component={ReduxSelect}
                     >
-
+                        <option></option>
                       {
                           projectEffort &&
                           projectEffort.map((value, index) => (
