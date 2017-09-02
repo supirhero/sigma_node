@@ -33,12 +33,12 @@ class Dashboard extends Component {
     render(){
       const auth = this.props.state.auth
       const alert = this.props.state.alert.alert
-      const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == 'GREEN' ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
+      const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == "GREEN" ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
       return(
                   <div className="unit whole" style={{position:'relative'}}>
                 {
                   <div className={alert && alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}
-                  style={{backgroundColor: "white" }}
+                  style={{backgroundColor: color }}
                   >
                   <small>{alert && alert.message ? alert.message : '' }</small>
                 </div>
@@ -63,7 +63,14 @@ class Dashboard extends Component {
                       </ul>
                       <div id='sigma-logo'></div>
 
-                        <Menu style={{display:'inline'}} triggerStyle={{backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')'}} triggerClass='profile'>
+                        <Menu style={{display:'inline'}} 
+                        triggerStyle={{
+                          backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center'
+                        
+                        }} triggerClass='profile'>
                           <MenuSection>
                             <MenuHeader title={auth.userdata.profile_name} subTitle={ this.props.state.auth.userdata.user_name}/>
                             <MenuItem title='Home' onClick={

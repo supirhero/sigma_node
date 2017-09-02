@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
-import { deleteAuthentication ,getListBU,rDirectorat} from './actions.jsx';
+import { deleteAuthentication ,getListBU,rDirectorat, showNotif, getDirectorateEntry, getDirectorateUtility} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader} from './Components.jsx';
 
@@ -11,8 +11,10 @@ class ReportsDirectorate extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      bu: '',
-      year: ''
+      bu_name: '',
+      bu: null,
+      year: null,
+      year_timesheet: null
     }
   }
   componentWillMount(){
@@ -27,6 +29,15 @@ class ReportsDirectorate extends Component {
       { value: '2017' },
       { value: '2018' },
     ]
+
+    const entry =state.data.r_entry_bu?state.data.r_entry_bu.allentry.map((value,index)=>{
+      return {name:value.label,value:parseFloat(value.value)}
+    }) : null
+
+    const utilization =state.data.r_util_bu?state.data.r_util_bu.allhour.map((value,index)=>{
+      return {name:value.label,value:parseFloat(value.value)}
+    }) : null
+
     return (
       !state.data.list_bu ? <PageLoader></PageLoader> :
 			<div>
@@ -50,31 +61,32 @@ class ReportsDirectorate extends Component {
                 
                 }}
                 triggerInput='true'
+                defaultValue={this.state.bu_name}
                 inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
                 >
                   {
                     this.props.state.data.list_bu &&
 
                     this.props.state.data.list_bu[0].children.map((value,index)=> {
-                      console.log('------child' + index, value.BU_NAME)
                       return[
-                        <MenuHeader style={{paddingLeft: '20px', paddingTop: '15px'}} key={index} title={value.BU_NAME} onClick={e => {
-                            console.log('working222')
+                        <MenuItem 
+
+                        textStyle={{paddingLeft: '20px', paddingTop: '15px', fontWeight: '400'}} key={index} title={value.BU_NAME} onClick={e => {
+                            this.setState({bu:value.BU_ID, bu_name: value.BU_NAME })
                             
-                            this.setState({bu:value.BU_ID})
                             e.preventDefault()
                           }}>
-                          </MenuHeader>,
+                          </MenuItem>,
                           
                             value.children !== null  &&
                             value.children.map((value2,index) => {
-                            console.log('child.child' + index,value2.BU_NAME)
                               
                               return(
                                 <MenuItem key={index} style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} title={value2.BU_NAME} onClick={
                                   e => {
-                                    
-                                    this.setState({bu:value2.BU_ID})
+                                    this.setState({bu:value2.BU_ID, bu_name: value2.BU_NAME }, ()=> {
+                                      console.log('BU_NAME',value2.BU_NAME)
+                                    })
                                     
                                   }
                                 }/>
@@ -104,6 +116,7 @@ class ReportsDirectorate extends Component {
               }
       
             >
+            <option value=''>choose year</option>
             {
               year.map((value,index)=> (
                 <option name="" value={value.value}>{value.value}</option>
@@ -113,7 +126,21 @@ class ReportsDirectorate extends Component {
 
             <button className="btn-primary"style={{ padding: '11px 14px',marginLeft:'5px'}} onClick={
                 e=> {
-                  this.props.dispatch(rDirectorat(this.state.bu,this.state.year))
+                  if((this.state.bu == null || this.state.bu ==  '') && (this.state.year == null || this.state.year == '')) {
+                    showNotif('Choose business unit and year', "RED") 
+                    
+                  }
+                  else if(this.state.year == null || this.state.year == '') {
+                    showNotif('Choose year', "RED") 
+                  }
+                  else if(this.state.bu == null ||  this.state.bu ==  '') {
+                    showNotif('Choose business unit', "RED") 
+
+                  }
+                  else {
+                    this.props.dispatch(rDirectorat(this.state.bu,this.state.year))
+
+                  }
                   
                   e.preventDefault()
                 }
@@ -144,14 +171,14 @@ class ReportsDirectorate extends Component {
                   <div className="grid wrap">
                     <div className="unit half">
                       <medium className="project-value-label completed">Completed</medium>
-                      <large className="project-value-number completed">{ state.data.project.completed }</large>
+                      <large className="project-value-number completed">{ state.data.project_dir.completed }</large>
 
                       <medium className="project-value-label not-started">Not Started</medium>
-                      <large className="project-value-number not-started">{ state.data.project.not_started }</large>
+                      <large className="project-value-number not-started">{ state.data.project_dir.not_started }</large>
                      </div>
                      <div className="unit half">
                       <medium className="project-value-label in-progress"> In Progress</medium>
-                      <large className="project-value-number in-progress">{ state.data.project.in_progress }</large>
+                      <large className="project-value-number in-progress">{ state.data.project_dir.in_progress }</large>
                      </div>
                    </div>
                 </div>
@@ -165,7 +192,7 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <medium className="project-value-label">Total Project Value</medium>
-                  <large className="project-value-number">10 M</large>
+                  <large className="project-value-number">{ state.data.finance.total_project_value } M</large>
 
                   <medium className="project-value-label">Invoiced</medium>
                   <large className="project-value-number">1 M</large>
@@ -200,18 +227,47 @@ class ReportsDirectorate extends Component {
                 <div className="unit golden-large">
                   <div className="grid">
                     <div className="unit four-fifths">
-                      <Select
-                        style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                        items={{
-                          items: [
-                          { title: 'JANUARY' },
-                          { title: 'FEBRUARY' },
-                          ],
-                        }}
-                      />
+                    <Select
+                    style={{ width: '48%', display: 'inline-block', float: 'right' }}
+                    input
+                    onChange={
+                        e=> {
+                          this.setState({year_timesheet:e.target.value})
+                        }
+                      }
+                    >
+                    <option value=''>choose year</option>
+                      {
+                        year.map((value,index)=> (
+                          <option name="" value={value.value}>{value.value}</option>
+                        ))
+                      }
+                    </Select>
                     </div>
                     <div className="unit one-fifth">
-                      <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}>search</span></button>
+                      <button className="btn-primary"style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' } }onClick={
+                        e=> {
+                          if((this.state.bu == null || this.state.bu ==  '') && (this.state.year_timesheet == null || this.state.year_timesheet == '')) {
+                            showNotif('Choose business unit and year', "RED") 
+                            
+                          }
+                          else if(this.state.year_timesheet == null || this.state.year_timesheet == '') {
+                            showNotif('Choose year', "RED") 
+                          }
+                          else if(this.state.bu == null ||  this.state.bu ==  '') {
+                            showNotif('Choose business unit', "RED") 
+
+                          }
+                          else {
+                            
+                            this.props.dispatch(getDirectorateEntry(this.state.bu,this.state.year_timesheet))
+                            this.props.dispatch(getDirectorateUtility(this.state.bu,this.state.year_timesheet))
+
+                          }
+                          
+                          e.preventDefault()
+                        }
+                      }>search</span></button>
 
                     </div>
                   </div>
@@ -253,13 +309,16 @@ class ReportsDirectorate extends Component {
                       <div className='unit four-fifths'>
 												<Select
                         style={{ width: '48%', display: 'inline-block', float: 'right' }}
-                        items={{
-                          items: [
-                          { title: 'JANUARY' },
-                          { title: 'FEBRUARY' },
-                          ],
-                        }}
-                      />
+                  
+                      >
+                      <option value=''>choose year</option>
+                        {
+                          year.map((value,index)=> (
+                            <option name="" value={value.value}>{value.value}</option>
+                          ))
+                        }
+                      </Select>
+                      
                       </div>
                       <div className='unit one-fifth'>
                         <button className='btn-primary'style={{padding:'11px 14px'}} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -270,22 +329,11 @@ class ReportsDirectorate extends Component {
                 </div>
                 <div className='grid'>
                   <div className='unit whole'>
+                   { 
+                     entry &&
                     <BarChart
-                      data={[
-                        {name: 'Jan', value: 20},
-                        {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 15},
-                        {name: 'Apr', value: 13},
-                        {name: 'May', value: 16},
-                        {name: 'Jun', value: 18},
-                        {name: 'Jul', value: 17},
-                        {name: 'Aug', value: 19},
-                        {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 30},
-                        {name: 'Nov', value: 23},
-                        {name: 'Des', value: 21}
-                      ]}/>
-
+                      data={entry}/>
+                    }
                   </div>
                 </div>
               </div>
@@ -321,22 +369,11 @@ class ReportsDirectorate extends Component {
                 </div>
                 <div className='grid'>
                   <div className='unit whole'>
-                    <BarChart
-                      data={[
-                        {name: 'Jan', value: 20},
-                        {name: 'Feb', value: 10},
-                        {name: 'Mar', value: 15},
-                        {name: 'Apr', value: 13},
-                        {name: 'May', value: 16},
-                        {name: 'Jun', value: 18},
-                        {name: 'Jul', value: 17},
-                        {name: 'Aug', value: 19},
-                        {name: 'Sep', value: 12},
-                        {name: 'Oct', value: 30},
-                        {name: 'Nov', value: 23},
-                        {name: 'Des', value: 21}
-                      ]}/>
-
+                   { 
+                     utilization &&
+                     <BarChart
+                      data={utilization}/>
+                    }
                   </div>
                 </div>
               </div>

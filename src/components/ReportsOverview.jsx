@@ -7,7 +7,7 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import {Cell} from 'recharts'
 import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header ,PageLoader} from './Components.jsx';
-import {reportMonthly,reportYearly,pop} from './actions.jsx'
+import {reportMonthly,reportYearly,pop, showNotif} from './actions.jsx'
 
 class ReportsOverview extends Component {
   constructor(){ 
@@ -138,7 +138,8 @@ class ReportsOverview extends Component {
                   </select> 
                       
                   <select onChange={this.handleYearChange.bind(this)} 
-                  className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}> 
+                  className='select' style={{height:'49px', width:'48%', display:'inline-block',float:'right'}}>
+                  <option>Choose year</option> 
                   { 
                     year &&
                     year.map((value,index) => { 
@@ -152,8 +153,21 @@ class ReportsOverview extends Component {
                     <div className="unit one-fifth">
                     <button className="btn-primary" style={{ padding: '11px 14px' }} ><span className="material-icons" style={{ color: 'white' }}  
                     onClick={(e)=> { 
-                      console.log(this.state.month,this.state.year); 
+                      if(this.state.year == null) {
+                        showNotif('Choose year', "RED") 
+                      }
+                      else if(this.state.month == null) {
+                        showNotif('Choose month', "RED") 
+
+                      }
+                      else if(this.state.month == null && this.state.year == null) {
+                        showNotif('Choose month and year', "RED") 
+                        
+                      }
+                      else {
+
                       this.props.reportMonthly(this.state.month,this.state.year)
+                      }
                       // store.dispatch(myPerformance('1','2017')) 
                       e.preventDefault() 
                     }}>search</span></button> 

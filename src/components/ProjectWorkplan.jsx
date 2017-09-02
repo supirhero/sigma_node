@@ -12,7 +12,7 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, Work
 
 import { Field, reduxForm } from 'redux-form';
 
-import { getWorkplanView, addTaskWorkplan, getTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
+import { getWorkplanView, addTaskWorkplan, getCreateTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
 denyRebaseline,acceptRebaseline, baseline, showNotif
 } from './actions.jsx';
 import ReactAutocomplete from 'react-autocomplete'
@@ -177,7 +177,7 @@ class ProjectWorkplan extends Component {
                 }) */}
                 this.props.dispatch(deleteTask( value.WBS_ID)).then(
                   res=> {
-                    showNotif('Task deleted', "GREEN")
+                    showNotif('Task deleted', 'GREEN')
                     const id = this.props.state.page.id;
                     this.props.dispatch(getWorkplanView(id))
                   }
@@ -222,6 +222,8 @@ class ProjectWorkplan extends Component {
   onSubmit(props) {
     const id = this.props.state.page.id;
     this.props.addTaskWorkplan(id, this.state.WBS_id,props).then(res=> {
+    this.props.dispatch(getCreateTaskView(id));
+    
       this.props.dispatch({
         type: 'POPUP',
         name:'addTimesheetWorkplan',
@@ -252,6 +254,8 @@ class ProjectWorkplan extends Component {
   onSubmitAssign(props){
     const id = this.props.state.page.id;
     this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
+    this.props.dispatch(getCreateTaskView(id));
+    
       this.props.dispatch({
         type: 'POPUP',
         name:'assign_task',
@@ -266,6 +270,8 @@ class ProjectWorkplan extends Component {
     alert('blaa')
     var id = this.props.state.page.id
     this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).then(res=> {
+    this.props.dispatch(getCreateTaskView(id));
+    
       this.props.dispatch({
         type: 'POPUP',
         name: 'request_rebaseline',
@@ -283,6 +289,8 @@ class ProjectWorkplan extends Component {
   onSubmitEditTask(props){
     const id = this.props.state.page.id
     this.props.editTaskAction(id,this.state.WBS_id,props).then(res=>{
+    this.props.dispatch(getCreateTaskView(id));
+    
       var newState = this.state.array.modified_task.concat(
         {
           project_id: id,
@@ -315,7 +323,7 @@ class ProjectWorkplan extends Component {
   componentWillMount() {
     const id = this.props.state.page.id;
     this.props.dispatch(getWorkplanView(id));
-    this.props.dispatch(getTaskView(id));
+    this.props.dispatch(getCreateTaskView(id));
   }
 
   render() {
@@ -741,6 +749,7 @@ class ProjectWorkplan extends Component {
               onClick={
                 (e) => {
                   console.log('PROPS', this.props);
+
                   this.props.dispatch({
                     type: 'POPUP',
                     name: 'createTask',
@@ -835,6 +844,7 @@ class ProjectWorkplan extends Component {
                 if(status == "NOT STARTED") {
                   this.props.dispatch(baseline(id)).then(res => {
                     this.props.dispatch(getWorkplanView(id));
+                    
                     showNotif('Baseline successful', 'GREEN')
                   })
                 }

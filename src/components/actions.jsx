@@ -1000,7 +1000,7 @@ export function addTaskWorkplan(id,wbs_id,data) {
   }
 }
 
-export function getTaskView(id) {
+export function getCreateTaskView(id) {
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
@@ -1301,6 +1301,47 @@ export function getEditTaskView(wbs_id){
     )
   }
 }
+
+export function getDirectorateEntry(bu_id, year){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}report/r_entry_bu/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data : {
+        bu_id : bu_id,
+        tahun: year
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: '', append: true,  data: res });
+        return res
+      }
+    )
+  }
+}
+
+export function getDirectorateUtility(bu_id, year){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}report/r_util_bu/?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data : {
+        bu_id : bu_id,
+        tahun: year
+      }
+    }).then(
+      (res)=>{
+        store.dispatch({ type: 'API', name: '', append: true,  data: res });
+        return res
+      }
+    )
+  }
+}
+
 export function editTaskAction(id,WBS_ID,data){
   return function(dispatch){
     const token = cookies.get('token')
@@ -1325,6 +1366,29 @@ export function editTaskAction(id,WBS_ID,data){
     )
   }
 }
+
+export function editTaskPercentAction(id,WBS_ID, props){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}task/editTaskPercent?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        PROJECT_ID: id,
+        WBS_ID: props.WBS_ID,
+        START_DATE: moment(props.START_DATE_PERCENT).format('YYYY-MM-DD'),
+        FINISH_DATE: moment(props.FINISH_DATE_PERCENT).format('YYYY-MM-DD')
+        
+      }
+    }).then(
+      (res)=>{
+        return res
+      }
+    )
+  }
+}
+
 
 
 export function rDirectorat(bu,tahun){
@@ -1368,7 +1432,7 @@ export function showNotif(message, color) {
   store.dispatch({
     type:'ALERT',
     show: true,
-    color: color ? color : '#efefee',
+    color: color ,
     message: message
     
   })

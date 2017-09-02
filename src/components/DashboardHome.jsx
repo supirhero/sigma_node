@@ -29,6 +29,8 @@ class DashboardHome extends Component {
   render() {
     // var projects = state.data.projects ? state.data.projects : null
     var auth = this.props.state.data
+    var project = auth ? auth.project : null
+    const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')' : null
     // console.log(projects);
     return(
       !auth.userdata && !auth.datatimesheet && !auth.project && !auth.userdata ? <PageLoader></PageLoader> :
@@ -40,7 +42,7 @@ class DashboardHome extends Component {
 
               <div className='grid'>
                   <div className='unit two-fifths'>
-                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')'}}>
+                    <div className='pic-wrapper' style={{width:'150px',height:'150px', backgroundImage:imageURL}}>
                     </div>
                   </div>
                   <div className='unit three-fifths'>
@@ -170,7 +172,8 @@ class DashboardHome extends Component {
     </div>
     <div className='projects'>
       {
-             !auth.project ? <PageLoader/> : 
+             auth &&
+             auth.project &&
               auth.project.map((value, index) => {
                 return(
                   <div key={index}>
@@ -236,7 +239,7 @@ class DashboardHome extends Component {
                         return(
                           <div className='grid wrap' key={index}>
                             <div className='unit whole no-gutters'>
-                              <div className='card' onClick={
+                              <div className='card' style={{marginBottom:'4px'}} onClick={
                                 e => {
                                   store.dispatch(changeRoute({
                                     type: 'PUSH',
@@ -257,16 +260,30 @@ class DashboardHome extends Component {
                                   <medium className='project-name list-pointer'>
                                     {value.project_name}
                                   </medium>
-                                </div>
-                                <div className='unit one-fifth'>
-                                  <small style={{fontSize:'15px'}} className='project-status'>
-                                    {
-                                      value.project_status
-                                    }
-                                    &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
+                                  <small style={{fontSize:'15px'}}  className='project-name list-pointer'>
+                                    ({value.iwo_no})
                                   </small>
                                 </div>
+                                <div className='unit one-fifth'>
+                               
+                                <medium style={{fontSize:'15px'}} className='project-name'>
+                                  {
+                                    value.project_type
+                                  }
+                                </medium>
+                                <small  style={{fontSize:'15px'}} className='project-name'>
+                                  Type : {
+                                    value.type_effort
+                                  }
+                                  </small>
+                              </div>
                                 <div className='unit two-fifths'>
+                                <small style={{fontSize:'15px', marginBottom:'11px'}} className='project-status'>
+                                  {
+                                    value.project_status
+                                  }
+                                  &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.project_complete}%</large>)
+                                </small>
                                   <Line
                                     progress={value.project_complete *0.01}
                                     initialAnimate={true}

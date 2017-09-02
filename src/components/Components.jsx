@@ -121,6 +121,8 @@ export class Menu extends Component {
         {
           this.props.triggerInput=='true' ?
           <input style={this.props.inputStyle}
+            value={this.props.defaultValue}
+            onkeydown="return false;"
 
             onClick={
               () => {
@@ -185,7 +187,7 @@ export class MenuItem extends Component {
         {this.props.children}
         {
           this.props.title &&
-          <small className='menu-title'>{this.props.title}</small>
+          <small className='menu-title' style={this.props.textStyle}>{this.props.title}</small>
         }
       </div>
     )

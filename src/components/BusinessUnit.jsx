@@ -104,49 +104,70 @@ class BusinessUnit extends Component {
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>
-                                <div className='card' onClick={e=>{
-                                  store.dispatch(changeRoute({
-                                    type: 'PUSH',
-                                    page: {
-                                      name: 'project',
-                                      id : value.PROJECT_ID
-                                    }
-                                  }))
-                                  e.preventDefault()
-                                }}>
+                                <div className='card' style={{marginBottom:'4px'}} onClick={
+                                  e => {
+                                    store.dispatch(changeRoute({
+                                      type: 'PUSH',
+                                      page: {
+                                        name: 'project',
+                                        id: value.PROJECT_ID,
+                                        project: {
+                                          status:value.PROJECT_STATUS,
+                                          bu_code: value.BU_CODE
+                                        }
+                                      }
+                                    }))
+  
+                                    e.preventDefault()
+                                  }
+                                }>
                                   <div className='unit two-fifths'>
-                                    <medium className='project-name'>
+                                    <medium className='project-name list-pointer'>
                                       {value.PROJECT_NAME}
                                     </medium>
-                                  </div>
-                                  <div className='unit one-fifth'>
-                                    <small style={{fontSize:'15px'}} className='project-status'>
-                                      {
-                                        value.PROJECT_STATUS
-                                      }
-                                      &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
+                                    <small style={{fontSize:'15px'}}  className='project-name list-pointer'>
+                                      ({value.IWO_NO})
                                     </small>
                                   </div>
+                                  <div className='unit one-fifth'>
+                                 
+                                  <medium style={{fontSize:'15px'}} className='project-name'>
+                                    {
+                                      value.PROJECT_TYPE
+                                    }
+                                  </medium>
+                                  <small  style={{fontSize:'15px'}} className='project-name'>
+                                    Type : {
+                                      value.EFFORT_TYPE
+                                    }
+                                    </small>
+                                </div>
                                   <div className='unit two-fifths'>
+                                  <small style={{fontSize:'15px', marginBottom:'11px'}} className='project-status'>
+                                    {
+                                      value.PROJECT_STATUS
+                                    }
+                                    &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
+                                  </small>
                                     <Line
                                       progress={value.PROJECT_COMPLETE *0.01}
                                       initialAnimate={true}
                                       options={{
-                                      strokeWidth: 3,
-                                      color: color,
-                                      trailColor:'#EEEEEE',
-                                      trailWidth: 12,
-                                      fontSize: 30,
-                                      easing: 'easeInOut',
-                                      duration: 700,
+                                        strokeWidth: 3,
+                                        color: color,
+                                        trailColor:'#EEEEEE',
+                                        trailWidth: 12,
+                                        fontSize: 30,
+                                        easing: 'easeInOut',
+                                        duration: 700,
                                       }}
                                       containerClassName={'line-bar'}
-                                    >
-                                    </Line>
+                                      >
+                                      </Line>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
                           )
                         })
                       }
