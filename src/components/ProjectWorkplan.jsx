@@ -69,7 +69,7 @@ class ProjectWorkplan extends Component {
         </div>
         </td>
       <td>{value.WORK}</td>
-      <td>{value.WORK_TOTAL}</td>
+      <td>{value.WORK_COMPLETE}</td>
       <td>{value.DURATION}</td>
       <td>{value.START_DATE}</td>
       <td>{value.FINISH_DATE}</td>

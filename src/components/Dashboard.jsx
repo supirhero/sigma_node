@@ -32,6 +32,7 @@ class Dashboard extends Component {
 
     render(){
       const alert = this.props.state.alert.alert
+      const state = store.getState()
       // const color = alert && alert.color == 'RED' ? '#e7666a' : alert.color == 'GREEN' ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee'
       return(
                   <div className="unit whole" style={{position:'relative'}}>
@@ -64,7 +65,7 @@ class Dashboard extends Component {
 
                         <Menu style={{display:'inline'}} triggerStyle={{backgroundImage:'url(http://prouds2.telkomsigma.co.id/prouds-api' + this.props.state.auth.userdata.image +  ')'}} triggerClass='profile'>
                           <MenuSection>
-                            <MenuHeader title='Kara Cray' subTitle='@karagay'/>
+                            <MenuHeader title={state.auth.userdata.user_name} />
                             <MenuItem title='Home' onClick={
                               e => {
                                 browserHistory.push('/')

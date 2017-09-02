@@ -61,7 +61,7 @@ class ProjectOverview extends Component {
               <div className='card project-workplan'>
                 <div className='grid'>
                   <div className='unit whole'>
-                    <Header text='Project Detail'/>
+                    <Header text='Project Workplan Status'/>
                   </div>
                 </div>
 

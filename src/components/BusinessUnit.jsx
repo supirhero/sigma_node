@@ -81,6 +81,26 @@ class BusinessUnit extends Component {
                       {
                         project &&
                         project.map((value,index) => {
+                          var color= '#F48165'
+                          switch (value.PROJECT_STATUS) {
+                            case 'In Progress':
+  
+                              color= '#65BDF4'
+                              break;
+                            case 'Completed':
+                              color= '#42C878'
+                              break;
+                            case 'Overdue':
+                              color='#CB0000'
+                              break;
+                            case 'On Hold':
+                              color = '#777777'
+                              break;
+                            case 'In Planning':
+                              color = '#777777'
+                              break;
+                            default:
+                          }
                           return(
                             <div className='grid wrap' key={index}>
                               <div className='unit whole no-gutters'>
@@ -102,9 +122,9 @@ class BusinessUnit extends Component {
                                   <div className='unit one-fifth'>
                                     <small style={{fontSize:'15px'}} className='project-status'>
                                       {
-                                        value.project_status
+                                        value.PROJECT_STATUS
                                       }
-                                      &nbsp;({value.PROJECT_COMPLETE}%)
+                                      &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
                                     </small>
                                   </div>
                                   <div className='unit two-fifths'>
@@ -113,7 +133,7 @@ class BusinessUnit extends Component {
                                       initialAnimate={true}
                                       options={{
                                       strokeWidth: 3,
-                                      color: '#F48165',
+                                      color: color,
                                       trailColor:'#EEEEEE',
                                       trailWidth: 12,
                                       fontSize: 30,

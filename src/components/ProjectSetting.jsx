@@ -343,7 +343,7 @@ class EditProject extends Component {
                       {
                           projectEffort &&
                           projectEffort.map((value, index) => (
-                            <option key={index} value={value.name} {...this.props.option}>{value.name}</option>
+                            <option key={index} value={value.value} {...this.props.option}>{value.name}</option>
                           ))
                         }
                     </Field>
