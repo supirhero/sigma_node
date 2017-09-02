@@ -1838,7 +1838,7 @@ export function getCurrentProgress(wbs_id){
   }
 }
 
-export function editTaskPercentAction(PROJECT_ID, WBS_ID, WORK_PERCENT_COMPLETE, DESCRIPTION){
+export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
@@ -1848,8 +1848,8 @@ export function editTaskPercentAction(PROJECT_ID, WBS_ID, WORK_PERCENT_COMPLETE,
       data: {
         PROJECT_ID,
         WBS_ID,
-        WORK_PERCENT_COMPLETE,
-        DESCRIPTION
+        WORK_PERCENT_COMPLETE:props.WORK_PERCENT_COMPLETE,
+        DESCRIPTION:props.DESCRIPTION
         
       }
     }).then(

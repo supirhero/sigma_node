@@ -27,7 +27,7 @@ class ProjectWorkplan extends Component {
       array: {
         new_task :[],
         modified_task:[],
-        manualupdate:[]
+        manualUpdate:[]
       },
       assignMember:{
         MEMBER:'',
@@ -269,14 +269,18 @@ class ProjectWorkplan extends Component {
     this.props.uploadWorkplan(id,props.document)
   }
   onSubmitManualUpdate(props){
+
     const id = this.props.state.page.id
     console.log(this.state.WBS_ID)
-    this.props.editTaskPercentAction(this.props.state.page.id,this.state.WBS_ID,props).then(res=>{
-      var newState = this.state.array.manualupdate.concat(
+    this.props.editTaskPercentAction(id,this.state.WBS_id,props).then(res=>{
+
+      var newState = this.state.array.manualUpdate.concat(
+
         {
+
           // PROJECT_ID: this.props.state.page.id,
-          PROJECT_ID:"7549136",
-          WBS_ID: this.state.WBS_ID,
+          PROJECT_ID:id,
+          WBS_ID: this.state.WBS_id,
           DESCRIPTION:props.DESCRIPTION,
           WORK_PERCENT_COMPLETE: props.WORK_PERCENT_COMPLETE
         }
@@ -428,7 +432,7 @@ class ProjectWorkplan extends Component {
         </PopUp>
         <PopUp id="manualUpdate" dividerText="TASK PROGRESS" btnText="UPLOAD FILE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: 'auto' }}>
           {
-            !this.props.state.data.manual_update && !this.props.state.data.parent ? <PageLoader/> :
+            !this.props.state.data.manualUpdate && !this.props.state.data.parent ? <PageLoader/> :
             <form onSubmit={handleSubmit(this.onSubmitManualUpdate.bind(this))}>
             <div>
             <label></label>
@@ -967,13 +971,15 @@ function mapStateToProps(state) {
   return {
     formValues: state.form.add_task,
     formValues: state.form.upload_workplan,
+    formValues:state.form.manualUpdate,
     state,
   };
 }
 export default reduxForm({ 
   // Must be unique, this will be the name for THIS PARTICULAR FORM
   form: 'add_task',
-  form: 'upload_workplan'
+  form: 'upload_workplan',
+  form:'manualUpdate'
 })(
   connect(mapStateToProps, { addTaskWorkplan,uploadWorkplan,editTaskAction, requestRebaseline, assignTaskMember,getCurrentProgress, editTaskPercentAction})(ProjectWorkplan),
 );
