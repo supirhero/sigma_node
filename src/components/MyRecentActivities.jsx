@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, Input, RadioButton, Select, PageLoader } from './Components.jsx';
+import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelect,ReduxInput,datepickerTimesheet,ReduxSelectNew,PopUp} from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, pop,resubmitTimesheet} from './actions.jsx';
+import { getMyActivities, pop,resubmitTimesheet,addTimesheet} from './actions.jsx';
 import moment from 'moment'
+import { Field, reduxForm } from 'redux-form';
+
 class MyRecentActivities extends Component {
   componentWillMount() {
     const myActivity = store.getState().data.activity_timesheet;
@@ -26,6 +28,7 @@ class MyRecentActivities extends Component {
   
 
   render() {
+    const { handleSubmit } = this.props;
     const myActivity = store.getState().data.activity_timesheet;
     if (!myActivity) {
       return <PageLoader />;
@@ -54,6 +57,110 @@ class MyRecentActivities extends Component {
 
     return (
       <div>
+      <PopUp id="addNewTimesheet" dividerText="INPUT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
+      <div>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Field
+              inputName="DATE"
+              name="TS_DATE"
+              component={datepickerTimesheet}
+              // validate={[required]}
+            />
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Field
+              inputName="PROJECT NAME"
+              name="PROJECT_ID"
+              // onChange={
+              //   (e, value)=>{
+              //     store.dispatch(taskList(value))
+              //     console.log(value)
+              //     // store.dispatch(pop());
+              //     // e.preventDefault()
+              //   }
+              // }
+              component={ReduxSelectNew}
+              // validate={[required]}
+              >
+            <option></option>
+   
+
+
+              </Field>
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+        <div className="unit three-quarters">
+                            
+                        
+                              <Field
+                              name="WP_ID"                                        
+                                inputName="TASK"
+                                component={ReduxSelectNew}
+                                // validate={[required]}
+                                >
+                                <option></option>
+                                
+                             </Field>
+                            </div>
+
+          <div className="unit one-quarter">
+            <Field
+              inputName="WORK HOURS"
+              name="HOUR"
+              type="HOUR"
+              component={ReduxInput}
+              // validate={[required]}
+            />
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Field
+              inputName="SUBJECT"
+              name="TS_SUBJECT"
+              type="TS_SUBJECT"
+              component={ReduxInput}
+              // validate={[required]}
+            />
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+          <div className="unit whole">
+            <Field
+                inputName="MESSAGE"
+                name="TS_MESSAGE"
+                // type="TS_MESSAGE"
+                component={ReduxInput}
+                // validate={[required]}
+              />
+          </div>
+        </div>
+        <div className="grid wrap narrow">
+          <div className="unit whole" style={{ textAlign: 'center' , display:'inline-block' }}>
+          <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
+          onClick={e=>{
+            this.props.dispatch({
+              type: 'POPUP',
+              name:'addNewTimesheet',
+              data: {
+                active:false
+              }
+            })
+
+            e.preventDefault()
+          }}> CANCEL </button>
+            <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary" > SUBMIT</button>
+          </div>
+        </div>
+
+      </form>
+      </div>
+    </PopUp>
         <div className="grid wrap">
           <div className="unit whole">
             <Divider
@@ -156,13 +263,15 @@ class MyRecentActivities extends Component {
                 {
                 value.is_approved == 0 &&
                 <a style={{marginLeft:'45px'}} onClick={e => {
-                  store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{
-                    store.dispatch(getMyActivities())
-                      
- 
-                       
+                  this.props.dispatch({
+                    type: 'POPUP',
+                    name:'addNewTimesheet',
+                    data: {
+                      active:false
+                    }
                   })
-                  
+                  // store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{ 
+                  //   store.dispatch(getMyActivities()) 
                 }}
                 >
                 RE-SUBMIT TIMESHEET</a>
@@ -182,10 +291,20 @@ class MyRecentActivities extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
   return {
+  
+    formValues: state.form.AddNewTimesheet,
     state,
     // filter: ownProps.location.query.filter
   };
-}
-export default connect(mapStateToProps,{resubmitTimesheet})(MyRecentActivities);
+  }
+  
+  export default reduxForm({
+  // Must be unique, this will be the name for THIS PARTICULAR FORM
+  form: 'AddNewTimesheet',
+  })(
+  connect(mapStateToProps, { addTimesheet })(MyRecentActivities),
+  );
+  

@@ -1718,8 +1718,6 @@ export function baseline(id) {
 
 
 export function getProfile() {
-  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
-  const token = cookies.get('token')
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -1886,7 +1884,7 @@ export function reportFindProject(value,status,schedule,budget) {
 }
 
 
-export function searchHome(KEYWORD) {
+export function searchHome(KEYWORD,page) {
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
@@ -1896,7 +1894,8 @@ export function searchHome(KEYWORD) {
             url: `${baseURL}home/searchhome?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
-              KEYWORD
+              KEYWORD,
+              page
             }
           }).then(
             res => {

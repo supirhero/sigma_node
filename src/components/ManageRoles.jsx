@@ -30,9 +30,9 @@ class ManageRoles extends Component {
     // store.dispatch(editProfileView("3"))
   }
 
-  componentDidUpdate(){
-    store.dispatch(getProfile())
-  }
+  // componentWillUpdate(){
+  //   store.dispatch(getProfile())
+  // }
 
   onSubmit(props){
     alert("New Role Created")
@@ -45,6 +45,7 @@ class ManageRoles extends Component {
             active:false,
           }
         })
+        store.dispatch(getProfile())
       }
     )
   
@@ -61,6 +62,7 @@ class ManageRoles extends Component {
             active:false,
           }
         })
+        store.dispatch(getProfile())
       }
     )
   }
