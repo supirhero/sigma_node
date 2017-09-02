@@ -71,9 +71,9 @@ class ProjectWorkplan extends Component {
         </td>
       <td>{value.WORK}</td>
       <td>{value.WORK_COMPLETE}</td>
-      <td>{value.DURATION}</td>
-      <td>{value.LEAF == "0" ? null : value.START_DATE}</td>
-      <td>{value.LEAF == "0" ? null:value.FINISH_DATE}</td>
+      <td>{value.WBS_PARENT_ID == null ? null : value.DURATION}</td>
+      <td>{value.WBS_PARENT_ID == null ? null : value.START_DATE}</td>
+      <td>{value.WBS_PARENT_ID == null ? null : value.FINISH_DATE}</td>
       <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
       <td style={{position:'relative', paddingRight:'10px'}} >

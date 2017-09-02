@@ -65,7 +65,18 @@ class ReportsDirectorate extends Component {
                 }}
                 triggerInput='true'
                 defaultValue={this.state.bu_name}
-                inputStyle={{ width: '100%', display: 'inline-block', float: 'left' }}
+                inputStyle={
+                    !state.data.list_bu  ?
+                    {
+                      float: 'left',
+                      display: 'inline-block',
+                      width: '100%',
+                      backgroundSize: '33px',
+                      backgroundImage:'url(http://www.xiconeditor.com/image/icons/loading.gif)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right',
+                  }:
+                  { width: '100%', display: 'inline-block', float: 'left' }}
                 >
                   {
                     this.props.state.data.list_bu &&
@@ -222,7 +233,8 @@ class ReportsDirectorate extends Component {
         <div className="grid wrap narrow">
           <div className="unit whole">
             <div className="card" style={{ padding: '35px' }}>
-              <div className="grid">
+                
+                <div className="grid">
                 <div className="unit golden-small">
                   <Header text='Timesheet' style={{display:'inline-block'}} />
 
@@ -234,7 +246,7 @@ class ReportsDirectorate extends Component {
                     style={{ width: '48%', display: 'inline-block', float: 'right' }} 
                     onChange={
                       e=> {
-                        this.setState({year:e.target.value})
+                        this.setState({year_timesheet:e.target.value})
                       }
                     }
             
@@ -280,18 +292,18 @@ class ReportsDirectorate extends Component {
                 <div className="unit one-third">
             
                   <Meter
-                    progress={state.data.r_entry_bu.jml_entry * 0.01}
-                    text={Math.floor(state.data.r_entry_bu.jml_entry)}
+                    progress={state.data.r_entry_bu && state.data.r_entry_bu.jml_entry * 0.01}
+                    text={Math.floor(state.data.r_entry_bu && state.data.r_entry_bu.jml_entry)}
                     title="Entry"
-                    status={state.data.r_entry_bu.status}
+                    status={state.data.r_entry_bu && state.data.r_entry_bu.status}
                   />
                 </div>
                 <div className="unit one-third">
                   <Meter
-                    progress={state.data.r_util_bu.jml_util * 0.01}
-                    text={Math.floor(state.data.r_util_bu.jml_util)}
+                    progress={state.data.r_util_bu && state.data.r_util_bu.jml_util * 0.01}
+                    text={Math.floor(state.data.r_util_bu && state.data.r_util_bu.jml_util)}
                     title="Utilization"
-                    status={state.data.r_util_bu.status_utilization}
+                    status={state.data.r_util_bu && state.data.r_util_bu.status_utilization}
                   />
                 </div>
                 <div className="unit one-third" />
@@ -342,15 +354,7 @@ class ReportsDirectorate extends Component {
 
                   </div>
                   <div className='unit golden-large'>
-                    <div className='grid'>
-                      <div className='unit four-fifths'>
-                        
-                      </div>
-                      <div className='unit one-fifth'>
-                        
 
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div className='grid'>
