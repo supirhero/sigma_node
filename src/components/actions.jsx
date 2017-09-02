@@ -1191,6 +1191,7 @@ export function getWorkplanView(id){
 
 export function uploadWorkplan(project_id,files){
   return function(dispatch){
+    const token = cookies.get('token')
     const formData = new FormData()
     formData.append('project_id',project_id)
     formData.append('document',files[0])
