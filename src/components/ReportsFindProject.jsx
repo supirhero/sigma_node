@@ -93,9 +93,8 @@ class ReportsFindProject extends Component {
                       //  }
                       {/* var arr = [] */}
                       if(this.state.status[index] == 1) {
-                        var newstate = this.state.status[index] = 0
                         this.setState({
-                          items: update(this.state.status,{ $set:{index: 0}})
+                          status: update(this.state.status,{[index] : {$set: 0}})
                         }, ()=> { 
                           console.log(this.state.status)
                          console.log("SET TO 0--------")
@@ -107,9 +106,8 @@ class ReportsFindProject extends Component {
                         })
                       }
                       else{
-                        var newstate = this.state.status[index] = 1
                         this.setState({
-                          items: update(this.state.status,{ $set:{index: 0}})
+                          status: update(this.state.status,{ [index]: {$set: 1}})
                         }, ()=> {
                           console.log(this.state.status)
                          console.log("SET TO 1--------")
