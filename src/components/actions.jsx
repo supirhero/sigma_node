@@ -399,7 +399,7 @@ export const addNewProject = (data,id) => {
   }
 }
 
-export const getBusinessUnitDetail = (id) => {
+export const getBusinessUnitDetail = (id,STATUS,PROJECT_TYPE,EFFORT_TYPE,KEYWORD) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
@@ -409,6 +409,10 @@ export const getBusinessUnitDetail = (id) => {
             url: `${baseURL}home/buDetail?token=${token}`,
             data: {
               bu_code: id,
+              STATUS,
+              PROJECT_TYPE,
+              EFFORT_TYPE,
+              KEYWORD
             },
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
@@ -1663,7 +1667,7 @@ export function editProfile(no_hp,address,files){
     const formData = new FormData();
     formData.append('no_hp',no_hp);
     formData.append('address',address);
-    formData.append('image',files[0])
+    formData.append('image',files ? files[0] : null)
     fetch(`${baseURL}home/edit_user?token=${token}`,{
       method:'POST',
       body:formData
@@ -1880,6 +1884,29 @@ export function reportFindProject(value,status,schedule,budget) {
           )
   }
 }
+
+
+export function searchHome(KEYWORD) {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}home/searchhome?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              KEYWORD
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'home', data: res})
+            },
+
+          )
+  }
+}
+
 
 
 

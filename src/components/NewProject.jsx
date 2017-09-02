@@ -752,13 +752,16 @@ class NewProject extends Component {
 
                 </div>
               </div> */}
-              <div className='grid wrap narrow'>
+            {/*   <div className='grid wrap narrow'>
                 <div className='unit whole'>
                   <Divider text='PROJECT CHARTER FORM'></Divider>
                 </div>
               </div>
+              */}
+              
               <div className='grid wrap narrow'>
-                <div className='unit three-quarters'>
+              {/*     
+              <div className='unit three-quarters'>
                   <medium style={{display: 'block', marginBottom:'11px'}}>FORM STATUS:&nbsp;<span style={{color:'#65BDF4'}}>DRAFTED</span></medium>
                   <medium style={{display: 'inline-block'}}>COMPLETION:&nbsp;<span style={{color:'#65BDF4'}}>25%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</medium>
 
@@ -782,6 +785,8 @@ class NewProject extends Component {
                   </div>
 
                 </div>
+*/}
+                
                 <div className='unit one-quarter'>
                   {/* <button className='btn-primary' onClick={
                     e => {

@@ -13,8 +13,8 @@ class ReportsOverview extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-      month : 0, 
-      year: 0 
+      month : 8, 
+      year: 2017 
     }; 
   } 
 
@@ -127,10 +127,12 @@ class ReportsOverview extends Component {
                     <div className="unit four-fifths">
                     <select onChange={this.handleMonthChange.bind(this)} 
                     className='select' style={{height:'49px', width:'48%', display:'inline-block'}}> 
+                    <option>choose month</option>
                     { 
                       month &&
                       month.map((value,index) => { 
                       return( 
+                        
                         <option key={index} value={value.number}>{value.name}</option> 
  
                       ) 
@@ -144,6 +146,7 @@ class ReportsOverview extends Component {
                     year &&
                     year.map((value,index) => { 
                     return( 
+                      
                       <option key={index} value={value.year}>{value.year}</option> 
  
                     ) 
