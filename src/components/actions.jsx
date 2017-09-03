@@ -1655,7 +1655,14 @@ export function editProfile(no_hp,address,files){
     fetch(`${baseURL}home/edit_user?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      (res)=>{
+        alert('Profile Updated')
+        // store.dispatch(viewTimesheet(TS_DATE));
+
+
+      }
+    )
   }
 }
 

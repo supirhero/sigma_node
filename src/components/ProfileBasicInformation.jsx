@@ -36,7 +36,11 @@ class ProfileBasicInformation extends Component {
 
 
   onSubmit(props) {
-    store.dispatch(editProfile(props.no_hp,props.address,props.image))
+    store.dispatch(editProfile(props.no_hp,props.address,props.image)).then(
+      ()=>{
+        alert("Profile Updated")
+      }
+    )
   }
 
 
