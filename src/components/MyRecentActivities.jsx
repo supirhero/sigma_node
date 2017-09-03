@@ -5,38 +5,65 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelect,ReduxInput,datepickerTimesheet,ReduxSelectNew,PopUp} from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, pop,resubmitTimesheet,addTimesheet,taskList} from './actions.jsx';
+import { getMyActivities, pop,resubmitTimesheet,addTimesheet,taskList,viewTimesheet} from './actions.jsx';
 import moment from 'moment'
 import { Field, reduxForm,initialize } from 'redux-form';
 
 class MyRecentActivities extends Component {
+  constructor(){
+    super();
+    this.state = {
+      month : 8,
+      year: 2017
+    };
+  }
+
   componentWillMount() {
     const myActivity = store.getState().data.activity_timesheet;
-    store.dispatch(getMyActivities());
+    store.dispatch(getMyActivities("7","2017"));
+    store.dispatch(viewTimesheet())
+    
   }
 
   componentWillUnmount() {
     store.dispatch(pop());
   }
 
-  // onSubmit() {
-  //   store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_id,value.ts_date,value.hour_total,value.subject,value.message),()=>{ 
-  //     store.dispatch(getMyActivities()) })
-  // }
-onSubmit(props){
-  this.props.dispatch(resubmitTimesheet(props)).then(res => {
-    store.dispatch(getMyActivities())
-    store.dispatch({
-      type: 'POPUP',
-      name: 'editHoliday',
-      data: {
-        active:false,
+
+
+
+  onSubmit(props){
+    // alert("Timesheet Resubmi")
+    this.props.dispatch(resubmitTimesheet(props)).then(
+      ()=> {
+        store.dispatch({
+          type: 'POPUP',
+          name: 'resubmitTimesheet',
+          data: {
+            active:false,
+          }
+        })
+        store.dispatch(getMyActivities(this.state.month,this.state.year))
       }
-    })
-    
-  })
-}
+    )
   
+  }
+
+
+  
+handleMonthChange (e) {
+  this.setState({month: e.target.value});
+  console.log(e.target.value);
+  e.preventDefault()
+
+ }
+ handleYearChange (e) {
+   this.setState({year: e.target.value});
+   console.log(e.target.value);
+   e.preventDefault()
+
+  }
+
 
   render() {
     const { handleSubmit } = this.props;
@@ -44,6 +71,30 @@ onSubmit(props){
     if (!myActivity) {
       return <PageLoader />;
     }
+    const month= [
+      {name:'January',number:'1'},
+      {name:'February',number:'2'},
+      {name:'March',number:'3'},
+      {name:'April',number:'4'},
+      {name:'May',number:'5'},
+      {name:'June',number:'6'},
+      {name:'July',number:'7'},
+      {name:'August',number:'8'},
+      {name:'September',number:'9'},
+      {name:'October',number:'10'},
+      {name:'November',number:'11'},
+      {name:'December',number:'12'},
+    ]
+  
+
+const year = [
+  {year:'2017'},
+  {year:'2016'},
+  {year:'2015'},
+  {year:'2014'},
+  {year:'2013'},
+  {year:'2012'},
+]
     
     function pill(value) {
       let className = 'pill pending';
@@ -67,6 +118,7 @@ onSubmit(props){
     }
 
     return (
+
       <div>
       <PopUp id="resubmitTimesheet" dividerText="RESUBMIT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
       <div>
@@ -98,7 +150,13 @@ onSubmit(props){
               // validate={[required]}
               >
             <option></option>
-   
+            {
+              store.getState().data.user_project.map((value,index)=>{
+                return <option key={index} value={value.PROJECT_ID}>{value.PROJECT_NAME}</option>
+              }
+            )
+        }
+
 
 
               </Field>
@@ -163,7 +221,6 @@ onSubmit(props){
                 active:false
               }
             })
-
             e.preventDefault()
           }}> CANCEL </button>
             <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary" > SUBMIT</button>
@@ -173,6 +230,7 @@ onSubmit(props){
       </form>
       </div>
     </PopUp>
+
         <div className="grid wrap">
           <div className="unit whole">
             <Divider
@@ -221,7 +279,48 @@ onSubmit(props){
           </div>
         </div>
 */} 
-     
+<div className='unit golden-large'>
+<div className='grid'>
+  <div className='unit four-fifths'>
+    <select onChange={this.handleMonthChange.bind(this)}
+      className='select' style={{height:'49px', width:'250px',marginLeft:'230px' ,display:'inline-block'}}>
+      {
+        month.map((value,index) => {
+        return(
+          <option key={index} value={value.number}>{value.name}</option>
+
+        )
+      })}
+    </select>
+    <select onChange={this.handleYearChange.bind(this)} 
+    className='select' style={{height:'49px', width:'250px',marginRight:'300px',display:'inline-block',float:'right'}}> 
+    { 
+      year.map((value,index) => { 
+      return( 
+        <option key={index} value={value.year}>{value.year}</option> 
+
+      ) 
+    })} 
+  </select> 
+   {/* <input placeholder='ex. 2017' onChange={this.handleYearChange.bind(this)} style={{width:'48%', display:'inline-block', float:'right'}}></input>
+    
+    <Input
+      onChange={this.handleYearChange.bind(this)}
+      style={{width:'48%', display:'inline-block', float:'right'}}
+
+      /> */}
+  </div>
+  <div className='unit one-fifth'>
+    <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
+      console.log(this.state.month,this.state.year);
+      store.dispatch(getMyActivities(this.state.month,this.state.year))
+      // store.dispatch(myPerformance('1','2017'))
+      e.preventDefault()
+    }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
+
+  </div>
+</div>
+</div>
 
      
 

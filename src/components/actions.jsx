@@ -1098,7 +1098,6 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(getProjectActivities());
         alert('updated')
         
       }
@@ -1241,13 +1240,17 @@ export function assignTaskMember(props,RP_ID,EMAIL,NAME){
   }
 }
 
-export function getMyActivities(){
+export function getMyActivities(bulan,tahun){
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
+      method:'POST',
       url:`${baseURL}home/myactivities?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        bulan,
+        tahun
+      }
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'myActivity', append: true,  data: res });
@@ -1939,7 +1942,7 @@ export const gethistory = (id) => {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}project/history/8532760?token=${token}`,
+            url: `${baseURL}project/history/${id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 

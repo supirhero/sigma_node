@@ -772,6 +772,42 @@ export class LineChart extends Component{
 }
 
 
+export class SCurve extends Component{
+  render(){
+    return(
+      <div className="bar-chart-container">
+        <large style={{margin:'30px 50px'}}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+          <ChartLine width={680} height={250} data={this.props.data}>
+            <XAxis dataKey="name" />
+            <YAxis label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
+            <YAxis unit="%" />
+            <CartesianGrid strokeDasharray="3 3"/>
+            <Tooltip />
+            <Legend iconType="circle" iconSize={8}/>
+            {this.props.lines.map((props)=>
+              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
+          </ChartLine>
+        </ResponsiveContainer>
+      </div>
+    )
+  }
+}
+
+const AxisLabel = ({ axisType, x, y, width, height, stroke, children }) => {
+  const isVert = axisType === 'yAxis';
+  const cx = isVert ? x : x + (width / 2);
+  const cy = isVert ? (height / 2) + y : y + height + 10;
+  const rot = isVert ? `270 ${cx} ${cy}` : 0;
+  return (
+    <text x={cx} y={cy} transform={`rotate(${rot})`} textAnchor="middle" stroke={stroke}>
+      {children}
+    </text>
+  );
+};
+
+
+
 
 export class Search extends Component {
   render() {

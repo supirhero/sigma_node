@@ -207,17 +207,17 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <medium className="project-value-label">Total Project Value</medium>
-                  <large className="project-value-number">{ state.data.finance.total_project_value } M</large>
+                  <large className="project-value-number">{ Math.floor(state.data.finance.total_project_value) } </large>
 
                   <medium className="project-value-label">Invoiced</medium>
-                  <large className="project-value-number">1 M</large>
+                  <large className="project-value-number">-</large>
                 </div>
                 <div className="unit half">
                   <medium className="project-value-label"> Revenue</medium>
-                  <large className="project-value-number"> 8 M</large>
+                  <large className="project-value-number">-</large>
 
                   <medium className="project-value-label">Cashed Out</medium>
-                  <large className="project-value-number">9 M</large>
+                  <large className="project-value-number">-</large>
                 </div>
               </div>
             </div>
@@ -304,6 +304,7 @@ class ReportsDirectorate extends Component {
                     progress={state.data.r_util_bu && state.data.r_util_bu.jml_util * 0.01}
                     text={Math.floor(state.data.r_util_bu && state.data.r_util_bu.jml_util)}
                     title="Utilization"
+                    
                     status={state.data.r_util_bu && state.data.r_util_bu.status_utilization}
                   />
                 </div>

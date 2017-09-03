@@ -11,7 +11,7 @@ import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyD
 class ProjectActivities extends Component {
   componentWillMount() {
     const id = store.getState().page.id
-    store.dispatch(getMyActivities());
+    // store.dispatch(getMyActivities());
     store.dispatch(getProjectActivities(id))
     const state = store.getState();
     const project_activity = state.data.project_activities;
@@ -44,6 +44,7 @@ class ProjectActivities extends Component {
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
     const state = store.getState();
+    const id = store.getState().page.id
     const project_activity = state.data.project_activities;
     if (!project_activity) {
       return <PageLoader />;
@@ -125,7 +126,7 @@ class ProjectActivities extends Component {
                           <medium style={{float:'left'}}><b>{value.user_name}</b></medium>
                           <small style={{display:'inline'}}>, Project Manager</small>
                         </div>
-                      <div style={{display: 'inline-block',marginLeft:'55px',marginTop:'-25px'}}>
+                      <div style={{display: 'inline-block',marginLeft:'104px',marginTop:'-25px'}}>
                           <small>
                             <b>{value.subject}</b> "{value.message}"
 
@@ -143,7 +144,12 @@ class ProjectActivities extends Component {
                         value.is_approved === '-1' &&
                         <span>
                           <a onClick={(e) => {
-                            store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "0"));
+                            store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "0")).then(
+                              ()=>{
+                                const id = store.getState().page.id
+                                store.dispatch(getProjectActivities(id))
+                              }
+                            )
                             // e.preventDefault()
                             // console.log(myActivity)
                           }}
@@ -151,7 +157,12 @@ class ProjectActivities extends Component {
                           <a
                             style={{ marginLeft: '20px' }}
                             onClick={(e) => {
-                              store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1"));
+                              store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1")).then(
+                                ()=>{
+                                  const id = store.getState().page.id
+                                  store.dispatch(getProjectActivities(id))
+                                }
+                              )
                             // e.preventDefault()
                             // console.log(myActivity.project_activity.ts_id)
                             }}

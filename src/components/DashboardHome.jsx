@@ -63,7 +63,7 @@ class DashboardHome extends Component {
                             browserHistory.push('/my-assignments')
                             e.preventDefault()
                           }
-                        }>My Assigments</a>
+                        }>My Assignments</a>
                       </li>
                       <li>
                         <span className='icon-clock'>&nbsp;&nbsp;</span>

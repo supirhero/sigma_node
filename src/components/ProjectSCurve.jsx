@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Header, ProjectHeader, LineChart ,TableNew,PageLoader} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, SCurve ,TableNew,PageLoader} from  './Components.jsx'
 import {getSCurve,pop} from './actions.jsx'
 
 
@@ -46,7 +46,7 @@ class ProjectSCurve extends Component {
             <div className="unit whole">
               <div className='card' style={{padding:'15px'}}>
                 <div className="unit whole">
-                    <LineChart
+                    <SCurve
                     data={dataSCurve}
 										lines={[{key:'Target', stroke:'#65bdf4'},
 														{key:'Actual', stroke:'#cf000f'}
@@ -59,7 +59,7 @@ class ProjectSCurve extends Component {
                  tableHeader={[  
                           { value: 'Time Period' },
                           { value: 'PV' },
-                          { value: 'AV' }
+                          { value: 'EV' }
                         ]}
                         tableData={tableSCurve}
                       />

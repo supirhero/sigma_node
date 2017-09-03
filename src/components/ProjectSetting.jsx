@@ -97,7 +97,6 @@ class EditProject extends Component {
   render() {
     const projectStatus = [
       { value: 'NOT STARTED' },
-      
         { value: 'IN PROGRESS' },
         {value: 'ON HOLD'},
         { value: 'CANCELLED' },
