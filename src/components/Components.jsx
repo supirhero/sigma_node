@@ -771,17 +771,29 @@ export class LineChart extends Component{
   }
 }
 
+const custom =(props) => {
+  const { payload, x, y, index } = props;
+  console.log('PAYLOADDDDD',payload)
+  return(
+    <text y={y}   style= {{
+    fontFamily: 'lato,sans-serif',
+    fontWeight: '300',
+    fontSize:'13px',
+    marginLeft:'10px'
+
+    }}>{payload.value}%</text>
+  )
+}
 
 export class SCurve extends Component{
   render(){
     return(
       <div className="bar-chart-container">
         <large style={{margin:'30px 50px'}}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={250}>
-          <ChartLine width={680} height={250} data={this.props.data}>
+        <ResponsiveContainer width='100%' height={270}>
+          <ChartLine width={680} height={270} data={this.props.data}>
             <XAxis dataKey="name" />
-            <YAxis label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
-            <YAxis unit="%" />
+            <YAxis tick={custom}  padding='0 0 0 10px' label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
@@ -2054,23 +2066,22 @@ export class TablePagination extends Component {
                                     role_name:row.column[1].value,
                                     
                                     role_desc:row.column[2].value,
-                                    role_1:res.data.profile_privilege[7].PRIVILEGE,
-                                    role_2:res.data.profile_privilege[8].PRIVILEGE,
-                                    role_3:res.data.profile_privilege[9].PRIVILEGE,
-                                    role_4:res.data.profile_privilege[10].PRIVILEGE,
-                                    role_5:res.data.profile_privilege[11].PRIVILEGE,
-                                    role_6:res.data.profile_privilege[12].PRIVILEGE,
-                                    role_7:res.data.profile_privilege[13].PRIVILEGE,
-                                    role_8:res.data.profile_privilege[14].PRIVILEGE,
-                                    role_9:res.data.profile_privilege[15].PRIVILEGE,
-                                    role_10:res.data.profile_privilege[3].PRIVILEGE,
-                                    role_11:res.data.profile_privilege[4].PRIVILEGE,
-                                    role_12:res.data.profile_privilege[5].PRIVILEGE,
-                                    role_13:res.data.profile_privilege[6].PRIVILEGE,
-                                    role_14:res.data.profile_privilege[0].PRIVILEGE,
-                                    role_15:res.data.profile_privilege[1].PRIVILEGE,
-                                    role_16:res.data.profile_privilege[2].PRIVILEGE,
-                                    role_17:res.data.profile_privilege[14].PRIVILEGE,
+                                    role_2:res.data.profile_privilege[8] ? res.data.profile_privilege[8].PRIVILEGE : null,
+                                    role_3:res.data.profile_privilege[9] ? res.data.profile_privilege[9].PRIVILEGE : null,
+                                    role_4:res.data.profile_privilege[10]? res.data.profile_privilege[10].PRIVILEGE : null,
+                                    role_5:res.data.profile_privilege[11]? res.data.profile_privilege[11].PRIVILEGE : null,
+                                    role_6:res.data.profile_privilege[12]? res.data.profile_privilege[12].PRIVILEGE : null,
+                                    role_7:res.data.profile_privilege[13]? res.data.profile_privilege[13].PRIVILEGE : null,
+                                    role_8:res.data.profile_privilege[14]? res.data.profile_privilege[14].PRIVILEGE : null,
+                                    role_9:res.data.profile_privilege[15]? res.data.profile_privilege[15].PRIVILEGE : null,
+                                    role_10:res.data.profile_privilege[3] ? res.data.profile_privilege[3].PRIVILEGE : null,
+                                    role_11:res.data.profile_privilege[4] ? res.data.profile_privilege[4].PRIVILEGE : null,
+                                    role_12:res.data.profile_privilege[5] ? res.data.profile_privilege[5].PRIVILEGE : null,
+                                    role_13:res.data.profile_privilege[6] ? res.data.profile_privilege[6].PRIVILEGE : null,
+                                    role_14:res.data.profile_privilege[0] ? res.data.profile_privilege[0].PRIVILEGE : null,
+                                    role_15:res.data.profile_privilege[1] ? res.data.profile_privilege[1].PRIVILEGE : null,
+                                    role_16:res.data.profile_privilege[2] ? res.data.profile_privilege[2].PRIVILEGE : null,
+                                    role_17:res.data.profile_privilege[14]? res.data.profile_privilege[14].PRIVILEGE : null,
                                   }
                                  ))
                               }
@@ -2545,6 +2556,12 @@ export class ReduxFileInput extends Component {
 
 
 export class ReduxUploadWorkplan extends Component {
+  constructor() {
+    super()
+    this.state= {
+      value:''
+    }
+  }
   render(){
     return(
       <div>
@@ -2554,8 +2571,14 @@ export class ReduxUploadWorkplan extends Component {
       style={this.props.style}
       placeholder='Upload File'
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-      onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
+      onDrop={( filesToUpload, e ) => {this.props.input.onChange(filesToUpload)
+      console.log(filesToUpload)
+      this.setState({
+        value:filesToUpload[0].name
+      })
+      }}
       >
+      <input type="text" value={this.state.value} onkeydown="return false;"></input>
       </Dropzone>
 
       </div>

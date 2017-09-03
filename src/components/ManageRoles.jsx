@@ -72,7 +72,7 @@ class ManageRoles extends Component {
   render() {
     const { handleSubmit } = this.props;
     const BusinessLevel = [
-			{name:'Update personal timesheet',field:'update_personal_timesheet',no:'role_1'},
+			// {name:'Update personal timesheet',field:'update_personal_timesheet',no:'role_1'},
       {name:'Access business unit overview',field:'access_business_unit',no:'role_2'},
       {name:'Create project',field:'create_project',no:'role_3'},
       {name:'Access all projects in business unit',field:'access_all_projects',no:'role_4'},

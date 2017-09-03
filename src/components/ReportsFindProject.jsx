@@ -16,7 +16,10 @@ class ReportsFindProject extends Component {
         status:[0,0,0,0,0,0],
         schedule:[0,0,0],
         budget:[0,0,0],
-        budget_head:[0,0,0],
+        status_flag : true,
+        schedule_flag : true,
+        budget_flag : true
+        
     } 
   } 
 
@@ -87,10 +90,21 @@ class ReportsFindProject extends Component {
                         console.log(this.state,"WWERIRENANRI")
                         this.state.status[index] = this.state.status[index] == 0 ? 1 : 0
                         console.log('STATUS',this.state.status)
-                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
-                          .then(res=> {
-                            this.forceUpdate()
-                          })    
+
+                        var flag = true;
+
+                        for(var i = 0; i < this.state.status.length; ++i) {
+                          if(this.state.status[i] !== 0) {
+                            this.setState({status_flag : false},()=> {
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                              .then(res=> {
+                                this.forceUpdate()
+                              })  
+                            })
+                            break;
+                          }
+                        } 
+                        
                       {/* if(this.state.status[index] == 1) {
                         this.setState({
                           status: update(this.state.status,{[index] : {$set: 0}})
@@ -139,10 +153,21 @@ class ReportsFindProject extends Component {
 
                         this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
                         console.log('schedule',this.state.schedule)
-                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
-                          .then(res=> {
-                            this.forceUpdate()
-                          })  
+
+
+                        for(var i = 0; i < this.state.schedule.length; ++i) {
+                          if(this.state.schedule[i] !== 0) {
+                            this.setState({schedule_flag : false}, ()=> {
+
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                              .then(res=> {
+                                this.forceUpdate()
+                              })  
+                            })
+                            break;
+                          }
+                        } 
+
                         {/* console.log(this.state,"WWERIRENANRI") */}
          
                       {/* if(this.state.schedule[index] == 1) {
@@ -182,17 +207,31 @@ class ReportsFindProject extends Component {
               
                 {
                   budget.map((value,index)=>{
-                   return <Checkbox id={'schedule' + index} label={value.label} group='schedule' 
+                   return <Checkbox id={'budget' + index} label={value.label} group='budget' 
                     onClick={
                       
                       e=>{
 
-                        this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
+                        this.state.budget[index] = this.state.budget[index] == 0 ? 1 : 0
                         console.log('schedule',this.state.schedule)
-                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
-                          .then(res=> {
-                            this.forceUpdate()
-                          })  
+
+                        var flag = true;
+
+                        for(var i = 0; i < this.state.budget.length; ++i) {
+                          if(this.state.budget[i] !== 0) {
+                            this.setState({budget_flag : false}, ()=> {
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                                .then(res=> {
+                                  this.forceUpdate()
+                                })  
+
+                            })
+                            break;
+                          }
+                        } 
+
+                     
+
                         {/* console.log(this.state,"WWERIRENANRI") */}
          
                       {/* if(this.state.schedule[index] == 1) {

@@ -1856,7 +1856,6 @@ export function reportFindProject(value,status,schedule,budget) {
               value,
               status,
               schedule,
-              budget
             }
           }).then(
             res => {
@@ -1977,7 +1976,7 @@ export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
 
 
 axios.interceptors.response.use(undefined, function (error) {
-  if(error.response.status === 404) 
+  if(error.response.status && error.response.status === 404) 
   {
     
     showNotif('404 Page not found', 'RED')
@@ -1985,9 +1984,9 @@ axios.interceptors.response.use(undefined, function (error) {
     // ipcRenderer.send('response-unauthenticated');
     return Promise.reject(error);
   }
-  else if(error.response.status === 403) 
+  else if(error.response.status && error.response.status === 403) 
     {
-      console.log('ERROR', error.response.data.message)
+      console.log('ERROR', error)
       showNotif(error.response.data.message, 'RED')
       store.dispatch(goBack())
       // ipcRenderer.send('response-unauthenticated');

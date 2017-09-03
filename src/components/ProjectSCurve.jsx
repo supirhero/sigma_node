@@ -7,6 +7,7 @@ import {Divider, Header, ProjectHeader, SCurve ,TableNew,PageLoader} from  './Co
 import {getSCurve,pop} from './actions.jsx'
 
 
+
 class ProjectSCurve extends Component {
   componentWillMount(){
     const id = store.getState().page.id
@@ -14,6 +15,7 @@ class ProjectSCurve extends Component {
     // const state = store.getState()
     // const s_curve = state.data.s_curve ? state.data.s_curve : null
   }
+  
     render(){
       const state = store.getState()
       const s_curve = state.data.s_curve ? state.data.s_curve : null
