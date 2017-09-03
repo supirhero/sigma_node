@@ -5,9 +5,9 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelect,ReduxInput,datepickerTimesheet,ReduxSelectNew,PopUp} from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, pop,resubmitTimesheet,addTimesheet} from './actions.jsx';
+import { getMyActivities, pop,resubmitTimesheet,addTimesheet,taskList} from './actions.jsx';
 import moment from 'moment'
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm,initialize } from 'redux-form';
 
 class MyRecentActivities extends Component {
   componentWillMount() {
@@ -19,12 +19,23 @@ class MyRecentActivities extends Component {
     store.dispatch(pop());
   }
 
-  onSubmit() {
-    alert('Please Re-Login to See Updated Profile')
+  // onSubmit() {
+  //   store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_id,value.ts_date,value.hour_total,value.subject,value.message),()=>{ 
+  //     store.dispatch(getMyActivities()) })
+  // }
+onSubmit(props){
+  this.props.dispatch(resubmitTimesheet(props)).then(res => {
+    store.dispatch(getMyActivities())
+    store.dispatch({
+      type: 'POPUP',
+      name: 'editHoliday',
+      data: {
+        active:false,
+      }
+    })
     
-    
-    
-  }
+  })
+}
   
 
   render() {
@@ -57,7 +68,7 @@ class MyRecentActivities extends Component {
 
     return (
       <div>
-      <PopUp id="addNewTimesheet" dividerText="INPUT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
+      <PopUp id="resubmitTimesheet" dividerText="RESUBMIT TIMESHEET" btnClass="btn-primary" btnText="INPUT TIMESHEET" btnStyle={{ display: 'block', margin: 'auto' }}>
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className="grid wrap narrow">
@@ -75,14 +86,14 @@ class MyRecentActivities extends Component {
             <Field
               inputName="PROJECT NAME"
               name="PROJECT_ID"
-              // onChange={
-              //   (e, value)=>{
-              //     store.dispatch(taskList(value))
-              //     console.log(value)
-              //     // store.dispatch(pop());
-              //     // e.preventDefault()
-              //   }
-              // }
+              onChange={
+                (e, value)=>{
+                  store.dispatch(taskList(value))
+                  console.log(value)
+                  // store.dispatch(pop());
+                  // e.preventDefault()
+                }
+              }
               component={ReduxSelectNew}
               // validate={[required]}
               >
@@ -104,6 +115,7 @@ class MyRecentActivities extends Component {
                                 // validate={[required]}
                                 >
                                 <option></option>
+                              
                                 
                              </Field>
                             </div>
@@ -146,7 +158,7 @@ class MyRecentActivities extends Component {
           onClick={e=>{
             this.props.dispatch({
               type: 'POPUP',
-              name:'addNewTimesheet',
+              name:'resubmitTimesheet',
               data: {
                 active:false
               }
@@ -265,13 +277,24 @@ class MyRecentActivities extends Component {
                 <a style={{marginLeft:'45px'}} onClick={e => {
                   this.props.dispatch({
                     type: 'POPUP',
-                    name:'addNewTimesheet',
+                    name:'resubmitTimesheet',
                     data: {
-                      active:false
+                      active:true
                     }
                   })
-                  // store.dispatch(resubmitTimesheet(value.project_id,value.wp,value.ts_date,value.hour_total,value.subject,value.message),()=>{ 
-                  //   store.dispatch(getMyActivities()) 
+                  store.dispatch(initialize(this.props.form,
+                    {
+                      TS_DATE: value.ts_date,
+                      TS_ID:value.ts_id,
+                      PROJECT_ID: value.project_id,
+                      WP_ID: value.wp,
+                      HOUR: value.hour_total,
+                      TS_SUBJECT: value.subject,
+                      TS_MESSAGE: value.message,
+                    }
+                   ))
+                  
+              
                 }}
                 >
                 RE-SUBMIT TIMESHEET</a>
@@ -295,7 +318,7 @@ class MyRecentActivities extends Component {
 function mapStateToProps(state) {
   return {
   
-    formValues: state.form.AddNewTimesheet,
+    formValues: state.form.resubmitTimesheet,
     state,
     // filter: ownProps.location.query.filter
   };
@@ -303,7 +326,7 @@ function mapStateToProps(state) {
   
   export default reduxForm({
   // Must be unique, this will be the name for THIS PARTICULAR FORM
-  form: 'AddNewTimesheet',
+  form: 'resubmitTimesheet',
   })(
   connect(mapStateToProps, { addTimesheet })(MyRecentActivities),
   );
