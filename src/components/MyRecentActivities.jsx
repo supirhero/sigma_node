@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelect,ReduxInput,datepickerTimesheet,ReduxSelectNew,PopUp} from './Components.jsx';
+import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelectNew,ReduxSelect,ReduxInput,datepickerUniversal,PopUp} from './Components.jsx';
 import { Line } from 'react-progressbar.js';
 import { getMyActivities, pop,resubmitTimesheet,addTimesheet,taskList,viewTimesheet} from './actions.jsx';
 import moment from 'moment'
@@ -128,7 +128,7 @@ const year = [
             <Field
               inputName="DATE"
               name="TS_DATE"
-              component={datepickerTimesheet}
+              component={datepickerUniversal}
               // validate={[required]}
             />
           </div>
@@ -146,7 +146,7 @@ const year = [
                   // e.preventDefault()
                 }
               }
-              component={ReduxSelectNew}
+              component={ReduxSelect}
               // validate={[required]}
               >
             <option></option>
@@ -164,18 +164,28 @@ const year = [
         </div>
         <div className="grid wrap narrow">
         <div className="unit three-quarters">
-                            
+        {
+          store.getState().data.task ?
+          <Field
+          name="WP_ID"                                        
+            inputName="TASK"
+            component={ReduxSelectNew}
+            // validate={[required]}
+            >
+            <option></option>
+                {
+                  store.getState().data.task.map((value,index)=>{
+                    return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
+                  }
+                )
+                }
+         </Field>
+         :
+          <ReduxSelectNew inputName="TASK">
+          <options> </options>
+          </ReduxSelectNew>
+        }
                         
-                              <Field
-                              name="WP_ID"                                        
-                                inputName="TASK"
-                                component={ReduxSelectNew}
-                                // validate={[required]}
-                                >
-                                <option></option>
-                              
-                                
-                             </Field>
                             </div>
 
           <div className="unit one-quarter">
