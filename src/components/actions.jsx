@@ -1996,7 +1996,7 @@ axios.interceptors.response.use(undefined, function (error) {
     {
       console.log('ERROR', error.response.data.message)
       showNotif(error.response.data.message, 'RED')
-      store.dispatch(goBack())
+      store.dispatch(replace('/'))
       // ipcRenderer.send('response-unauthenticated');
       return Promise.reject(error);
     }

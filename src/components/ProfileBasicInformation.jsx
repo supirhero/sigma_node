@@ -36,15 +36,17 @@ class ProfileBasicInformation extends Component {
 
 
   onSubmit(props) {
-    store.dispatch(editProfile(props.no_hp,props.address,props.image)).then(
+    this.props.dispatch(editProfile(props.no_hp,props.address,props.image)).then(
       ()=>{
         alert("Profile Updated")
+        
       }
     )
   }
 
 
   render() {
+    const imageURL = store.getState().auth.userdata && store.getState().auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + store.getState().auth.userdata.image +  ')' : null
     const { handleSubmit } = this.props;
     return (
       <div>
@@ -52,6 +54,7 @@ class ProfileBasicInformation extends Component {
         <div className="grid wrap">
           <div className="unit one-third">
             <div className="pic-wrapper" style={{ 
+               backgroundImage:imageURL,
               height: '160px',
                 width: '160px'}} />
           </div>

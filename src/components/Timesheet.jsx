@@ -381,10 +381,7 @@ componentDidUpdate(){
                           return(
                             <div key={index}>
                             <div className="card project">
-                              <div className="unit one-fifth" style={{width: '79px'}}>
-                                <small style={{display:'block'}}>4:55 PM</small>
-                              </div>
-                                <div className="unit four-fifths">
+                                <div className="unit whole">
                               <small className="project-info" >
                                   Project <a>{value.PROJECT_NAME}</a>
                                 <p>(<b>{value.HOUR_TOTAL} hours</b>) - {value.WBS_NAME}</p>
