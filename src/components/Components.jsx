@@ -780,8 +780,7 @@ export class SCurve extends Component{
         <ResponsiveContainer width='100%' height={250}>
           <ChartLine width={680} height={250} data={this.props.data}>
             <XAxis dataKey="name" />
-            <YAxis label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
-            <YAxis unit="%" />
+            <YAxis unit="%" label="%" />
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>
@@ -2049,18 +2048,39 @@ export class TablePagination extends Component {
 
                                 console.log(row.column[1].value,"NAMAA")
                                 store.dispatch(initialize('addNewRole',
+                                  // {
+                                  //   BISA LAMA
+                                  //   profile_id:row.column[0].value,
+                                  //   role_name:row.column[1].value,
+                                  //   role_desc:row.column[2].value,
+                                  //   role_1:res.data.profile_privilege[3].PRIVILEGE,
+                                  //   role_2:res.data.profile_privilege[4].PRIVILEGE,
+                                  //   role_3:res.data.profile_privilege[5].PRIVILEGE,
+                                  //   role_4:res.data.profile_privilege[6].PRIVILEGE,
+                                  //   role_5:res.data.profile_privilege[7].PRIVILEGE,
+                                  //   role_6:res.data.profile_privilege[0].PRIVILEGE,
+                                  //   role_7:res.data.profile_privilege[1].PRIVILEGE,
+                                  //   role_8:res.data.profile_privilege[2].PRIVILEGE,
+                                  //   role_9:res.data.profile_privilege[8].PRIVILEGE,
+                                  //   role_10:res.data.profile_privilege[9].PRIVILEGE,
+                                  //   role_11:res.data.profile_privilege[10].PRIVILEGE,
+                                  //   role_12:res.data.profile_privilege[11].PRIVILEGE,
+                                  //   role_13:res.data.profile_privilege[12].PRIVILEGE,
+                                  //   role_14:res.data.profile_privilege[13].PRIVILEGE,
+                                  //   role_15:res.data.profile_privilege[14].PRIVILEGE,
+                                  // }
                                   {
                                     profile_id:row.column[0].value,
                                     role_name:row.column[1].value,
                                     role_desc:row.column[2].value,
-                                    role_1:res.data.profile_privilege[3].PRIVILEGE,
-                                    role_2:res.data.profile_privilege[4].PRIVILEGE,
-                                    role_3:res.data.profile_privilege[5].PRIVILEGE,
-                                    role_4:res.data.profile_privilege[6].PRIVILEGE,
-                                    role_5:res.data.profile_privilege[7].PRIVILEGE,
-                                    role_6:res.data.profile_privilege[0].PRIVILEGE,
-                                    role_7:res.data.profile_privilege[1].PRIVILEGE,
-                                    role_8:res.data.profile_privilege[2].PRIVILEGE,
+                                    role_1:res.data.profile_privilege[0].PRIVILEGE,
+                                    role_2:res.data.profile_privilege[1].PRIVILEGE,
+                                    role_3:res.data.profile_privilege[2].PRIVILEGE,
+                                    role_4:res.data.profile_privilege[3].PRIVILEGE,
+                                    role_5:res.data.profile_privilege[4].PRIVILEGE,
+                                    role_6:res.data.profile_privilege[5].PRIVILEGE,
+                                    role_7:res.data.profile_privilege[6].PRIVILEGE,
+                                    role_8:res.data.profile_privilege[7].PRIVILEGE,
                                     role_9:res.data.profile_privilege[8].PRIVILEGE,
                                     role_10:res.data.profile_privilege[9].PRIVILEGE,
                                     role_11:res.data.profile_privilege[10].PRIVILEGE,

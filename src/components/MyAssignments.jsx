@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton,PageLoader} from  './components.jsx'
-import {getMyAssignment,pop,viewTimesheet,reportYearly} from './actions.jsx'
+import {getMyAssignment,pop,viewTimesheet,reportYearly,changeRoute} from './actions.jsx'
 
 class MyAssignments extends Component {
 
@@ -50,7 +50,23 @@ class MyAssignments extends Component {
           
           <div className='grid wrap'>
             <div className='unit whole'>
-              <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}}>{value.bu_name}</a></large>
+              <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} 
+              onClick={
+                e => {
+                  store.dispatch(changeRoute({
+                    type: 'PUSH',
+                    page: {
+                      name: 'business-unit',
+                      business_unit: {
+                        bu_code: value.bu_code
+
+                      }
+                    }
+                  }))
+                  e.preventDefault()
+                }
+              }
+              >{value.bu_name}</a></large>
             </div>
           </div>
           <div className='grid wrap'>
