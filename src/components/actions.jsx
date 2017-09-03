@@ -163,6 +163,50 @@ export const getProjectTeamMember = (id) => {
   }
 }
 
+export const gethistory = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/history/8532760?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'history',  data: res, append: true})
+
+            },
+          )
+  }
+}
+
+export const gethistorydetail = (wbs_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/gethistorydetail/${wbs_id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'historydetail',  data: res, append: true})
+
+            },
+          )
+  }
+}
+
 
 export const getAvailableProjectTeamMember = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
@@ -1368,7 +1412,7 @@ export function showNotif(message, color) {
   store.dispatch({
     type:'ALERT',
     show: true,
-    color: color ? color : '#efefee',
+    //color: color ? color : '#efefee',
     message: message
     
   })
