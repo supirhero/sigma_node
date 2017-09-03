@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
 import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
-import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop } from './actions.jsx'
+import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -55,7 +55,7 @@ class ProjectTeamMember extends Component {
             menuStyle={{
               borderRadius: '3px',
               boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-              background: 'rgba(255, 255, 255, 0.9)',
+              background: 'white',
               padding: '2px 0',
               fontSize: '90%',
               position: 'fixed',
@@ -129,7 +129,18 @@ class ProjectTeamMember extends Component {
                         <small style={{textAlign:'center', color:'#717171', marginTop:'7px'}}>{value.USER_TYPE_ID}</small>
                       </div>
                       <div className='unit one-fifth no-gutters'>
-                        <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}}></span></medium>
+                        <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
+                          e=> {
+                            this.props.dispatch(deleteProjectTeamMember(value.RP_ID)).then(()=> {
+                              showNotif('Successfully removed member from project', 'GREEN')
+                              const id = this.props.state.data.project_id
+                              // store.dispatch(getProjectTeamMember(id))
+                              this.props.dispatch(getAvailableProjectTeamMember(id))
+                            })
+
+                            e.preventDefault()
+                          }
+                        }></span></medium>
                       </div>
                     </div>
                   </div>

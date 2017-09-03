@@ -42,6 +42,17 @@ class ReportsFindProject extends Component {
       {label:"Ahead Schedule",value:"9"},
     ]
 
+    const budget= [
+      {label:"Over Budget",value:"10"},
+      {label:"On Budget",value:"11"},
+      {label:"Ahead Budget",value:"12"},
+    ]
+
+    const status_c = [0,0,0,0,0,0]
+    const schedule_c = [0,0,0]
+    const budget_c = [0,0,0]
+    
+    
    
 
 
@@ -74,8 +85,13 @@ class ReportsFindProject extends Component {
                       
                       e=>{
                         console.log(this.state,"WWERIRENANRI")
-                 
-                      if(this.state.status[index] == 1) {
+                        this.state.status[index] = this.state.status[index] == 0 ? 1 : 0
+                        console.log('STATUS',this.state.status)
+                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })    
+                      {/* if(this.state.status[index] == 1) {
                         this.setState({
                           status: update(this.state.status,{[index] : {$set: 0}})
                         }, ()=> { 
@@ -94,23 +110,14 @@ class ReportsFindProject extends Component {
                         }, ()=> {
                           console.log(this.state.status)
                          console.log("SET TO 1--------")
-                          
-                          {/* var i = 0; */}
-                          
-                         {/* console.log(arr) */}
-                         
                           this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
                           .then(res=> {
                             this.forceUpdate()
                           }) 
-                          // this.props.dispatch(reportSearchProject(this.state.status))
-                          // console.log(this.state.status)
                         })
                         
-                        // this.setState(status[index] = 1)
-                      }
+                      } */}
                         
-                          {/* e.preventDefault() */}
 
                        
                     }}
@@ -120,7 +127,7 @@ class ReportsFindProject extends Component {
             </div>      
             <div className="unit whole no-gutters">
                 <medium><b>Schedule</b></medium>
-              </div> 
+            </div> 
               <div className="unit whole no-gutters">
               
                 {
@@ -129,9 +136,16 @@ class ReportsFindProject extends Component {
                     onClick={
                       
                       e=>{
-                        console.log(this.state,"WWERIRENANRI")
+
+                        this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
+                        console.log('schedule',this.state.schedule)
+                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })  
+                        {/* console.log(this.state,"WWERIRENANRI") */}
          
-                      if(this.state.schedule[index] == 1) {
+                      {/* if(this.state.schedule[index] == 1) {
                         this.setState({
                           schedule: update(this.state.schedule,{[index] : {$set: 0}})
                         }, ()=> { 
@@ -152,20 +166,64 @@ class ReportsFindProject extends Component {
                             this.forceUpdate()
                           }) 
                         })
-                      }
+                      } */}
 
                           {/* e.preventDefault() */}
                     }}
                   ></Checkbox>
                   })
                 }
-                </div>      
+                </div>     
 
-          
-       
+                <div className="unit whole no-gutters">
+                <medium><b>Budget</b></medium>
+            </div> 
+              <div className="unit whole no-gutters">
+              
+                {
+                  budget.map((value,index)=>{
+                   return <Checkbox id={'schedule' + index} label={value.label} group='schedule' 
+                    onClick={
+                      
+                      e=>{
 
+                        this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
+                        console.log('schedule',this.state.schedule)
+                        this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })  
+                        {/* console.log(this.state,"WWERIRENANRI") */}
+         
+                      {/* if(this.state.schedule[index] == 1) {
+                        this.setState({
+                          schedule: update(this.state.schedule,{[index] : {$set: 0}})
+                        }, ()=> { 
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })                          
+                          // console.log(this.state.status)
+                        })
+                      }
+                      else{
+                        this.setState({
+                          schedule: update(this.state.schedule,{ [index]: {$set: 1}})
+                        }, ()=> {
+                        
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          }) 
+                        })
+                      } */}
 
-            
+                          {/* e.preventDefault() */}
+                    }}
+                  ></Checkbox>
+                  })
+                }
+                </div> 
             </div>
           </div>
           <div className="unit three-quarters">

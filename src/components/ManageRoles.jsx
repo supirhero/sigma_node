@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect,destroy } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -38,6 +38,7 @@ class ManageRoles extends Component {
     alert("New Role Created")
     this.props.dispatch(createProfile(props)).then(
       ()=> {
+        
         store.dispatch({
           type: 'POPUP',
           name: 'createRole',
@@ -55,6 +56,7 @@ class ManageRoles extends Component {
     alert("Role Updated")
     this.props.dispatch(editProfileAction(props)).then(
       ()=> {
+        
         store.dispatch({
           type: 'POPUP',
           name: 'createRole',
@@ -214,7 +216,16 @@ class ManageRoles extends Component {
 
           <div className="grid wrap narrow">
             <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
-              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"> CANCEL </button>
+              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={e=> {
+                this.props.dispatch({
+                    type: 'POPUP',
+                    name:'createRole',
+                    data: {
+                      active:false
+                    }
+                  })
+                e.preventDefault()
+                }}> CANCEL </button>
               <button type='submit' style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
             </div>
           </div>
@@ -416,6 +427,9 @@ function mapStateToProps(state) {
 }
 
 export default reduxForm({
+  onSubmitSuccess: (res, dispatch) => {
+        dispatch(destroy('addNewRole'))
+  },
   // Must be unique, this will be the name for THIS PARTICULAR FORM
   form: 'addNewRole',
 })(
