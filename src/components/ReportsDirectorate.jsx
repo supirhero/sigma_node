@@ -177,8 +177,9 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit golden-small">
                   <Meter
-                      progress={state.data.project_dir.jumlah}
-                      text={state.data.project_dir.jumlah}
+                      progress={state.data.project_dir ? state.data.project_dir.jumlah : null}
+                      text={state.data.project_dir ? state.data.project_dir.jumlah : null}
+                      
                     />
                 </div>
                 <div className="unit golden-large">

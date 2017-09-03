@@ -1372,27 +1372,7 @@ export function editTaskAction(id,WBS_ID,data){
   }
 }
 
-export function editTaskPercentAction(id,WBS_ID, props){
-  return function(dispatch){
-    const token = cookies.get('token')
-    return axios({
-      method:'POST',
-      url:`${baseURL}task/editTaskPercent?token=${token}`,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      data: {
-        PROJECT_ID: id,
-        WBS_ID: props.WBS_ID,
-        START_DATE: moment(props.START_DATE_PERCENT).format('YYYY-MM-DD'),
-        FINISH_DATE: moment(props.FINISH_DATE_PERCENT).format('YYYY-MM-DD')
-        
-      }
-    }).then(
-      (res)=>{
-        return res
-      }
-    )
-  }
-}
+
 
 
 
@@ -1909,4 +1889,48 @@ export function searchHome(KEYWORD,page) {
 
 
 
+export function getCurrentProgress(wbs_id){
+  store.dispatch({type: 'LOADER', loader:'project-loader', show:true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}task/getCurrentProgresTask?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              wbs_id
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'task', data: res})
+            },
 
+          )
+  }
+}
+
+
+
+export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
+  return function(dispatch){
+    const token = cookies.get('token')
+    return axios({
+      method:'POST',
+      url:`${baseURL}task/editTaskPercent?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data: {
+        PROJECT_ID,
+        WBS_ID,
+        WORK_PERCENT_COMPLETE:props.WORK_PERCENT_COMPLETE,
+        DESCRIPTION:props.DESCRIPTION
+        
+      }
+    }).then(
+      (res)=>{
+        return res
+        alert('task updated')
+      }
+    )
+  }
+}

@@ -69,7 +69,7 @@ class ReportsFindProject extends Component {
               <div className="unit whole no-gutters">
                 {
                   status.map((value,index)=>{
-                   return <Checkbox id={index*10} label={value.label} group='status' 
+                   return <Checkbox id={index} label={value.label} group='status' 
                     onClick={
                       
                       e=>{
@@ -109,21 +109,12 @@ class ReportsFindProject extends Component {
                         
                         // this.setState(status[index] = 1)
                       }
-
-                      // const arr = []
-                      // this.setState({
-                      //   items: update(this.state.status,{ $set:{index: 0}})
-                      // }, ()=> {
                         
-                        
-                      // })
-                        
-                        
-                          e.preventDefault()
+                          {/* e.preventDefault() */}
 
                        
                     }}
-                  ></Checkbox>
+                  ></Checkbox> 
                   })
                 }
             </div>      
@@ -163,7 +154,7 @@ class ReportsFindProject extends Component {
                         })
                       }
 
-                          e.preventDefault()
+                          {/* e.preventDefault() */}
                     }}
                   ></Checkbox>
                   })
