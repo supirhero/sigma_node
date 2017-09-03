@@ -21,7 +21,7 @@ class Reports extends Component {
 									(e) => {
                   browserHistory.replace('/reports');
 									  }}
-              > Overview </medium>
+              > SPI & CPI </medium>
 
               <medium
                 className="heading list-pointer"
