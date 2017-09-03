@@ -31,7 +31,7 @@ class DashboardHome extends Component {
     const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')' : null
     // console.log(projects);
     return(
-      !auth.userdata && !auth.datatimesheet && !auth.project && !auth.userdata ? <PageLoader></PageLoader> :
+      !auth.datatimesheet && !auth.project && !auth.userdata ? <PageLoader></PageLoader> :
       <div>
       <div className='grid wrap'>
         <div className='unit half'>
@@ -45,7 +45,7 @@ class DashboardHome extends Component {
                   </div>
                   <div className='unit three-fifths'>
                     <large style={{fontSize:'18px'}}>{auth.userdata ? auth.userdata.user_name : '-'}</large>
-                    <small>{auth.userdata.profile_name}</small>
+                    <small>{auth.userdata ? auth.userdata.profile_name: null}</small>
                     <ul>
                       <li>
                         <span className='icon-speedometer'>&nbsp;&nbsp;</span>

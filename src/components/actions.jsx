@@ -17,10 +17,13 @@ const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/"
 const token = cookies.get('token')
 const token_string = `?token=${token}`
 console.log(token)
+
+
+
+
+
 export function login(email, password) {
-
   store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
-
   return function (dispatch) {
     return axios({
             method: 'POST',
@@ -1394,6 +1397,7 @@ export function rDirectorat(bu,tahun){
   }
 }
 
+
 function showNotification(message) {
   return {
     type:'ALERT',
@@ -1431,7 +1435,7 @@ export function showNotif(message, color) {
       })
 
     }
-    , 4000);
+    , 6000);
  
   
 }
@@ -1886,7 +1890,24 @@ export function searchHome(KEYWORD,page) {
   }
 }
 
+export function deleteProjectTeamMember(RP_ID){
+  alert(RP_ID)
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}project/ProjectMember_delete?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              member : RP_ID 
+            }
+          }).then(
+            res => {
+            },
 
+          )
+  }
+}
 
 export function getCurrentProgress(wbs_id){
   store.dispatch({type: 'LOADER', loader:'project-loader', show:true})
@@ -1903,6 +1924,26 @@ export function getCurrentProgress(wbs_id){
           }).then(
             res => {
               store.dispatch({type:'API', name: 'task', data: res})
+            },
+
+          )
+  }
+}
+
+export function inviteToBusiness(BU_ID, USER_ID){
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}home/inviteToBusiness?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              BU_ID : BU_ID,
+              USER_ID : USER_ID
+            }
+          }).then(
+            res => {
+              return res
             },
 
           )
@@ -1935,6 +1976,24 @@ export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
 }
 
 
+axios.interceptors.response.use(undefined, function (error) {
+  if(error.response.status === 404) 
+  {
+    
+    showNotif('404 Page not found', 'RED')
+    store.dispatch(goBack())
+    // ipcRenderer.send('response-unauthenticated');
+    return Promise.reject(error);
+  }
+  else if(error.response.status === 403) 
+    {
+      console.log('ERROR', error.response.data.message)
+      showNotif(error.response.data.message, 'RED')
+      store.dispatch(goBack())
+      // ipcRenderer.send('response-unauthenticated');
+      return Promise.reject(error);
+    }
+});
 export const gethistory = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
