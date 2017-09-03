@@ -170,7 +170,7 @@ const year = [
           <Field
           name="WP_ID"                                        
             inputName="TASK"
-            component={ReduxSelectNew}
+            component={ReduxSelect}
             // validate={[required]}
             >
             <option></option>
@@ -182,9 +182,9 @@ const year = [
                 }
          </Field>
          :
-          <ReduxSelectNew inputName="TASK">
+          <ReduxSelect inputName="TASK">
           <options> </options>
-          </ReduxSelectNew>
+          </ReduxSelect>
         }
                         
                             </div>

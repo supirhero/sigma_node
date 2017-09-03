@@ -6,7 +6,7 @@ import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
 import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
-import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
+import { getDocsFiles, addDocsAndFiles,deleteProjectDoc } from './actions.jsx'
 
 
 
@@ -32,6 +32,13 @@ class ProjectDocsAndFiles extends Component {
       }
     )
   }
+
+  onSubmitDelete(){
+    const id = store.getState().page.id
+    store.dispatch(deleteProjectDoc(id))
+  }
+  
+
     render(){
       const {handleSubmit} = this.props;
       const appStore = store.getState()
@@ -142,7 +149,22 @@ class ProjectDocsAndFiles extends Component {
                           <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
                         </div>
                         <div className='unit one-fifth'>
-                          <medium style={{textAlign:'right'}}><span className='icon-trash' style={{color:'#D62431'}}></span></medium>
+                          <medium style={{textAlign:'right'}}><span className='icon-trash' style={{color:'#D62431'}}
+                          onClick={
+                            e=> {
+                              this.props.dispatch(deleteProjectDoc(value.doc_id)).then(()=> {
+                                showNotif('Successfully removed doc from project', 'GREEN')
+                                const id = this.props.state.data.project_id
+                                // store.dispatch(getProjectTeamMember(id))
+                                this.props.dispatch(getDocsFiles(id))
+                              })
+  
+                              e.preventDefault()
+                            }
+                          }
+                          
+                          
+                          ></span></medium>
                         </div>
                       </div>
                       <div className='grid'>

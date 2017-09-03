@@ -207,7 +207,7 @@ class ReportsDirectorate extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <medium className="project-value-label">Total Project Value</medium>
-                  <large className="project-value-number">{state.data.finance.total_project_value} </large>
+                  <large className="project-value-number">{(state.data.finance.total_project_value).replace(/,+|,(?=,+|$)/, '')} </large>
 
                   <medium className="project-value-label">Invoiced</medium>
                   <large className="project-value-number">-</large>
