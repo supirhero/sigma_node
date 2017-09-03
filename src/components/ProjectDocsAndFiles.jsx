@@ -17,7 +17,7 @@ class ProjectDocsAndFiles extends Component {
   }
   onSubmit(props){
     const id = store.getState().page.id
-    store.dispatch(addDocsAndFiles(props.desc, props.document, id)).then(
+    this.props.dispatch(addDocsAndFiles(props.desc, props.document,id)).then(
       (res)=>{
         this.props.dispatch({
           type: 'POPUP',
@@ -35,7 +35,15 @@ class ProjectDocsAndFiles extends Component {
 
   onSubmitDelete(){
     const id = store.getState().page.id
-    store.dispatch(deleteProjectDoc(id))
+    this.props.dispatch(deleteProjectDoc(id)).then(
+      (res)=>{
+        store.dispatch(getDocsFiles(id))
+        alert("Docs Deleted")
+        // res.preventDefault()
+        // console.log("closed")
+      }
+    )
+    
   }
   
 

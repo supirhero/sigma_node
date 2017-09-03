@@ -780,7 +780,8 @@ export class SCurve extends Component{
         <ResponsiveContainer width='100%' height={250}>
           <ChartLine width={680} height={250} data={this.props.data}>
             <XAxis dataKey="name" />
-            <YAxis unit="%" label="%" />
+            <YAxis unit="%" label="%" interval={0} />
+            
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip />
             <Legend iconType="circle" iconSize={8}/>

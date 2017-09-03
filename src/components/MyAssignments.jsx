@@ -78,13 +78,28 @@ class MyAssignments extends Component {
                     <div key={index}>
                     
                     
-                <medium style={{marginBottom: '30px'}}>Project&nbsp;<a>{value.project_name}</a></medium>
+                <medium style={{marginBottom: '30px'}}
+                onClick={
+                  e => {
+                    store.dispatch(changeRoute({
+                      type: 'PUSH',
+                      page: {
+                        name: 'project',
+                        id: value.project_id,
+                        project: {
+                          status:value.project_status,
+                          bu_code: value.bu_code
+                        }
+                      }
+                    }))
+                  }
+                }
+                >Project&nbsp;<a>{value.project_name}</a></medium>
                 {/* MAP THIS */}
                 {
                   value.assignment_list.map((value,index)=>{
                     return(
                       <div key={index}>
-                     
                         <div>
                           <div className='grid' >
                             <div className='unit golden-large no-gutters'>
