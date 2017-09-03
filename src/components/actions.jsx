@@ -1986,4 +1986,12 @@ axios.interceptors.response.use(undefined, function (error) {
     // ipcRenderer.send('response-unauthenticated');
     return Promise.reject(error);
   }
+  else if(error.response.status === 403) 
+    {
+      console.log('ERROR', error.response.data.message)
+      showNotif(error.response.data.message, 'RED')
+      store.dispatch(goBack())
+      // ipcRenderer.send('response-unauthenticated');
+      return Promise.reject(error);
+    }
 });

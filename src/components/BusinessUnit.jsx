@@ -45,9 +45,9 @@ class BusinessUnit extends Component {
     store.dispatch(pop());
   }
 
-  componentWillUpdate(){
-    store.dispatch(getBusinessUnitDetail(id,this.state.status,this.state.type,this.state.effort,this.state.search))
-  }
+  // componentWillUpdate(){
+  //   store.dispatch(getBusinessUnitDetail(this.props.state.data.bu_code,this.state.status,this.state.type,this.state.effort,this.state.search))
+  // }
 
   render() {
     // var state = this.props.state;
@@ -403,6 +403,6 @@ class BusinessUnit extends Component {
 
 
 function mapStateToProps(state) {
-  return state
+  return {state}
 }
 export default connect(mapStateToProps)(BusinessUnit);
