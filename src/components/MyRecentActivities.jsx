@@ -13,14 +13,15 @@ class MyRecentActivities extends Component {
   constructor(){
     super();
     this.state = {
-      month : 8,
-      year: 2017
+      month : null,
+      year: null,
+      month_name:"September"
     };
   }
 
   componentWillMount() {
     const myActivity = store.getState().data.activity_timesheet;
-    store.dispatch(getMyActivities("7","2017"));
+    store.dispatch(getMyActivities());
     store.dispatch(viewTimesheet())
     
   }
@@ -52,7 +53,7 @@ class MyRecentActivities extends Component {
 
   
 handleMonthChange (e) {
-  this.setState({month: e.target.value});
+  this.setState({month: e.target.value})
   console.log(e.target.value);
   e.preventDefault()
 
@@ -294,6 +295,7 @@ const year = [
   <div className='unit four-fifths'>
     <select onChange={this.handleMonthChange.bind(this)}
       className='select' style={{height:'49px', width:'250px',marginLeft:'230px' ,display:'inline-block'}}>
+        <option>Choose Month</option>
       {
         month.map((value,index) => {
         return(
@@ -304,6 +306,7 @@ const year = [
     </select>
     <select onChange={this.handleYearChange.bind(this)} 
     className='select' style={{height:'49px', width:'250px',marginRight:'300px',display:'inline-block',float:'right'}}> 
+    <option>Choose Year</option>
     { 
       year.map((value,index) => { 
       return( 
@@ -324,6 +327,7 @@ const year = [
     <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
       console.log(this.state.month,this.state.year);
       store.dispatch(getMyActivities(this.state.month,this.state.year))
+      this.setState({month_name:e.target.value})
       // store.dispatch(myPerformance('1','2017'))
       e.preventDefault()
     }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -336,7 +340,7 @@ const year = [
 
         <div className="grid wrap">
           <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text={moment().format("YYYY-MM-DD")} />
+            <Divider style={{ marginTop: '0' }} text={this.state.month_name} />
           </div>
         </div>
         {
