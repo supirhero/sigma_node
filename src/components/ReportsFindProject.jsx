@@ -14,9 +14,7 @@ class ReportsFindProject extends Component {
     super(); 
     this.state = { 
         status:[0,0,0,0,0,0],
-        status_fin:[0,0,0,0,0,0],
         schedule:[0,0,0],
-        schedule_fin:[0,0,0],
         budget:[0,0,0],
         budget_head:[0,0,0],
     } 
@@ -29,13 +27,19 @@ class ReportsFindProject extends Component {
     // store.dispatch(reportFindProject([0],[0],[0],[0],[0]))
   }
   render() {
-    const value = [
+    const status = [
       {label:"not started",value:"1"},
       {label:"in progress",value:"2"},
       {label:"on hold",value:"3"},
       {label:"completed",value:"4"},
       {label:"in planning",value:"5"},
       {label:"cancelled",value:"6"}
+    ]
+
+    const schedule= [
+      {label:"Schedule Overrun",value:"7"},
+      {label:"On Schedule",value:"8"},
+      {label:"Ahead Schedule",value:"9"},
     ]
 
    
@@ -64,41 +68,20 @@ class ReportsFindProject extends Component {
               </div> 
               <div className="unit whole no-gutters">
                 {
-                  value.map((value,index)=>{
-                   return <Checkbox id={index} label={value.label} group='status' 
+                  status.map((value,index)=>{
+                   return <Checkbox id={index*10} label={value.label} group='status' 
                     onClick={
                       
                       e=>{
                         console.log(this.state,"WWERIRENANRI")
-                      //  if ( this.state["checkbox"+index] == 1) {
-                      //    this.setState({
-                      //      ["checkbox" + index] : "0"
-                      //    }) 
-                      //     this.setState(
-                      //      this.state.status.concat({
-                      //        status:0
-                      //      })
-                      //    ) 
-
-                      //  }
-                      //  else {
-                      //   this.setState({
-                      //     ["checkbox" + index] : "1"
-                      //   }) 
-                      //    this.setState(
-                      //     this.state.statu`s.concat({
-                      //       status:1
-                      //     })
-                      //   ) 
-                      //  }
-                      {/* var arr = [] */}
+                 
                       if(this.state.status[index] == 1) {
                         this.setState({
                           status: update(this.state.status,{[index] : {$set: 0}})
                         }, ()=> { 
                           console.log(this.state.status)
                          console.log("SET TO 0--------")
-                          this.props.dispatch(reportSearchProject(this.state.status))
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
                           .then(res=> {
                             this.forceUpdate()
                           })                          
@@ -116,7 +99,7 @@ class ReportsFindProject extends Component {
                           
                          {/* console.log(arr) */}
                          
-                          this.props.dispatch(reportSearchProject(this.state.status))
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
                           .then(res=> {
                             this.forceUpdate()
                           }) 
@@ -144,6 +127,48 @@ class ReportsFindProject extends Component {
                   })
                 }
             </div>      
+            <div className="unit whole no-gutters">
+                <medium><b>Schedule</b></medium>
+              </div> 
+              <div className="unit whole no-gutters">
+              
+                {
+                  schedule.map((value,index)=>{
+                   return <Checkbox id={'schedule' + index} label={value.label} group='schedule' 
+                    onClick={
+                      
+                      e=>{
+                        console.log(this.state,"WWERIRENANRI")
+         
+                      if(this.state.schedule[index] == 1) {
+                        this.setState({
+                          schedule: update(this.state.schedule,{[index] : {$set: 0}})
+                        }, ()=> { 
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          })                          
+                          // console.log(this.state.status)
+                        })
+                      }
+                      else{
+                        this.setState({
+                          schedule: update(this.state.schedule,{ [index]: {$set: 1}})
+                        }, ()=> {
+                        
+                          this.props.dispatch(reportSearchProject(this.state.status, this.state.schedule))
+                          .then(res=> {
+                            this.forceUpdate()
+                          }) 
+                        })
+                      }
+
+                          e.preventDefault()
+                    }}
+                  ></Checkbox>
+                  })
+                }
+                </div>      
 
           
        
