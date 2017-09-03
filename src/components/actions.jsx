@@ -170,7 +170,7 @@ export const gethistory = (id) => {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}project/history/7549136?token=${token}`,
+            url: `${baseURL}project/history/8532760?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 
@@ -185,14 +185,14 @@ export const gethistory = (id) => {
   }
 }
 
-export const gethistorydetail = (id) => {
+export const gethistorydetail = (wbs_id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}project/gethistorydetail/7549136?token=${token}`,
+            url: `${baseURL}project/gethistorydetail/${wbs_id}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
 

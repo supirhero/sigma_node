@@ -18,7 +18,7 @@ import Autosuggest from 'react-autosuggest';
 import {initialize} from 'redux-form';
 
 
-import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView} from './actions.jsx'
+import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView,gethistorydetail} from './actions.jsx'
 
 const cookies = new Cookies();
 const baseURL = "http://45.77.45.126"
@@ -1512,7 +1512,7 @@ export class TablePagination extends Component {
                 <tr>
                   {
                       this.props.tableHeader.map((value, index) => (
-                        <th key={index}>{value.value}</th>
+                        <th key={index} >{value.value}</th>
                       ))
                     }
                 </tr>
@@ -1537,7 +1537,8 @@ export class TablePagination extends Component {
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
                           <button className="btn-primary" title='Detail' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
-                            
+                            store.dispatch(gethistorydetail(row.column[5].value))
+
                             console.log(row)
                             store.dispatch({
                               type: 'POPUP',
