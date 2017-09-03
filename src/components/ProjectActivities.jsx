@@ -53,7 +53,7 @@ class ProjectActivities extends Component {
       
         <div className="grid wrap padding-left">
           <div className="unit whole">
-            <ProjectHeader projectName="Transaction Based Managed Services 2017" sectionName="ACTIVIES" />
+            <ProjectHeader projectName={this.props.state.data.overview.project_name} sectionName="ACTIVIES" />
           </div>
         </div>
         <div className="grid wrap padding-left">

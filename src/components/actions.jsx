@@ -513,7 +513,7 @@ export const editProject = (data, id) =>
             CUST_ID:data.CUST_ID,
             DESC:data.DESC,
             END_CUST_ID:data.END_CUST_ID,
-            ho_operation:"yes",
+            HO:data.HO,
             IWO_NO:data.IWO_NO,
             MARGIN:parseFloat(data.MARGIN),
             OVERHEAD:data.OVERHEAD,
