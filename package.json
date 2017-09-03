@@ -40,6 +40,7 @@
     "react-day-picker": "^6.1.0",
     "react-dom": "^15.6.1",
     "react-dropzone": "^4.0.1",
+    "react-file-download": "^0.3.4",
     "react-file-input": "^0.2.5",
     "react-menu": "0.0.10",
     "react-password-mask": "^2.4.6",

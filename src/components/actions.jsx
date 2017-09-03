@@ -9,7 +9,7 @@ const cookies = new Cookies();
 import axios from 'axios'
 var compile_mode = process.env.NODE_ENV
 
-
+import fileDownload from 'react-file-download';
 // const baseURL = "http://45.77.45.126/dev/"
 const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/"
 
@@ -212,6 +212,53 @@ export const assignProjectTeamMember = (id,user_id) => {
   }
 }
 
+export const registerVendor = (props) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}login/doRegistration`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              submit: 'registVendor',
+              V_EMAIL_SUP : props.V_EMAIL_SUP,
+              V_EMAIL: props.V_EMAIL,
+              V_USER_ID: props.V_USER_ID,
+              V_USER_NAME:props.V_USER_NAME,
+              V_PASSWORD: props.V_PASSWORD,
+            }
+          }).then(
+            res => {
+            },
+          )
+  }
+}
+
+export const registerSigma = (props) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}login/doRegistration`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              submit: 'registSigma',
+              EMAIL: props.V_EMAIL,
+              USER_ID: props.V_USER_ID,
+              USERNAME:props.V_USER_NAME,
+              PASSWORD: props.V_PASSWORD,
+            }
+          }).then(
+            res => {
+            },
+          )
+  }
+}
+
 
 
 
@@ -237,6 +284,32 @@ export const getDocsFiles = (id) => {
 
 }
 
+export const deleteProjectDoc = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}home/deleteprojectdoc/${id}?token=${token}` ,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              doc_id:id
+            }
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'project', data: res, append:true})
+
+            },
+          )
+  }
+
+}
+
+
 
 
 export const addDocsAndFiles = (desc,files, id ) => {
@@ -252,7 +325,6 @@ export const addDocsAndFiles = (desc,files, id ) => {
     }).then(
       res => {
         // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-        alert('document uploaded');
         
         store.dispatch({type:'API', name: 'project', data: res, append:true})
 
@@ -772,8 +844,63 @@ export const reportPeople = (BU_ID,BULAN,TAHUN) => {
 
 }
 
+export const reportDownloadFilt2er = (status, schedule, budget) => {
+  const formData = new FormData();
+  return function (dispatch) {
+    const token = cookies.get('token')
+    formData.append('status',status)
+    formData.append('schedule',schedule)
+    formData.append('budget',budget)
+    
+    
+    return fetch(`${baseURL}report/report_filter_download?token=${token}`,{
+      method:'GET',
+      body:formData,
+      headers: {
+        Accept: 'application/json',
+      },
+    }).then(
+            res => {
+              fileDownload(res,'report.xls' )
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.json());
+              // store.dispatch({type:'API', name: 'report', data: res, append:true})
 
+            },
+          )
+  }
 
+}
+
+export const reportDownloadFilter = (status, schedule, budget) => {
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}report/report_filter_download?token=${token}` ,
+            headers: {
+              
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             responseType: "arraybuffer",
+             data:{
+              // value:props.value,
+              status: status,
+              schedule: schedule,
+              budget: budget
+             }
+          }).then(
+            res => {
+              fileDownload(res.data, 'report.xls' )
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'report', data: res, append:true})
+
+            },
+          )
+  }
+
+}
 
 export const reportSearchProject = (status, schedule, budget) => {
   return function (dispatch) {
@@ -1655,7 +1782,14 @@ export function editProfile(no_hp,address,files){
     fetch(`${baseURL}home/edit_user?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      (res)=>{
+        alert('Profile Updated')
+        // store.dispatch(viewTimesheet(TS_DATE));
+
+
+      }
+    )
   }
 }
 
@@ -1740,7 +1874,7 @@ export function editProfileView(profile_id){
   }
 }
 
-export function editProfileAction(data){
+export function editProfileAction(props){
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
@@ -1750,26 +1884,24 @@ export function editProfileAction(data){
             url: `${baseURL}role/editprofile_action?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
-              profile_id:data.profile_id,
-              role_name:data.role_name,
-              role_desc:data.role_desc,
-              role_1:data.role_1,
-              role_2:data.role_2,
-              role_3:data.role_3,
-              role_4:data.role_4,
-              role_5:data.role_5,
-              role_6:data.role_6,
-              role_7:data.role_7,
-              role_8:data.role_8,
-              role_9:data.role_9,
-              role_10:data.role_10,
-              role_11:data.role_11,
-              role_12:data.role_12,
-              role_13:data.role_13,
-              role_14:data.role_14,
-              role_15:data.role_15,
-              role_16:data.role_16,
-              role_17:data.role_17,
+              profile_id:props.profile_id,
+              role_name:props.role_name,
+              role_desc:props.role_desc,
+              role_1:props.role_1,
+              role_2:props.role_2,
+              role_3:props.role_3,
+              role_4:props.role_4,
+              role_5:props.role_5,
+              role_6:props.role_6,
+              role_7:props.role_7,
+              role_8:props.role_8,
+              role_9:props.role_9,
+              role_10:props.role_10,
+              role_11:props.role_11,
+              role_12:props.role_12,
+              role_13:props.role_13,
+              role_14:props.role_14,
+              role_15:props.role_15,
             }
           }).then(
             res => {
@@ -1783,7 +1915,7 @@ export function editProfileAction(data){
 
 
 
-export function createProfile(data){
+export function createProfile(props){
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
@@ -1793,25 +1925,23 @@ export function createProfile(data){
             url: `${baseURL}role/createprofile?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data:{
-              role_name:data.role_name,
-              role_desc:data.role_desc,
-              role_1:data.role_1,
-              role_2:data.role_2,
-              role_3:data.role_3,
-              role_4:data.role_4,
-              role_5:data.role_5,
-              role_6:data.role_6,
-              role_7:data.role_7,
-              role_8:data.role_8,
-              role_9:data.role_9,
-              role_10:data.role_10,
-              role_11:data.role_11,
-              role_12:data.role_12,
-              role_13:data.role_13,
-              role_14:data.role_14,
-              role_15:data.role_15,
-              role_16:data.role_16,
-              role_17:data.role_17,
+              role_name:props.role_name,
+              role_desc:props.role_desc,
+              role_1:props.role_1,
+              role_2:props.role_2,
+              role_3:props.role_3,
+              role_4:props.role_4,
+              role_5:props.role_5,
+              role_6:props.role_6,
+              role_7:props.role_7,
+              role_8:props.role_8,
+              role_9:props.role_9,
+              role_10:props.role_10,
+              role_11:props.role_11,
+              role_12:props.role_12,
+              role_13:props.role_13,
+              role_14:props.role_14,
+              role_15:props.role_15,
             }
           }).then(
             res => {
@@ -1988,10 +2118,16 @@ axios.interceptors.response.use(undefined, function (error) {
     {
       console.log('ERROR', error)
       showNotif(error.response.data.message, 'RED')
-      store.dispatch(goBack())
+      store.dispatch(replace('/'))
       // ipcRenderer.send('response-unauthenticated');
       return Promise.reject(error);
     }
+  else if(error.response.status && error.response.status === 400) {
+    console.log('ERROR', error)
+    showNotif(error.response.data.message, 'RED')
+    // ipcRenderer.send('response-unauthenticated');
+    return Promise.reject(error);
+  }
 });
 export const gethistory = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})

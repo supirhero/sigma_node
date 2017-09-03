@@ -206,10 +206,15 @@ class ReportsDirectorate extends Component {
               <Header text='Finance (IDR)' style={{display:'inline-block'}} />
               <div className="grid wrap">
                 <div className="unit half">
-                  <medium className="project-value-label">Total Project Value</medium>
-                  <large className="project-value-number">{ Math.floor(state.data.finance.total_project_value) } </large>
-
-                  <medium className="project-value-label">Invoiced</medium>
+                <medium className="project-value-label">Total Project Value</medium>
+                {/*  
+                  
+                  <large className="project-value-number">{state.data.finance && (state.data.finance.total_project_value).replace(/,+|,(?=,+|$)/,'')} </large> 
+            */}
+            <large className="project-value-number">{state.data.finance.total_project_value} </large> 
+            {/*   
+          */} 
+            <medium className="project-value-label">Invoiced</medium>
                   <large className="project-value-number">-</large>
                 </div>
                 <div className="unit half">

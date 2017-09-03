@@ -6,7 +6,7 @@ import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Search, Input, BarChart, Divider, Meter, TableExample ,Checkbox} from './Components.jsx';
-import {reportFindProject, reportSearchProject} from './actions.jsx'
+import {reportFindProject, reportSearchProject, reportDownloadFilter} from './actions.jsx'
 
 
 class ReportsFindProject extends Component {
@@ -87,24 +87,33 @@ class ReportsFindProject extends Component {
                     onClick={
                       
                       e=>{
-                        console.log(this.state,"WWERIRENANRI")
                         this.state.status[index] = this.state.status[index] == 0 ? 1 : 0
-                        console.log('STATUS',this.state.status)
-
                         var flag = true;
 
                         for(var i = 0; i < this.state.status.length; ++i) {
                           if(this.state.status[i] !== 0) {
-                            this.setState({status_flag : false},()=> {
+                            flag = false
+                            
+                            
+                            break;
+
+                          }
+                        }
+
+                        this.setState({status_flag : flag},()=> {
                               this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
                               .then(res=> {
                                 this.forceUpdate()
                               })  
                             })
-                            break;
-                          }
-                        } 
-                        
+
+                        {/* if(flag === true) {
+                          alert('is empty')
+                          this.props.dispatch(reportSearchProject(null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                                .then(res=> {
+                                  this.forceUpdate()
+                                })  
+                        } */}
                       {/* if(this.state.status[index] == 1) {
                         this.setState({
                           status: update(this.state.status,{[index] : {$set: 0}})
@@ -150,26 +159,31 @@ class ReportsFindProject extends Component {
                     onClick={
                       
                       e=>{
-
+                        
                         this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
                         console.log('schedule',this.state.schedule)
 
+                        var flag = true;
 
                         for(var i = 0; i < this.state.schedule.length; ++i) {
                           if(this.state.schedule[i] !== 0) {
-                            this.setState({schedule_flag : false}, ()=> {
+                            flag = false
+                            
+                            break;
+                          }
+                        } 
+                          
+                        this.setState({schedule_flag : flag}, ()=> {
 
                               this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
                               .then(res=> {
                                 this.forceUpdate()
                               })  
                             })
-                            break;
-                          }
-                        } 
+                      
 
                         {/* console.log(this.state,"WWERIRENANRI") */}
-         
+          
                       {/* if(this.state.schedule[index] == 1) {
                         this.setState({
                           schedule: update(this.state.schedule,{[index] : {$set: 0}})
@@ -219,17 +233,19 @@ class ReportsFindProject extends Component {
 
                         for(var i = 0; i < this.state.budget.length; ++i) {
                           if(this.state.budget[i] !== 0) {
-                            this.setState({budget_flag : false}, ()=> {
-                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
-                                .then(res=> {
-                                  this.forceUpdate()
-                                })  
-
-                            })
+                            flag = false
+                            
                             break;
                           }
                         } 
+                         
+                        this.setState({budget_flag : flag}, ()=> {
 
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                              .then(res=> {
+                                this.forceUpdate()
+                              })  
+                            })
                      
 
                         {/* console.log(this.state,"WWERIRENANRI") */}
@@ -263,6 +279,12 @@ class ReportsFindProject extends Component {
                   })
                 }
                 </div> 
+                <div className="unit whole no-gutters">
+                  <button className='btn-primary' onClick={ e=> {
+                    this.props.dispatch(reportDownloadFilter(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                    e.preventDefault()
+                    }}>DOWNLOAD EXCEL</button>
+                </div>
             </div>
           </div>
           <div className="unit three-quarters">

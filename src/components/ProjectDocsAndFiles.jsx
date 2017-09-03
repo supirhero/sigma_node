@@ -6,7 +6,7 @@ import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
 import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
-import { getDocsFiles, addDocsAndFiles } from './actions.jsx'
+import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif } from './actions.jsx'
 
 
 
@@ -17,8 +17,11 @@ class ProjectDocsAndFiles extends Component {
   }
   onSubmit(props){
     const id = store.getState().page.id
-    store.dispatch(addDocsAndFiles(props.desc, props.document, id)).then(
+    this.props.dispatch(addDocsAndFiles(props.desc, props.document,id)).then(
       (res)=>{
+        showNotif('Successfully added document', 'GREEN')
+        
+        store.dispatch(getDocsFiles(id))
         this.props.dispatch({
           type: 'POPUP',
           name:'uploadFileDocsFiles',
@@ -26,12 +29,26 @@ class ProjectDocsAndFiles extends Component {
             active:false
           }
         })
-        store.dispatch(getDocsFiles(id))
         // res.preventDefault()
         // console.log("closed")
       }
     )
   }
+
+  onSubmitDelete(){
+    const id = store.getState().page.id
+    this.props.dispatch(deleteProjectDoc(id)).then(
+      (res)=>{
+        this.props.dispatch(getDocsFiles(id))
+        
+        // res.preventDefault()
+        // console.log("closed")
+      }
+    )
+    
+  }
+  
+
     render(){
       const {handleSubmit} = this.props;
       const appStore = store.getState()
@@ -142,7 +159,19 @@ class ProjectDocsAndFiles extends Component {
                           <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
                         </div>
                         <div className='unit one-fifth'>
-                          <medium style={{textAlign:'right'}}><span className='icon-trash' style={{color:'#D62431'}}></span></medium>
+                          <medium style={{textAlign:'right', marginTop:'9px'}}> &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
+                            e=> {
+                              this.props.dispatch(deleteProjectDoc(value.doc_id)).then(()=> {
+                                const id = store.getState().page.id
+                                
+                                // store.dispatch(getProjectTeamMember(id))
+                                this.props.dispatch(getDocsFiles(id))
+                                showNotif('Successfully removed doc from project', 'GREEN')
+                              })
+  
+                              e.preventDefault()
+                            }
+                          }></span></medium>
                         </div>
                       </div>
                       <div className='grid'>

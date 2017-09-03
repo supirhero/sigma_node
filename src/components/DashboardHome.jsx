@@ -166,7 +166,6 @@ class DashboardHome extends Component {
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
                         // browserHistory.push('/business-unit')
-
                         store.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {

@@ -2055,33 +2055,52 @@ export class TablePagination extends Component {
                           <td style={{ position: 'relative', float:'right' }}>
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
                             alert(row.column[0].value)
-                            console.log(row)
+                            console.log(row,"TESTLIAT")
                             store.dispatch(editProfileView(row.column[0].value)).then(
                               res => {
 
                                 console.log(row.column[1].value,"NAMAA")
                                 store.dispatch(initialize('addNewRole',
+                                  // {
+                                  //   BISA LAMA
+                                  //   profile_id:row.column[0].value,
+                                  //   role_name:row.column[1].value,
+                                  //   role_desc:row.column[2].value,
+                                  //   role_1:res.data.profile_privilege[3].PRIVILEGE,
+                                  //   role_2:res.data.profile_privilege[4].PRIVILEGE,
+                                  //   role_3:res.data.profile_privilege[5].PRIVILEGE,
+                                  //   role_4:res.data.profile_privilege[6].PRIVILEGE,
+                                  //   role_5:res.data.profile_privilege[7].PRIVILEGE,
+                                  //   role_6:res.data.profile_privilege[0].PRIVILEGE,
+                                  //   role_7:res.data.profile_privilege[1].PRIVILEGE,
+                                  //   role_8:res.data.profile_privilege[2].PRIVILEGE,
+                                  //   role_9:res.data.profile_privilege[8].PRIVILEGE,
+                                  //   role_10:res.data.profile_privilege[9].PRIVILEGE,
+                                  //   role_11:res.data.profile_privilege[10].PRIVILEGE,
+                                  //   role_12:res.data.profile_privilege[11].PRIVILEGE,
+                                  //   role_13:res.data.profile_privilege[12].PRIVILEGE,
+                                  //   role_14:res.data.profile_privilege[13].PRIVILEGE,
+                                  //   role_15:res.data.profile_privilege[14].PRIVILEGE,
+                                  // }
                                   {
                                     profile_id:row.column[0].value,
                                     role_name:row.column[1].value,
-                                    
                                     role_desc:row.column[2].value,
-                                    role_2:res.data.profile_privilege[8] ? res.data.profile_privilege[8].PRIVILEGE : null,
-                                    role_3:res.data.profile_privilege[9] ? res.data.profile_privilege[9].PRIVILEGE : null,
-                                    role_4:res.data.profile_privilege[10]? res.data.profile_privilege[10].PRIVILEGE : null,
-                                    role_5:res.data.profile_privilege[11]? res.data.profile_privilege[11].PRIVILEGE : null,
-                                    role_6:res.data.profile_privilege[12]? res.data.profile_privilege[12].PRIVILEGE : null,
-                                    role_7:res.data.profile_privilege[13]? res.data.profile_privilege[13].PRIVILEGE : null,
-                                    role_8:res.data.profile_privilege[14]? res.data.profile_privilege[14].PRIVILEGE : null,
-                                    role_9:res.data.profile_privilege[15]? res.data.profile_privilege[15].PRIVILEGE : null,
-                                    role_10:res.data.profile_privilege[3] ? res.data.profile_privilege[3].PRIVILEGE : null,
-                                    role_11:res.data.profile_privilege[4] ? res.data.profile_privilege[4].PRIVILEGE : null,
-                                    role_12:res.data.profile_privilege[5] ? res.data.profile_privilege[5].PRIVILEGE : null,
-                                    role_13:res.data.profile_privilege[6] ? res.data.profile_privilege[6].PRIVILEGE : null,
-                                    role_14:res.data.profile_privilege[0] ? res.data.profile_privilege[0].PRIVILEGE : null,
-                                    role_15:res.data.profile_privilege[1] ? res.data.profile_privilege[1].PRIVILEGE : null,
-                                    role_16:res.data.profile_privilege[2] ? res.data.profile_privilege[2].PRIVILEGE : null,
-                                    role_17:res.data.profile_privilege[14]? res.data.profile_privilege[14].PRIVILEGE : null,
+                                    role_1:res.data.profile_privilege[0].PRIVILEGE,
+                                    role_2:res.data.profile_privilege[1].PRIVILEGE,
+                                    role_3:res.data.profile_privilege[2].PRIVILEGE,
+                                    role_4:res.data.profile_privilege[3].PRIVILEGE,
+                                    role_5:res.data.profile_privilege[4].PRIVILEGE,
+                                    role_6:res.data.profile_privilege[5].PRIVILEGE,
+                                    role_7:res.data.profile_privilege[6].PRIVILEGE,
+                                    role_8:res.data.profile_privilege[7].PRIVILEGE,
+                                    role_9:res.data.profile_privilege[8].PRIVILEGE,
+                                    role_10:res.data.profile_privilege[9].PRIVILEGE,
+                                    role_11:res.data.profile_privilege[10].PRIVILEGE,
+                                    role_12:res.data.profile_privilege[11].PRIVILEGE,
+                                    role_13:res.data.profile_privilege[12].PRIVILEGE,
+                                    role_14:res.data.profile_privilege[13].PRIVILEGE,
+                                    role_15:res.data.profile_privilege[14].PRIVILEGE,
                                   }
                                  ))
                               }
@@ -2576,6 +2595,7 @@ export class ReduxUploadWorkplan extends Component {
       this.setState({
         value:filesToUpload[0].name
       })
+      e.preventDefault()
       }}
       >
       <input type="text" value={this.state.value} onkeydown="return false;"></input>

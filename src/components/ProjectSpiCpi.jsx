@@ -87,6 +87,7 @@ if (!spi && !cpi) {
                 <TabPanel>
                   <div className="grid padding-left">
                     <div className="unit whole">
+                      <large>SPI</large>
                       <BarChart fill= "#D2E5FA"
                         data={spi}
                       />
@@ -111,6 +112,7 @@ if (!spi && !cpi) {
                 <TabPanel>
                   <div className="grid padding-left">
                     <div className="unit whole">
+                    <large>CPI</large>
                       <BarChart
                         fill= "#D2E5FA"
                         data={cpi}

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, TimeSheetTimeButton,PageLoader} from  './components.jsx'
-import {getMyAssignment,pop,viewTimesheet,reportYearly} from './actions.jsx'
+import {getMyAssignment,pop,viewTimesheet,reportYearly,changeRoute} from './actions.jsx'
 
 class MyAssignments extends Component {
 
@@ -50,7 +50,23 @@ class MyAssignments extends Component {
           
           <div className='grid wrap'>
             <div className='unit whole'>
-              <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}}>{value.bu_name}</a></large>
+              <large>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} 
+              onClick={
+                e => {
+                  store.dispatch(changeRoute({
+                    type: 'PUSH',
+                    page: {
+                      name: 'business-unit',
+                      business_unit: {
+                        bu_code: value.bu_code
+
+                      }
+                    }
+                  }))
+                  e.preventDefault()
+                }
+              }
+              >{value.bu_name}</a></large>
             </div>
           </div>
           <div className='grid wrap'>
@@ -62,13 +78,28 @@ class MyAssignments extends Component {
                     <div key={index}>
                     
                     
-                <medium style={{marginBottom: '30px'}}>Project&nbsp;<a>{value.project_name}</a></medium>
+                <medium style={{marginBottom: '30px'}}
+                onClick={
+                  e => {
+                    store.dispatch(changeRoute({
+                      type: 'PUSH',
+                      page: {
+                        name: 'project',
+                        id: value.project_id,
+                        project: {
+                          status:value.project_status,
+                          bu_code: value.bu_code
+                        }
+                      }
+                    }))
+                  }
+                }
+                >Project&nbsp;<a>{value.project_name}</a></medium>
                 {/* MAP THIS */}
                 {
                   value.assignment_list.map((value,index)=>{
                     return(
                       <div key={index}>
-                     
                         <div>
                           <div className='grid' >
                             <div className='unit golden-large no-gutters'>

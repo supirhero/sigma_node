@@ -3,22 +3,64 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {Input} from './Components.jsx'
+import {ReduxInput, required} from './Components.jsx'
+import {registerVendor, showNotif} from './actions.jsx'
+import {Field, reduxForm} from 'redux-form';
+
 
 class RegisterVendor extends Component {
+
+  onSubmit(props){
+    this.props.registerVendor(props).then(()=> {
+      showNotif('Successfully registered user')
+      browserHistory.push('/auth')
+    })
+  }
   render() {
+    const {handleSubmit} = this.props;
+    
 
     return(
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className='grid'>
           <div className='unit half'>
-            <Input inputName="FULL NAME" />
-            <Input inputName="USER ID" />
-            <Input inputName="EMAIL SUPERVISOR SIGMA" />        
+            <Field
+              inputName="FULL NAME"
+              name="V_USER_NAME"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />  
+            <Field
+              inputName="USER ID"
+              name="V_USER_ID"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            /> 
+            <Field
+              inputName="EMAIL SUPERVISOR SIGMA"
+              name="V_EMAIL_SUP"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />           
           </div>
           <div className='unit half'>
-            <Input inputName="EMAIL ADDRESS" />
-            <Input inputName="PASSWORD" />             
+          <Field
+              inputName="EMAIL ADDRESS" 
+              name="V_EMAIL"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            /> 
+            <Field
+              inputName="PASSWORD" 
+              name="V_PASSWORD"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            /> 
           </div>
         </div>
         <div className='grid'>
@@ -41,4 +83,8 @@ function mapStateToProps(state) {
     state
   }
 }
-export default connect(mapStateToProps)(RegisterVendor)
+export default connect(mapStateToProps, { registerVendor })
+(
+  reduxForm({
+    form: 'register_sigma',
+  })(RegisterVendor));

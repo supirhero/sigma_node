@@ -3,21 +3,55 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {Input} from './Components.jsx'
+import {ReduxInput, required} from './Components.jsx'
+import {registerSigma, showNotif} from './actions.jsx'
+import {Field, reduxForm} from 'redux-form';
+
 
 class RegisterSigma extends Component {
+  onSubmit(props){
+    this.props.registerSigma(props).then(()=> {
+      showNotif('Successfully registered Sigma user')
+      browserHistory.push('/auth')
+    })
+  }
   render() {
-
+    const {handleSubmit} = this.props;
+    
     return(
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className='grid'>
           <div className='unit half'>
-            <Input inputName="NIK" />
-            <Input inputName="FULL NAME" />          
+            <Field
+              inputName="NIK"
+              name="V_USER_ID"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />
+            <Field
+              inputName="FULL NAME"
+              name="V_USER_NAME"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />        
           </div>
           <div className='unit half'>
-            <Input inputName="EMAIL ADDRESS" />
-            <Input inputName="PASSWORD" />              
+          <Field
+              inputName="EMAIL ADDRESS"
+              name="V_EMAIL"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />    
+            <Field
+              inputName="PASSWORD"
+              name="V_PASSWORD"
+              type='input'
+              component={ReduxInput}
+              validate={[required]}
+            />  
           </div>
         </div>
         <div className='grid'>
@@ -35,9 +69,14 @@ class RegisterSigma extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
   return {
     state
   }
 }
-export default connect(mapStateToProps)(RegisterSigma)
+export default connect(mapStateToProps, { registerSigma })
+(
+  reduxForm({
+    form: 'register_sigma',
+  })(RegisterSigma));

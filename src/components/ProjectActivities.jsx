@@ -126,7 +126,7 @@ class ProjectActivities extends Component {
                           <medium style={{float:'left'}}><b>{value.user_name}</b></medium>
                           <small style={{display:'inline'}}>, Project Manager</small>
                         </div>
-                      <div style={{display: 'inline-block',marginLeft:'104px',marginTop:'-25px'}}>
+                      <div style={{display: 'inline-block',marginLeft:'55px',marginTop:'-25px'}}>
                           <small>
                             <b>{value.subject}</b> "{value.message}"
 

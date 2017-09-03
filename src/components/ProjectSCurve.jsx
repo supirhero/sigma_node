@@ -27,8 +27,8 @@ class ProjectSCurve extends Component {
       const tableSCurve = s_curve?s_curve.map((value,index)=>{
         return {column:[
           {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
-          {value:value.PV == null ? '0' : value.PV},
-          {value:value.EV == null ? '0' : value.EV},
+          {value:value.PV == null ? '0' : `${value.PV}  (${value.pv_percent} %)`},
+          {value:value.EV == null ? '0' : `${value.EV}  (${value.ev_percent} %)`},
         ]}
       }):null
 
