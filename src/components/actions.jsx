@@ -256,6 +256,7 @@ export const deleteProjectDoc = (id) => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
               store.dispatch({type:'API', name: 'project', data: res, append:true})
+              alert("Document Deleted")
 
             },
           )
