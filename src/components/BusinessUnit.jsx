@@ -45,9 +45,6 @@ class BusinessUnit extends Component {
     store.dispatch(pop());
   }
 
-  // componentWillUpdate(){
-  //   store.dispatch(getBusinessUnitDetail(this.props.state.data.bu_code,this.state.status,this.state.type,this.state.effort,this.state.search))
-  // }
 
   render() {
     // var state = this.props.state;

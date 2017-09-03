@@ -38,7 +38,7 @@ import ProjectIssues from './ProjectIssues.jsx'
 import ProjectWorkplan from './ProjectWorkplan.jsx'
 import ProjectSpiCpi from './ProjectSpiCpi.jsx'
 import ProjectSCurve from './ProjectSCurve.jsx'
-
+import ProjectHistory from './ProjectHistory.jsx' 
 
 import Dataset from './Dataset.jsx'
 import DatasetUser from './DatasetUser.jsx'
@@ -115,9 +115,11 @@ render(
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
           <Route path='workplan' component={ProjectWorkplan}></Route>
+          <Route path='history' component={ProjectHistory}></Route> 
           <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
           <Route path='s-curve' component={ProjectSCurve}></Route>
           <Route path='spi-and-cpi' component={ProjectSpiCpi}></Route>
+          
 
         </Route>
         <Route path='profile' component={Profile}>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, required,TimeSheetTimeButton, PopUp, Select,ReduxSelect, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, Select, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop,getDay,weekTimesheet } from './actions.jsx';
 import DatePicker from 'react-datepicker';
@@ -76,7 +76,7 @@ componentDidUpdate(){
     // console.log(this.state.click) 
 
     // const startOfWeek = moment().startOf('week');
-    // const endOfWeek = moment().endOf('week');
+    // const endOfWeek = g().endOf('week');
     // var days = [];
     // var day = startOfWeek;
     // while (day < endOfWeek){

@@ -26,6 +26,7 @@ class ProjectDocsAndFiles extends Component {
             active:false
           }
         })
+        store.dispatch(getDocsFiles(id))
         // res.preventDefault()
         // console.log("closed")
       }

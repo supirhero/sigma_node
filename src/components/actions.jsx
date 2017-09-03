@@ -1056,42 +1056,38 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
   }
 }
 
-export function resubmitTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE) {
+export function resubmitTimesheet(props) {
   const currentDate = moment().format("YYYY-MM-DD");
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
       method:'POST',
-      url:`${baseURL}timesheet/addTimesheet?token=${token}`,
+      url:`${baseURL}timesheet/editTimesheet?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
-            PROJECT_ID,
-            WP_ID,
-              TS_DATE,
-             HOUR,
-             TS_SUBJECT,
-             TS_MESSAGE,
+           PROJECT_ID:props.PROJECT_ID,
+           WP_ID:props.WP_ID,
+            TS_ID:props.TS_ID,
+            TS_DATE:props.TS_DATE,
+             HOUR:props.HOUR,
+             TS_SUBJECT:props.TS_SUBJECT,
+             TS_MESSAGE:props.TS_MESSAGE,
              LATITUDE:'38.898648',
              LONGITUDE:'77.037692'
             }
     }).then(
       (res)=>{
-        // alert("yeee ee")
-        // console.log("ADDTIMESHEET");
-        store.dispatch(getMyActivities())
-        // console.log("weoww")
-        alert("Timesheet Resubmitted")
+        console.log("ADDTIMESHEET");
+        alert('successful')
         // store.dispatch(viewTimesheet(TS_DATE));
-        // res.data.status == "success" ? 
-        // alert("TIMESHEET ADDED") : alert("Berhasil menambahkan user ke dalam project")
-        ,()=>{
-        }
 
 
       }
     )
   }
 }
+
+
 
 
 
@@ -1105,7 +1101,6 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        store.dispatch(getProjectActivities());
         alert('updated')
         
       }
@@ -1248,13 +1243,17 @@ export function assignTaskMember(props,RP_ID,EMAIL,NAME){
   }
 }
 
-export function getMyActivities(){
+export function getMyActivities(bulan,tahun){
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
-      method:'GET',
+      method:'POST',
       url:`${baseURL}home/myactivities?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        bulan,
+        tahun
+      }
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'myActivity', append: true,  data: res });
@@ -1995,3 +1994,46 @@ axios.interceptors.response.use(undefined, function (error) {
       return Promise.reject(error);
     }
 });
+export const gethistory = (id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/history/${id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'history',  data: res, append: true})
+
+            },
+          )
+  }
+}
+
+export const gethistorydetail = (wbs_id) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'GET',
+            url: `${baseURL}project/gethistorydetail/${wbs_id}?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
+
+          }).then(
+            res => {
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              store.dispatch({type:'API', name: 'historydetail',  data: res, append: true})
+
+            },
+          )
+  }
+}
