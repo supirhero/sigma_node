@@ -2043,7 +2043,7 @@ export class TablePagination extends Component {
                           <td style={{ position: 'relative', float:'right' }}>
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
                             alert(row.column[0].value)
-                            console.log(row)
+                            console.log(row,"TESTLIAT")
                             store.dispatch(editProfileView(row.column[0].value)).then(
                               res => {
 

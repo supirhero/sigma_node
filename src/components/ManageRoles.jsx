@@ -72,26 +72,23 @@ class ManageRoles extends Component {
   render() {
     const { handleSubmit } = this.props;
     const BusinessLevel = [
-			{name:'Update personal timesheet',field:'update_personal_timesheet',no:'role_1'},
-      {name:'Access business unit overview',field:'access_business_unit',no:'role_2'},
-      {name:'Create project',field:'create_project',no:'role_3'},
-      {name:'Access all projects in business unit',field:'access_all_projects',no:'role_4'},
-      {name:'Approve timesheet (non-project)',field:'approve_timesheet',no:'role_5'},
-      {name:'See report overview',field:'see_report_overview',no:'role_6'},
-      {name:'See resources report',field:'see_resources_report',no:'role_7'},
-      {name:'Download Report',field:'download_report',no:'role_8'},
-      {name:'Approve re-baseline',field:'approve_rebaseline',no:'role_9'},
+			{name:'Report BU - Directorat / BU',field:'update_personal_timesheet',no:'role_1'},
+      {name:'Report BU - Team Member',field:'access_business_unit',no:'role_2'},
+      {name:'Report Project - Find All Project',field:'create_project',no:'role_3'},
+      {name:'Admin Console',field:'access_all_projects',no:'role_4'},
+      {name:'Home-View, & Project Assignment',field:'approve_timesheet',no:'role_5'},
+      {name:'Overview, Listing All Project in BU',field:'see_report_overview',no:'role_6'},
+      {name:'BU - Invite/Delete Member BU',field:'see_resources_report',no:'role_7'},
+      {name:'Report BU - Overview (SPI & CPI)',field:'download_report',no:'role_8'},
+      
     ]
 
     const ProjectLevel = [
-			{name:'Upload and delete workplan',field:'upload_delete_workplan',no:'role_10'},
-      {name:'Assign Task',field:'assign_task',no:'role_11'},
-      {name:'Baseline / re-baseline',field:'baseline_rebaseline',no:'role_12'},
-      {name:'Update progress manually',field:'update_progress_manually',no:'role_13'},
-      {name:'Approve Timesheet (project)',field:'approve_timesheet',no:'role_14'},
-      {name:'Edit Project',field:'edit_project',no:'role_15'},
-      {name:'See Project Report',field:'see_project_report',no:'role_16'},
-      {name:'Download Report',field:'download_report_project',no:'role_17'},
+			{name:'Project Assignment - Workplan',field:'upload_delete_workplan',no:'role_10'},
+      {name:'Project Assignment - Team Member - Invite / Delete',field:'assign_task',no:'role_11'},
+      {name:'Project Assignment - Docs & Files',field:'baseline_rebaseline',no:'role_12'},
+      {name:'Project Assignment - Issues',field:'update_progress_manually',no:'role_13'},
+      {name:'Project Assignment - Manual Update Activities',field:'approve_timesheet',no:'role_14'},
     ]
 
     return (
