@@ -72,8 +72,8 @@ class ProjectWorkplan extends Component {
       <td>{value.WORK}</td>
       <td>{value.WORK_COMPLETE}</td>
       <td>{value.WBS_PARENT_ID == null ? null : value.DURATION}</td>
-      <td>{value.WBS_PARENT_ID == null ? null : value.START_DATE}</td>
-      <td>{value.WBS_PARENT_ID == null ? null : value.FINISH_DATE}</td>
+      <td>{value.LEAF !== "0" ? value.START_DATE : ""}</td>
+      <td>{value.LEAF !== "0" ? value.FINISH_DATE : ""}</td>
       <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
       <td style={{position:'relative', paddingRight:'10px'}} >
@@ -257,7 +257,7 @@ class ProjectWorkplan extends Component {
     const id = this.props.state.page.id 
     console.log(this.state.WBS_ID) 
     this.props.editTaskPercentAction(this.props.state.page.id,this.state.WBS_id,props).then(res=>{ 
-      var newState = this.state.array.manualupdate.concat( 
+      var newState = this.state.array.manualUpdate.concat( 
         { 
           // PROJECT_ID: this.props.state.page.id, 
           PROJECT_ID:id, 
