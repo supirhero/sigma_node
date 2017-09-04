@@ -10,7 +10,6 @@ import ReactAutocomplete from 'react-autocomplete'
 
 import store from '../reducers/combineReducers.jsx';
 
-
 class BusinessUnit extends Component {
   constructor(){
     super();
