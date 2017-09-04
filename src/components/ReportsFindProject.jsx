@@ -64,8 +64,8 @@ class ReportsFindProject extends Component {
 
    
 
-    const state = store.getState()
-    const project_list = state.data.project
+    const state = this.props.state
+    const project_list = state.data.project_find
     
     return (
       
@@ -177,7 +177,7 @@ class ReportsFindProject extends Component {
 
                               this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
                               .then(res=> {
-                                this.forceUpdate()
+                                {/* this.forceUpdate() */}
                               })  
                             })
                       
@@ -243,7 +243,7 @@ class ReportsFindProject extends Component {
 
                               this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
                               .then(res=> {
-                                this.forceUpdate()
+                                {/* this.forceUpdate() */}
                               })  
                             })
                      
@@ -293,6 +293,14 @@ class ReportsFindProject extends Component {
                 <Search
                   placeholder="enter project / business unit / project manager / etc name"
                   style={{ width: '100%', margin: '0' }}
+                  onChange={
+                    e => {
+                    this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, e.target.value))
+                    {/* this.forceUpdate() */}
+                      console.log(e.target.value)
+                      {/* e.preventDefault() */}
+                    }
+                  }
                 />
               </div>
             </div>
@@ -395,6 +403,7 @@ class ReportsFindProject extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     // filter: ownProps.location.query.filter
   };
 }

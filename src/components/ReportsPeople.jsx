@@ -12,10 +12,13 @@ class ReportsPeople extends Component {
   constructor(){ 
     super(); 
     this.state = { 
+      bu: '',
       month : 0, 
-      year: 0 
+      year: 0 ,
+      bu_name : ''
     }; 
   } 
+
 
   componentWillMount(){
     store.dispatch(reportPeople("6","6","2017"));
@@ -63,7 +66,7 @@ class ReportsPeople extends Component {
       {name:'SEPTEMBER',number:'9'},
       {name:'OCTOBER',number:'10'},
       {name:'NOVEMBER',number:'11'},
-      {name:'DEECMBER',number:'12'},
+      {name:'DECMBER',number:'12'},
     ]
   
     const year = [
@@ -81,7 +84,9 @@ class ReportsPeople extends Component {
           <div className="unit golden-large">
             
           <Menu
+
           style={{position:'relative', display:'inline' }}
+          defaultValue={this.state.bu_name}
           menuStyle={{ 
             width:'500px', top:'50px', right:'auto',
             height:'300px', overflow:'scroll'
@@ -96,23 +101,29 @@ class ReportsPeople extends Component {
               this.props.state.data.list_bu[0].children.map((value,index)=> {
                 console.log('------child' + index, value.BU_NAME)
                 return[
-                  <MenuHeader style={{paddingLeft: '20px', paddingTop: '15px'}} key={index} title={value.BU_NAME} onClick={e => {
+                  
+                  <MenuItem style={{paddingLeft: '20px', paddingTop: '15px'}} key={index} title={value.BU_NAME} 
+                  textStyle={{paddingLeft: '20px', paddingTop: '15px', fontWeight: '400'}} 
+
+                  onClick={e => {
                       console.log('working222')
                       
-                      this.setState({bu:value.BU_ID})
+                      this.setState({bu:value.BU_ID, bu_name:value.BU_NAME})
                       e.preventDefault()
                     }}>
-                    </MenuHeader>,
+                    </MenuItem>,
                     
                       value.children !== null  &&
                       value.children.map((value2,index) => {
                       console.log('child.child' + index,value2.BU_NAME)
                         
                         return(
-                          <MenuItem key={index} style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} title={value2.BU_NAME} onClick={
+                          <MenuItem key={index} 
+                          style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} 
+                          title={value2.BU_NAME} onClick={
                             e => {
                               
-                              this.setState({bu:value2.BU_ID})
+                              this.setState({bu:value2.BU_ID, bu_name:value2.BU_NAME})
                               
                             }
                           }/>
@@ -132,7 +143,7 @@ class ReportsPeople extends Component {
         </Menu>
           </div>
 					<div className="unit golden-small">
-          <select onClick={this.handleMonthChange.bind(this)} 
+          <select onChange={this.handleMonthChange.bind(this)} 
           className='select' style={{height:'49px', width:'130px', display:'inline-block'}}> 
           { 
             month.map((value,index) => { 
@@ -143,7 +154,7 @@ class ReportsPeople extends Component {
           })} 
         </select> 
             
-        <select onClick={this.handleYearChange.bind(this)} 
+        <select onChange={this.handleYearChange.bind(this)} 
         className='select' style={{height:'49px', width:'100px', display:'inline-block',marginLeft:'5px'}}> 
         { 
           year.map((value,index) => { 
@@ -156,7 +167,7 @@ class ReportsPeople extends Component {
       <button className="btn-primary" style={{ padding: '11px 14px',display:'inline-block' ,marginLeft:'30px',marginTop:'5px'}} ><span className="material-icons" style={{ color: 'white' }}  
       onClick={(e)=> { 
         console.log(this.state.month,this.state.year); 
-        store.dispatch(reportPeople(this.state.month,this.state.year)) 
+        store.dispatch(reportPeople(this.state.bu,this.state.month,this.state.year)) 
         // store.dispatch(myPerformance('1','2017')) 
         e.preventDefault() 
       }}>search</span></button> 

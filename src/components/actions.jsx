@@ -872,7 +872,7 @@ export const reportDownloadFilt2er = (status, schedule, budget) => {
 
 }
 
-export const reportDownloadFilter = (status, schedule, budget) => {
+export const reportDownloadFilter = (status, schedule, budget, keyword) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -887,7 +887,8 @@ export const reportDownloadFilter = (status, schedule, budget) => {
               // value:props.value,
               status: status,
               schedule: schedule,
-              budget: budget
+              budget: budget,
+              keyword:keyword
              }
           }).then(
             res => {
@@ -902,7 +903,7 @@ export const reportDownloadFilter = (status, schedule, budget) => {
 
 }
 
-export const reportSearchProject = (status, schedule, budget) => {
+export const reportSearchProject = (status, schedule, budget, keyword) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -915,7 +916,9 @@ export const reportSearchProject = (status, schedule, budget) => {
               // value:props.value,
               status: status,
               schedule: schedule,
-              budget: budget
+              budget: budget,
+              keyword:keyword
+              
              }
           }).then(
             res => {

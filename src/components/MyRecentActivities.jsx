@@ -182,9 +182,15 @@ const year = [
                 }
          </Field>
          :
-          <ReduxSelect inputName="TASK">
+          <Field 
+            name="WP_ID"                                        
+          
+          inputName="TASK"
+          component={ReduxSelect}
+          
+          >
           <options> </options>
-          </ReduxSelect>
+          </Field>
         }
                         
                             </div>
@@ -391,14 +397,8 @@ const year = [
                 {
                 value.is_approved == 0 &&
                 <a style={{marginLeft:'45px'}} onClick={e => {
-                  this.props.dispatch({
-                    type: 'POPUP',
-                    name:'resubmitTimesheet',
-                    data: {
-                      active:true
-                    }
-                  })
-                  store.dispatch(initialize(this.props.form,
+                 
+                  this.props.initialize(
                     {
                       TS_DATE: value.ts_date,
                       TS_ID:value.ts_id,
@@ -408,7 +408,15 @@ const year = [
                       TS_SUBJECT: value.subject,
                       TS_MESSAGE: value.message,
                     }
-                   ))
+                   )
+                   this.props.dispatch({
+                    type: 'POPUP',
+                    name:'resubmitTimesheet',
+                    data: {
+                      active:true
+                    }
+                  })
+                  e.preventDefault()
                   
               
                 }}

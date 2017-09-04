@@ -45,11 +45,11 @@ class ProjectOverview extends Component {
                   </div>
                 </div>
                 <div className='grid'>
-                  <div className='unit whole'>
+                  <div className='unit two-fifths'>
                     <medium>Description</medium>
                     <small>{overview.description ? overview.description : '-'}</small>
                   </div>
-                  <div className='unit two-fifths'>
+                  <div className='unit three-fifths'>
                   <medium>Effort Type</medium>
                   <small>{overview.effort_type}</small>
                 </div>
@@ -101,7 +101,7 @@ class ProjectOverview extends Component {
                   </div>
 
                 </div>
-                <div className='grid'>
+                {/* <div className='grid'>
                   <div className='unit half'>
                     <div className='grid tab'>
 
@@ -122,9 +122,9 @@ class ProjectOverview extends Component {
                     </div>
                   </div>
                   <div className='unit half'></div>
-                </div>
+                </div> */}
 
-                <div className='grid' style={{borderBottom:'2px solid #F6F6F6', paddingBottom: '14px'}}>
+                {/* <div className='grid' style={{borderBottom:'2px solid #F6F6F6', paddingBottom: '14px'}}>
                   <div className='unit golden-large'>
                     <small>Lorem ipsum dolor sit amet consc....</small>
                   </div>
@@ -139,7 +139,7 @@ class ProjectOverview extends Component {
                   <div className='unit golden-small'>
                     <small>June 1 2017 - June 8 2017</small>
                   </div>
-                </div>
+                </div> */}
 
               </div>
             {/* <PopUp id="closeProject" dividerText="CLOSE THIS PROJECT" btnClass='btn-primary' btnText="CLOSE THIS PROJECT" style={{ margin: 'auto', float:'right', marginTop:'20px'}}>

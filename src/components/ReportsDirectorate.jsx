@@ -85,7 +85,8 @@ class ReportsDirectorate extends Component {
                       return[
                         <MenuItem 
 
-                        textStyle={{paddingLeft: '20px', paddingTop: '15px', fontWeight: '400'}} key={index} title={value.BU_NAME} onClick={e => {
+                        textStyle={{paddingLeft: '20px', paddingTop: '15px', fontWeight: '400'}} key={index} title={value.BU_NAME} 
+                        onClick={e => {
                             this.setState({bu:value.BU_ID, bu_name: value.BU_NAME })
                             
                             e.preventDefault()
@@ -96,7 +97,9 @@ class ReportsDirectorate extends Component {
                             value.children.map((value2,index) => {
                               
                               return(
-                                <MenuItem key={index} style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} title={value2.BU_NAME} onClick={
+                                <MenuItem key={index} 
+                                style={{paddingLeft:'35px', paddingTop:'10px', zIndex:'10'}} 
+                                title={value2.BU_NAME} onClick={
                                   e => {
                                     this.setState({bu:value2.BU_ID, bu_name: value2.BU_NAME }, ()=> {
                                       console.log('BU_NAME',value2.BU_NAME)
