@@ -28,7 +28,7 @@ class ProjectTeamMember extends Component {
     render(){
       const appStore = this.props.state;
       const active_member = this.props.state.data.exist
-      const available_assign = this.props.state.data.data ? this.props.state.data.data.map((value,index)=>{
+      const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
        return {id:value.USER_ID , label:value.USER_NAME}
       }) : []
       return(
@@ -64,7 +64,7 @@ class ProjectTeamMember extends Component {
               overflow: 'auto',
               maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
             }}
-            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            shouldItemRender={(item, value) => item.label && item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
             getItemValue={item => item.label}
             renderItem={(item, highlighted) =>
               <div className="small-wrap">
