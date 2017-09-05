@@ -17,7 +17,6 @@ class Timesheet extends Component {
       jumlah : 0 ,
       holiday: null,
       selected:moment().format("YYYY-MM-DD"),
-      tanggal:moment().format("YYYY-MM-DD")
     };
   }
 
@@ -41,14 +40,6 @@ class Timesheet extends Component {
     )
   }
 
-  handleInitialize() {
-    const initData = {
-      TS_DATE:this.state.tanggal
-    };
-
-    this.props.initialize(initData);
-  }
-
   componentWillMount(){
     const currentDate = moment().format("YYYY-MM-DD");
     const state = store.getState();
@@ -56,15 +47,13 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-    console.log(this.state.selected,"TANGGALLLL")
-    this.handleInitialize()
+    
   }
 
 componentDidUpdate(){
   e=>{
   store.dispatch(viewTimesheet(this.state.selected))
   e.preventDefault()
-  this.handleInitialize();
 }
 }
 
@@ -72,10 +61,6 @@ componentDidUpdate(){
   componentWillUnmount() {
     store.dispatch(pop());
   }
-
-  
-    
-  
 
 
 
@@ -164,9 +149,6 @@ componentDidUpdate(){
                       onClick={ 
                         e => { 
                           store.dispatch(viewTimesheet(value.day)) 
-                          this.setState({tanggal:value.day},()=>{
-                            console.log(this.state.tanggal)
-                          })
                           value.holiday == true ?  this.setState({
                             holiday : true
                           }) : this.setState({
