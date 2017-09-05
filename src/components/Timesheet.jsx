@@ -280,7 +280,7 @@ componentDidUpdate(){
                         name="HOUR"
                         type="HOUR"
                         component={ReduxSelect}
-                        // validate={[required]}
+                        validate={[required]}
                       />
                     </div>
                   </div>
