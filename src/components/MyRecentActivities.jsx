@@ -389,10 +389,12 @@ const year = [
             </div>
             <div className="grid wrap">
               <div className="unit whole" style={{ marginLeft: '104px' }}>
-                <small style={{ fontSize: '12px' }}>{value.submit_date ? `submitted on : ${(value.submit_date).substr(0,9)} | ${(value.submit_date).substr(10,5)} ${(value.submit_date).substr(26,2)}`:null}</small>
+                <small style={{ fontSize: '12px' }}>{value.submit_date ? `submitted on : ${moment((value.submit_date).substr(0,9)).format('DD-MMM-YYYY')} | ${(value.submit_date).substr(10,5)} ${(value.submit_date).substr(26,2)}`:null}</small>
                 <br />
                 <br />
-                <small style={{ fontSize: '12px' }}>{value.ts_date ? `submitted for : ${value.ts_date}` : null}</small>
+                
+  {/*  <small style={{ fontSize: '12px' }}>{value.ts_date ? `submitted for : ${(value.ts_date)}` : null}</small> */}
+               <small style={{ fontSize: '12px' }}>{value.ts_date ? `submitted for : ${moment(value.ts_date).format('DD-MMM-YYYY')}` : null}</small> 
                 <medium style={{ display: 'inline', marginLeft: '37%' }}>
                 {
                 value.is_approved == 0 &&

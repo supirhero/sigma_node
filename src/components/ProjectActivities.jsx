@@ -7,7 +7,7 @@ import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, ProjectHeader, PageLoader } from './Components.jsx';
 import { Line } from 'react-progressbar.js';
 import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyData } from './actions.jsx';
-
+import moment from 'moment'
 class ProjectActivities extends Component {
   componentWillMount() {
     const id = store.getState().page.id
@@ -138,7 +138,7 @@ class ProjectActivities extends Component {
 
                     <div className="grid wrap">
                       <div className="unit whole" style={{ marginLeft: '104px' }}>
-                        <small style={{ fontSize: '12px' }}>{`${value.bulan} ${value.tahun} via web`}</small>
+                      <small style={{ fontSize: '12px' }}>{value.submit_date ? `submitted on : ${moment((value.submit_date).substr(0,9)).format('DD-MMM-YYYY')} | ${(value.submit_date).substr(10,5)} ${(value.submit_date).substr(26,2)}`:null}</small>
                         <medium style={{ display: 'inline', marginLeft: '170px' }}>
                           {
                         value.is_approved === '-1' &&

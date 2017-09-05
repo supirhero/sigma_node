@@ -387,7 +387,7 @@ componentDidUpdate(){
                                 <p>(<b>{value.HOUR_TOTAL} hours</b>) - {value.WBS_NAME}</p>
                                 <p>left a <b>{value.SUBJECT}</b> message</p>
                                 <p>{value.MESSAGE}</p>                                
-                                <small style={{ fontSize: '12px' }}>{value.SUBMIT_DATE ? `submitted on : ${(value.SUBMIT_DATE).substr(0,9)} | ${(value.SUBMIT_DATE).substr(10,5)} ${(value.SUBMIT_DATE).substr(26,2)}`:null}</small>
+                                <small style={{ fontSize: '12px' }}>{value.SUBMIT_DATE ? `submitted on : ${moment((value.SUBMIT_DATE).substr(0,9)).format('DD-MMM-YYYY')} | ${(value.SUBMIT_DATE).substr(10,5)} ${(value.SUBMIT_DATE).substr(26,2)}`:null}</small>
                                   </small>
                                   <div className="grid wrap" style={{ float: 'right' }}>
                                     <div className="unit whole" >
