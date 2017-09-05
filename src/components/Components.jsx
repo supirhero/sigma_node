@@ -551,79 +551,6 @@ export class ReduxSelect extends Component {
   }
 }
 
-// export class ReduxSelectTimesheet extends Component {
-//   componentDidUpdate() {
-//     console.log('PROPS', this.props);
-//   }
-//   render() {
-//     console.log('SELECT PROPS',this.props);
-//     return (
-//       <div style={this.props.style}>
-
-//         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-//         {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-//         <select
-//           // className='select'
-//           className= {'select ' +  ((this.props.meta.error && 'error'))}
-
-//           {...this.props.select}
-//           {...this.props.custom}
-//           {...this.props.input}
-
-//           // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
-//           placeholder={this.props.placeholder}
-//           // onBlur = {e=> {
-//           //
-//           // }}
-//         >
-//           {this.props.children}
-//         </select>
-//         {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
-//         {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
-//       </div>
-//     )
-//   }
-// }
-
-
-export class ReduxSelectNew extends Component {
-  render() {
-    return (
-      <div style={this.props.style}>
-
-        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select className='select' {...this.props.select} {...this.props.custom}
-          onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
-        >
-          {this.props.children}
-        </select>
-
-      </div>
-    )
-  }
-}
-
-
-// export class ReduxSelect extends Component {
-//   render() {
-//     return (
-//       <div style={this.props.style}>
-//         {this.props.inputName ? <h2 className="input-name">{this.props.inputName}</h2> : null}
-//         {this.props.inputDesc ? <h2 className="input-desc">{this.props.inputDesc}</h2> : null}
-//         <select className="select" {...this.props.select} {...this.props.custom}
-//         onChange={(event, index, value) => this.props.input.onChange(event.target.value)}
-//           >
-//           {this.props.items.items.map((value, index) => (
-//               <option key={index} value={value.title} {...this.props.option}>{value.title}</option>
-//             ))}
-//         </select>
-//
-//       </div>
-//     );
-//
-//   }
-// }
 
 
 export class TimeSheetTimeButton extends Component {
@@ -834,7 +761,57 @@ export class Search extends Component {
   }
 }
 
+export class Confirmation extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
 
+    };
+  }
+
+  render() {
+    console.log('POPUP PROPS',this.props);
+    const popup = store.getState().data.popup
+    return(
+
+      store.getState().alert.confirmation && store.getState().alert.confirmation.show ?
+      <div style={this.props.style}>
+        <div 
+          className={' popup-container'} style={{zIndex:'30', display:'block'}}
+        >
+            <div className='grid wrap' style={{position:'relative'}}>
+              <div className='unit whole' style={{position:'absolute'}}>
+                <div className='card shadow' style={{margin:'6% auto', width:'70%', marginLeft:'9%'}}>
+                   <small>{store.getState().alert.confirmation && store.getState().alert.confirmation.message }</small>
+                   <div style={{margin:'auto', width:'430px', marginTop:'50px'}}>
+                  <button className='btn-secondary' style={{width:'45%', float:'left'}} onClick={
+                    e=> {
+                      store.dispatch({
+                        type: 'CONFIRM',
+                        message: '',
+                        show:false,
+                        
+                      })
+                      e.preventDefault()
+                    }
+                  }>CANCEL</button>
+                  <button className='btn-primary' style={{width:'45%', float:'right'}} onClick={(e)=> store.getState().alert.confirmation.onConfirm(e)}>APPROVE</button>
+                   </div>
+                     
+
+                </div>
+              </div>
+            </div>
+            <div className='tint'></div>}
+
+        </div>
+      </div> : null
+
+    )
+  }
+
+}
 
 
 export class PopUp extends Component {
@@ -1244,10 +1221,23 @@ export class TablePagination extends Component {
                       </button>
                   
                       <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
-                        store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
-                          store.dispatch(getDataMaster("holiday"))
+                        store.dispatch({
+                              type: 'CONFIRM',
+                              message: 'Delete Holday?',
+                              show:true,
+                              onConfirm: ()=> {
+                                store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
+                                  store.dispatch({
+                                    type: 'CONFIRM',
+                                    message: '',
+                                    onConfirm: null
+                                  })
+                                  store.dispatch(getDataMaster("holiday"))
 
-                        })
+                                })
+                              }
+                            })
+                        
                         e.preventDefault()
                       }}> 
                       <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
@@ -1601,6 +1591,9 @@ export class TablePagination extends Component {
                         </button>
                     
                         <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
+                          
+                      
+                        
                           // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                           //   store.dispatch(getDataMaster("holiday"))
                           // })

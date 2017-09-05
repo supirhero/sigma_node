@@ -21,7 +21,12 @@ var initialState = {
       color: "RED",
       message:  '',
       show: false
-      }
+      },
+    confirmation: {
+      message: '',
+      show: false,
+      onConfirm : null
+    }
   }
 
 
@@ -94,6 +99,15 @@ const page = (state = Immutable.List(), action) => {
 }
 const alert = (state = initialState, action) => {
   switch (action.type) {
+    case 'CONFIRM': 
+    return Object.assign({},state, {
+      confirmation:{
+        show: action.show,
+        message: action.message,
+        onConfirm: action.onConfirm
+      }
+    })
+    break;
     case 'ALERT': 
     return Object.assign({},state, {
       alert:{

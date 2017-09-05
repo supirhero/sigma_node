@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication ,getListBU,rDirectorat, showNotif, getDirectorateEntry, getDirectorateUtility} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader} from './Components.jsx';
+import {BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader} from './Components.jsx';
 
 
 class ReportsDirectorate extends Component {

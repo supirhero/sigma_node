@@ -131,12 +131,27 @@ class ProjectTeamMember extends Component {
                       <div className='unit one-fifth no-gutters'>
                         <medium style={{textAlign:'right', marginTop:'9px'}}>ONLINE &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
                           e=> {
-                            this.props.dispatch(deleteProjectTeamMember(value.RP_ID)).then(()=> {
-                              showNotif('Successfully removed member from project', 'GREEN')
-                              const id = this.props.state.data.project_id
-                              // store.dispatch(getProjectTeamMember(id))
-                              this.props.dispatch(getAvailableProjectTeamMember(id))
-                            })
+
+                            this.props.dispatch({
+                                type: 'CONFIRM',
+                                message: 'Would you like to remove member?',
+                                show:true,
+                                onConfirm: ()=> {
+                                      this.props.dispatch(deleteProjectTeamMember(value.RP_ID)).then(()=> {
+                                        {/* showNotif('Successfully removed member from project', 'GREEN') */}
+                                        const id = this.props.state.data.project_id
+                                        this.props.dispatch(getProjectTeamMember(id))
+                                        this.props.dispatch({
+                                          type: 'CONFIRM',
+                                          message: 'Would you like to remove member?',
+                                          show:true,
+                                        })
+                                        
+                                        this.props.dispatch(getAvailableProjectTeamMember(id))
+                                      })
+                                }
+                              })
+                        
 
                             e.preventDefault()
                           }

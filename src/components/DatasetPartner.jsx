@@ -22,6 +22,7 @@ class DatasetPartner extends Component {
                 </div>
                 <div className="unit whole">
                 <TablePagination
+                  showDelete={false}
                   tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'ADDRESS'},{value:'TELEPHONE'},{value:null}]}
                   tableData={[{column:[
                     {value:'1'},

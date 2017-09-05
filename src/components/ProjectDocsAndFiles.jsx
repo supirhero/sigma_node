@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 
-import {Divider, Header, ProjectHeader, PopUp, InputFile, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, PopUp, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif } from './actions.jsx'
 
 
@@ -161,14 +161,28 @@ class ProjectDocsAndFiles extends Component {
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right', marginTop:'9px'}}> &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
                             e=> {
-                              this.props.dispatch(deleteProjectDoc(value.doc_id)).then(()=> {
-                                const id = store.getState().page.id
+                              store.dispatch({
+                              type: 'CONFIRM',
+                              message: 'Would you like to delete this document?',
+                              show:true,
+                              onConfirm: ()=> {
+                                this.props.dispatch(deleteProjectDoc(value.doc_id)).then(()=> {
+                                  const id = store.getState().page.id
+                                  
+                                  // store.dispatch(getProjectTeamMember(id))
+                                  this.props.dispatch(getDocsFiles(id))
+                                  {/* showNotif('Successfully removed doc from project', 'GREEN') */}
+                                })
+                                store.dispatch({
+                                type: 'CONFIRM',
+                                message: '',
+                                show:false,
                                 
-                                // store.dispatch(getProjectTeamMember(id))
-                                this.props.dispatch(getDocsFiles(id))
-                                showNotif('Successfully removed doc from project', 'GREEN')
                               })
-  
+
+                              }
+                              
+                            })
                               e.preventDefault()
                             }
                           }></span></medium>

@@ -51,6 +51,7 @@ class DashboardHome extends Component {
                         <span className='icon-speedometer'>&nbsp;&nbsp;</span>
                         <a onClick={
                           e => {
+                          
                             browserHistory.push('/my-performance')
                             e.preventDefault()
                           }

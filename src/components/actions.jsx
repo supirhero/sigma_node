@@ -350,7 +350,6 @@ export const deleteTask = (wbs_id ) => {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log(res.data);
               // store.dispatch({type:'API', name: 'project', data: res, append:true})
               return res
             },
@@ -950,7 +949,7 @@ export const getSCurve = (id) => {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              store.dispatch({type:'API', name: 'project', data: res})
+              store.dispatch({type:'API', append:true, name: 'project', data: res})
 
             },
           )
@@ -2023,7 +2022,6 @@ export function searchHome(KEYWORD,page) {
 }
 
 export function deleteProjectTeamMember(RP_ID){
-  alert(RP_ID)
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
