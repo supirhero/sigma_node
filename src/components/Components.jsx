@@ -95,78 +95,80 @@ export const validate = () => {
 }
 
 export const muiTheme = getMuiTheme({
-    fontFamily: 'lato, sans-serif',
-    fontSize: '17px',
-   radioButton: {
-        size: '24px',
+  fontFamily: 'lato, sans-serif',
+  fontSize: '17px',
+  radioButton: {
+    size: '24px',
 
-         checkedColor:  "#F48165",
-         borderColor: "#F48165",
-         labelColor: '#777777'
-     },
+    checkedColor:  "#F48165",
+    borderColor: "#F48165",
+    labelColor: '#777777'
+  },
 
-   });
+});
 
 export class Menu extends Component {
-    constructor(){
-      super();
-      this.state = {
-        clicked : false
+  constructor(){
+    super();
+    this.state = {
+      clicked : false
 
-      };
-    }
-    render(){
-      return(
-        <div style={this.props.style}>
-        {
-          this.props.triggerInput=='true' ?
-          <input style={this.props.inputStyle}
-            value={this.props.defaultValue}
-            onkeydown="return false;"
+    };
+  }
+  render(){
+    return(
+      <div style={this.props.style}>
+      {
+        this.props.triggerInput=='true' ?
+        <input 
+        placeholder = {this.props.placeholder}
+        style={this.props.inputStyle}
+        value={this.props.defaultValue}
+        onkeydown="return false;"
 
-            onClick={
-              () => {
-                  console.log('working');
-                  if (this.state.clicked) {
-                    this.setState({clicked:false})
-                  }
-                  else {
-                    this.setState({clicked:true})
-                  }
-                }
-            }
-            ></input>
-          :
-          <div className={this.props.triggerClass} style={this.props.triggerStyle} 
-
-          onClick={
+        onClick={
           () => {
-              if (this.state.clicked) {
-                this.setState({clicked:false})
-              }
-              else {
-                this.setState({clicked:true})
-              }
+            console.log('working');
+            if (this.state.clicked) {
+              this.setState({clicked:false})
             }
-          }>{this.props.icon}
+            else {
+              this.setState({clicked:true})
+            }
+          }
+        }
+        ></input>
+        :
+        <div className={this.props.triggerClass} style={this.props.triggerStyle} 
+
+        onClick={
+          () => {
+            if (this.state.clicked) {
+              this.setState({clicked:false})
+            }
+            else {
+              this.setState({clicked:true})
+            }
+          }
+        }>{this.props.icon}
         </div>}
 
 
-            <div
-          
-            onMouseLeave = {
-              () => {
-                this.setState({
-                  clicked : false
-                })
-              }
-            } style={this.props.menuStyle} className={this.state.clicked ? 'menu active' : 'menu'}>
-              {this.props.children}
+        <div
+        
+        onMouseLeave = {
+          () => {
+            this.setState({
+              clicked : false
+            })
+          }
+        } style={this.props.menuStyle} className={this.state.clicked ? 'menu active' : 'menu'}>
+        {this.props.children}
 
-            </div>
-          </div>
-      )
-    }
+        </div>
+        </div>
+        )
+  }
 
 }
 
@@ -174,9 +176,9 @@ export class MenuSection extends Component {
   render() {
     return(
       <div className='menu-section'>
-        {this.props.children}
+      {this.props.children}
       </div>
-    )
+      )
   }
 }
 
@@ -184,13 +186,13 @@ export class MenuItem extends Component {
   render() {
     return(
       <div className='menu-item' style={this.props.style} onClick={this.props.onClick}>
-        {this.props.children}
-        {
-          this.props.title &&
-          <small className='menu-title' style={this.props.textStyle}>{this.props.title}</small>
-        }
+      {this.props.children}
+      {
+        this.props.title &&
+        <small className='menu-title' style={this.props.textStyle}>{this.props.title}</small>
+      }
       </div>
-    )
+      )
   }
 }
 
@@ -198,9 +200,9 @@ export class MenuNotifItem extends Component {
   render() {
     return(
       <div className='menu-notif-item' onClick={this.props.onClick}>
-        <small className='menu-title'>{this.props.children}</small>
+      <small className='menu-title'>{this.props.children}</small>
       </div>
-    )
+      )
   }
 }
 
@@ -209,14 +211,14 @@ export class MenuHeader extends Component {
   render() {
     return (
       <div className='menu-header' style={this.props.style}>
-        <large className='title'>{this.props.title}</large>
-        {
-          this.props.subTitle != null ?
-          <small>{this.props.subTitle}</small>:
-          null
-        }
+      <large className='title'>{this.props.title}</large>
+      {
+        this.props.subTitle != null ?
+        <small>{this.props.subTitle}</small>:
+        null
+      }
       </div>
-    )
+      )
   }
 }
 
@@ -224,21 +226,21 @@ export class Divider extends Component {
   render() {
     return (
       <div className='divider-wrapper' style={this.props.style}>
-        {
-          this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
-        }
-        <h2>
-        {
-            this.props.text &&
-            <span>{this.props.text}</span>
-        }
+      {
+        this.props.btnLeftText && <button className='btn-secondary' onClick={this.props.btnLeftClick}>{this.props.btnLeftText}</button>
+      }
+      <h2>
+      {
+        this.props.text &&
+        <span>{this.props.text}</span>
+      }
       </h2>
-        {
-          this.props.btnRightText && <button className='btn-secondary btn-right' style={this.props.btnRightStyle} onClick={this.props.btnRightClick}>{this.props.btnRightText}</button>
-        }
+      {
+        this.props.btnRightText && <button className='btn-secondary btn-right' style={this.props.btnRightStyle} onClick={this.props.btnRightClick}>{this.props.btnRightText}</button>
+      }
 
       </div>
-    )
+      )
   }
 }
 
@@ -247,14 +249,14 @@ export class Divider extends Component {
 export class Input extends Component {
   render() {
     return (
-        <div style={this.props.style}>
-          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-          <input placeholder={this.props.placeholder}></input>
-          {this.props.children}
-        </div>
+      <div style={this.props.style}>
+      {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+      {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+      <input placeholder={this.props.placeholder}></input>
+      {this.props.children}
+      </div>
 
-    )
+      )
   }
 }
 
@@ -281,9 +283,9 @@ export class RenderRadioGroup extends Component {
     return(
       <div style={this.props.style}>
       <RadioButtonGroup
-        {...this.props.input}
-        valueSelected={this.props.input.value}
-        onChange={(event, value) => this.props.input.onChange(value)}
+      {...this.props.input}
+      valueSelected={this.props.input.value}
+      onChange={(event, value) => this.props.input.onChange(value)}
       >
       {this.props.children}
       </RadioButtonGroup>
@@ -291,80 +293,80 @@ export class RenderRadioGroup extends Component {
 
 
       </div>
-    )
-}}
+      )
+  }}
 
-export class ReduxInput extends Component {
-  componentDidUpdate() {
+  export class ReduxInput extends Component {
+    componentDidUpdate() {
 
-    console.log('PROPS', this.props);
-  }
-  render(){
-    if(this.props.meta.error == 'IWO is already used'){
-      console.log("ERRORRR",this.props.meta.error );
-      this.props.meta.error = undefined
+      console.log('PROPS', this.props);
     }
-    return(
+    render(){
+      if(this.props.meta.error == 'IWO is already used'){
+        console.log("ERRORRR",this.props.meta.error );
+        this.props.meta.error = undefined
+      }
+      return(
         <div style={this.props.style}>
-          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-          <input
-            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
-            style={{width:'100%'}}
-            placeholder={this.props.placeholder}
-            type='text'
-            {...this.props.input}
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <input
+        className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+        style={{width:'100%'}}
+        placeholder={this.props.placeholder}
+        type='text'
+        {...this.props.input}
 
-            // {...this.props.field}
-          >
-          </input>
-          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        // {...this.props.field}
+        >
+        </input>
+        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
         </div>
-    )
+        )
+    }
+
   }
 
-}
-
-export const ReduxInputAsync2 = (
-  { input, label, type, meta: { asyncValidating, touched, error } },
-) => (
-  <div>
+  export const ReduxInputAsync2 = (
+    { input, label, type, meta: { asyncValidating, touched, error } },
+    ) => (
+    <div>
     <label>{label}</label>
     <div className={asyncValidating ? 'async-validating' : ''}>
-      <input {...input} type={type} placeholder={label} />
-      {touched && error && <span>{error}</span>}
+    <input {...input} type={type} placeholder={label} />
+    {touched && error && <span>{error}</span>}
     </div>
-  </div>
-);
+    </div>
+    );
 
-export class ReduxInputAsync extends Component {
-  constructor(){
-    super();
-    this.state = {
-      error : null
+    export class ReduxInputAsync extends Component {
+      constructor(){
+        super();
+        this.state = {
+          error : null
 
-    };
-  }
+        };
+      }
 
-  componentDidUpdate() {
+      componentDidUpdate() {
 
-    console.log('PROPS', this.props);
-  }
+        console.log('PROPS', this.props);
+      }
 
-  render(){
-    return(
-        <div style={this.props.style}>
+      render(){
+        return(
+          <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <input
-            // className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
-            className= {
-               this.state.error != null &&
-              this.props.input.value == '' || this.state.error == 'IWO already used'? 'error' : ''
+          // className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+          className= {
+           this.state.error != null &&
+           this.props.input.value == '' || this.state.error == 'IWO already used'? 'error' : ''
 
-            }
-            style={{width:'100%'}}
-            // onFocus = {e=> {
+         }
+         style={{width:'100%'}}
+         // onFocus = {e=> {
             //   this.setState({error : null})
             // }}
             placeholder={this.props.placeholder}
@@ -392,67 +394,67 @@ export class ReduxInputAsync extends Component {
             // }}
 
             // {...this.props.field}
-          >
-          </input>
-          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))}
+            >
+            </input>
+            {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))}
 
           {/* {
             this.props.input.value == '' && this.state.error !=null? <span className='error-alert'>Required</span> :
             this.state.error!=null && this.props.input.value != '' &&
               <span className='error-alert'>{this.state.error}</span>
-          } */}
+            } */}
 
-        </div>
-    )
-  }
-}
+            </div>
+            )
+      }
+    }
 
 
-export class ReduxInputMask extends Component {
-  render(){
-    return(
-        <div style={this.props.style}>
+    export class ReduxInputMask extends Component {
+      render(){
+        return(
+          <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <PasswordMask
-            className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
-            style={{width:'100%'}}
-            placeholder={this.props.placeholder}
-            type='text'
-            buttonStyles = {{display:'none'}}
-            {...this.props.input}
+          className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+          style={{width:'100%'}}
+          placeholder={this.props.placeholder}
+          type='text'
+          buttonStyles = {{display:'none'}}
+          {...this.props.input}
 
-            // {...this.props.field}
+          // {...this.props.field}
           >
           </PasswordMask>
           {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
-        </div>
-    )
-  }
-}
+          </div>
+          )
+      }
+    }
 
 
 
-export class ReduxInputDisabled extends Component {
-  render(){
-    return(
-        <div style={this.props.style}>
+    export class ReduxInputDisabled extends Component {
+      render(){
+        return(
+          <div style={this.props.style}>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
           {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
           <input
-            style={{width:'100%'}}
-            placeholder={this.props.placeholder}
-            type='text'
-            value={this.props.value}
-            {...this.props.input}
+          style={{width:'100%'}}
+          placeholder={this.props.placeholder}
+          type='text'
+          value={this.props.value}
+          {...this.props.input}
 
-            disabled
+          disabled
           >
           </input>
-        </div>
-    )
-  }
-}
+          </div>
+          )
+      }
+    }
 
 // export class RenderRadioGroup extends Component {
 //   render() {
@@ -469,10 +471,10 @@ export class RadioButton extends Component {
   render() {
     return (
       <p className='radio-button' style={this.props.style}>
-       <input type="radio" id={this.props.id} name={this.props.name} value={this.props.value} {...this.props.input} onChange={(event, value) => this.props.input.onChange(value)} />
-       <label htmlFor={this.props.id}>{this.props.label}</label>
-     </p>
-    )
+      <input type="radio" id={this.props.id} name={this.props.name} value={this.props.value} {...this.props.input} onChange={(event, value) => this.props.input.onChange(value)} />
+      <label htmlFor={this.props.id}>{this.props.label}</label>
+      </p>
+      )
   }
 }
 
@@ -480,10 +482,10 @@ export class Checkbox extends Component{
   render(){
     return (
       <p className='checkbox-button' style={this.props.style} >
-        <input type='checkbox' id={this.props.id} name={this.props.group} onClick={this.props.onClick} />
-        <label htmlFor={this.props.id}>{this.props.label}</label>
+      <input type='checkbox' id={this.props.id} name={this.props.group} onClick={this.props.onClick} />
+      <label htmlFor={this.props.id}>{this.props.label}</label>
       </p>
-    )
+      )
   }
 }
 
@@ -491,14 +493,14 @@ export class Select extends Component {
   render() {
     return (
       <div style={this.props.style}>
-        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select onChange={this.props.onChange} className='select' style={{height: '49px'}}>
-          {this.props.children}
-        </select>
+      {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+      {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+      <select onChange={this.props.onChange} className='select' style={{height: '49px'}}>
+      {this.props.children}
+      </select>
 
       </div>
-    )
+      )
   }
 }
 
@@ -525,29 +527,29 @@ export class ReduxSelect extends Component {
     return (
       <div style={this.props.style}>
 
-        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-        <select
-          style={this.props.selectStyle}
-          // className='select'
-          className={'select ' + (this.props.meta.touched && this.props.meta.error && 'error')}
+      {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+      {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+      <select
+      style={this.props.selectStyle}
+      // className='select'
+      className={'select ' + (this.props.meta.touched && this.props.meta.error && 'error')}
 
-          {...this.props.select}
-          {...this.props.custom}
-          {...this.props.input}
+      {...this.props.select}
+      {...this.props.custom}
+      {...this.props.input}
 
-          // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
-          placeholder={this.props.placeholder}
-          // onBlur = {e=> {
+      // onChange={(event,index,value)=>this.props.input.onChange(event.target.value)}
+      placeholder={this.props.placeholder}
+      // onBlur = {e=> {
           //
           // }}
-        >
+          >
           {this.props.children}
-        </select>
-        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+          </select>
+          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
         {/* {this.state.error && this.props.input.value ==  ''   && <span className='error-alert'>Required</span>} */}
-      </div>
-    )
+        </div>
+        )
   }
 }
 
@@ -556,11 +558,11 @@ export class ReduxSelect extends Component {
 export class TimeSheetTimeButton extends Component {
   render(){
     return(
-    <button className ='btn-secondary' style={{float:'left', width:'120px', height:'120px'}} onClick={this.props.onClick}>
+      <button className ='btn-secondary' style={{float:'left', width:'120px', height:'120px'}} onClick={this.props.onClick}>
       {this.props.text}
       <small style={{marginTop:'10px'}}>{this.props.hours}</small>
-    </button>
-    )
+      </button>
+      )
   }
 }
 
@@ -568,31 +570,31 @@ export class Meter extends Component {
   render(){
     return(
       <div className='circle-container'>
-        <div className='meter-container'>
-          <small>{this.props.text}</small>
+      <div className='meter-container'>
+      <small>{this.props.text}</small>
 
-          <Circle
-            progress={this.props.progress > 100 ? 100 : this.props.progress}
-            // initialAnimate={true}
-            // text= {this.props.text}
-            options={{
-              strokeWidth: 12,
-              color: '#F48165',
-              trailWidth: 12,
-              fontSize: 30,
-              easing: 'easeInOut',
-              duration: 700,
-            }}
-            containerClassName={'circle-bar'}
-            >
-            </Circle>
-        </div>
-          <div className='circle-desc'>
-            <medium>{this.props.title}</medium>
-            <small className='status'>{this.props.status}</small>
-          </div>
+      <Circle
+      progress={this.props.progress > 100 ? 100 : this.props.progress}
+      // initialAnimate={true}
+      // text= {this.props.text}
+      options={{
+        strokeWidth: 12,
+        color: '#F48165',
+        trailWidth: 12,
+        fontSize: 30,
+        easing: 'easeInOut',
+        duration: 700,
+      }}
+      containerClassName={'circle-bar'}
+      >
+      </Circle>
       </div>
-    )
+      <div className='circle-desc'>
+      <medium>{this.props.title}</medium>
+      <small className='status'>{this.props.status}</small>
+      </div>
+      </div>
+      )
   }
 }
 
@@ -600,21 +602,21 @@ export class BarChart extends Component {
   render() {
     return(
       <div className='bar-chart-container'>
-        <large style={this.props.labelStyle}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={250}>
-          <ChartBar width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
-            {/* <YAxis /> */}
-            {/* <CartesianGrid strokeDasharray="3 3" /> */}
-            <Tooltip />
-            <Text scaleToFit={true} />
+      <large style={this.props.labelStyle}>{this.props.label}</large>
+      <ResponsiveContainer width='100%' height={250}>
+      <ChartBar width={680} height={250} data={this.props.data}>
+      <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
+    {/* <YAxis /> */}
+  {/* <CartesianGrid strokeDasharray="3 3" /> */}
+  <Tooltip />
+  <Text scaleToFit={true} />
 
-            <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
-          </ChartBar>
-        </ResponsiveContainer>
+  <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
+  </ChartBar>
+  </ResponsiveContainer>
 
-      </div>
-    )
+  </div>
+  )
   }
 }
 
@@ -623,25 +625,25 @@ export class BarChartSPI extends Component {
     const COLORS = ['#42C878', '#CF000F'];
     return(
       <div className='bar-chart-container'>
-        <large style={this.props.labelStyle}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={250}>
-        <ChartBar width={600} height={250} data={this.props.data}>
-        <XAxis dataKey="name"/>
-        <Tooltip />
-        <Bar dataKey="value" fill="#8884d8">
-            {
-              this.props.data &&
-              this.props.data.map((entry, index) => {
-                const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
-                return <Cell key={index} fill={color} />;
-              })
-            }
-        </Bar>
-        </ChartBar>
-        </ResponsiveContainer>
+      <large style={this.props.labelStyle}>{this.props.label}</large>
+      <ResponsiveContainer width='100%' height={250}>
+      <ChartBar width={600} height={250} data={this.props.data}>
+      <XAxis dataKey="name"/>
+      <Tooltip />
+      <Bar dataKey="value" fill="#8884d8">
+      {
+        this.props.data &&
+        this.props.data.map((entry, index) => {
+          const color = entry.value > 0.83 ? COLORS[0] : COLORS[1];
+          return <Cell key={index} fill={color} />;
+        })
+      }
+      </Bar>
+      </ChartBar>
+      </ResponsiveContainer>
 
       </div>
-    )
+      )
   }
 }
 
@@ -654,25 +656,25 @@ export class BarChartCPI extends Component {
     const COLORS = ['#42C878', '#CF000F'];
     return(
       <div className='bar-chart-container'>
-        <large style={this.props.labelStyle}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={250}>
-        <ChartBar width={600} height={250} data={this.props.data}>
-        <XAxis dataKey="name" name="value" />
-        <Tooltip />
-        <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
-            {
-              this.props.data &&
-              this.props.data.map((entry, index) => {
-                const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
-                return <Cell key={index} fill={color} />;
-              })
-            }
-        </Bar>
-        </ChartBar>
-        </ResponsiveContainer>
+      <large style={this.props.labelStyle}>{this.props.label}</large>
+      <ResponsiveContainer width='100%' height={250}>
+      <ChartBar width={600} height={250} data={this.props.data}>
+      <XAxis dataKey="name" name="value" />
+      <Tooltip />
+      <Bar dataKey="value" key="value" fill="#8884d8" label={customLabel}>
+      {
+        this.props.data &&
+        this.props.data.map((entry, index) => {
+          const color = entry.value > 0.77 ? COLORS[0] : COLORS[1];
+          return <Cell key={index} fill={color} />;
+        })
+      }
+      </Bar>
+      </ChartBar>
+      </ResponsiveContainer>
 
       </div>
-    )
+      )
   }
 }
 
@@ -681,20 +683,20 @@ export class LineChart extends Component{
   render(){
     return(
       <div className="bar-chart-container">
-        <large style={{margin:'30px 50px'}}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={250}>
-          <ChartLine width={680} height={250} data={this.props.data}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip />
-            <Legend iconType="circle" iconSize={8}/>
-            {this.props.lines.map((props)=>
-              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
-          </ChartLine>
-        </ResponsiveContainer>
+      <large style={{margin:'30px 50px'}}>{this.props.label}</large>
+      <ResponsiveContainer width='100%' height={250}>
+      <ChartLine width={680} height={250} data={this.props.data}>
+      <XAxis dataKey="name" />
+      <YAxis />
+      <CartesianGrid strokeDasharray="3 3"/>
+      <Tooltip />
+      <Legend iconType="circle" iconSize={8}/>
+      {this.props.lines.map((props)=>
+        <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
+      </ChartLine>
+      </ResponsiveContainer>
       </div>
-    )
+      )
   }
 }
 
@@ -703,33 +705,33 @@ const custom =(props) => {
   console.log('PAYLOADDDDD',payload)
   return(
     <text y={y}   style= {{
-    fontFamily: 'lato,sans-serif',
-    fontWeight: '300',
-    fontSize:'13px',
-    marginLeft:'10px'
+      fontFamily: 'lato,sans-serif',
+      fontWeight: '300',
+      fontSize:'13px',
+      marginLeft:'10px'
 
     }}>{payload.value}%</text>
-  )
+    )
 }
 
 export class SCurve extends Component{
   render(){
     return(
       <div className="bar-chart-container">
-        <large style={{margin:'30px 50px'}}>{this.props.label}</large>
-        <ResponsiveContainer width='100%' height={270}>
-          <ChartLine width={680} height={270} data={this.props.data}>
-            <XAxis dataKey="name" />
-            <YAxis tick={custom}  padding='0 0 0 10px' label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
-            <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip />
-            <Legend iconType="circle" iconSize={8}/>
-            {this.props.lines.map((props)=>
-              <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
-          </ChartLine>
-        </ResponsiveContainer>
+      <large style={{margin:'30px 50px'}}>{this.props.label}</large>
+      <ResponsiveContainer width='100%' height={270}>
+      <ChartLine width={680} height={270} data={this.props.data}>
+      <XAxis dataKey="name" />
+      <YAxis tick={custom}  padding='0 0 0 10px' label={<AxisLabel axisType='yAxis'>%</AxisLabel>} />
+      <CartesianGrid strokeDasharray="3 3"/>
+      <Tooltip />
+      <Legend iconType="circle" iconSize={8}/>
+      {this.props.lines.map((props)=>
+        <LineGraph type="monotone" dataKey={props.key} stroke={props.stroke} />)}
+      </ChartLine>
+      </ResponsiveContainer>
       </div>
-    )
+      )
   }
 }
 
@@ -740,9 +742,9 @@ const AxisLabel = ({ axisType, x, y, width, height, stroke, children }) => {
   const rot = isVert ? `270 ${cx} ${cy}` : 0;
   return (
     <text x={cx} y={cy} transform={`rotate(${rot})`} textAnchor="middle" stroke={stroke}>
-      {children}
+    {children}
     </text>
-  );
+    );
 };
 
 
@@ -752,12 +754,12 @@ export class Search extends Component {
   render() {
     return(
       <div className='search' style={this.props.style}>
-        <div className='card'>
-          <input placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
-          <i className='icon-magnifier'></i>
-        </div>
+      <div className='card'>
+      <input placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
+      <i className='icon-magnifier'></i>
       </div>
-    )
+      </div>
+      )
   }
 }
 
@@ -777,38 +779,38 @@ export class Confirmation extends Component {
 
       store.getState().alert.confirmation && store.getState().alert.confirmation.show ?
       <div style={this.props.style}>
-        <div 
-          className={' popup-container'} style={{zIndex:'30', display:'block'}}
-        >
-            <div className='grid wrap' style={{position:'relative'}}>
-              <div className='unit whole' style={{position:'absolute'}}>
-                <div className='card shadow' style={{margin:'6% auto', width:'70%', marginLeft:'9%'}}>
-                   <small>{store.getState().alert.confirmation && store.getState().alert.confirmation.message }</small>
-                   <div style={{margin:'auto', width:'430px', marginTop:'50px'}}>
-                  <button className='btn-secondary' style={{width:'45%', float:'left'}} onClick={
-                    e=> {
-                      store.dispatch({
-                        type: 'CONFIRM',
-                        message: '',
-                        show:false,
-                        
-                      })
-                      e.preventDefault()
-                    }
-                  }>CANCEL</button>
-                  <button className='btn-primary' style={{width:'45%', float:'right'}} onClick={(e)=> store.getState().alert.confirmation.onConfirm(e)}>APPROVE</button>
-                   </div>
-                     
+      <div 
+      className={' popup-container'} style={{zIndex:'30', display:'block'}}
+      >
+      <div className='grid wrap' style={{position:'relative'}}>
+      <div className='unit whole' style={{position:'absolute'}}>
+      <div className='card shadow' style={{margin:'6% auto', width:'70%', marginLeft:'9%'}}>
+      <small>{store.getState().alert.confirmation && store.getState().alert.confirmation.message }</small>
+      <div style={{margin:'auto', width:'430px', marginTop:'50px'}}>
+      <button className='btn-secondary' style={{width:'45%', float:'left'}} onClick={
+        e=> {
+          store.dispatch({
+            type: 'CONFIRM',
+            message: '',
+            show:false,
+            
+          })
+          e.preventDefault()
+        }
+      }>CANCEL</button>
+      <button className='btn-primary' style={{width:'45%', float:'right'}} onClick={(e)=> store.getState().alert.confirmation.onConfirm(e)}>APPROVE</button>
+      </div>
+      
 
-                </div>
-              </div>
-            </div>
-            <div className='tint'></div>}
+      </div>
+      </div>
+      </div>
+      <div className='tint'></div>}
 
-        </div>
+      </div>
       </div> : null
 
-    )
+      )
   }
 
 }
@@ -830,17 +832,17 @@ export class PopUp extends Component {
     return(
 
       <div style={this.props.style}>
-        {
-          popup &&
-          popup[this.props.id] &&
-          popup[this.props.id].active == true &&
+      {
+        popup &&
+        popup[this.props.id] &&
+        popup[this.props.id].active == true &&
         <div className={popup && popup[this.props.id] && popup[this.props.id].active ? this.props.id + ' popup-container active' : this.props.id +  ' popup-container'} style={{zIndex:'2'}}>
-            <div className='grid wrap' style={{position:'relative'}}>
-              <div className='unit whole'>
-                <div className='card shadow' style={{marginTop:'6%'}}>
-                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
-                      e => {
-                        document.body.style.overflow = 'scroll';
+        <div className='grid wrap' style={{position:'relative'}}>
+        <div className='unit whole'>
+        <div className='card shadow' style={{marginTop:'6%'}}>
+        <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+          e => {
+            document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
                         store.dispatch({
@@ -859,16 +861,16 @@ export class PopUp extends Component {
 
                     {this.props.children}
 
-                </div>
-              </div>
-            </div>
-            <div className='tint'></div>}
+                    </div>
+                    </div>
+                    </div>
+                    <div className='tint'></div>}
 
-        </div>
-  }
-      </div>
+                    </div>
+                  }
+                  </div>
 
-    )
+                  )
   }
 
 }
@@ -889,13 +891,13 @@ export class PopUpTimesheet extends Component {
     return(
       <div style={this.props.style}>
 
-        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
-            <div className='grid wrap' style={{position:'relative'}}>
-              <div className='unit whole'>
-                <div className='card shadow' style={{marginTop:'6%'}}>
-                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
-                      e => {
-                        document.body.style.overflow = 'scroll';
+      <div className={this.state.clicked ? 'popup-container active' : 'popup-container'}>
+      <div className='grid wrap' style={{position:'relative'}}>
+      <div className='unit whole'>
+      <div className='card shadow' style={{marginTop:'6%'}}>
+      <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+        e => {
+          document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
                         this.setState({
@@ -906,8 +908,8 @@ export class PopUpTimesheet extends Component {
                     }></Divider>
                     {this.props.children}
 
-            <div className="grid wrap narrow">
-                <div className="unit whole" style={{ textAlign: 'center', display:'inline-block' }}>
+                    <div className="grid wrap narrow">
+                    <div className="unit whole" style={{ textAlign: 'center', display:'inline-block' }}>
                     <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary"
                     onClick={
                       e => {
@@ -926,12 +928,12 @@ export class PopUpTimesheet extends Component {
                         })
                         e.preventDefault()
                       }}
-                    >CANCEL</button>
+                      >CANCEL</button>
 
-                    <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"
-                    onClick={
-                      e => {
-                        document.body.style.overflow = 'scroll';
+                      <button type="submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px'}} className="btn-primary"
+                      onClick={
+                        e => {
+                          document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                       document.documentElement.scrollTop = 0; // For IE and Firefox
                         // if (window.addEventListener) // older FF
@@ -946,21 +948,21 @@ export class PopUpTimesheet extends Component {
                         })
                         e.preventDefault()
                       }}
-                    >ADD NEW</button>
+                      >ADD NEW</button>
 
 
-                    </div>
-                  </div>
-                    </div>
-                  </div>
-                </div>
-            <div className='tint'></div>
-        </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      <div className='tint'></div>
+                      </div>
 
-        <button style={this.props.btnStyle} className={this.props.btnClass}
-          onClick={
-            e => {
-              document.body.style.overflow = 'hidden';
+                      <button style={this.props.btnStyle} className={this.props.btnClass}
+                      onClick={
+                        e => {
+                          document.body.style.overflow = 'hidden';
               document.body.scrollTop = 0; // For Chrome, Safari and Opera
             document.documentElement.scrollTop = 0; // For IE and Firefox
               // if (window.addEventListener) // older FF
@@ -975,11 +977,11 @@ export class PopUpTimesheet extends Component {
               })
               e.preventDefault()
             }}
-          >{this.props.btnText}</button>
-      </div>
+            >{this.props.btnText}</button>
+            </div>
 
-    )
-  }
+            )
+}
 }
 
 export class PopUpTimesheet2 extends Component {
@@ -997,13 +999,13 @@ export class PopUpTimesheet2 extends Component {
     return(
       <div style={this.props.style}>
 
-        <div className={this.state.clicked ? 'popup-container active' : 'popup-container'} style={{zIndex:'2'}}>
-            <div className='grid wrap' style={{position:'relative'}}>
-              <div className='unit whole'>
-                <div className='card shadow' style={{marginTop:'6%'}}>
-                    <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
-                      e => {
-                        document.body.style.overflow = 'scroll';
+      <div className={this.state.clicked ? 'popup-container active' : 'popup-container'} style={{zIndex:'2'}}>
+      <div className='grid wrap' style={{position:'relative'}}>
+      <div className='unit whole'>
+      <div className='card shadow' style={{marginTop:'6%'}}>
+      <Divider text={this.props.dividerText} btnRightStyle={{padding : '15px 16px'}} btnRightText={<i className='material-icons' style={{color:'#333333'}}>close</i>} btnRightClick={
+        e => {
+          document.body.style.overflow = 'scroll';
                         document.body.scrollTop = 0; // For Chrome, Safari and Opera
                         document.documentElement.scrollTop = 0; // For IE and Firefox
                         this.setState({
@@ -1033,20 +1035,20 @@ export class PopUpTimesheet2 extends Component {
                         })
                         e.preventDefault()
                       }}
-                    >CANCEL</button>
-                    </div>
-                    </div>
+                      >CANCEL</button>
+                      </div>
+                      </div>
 
-                    </div>
-                  </div>
-                </div>
-            <div className='tint'></div>
-        </div>
+                      </div>
+                      </div>
+                      </div>
+                      <div className='tint'></div>
+                      </div>
 
-        <button style={this.props.btnStyle} className={this.props.btnClass}
-          onClick={
-            e => {
-              document.body.style.overflow = 'hidden';
+                      <button style={this.props.btnStyle} className={this.props.btnClass}
+                      onClick={
+                        e => {
+                          document.body.style.overflow = 'hidden';
               document.body.scrollTop = 0; // For Chrome, Safari and Opera
             document.documentElement.scrollTop = 0; // For IE and Firefox
               // if (window.addEventListener) // older FF
@@ -1061,10 +1063,10 @@ export class PopUpTimesheet2 extends Component {
               })
               e.preventDefault()
             }}
-          >{this.props.btnText}</button>
-      </div>
+            >{this.props.btnText}</button>
+            </div>
 
-    )
+            )
   }
 }
 
@@ -1072,35 +1074,35 @@ export class Table extends Component {
   render() {
     return (
       <div>
-        <MuiThemeProvider>
-          <MaterialTable >
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-              {this.props.tableHeader.map((header, index) => (
-                <TableRowColumn>
-                  <TableHeaderColumn>{header.value}</TableHeaderColumn>
-                </TableRowColumn>
-              ))}
-            </TableHeader>
+      <MuiThemeProvider>
+      <MaterialTable >
+      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+      {this.props.tableHeader.map((header, index) => (
+        <TableRowColumn>
+        <TableHeaderColumn>{header.value}</TableHeaderColumn>
+        </TableRowColumn>
+        ))}
+      </TableHeader>
 
-            <TableBody displayRowCheckbox={false} >
-              {this.props.tableData.map((row, index) => (
-                <TableRow key={index}>
-                  {
+      <TableBody displayRowCheckbox={false} >
+      {this.props.tableData.map((row, index) => (
+        <TableRow key={index}>
+        {
 
 
-                    row.column.map((column,index)=>(
-                      <TableRowColumn>{column.value}</TableRowColumn>
-                    ))
-                  }
+          row.column.map((column,index)=>(
+            <TableRowColumn>{column.value}</TableRowColumn>
+            ))
+        }
 
-                </TableRow>
-              ))
-            }
-            </TableBody>
+        </TableRow>
+        ))
+    }
+    </TableBody>
 
-          </MaterialTable>
-        </MuiThemeProvider>
-      </div>
+    </MaterialTable>
+    </MuiThemeProvider>
+    </div>
     );
   }
 }
@@ -1109,34 +1111,34 @@ export class TableNew extends Component{
   render(){
     return(
       <table className='table' style={{width:'100%'}}>
-        <thead>
-          <tr>
-            {
-              this.props.tableHeader.map((value,index)=>(
-                <th key={index}>{value.value}</th>
+      <thead>
+      <tr>
+      {
+        this.props.tableHeader.map((value,index)=>(
+          <th key={index}>{value.value}</th>
+          ))
+      }
+      </tr>
+      </thead>
+
+      <tbody>
+      {
+        this.props.tableData &&
+        this.props.tableData.map((row,index)=>(
+          <tr className='items' key={index}>
+          {
+            row.column.map((column,index)=>(
+              <td key={index}>{column.value}</td>
+
               ))
-            }
+          }
           </tr>
-        </thead>
+          ))
+      }
 
-        <tbody>
-            {
-              this.props.tableData &&
-              this.props.tableData.map((row,index)=>(
-                <tr className='items' key={index}>
-                  {
-                    row.column.map((column,index)=>(
-                      <td key={index}>{column.value}</td>
-
-                    ))
-                  }
-                </tr>
-              ))
-            }
-
-        </tbody>
+      </tbody>
       </table>
-    )
+      )
   }
 }
 
@@ -1172,176 +1174,176 @@ export class TablePagination extends Component {
 
     return (
       <div>
-        <div className="grid">
-          <div className="unit whole">
+      <div className="grid">
+      <div className="unit whole">
 
-            
-        <table className="table" style={{ width: '100%' }}>
-          <thead>
-            <tr>
-              {
-                  this.props.tableHeader.map((value, index) => (
-                    <th key={index}>{value.value}</th>
-                  ))
-                }
-            </tr>
-          </thead>
+      
+      <table className="table" style={{ width: '100%' }}>
+      <thead>
+      <tr>
+      {
+        this.props.tableHeader.map((value, index) => (
+          <th key={index}>{value.value}</th>
+          ))
+      }
+      </tr>
+      </thead>
 
-          <tbody>
+      <tbody>
+      {
+        
+        this.props.tableData &&
+        this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+          <tr className="items" key={index}>
+          {
+            row.column.map((column, index) => (
+              <td key={index}>{column.value}</td>
+              ))
+          }
+          <td style={{ position: 'relative', float:'right' }}>
+          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
+            store.dispatch({
+              type: 'POPUP',
+              name: this.props.editPopUp,
+              data: {
+                active:true,
+              }
+            })
+            store.dispatch(initialize(this.props.form,
             {
+              HOLIDAY_ID_EDIT: row.column[3].value,
+              HOLIDAY_START_EDIT: row.column[1].value,
+              HOLIDAY_END_EDIT: row.column[2].value,
+              HOLIDAY_EDIT: row.column[0].value,
+            }
+            ))
+            e.preventDefault()
+          }}> 
+          EDIT
+          </button>
+          
+          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
+            store.dispatch({
+              type: 'CONFIRM',
+              message: 'Delete Holday?',
+              show:true,
+              onConfirm: ()=> {
+                store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
+                  store.dispatch({
+                    type: 'CONFIRM',
+                    message: '',
+                    onConfirm: null
+                  })
+                  store.dispatch(getDataMaster("holiday"))
+
+                })
+              }
+            })
+            
+            e.preventDefault()
+          }}> 
+          <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
+          </button>
+          </td>
+          </tr>
+          ))
+      }
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      <div className="grid">
+      <div className="unit whole">
+      
+      </div>
+      <div className="container" style={{float:'left'}}>
+      <small style={{display:'inline-block'}}>show entries</small>
+      <Select
+      style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+      items={{
+        items : [
+        {title : '10'},
+        {title : '20'}
+        ]
+      }}
+      />
+
+      </div>
+      <div className="container" style={{float:'right'}}>
+      <button className="arrow" onClick={e=> {
+        this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+        
+        e.preventDefault()
+      }}> <b> &lt; </b> </button>
+      {
+        
+        pages.slice(
+          3 % this.state.page != 3 ? 0 :
+          this.state.page % 3  == 0  ? 
+          this.state.page % 2 != 0 ? this.state.page -2 :
+          
+          (this.state.page-3)
+          : this.state.page-3  
+          ,
+          3 % this.state.page != 3 ? 5 :
+          this.state.page % 3  == 0  ? 
+          this.state.page % 2 != 0 ? this.state.page +1 :
+          this.state.page+2
+          : this.state.page+2  
+
+          ).map((value, index)=> (
+            <button 
+            className={this.state.page == value ? "pagination" : 'arrow'}
+            onClick={e=> {
+              this.setState({page: value},()=>[
+                console.log(this.state.page)
+                ])
               
-                  this.props.tableData &&
-                  this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                    <tr className="items" key={index}>
-                      {
-                        row.column.map((column, index) => (
-                      <td key={index}>{column.value}</td>
-                        ))
-                      }
-                      <td style={{ position: 'relative', float:'right' }}>
-                      <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
-                        store.dispatch({
-                          type: 'POPUP',
-                          name: this.props.editPopUp,
-                          data: {
-                            active:true,
-                          }
-                        })
-                        store.dispatch(initialize(this.props.form,
-                          {
-                            HOLIDAY_ID_EDIT: row.column[3].value,
-                            HOLIDAY_START_EDIT: row.column[1].value,
-                            HOLIDAY_END_EDIT: row.column[2].value,
-                            HOLIDAY_EDIT: row.column[0].value,
-                          }
-                         ))
-                        e.preventDefault()
-                      }}> 
-                      EDIT
-                      </button>
-                  
-                      <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
-                        store.dispatch({
-                              type: 'CONFIRM',
-                              message: 'Delete Holday?',
-                              show:true,
-                              onConfirm: ()=> {
-                                store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
-                                  store.dispatch({
-                                    type: 'CONFIRM',
-                                    message: '',
-                                    onConfirm: null
-                                  })
-                                  store.dispatch(getDataMaster("holiday"))
-
-                                })
-                              }
-                            })
-                        
-                        e.preventDefault()
-                      }}> 
-                      <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
-                      </button>
-                      </td>
-                    </tr>
-                  ))
-                }
-
-          </tbody>
-        </table>
-
-          </div>
-        </div>
-        <div className="grid">
-        <div className="unit whole">
-         
-        </div>
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
-
-                  </div>
-                  <div className="container" style={{float:'right'}}>
-                    <button className="arrow" onClick={e=> {
-                      this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                      
-                      e.preventDefault()
-                      }}> <b> &lt; </b> </button>
-                    {
-                      
-                      pages.slice(
-                        3 % this.state.page != 3 ? 0 :
-                          this.state.page % 3  == 0  ? 
-                          this.state.page % 2 != 0 ? this.state.page -2 :
-                          
-                          (this.state.page-3)
-                          : this.state.page-3  
-                        ,
-                        3 % this.state.page != 3 ? 5 :
-                          this.state.page % 3  == 0  ? 
-                          this.state.page % 2 != 0 ? this.state.page +1 :
-                          this.state.page+2
-                          : this.state.page+2  
-
-                        ).map((value, index)=> (
-                        <button 
-                        className={this.state.page == value ? "pagination" : 'arrow'}
-                        onClick={e=> {
-                          this.setState({page: value},()=>[
-                            console.log(this.state.page)
-                          ])
-                          
-                          var ceiling = value*10
-                          var floor = ceiling-10
-                          this.setState({
-                            ceiling : ceiling,
-                            floor : floor
-                          })
+              var ceiling = value*10
+              var floor = ceiling-10
+              this.setState({
+                ceiling : ceiling,
+                floor : floor
+              })
                           {/* const newData = this.props.tableData.slice(floor, ceiling)
                           this.setState({data : newData})  */}
                           e.preventDefault()
                         }}>
                         <b>{value}</b></button>
-                      ))
-                    }
-                    <button className="arrow">. . .</button>
-                    <button className="arrow" onClick={e=> {
-                      this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                      
-                      e.preventDefault()
-                      }}> <b> &gt; </b> </button>
-                  </div>
-             	 </div>
-      </div>
+                        ))
+        }
+        <button className="arrow">. . .</button>
+        <button className="arrow" onClick={e=> {
+          this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+          
+          e.preventDefault()
+        }}> <b> &gt; </b> </button>
+        </div>
+        </div>
+        </div>
 
-    );
+        );
+}
+}
+
+export class TablePaginationHistory extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page : 1,
+      ceiling: 10,
+      floor: 0,
+    };
   }
-  }
-  
-  export class TablePaginationHistory extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        page : 1,
-        ceiling: 10,
-        floor: 0,
-      };
-    }
     // getInitialState() {
     //   return { 
     //     page : 0,
     //     ceiling: 0,
     //     floor: 10,
     //     data : props.tableData.slice(0,10)
-  
+    
     //   };
     // }
     render() {
@@ -1351,36 +1353,36 @@ export class TablePagination extends Component {
       for (var i=1; i<=pagesAmount; i++) {
         pages.push(i);
       }
-  
+      
       return (
         <div>
-          <div className="grid">
-            <div className="unit whole">
-  
-              
-          <table className="table" style={{ width: '100%' }}>
-            <thead>
-              <tr>
-                {
-                    this.props.tableHeader.map((value, index) => (
-                      <th key={index} >{value.value}</th>
-                    ))
-                  }
-              </tr>
-            </thead>
-  
-            <tbody>
-              {
-                
-                    this.props.tableData &&
-                    this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                      <tr className="items" key={index}>
-                      <td>{row.column[0].value}</td>
-                      <td> {row.column[1].value}</td>
-                      <td>{row.column[2].value}</td>
-                      <td> {row.column[3].value}</td>
-                      <td>{row.column[4].value}</td>
-      
+        <div className="grid">
+        <div className="unit whole">
+        
+        
+        <table className="table" style={{ width: '100%' }}>
+        <thead>
+        <tr>
+        {
+          this.props.tableHeader.map((value, index) => (
+            <th key={index} >{value.value}</th>
+            ))
+        }
+        </tr>
+        </thead>
+        
+        <tbody>
+        {
+          
+          this.props.tableData &&
+          this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+            <tr className="items" key={index}>
+            <td>{row.column[0].value}</td>
+            <td> {row.column[1].value}</td>
+            <td>{row.column[2].value}</td>
+            <td> {row.column[3].value}</td>
+            <td>{row.column[4].value}</td>
+            
                         {/* {
                           row.column.map((column, index) => (
                         <td key={index}>{column.value}</td>
@@ -1402,108 +1404,108 @@ export class TablePagination extends Component {
                         DETAIL
                         </button>
                         </td>
-                      </tr>
-                    ))
-                  }
-  
-            </tbody>
-          </table>
-  
-            </div>
-          </div>
-          <div className="grid">
-          <div className="unit whole">
-           
-          </div>
-                    <div className="container" style={{float:'left'}}>
-                      <small style={{display:'inline-block'}}>show entries</small>
-                       <Select
-                            style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                            items={{
-                              items : [
-                                {title : '10'},
-                                {title : '20'}
-                              ]
-                             }}
-                          />
-  
-                    </div>
-                    <div className="container" style={{float:'right'}}>
-                      <button className="arrow" onClick={e=> {
-                        this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                        
-                        e.preventDefault()
-                        }}> <b> &lt; </b> </button>
-                      {
-                        
-                        pages.slice(
-                          3 % this.state.page != 3 ? 0 :
-                            this.state.page % 3  == 0  ? 
-                            this.state.page % 2 != 0 ? this.state.page -2 :
-                            
-                            (this.state.page-3)
-                            : this.state.page-3  
-                          ,
-                          3 % this.state.page != 3 ? 5 :
-                            this.state.page % 3  == 0  ? 
-                            this.state.page % 2 != 0 ? this.state.page +1 :
-                            this.state.page+2
-                            : this.state.page+2  
-  
-                          ).map((value, index)=> (
-                          <button 
-                          className={this.state.page == value ? "pagination" : 'arrow'}
-                          onClick={e=> {
-                            this.setState({page: value},()=>[
-                              console.log(this.state.page)
-                            ])
-                            
-                            var ceiling = value*10
-                            var floor = ceiling-10
-                            this.setState({
-                              ceiling : ceiling,
-                              floor : floor
-                            })
+                        </tr>
+                        ))
+        }
+        
+        </tbody>
+        </table>
+        
+        </div>
+        </div>
+        <div className="grid">
+        <div className="unit whole">
+        
+        </div>
+        <div className="container" style={{float:'left'}}>
+        <small style={{display:'inline-block'}}>show entries</small>
+        <Select
+        style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+        items={{
+          items : [
+          {title : '10'},
+          {title : '20'}
+          ]
+        }}
+        />
+        
+        </div>
+        <div className="container" style={{float:'right'}}>
+        <button className="arrow" onClick={e=> {
+          this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+          
+          e.preventDefault()
+        }}> <b> &lt; </b> </button>
+        {
+          
+          pages.slice(
+            3 % this.state.page != 3 ? 0 :
+            this.state.page % 3  == 0  ? 
+            this.state.page % 2 != 0 ? this.state.page -2 :
+            
+            (this.state.page-3)
+            : this.state.page-3  
+            ,
+            3 % this.state.page != 3 ? 5 :
+            this.state.page % 3  == 0  ? 
+            this.state.page % 2 != 0 ? this.state.page +1 :
+            this.state.page+2
+            : this.state.page+2  
+            
+            ).map((value, index)=> (
+              <button 
+              className={this.state.page == value ? "pagination" : 'arrow'}
+              onClick={e=> {
+                this.setState({page: value},()=>[
+                  console.log(this.state.page)
+                  ])
+                
+                var ceiling = value*10
+                var floor = ceiling-10
+                this.setState({
+                  ceiling : ceiling,
+                  floor : floor
+                })
                             {/* const newData = this.props.tableData.slice(floor, ceiling)
                             this.setState({data : newData})  */}
                             e.preventDefault()
                           }}>
                           <b>{value}</b></button>
-                        ))
-                      }
-                      <button className="arrow">. . .</button>
-                      <button className="arrow" onClick={e=> {
-                        this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                        
-                        e.preventDefault()
-                        }}> <b> &gt; </b> </button>
-                    </div>
-                  </div>
-        </div>
-  
-      );
-    }
-    }
+                          ))
+          }
+          <button className="arrow">. . .</button>
+          <button className="arrow" onClick={e=> {
+            this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+            
+            e.preventDefault()
+          }}> <b> &gt; </b> </button>
+          </div>
+          </div>
+          </div>
+          
+          );
+}
+}
 
 
 
 
-  export class TablePaginationBU extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        page : 1,
-        ceiling: 10,
-        floor: 0,
-      };
-    }
+export class TablePaginationBU extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page : 1,
+      ceiling: 10,
+      floor: 0,
+    };
+  }
     // getInitialState() {
     //   return { 
     //     page : 0,
     //     ceiling: 0,
     //     floor: 10,
     //     data : props.tableData.slice(0,10)
-  
+    
     //   };
     // }
     render() {
@@ -1513,34 +1515,34 @@ export class TablePagination extends Component {
       for (var i=1; i<=pagesAmount; i++) {
         pages.push(i);
       }
-  
+      
       return (
         <div>
-          <div className="grid">
-            <div className="unit whole">
-  
-              
-          <table className="table" style={{ width: '100%' }}>
-            <thead>
-              <tr>
-                {
-                    this.props.tableHeader.map((value, index) => (
-                      <th key={index}>{value.value}</th>
-                    ))
-                  }
-              </tr>
-            </thead>
-  
-            <tbody>
-              {
-                
-                    this.props.tableData &&
-                    this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                      <tr className="items" key={index}>
-                      <td>{row.column[0].value}</td>
-                      <td> {row.column[1].value}</td>
-                      <td>{row.column[2].value}</td>
-                        
+        <div className="grid">
+        <div className="unit whole">
+        
+        
+        <table className="table" style={{ width: '100%' }}>
+        <thead>
+        <tr>
+        {
+          this.props.tableHeader.map((value, index) => (
+            <th key={index}>{value.value}</th>
+            ))
+        }
+        </tr>
+        </thead>
+        
+        <tbody>
+        {
+          
+          this.props.tableData &&
+          this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+            <tr className="items" key={index}>
+            <td>{row.column[0].value}</td>
+            <td> {row.column[1].value}</td>
+            <td>{row.column[2].value}</td>
+            
 
                         {/* {
                           row.column.map((column, index) => (
@@ -1577,23 +1579,23 @@ export class TablePagination extends Component {
                           })
                           console.log("SAFDSADADASD", row)
                           store.dispatch(initialize(this.props.form,
-                            {
-                              BU_PARENT_ID_EDIT:row.column[4].value,
-                              BU_NAME_EDIT:row.column[1].value,
-                              BU_ALIAS_EDIT:row.column[3].value,
-                              BU_HEAD_EDIT:row.column[2].value,
-                              BU_CODE_EDIT:row.column[5].value,
-                            }
-                           ))
+                          {
+                            BU_PARENT_ID_EDIT:row.column[4].value,
+                            BU_NAME_EDIT:row.column[1].value,
+                            BU_ALIAS_EDIT:row.column[3].value,
+                            BU_HEAD_EDIT:row.column[2].value,
+                            BU_CODE_EDIT:row.column[5].value,
+                          }
+                          ))
                           e.preventDefault()
                         }}> 
                         EDIT
                         </button>
-                    
+                        
                         <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                           
-                      
-                        
+                          
+                          
                           // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                           //   store.dispatch(getDataMaster("holiday"))
                           // })
@@ -1603,107 +1605,107 @@ export class TablePagination extends Component {
                         </button>
                         
                         </td>
-                      </tr>
-                    ))
-                  }
-  
-            </tbody>
-          </table>
-  
-            </div>
-          </div>
-          <div className="grid">
-          <div className="unit whole">
-           
-          </div>
-                    <div className="container" style={{float:'left'}}>
-                      <small style={{display:'inline-block'}}>show entries</small>
-                       <Select
-                            style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                            items={{
-                              items : [
-                                {title : '10'},
-                                {title : '20'}
-                              ]
-                             }}
-                          />
-  
-                    </div>
-                    <div className="container" style={{float:'right'}}>
-                      <button className="arrow" onClick={e=> {
-                        this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                        
-                        e.preventDefault()
-                        }}> <b> &lt; </b> </button>
-                      {
-                        
-                        pages.slice(
-                          3 % this.state.page != 3 ? 0 :
-                            this.state.page % 3  == 0  ? 
-                            this.state.page % 2 != 0 ? this.state.page -2 :
-                            
-                            (this.state.page-3)
-                            : this.state.page-3  
-                          ,
-                          3 % this.state.page != 3 ? 5 :
-                            this.state.page % 3  == 0  ? 
-                            this.state.page % 2 != 0 ? this.state.page +1 :
-                            this.state.page+2
-                            : this.state.page+2  
-  
-                          ).map((value, index)=> (
-                          <button 
-                          className={this.state.page == value ? "pagination" : 'arrow'}
-                          onClick={e=> {
-                            this.setState({page: value},()=>[
-                              console.log(this.state.page)
-                            ])
-                            
-                            var ceiling = value*10
-                            var floor = ceiling-10
-                            this.setState({
-                              ceiling : ceiling,
-                              floor : floor
-                            })
+                        </tr>
+                        ))
+        }
+        
+        </tbody>
+        </table>
+        
+        </div>
+        </div>
+        <div className="grid">
+        <div className="unit whole">
+        
+        </div>
+        <div className="container" style={{float:'left'}}>
+        <small style={{display:'inline-block'}}>show entries</small>
+        <Select
+        style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+        items={{
+          items : [
+          {title : '10'},
+          {title : '20'}
+          ]
+        }}
+        />
+        
+        </div>
+        <div className="container" style={{float:'right'}}>
+        <button className="arrow" onClick={e=> {
+          this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+          
+          e.preventDefault()
+        }}> <b> &lt; </b> </button>
+        {
+          
+          pages.slice(
+            3 % this.state.page != 3 ? 0 :
+            this.state.page % 3  == 0  ? 
+            this.state.page % 2 != 0 ? this.state.page -2 :
+            
+            (this.state.page-3)
+            : this.state.page-3  
+            ,
+            3 % this.state.page != 3 ? 5 :
+            this.state.page % 3  == 0  ? 
+            this.state.page % 2 != 0 ? this.state.page +1 :
+            this.state.page+2
+            : this.state.page+2  
+            
+            ).map((value, index)=> (
+              <button 
+              className={this.state.page == value ? "pagination" : 'arrow'}
+              onClick={e=> {
+                this.setState({page: value},()=>[
+                  console.log(this.state.page)
+                  ])
+                
+                var ceiling = value*10
+                var floor = ceiling-10
+                this.setState({
+                  ceiling : ceiling,
+                  floor : floor
+                })
                             {/* const newData = this.props.tableData.slice(floor, ceiling)
                             this.setState({data : newData})  */}
                             e.preventDefault()
                           }}>
                           <b>{value}</b></button>
-                        ))
-                      }
-                      <button className="arrow">. . .</button>
-                      <button className="arrow" onClick={e=> {
-                        this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                        
-                        e.preventDefault()
-                        }}> <b> &gt; </b> </button>
-                    </div>
-                  </div>
-        </div>
-  
-      );
-    }
-    }
-  
-    
+                          ))
+          }
+          <button className="arrow">. . .</button>
+          <button className="arrow" onClick={e=> {
+            this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+            
+            e.preventDefault()
+          }}> <b> &gt; </b> </button>
+          </div>
+          </div>
+          </div>
+          
+          );
+}
+}
 
-    export class TablePaginationProject extends Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          page : 1,
-          ceiling: 10,
-          floor: 0,
-        };
-      }
+
+
+export class TablePaginationProject extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page : 1,
+      ceiling: 10,
+      floor: 0,
+    };
+  }
       // getInitialState() {
       //   return { 
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-    
+      
       //   };
       // }
       render() {
@@ -1713,36 +1715,36 @@ export class TablePagination extends Component {
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-    
+        
         return (
           <div>
-            <div className="grid">
-              <div className="unit whole">
-    
-                
-            <table className="table" style={{ width: '100%' }}>
-              <thead>
-                <tr>
-                  {
-                      this.props.tableHeader.map((value, index) => (
-                        <th key={index}>{value.value}</th>
-                      ))
-                    }
-                </tr>
-              </thead>
-    
-              <tbody>
-                {
-                  
-                      this.props.tableData &&
-                      this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                        <tr className="items" key={index}>
-                        <td>{row.column[0].value}</td>
-                        <td> {row.column[1].value}</td>
-                        <td>{row.column[2].value}</td>
-                        <td>{row.column[3].value}</td>
-                          
-  
+          <div className="grid">
+          <div className="unit whole">
+          
+          
+          <table className="table" style={{ width: '100%' }}>
+          <thead>
+          <tr>
+          {
+            this.props.tableHeader.map((value, index) => (
+              <th key={index}>{value.value}</th>
+              ))
+          }
+          </tr>
+          </thead>
+          
+          <tbody>
+          {
+            
+            this.props.tableData &&
+            this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+              <tr className="items" key={index}>
+              <td>{row.column[0].value}</td>
+              <td> {row.column[1].value}</td>
+              <td>{row.column[2].value}</td>
+              <td>{row.column[3].value}</td>
+              
+              
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
@@ -1750,108 +1752,108 @@ export class TablePagination extends Component {
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
                           
-                      
-                         
+                          
+                          
                           </td>
-                        </tr>
-                      ))
-                    }
-    
-              </tbody>
-            </table>
-    
-              </div>
-            </div>
-            <div className="grid">
-            <div className="unit whole">
-             
-            </div>
-                      <div className="container" style={{float:'left'}}>
-                        <small style={{display:'inline-block'}}>show entries</small>
-                         <Select
-                              style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                              items={{
-                                items : [
-                                  {title : '10'},
-                                  {title : '20'}
-                                ]
-                               }}
-                            />
-    
-                      </div>
-                      <div className="container" style={{float:'right'}}>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                          
-                          e.preventDefault()
-                          }}> <b> &lt; </b> </button>
-                        {
-                          
-                          pages.slice(
-                            3 % this.state.page != 3 ? 0 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page -2 :
-                              
-                              (this.state.page-3)
-                              : this.state.page-3  
-                            ,
-                            3 % this.state.page != 3 ? 5 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page +1 :
-                              this.state.page+2
-                              : this.state.page+2  
-    
-                            ).map((value, index)=> (
-                            <button 
-                            className={this.state.page == value ? "pagination" : 'arrow'}
-                            onClick={e=> {
-                              this.setState({page: value},()=>[
-                                console.log(this.state.page)
-                              ])
-                              
-                              var ceiling = value*10
-                              var floor = ceiling-10
-                              this.setState({
-                                ceiling : ceiling,
-                                floor : floor
-                              })
+                          </tr>
+                          ))
+          }
+          
+          </tbody>
+          </table>
+          
+          </div>
+          </div>
+          <div className="grid">
+          <div className="unit whole">
+          
+          </div>
+          <div className="container" style={{float:'left'}}>
+          <small style={{display:'inline-block'}}>show entries</small>
+          <Select
+          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+          items={{
+            items : [
+            {title : '10'},
+            {title : '20'}
+            ]
+          }}
+          />
+          
+          </div>
+          <div className="container" style={{float:'right'}}>
+          <button className="arrow" onClick={e=> {
+            this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+            
+            e.preventDefault()
+          }}> <b> &lt; </b> </button>
+          {
+            
+            pages.slice(
+              3 % this.state.page != 3 ? 0 :
+              this.state.page % 3  == 0  ? 
+              this.state.page % 2 != 0 ? this.state.page -2 :
+              
+              (this.state.page-3)
+              : this.state.page-3  
+              ,
+              3 % this.state.page != 3 ? 5 :
+              this.state.page % 3  == 0  ? 
+              this.state.page % 2 != 0 ? this.state.page +1 :
+              this.state.page+2
+              : this.state.page+2  
+              
+              ).map((value, index)=> (
+                <button 
+                className={this.state.page == value ? "pagination" : 'arrow'}
+                onClick={e=> {
+                  this.setState({page: value},()=>[
+                    console.log(this.state.page)
+                    ])
+                  
+                  var ceiling = value*10
+                  var floor = ceiling-10
+                  this.setState({
+                    ceiling : ceiling,
+                    floor : floor
+                  })
                               {/* const newData = this.props.tableData.slice(floor, ceiling)
                               this.setState({data : newData})  */}
                               e.preventDefault()
                             }}>
                             <b>{value}</b></button>
-                          ))
-                        }
-                        <button className="arrow">. . .</button>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                          
-                          e.preventDefault()
-                          }}> <b> &gt; </b> </button>
-                      </div>
-                    </div>
-          </div>
-    
-        );
-      }
-      }
+                            ))
+            }
+            <button className="arrow">. . .</button>
+            <button className="arrow" onClick={e=> {
+              this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+              
+              e.preventDefault()
+            }}> <b> &gt; </b> </button>
+            </div>
+            </div>
+            </div>
+            
+            );
+}
+}
 
-    export class TablePaginationUser extends Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          page : 1,
-          ceiling: 10,
-          floor: 0,
-        };
-      }
+export class TablePaginationUser extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page : 1,
+      ceiling: 10,
+      floor: 0,
+    };
+  }
       // getInitialState() {
       //   return { 
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-    
+      
       //   };
       // }
       render() {
@@ -1861,36 +1863,36 @@ export class TablePagination extends Component {
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-    
+        
         return (
           <div>
-            <div className="grid">
-              <div className="unit whole">
-    
-                
-            <table className="table" style={{ width: '100%' }}>
-              <thead>
-                <tr>
-                  {
-                      this.props.tableHeader.map((value, index) => (
-                        <th key={index}>{value.value}</th>
-                      ))
-                    }
-                </tr>
-              </thead>
-    
-              <tbody>
-                {
-                  
-                      this.props.tableData &&
-                      this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                        <tr className="items" key={index}>
-                        <td>{row.column[0].value}</td>
-                        <td> {row.column[1].value}</td>
-                        <td>{row.column[2].value}</td>
-                        <td>{row.column[3].value}</td>
-                          
-  
+          <div className="grid">
+          <div className="unit whole">
+          
+          
+          <table className="table" style={{ width: '100%' }}>
+          <thead>
+          <tr>
+          {
+            this.props.tableHeader.map((value, index) => (
+              <th key={index}>{value.value}</th>
+              ))
+          }
+          </tr>
+          </thead>
+          
+          <tbody>
+          {
+            
+            this.props.tableData &&
+            this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+              <tr className="items" key={index}>
+              <td>{row.column[0].value}</td>
+              <td> {row.column[1].value}</td>
+              <td>{row.column[2].value}</td>
+              <td>{row.column[3].value}</td>
+              
+              
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
@@ -1898,110 +1900,110 @@ export class TablePagination extends Component {
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
                           
-                      
-                         
+                          
+                          
                           </td>
-                        </tr>
-                      ))
-                    }
-    
-              </tbody>
-            </table>
-    
-              </div>
-            </div>
-            <div className="grid">
-            <div className="unit whole">
-             
-            </div>
-                      <div className="container" style={{float:'left'}}>
-                        <small style={{display:'inline-block'}}>show entries</small>
-                         <Select
-                              style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                              items={{
-                                items : [
-                                  {title : '10'},
-                                  {title : '20'}
-                                ]
-                               }}
-                            />
-    
-                      </div>
-                      <div className="container" style={{float:'right'}}>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                          
-                          e.preventDefault()
-                          }}> <b> &lt; </b> </button>
-                        {
-                          
-                          pages.slice(
-                            3 % this.state.page != 3 ? 0 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page -2 :
-                              
-                              (this.state.page-3)
-                              : this.state.page-3  
-                            ,
-                            3 % this.state.page != 3 ? 5 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page +1 :
-                              this.state.page+2
-                              : this.state.page+2  
-    
-                            ).map((value, index)=> (
-                            <button 
-                            className={this.state.page == value ? "pagination" : 'arrow'}
-                            onClick={e=> {
-                              this.setState({page: value},()=>[
-                                console.log(this.state.page)
-                              ])
-                              
-                              var ceiling = value*10
-                              var floor = ceiling-10
-                              this.setState({
-                                ceiling : ceiling,
-                                floor : floor
-                              })
+                          </tr>
+                          ))
+          }
+          
+          </tbody>
+          </table>
+          
+          </div>
+          </div>
+          <div className="grid">
+          <div className="unit whole">
+          
+          </div>
+          <div className="container" style={{float:'left'}}>
+          <small style={{display:'inline-block'}}>show entries</small>
+          <Select
+          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+          items={{
+            items : [
+            {title : '10'},
+            {title : '20'}
+            ]
+          }}
+          />
+          
+          </div>
+          <div className="container" style={{float:'right'}}>
+          <button className="arrow" onClick={e=> {
+            this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+            
+            e.preventDefault()
+          }}> <b> &lt; </b> </button>
+          {
+            
+            pages.slice(
+              3 % this.state.page != 3 ? 0 :
+              this.state.page % 3  == 0  ? 
+              this.state.page % 2 != 0 ? this.state.page -2 :
+              
+              (this.state.page-3)
+              : this.state.page-3  
+              ,
+              3 % this.state.page != 3 ? 5 :
+              this.state.page % 3  == 0  ? 
+              this.state.page % 2 != 0 ? this.state.page +1 :
+              this.state.page+2
+              : this.state.page+2  
+              
+              ).map((value, index)=> (
+                <button 
+                className={this.state.page == value ? "pagination" : 'arrow'}
+                onClick={e=> {
+                  this.setState({page: value},()=>[
+                    console.log(this.state.page)
+                    ])
+                  
+                  var ceiling = value*10
+                  var floor = ceiling-10
+                  this.setState({
+                    ceiling : ceiling,
+                    floor : floor
+                  })
                               {/* const newData = this.props.tableData.slice(floor, ceiling)
                               this.setState({data : newData})  */}
                               e.preventDefault()
                             }}>
                             <b>{value}</b></button>
-                          ))
-                        }
-                        <button className="arrow">. . .</button>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                          
-                          e.preventDefault()
-                          }}> <b> &gt; </b> </button>
-                      </div>
-                    </div>
-          </div>
-    
-        );
-      }
-      }
+                            ))
+            }
+            <button className="arrow">. . .</button>
+            <button className="arrow" onClick={e=> {
+              this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+              
+              e.preventDefault()
+            }}> <b> &gt; </b> </button>
+            </div>
+            </div>
+            </div>
+            
+            );
+}
+}
 
-    
 
-    export class TablePaginationRoles extends Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          page : 1,
-          ceiling: 10,
-          floor: 0,
-        };
-      }
+
+export class TablePaginationRoles extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page : 1,
+      ceiling: 10,
+      floor: 0,
+    };
+  }
       // getInitialState() {
       //   return { 
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-    
+      
       //   };
       // }
       render() {
@@ -2011,35 +2013,35 @@ export class TablePagination extends Component {
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-    
+        
         return (
           <div>
-            <div className="grid">
-              <div className="unit whole">
-    
-                
-            <table className="table" style={{ width: '100%' }}>
-              <thead>
-                <tr>
-                  {
-                      this.props.tableHeader.map((value, index) => (
-                        <th key={index}>{value.value}</th>
-                      ))
-                    }
-                </tr>
-              </thead>
-    
-              <tbody>
-                {
-                  
-                      this.props.tableData &&
-                      this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-                        <tr className="items" key={index}>
-                        <td>{row.column[0].value}</td>
-                        <td> {row.column[1].value}</td>
-                        <td>{row.column[2].value}</td>
-                          
-  
+          <div className="grid">
+          <div className="unit whole">
+          
+          
+          <table className="table" style={{ width: '100%' }}>
+          <thead>
+          <tr>
+          {
+            this.props.tableHeader.map((value, index) => (
+              <th key={index}>{value.value}</th>
+              ))
+          }
+          </tr>
+          </thead>
+          
+          <tbody>
+          {
+            
+            this.props.tableData &&
+            this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+              <tr className="items" key={index}>
+              <td>{row.column[0].value}</td>
+              <td> {row.column[1].value}</td>
+              <td>{row.column[2].value}</td>
+              
+              
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
@@ -2095,9 +2097,9 @@ export class TablePagination extends Component {
                                     role_14:res.data.profile_privilege[13].PRIVILEGE,
                                     role_15:res.data.profile_privilege[14].PRIVILEGE,
                                   }
-                                 ))
+                                  ))
                               }
-                            )
+                              )
                             store.dispatch({
                               type: 'POPUP',
                               name: this.props.editPopUp,
@@ -2109,7 +2111,7 @@ export class TablePagination extends Component {
                           }}> 
                           EDIT
                           </button>
-                      
+                          
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                             // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                             //   store.dispatch(getDataMaster("holiday"))
@@ -2119,89 +2121,89 @@ export class TablePagination extends Component {
                           <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
                           </button>
                           </td>
-                        </tr>
-                      ))
-                    }
+                          </tr>
+                          ))
+}
+
+</tbody>
+</table>
+
+</div>
+</div>
+<div className="grid">
+<div className="unit whole">
+
+</div>
+<div className="container" style={{float:'left'}}>
+<small style={{display:'inline-block'}}>show entries</small>
+<Select
+style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
+items={{
+  items : [
+  {title : '10'},
+  {title : '20'}
+  ]
+}}
+/>
+
+</div>
+<div className="container" style={{float:'right'}}>
+<button className="arrow" onClick={e=> {
+  this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+  
+  e.preventDefault()
+}}> <b> &lt; </b> </button>
+{
+  
+  pages.slice(
+    3 % this.state.page != 3 ? 0 :
+    this.state.page % 3  == 0  ? 
+    this.state.page % 2 != 0 ? this.state.page -2 :
     
-              </tbody>
-            </table>
+    (this.state.page-3)
+    : this.state.page-3  
+    ,
+    3 % this.state.page != 3 ? 5 :
+    this.state.page % 3  == 0  ? 
+    this.state.page % 2 != 0 ? this.state.page +1 :
+    this.state.page+2
+    : this.state.page+2  
     
-              </div>
-            </div>
-            <div className="grid">
-            <div className="unit whole">
-             
-            </div>
-                      <div className="container" style={{float:'left'}}>
-                        <small style={{display:'inline-block'}}>show entries</small>
-                         <Select
-                              style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                              items={{
-                                items : [
-                                  {title : '10'},
-                                  {title : '20'}
-                                ]
-                               }}
-                            />
-    
-                      </div>
-                      <div className="container" style={{float:'right'}}>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-                          
-                          e.preventDefault()
-                          }}> <b> &lt; </b> </button>
-                        {
-                          
-                          pages.slice(
-                            3 % this.state.page != 3 ? 0 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page -2 :
-                              
-                              (this.state.page-3)
-                              : this.state.page-3  
-                            ,
-                            3 % this.state.page != 3 ? 5 :
-                              this.state.page % 3  == 0  ? 
-                              this.state.page % 2 != 0 ? this.state.page +1 :
-                              this.state.page+2
-                              : this.state.page+2  
-    
-                            ).map((value, index)=> (
-                            <button 
-                            className={this.state.page == value ? "pagination" : 'arrow'}
-                            onClick={e=> {
-                              this.setState({page: value},()=>[
-                                console.log(this.state.page)
-                              ])
-                              
-                              var ceiling = value*10
-                              var floor = ceiling-10
-                              this.setState({
-                                ceiling : ceiling,
-                                floor : floor
-                              })
+    ).map((value, index)=> (
+      <button 
+      className={this.state.page == value ? "pagination" : 'arrow'}
+      onClick={e=> {
+        this.setState({page: value},()=>[
+          console.log(this.state.page)
+          ])
+        
+        var ceiling = value*10
+        var floor = ceiling-10
+        this.setState({
+          ceiling : ceiling,
+          floor : floor
+        })
                               {/* const newData = this.props.tableData.slice(floor, ceiling)
                               this.setState({data : newData})  */}
                               e.preventDefault()
                             }}>
                             <b>{value}</b></button>
-                          ))
-                        }
-                        <button className="arrow">. . .</button>
-                        <button className="arrow" onClick={e=> {
-                          this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-                          
-                          e.preventDefault()
-                          }}> <b> &gt; </b> </button>
-                      </div>
-                    </div>
-          </div>
+                            ))
+  }
+  <button className="arrow">. . .</button>
+  <button className="arrow" onClick={e=> {
+    this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
     
-        );
-      }
-      }
-    
+    e.preventDefault()
+  }}> <b> &gt; </b> </button>
+  </div>
+  </div>
+  </div>
+  
+  );
+}
+}
+
 
 
 
@@ -2213,60 +2215,60 @@ export class TableNewMasterData extends Component{
   render(){
     return(
       <table className='table' style={{width:'100%'}}>
-        <thead>
-          <tr>
-            {
-              this.props.tableHeader.map((value,index)=>(
-                <th key={index}>{value.value}</th>
+      <thead>
+      <tr>
+      {
+        this.props.tableHeader.map((value,index)=>(
+          <th key={index}>{value.value}</th>
+          ))
+      }
+      </tr>
+      </thead>
+
+      <tbody>
+      {
+        this.props.tableData &&
+        this.props.tableData.map((row,index)=>(
+          <tr className='items' key={index}>
+          {
+            row.column.map((column,index)=>(
+              <td key={index}>{column.value}</td>
               ))
-            }
+          }
+          <td style={{position:'relative'}}>
+          <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
+          <MenuSection>
+          <MenuItem title='Edit' onClick={e => {
+            store.dispatch({
+              type: 'POPUP',
+              name:'edit',
+              data: {
+                active:true
+              }
+            })
+            e.preventDefault()
+          }}/>
+          <MenuItem title='Delete' onClick={e => {
+            store.dispatch({
+              type: 'POPUP',
+              name:'deleteHoliday',
+              data: {
+                active:true
+              }
+            })
+            store.dispatch(deleteHoliday(this.props.id))
+            e.preventDefault()
+          }}/>
+          </MenuSection>
+          </Menu>
+          </td>
           </tr>
-        </thead>
+          ))
+      }
 
-        <tbody>
-            {
-              this.props.tableData &&
-              this.props.tableData.map((row,index)=>(
-                <tr className='items' key={index}>
-                  {
-                    row.column.map((column,index)=>(
-                      <td key={index}>{column.value}</td>
-                    ))
-                  }
-                  <td style={{position:'relative'}}>
-                  <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' icon='more_horiz'>
-                    <MenuSection>
-                      <MenuItem title='Edit' onClick={e => {
-                        store.dispatch({
-                          type: 'POPUP',
-                          name:'edit',
-                          data: {
-                            active:true
-                          }
-                        })
-                        e.preventDefault()
-                      }}/>
-                      <MenuItem title='Delete' onClick={e => {
-                        store.dispatch({
-                          type: 'POPUP',
-                          name:'deleteHoliday',
-                          data: {
-                            active:true
-                          }
-                        })
-                        store.dispatch(deleteHoliday(this.props.id))
-                        e.preventDefault()
-                      }}/>
-                    </MenuSection>
-                  </Menu>
-                </td>
-                </tr>
-              ))
-            }
-
-        </tbody>
+      </tbody>
       </table>
-    )
+      )
   }
 }
 
@@ -2276,10 +2278,10 @@ export class Header extends Component {
   render() {
     return(
       <div className={this.props.center ? 'header center' : 'header'} style={this.props.style}>
-        <large>{this.props.text}</large>
-        <span></span>
+      <large>{this.props.text}</large>
+      <span></span>
       </div>
-    )
+      )
   }
 }
 
@@ -2287,10 +2289,10 @@ export class ProjectHeader extends Component {
   render () {
     return (
       <div className='project-header'>
-        <large>{this.props.projectName}</large>
-        <large>{this.props.sectionName}</large>
+      <large>{this.props.projectName}</large>
+      <large>{this.props.sectionName}</large>
       </div>
-    )
+      )
   }
 }
 
@@ -2327,10 +2329,10 @@ export class ProjectHeader extends Component {
 // }
 
 function renderAdjacent(onWhatever){
-    return [
-        <tr><td>Item 1</td></tr>,
-        <tr><td>Item 2</td></tr>
-    ];
+  return [
+  <tr><td>Item 1</td></tr>,
+  <tr><td>Item 2</td></tr>
+  ];
 }
 
 
@@ -2362,52 +2364,52 @@ export class WorkplanRow extends Component {
       }>
 
       <td style={{overflow:'visible', width:'410px'}}>
-        <div style={{paddingLeft: padding+'px', wordBreak:'break-word', paddingRight:'15px'}}>
-          {/* <div style={{width:'200px', overflow:'hidden'}}> */}
-          <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
-            {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
-          </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
-          {/* </div> */}
+      <div style={{paddingLeft: padding+'px', wordBreak:'break-word', paddingRight:'15px'}}>
+    {/* <div style={{width:'200px', overflow:'hidden'}}> */}
+    <span style={{verticalAlign:'middle', fontSize:'16px', color:'black'}} className='material-icons'>
+    {value.children.length!=0 ? this.state[(value.WBS_ID).toString()] ? 'expand_more': 'expand_less' : ""}
+    </span>&nbsp;&nbsp;&nbsp;&nbsp;{value.WBS_NAME}
+  {/* </div> */}
 
-        </div>
-        </td>
-      <td>{value.WORK}</td>
-      <td>{value.WORK_TOTAL}</td>
-      <td>{value.DURATION}</td>
-      <td>{value.START_DATE}</td>
-      <td>{value.FINISH_DATE}</td>
-      <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
-      <td>{value.RESOURCE_WBS} people</td>
-      <td style={{position:'relative', paddingRight:'20px'}} >
-      {
-        value.LEAF == 1 &&
+  </div>
+  </td>
+  <td>{value.WORK}</td>
+  <td>{value.WORK_TOTAL}</td>
+  <td>{value.DURATION}</td>
+  <td>{value.START_DATE}</td>
+  <td>{value.FINISH_DATE}</td>
+  <td>{Math.round(value.WORK_PERCENT_COMPLETE * 100)/100}%</td>
+  <td>{value.RESOURCE_WBS} people</td>
+  <td style={{position:'relative', paddingRight:'20px'}} >
+  {
+    value.LEAF == 1 &&
         // React.cloneElement(this.props.children, { data: value })
         <WorkplanRow data={workplan} >
-          <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
-            <MenuSection>
-              <MenuItem title='Add Timesheet' onClick={e => {
-                this.props.dispatch({
-                  type: 'POPUP',
-                  name:'addTimesheetWorkplan',
-                  data: {
-                    active:true
-                  }
-                })
+        <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
+        <MenuSection>
+        <MenuItem title='Add Timesheet' onClick={e => {
+          this.props.dispatch({
+            type: 'POPUP',
+            name:'addTimesheetWorkplan',
+            data: {
+              active:true
+            }
+          })
 
-                e.preventDefault()
-              }}/>
-              <MenuItem title='Manual Update' onClick={e => {
-                this.props.dispatch({
-                  type: 'POPUP',
-                  name:'manualUpdate',
-                  data: {
-                    active:true
-                  }
-                })
+          e.preventDefault()
+        }}/>
+        <MenuItem title='Manual Update' onClick={e => {
+          this.props.dispatch({
+            type: 'POPUP',
+            name:'manualUpdate',
+            data: {
+              active:true
+            }
+          })
 
-                e.preventDefault()
-              }}/>
-              <MenuItem title='Edit' onClick={e => {
+          e.preventDefault()
+        }}/>
+        <MenuItem title='Edit' onClick={e => {
                 // this.props.dispatch(getEditTaskView(   props.data))
                 this.props.dispatch({
                   type: 'POPUP',
@@ -2447,17 +2449,17 @@ export class WorkplanRow extends Component {
 
 
 
-            </MenuSection>
+              </MenuSection>
 
-          </Menu>
-        </WorkplanRow>
+              </Menu>
+              </WorkplanRow>
 
-      }
+            }
 
-      </td>
+            </td>
 
-    </tr>
-    )
+            </tr>
+            )
   }
   renderRow(value){
     return(
@@ -2468,8 +2470,8 @@ export class WorkplanRow extends Component {
         this.state[(value.WBS_ID).toString()] && this.state[(value.WBS_ID).toString()] !=false &&
         this.renderRow(value)
 
-      ])
-    )
+        ])
+      )
   }
 
   render(){
@@ -2477,18 +2479,18 @@ export class WorkplanRow extends Component {
     return (
       <tbody>
 
-        {
-          this.menu(value)
+      {
+        this.menu(value)
 
-        }
-        {
-          value.children.length !=0 && this.state[(value.WBS_ID).toString()] &&
-          this.renderRow(value)
-        }
+      }
+      {
+        value.children.length !=0 && this.state[(value.WBS_ID).toString()] &&
+        this.renderRow(value)
+      }
       </tbody>
 
 
-    )
+      )
   }
 }
 
@@ -2504,22 +2506,22 @@ export class ActivityRow extends Component {
     var value = this.props.data
     return (
       <tbody>
-        {
-          value.sub.map((value, index) => (
-            <tr>
-              <td style={{paddingLeft: '60px'}}>{value.task}</td>
-              <td>{value.work}</td>
-              <td>{value.work_total}</td>
-              <td>{value.duration}</td>
-              <td>{value.start_date}</td>
-              <td>{value.end_date}</td>
-              <td>{value.work_complete}</td>
-              <td>{value.resources}</td>
-            </tr>
+      {
+        value.sub.map((value, index) => (
+          <tr>
+          <td style={{paddingLeft: '60px'}}>{value.task}</td>
+          <td>{value.work}</td>
+          <td>{value.work_total}</td>
+          <td>{value.duration}</td>
+          <td>{value.start_date}</td>
+          <td>{value.end_date}</td>
+          <td>{value.work_complete}</td>
+          <td>{value.resources}</td>
+          </tr>
           ))
-        }
+      }
       </tbody>
-    )
+      )
   }
 }
 
@@ -2532,17 +2534,17 @@ export class InputFile extends Component {
   render(){
     return(
       <div style={this.props.style}>
-        <form>
-          <FileInput
-            name={this.props.name}
-            placeholder={this.props.placeholder}
-            accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-            onChange={this.handleChange}
-            >
-          </FileInput>
-        </form>
-        </div>
-    )
+      <form>
+      <FileInput
+      name={this.props.name}
+      placeholder={this.props.placeholder}
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onChange={this.handleChange}
+      >
+      </FileInput>
+      </form>
+      </div>
+      )
   }
 }
 
@@ -2550,14 +2552,14 @@ export class ReduxFileInput extends Component {
   render(){
     return(
       <FileInput
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
-        onDrop={(event)=> this.props.input.onDrop(event.target.files[0])}
-        {...this.props.custom}
-        >
+      name={this.props.name}
+      placeholder={this.props.placeholder}
+      accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
+      onDrop={(event)=> this.props.input.onDrop(event.target.files[0])}
+      {...this.props.custom}
+      >
       </FileInput>
-    )
+      )
   }
 }
 
@@ -2578,18 +2580,18 @@ export class ReduxUploadWorkplan extends Component {
       placeholder='Upload File'
       accept=".zip,.doc,.docs,.docx,.xls,.pdf,.xlsx,.jpg,.jpeg,.png"
       onDrop={( filesToUpload, e ) => {this.props.input.onChange(filesToUpload)
-      console.log(filesToUpload)
-      this.setState({
-        value:filesToUpload[0].name
-      })
-      e.preventDefault()
+        console.log(filesToUpload)
+        this.setState({
+          value:filesToUpload[0].name
+        })
+        e.preventDefault()
       }}
       >
       <input type="text" value={this.state.value} onkeydown="return false;"></input>
       </Dropzone>
 
       </div>
-    )
+      )
   }
 }
 
@@ -2607,7 +2609,7 @@ export class ReduxDropProfilePicture extends Component {
       onDrop={( filesToUpload, e ) => this.props.input.onChange(filesToUpload)}
       >
       </Dropzone>
-    )
+      )
   }
 }
 
@@ -2615,15 +2617,15 @@ export class LoaderLogin extends Component {
   render(){
     return(
       <div className='loader-login-wrapper'>
-        <div className='load' id={this.props.id}>
-          <div className='loader'  style={this.props.style}>
-            <div className='loader__figure'></div>
+      <div className='load' id={this.props.id}>
+      <div className='loader'  style={this.props.style}>
+      <div className='loader__figure'></div>
 
-          </div>
-        </div>
-        {this.props.children}
       </div>
-    )
+      </div>
+      {this.props.children}
+      </div>
+      )
   }
 }
 
@@ -2631,9 +2633,9 @@ export class EmptyData extends Component {
   render(){
     return(
       <div style={{width:'100%'}}>
-        <large style={{width:'100%', textAlign:'center'}} >NO DATA TO SHOW</large>
+      <large style={{width:'100%', textAlign:'center'}} >NO DATA TO SHOW</large>
       </div>
-    )
+      )
   }
 }
 
@@ -2641,14 +2643,14 @@ export class PageLoader extends Component {
   render(){
     return(
       <div className='loader-wrapper'>
-        <div className='load' id={this.props.id}>
-          <div className='loader'  style={this.props.style}>
-            <div className='loader__figure'></div>
+      <div className='load' id={this.props.id}>
+      <div className='loader'  style={this.props.style}>
+      <div className='loader__figure'></div>
 
-          </div>
-        </div>
       </div>
-    )
+      </div>
+      </div>
+      )
   }
 }
 
@@ -2656,57 +2658,57 @@ export class Pagination extends Component {
   render(){
     return(
       <div className="container" style={{float:'right'}}>
-        <button className="arrow"> <b> &lt; </b> </button>
-        <button className="pagination"><b>1</b></button>
-        <button className="arrow"> <b> &gt; </b> </button>
+      <button className="arrow"> <b> &lt; </b> </button>
+      <button className="pagination"><b>1</b></button>
+      <button className="arrow"> <b> &gt; </b> </button>
       </div>
-    )
+      )
   }
 }
 
 export class datepickerUniversal extends Component {
 
-    static defaultProps(){
-      placeholder: ''
-    }
+  static defaultProps(){
+    placeholder: ''
+  }
 
-    constructor (props) {
-      super(props)
-      this.handleChange = this.handleChange.bind(this)
-    }
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    handleChange (date) {
-      this.props.input.onChange(moment(date).format('DD-MMM-YYYY'))
+  handleChange (date) {
+    this.props.input.onChange(moment(date).format('DD-MMM-YYYY'))
 
-    }
+  }
 
-    render () {
-      console.log('DATE PICKER PROPS', this.props.meta)
-      const {
-        input, placeholder,
-        meta: {touched, error}
-      } = this.props
+  render () {
+    console.log('DATE PICKER PROPS', this.props.meta)
+    const {
+      input, placeholder,
+      meta: {touched, error}
+    } = this.props
 
-      return (
-        <div style={this.props.style}>
-          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-          <DatePicker
-            style={{width:'100%'}}
-          {...input}
-          placeholder={placeholder}
-          dateFormat="DD-MMM-YYYY"
-          className={ this.props.meta.touched && this.props.meta.error != null && 'error'}
-          
-          // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
-          selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
-          // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
+    return (
+      <div style={this.props.style}>
+      {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+      {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+      <DatePicker
+      style={{width:'100%'}}
+      {...input}
+      placeholder={placeholder}
+      dateFormat="DD-MMM-YYYY"
+      className={ this.props.meta.touched && this.props.meta.error != null && 'error'}
+      
+      // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
+      selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
+      // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
 
-          // onChange={this.handleChange}
-         >
-          {this.props.children}
-          </DatePicker>
-          {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+      // onChange={this.handleChange}
+      >
+      {this.props.children}
+      </DatePicker>
+      {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
 
 
 
@@ -2715,22 +2717,22 @@ export class datepickerUniversal extends Component {
       </div>
 
       )
-    }
   }
+}
 
 export class datepickerTimesheet extends Component {
 
-    static defaultProps(){
-      placeholder: ''
-    }
+  static defaultProps(){
+    placeholder: ''
+  }
 
-    constructor (props) {
-      super(props)
-      this.handleChange = this.handleChange.bind(this)
-    }
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    handleChange (date) {
-      this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
+  handleChange (date) {
+    this.props.input.onChange(moment(date).format('YYYY-MM-DD'))
       // this.props.input.onChange(moment(date).format(`DD-${MMM.toUpperCase()}-YY`))
     }
 
@@ -2742,23 +2744,23 @@ export class datepickerTimesheet extends Component {
 
       return (
         <div style={this.props.style}>
-          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-          {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-          <DatePicker
-          {...input}
-          placeholder={placeholder}
-          dateFormat="YYYY-MM-DD"
-          // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
-          selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
-          onChange={this.handleChange}
-          minDate={moment().subtract(2,'month')}
-          maxDate={moment()}
-         >
-          {this.props.children}
-          </DatePicker>
-      </div>
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <DatePicker
+        {...input}
+        placeholder={placeholder}
+        dateFormat="YYYY-MM-DD"
+        // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
+        selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
+        onChange={this.handleChange}
+        minDate={moment().subtract(2,'month')}
+        maxDate={moment()}
+        >
+        {this.props.children}
+        </DatePicker>
+        </div>
 
-      )
+        )
     }
   }
 
