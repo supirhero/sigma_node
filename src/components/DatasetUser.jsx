@@ -40,7 +40,7 @@ class DatasetUser extends Component {
                       {value:value.USER_ID},
                       {value:value.USER_NAME},
                       {value:value.EMAIL},
-                      {value:value.LAST_LOGIN}
+                      {value:value.LAST_LOGIN && `${(value.LAST_LOGIN).substr(0,10)} | ${(value.LAST_LOGIN).substr(11,5)} ${(value.LAST_LOGIN).substr(26,2)}`}
                     ]}
                   }):null}>
                 </TablePagination>                            
