@@ -279,7 +279,7 @@ componentDidUpdate(){
                         inputName="WORK HOURS"
                         name="HOUR"
                         type="HOUR"
-                        component={ReduxSelect}
+                        component={ReduxInput}
                         validate={[required]}
                       />
                     </div>
@@ -290,7 +290,7 @@ componentDidUpdate(){
                         inputName="SUBJECT"
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
-                        component={ReduxSelect}
+                        component={ReduxInput}
                         // validate={[required]}
                       />
                     </div>
@@ -301,7 +301,7 @@ componentDidUpdate(){
                           inputName="MESSAGE"
                           name="TS_MESSAGE"
                           // type="TS_MESSAGE"
-                          component={ReduxSelect}
+                          component={ReduxInput}
                           // validate={[required]}
                         />
                     </div>
