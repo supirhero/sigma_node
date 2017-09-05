@@ -337,14 +337,13 @@ class BusinessUnit extends Component {
                               {
                                 value.SPI
                               }
-                              &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
+              
                               </small>
                               <small style={{fontSize:'15px', marginBottom:'11px', marginTop:'11px'}} className='project-status'>
                               CPI :
                               {
                                 value.CPI
                               }
-                              &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
                               </small>
                               <Line
                               progress={value.PROJECT_COMPLETE *0.01}
