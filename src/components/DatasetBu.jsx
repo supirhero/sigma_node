@@ -15,9 +15,16 @@ import {Field, reduxForm} from 'redux-form';
 
 
 class DatasetBu extends Component {
+  constructor(){
+    super();
+    this.state = {
+      search : ""
+    };
+  }
+
   componentWillMount(){
     const bu = store.getState().data.bu
-    store.dispatch(getDataMaster("bu"))
+    store.dispatch(getDataMaster("bu",this.state.search))
   }
   
  
@@ -41,7 +48,7 @@ class DatasetBu extends Component {
   onSubmitEdit(props){
     alert("Business Unit Updated")
     this.props.dispatch(editBU(props)).then(res => {
-      this.props.dispatch(getDataMaster("bu"))
+      this.props.dispatch(getDataMaster("bu",this.state.search))
       store.dispatch({
         type: 'POPUP',
         name: 'editBusinessUnit',
@@ -222,7 +229,17 @@ class DatasetBu extends Component {
                     </div>
                     </form>
                   </PopUp>
-                  <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
+                  <Search placeholder='Search for BU' style={{width:'400px', display:'block', float:'right'}}
+                  onChange={e=>{
+                    this.setState({search:e.target.value},()=>{
+                      store.dispatch(getDataMaster("bu",this.state.search))
+                    })
+                    e.preventDefault()
+                  }}
+                  
+                   >
+            
+                  </Search>
                 </div>
                 <div className="unit whole">
                   <TablePaginationBU

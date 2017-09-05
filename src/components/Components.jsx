@@ -1258,19 +1258,6 @@ export class TablePagination extends Component {
       <div className="unit whole">
       
       </div>
-      <div className="container" style={{float:'left'}}>
-      <small style={{display:'inline-block'}}>show entries</small>
-      <Select
-      style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-      items={{
-        items : [
-        {title : '10'},
-        {title : '20'}
-        ]
-      }}
-      />
-
-      </div>
       <div className="container" style={{float:'right'}}>
       <button className="arrow" onClick={e=> {
         this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
@@ -1490,6 +1477,10 @@ export class TablePaginationHistory extends Component {
 
 
 
+    
+ 
+
+
 export class TablePaginationBU extends Component {
   constructor(props){
     super(props);
@@ -1616,19 +1607,6 @@ export class TablePaginationBU extends Component {
         </div>
         <div className="grid">
         <div className="unit whole">
-        
-        </div>
-        <div className="container" style={{float:'left'}}>
-        <small style={{display:'inline-block'}}>show entries</small>
-        <Select
-        style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-        items={{
-          items : [
-          {title : '10'},
-          {title : '20'}
-          ]
-        }}
-        />
         
         </div>
         <div className="container" style={{float:'right'}}>
@@ -1847,142 +1825,161 @@ export class TablePaginationUser extends Component {
       floor: 0,
     };
   }
-      // getInitialState() {
-      //   return { 
-      //     page : 0,
-      //     ceiling: 0,
-      //     floor: 10,
-      //     data : props.tableData.slice(0,10)
+  // getInitialState() {
+  //   return { 
+  //     page : 0,
+  //     ceiling: 0,
+  //     floor: 10,
+  //     data : props.tableData.slice(0,10)
+
+  //   };
+  // }
+  render() {
+    var pages = [];
+    const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+
+    
+    for (var i=1; i<=pagesAmount; i++) {
+      pages.push(i);
+    }
+
+    return (
+      <div>
+      <div className="grid">
+      <div className="unit whole">
+
       
-      //   };
-      // }
-      render() {
-        var pages = [];
-        const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+      <table className="table" style={{ width: '100%' }}>
+      <thead>
+      <tr>
+      {
+        this.props.tableHeader.map((value, index) => (
+          <th key={index}>{value.value}</th>
+          ))
+      }
+      </tr>
+      </thead>
+
+      <tbody>
+      {
         
-        for (var i=1; i<=pagesAmount; i++) {
-          pages.push(i);
-        }
-        
-        return (
-          <div>
-          <div className="grid">
-          <div className="unit whole">
-          
-          
-          <table className="table" style={{ width: '100%' }}>
-          <thead>
-          <tr>
+        this.props.tableData &&
+        this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
+          <tr className="items" key={index}>
           {
-            this.props.tableHeader.map((value, index) => (
-              <th key={index}>{value.value}</th>
+            row.column.map((column, index) => (
+              <td key={index}>{column.value}</td>
               ))
           }
-          </tr>
-          </thead>
+          <td style={{ position: 'relative', float:'right' }}>
+          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
+            store.dispatch({
+              type: 'POPUP',
+              name: this.props.editPopUp,
+              data: {
+                active:true,
+              }
+            })
+            store.dispatch(initialize(this.props.form,
+            {
+              USER_ID: row.column[0].value,
+            }
+            ))
+            e.preventDefault()
+          }}> 
+          EDIT
+          </button>
           
-          <tbody>
-          {
-            
-            this.props.tableData &&
-            this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
-              <tr className="items" key={index}>
-              <td>{row.column[0].value}</td>
-              <td> {row.column[1].value}</td>
-              <td>{row.column[2].value}</td>
-              <td>{row.column[3].value}</td>
-              
-              
-                          {/* {
-                            row.column.map((column, index) => (
-                          <td key={index}>{column.value}</td>
-                            ))
-                          } */}
-                          <td style={{ position: 'relative', float:'right' }}>
-                          
-                          
-                          
-                          </td>
-                          </tr>
-                          ))
-          }
-          
-          </tbody>
-          </table>
-          
-          </div>
-          </div>
-          <div className="grid">
-          <div className="unit whole">
-          
-          </div>
-          <div className="container" style={{float:'left'}}>
-          <small style={{display:'inline-block'}}>show entries</small>
-          <Select
-          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-          items={{
-            items : [
-            {title : '10'},
-            {title : '20'}
-            ]
-          }}
-          />
-          
-          </div>
-          <div className="container" style={{float:'right'}}>
-          <button className="arrow" onClick={e=> {
-            this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
+            store.dispatch({
+              type: 'CONFIRM',
+              message: 'Delete Holday?',
+              show:true,
+              onConfirm: ()=> {
+                store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
+                  store.dispatch({
+                    type: 'CONFIRM',
+                    message: '',
+                    onConfirm: null
+                  })
+                  store.dispatch(getDataMaster("holiday"))
+
+                })
+              }
+            })
             
             e.preventDefault()
-          }}> <b> &lt; </b> </button>
-          {
-            
-            pages.slice(
-              3 % this.state.page != 3 ? 0 :
-              this.state.page % 3  == 0  ? 
-              this.state.page % 2 != 0 ? this.state.page -2 :
+          }}> 
+          <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
+          </button>
+          </td>
+          </tr>
+          ))
+      }
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      <div className="grid">
+      <div className="unit whole">
+      
+      </div>
+      <div className="container" style={{float:'right'}}>
+      <button className="arrow" onClick={e=> {
+        this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+        
+        e.preventDefault()
+      }}> <b> &lt; </b> </button>
+      {
+        
+        pages.slice(
+          3 % this.state.page != 3 ? 0 :
+          this.state.page % 3  == 0  ? 
+          this.state.page % 2 != 0 ? this.state.page -2 :
+          
+          (this.state.page-3)
+          : this.state.page-3  
+          ,
+          3 % this.state.page != 3 ? 5 :
+          this.state.page % 3  == 0  ? 
+          this.state.page % 2 != 0 ? this.state.page +1 :
+          this.state.page+2
+          : this.state.page+2  
+
+          ).map((value, index)=> (
+            <button 
+            className={this.state.page == value ? "pagination" : 'arrow'}
+            onClick={e=> {
+              this.setState({page: value},()=>[
+                console.log(this.state.page)
+                ])
               
-              (this.state.page-3)
-              : this.state.page-3  
-              ,
-              3 % this.state.page != 3 ? 5 :
-              this.state.page % 3  == 0  ? 
-              this.state.page % 2 != 0 ? this.state.page +1 :
-              this.state.page+2
-              : this.state.page+2  
-              
-              ).map((value, index)=> (
-                <button 
-                className={this.state.page == value ? "pagination" : 'arrow'}
-                onClick={e=> {
-                  this.setState({page: value},()=>[
-                    console.log(this.state.page)
-                    ])
-                  
-                  var ceiling = value*10
-                  var floor = ceiling-10
-                  this.setState({
-                    ceiling : ceiling,
-                    floor : floor
-                  })
-                              {/* const newData = this.props.tableData.slice(floor, ceiling)
-                              this.setState({data : newData})  */}
-                              e.preventDefault()
-                            }}>
-                            <b>{value}</b></button>
-                            ))
-            }
-            <button className="arrow">. . .</button>
-            <button className="arrow" onClick={e=> {
-              this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-              
-              e.preventDefault()
-            }}> <b> &gt; </b> </button>
-            </div>
-            </div>
-            </div>
-            
-            );
+              var ceiling = value*10
+              var floor = ceiling-10
+              this.setState({
+                ceiling : ceiling,
+                floor : floor
+              })
+                          {/* const newData = this.props.tableData.slice(floor, ceiling)
+                          this.setState({data : newData})  */}
+                          e.preventDefault()
+                        }}>
+                        <b>{value}</b></button>
+                        ))
+        }
+        <button className="arrow">. . .</button>
+        <button className="arrow" onClick={e=> {
+          this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+          
+          e.preventDefault()
+        }}> <b> &gt; </b> </button>
+        </div>
+        </div>
+        </div>
+
+        );
 }
 }
 

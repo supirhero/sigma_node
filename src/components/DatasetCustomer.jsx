@@ -136,6 +136,7 @@ class DatasetCustomer extends Component {
                 </TableNew>
 
                  <div className="unit whole">
+                 {/* 
                   <div className="container" style={{float:'left'}}>
                     <small style={{display:'inline-block'}}>show entries</small>
                      <Select 
@@ -149,6 +150,7 @@ class DatasetCustomer extends Component {
                         />
                   
                   </div>
+                  */}
                   <div className="container" style={{float:'right'}}>                  
                     <button className="arrow"> <b> &lt; </b> </button>
                     <button className="pagination"><b>1</b></button>
