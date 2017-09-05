@@ -1593,13 +1593,13 @@ export function requestRebaseline(id, props, array){
   }
 }
 
-export function getDataMaster(data){
+export function getDataMaster(data,keyword){
 
   return function(dispatch){
     const token = cookies.get('token')
     return axios({
       method:'GET',
-      url:`${baseURL}Datamaster/getData/${data}?token=${token}`,
+      url:`${baseURL}Datamaster/getData/${data}/${keyword}?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then(
       (res)=>{

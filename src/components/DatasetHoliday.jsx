@@ -15,7 +15,8 @@ class DatasetHoliday extends Component {
     super();
     this.state = {
       month : 8,
-      year: 2017
+      year: 2017,
+      search : ""
     };
   }
 
@@ -34,7 +35,7 @@ class DatasetHoliday extends Component {
 onSubmitUpdateHoliday(props){
   alert("Holiday Updated")
   this.props.dispatch(updateHoliday(props)).then(res => {
-    this.props.dispatch(getDataMaster("holiday"))
+    this.props.dispatch(getDataMaster("holiday",this.state.search))
     store.dispatch({
       type: 'POPUP',
       name: 'editHoliday',
@@ -45,24 +46,20 @@ onSubmitUpdateHoliday(props){
     
   })
 }
-componentWillUpdate() {
-  
-}
-componentDidUpdate() {
-  
-}
+
 
   componentWillMount(){
     const state = store.getState()
     const holiday = state.data.holiday
     // const holiday = store.getState().data.holiday
-    this.props.dispatch(getDataMaster("holiday"))
+    this.props.dispatch(getDataMaster("holiday",this.state.search))
   }
 
   onSubmit(props){
     alert("New Holiday Added")
     this.props.dispatch(addHoliday(props)).then(
       ()=> {
+        this.props.dispatch(getDataMaster("holiday",this.state.search))
         store.dispatch({
           type: 'POPUP',
           name: 'createHoliday',
@@ -226,7 +223,18 @@ componentDidUpdate() {
                     </div>
                     </form>
 									</PopUp>
-									<Search placeholder='search holiday' style={{float:'right',width:'400px'}} />
+                  <Search placeholder='Search for Holiday' style={{width:'400px', display:'block', float:'right'}}
+                  onChange={e=>{
+                    this.setState({search:e.target.value},()=>{
+                      store.dispatch(getDataMaster("holiday",this.state.search))
+                    })
+                    e.preventDefault()
+                  }}
+                  
+                   >
+            
+                  </Search>
+                  
 								</div>
 								<div className="unit whole">
 

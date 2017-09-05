@@ -13,21 +13,21 @@ class DatasetUser extends Component {
   constructor() {
     super()
     this.state= {
-      search : ''
+      search : ""
     }
   }
 
   componentWillMount(){
     const user = store.getState().data.user
     // store.dispatch(getDataMaster())
-    store.dispatch(getDataMaster("user"))
+    store.dispatch(getDataMaster("user",this.state.search))
     
   }
 
   onSubmitUpdateUser(props){
     alert("Holiday Updated")
     this.props.dispatch(changePassword(props)).then(res => {
-      this.props.dispatch(getDataMaster("user"))
+      this.props.dispatch(getDataMaster("user",this.state.search))
       store.dispatch({
         type: 'POPUP',
         name: 'editUser',
@@ -53,7 +53,7 @@ class DatasetUser extends Component {
     return (
       <div>
 
-      <PopUp id="editUser" context={this} dividerText="EDIT USER" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
+      <PopUp id="editUser" context={this} dividerText="CHANGE USER PASSWORD" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
       <form onSubmit={handleSubmit(this.onSubmitUpdateUser.bind(this))}>
         <div>     
           <div className="grid wrap narrow">
@@ -102,14 +102,14 @@ class DatasetUser extends Component {
             <div className="card" style={{ padding: '15px 35px' }}>
               <div className="unit whole">
                 <Header text='User' style={{display:'inline-block'}} />
-                <Search placeholder='Search User' style={{width:'400px', display:'block', float:'right'}}
-                // onChange={e=>{
-                //   this.setState({search:e.target.value},()=>{
-                //     store.dispatch(getDataMaster("user"))
-                //   })
-                //   e.preventDefault()
-                // }}
-                //
+                <Search placeholder='Search for User' style={{width:'400px', display:'block', float:'right'}}
+                onChange={e=>{
+                  this.setState({search:e.target.value},()=>{
+                    store.dispatch(getDataMaster("user",this.state.search))
+                  })
+                  e.preventDefault()
+                }}
+                
                  >
           
                 </Search>
