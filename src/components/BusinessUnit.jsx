@@ -119,6 +119,15 @@ class BusinessUnit extends Component {
           </div>
         </div> */}
 
+        <label className='projects'>
+        SPI:
+          {
+          state.data.bu_spi
+          } 
+          CPI:{
+          state.data.bu_cpi
+          } 
+        </label>
         <div className='projects'>
         <div>
         <div className="grid wrap">
@@ -270,7 +279,6 @@ class BusinessUnit extends Component {
                             var color= '#F48165'
                             switch (value.PROJECT_STATUS) {
                               case 'In Progress':
-
                               color= '#65BDF4'
                               break;
                               case 'Completed':
