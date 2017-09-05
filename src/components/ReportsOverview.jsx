@@ -303,17 +303,18 @@ class ReportsOverview extends Component {
                     {
                       r_yearly_spi &&
                       r_yearly_spi.map((value,index)=>{
-                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),CIA2:parseFloat(value.CIA2),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TSDM:parseFloat(value.TSDM),TKDM:parseFloat(value.TKDM)}
                     }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
                             {key:'CIA1', stroke:'#94dea9'},
+                            {key:'CIA2', stroke:'#642bb6'},
                             {key:'DCES', stroke:'#795548'},
                             {key:'FSD', stroke:'#0099ff'},
                             {key:'ITPS', stroke:'#642bb6'},
                             {key:'SGP', stroke:'#f8aa27'},
                             {key:'SMS', stroke:'#94dea9'},
                             {key:'SSI', stroke:'#795548'},
-                            {key:'TBSDM', stroke:'#0099ff'},
+                            {key:'TSDM', stroke:'#0099ff'},
                             {key:'TKDM', stroke:'#642bb6'},                              													
 													]}
                     style={{marginTop:'50px'}}
@@ -328,22 +329,23 @@ class ReportsOverview extends Component {
                   !r_yearly_cpi ? <PageLoader /> :
                 
                   <LineChart
-                    label="SPI HISTORY"
+                    label="CPI HISTORY"
                     data=
                     {
                       r_yearly_cpi &&
                       r_yearly_cpi.map((value,index)=>{
-                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TBSDM:parseFloat(value.TBSDM),TKDM:parseFloat(value.TKDM)}
+                      return {name:value.name,BSD:parseFloat(value.BSD),CIA1:parseFloat(value.CIA1),CIA2:parseFloat(value.CIA2),DCES:parseFloat(value.DCES),FSD:parseFloat(value.FSD),ITPS:parseFloat(value.ITPS),SGP:parseFloat(value.SGP),SMS:parseFloat(value.SMS),SSI:parseFloat(value.SSI),TSDM:parseFloat(value.TSDM),TKDM:parseFloat(value.TKDM)}
                     }) }
                     lines={[{key:'BSD', stroke:'#f8aa27'},
                             {key:'CIA1', stroke:'#94dea9'},
+                            {key:'CIA2', stroke:'#642bb6'},
                             {key:'DCES', stroke:'#795548'},
                             {key:'FSD', stroke:'#0099ff'},
                             {key:'ITPS', stroke:'#642bb6'},
                             {key:'SGP', stroke:'#f8aa27'},
                             {key:'SMS', stroke:'#94dea9'},
                             {key:'SSI', stroke:'#795548'},
-                            {key:'TBSDM', stroke:'#0099ff'},
+                            {key:'TSDM', stroke:'#0099ff'},
                             {key:'TKDM', stroke:'#642bb6'},                              													
 													]}
                     style={{marginTop:'50px'}}
