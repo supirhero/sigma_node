@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, required,TimeSheetTimeButton, PopUp, Select, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { addTimesheet, viewTimesheet, taskList, pop,getDay,weekTimesheet } from './actions.jsx';
+import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet } from './actions.jsx';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
