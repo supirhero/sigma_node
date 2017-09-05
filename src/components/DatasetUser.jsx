@@ -5,8 +5,9 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePagination,Header,Search ,PageLoader} from './Components.jsx';
-import {getDataMasterUser,getDataMaster} from './actions.jsx'
+import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput} from './Components.jsx';
+import {getDataMasterUser,getDataMaster,changePassword} from './actions.jsx'
+import {Field, reduxForm} from 'redux-form';
 
 class DatasetUser extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class DatasetUser extends Component {
   }
 
   onSubmitUpdateUser(props){
-    alert("Holiday Updated")
+    alert("User Password Changed")
     this.props.dispatch(changePassword(props)).then(res => {
       this.props.dispatch(getDataMaster("user",this.state.search))
       store.dispatch({
@@ -41,6 +42,7 @@ class DatasetUser extends Component {
 
 
   render() {
+    const {handleSubmit} = this.props;
     const state = store.getState()
     const user = state.data.user
 
@@ -113,17 +115,25 @@ class DatasetUser extends Component {
                 </Search>
               </div>
               <div className="unit whole">
-                <TablePagination
-                  tableHeader={[{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'LAST LOGIN'}]}
-                  tableData={user?user.map((value,index)=>{
-                    return {column:[
-                      {value:value.USER_ID},
-                      {value:value.USER_NAME},
-                      {value:value.EMAIL},
-                      {value:value.LAST_LOGIN}
-                    ]}
-                  }):null}>
-                </TablePagination>                            
+              <TablePaginationUser 
+              form='editUser' 
+              editPopUp='editUser' 
+              deletePopUp='deleteUser' 
+               
+             tableHeader={[{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'USER TYPE'},{value:'LAST LOGIN'},{value:null}]} 
+             tableData={ 
+              user ?  user.map((value,index)=>{ 
+                return {column:[ 
+                  {value:value.USER_ID}, 
+                  {value:value.USER_NAME}, 
+                  {value:value.EMAIL}, 
+                  {value:value.USER_TYPE_ID}, 
+                  {value:value.LAST_LOGIN && `${(value.LAST_LOGIN).substr(0,10)} | ${(value.LAST_LOGIN).substr(11,5)} ${(value.LAST_LOGIN).substr(26,2)}`} 
+                ]} 
+             }) : [ ] }> 
+              
+            
+           </TablePaginationUser>                      
               </div>
 
                 
@@ -138,8 +148,12 @@ class DatasetUser extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
 		// filter: ownProps.location.query.filter
   };
 }
-export default connect(mapStateToProps)(DatasetUser);
-// export default Login
+
+export default connect(mapStateToProps, { getDataMaster })(
+  reduxForm({
+    form: 'editUser',
+  })(DatasetUser));

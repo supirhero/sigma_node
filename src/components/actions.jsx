@@ -2173,3 +2173,24 @@ export const gethistorydetail = (wbs_id) => {
           )
   }
 }
+
+export function changePassword(props){ 
+  return function(dispatch){ 
+    const token = cookies.get('token') 
+    return axios({ 
+      method:'POST', 
+      url:`${baseURL}Datamaster/user/ext/changepassword?token=${token}`, 
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+      data: { 
+        user_id : props.USER_ID, 
+        password : props.PASSWORD 
+      } 
+    }).then( 
+      (res)=>{ 
+        return res 
+        alert('password changed') 
+      } 
+    ) 
+  } 
+} 
+
