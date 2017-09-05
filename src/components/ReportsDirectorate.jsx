@@ -6,7 +6,6 @@ import { deleteAuthentication ,getListBU,rDirectorat, showNotif, getDirectorateE
 import store from '../reducers/combineReducers.jsx';
 import {BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader, Select} from './Components.jsx';
 
-
 class ReportsDirectorate extends Component {
   constructor(props) {
     super(props)
