@@ -337,7 +337,6 @@ class BusinessUnit extends Component {
                               {
                                 value.SPI
                               }
-              
                               </small>
                               <small style={{fontSize:'15px', marginBottom:'11px', marginTop:'11px'}} className='project-status'>
                               CPI :
