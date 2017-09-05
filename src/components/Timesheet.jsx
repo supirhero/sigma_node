@@ -4,10 +4,9 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, required,TimeSheetTimeButton, PopUp, ReduxSelectNew,Select,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, ReduxSelect,Select,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet } from './actions.jsx';
-
 import moment from 'moment';
 
 
@@ -235,7 +234,7 @@ componentDidUpdate(){
                             // e.preventDefault()
                           }
                         }
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         // validate={[required]}
                         >
                       <option></option>
@@ -257,7 +256,7 @@ componentDidUpdate(){
                                         <Field
                                         name="WP_ID"                                        
                                           inputName="TASK"
-                                          component={ReduxSelectNew}
+                                          component={ReduxSelect}
                                           // validate={[required]}
                                           >
                                           <option></option>
@@ -269,9 +268,9 @@ componentDidUpdate(){
                                               }
                                        </Field>
                                        :
-                                        <ReduxSelectNew inputName="TASK">
+                                        <Select inputName="TASK">
                                         <options> </options>
-                                        </ReduxSelectNew>
+                                        </Select>
                                       }
                                       </div>
 
@@ -280,7 +279,7 @@ componentDidUpdate(){
                         inputName="WORK HOURS"
                         name="HOUR"
                         type="HOUR"
-                        component={ReduxInput}
+                        component={ReduxSelect}
                         // validate={[required]}
                       />
                     </div>
@@ -291,7 +290,7 @@ componentDidUpdate(){
                         inputName="SUBJECT"
                         name="TS_SUBJECT"
                         type="TS_SUBJECT"
-                        component={ReduxInput}
+                        component={ReduxSelect}
                         // validate={[required]}
                       />
                     </div>
@@ -302,7 +301,7 @@ componentDidUpdate(){
                           inputName="MESSAGE"
                           name="TS_MESSAGE"
                           // type="TS_MESSAGE"
-                          component={ReduxInput}
+                          component={ReduxSelect}
                           // validate={[required]}
                         />
                     </div>
