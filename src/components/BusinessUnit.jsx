@@ -102,6 +102,7 @@ class BusinessUnit extends Component {
           }
         }
         />
+
         </div>
         </div>
 
@@ -133,14 +134,12 @@ class BusinessUnit extends Component {
           e.preventDefault()
         }}
         >
-
         </Search>
         </div>
         </div>
         <div style={{marginBottom: '30px'}} className='grid wrap'>
         <div className='unit three-fifths'>
-
-
+        
         <div>
         <select 
         className='select' style={{height:'49px', width:'33.333%', display:'inline-block'}}
@@ -332,6 +331,18 @@ class BusinessUnit extends Component {
                                 value.PROJECT_STATUS
                               }
                               &nbsp;(<large style={{color: color, display:'inline-block', fontSize:'15px'}}>{value.PROJECT_COMPLETE}%</large>)
+                              </small>
+                              <small style={{fontSize:'15px', marginBottom:'11px', marginTop:'11px'}} className='project-status'>
+                              SPI :
+                              {
+                                value.SPI
+                              }
+                              </small>
+                              <small style={{fontSize:'15px', marginBottom:'11px', marginTop:'11px'}} className='project-status'>
+                              CPI :
+                              {
+                                value.CPI
+                              }
                               </small>
                               <Line
                               progress={value.PROJECT_COMPLETE *0.01}
