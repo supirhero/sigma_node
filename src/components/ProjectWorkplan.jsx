@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import store from '../reducers/combineReducers.jsx';
 
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal,datepickerTimesheet ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
 
 
 import { Field, reduxForm } from 'redux-form';
@@ -161,13 +161,27 @@ class ProjectWorkplan extends Component {
                     active:true
                   }
                 }) */}
-                this.props.dispatch(deleteTask( value.WBS_ID)).then(
-                  res=> {
-                    showNotif('Task deleted', 'GREEN')
-                    const id = this.props.state.page.id;
-                    this.props.dispatch(getWorkplanView(id))
-                  }
-                )
+                this.props.dispatch({
+                    type: 'CONFIRM',
+                    message: 'Would you like to delete task?',
+                    show:true,
+                    onConfirm: ()=> {
+                      this.props.dispatch(deleteTask( value.WBS_ID)).then(
+                        res=> {
+                          {/* showNotif('Task deleted', 'GREEN') */}
+                          this.props.dispatch({
+                            type: 'CONFIRM',
+                            message: '',
+                            show: false,
+                          })
+                          const id = this.props.state.page.id;
+                          this.props.dispatch(getWorkplanView(id))
+                        }
+                      )
+                    }
+                  })
+
+             
 
                 e.preventDefault()
               }}/>
@@ -240,7 +254,8 @@ class ProjectWorkplan extends Component {
   onSubmitAssign(props){
     const id = this.props.state.page.id;
     this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
-    this.props.dispatch(getCreateTaskView(id));
+    this.props.dispatch(getWorkplanView(id));
+      
     
       this.props.dispatch({
         type: 'POPUP',

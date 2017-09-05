@@ -10,8 +10,8 @@ import {getSCurve,pop} from './actions.jsx'
 
 class ProjectSCurve extends Component {
   componentWillMount(){
-    const id = store.getState().page.id
-    store.dispatch(getSCurve(id))
+    const id = this.props.state.page.id
+    this.props.dispatch(getSCurve(id))
     // const state = store.getState()
     // const s_curve = state.data.s_curve ? state.data.s_curve : null
   }
