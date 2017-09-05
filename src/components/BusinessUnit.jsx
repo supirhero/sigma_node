@@ -120,18 +120,24 @@ class BusinessUnit extends Component {
         </div> */}
 
         <label className='projects'>
-        SPI:
-          {
-          state.data.bu_spi
-          } 
-          CPI:{
-          state.data.bu_cpi
-          } 
         </label>
         <div className='projects'>
         <div>
         <div className="grid wrap">
         <div className="unit whole">
+        <div className="unit half">
+          SPI:
+          {
+          state.data.bu_spi
+          }
+        </div>
+        <div className="unit half">
+      
+             CPI:{
+          state.data.bu_cpi
+          } 
+        </div>
+        
         <button className='btn-secondary' style={{padding:'17px 22px', width:'20%', float:'right'}} onClick={e => {
           browserHistory.push('/new-project')
         }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
