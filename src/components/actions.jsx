@@ -1609,13 +1609,12 @@ export function getDataMaster(data){
   }
 }
 
-export function getDataMasterUser(){
-  
+export function getDataMasterUser(keyword){
     return function(dispatch){
       const token = cookies.get('token')
       return axios({
         method:'GET',
-        url:`${baseURL}datamaster/getData/user?token=${token}`,
+        url:`${baseURL}Datamaster/getData/user/100/1/${keyword}?token=${token}`,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }).then(
         (res)=>{
@@ -1624,6 +1623,8 @@ export function getDataMasterUser(){
       )
     }
   }
+
+
 
 export function getDataMasterMIS(data){
   return function(dispatch){
@@ -2183,8 +2184,8 @@ export function changePassword(props){
       url:`${baseURL}Datamaster/user/ext/changepassword?token=${token}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: {
-        user_id : props.user_id,
-        password : props.password
+        user_id : props.USER_ID,
+        password : props.PASSWORD
       }
     }).then(
       (res)=>{
