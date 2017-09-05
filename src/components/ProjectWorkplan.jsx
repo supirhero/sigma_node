@@ -543,7 +543,7 @@ class ProjectWorkplan extends Component {
               </div>
               <div className="grid wrap narrow">
                 <div className="unit three-fifths">
-                    <h2 className="input-desc">Test</h2>
+                    <h2 className="input-desc">Invite Member</h2>
                       <ReactAutocomplete
                       menuStyle={{
                         opacity:'1'

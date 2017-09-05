@@ -4,12 +4,12 @@ import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, required,TimeSheetTimeButton, PopUp, Select, Input, ReduxSelectNew,ReduxInput,PageLoader,datepickerTimesheet, maxHours} from './components.jsx';
+import { Divider, required,TimeSheetTimeButton, PopUp, ReduxSelectNew,Select,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet } from './actions.jsx';
-import DatePicker from 'react-datepicker';
+
 import moment from 'moment';
-import DayPicker from 'react-day-picker';
+
 
 class Timesheet extends Component {
   constructor(){
@@ -48,7 +48,7 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-    // store.dispatch(getDay(""))
+    
   }
 
 componentDidUpdate(){
@@ -72,29 +72,6 @@ componentDidUpdate(){
     const state = store.getState();
     const timesheet = state.data;
     const weekdays = state.data.weekdays; 
-    // store.dispatch(weekTimesheet(this.state.click))
-    // console.log(this.state.click) 
-
-    // const startOfWeek = moment().startOf('week');
-    // const endOfWeek = g().endOf('week');
-    // var days = [];
-    // var day = startOfWeek;
-    // while (day < endOfWeek){
-    //   days.push(day.toDate());
-    //   day=day.clone().add(1,'d')
-    //   console.log(days)
-    // }
-
-    // console.log(timesheet.task);
-    // function status(){
-    //   if (timesheet.user_activities.IS_APPROVED == '1'){
-    //     return <b>DITERIMA</b>
-    //   } else if (timesheet.user_activities.IS_APPROVED == '-1'){
-    //     return <b>BELUM DIKONFIRMASI</b>
-    //   } else{
-    //     return <b>DITOLAK</b>
-    //   }
-    //  }
 
     function status(value) {
       let resubmit = '' ;
