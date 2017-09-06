@@ -2220,5 +2220,28 @@ export const reportDownloadPeople = (BU_ID, TAHUN, BULAN) => {
             },
           )
   }
+}
 
+
+export const uploadUsers = (files) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  
+  return function(dispatch){
+    const formData = new FormData();
+    const token = cookies.get('token')  
+    formData.append('userfile',files[0])
+    return fetch(`${baseURL}Datamaster/upload_users/?token=${token}`,{
+      method:'POST',
+      body:formData
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        
+        store.dispatch({type:'API', name: 'datamaster', data: res, append:true})
+
+
+      },
+    )
+  }
 }
