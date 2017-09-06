@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan} from './Components.jsx';
+import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan,ReduxUploadUser} from './Components.jsx';
 import {getDataMasterUser,getDataMaster,changePassword,uploadUsers} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -127,7 +127,7 @@ class DatasetUser extends Component {
             name="userfile"
             type='input'
             placeholder="Press to Select File"
-            component={ReduxUploadWorkplan}
+            component={ReduxUploadUser}
           />
             </div>
           </div>

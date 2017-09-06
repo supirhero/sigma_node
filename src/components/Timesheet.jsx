@@ -41,6 +41,7 @@ class Timesheet extends Component {
             active:false
           }
         })
+        resetForm()
         
         // res.preventDefault()
         // console.log("closed")
@@ -78,7 +79,7 @@ componentDidUpdate(){
 
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit,resetForm } = this.props;
     const currentDate = moment().format("ddd,MMM DD");
     const state = store.getState();
     const timesheet = state.data;

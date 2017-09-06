@@ -2693,7 +2693,7 @@ export class ReduxUploadWorkplan extends Component {
     this.state= {
       value:''
     }
-  }
+  } 
   render(){
     return(
       <div>
@@ -2708,7 +2708,7 @@ export class ReduxUploadWorkplan extends Component {
         this.setState({
           value:filesToUpload[0].name
         })
-        e.preventDefault()
+        
       }}
       >
       <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input>
@@ -2718,6 +2718,39 @@ export class ReduxUploadWorkplan extends Component {
       )
   }
 }
+
+export class ReduxUploadUser extends Component {
+  constructor() {
+    super()
+    this.state= {
+      value:''
+    }
+  } 
+  render(){
+    return(
+      <div>
+      <Dropzone
+      name={this.props.name}
+      className="upload-workplan"
+      style={this.props.style}
+      placeholder='Upload File'
+      accept=".xls,.xlsx"
+      onDrop={( filesToUpload, e ) => {this.props.input.onChange(filesToUpload)
+        console.log(filesToUpload)
+        this.setState({
+          value:filesToUpload[0].name
+        })
+        
+      }}
+      >
+      <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input>
+      </Dropzone>
+
+      </div>
+      )
+  }
+}
+
 
 
 
