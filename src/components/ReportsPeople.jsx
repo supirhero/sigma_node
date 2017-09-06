@@ -12,7 +12,7 @@ class ReportsPeople extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-      bu: 0,
+      bu: '',
       month : 0, 
       year: 0 ,
       bu_name : ''
