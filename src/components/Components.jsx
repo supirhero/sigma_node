@@ -482,8 +482,8 @@ export class Checkbox extends Component{
   render(){
     return (
       <p className='checkbox-button' style={this.props.style} >
-      <input type='checkbox' id={this.props.id} name={this.props.group} onClick={this.props.onClick} />
-      <label htmlFor={this.props.id}>{this.props.label}</label>
+        <input type='checkbox' id={this.props.id} name={this.props.group} onClick={this.props.onClick} checked={this.props.checked}/>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
       </p>
       )
   }
@@ -601,19 +601,19 @@ export class Meter extends Component {
 export class BarChart extends Component {
   render() {
     return(
-      <div className='bar-chart-container'>
-      <large style={this.props.labelStyle}>{this.props.label}</large>
-      <ResponsiveContainer width='100%' height={250}>
-      <ChartBar width={680} height={250} data={this.props.data}>
-      <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
-    {/* <YAxis /> */}
-  {/* <CartesianGrid strokeDasharray="3 3" /> */}
-  <Tooltip />
-  <Text scaleToFit={true} />
+      <div style={this.props.style} className='bar-chart-container'>
+        <large style={this.props.labelStyle}>{this.props.label}</large>
+        <ResponsiveContainer width='100%' height={250}>
+          <ChartBar width={680} height={250} data={this.props.data}>
+            <XAxis dataKey="name" interval={0} tickCount={12} padding={{right:10}} />
+            {/* <YAxis /> */}
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+            <Tooltip />
+            <Text scaleToFit={true} />
 
-  <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
-  </ChartBar>
-  </ResponsiveContainer>
+            <Bar dataKey="value" fill={this.props.fill ? this.props.fill : "#F48165"} />
+          </ChartBar>
+        </ResponsiveContainer>
 
   </div>
   )

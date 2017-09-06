@@ -87,8 +87,10 @@ if (!spi && !cpi) {
                 <TabPanel>
                   <div className="grid padding-left">
                     <div className="unit whole">
-                      <large>SPI</large>
-                      <BarChart fill= "#D2E5FA"
+                      <large style={{display:'inline-block'}}>SPI</large>
+                      <button style={{float:'right', marginBottom: '10px'}} className='btn-primary'>RECALCULATE</button>
+                      
+                      <BarChart style={{marginTop:'70px'}} fill= "#D2E5FA"
                         data={spi}
                       />
                     </div>

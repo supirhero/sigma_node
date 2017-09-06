@@ -13,9 +13,10 @@ class ReportsFindProject extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-        status:[0,0,0,0,0,0],
-        schedule:[0,0,0],
-        budget:[0,0,0],
+        select_all:true,
+        status:[1,1,1,1,1,1],
+        schedule:[1,1,1],
+        budget:[1,1,1],
         status_flag : true,
         schedule_flag : true,
         budget_flag : true
@@ -27,6 +28,8 @@ class ReportsFindProject extends Component {
 
 
   componentWillMount(){
+    this.props.dispatch(reportSearchProject([1,1,1,1,1,1], [1,1,1],[1,1,1]))
+    
     // store.dispatch(reportFindProject([0],[0],[0],[0],[0]))
   }
   render() {
@@ -66,7 +69,8 @@ class ReportsFindProject extends Component {
 
     const state = this.props.state
     const project_list = state.data.project_find
-    
+
+
     return (
       
       <div>
@@ -77,16 +81,31 @@ class ReportsFindProject extends Component {
               <div className="unit whole">
                 <large><b>FILTERED BY</b></large>
               </div>
+              <Checkbox id='all' label='select all' checked={this.state.select_all} group='all' onClick={
+                     e=> {
+                      this.setState({select_all:this.state.select_all ? false : true}, ()=> {
+                        if(this.state.select_all) {
+
+                      this.props.dispatch(reportSearchProject([1,1,1,1,1,1], [1,1,1],[1,1,1]))
+                        }
+                      })
+                     }
+                   } ></Checkbox> 
               <div className="unit whole no-gutters">
                 <medium><b>Status</b></medium>
               </div> 
               <div className="unit whole no-gutters">
+            
+              </div>
+              <div className="unit whole no-gutters">
+              
+                
                 {
                   status.map((value,index)=>{
                    return <Checkbox id={index} label={value.label} group='status' 
                     onClick={
-                      
                       e=>{
+                      this.setState({select_all:false})
                         this.state.status[index] = this.state.status[index] == 0 ? 1 : 0
                         var flag = true;
 
@@ -155,10 +174,12 @@ class ReportsFindProject extends Component {
               
                 {
                   schedule.map((value,index)=>{
+
                    return <Checkbox id={'schedule' + index} label={value.label} group='schedule' 
                     onClick={
                       
                       e=>{
+                      this.setState({select_all:false})
                         
                         this.state.schedule[index] = this.state.schedule[index] == 0 ? 1 : 0
                         console.log('schedule',this.state.schedule)
@@ -225,6 +246,7 @@ class ReportsFindProject extends Component {
                     onClick={
                       
                       e=>{
+                        this.setState({select_all:false})
 
                         this.state.budget[index] = this.state.budget[index] == 0 ? 1 : 0
                         console.log('schedule',this.state.schedule)
@@ -315,6 +337,8 @@ class ReportsFindProject extends Component {
               <div className="grid">
                 <div className="unit golden-large">
                   <medium>{value.PROJECT_NAME}</medium>
+                  <small>{value.IWO_NO}</small>
+                  
                 </div>
                 <div className="unit golden-small no-gutters">
                   <medium style={{ float: 'right',marginRight:'55px'}}><b>{value.PROJECT_STATUS}<span className='in-progress'> {value.PERCENT ? `${value.PERCENT} %` : null }</span></b>
