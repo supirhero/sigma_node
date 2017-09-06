@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelectNew,ReduxInputDisabled,required} from './Components.jsx';
+import { Select, Input, Table,TablePaginationBU,Header, Search, PopUp,PageLoader ,ReduxInput,ReduxSelect,ReduxInputDisabled,required} from './Components.jsx';
 
 import {getDataMaster,addBU,editBU,getBusinessUnitDetail} from './actions.jsx'
 
@@ -123,7 +123,7 @@ class DatasetBu extends Component {
                         <Field
                         inputName="HEAD"
                         name="BU_HEAD"                      
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         validate={[required]}>
                         {
                               bu?bu.map((value,index)=>{
@@ -141,7 +141,7 @@ class DatasetBu extends Component {
                         <Field
                         inputName="PARENT"
                         name="BU_PARENT_ID"
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         validate={[required]}>
                         {
                           bu?bu.map((value,index)=>{
@@ -191,7 +191,7 @@ class DatasetBu extends Component {
                         <Field
                         inputName="HEAD"
                         name="BU_HEAD_EDIT"                      
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         validate={[required]}>
                         {
                               bu?bu.map((value,index)=>{
@@ -209,7 +209,7 @@ class DatasetBu extends Component {
                         <Field
                         inputName="PARENT"
                         name="BU_PARENT_ID_EDIT"
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                         validate={[required]}>
                         {
                           bu?bu.map((value,index)=>{

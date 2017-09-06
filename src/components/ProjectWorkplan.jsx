@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import store from '../reducers/combineReducers.jsx';
 
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, ReduxSelectNew, WorkplanRow, PageLoader, datepickerUniversal ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
+import { Divider, Header, ProjectHeader, PopUp, ReduxInput, WorkplanRow, PageLoader, datepickerUniversal ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
 
 
 import { Field, reduxForm } from 'redux-form';
@@ -430,7 +430,7 @@ class ProjectWorkplan extends Component {
             inputName="PARENT"
             name="PARENT_EDIT"
             type="input"
-            component={ReduxSelectNew}
+            component={ReduxSelect}
           >
             {
 
@@ -685,7 +685,7 @@ class ProjectWorkplan extends Component {
                       <Field
                         inputName="PARENT"
                         name="WBS_PARENT_ID"
-                        component={ReduxSelectNew}
+                        component={ReduxSelect}
                       >
                         <option />
                         {

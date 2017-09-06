@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
-import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelectNew,ReduxSelect,ReduxInput,datepickerUniversal,PopUp} from './Components.jsx';
+import { Divider, Input, RadioButton, Select, PageLoader ,ReduxSelect,ReduxInput,datepickerUniversal,PopUp} from './Components.jsx';
 import { Line } from 'react-progressbar.js';
 import { getMyActivities, pop,resubmitTimesheet,addTimesheet,taskList,viewTimesheet} from './actions.jsx';
 import moment from 'moment'
