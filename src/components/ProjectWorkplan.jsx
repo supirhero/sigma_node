@@ -813,7 +813,7 @@ class ProjectWorkplan extends Component {
               <h2 className='input-desc'>You can upload your project workplan to generate task automatically on PRouDS. Please download the project workplan template <a>here</a></h2>
               <h2 className='input-desc'><i>SELECT FILE</i></h2>
               {/*  <h2 className='input-desc'><i>You can attach one of these documents (Proposal, SPK/Contract, IWO, Change Management, Service Request, Others). If you want to add 2 or more, you can upload the compressed file (.zip). Max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>  */}
-              <h2 className='input-desc'><i>max file size is 5 MB. allowed file: .zip, .doc, .docs, .docx, .xls, .pdf, .xlsx, .jpg, .jpeg, .png</i></h2>
+              <h2 className='input-desc'><i>Max file 5mb, must be only xls with supported file format</i></h2>
               <div className="grid wrap">
               <Field
               inputName="SELECT FILE"

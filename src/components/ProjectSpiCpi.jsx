@@ -28,11 +28,11 @@ class ProjectSpiCpi extends Component {
     const state = store.getState()
     
     const spi = state.data.spi ? state.data.spi.map((value,index)=>{
-      return {name:value.Week , value:parseFloat(value.SPI)}
+      return {name:value.WEEK , value:parseFloat(value.SPI)}
     }) : null
     
     const cpi = state.data.cpi ? state.data.cpi.map((value,index)=>{
-      return {name:value.Week , value:parseFloat(value.CPI)}
+      return {name:value.WEEK , value:parseFloat(value.CPI)}
     }) : null
 
     // const dataSPI = spi.map((value,index)=>{
@@ -47,7 +47,7 @@ class ProjectSpiCpi extends Component {
 
     const tableSPI = store.getState().data.spi?store.getState().data.spi.map((value,index)=>{
       return {column:[
-        {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
+        {value: `Week ${value.WEEK} ( ${value.STARTDATE} --- ${value.ENDDATE} )`},
         {value:value.EV == null ? '0' : value.EV},
         {value:value.PV == null ? '0' : value.PV},
         {value:value.SPI == null ? '0' : parseFloat(value.SPI).toFixed(2)}
@@ -56,7 +56,7 @@ class ProjectSpiCpi extends Component {
 
     const tableCPI = store.getState().data.cpi?store.getState().data.cpi.map((value,index)=>{
       return {column:[
-        {value: `Week ${value.Week} ( ${value.startdate} --- ${value.enddate} )`},
+        {value: `Week ${value.Week} ( ${value.STARTDATE} --- ${value.ENDDATE} )`},
         {value:value.EV == null ? '0' : value.EV},
         {value:value.AC == null ? '0' : value.AC},
         {value:value.CPI == null ? '0' : parseFloat(value.CPI).toFixed(2)}

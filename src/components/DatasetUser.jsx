@@ -42,7 +42,7 @@ class DatasetUser extends Component {
   onSubmitUploadUser(props){
     alert("File Uploaded")
     this.props.dispatch(uploadUsers(props)).then(res => {
-      this.props.dispatch(getDataMaster("user",this.state.search))
+      // this.props.dispatch(getDataMaster("user",this.state.search))
       store.dispatch({
         type: 'POPUP',
         name: 'uploadUser',
