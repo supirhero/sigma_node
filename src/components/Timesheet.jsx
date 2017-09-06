@@ -58,7 +58,7 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-   
+    
   }
 
 componentDidUpdate(){
@@ -84,6 +84,7 @@ componentDidUpdate(){
     const timesheet = state.data;
     const weekdays = state.data.weekdays; 
     const tomorrow = moment().add(1,'days')
+    
 
     function status(value) {
       let resubmit = '' ;
@@ -161,20 +162,22 @@ componentDidUpdate(){
                       return  <TimeSheetTimeButton text={moment(value.day).format("ddd, MMM D")} hours={value.holiday == false ? `${value.work_hour} Hours` : "Day Off"}  
                       onClick={ 
                         e => { 
-                          store.dispatch(viewTimesheet(value.day)) 
+                          store.dispatch(viewTimesheet(value.day))
                           value.holiday == true ?  this.setState({
                             holiday : true
                           }) : this.setState({
                             holiday : false
-                          })
-                          this.setState({
-                            selected:value.day,
-                            datepicker:value.day
                           },()=>{
-                            console.log(this.state.datepicker)
+                            this.setState({
+                              selected:value.day,
+                              datepicker:value.day
+                            },()=>{
+                              this.handleInitialize()
+                              console.log(this.state.datepicker)
+                            })
                           })
-
-                        }} 
+                        }
+                      } 
                       /> 
                     } 
                   ) : <PageLoader /> 
