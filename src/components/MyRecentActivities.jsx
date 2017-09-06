@@ -173,7 +173,7 @@ const year = [
             component={ReduxSelect}
             // validate={[required]}
             >
-            <option></option>
+            
                 {
                   store.getState().data.task.map((value,index)=>{
                     return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
@@ -405,7 +405,7 @@ const year = [
                       TS_DATE: value.ts_date,
                       TS_ID:value.ts_id,
                       PROJECT_ID: value.project_id,
-                      WP_ID: value.wp,
+                      WP_ID: value.wbs_name,
                       HOUR: value.hour_total,
                       TS_SUBJECT: value.subject,
                       TS_MESSAGE: value.message,
