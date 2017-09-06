@@ -70,7 +70,7 @@ class Project extends Component {
                       sidebar.map((value, index) => {
                         if (value.type == 'menu') {
                           return(
-                            <li key={index}><small className={ this.state.active == value.name ? 'active' : '' } onClick={
+                            <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
                               e => {
                                 const name = value.name
                                 this.setState({
@@ -85,7 +85,7 @@ class Project extends Component {
                                 }
                                 e.preventDefault()
                               }
-                            }>{value.name}</small></li>
+                            }>{value.name}</a></li>
                           )
                         }
                         else {

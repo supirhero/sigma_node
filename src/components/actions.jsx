@@ -1325,7 +1325,9 @@ export function uploadWorkplan(project_id,files){
     fetch(`${baseURL}task/upload_wbs?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      alert("upload successful")
+    )
   }
 }
 
