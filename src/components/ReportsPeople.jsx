@@ -6,13 +6,13 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header,PageLoader,Menu, MenuSection, MenuItem, MenuHeader } from './Components.jsx';
 
-import {reportPeople} from './actions.jsx'
+import {reportPeople, reportDownloadPeople} from './actions.jsx'
 
 class ReportsPeople extends Component {
   constructor(){ 
     super(); 
     this.state = { 
-      bu: '',
+      bu: 0,
       month : 0, 
       year: 0 ,
       bu_name : ''
@@ -171,6 +171,12 @@ class ReportsPeople extends Component {
         // store.dispatch(myPerformance('1','2017')) 
         e.preventDefault() 
       }}>search</span></button> 
+      <div className="unit whole no-gutters">
+                  <button className='btn-primary' onClick={ e=> {
+                    this.props.dispatch(reportDownloadPeople(this.state.bu,this.state.year,this.state.month))
+                    e.preventDefault()
+                    }}>DOWNLOAD EXCEL</button>
+                </div>
           </div>
 				</div>    
 				
