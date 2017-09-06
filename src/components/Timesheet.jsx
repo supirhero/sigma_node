@@ -360,7 +360,7 @@ componentDidUpdate(){
 
           { 
             
-            tomorrow ? 
+            this.state.user_activities !== [] ?  
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -443,7 +443,7 @@ return {
 export default reduxForm({
 // Must be unique, this will be the name for THIS PARTICULAR FORM
 form: 'AddNewTimesheet',
-enableReinitialize: true,
+
 })(
 connect(mapStateToProps, { addTimesheet })(Timesheet),
 );
