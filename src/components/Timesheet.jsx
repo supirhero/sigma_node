@@ -50,9 +50,6 @@ class Timesheet extends Component {
     )
   }
 
-  componentDidMount(){
-    this.handleInitialize()
-  }
 
   componentWillMount(){
     const currentDate = moment().format("YYYY-MM-DD");
@@ -61,7 +58,7 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-    
+   
   }
 
 componentDidUpdate(){
@@ -70,6 +67,7 @@ componentDidUpdate(){
   e.preventDefault()
 }
 }
+
 
 
   componentWillUnmount() {
