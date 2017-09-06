@@ -2584,7 +2584,7 @@ export class ReduxUploadWorkplan extends Component {
         e.preventDefault()
       }}
       >
-      <input type="text" value={this.state.value} onkeydown="return false;"></input>
+      <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input>
       </Dropzone>
 
       </div>

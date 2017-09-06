@@ -2194,3 +2194,17 @@ export function changePassword(props){
   } 
 } 
 
+
+export function uploadUsers(files){
+  return function(dispatch){
+    const token = cookies.get('token')
+    const formData = new FormData()
+    formData.append('userfile',files[0])
+    fetch(`${baseURL}datamaster/upload_users?token=${token}`,{
+      method:'POST',
+      body:formData
+    })
+  }
+}
+
+

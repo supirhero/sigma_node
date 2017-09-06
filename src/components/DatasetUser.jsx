@@ -5,8 +5,8 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput} from './Components.jsx';
-import {getDataMasterUser,getDataMaster,changePassword} from './actions.jsx'
+import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan} from './Components.jsx';
+import {getDataMasterUser,getDataMaster,changePassword,uploadUsers} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
 class DatasetUser extends Component {
@@ -38,6 +38,23 @@ class DatasetUser extends Component {
       
     })
   }
+
+  onSubmitUploadUser(props){
+    alert("File Uploaded")
+    this.props.dispatch(uploadUsers(props)).then(res => {
+      this.props.dispatch(getDataMaster("user",this.state.search))
+      store.dispatch({
+        type: 'POPUP',
+        name: 'uploadUser',
+        data: {
+          active:false,
+        }
+      })
+      
+    })
+  }
+
+
 
 
 
@@ -97,11 +114,67 @@ class DatasetUser extends Component {
         </form>
       </PopUp>
 
+      <PopUp id="uploadUser" context={this} dividerText="UPLOAD USER" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
+      <form onSubmit={handleSubmit(this.onSubmitUploadUser.bind(this))}>
+        <div>    
+        <div className="grid wrap narrow">
+        <div className="unit golden-large" style={{padding:'0'}}>
+        <h2 className="input-desc" style={{marginTop:'25px',marginLeft:'10px'}}>Select File</h2>
+      </div> 
+            <div className="unit whole">
+            <Field
+            inputName="UPLOAD FILE"
+            name="userfile"
+            type='input'
+            placeholder="Press to Select File"
+            component={ReduxUploadWorkplan}
+          />
+            </div>
+          </div>
+            <div className="grid wrap narrow">
+              <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+                <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
+                  e=> {
+                    store.dispatch({
+                      type: 'POPUP',
+                      name: 'uploadUser',
+                      data: {
+                        active:false,
+                      }
+                    })
+                  e.prevenDefault()
+                  }
+                  }> CANCEL </button>
+                <button type = "submit" style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary">UPLOAD</button>
+              </div>
+            </div>
+        </div>
+        </form>
+      </PopUp>
+
         <div className="grid wrap dataset">
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
               <div className="unit whole">
-                <Header text='User' style={{display:'inline-block'}} />
+              <Header text='User' style={{display:'inline-block'}} />
+              <button className='btn-primary hover'
+              style={{display:'inline-block', marginLeft: '22%',marginTop:'3px'}}
+              onClick={
+              e => {
+                console.log('PROPS', this.props);
+                this.props.dispatch({
+                  type: 'POPUP',
+                  name:'uploadUser',
+                  data: {
+                    active:true
+                  }
+                })
+                e.preventDefault()
+              }
+            }>
+              UPLOAD
+            </button>
+                
                 <Search placeholder='Search for User' style={{width:'400px', display:'block', float:'right'}}
                 onChange={e=>{
                   this.setState({search:e.target.value},()=>{
@@ -116,7 +189,7 @@ class DatasetUser extends Component {
               </div>
               <div className="unit whole">
               <TablePaginationUser 
-              form='editUser' 
+              form='uploadUser' 
               editPopUp='editUser' 
               deletePopUp='deleteUser' 
                
@@ -156,4 +229,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { getDataMaster })(
   reduxForm({
     form: 'editUser',
+    form: 'uploadUser'
   })(DatasetUser));
