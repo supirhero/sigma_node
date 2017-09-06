@@ -2194,17 +2194,31 @@ export function changePassword(props){
   } 
 } 
 
-
-export function uploadUsers(files){
-  return function(dispatch){
+export const reportDownloadPeople = (BU_ID, TAHUN, BULAN) => {
+  return function (dispatch) {
     const token = cookies.get('token')
-    const formData = new FormData()
-    formData.append('userfile',files[0])
-    fetch(`${baseURL}datamaster/upload_users?token=${token}`,{
-      method:'POST',
-      body:formData
-    })
+    return axios({
+            method: 'POST',
+            url: `${baseURL}report/r_people_download?token=${token}` ,
+            headers: {
+              
+              'Content-Type': 'application/x-www-form-urlencoded'
+             },
+             responseType: "arraybuffer",
+             data:{
+              BU_ID,
+              TAHUN,
+              BULAN
+             }
+          }).then(
+            res => {
+              fileDownload(res.data, 'Timesheet Report.xls' )
+              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              console.log(res.data);
+              // store.dispatch({type:'API', name: 'report', data: res, append:true})
+
+            },
+          )
   }
+
 }
-
-
