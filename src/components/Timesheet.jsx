@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, required,TimeSheetTimeButton, PopUp, ReduxSelect,Select,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm ,initialize} from 'redux-form';
 import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet } from './actions.jsx';
 import moment from 'moment';
 
@@ -17,8 +17,18 @@ class Timesheet extends Component {
       jumlah : 0 ,
       holiday: null,
       selected:moment().format("YYYY-MM-DD"),
+      datepicker: null, 
     };
   }
+
+
+  handleInitialize() {
+    const initData = {
+      TS_DATE: this.state.datepicker,
+    };
+    this.props.initialize(initData);
+  }
+
 
   onSubmit(props){
     this.props.addTimesheet(props.PROJECT_ID,props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
@@ -38,6 +48,10 @@ class Timesheet extends Component {
       }
       
     )
+  }
+
+  componentDidMount(){
+    this.handleInitialize()
   }
 
   componentWillMount(){
@@ -71,6 +85,7 @@ componentDidUpdate(){
     const state = store.getState();
     const timesheet = state.data;
     const weekdays = state.data.weekdays; 
+    const tomorrow = moment().add(1,'days')
 
     function status(value) {
       let resubmit = '' ;
@@ -155,9 +170,12 @@ componentDidUpdate(){
                             holiday : false
                           })
                           this.setState({
-                            selected:value.day
+                            selected:value.day,
+                            datepicker:value.day
+                          },()=>{
+                            console.log(this.state.datepicker)
                           })
-                          
+
                         }} 
                       /> 
                     } 
@@ -165,7 +183,6 @@ componentDidUpdate(){
                   } 
                   <span className="icon-arrow-right-circle list-pointer" onClick={ 
                     e => { 
-                     
                       this.setState({ 
                         jumlah: this.state.jumlah - 1
                       },()=>{
@@ -340,7 +357,9 @@ componentDidUpdate(){
             </div>
           </div>
 
-          { this.state.user_activities !== [] ? 
+          { 
+            
+            tomorrow ? 
             <div className="grid wrap">
               <div className="unit whole">
                 <div className="card">
@@ -353,6 +372,7 @@ componentDidUpdate(){
                   </div>
                 </div>
                       {
+                        
                         timesheet.user_activities.map((value,index)=>{
                           return(
                             <div key={index}>
@@ -422,6 +442,7 @@ return {
 export default reduxForm({
 // Must be unique, this will be the name for THIS PARTICULAR FORM
 form: 'AddNewTimesheet',
+enableReinitialize: true,
 })(
 connect(mapStateToProps, { addTimesheet })(Timesheet),
 );

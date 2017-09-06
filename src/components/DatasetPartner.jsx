@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePagination,Header,Search } from './Components.jsx';
+import { Select, Input, Table,TablePaginationMIS,Header,Search } from './Components.jsx';
 
 
 class DatasetPartner extends Component {
@@ -18,10 +18,9 @@ class DatasetPartner extends Component {
               <div className="table-wrap">
 								<div className="unit whole">
 									<Header text='Partner' style={{display:'inline-block'}} />
-									<Search placeholder='search partner' style={{float:'right',width:'400px'}} />
                 </div>
                 <div className="unit whole">
-                <TablePagination
+                <TablePaginationMIS
                   showDelete={false}
                   tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'ADDRESS'},{value:'TELEPHONE'},{value:null}]}
                   tableData={[{column:[
@@ -96,7 +95,7 @@ class DatasetPartner extends Component {
                   
                 
                 ]}
-                ></TablePagination>                
+                ></TablePaginationMIS>                
                 </div>
 
         			</div>

@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew,Header,Search,PageLoader } from './Components.jsx';
+import { Select, Input, Table,TableNew,Header,Search,PageLoader,TablePaginationMIS } from './Components.jsx';
 import {getDataMasterMIS} from './actions.jsx'
 import { Field, reduxForm } from 'redux-form';
 
@@ -31,11 +31,10 @@ class DatasetCustomer extends Component {
               <div className="table-wrap">
 								<div className="unit whole">
 									<Header text='Customer' style={{display:'inline-block'}} />
-									<Search placeholder='search customer' style={{float:'right',width:'400px'}} />
                 </div>
                 <div className="unit whole">
 
-                  <TableNew
+                  <TablePaginationMIS
                   tableHeader={[{value:'NO'},{value:'ID'},{value:'NAME'},{value:'CODE'},{value:'SAP ID'},{value:'AM'},{value:'ADDRESS'}]}
                   tableData={[{column:[
                     {value:'1'},
@@ -133,31 +132,7 @@ class DatasetCustomer extends Component {
                 ]}
                 >
                 
-                </TableNew>
-
-                 <div className="unit whole">
-                 {/* 
-                  <div className="container" style={{float:'left'}}>
-                    <small style={{display:'inline-block'}}>show entries</small>
-                     <Select 
-                          style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-                          items={{
-                            items : [
-                              {title : '10'},
-                              {title : '20'}
-                            ]
-                           }}
-                        />
-                  
-                  </div>
-                  */}
-                  <div className="container" style={{float:'right'}}>                  
-                    <button className="arrow"> <b> &lt; </b> </button>
-                    <button className="pagination"><b>1</b></button>
-                    <button className="arrow"> <b> &gt; </b> </button>
-                  </div>
-                 </div>
-              
+                </TablePaginationMIS>
                 </div>
         			</div>
             </div>
