@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication ,getListBU,rDirectorat, showNotif, getDirectorateEntry, getDirectorateUtility} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import {BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader, Select} from './Components.jsx';
+import numeral from 'numeral'
 
 class ReportsDirectorate extends Component {
   constructor(props) {
@@ -218,7 +219,8 @@ class ReportsDirectorate extends Component {
                   
                   <large className="project-value-number">{state.data.finance && (state.data.finance.total_project_value).replace(/,+|,(?=,+|$)/,'')} </large> 
                 */}
-                <large className="project-value-number">{state.data.finance.total_project_value} </large> 
+                
+                <large className="project-value-number">{numeral(state.data.finance.total_project_value).format('0,0')} </large> 
             {/*   
             */} 
             <medium className="project-value-label">Invoiced</medium>
