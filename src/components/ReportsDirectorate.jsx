@@ -18,7 +18,7 @@ class ReportsDirectorate extends Component {
   }
   componentWillMount(){
     this.props.dispatch(getListBU())
-    this.props.dispatch(rDirectorat("44","2017"))
+    // this.props.dispatch(rDirectorat("44","2017"))
   }
 
 
@@ -167,10 +167,14 @@ class ReportsDirectorate extends Component {
             </div>
             </div>
 
+           { 
+            state.data.project_dir && state.data.finance  &&
+
+             <div >
             <div className="grid wrap">
-            <div className="unit whole">
-            <Divider text="OVERVIEW" />
-            </div>
+              <div className="unit whole">
+                <Divider text="OVERVIEW" />
+              </div>
             </div>
 
             <div className="grid wrap">
@@ -379,6 +383,8 @@ class ReportsDirectorate extends Component {
            </div>
            </div>
            </div>
+            </div>}
+            
 
 
            </div>
