@@ -181,16 +181,18 @@ const year = [
                 )
                 }
          </Field>
-         :
-          <Field 
-            name="WP_ID"                                        
-          
-          inputName="TASK"
-          component={ReduxSelect}
-          
-          >
-          <options> </options>
-          </Field>
+   :
+  //  <Select inputName="TASK">
+  //  <options> </options>
+  //  </Select>
+  <Field 
+  name="WP_ID"                                        
+inputName="TASK"
+component={ReduxSelect}
+
+>
+<options> </options>
+</Field>
         }
                         
                             </div>
@@ -405,12 +407,16 @@ const year = [
                       TS_DATE: value.ts_date,
                       TS_ID:value.ts_id,
                       PROJECT_ID: value.project_id,
-                      WP_ID: value.wbs_name,
+                      WP_ID: value.wbs_id,
+                      
+                      // initialize:value.wbs_name,
                       HOUR: value.hour_total,
                       TS_SUBJECT: value.subject,
                       TS_MESSAGE: value.message,
                     }
-                   )
+                   ,()=>{
+                    store.dispatch(taskList(value.wbs_id))
+                   })
                    this.props.dispatch({
                     type: 'POPUP',
                     name:'resubmitTimesheet',
