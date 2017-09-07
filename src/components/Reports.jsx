@@ -13,7 +13,10 @@ class Reports extends Component {
         <div className="grid wrap reports">
           <div className="unit whole">
             <large> REPORTS </large>
-            <div style={{ marginTop: '20px' }}>
+             <div style={{ marginTop: '20px' }}>
+           { 
+            this.props.state.auth.privilege.report_overview &&
+             
               <medium
                 style={{ display: 'inline-block' }}
                 className="list-pointer"
@@ -22,8 +25,10 @@ class Reports extends Component {
                   browserHistory.replace('/reports');
 									  }}
               > SPI & CPI </medium>
-
-              <medium
+             }
+             { 
+              this.props.state.auth.privilege.report_bu_directorat &&
+               <medium
                 className="heading list-pointer"
                 onClick={
                   (e) => {
@@ -31,7 +36,11 @@ class Reports extends Component {
 									  }
                 }
               > Directorate / BU </medium>
-              <medium
+              }
+              {
+              this.props.state.auth.privilege.report_bu_teammember &&
+                
+                <medium
               className="heading list-pointer"
               onClick={
                 (e) => {
@@ -39,13 +48,19 @@ class Reports extends Component {
                 }
               }
               > Team Member </medium>
-              <medium className="heading list-pointer"
+              }
+
+              {
+              this.props.state.auth.privilege.report_find_project &&
+                
+                <medium className="heading list-pointer"
               onClick={
                 (e) => {
                   browserHistory.replace('/reports/find-project');
                 }
               }
               > Find Project </medium>
+              }
             </div>
           </div>
         </div>
@@ -64,6 +79,7 @@ class Reports extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
 		// filter: ownProps.location.query.filter
   };
 }

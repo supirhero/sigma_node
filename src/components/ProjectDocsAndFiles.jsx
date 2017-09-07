@@ -117,25 +117,26 @@ class ProjectDocsAndFiles extends Component {
           </div>
           <div className='grid padding-left'>
             <div className='unit whole'>
-
-              <button className='btn-primary'
-                style={{display:'block', margin: 'auto'}}
-                onClick={
-                e => {
-                  console.log('PROPS', this.props);
-                  this.props.dispatch({
-                    type: 'POPUP',
-                    name:'uploadFileDocsFiles',
-                    data: {
-                      active:true
-                    }
-                  })
-                  e.preventDefault()
-                }}
-                >
-                UPLOAD FILE
-              </button>
-
+              {
+                this.props.state.auth.privilege.upload_doc &&
+                <button className='btn-primary'
+                  style={{display:'block', margin: 'auto'}}
+                  onClick={
+                  e => {
+                    console.log('PROPS', this.props);
+                    this.props.dispatch({
+                      type: 'POPUP',
+                      name:'uploadFileDocsFiles',
+                      data: {
+                        active:true
+                      }
+                    })
+                    e.preventDefault()
+                  }}
+                  >
+                  UPLOAD FILE
+                </button>
+              }
 
             </div>
           </div>
