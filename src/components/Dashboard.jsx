@@ -89,7 +89,6 @@ class Dashboard extends Component {
                           </MenuSection>
                           {
                             this.props.state.auth.privilege.master_data_access &&
-                            tuser_name &&
                             
                             <MenuSection>
                             <MenuHeader title='ADMIN CONSOLE'/>
