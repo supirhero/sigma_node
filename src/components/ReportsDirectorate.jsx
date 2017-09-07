@@ -18,7 +18,7 @@ class ReportsDirectorate extends Component {
   }
   componentWillMount(){
     this.props.dispatch(getListBU())
-    // this.props.dispatch(rDirectorat("44","2017"))
+    // this.props.dispatch(rDirectorat("44","git2017"))
   }
 
 

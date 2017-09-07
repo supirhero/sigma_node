@@ -69,7 +69,7 @@ class Project extends Component {
                     {
                       sidebar.map((value, index) => {
                         if (value.type == 'menu') {
-                          if( value.name != 'Team Member' && !this.props.state.auth.privilege.project_member) {
+                          {/* if( value.name == 'Team Member' && this.props.state.auth.privilege.project_member) { */}
 
                             return(
                               <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
@@ -89,8 +89,8 @@ class Project extends Component {
                                 }
                               }>{value.name}</a></li>
                             )
-                            }
-                          else return null
+                            {/* } */}
+                          {/* else return null */}
                         }
                         else {
                           return(
