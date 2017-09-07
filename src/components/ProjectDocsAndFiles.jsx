@@ -53,6 +53,7 @@ class ProjectDocsAndFiles extends Component {
       const {handleSubmit} = this.props;
       const appStore = store.getState()
       const project_doc_list = appStore.data.project_doc_list
+      const overview = appStore.data.overview ? appStore.data.overview : null
       return(
         <div className='project-DocsFiles'>
           
@@ -112,7 +113,7 @@ class ProjectDocsAndFiles extends Component {
         </PopUp>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='DOCS & FILES'/>
+              <ProjectHeader projectName={overview.project_name} sectionName='DOCS & FILES'/>
             </div>
           </div>
           <div className='grid padding-left'>

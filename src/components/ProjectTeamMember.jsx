@@ -28,6 +28,7 @@ class ProjectTeamMember extends Component {
     render(){
       const appStore = this.props.state;
       const active_member = this.props.state.data.exist
+      const overview = appStore.data.overview ? appStore.data.overview : null
       const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
        return {id:value.USER_ID , label:value.USER_NAME}
       }) : []
@@ -35,7 +36,7 @@ class ProjectTeamMember extends Component {
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='TEAM MEMBER'/>
+              <ProjectHeader projectName={overview.project_name} sectionName='TEAM MEMBER'/>
             </div>
           </div>
           <div className='grid padding-left'>

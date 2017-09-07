@@ -67,12 +67,13 @@ class ProjectIssues extends Component {
 
     const state = store.getState()
     const projectIssueList = state.data.project_issue_list;
+    const overview = state.data.overview ? state.data.overview : null
 
     return (
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">
-            <ProjectHeader projectName="Transaction Based Managed Services 2017" sectionName="Issues" />
+            <ProjectHeader projectName={overview.project_name} sectionName="Issues" />
           </div>
         </div>
         <div className="grid padding-left">

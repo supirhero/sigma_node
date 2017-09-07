@@ -18,6 +18,10 @@ class Timesheet extends Component {
       holiday: null,
       selected:moment().format("YYYY-MM-DD"),
       datepicker: null, 
+      tomorrow: moment().add(10,'years').format("YYYY-MM-DD"),
+      
+
+      
     };
   }
 
@@ -27,6 +31,7 @@ class Timesheet extends Component {
       TS_DATE: this.state.datepicker,
     };
     this.props.initialize(initData);
+    
   }
 
 
@@ -59,7 +64,8 @@ class Timesheet extends Component {
     store.dispatch(viewTimesheet(currentDate));
     const timesheet = state.data.timesheet;
     const auth = state.auth;
-    
+    console.log(this.state.tomorrow)
+    console.log(this.state.range)
   }
 
 componentDidUpdate(){
@@ -169,13 +175,14 @@ componentDidUpdate(){
                           }) : this.setState({
                             holiday : false
                           },()=>{
+                            value.day !== this.state.tomorrow ?
                             this.setState({
                               selected:value.day,
                               datepicker:value.day
                             },()=>{
                               this.handleInitialize()
                               console.log(this.state.datepicker)
-                            })
+                            }) : this.setState({datepicker:""})
                           })
                         }
                       } 
@@ -386,6 +393,9 @@ componentDidUpdate(){
                                 <p>left a <b>{value.SUBJECT}</b> message</p>
                                 <p>{value.MESSAGE}</p>                                
                                 <small style={{ fontSize: '12px' }}>{value.SUBMIT_DATE ? `submitted on : ${moment((value.SUBMIT_DATE).substr(0,9)).format('DD-MMM-YYYY')} | ${(value.SUBMIT_DATE).substr(10,5)} ${(value.SUBMIT_DATE).substr(26,2)}`:null}</small>
+                                <br />
+                                <br />
+                                <small style={{ fontSize: '12px' }}>{value.TS_DATE ? `submitted for : ${moment(value.TS_DATE).format('DD-MMM-YYYY')}` : null}</small> 
                                   </small>
                                   <div className="grid wrap" style={{ float: 'right' }}>
                                     <div className="unit whole" >

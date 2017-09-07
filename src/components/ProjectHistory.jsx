@@ -27,6 +27,7 @@ class ProjectHistory extends Component {
 
     render(){
       const appStore = this.props.state;
+      const overview = appStore.data.overview ? appStore.data.overview : null
      // const active_member = this.props.state.data.exist
       //const history_list = this.props.state.data.summary ? this.props.state.data.summary.map((value,index)=>{
        //return {id:value.USER_ID , label:value.USER_NAME}
@@ -44,7 +45,7 @@ class ProjectHistory extends Component {
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='HISTORY'/>
+              <ProjectHeader projectName={overview.project_name} sectionName='HISTORY'/>
             </div>
           </div>
           

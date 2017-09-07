@@ -302,7 +302,7 @@ component={ReduxSelect}
 <div className='grid'>
   <div className='unit four-fifths'>
     <select onChange={this.handleMonthChange.bind(this)}
-      className='select' style={{height:'49px', width:'250px',marginLeft:'230px' ,display:'inline-block'}}>
+      className='select' style={{height:'49px', width:'250px',float:'right' ,display:'inline-block'}}>
         <option>Choose Month</option>
       {
         month.map((value,index) => {
@@ -313,7 +313,7 @@ component={ReduxSelect}
       })}
     </select>
     <select onChange={this.handleYearChange.bind(this)} 
-    className='select' style={{height:'49px', width:'250px',marginRight:'300px',display:'inline-block',float:'right'}}> 
+    className='select' style={{height:'49px', width:'250px',display:'inline-block',float:'right',marginRight:'20px'}}> 
     <option>Choose Year</option>
     { 
       year.map((value,index) => { 

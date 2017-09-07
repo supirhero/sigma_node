@@ -26,6 +26,7 @@ class ProjectSpiCpi extends Component {
   
   render() {
     const state = store.getState()
+    const overview = state.data.overview ? state.data.overview : null
     
     const spi = state.data.spi ? state.data.spi.map((value,index)=>{
       return {name:value.WEEK , value:parseFloat(value.SPI)}
@@ -73,7 +74,7 @@ if (!spi && !cpi) {
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">
-            <ProjectHeader projectName="Transaction Based Managed Services 2017" sectionName="SPI & CPI" />
+            <ProjectHeader projectName={overview.project_name} sectionName="SPI & CPI" />
           </div>
         </div>
         <Tabs>

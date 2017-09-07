@@ -19,7 +19,8 @@ class ProjectSCurve extends Component {
     render(){
       const state = store.getState()
       const s_curve = state.data.s_curve ? state.data.s_curve : null
-      
+      const overview = state.data.overview ? state.data.overview : null
+
       const dataSCurve = s_curve?s_curve.map((value,index)=>{
         return {name:value.Week,Target:value.pv_percent, Actual:value.ev_percent}
       }):null
@@ -40,7 +41,7 @@ class ProjectSCurve extends Component {
         <div className='project-DocsFiles'>
           <div className='grid padding-left'>
             <div className='unit whole'>
-              <ProjectHeader projectName='Transaction Based Managed Services 2017' sectionName='S Curve'/>
+              <ProjectHeader projectName={overview.project_name} sectionName='S Curve'/>
             </div>
           </div>
 
