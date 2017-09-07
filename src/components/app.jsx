@@ -71,6 +71,15 @@ function requireAuth(nextState, replace) {
    }
 }
 
+function changeOverview(nextState, replace) {
+  if (store.getState().auth.privilege.report_overview == false) {
+    replace({
+    pathname: '/reports/directorate',
+    state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
 store.subscribe(()=> {
 
   saveState(store.getState())
@@ -108,7 +117,7 @@ render(
         <Route path='business-unit' component={BusinessUnit}></Route>
         <Route path=':id/workplan' component={ProjectWorkplan}></Route>
         <Route path='project/:id' component={Project}>
-          <IndexRoute component={ProjectOverview}></IndexRoute>
+          <IndexRoute component={ProjectOverview} ></IndexRoute>
           <Route path='edit-project' component={ProjectSetting}></Route>
           <Route path='activities' component={ProjectActivities}></Route>
           <Route path='team-member' component={ProjectTeamMember}></Route>
@@ -130,8 +139,8 @@ render(
         <Route path='timesheet' component={Timesheet}></Route>
         <Route path='my-recent-activities' component={MyRecentActivities} />
 
-        <Route path='reports' component={Reports}>
-          <IndexRoute component={ReportsOverview} />
+        <Route path='reports' component={Reports} >
+          <IndexRoute component={ReportsOverview} onEnter={changeOverview}/>
           <Route path='directorate' component={ReportsDirectorate} />
           <Route path='people' component={ReportsPeople} />
           <Route path='find-project' component={ReportsFindProject} />

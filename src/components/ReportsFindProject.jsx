@@ -14,15 +14,21 @@ class ReportsFindProject extends Component {
     super(); 
     this.state = { 
         select_all:true,
-        status:[1,1,1,1,1,1],
-        schedule:[1,1,1],
-        budget:[1,1,1],
+        status:[0,0,0,0,0,0],
+        schedule:[0,0,0],
+        budget:[0,0,0],
         status_flag : true,
         schedule_flag : true,
-        budget_flag : true
+        budget_flag : true,
         
+        keyword: null,
+
+        page : 1,
+        ceiling: 10,
+        floor: 0,
     } 
   } 
+
 
   //variable yang akan di send
 
@@ -58,7 +64,12 @@ class ReportsFindProject extends Component {
     const schedule_c = [0,0,0]
     const budget_c = [0,0,0]
     
+    const pagesAmount = this.props.state.data.pagenumber ? this.props.state.data.pagenumber : 0
     
+    const pages=[]
+    for (var i=1; i<=pagesAmount; i++) {
+      pages.push(i);
+    }
    
 
 
@@ -120,7 +131,9 @@ class ReportsFindProject extends Component {
                         }
 
                         this.setState({status_flag : flag},()=> {
-                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                          this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, this.state.keyword))
+                          
+                          
                               .then(res=> {
                                 this.forceUpdate()
                               })  
@@ -196,7 +209,8 @@ class ReportsFindProject extends Component {
                           
                         this.setState({schedule_flag : flag}, ()=> {
 
-                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, this.state.keyword))
+                              
                               .then(res=> {
                                 {/* this.forceUpdate() */}
                               })  
@@ -263,7 +277,7 @@ class ReportsFindProject extends Component {
                          
                         this.setState({budget_flag : flag}, ()=> {
 
-                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null))
+                              this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, this.state.keyword))
                               .then(res=> {
                                 {/* this.forceUpdate() */}
                               })  
@@ -317,7 +331,10 @@ class ReportsFindProject extends Component {
                   style={{ width: '100%', margin: '0' }}
                   onChange={
                     e => {
-                    this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, e.target.value))
+                      this.setState({keyword : e.targer.value}, () => {
+
+                        this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, this.state.keyword, this.state.page, 5))
+                      })
                     {/* this.forceUpdate() */}
                       console.log(e.target.value)
                       {/* e.preventDefault() */}
@@ -411,11 +428,59 @@ class ReportsFindProject extends Component {
 
 
 
-            {/* <div className="container" style={{float:'right'}}>                  
-              <button className="arrow"> <b> &lt; </b> </button>
-              <button className="pagination"><b>1</b></button>
-              <button className="arrow"> <b> &gt; </b> </button>
-            </div> */}
+          <div className="container" style={{float:'right'}}>
+            <button className="arrow" onClick={e=> {
+                this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
+                
+                e.preventDefault()
+              }}> <b> &lt; </b> </button>
+                {
+                
+                pages.slice(
+                  3 % this.state.page != 3 ? 0 :
+                  this.state.page % 3  == 0  ? 
+                  this.state.page % 2 != 0 ? this.state.page -2 :
+                  
+                  (this.state.page-3)
+                  : this.state.page-3  
+                  ,
+                  3 % this.state.page != 3 ? 5 :
+                  this.state.page % 3  == 0  ? 
+                  this.state.page % 2 != 0 ? this.state.page +1 :
+                  this.state.page+2
+                  : this.state.page+2  
+        
+                  ).map((value, index)=> (
+                    <button 
+                    className={this.state.page == value ? "pagination" : 'arrow'}
+                    onClick={e=> {
+                      this.setState({page: value},()=>[
+                        console.log(this.state.page)
+                        ])
+                      
+                      var ceiling = value*10
+                      var floor = ceiling-10
+                      this.setState({
+                        ceiling : ceiling,
+                        floor : floor
+                      })
+                    this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null,this.state.keyword, value, 5))
+                      
+                                  {/* const newData = this.props.tableData.slice(floor, ceiling)
+                                  this.setState({data : newData})  */}
+                      e.preventDefault()
+                    }}>
+                    <b>{value}</b></button>
+                    ))
+                }
+                <button className="arrow">. . .</button>
+                <button className="arrow" onClick={e=> {
+                  this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
+                  
+                  e.preventDefault()
+                }}> <b> &gt; </b> 
+              </button>
+            </div>
 
           </div>
         </div>

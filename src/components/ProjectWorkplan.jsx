@@ -106,16 +106,17 @@ class ProjectWorkplan extends Component {
            e.preventDefault()
          }}/>
               <MenuItem title='Edit' onClick={e => {
-                this.props.dispatch(getEditTaskView(value.WBS_ID)).then(
-                  res => {
-                    this.setState({WBS_id: value.WBS_ID})
-                    this.props.dispatch({
+                this.props.dispatch({
                       type: 'POPUP',
                       name:'edit_task',
                       data: {
                         active:true,
                       }
                     })
+                this.props.dispatch(getEditTaskView(value.WBS_ID)).then(
+                  res => {
+                    this.setState({WBS_id: value.WBS_ID})
+                    
                     console.log('POPUP',res);
                     this.handleInitialize({
                       NAME_EDIT : res.data.detail_task[0].WBS_NAME,
@@ -289,7 +290,6 @@ class ProjectWorkplan extends Component {
         }                                                                                                                                                                                                                                                                                                                                                                                                            
       }) 
       this.props.dispatch(getWorkplanView(id))
-      alert('Workplan Updated')
     }) 
   } 
 

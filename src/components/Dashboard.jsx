@@ -74,7 +74,7 @@ class Dashboard extends Component {
                         
                         }} triggerClass='profile'>
                           <MenuSection>
-                            <MenuHeader title={auth.userdata ? auth.userdata.profile_name: null} subTitle={auth.userdata ?auth.userdata.user_name : null }/>
+                            <MenuHeader title={auth.userdata ? auth.userdata.user_name: null} subTitle={auth.userdata ?auth.userdata.profile_name : null }/>
                             <MenuItem title='Home' onClick={
                               e => {
                                 browserHistory.push('/')
@@ -87,19 +87,28 @@ class Dashboard extends Component {
                               }
                             }/>
                           </MenuSection>
-                          <MenuSection>
+                          {
+                            this.props.state.auth.privilege.master_data_access &&
+                            tuser_name &&
+                            
+                            <MenuSection>
                             <MenuHeader title='ADMIN CONSOLE'/>
-                            <MenuItem title='Master Data' onClick={
+                            {
+                              this.props.state.auth.privilege.master_data_access &&
+                              <MenuItem title='Master Data' onClick={
                               e => {
                                 browserHistory.push('/dataset')
                               }
-                            }/>
-                            <MenuItem title='Manage Role & Access' onClick={
+                            }/>}
+                            {
+                              this.props.state.auth.privilege.manage_role_access &&
+                              
+                              <MenuItem title='Manage Role & Access' onClick={
                               e => {
                                 browserHistory.push('/manage')
                               }
-                              }/>
-                          </MenuSection>
+                              }/>}
+                          </MenuSection>}
                           <MenuSection>
                             <MenuItem onClick={
                               e => {

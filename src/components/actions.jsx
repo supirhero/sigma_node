@@ -902,7 +902,7 @@ export const reportDownloadFilter = (status, schedule, budget, keyword) => {
 
 }
 
-export const reportSearchProject = (status, schedule, budget, keyword) => {
+export const reportSearchProject = (status, schedule, budget, keyword, page, limit) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -916,7 +916,10 @@ export const reportSearchProject = (status, schedule, budget, keyword) => {
               status: status,
               schedule: schedule,
               budget: budget,
-              keyword:keyword
+              keyword:keyword,
+              page: page,
+              limit:limit ? limit : 5,
+
               
              }
           }).then(
@@ -1325,9 +1328,9 @@ export function uploadWorkplan(project_id,files){
     fetch(`${baseURL}task/upload_wbs?token=${token}`,{
       method:'POST',
       body:formData
-    }).then(
-      alert("upload successful")
-    )
+    }).then(res=> {
+      return res
+    })
   }
 }
 
@@ -1990,6 +1993,7 @@ export function reportFindProject(value,status,schedule,budget) {
               value,
               status,
               schedule,
+              page
             }
           }).then(
             res => {

@@ -153,7 +153,11 @@ class BusinessUnit extends Component {
         </div>
         </div>
         <div style={{marginBottom: '30px'}} className='grid wrap'>
-        <div className='unit three-fifths'>
+        <div className=
+        {
+          this.props.state.auth.privilege.bu_invite_member ?
+          
+          'unit three-fifths' : 'unit whole'}>
         
         <div>
         <select 
@@ -213,68 +217,72 @@ class BusinessUnit extends Component {
 
               </div>
               </div>
+              {
+                this.props.state.auth.privilege.bu_invite_member &&
               <div className="unit two-fifths">
-              <ReactAutocomplete
-              inputProps={{ placeholder: 'Invite to Business Unit' }}
-              items={available_assign}
-              menuStyle={{
-                opacity:'1'
 
-              }}
-              getItemValue={(label) => label.label}
-              style={{width:'500px',marginTop:'60px'}}
-              wrapperProps={{
-                style:{width:'82%', zIndex:'3', position:'relative', display:'inline-block'}
-              }}
-              menuStyle={{
-                borderRadius: '3px',
-                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                background: 'white',
-                padding: '2px 0',
-                fontSize: '90%',
-                position: 'fixed',
-                display:'block',
-                cursor:'pointer',
-                overflow: 'auto',
-                          maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
-                        }}
-                        shouldItemRender={(item, value) => item.label ? item.label.toLowerCase().indexOf(value.toLowerCase()) > -1 : null}
-                        getItemValue={item => item.label}
-                        renderItem={(item, highlighted) =>
-                          <div className="small-wrap">
-                          <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
+                <ReactAutocomplete
+                inputProps={{ placeholder: 'Invite to Business Unit' }}
+                items={available_assign}
+                menuStyle={{
+                  opacity:'1'
 
-                          </div>
-                        }
-                        value={this.state.value}
-                        onChange={e => {
-                          this.setState({ value: e.target.value })
+                }}
+                getItemValue={(label) => label.label}
+                style={{width:'500px',marginTop:'60px'}}
+                wrapperProps={{
+                  style:{width:'82%', zIndex:'3', position:'relative', display:'inline-block'}
+                }}
+                menuStyle={{
+                  borderRadius: '3px',
+                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                  background: 'white',
+                  padding: '2px 0',
+                  fontSize: '90%',
+                  position: 'fixed',
+                  display:'block',
+                  cursor:'pointer',
+                  overflow: 'auto',
+                  maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
+                }}
+                shouldItemRender={(item, value) => item.label ? item.label.toLowerCase().indexOf(value.toLowerCase()) > -1 : null}
+                getItemValue={item => item.label}
+                renderItem={(item, highlighted) =>
+                  <div className="small-wrap">
+                  <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
 
-                        }}
-                        onSelect={(id,label) => {
-                          console.log('LABELLLL',id)
-                          this.setState({ id:label.id})
-                          this.setState({label:label.label})
-                          this.setState({ value: label.label})
-                          
-                          // alert(`selected ${this.state.label}`)
-                          console.log(id)
-                        }}
-                        />
-                        <button className='btn-primary' style={{padding:'10px 12px', float:'right', display:'inline-block'}} 
-                        onClick=
-                        {
-                          e => {
-                            this.props.dispatch(inviteToBusiness(state.data.bu_id,this.state.id)).then(()=>{
-                              showNotif('Successfully added member to business unit', 'GREEN')
+                  </div>
+                }
+                value={this.state.value}
+                onChange={e => {
+                  this.setState({ value: e.target.value })
 
-                              this.props.dispatch(getBusinessUnitDetail(state.page.business_unit.bu_code))
+                }}
+                onSelect={(id,label) => {
+                  console.log('LABELLLL',id)
+                  this.setState({ id:label.id})
+                  this.setState({label:label.label})
+                  this.setState({ value: label.label})
+                  
+                  // alert(`selected ${this.state.label}`)
+                  console.log(id)
+                }}
+                />
+                <button className='btn-primary' style={{padding:'10px 12px', float:'right', display:'inline-block'}} 
+                onClick=
+                {
+                  e => {
+                    this.props.dispatch(inviteToBusiness(state.data.bu_id,this.state.id)).then(()=>{
+                      showNotif('Successfully added member to business unit', 'GREEN')
 
-                            })
-                          }
-                        }>
-                        <i className='material-icons'>add</i></button>
+                      this.props.dispatch(getBusinessUnitDetail(state.page.business_unit.bu_code))
+
+                    })
+                  }
+                }>
+                <i className='material-icons'>add</i></button>
                         </div>
+                }
                         </div>
                         <div className='grid wrap'>
 

@@ -76,7 +76,10 @@ class ProjectIssues extends Component {
           </div>
         </div>
         <div className="grid padding-left">
-        <button className='btn-primary'
+        {
+          this.props.state.auth.privilege.upload_issue &&
+
+          <button className='btn-primary'
         style={{display:'block', margin: 'auto'}}
         onClick={
         e => {
@@ -93,7 +96,7 @@ class ProjectIssues extends Component {
       }
         >
         UPLOAD ISSUE
-      </button>
+      </button>}
           <PopUp id="issue" dividerText="REPORT AN ISSUE" btnText="REPORT AN ISSUE" btnClass="btn-primary" btnStyle={{ display: 'block', margin: '0 auto' }}>
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <div>

@@ -69,24 +69,28 @@ class Project extends Component {
                     {
                       sidebar.map((value, index) => {
                         if (value.type == 'menu') {
-                          return(
-                            <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
-                              e => {
-                                const name = value.name
-                                this.setState({
-                                  active : value.name
-                                })
-                                if (value.name == 'Workplan') {
-                                  browserHistory.push(value.path)
-                                }
-                                else {
-                                  browserHistory.replace(value.path)
+                          if( value.name != 'Team Member' && !this.props.state.auth.privilege.project_member) {
 
+                            return(
+                              <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
+                                e => {
+                                  const name = value.name
+                                  this.setState({
+                                    active : value.name
+                                  })
+                                  if (value.name == 'Workplan') {
+                                    browserHistory.push(value.path)
+                                  }
+                                  else {
+                                    browserHistory.replace(value.path)
+
+                                  }
+                                  e.preventDefault()
                                 }
-                                e.preventDefault()
-                              }
-                            }>{value.name}</a></li>
-                          )
+                              }>{value.name}</a></li>
+                            )
+                            }
+                          else return null
                         }
                         else {
                           return(
