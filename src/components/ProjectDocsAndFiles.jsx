@@ -157,10 +157,10 @@ class ProjectDocsAndFiles extends Component {
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>
                         <div className='unit four-fifths'>
-                          <a style={{ display:'inline'}} onClick={ () => {
-                            fileDownload(`http://prouds2.telkomsigma.co.id/prouds-api/document_assets/rebaseline_evidence/${value.url}`,value.doc_name) 
-                          }}>{value.doc_name}</a>
-                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
+                          <a href ={`http://prouds2.telkomsigma.co.id/prouds-api/document_assets/rebaseline_evidence/${value.url}`} style={{ display:'inline'}} 
+                            
+                          >{value.doc_name}</a>
+                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}</small>
                         </div>
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right', marginTop:'9px'}}> &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
