@@ -331,7 +331,7 @@ class ReportsFindProject extends Component {
                   style={{ width: '100%', margin: '0' }}
                   onChange={
                     e => {
-                      this.setState({keyword : e.targer.value}, () => {
+                      this.setState({keyword : e.target.value}, () => {
 
                         this.props.dispatch(reportSearchProject(!this.state.status_flag ? this.state.status : null, !this.state.schedule_flag ? this.state.schedule : null , !this.state.budget_flag ? this.state.budget : null, this.state.keyword, this.state.page, 5))
                       })
