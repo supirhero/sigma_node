@@ -135,6 +135,7 @@ class ProjectWorkplan extends Component {
               <MenuItem title='Assign' onClick={e => {
                 // this.setState({WBS_id:value.WBS_id})
                 // this.setState({WBS_name:value.WBS_name})
+                // this.setState({WBS_ID:value.WBS_ID})
                 this.props.dispatch({
                   type: 'POPUP',
                   name:'assign_task',
@@ -149,6 +150,7 @@ class ProjectWorkplan extends Component {
                 const id = this.props.state.page.id;
 
                 this.props.dispatch(getTaskMemberView(id,value.WBS_ID))
+                console.log(value.WBS_ID)
 
                 e.preventDefault()
               }}/>
