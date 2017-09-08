@@ -1599,6 +1599,34 @@ export function requestRebaseline(id, props, array){
   }
 }
 
+
+
+
+export const requestRebaselineFetch = (id,reason,files ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  return function(dispatch){
+    const formData = new FormData();
+    // formData.append('array',array);
+    formData.append('evidence',files[0])
+    formData.append('project_id',id)
+    formData.append('reason',reason)
+    return fetch(`${baseURL}project/rebaseline/${id}?token=${token}`,{
+      method:'POST',
+      body:formData
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        
+        
+
+
+      },
+    )
+  }
+}
+
+
 export function getDataMaster(data,keyword){
 
   return function(dispatch){

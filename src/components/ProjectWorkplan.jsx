@@ -12,7 +12,7 @@ import { Divider, Header, ProjectHeader, PopUp, ReduxInput, WorkplanRow, PageLoa
 
 import { Field, reduxForm } from 'redux-form';
 
-import { getWorkplanView, addTaskWorkplan, getCreateTaskView, getTaskMemberView ,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
+import { getWorkplanView, addTaskWorkplan, getCreateTaskView, getTaskMemberView ,requestRebaselineFetch,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
 denyRebaseline,acceptRebaseline, baseline, showNotif,getCurrentProgress,editTaskPercentAction
 } from './actions.jsx';
 import ReactAutocomplete from 'react-autocomplete'
@@ -298,9 +298,11 @@ class ProjectWorkplan extends Component {
   onSubmitRebaseline(props){
     alert('Re-baseline Request Success')
     var id = this.props.state.page.id
-    this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).then(res=> {
-    this.props.dispatch(getCreateTaskView(id));
-    this.props.dispatch(getWorkplanView(id))
+    store.dispatch(requestRebaselineFetch(id,props.reason,props.evidence))
+    .then(res=> {
+      this.props.dispatch(getCreateTaskView(id));
+      this.props.dispatch(getWorkplanView(id))
+      // this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).
     
     
       this.props.dispatch({

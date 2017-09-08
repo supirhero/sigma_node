@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
-
+import fileDownload from 'react-file-download';
 import {Divider, Header, ProjectHeader, PopUp, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif } from './actions.jsx'
 
@@ -157,7 +157,9 @@ class ProjectDocsAndFiles extends Component {
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>
                         <div className='unit four-fifths'>
-                          <a style={{ display:'inline'}}>{value.url}</a>
+                          <a style={{ display:'inline'}} onClick={ () => {
+                            fileDownload(`http://prouds2.telkomsigma.co.id/prouds-api/document_assets/rebaseline_evidence/${value.url}`,value.doc_name) 
+                          }}>{value.doc_name}</a>
                           <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
                         </div>
                         <div className='unit one-fifth'>
@@ -193,6 +195,14 @@ class ProjectDocsAndFiles extends Component {
                       <div className='grid'>
                         <div className='unit whole'>
                           <small>{value.doc_desc}</small>
+                          <br />
+                          <br />
+                          {
+                            project_doc_list.jenis == "rebaseline" ?
+                            <small>type : rebaseline</small>
+                            :
+                            <small>type : document</small>
+                          }
                         </div>
 
                       </div>
