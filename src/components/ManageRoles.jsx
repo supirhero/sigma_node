@@ -225,7 +225,7 @@ class ManageRoles extends Component {
                   })
                 e.preventDefault()
                 }}> CANCEL </button>
-              <button type='submit' style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> ADD NEW </button>
+              <button type='submit' style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> SUBMIT EDIT </button>
             </div>
           </div>
         </div>
