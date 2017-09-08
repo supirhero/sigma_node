@@ -2164,6 +2164,14 @@ axios.interceptors.response.use(undefined, function (error) {
     // ipcRenderer.send('response-unauthenticated');
     return Promise.reject(error);
   }
+  else if(error.response.status && error.response.status === 401) {
+    showNotif(error.response.data.message, 'RED')
+    store.dispatch(logout())
+    store.dispatch(replace('/auth'))
+    
+    
+    return Promise.reject(error);
+  }
 });
 export const gethistory = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
