@@ -6,7 +6,7 @@ import {logout} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader,MenuNotifItem} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
-
+import moment from 'moment'
 
 
 
@@ -158,6 +158,15 @@ class Dashboard extends Component {
                   }></button> */}
                 </div>
                 {this.props.children}
+                <div className="footer">
+                <div className='grid wrap'>
+                  <div className='unit whole'>
+                    <p>
+                    {`© ${moment().format("YYYY")} - Project Management & Resources Delivery System. All rights reserved`} 
+                    </p>
+                  </div>
+                </div>
+                </div>
               </div>
 
 
