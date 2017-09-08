@@ -15,7 +15,8 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux'
 import Autosuggest from 'react-autosuggest';
-import {initialize} from 'redux-form';
+import {initialize, change} from 'redux-form';
+import ReactAutocomplete from 'react-autocomplete'
 
 
 import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView,gethistorydetail} from './actions.jsx'
@@ -252,7 +253,7 @@ export class Input extends Component {
       <div style={this.props.style}>
       {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
       {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-      <input placeholder={this.props.placeholder}></input>
+      <input style={this.props.inputStyle} placeholder={this.props.placeholder}></input>
       {this.props.children}
       </div>
 
@@ -327,17 +328,121 @@ export class RenderRadioGroup extends Component {
 
   }
 
-  export const ReduxInputAsync2 = (
-    { input, label, type, meta: { asyncValidating, touched, error } },
-    ) => (
-    <div>
-    <label>{label}</label>
-    <div className={asyncValidating ? 'async-validating' : ''}>
-    <input {...input} type={type} placeholder={label} />
-    {touched && error && <span>{error}</span>}
-    </div>
-    </div>
-    );
+  export class ReduxAutoComplete extends Component {
+    constructor() {
+      super()
+      this.state= {
+        value: '',
+        USER_NAME: null,
+        RP_ID: null
+      }
+    }
+ 
+    render(){
+    
+      return(
+        <div>
+        <ReactAutocomplete
+        menuStyle={{
+          opacity:'1'
+        }}
+        getItemValue={(label) => label.label}
+        style={{width:'100%'}}
+        items={this.props.data}
+        wrapperProps={{style: {width:'100%'}}}
+        menuStyle={{
+          borderRadius: '3px',
+          boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+          background: 'rgba(255, 255, 255, 5)',
+          padding: '2px 0',
+          fontSize: '90%',
+          top:'10',
+          zIndex: '1',
+          overflow: 'auto',
+          maxHeight: '300px',
+          cursor:'pointer',
+          display:'block'
+        }}
+        shouldItemRender={(item, value) => item.IWO_NO.toLowerCase().indexOf(value.toLowerCase()) > -1}
+        // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+        getItemValue={item => item.IWO_NO}
+        renderItem={(item, highlighted) =>
+          <small key={item.IWO_NO}>{item.IWO_NO}</small>  
+        }
+        {...this.props.select}
+        {...this.props.custom}
+        {...this.props.input}
+        value={this.state.value}
+        onChange={e => {
+          this.setState({value: e.target.value}, ()=> {
+            this.props.input.onChange(this.state.value)
+
+          })
+          
+      }}
+        onSelect={(IWO_NO, value) => {
+          this.props.input.onChange(IWO_NO)
+          this.setState({value: IWO_NO})
+
+          var fields = [
+                        {
+                          field: 'AMOUNT',
+                          // value: arr.AMOUNT
+                          value: value.AMOUNT == null ? 0 : value.AMOUNT
+                        },
+                        {
+                          field: 'PROJECT_NAME',
+                          // value: value.PROJECT_NAME
+                          value: value.PROJECT_NAME == null ? 'none' : value.PROJECT_NAME
+                        },
+                        {
+                          field: 'RELATED',
+                          // value: value.RELATED_BU
+                          value: value.RELATED_BU == null ? 'none' : value.RELATED_BU
+                        },
+                        {
+                          field: 'CUST_ID',
+                          // value: value.CUSTOMER_ID
+                          value: value.CUSTOMER_ID == null ? 'none' : value.CUSTOMER_ID
+                        }
+                        ,
+                        {
+                          field: 'MARGIN',
+                          // value: value.MARGIN == null ? 'none' : value.MARGIN
+                          value: value.MARGIN == null ? 0 : value.MARGIN
+                        },
+                        {
+                          field: 'END_CUST_ID',
+                          // value: value.END_CUSTOMER
+                          value: value.END_CUSTOMER == null ? 'none' : value.END_CUSTOMER
+                        },
+                        {
+                          field: 'AM_ID',
+                          // value: value.END_CUSTOMER
+                          value: value.AM_ID == null ? 'none' : value.AM_ID
+                        }
+                      ]
+                      fields.map((value, index) => {
+                        store.dispatch(change("add_project", 
+                          value.field, value.value
+                        ))
+                      })
+
+
+                        this.setState({data:IWO_NO},()=>{
+                          console.log(this.state.data)
+                        })
+                    }}
+                  />
+                  {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))}
+                  
+                  </div>
+
+        )
+    }
+
+  }
+
 
     export class ReduxInputAsync extends Component {
       constructor(){

@@ -57,7 +57,8 @@ export function login(email, password) {
           )
           .catch(
             res=>{
-              alert('failed')
+              store.dispatch({type: 'LOADER', loader:'login-loader', show: false})
+              
             }
           )
   }

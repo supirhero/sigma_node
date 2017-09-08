@@ -299,8 +299,9 @@ class ProjectWorkplan extends Component {
     alert('Re-baseline Request Success')
     var id = this.props.state.page.id
     this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).then(res=> {
-    this.props.dispatch(getCreateTaskView(id))
+    this.props.dispatch(getCreateTaskView(id));
     this.props.dispatch(getWorkplanView(id))
+    
     
       this.props.dispatch({
         type: 'POPUP',

@@ -22,7 +22,7 @@ import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'mate
 
 import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView, showNotif } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync, RenderRadioGroup} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync, RenderRadioGroup, ReduxAutoComplete} from './Components.jsx'
 
 
 
@@ -30,7 +30,8 @@ class NewProject extends Component {
   constructor(){
     super();
     this.state = {
-      iwo_index : 0
+      iwo_index : 0,
+      value: ''
 
     };
   }
@@ -117,7 +118,19 @@ class NewProject extends Component {
       const iwo = new_project.iwo ? new_project.iwo : false
       const form_values = this.props.formValues  ? this.props.formValues.values : false
 
-
+      const iwo_map = iwo ? iwo.map((value,index)=>{
+        return {
+          IWO_NO:value.IWO_NO, 
+          PROJECT_NAME:value.PROJECT_NAME, 
+          RELATED_BU:value.RELATED_BU, 
+          CUSTOMER_ID:value.CUSTOMER_ID, 
+          MARGIN:value.MARGIN,
+          END_CUSTOMER: value.END_CUSTOMER,
+          AM_ID: value.AM_ID,
+          AMOUNT: value.AMOUNT
+        }
+       }) : null
+  
 
       const {handleSubmit} = this.props;
 
@@ -285,105 +298,30 @@ class NewProject extends Component {
                   >
                 </Field>
                   :
-
-
-                  <Field
-                  inputName="IWO NUMBER"
-                  name="IWO_NO"
-                  component={ReduxSelect}
-                  validate={iwo && [required]}
-                  selectStyle={
-                    !iwo ?
-                    {
+                  !iwo ? 
+                  <Input
+                  inputStyle={{
                     backgroundColor:'white',
                     backgroundSize: '33px',
                     backgroundImage:'url(http://www.xiconeditor.com/image/icons/loading.gif)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right',
-                  }:
-                  {
-
-                }
-
-                }
-                  onChange={(e,value)=> {
-                    // store.dispatch(getAccountManager(res2.data))
-                    if (value != '' ) {
-                      var iwo_no = this.props.formValues.values.IWO_NO
-                      var i = _.findIndex(iwo, { 'IWO_NO' : value});
-                      var arr =iwo[i]
-                      store.dispatch(getAccountManager(arr.ACCOUNT_MANAGER_ID))
-                      var fields = [
-                        {
-                          field: 'AMOUNT',
-                          // value: arr.AMOUNT
-                          value: arr.AMOUNT == null ? 0 : arr.AMOUNT
-
-                        },
-                        {
-                          field: 'PROJECT_NAME',
-                          // value: arr.PROJECT_NAME
-                          value: arr.PROJECT_NAME == null ? 'none' : arr.PROJECT_NAME
-
-                        },
-                        {
-                          field: 'RELATED',
-                          // value: arr.RELATED_BU
-                          value: arr.RELATED_BU == null ? 'none' : arr.RELATED_BU
-
-                        },
-                        {
-                          field: 'CUST_ID',
-                          // value: arr.CUSTOMER_ID
-                          value: arr.CUSTOMER_ID == null ? 'none' : arr.CUSTOMER_ID
-
-                        }
-                        ,
-                        {
-                          field: 'MARGIN',
-                          // value: arr.MARGIN == null ? 'none' : arr.MARGIN
-                          value: arr.MARGIN == null ? 0 : arr.MARGIN
-
-                        },
-                        {
-                          field: 'END_CUST_ID',
-                          // value: arr.END_CUSTOMER
-                          value: arr.END_CUSTOMER == null ? 'none' : arr.END_CUSTOMER
-
-                        },
-                        {
-                          field: 'AM_ID',
-                          // value: arr.END_CUSTOMER
-                          value: arr.AM_ID == null ? 'none' : arr.AM_ID
-
-                        }
-                      ]
-
-                      fields.map((value, index) => {
-                        this.props.change(
-                          value.field, value.value
-                        )
-
-                      })
-                    }
-
-                    // e.preventDefault()
+                    width:'100%'
                   }}
-                  // onChange={(event, index, value)=>{
-                  //
-                  //   // alert(this.state.iwo_index)
-                  // }}
-                >
-                  <option>Choose IWO</option>
+                /> 
+                  :
+                  <Field
+                  inputName="IWO NUMBER"
+                  name="IWO_NO"
+                  data={iwo_map}
+                  validate={iwo && [required]}
+                  component={ReduxAutoComplete}
+                  onChange = {(e,value,bla) => console.log("ASDAD")}
+                  
+                  />
 
-                  {
-                    iwo &&
-                    iwo.map((value, index) => (
-                      <option key ={index} am_id={value.ACCOUNT_MANAGER_ID} value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
 
-                    ))
-                  }
-                </Field>
+    
               }
 
                 <Field
