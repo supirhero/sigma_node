@@ -197,12 +197,7 @@ class ProjectDocsAndFiles extends Component {
                           <small>{value.doc_desc}</small>
                           <br />
                           <br />
-                          {
-                            project_doc_list.jenis == "rebaseline" ?
-                            <small>type : rebaseline</small>
-                            :
-                            <small>type : document</small>
-                          }
+                          <small>{value.jenis === "rebaseline" ? "type : rebaseline" : "type: document"}</small>
                         </div>
 
                       </div>
