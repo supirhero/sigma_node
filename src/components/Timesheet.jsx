@@ -18,7 +18,8 @@ class Timesheet extends Component {
       holiday: null,
       selected:moment().format("YYYY-MM-DD"),
       datepicker: null, 
-      tomorrow: moment().add(10,'years').format("YYYY-MM-DD"),
+     
+      
       
 
       
@@ -65,7 +66,7 @@ class Timesheet extends Component {
     const timesheet = state.data.timesheet;
     const auth = state.auth;
     console.log(this.state.tomorrow)
-    console.log(this.state.range)
+    
   }
 
 componentDidUpdate(){
@@ -90,7 +91,10 @@ componentDidUpdate(){
     const state = store.getState();
     const timesheet = state.data;
     const weekdays = state.data.weekdays; 
-    const tomorrow = moment().add(1,'days')
+    const format = "YYYY-MM-DD";
+
+    const yesterday = moment().subtract(100,'years').format("YYYY-MM-DD")
+    const today = moment().add(1,'days').format("YYYY-MM-DD")
     
 
     function status(value) {
@@ -175,14 +179,14 @@ componentDidUpdate(){
                           }) : this.setState({
                             holiday : false
                           },()=>{
-                            value.day !== this.state.tomorrow ?
+                            moment(value.day).isBetween(yesterday,today) ?
                             this.setState({
                               selected:value.day,
                               datepicker:value.day
                             },()=>{
                               this.handleInitialize()
                               console.log(this.state.datepicker)
-                            }) : this.setState({datepicker:""})
+                            }) : alert("Timesheet submission in the future is not allowed! ")
                           })
                         }
                       } 

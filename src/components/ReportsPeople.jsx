@@ -6,7 +6,7 @@ import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, BarChart, Divider, Meter,Table, TableNew,Header,PageLoader,Menu, MenuSection, MenuItem, MenuHeader } from './Components.jsx';
 
-import {reportPeople, reportDownloadPeople} from './actions.jsx'
+import {reportPeople, reportDownloadPeople,getListBU} from './actions.jsx'
 
 class ReportsPeople extends Component {
   constructor(){ 
@@ -22,6 +22,7 @@ class ReportsPeople extends Component {
 
   componentWillMount(){
     store.dispatch(reportPeople("6","6","2017"));
+    store.dispatch(getListBU())
   }
 
   
@@ -172,7 +173,7 @@ class ReportsPeople extends Component {
         e.preventDefault() 
       }}>search</span></button> 
       <div className="unit whole no-gutters">
-                  <button className='btn-primary' onClick={ e=> {
+                  <button className='btn-primary' style={{marginTop:'20px'}} onClick={ e=> {
                     this.props.dispatch(reportDownloadPeople(this.state.bu,this.state.year,this.state.month))
                     e.preventDefault()
                     }}>DOWNLOAD EXCEL</button>
