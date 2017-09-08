@@ -6,6 +6,7 @@ import { deleteAuthentication ,getListBU,rDirectorat, showNotif, getDirectorateE
 import store from '../reducers/combineReducers.jsx';
 import {BarChart, Divider, Meter, Header ,Menu, MenuSection, MenuItem, MenuHeader, PageLoader, Select} from './Components.jsx';
 import numeral from 'numeral'
+import moment from 'moment'
 
 class ReportsDirectorate extends Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class ReportsDirectorate extends Component {
       bu_name: '',
       bu: null,
       year: null,
-      year_timesheet: null
+      year_timesheet: null,
+      this_year : moment().format("YYYY")
+      
     }
   }
   componentWillMount(){
@@ -387,7 +390,15 @@ class ReportsDirectorate extends Component {
            </div>
             </div>}
             
-
+            <div className="footer">
+            <div className='grid wrap'>
+              <div className='unit whole'>
+                <p>
+                 {`© ${this.state.this_year} - Project Management & Resources Delivery System. All rights reserved`} 
+                </p>
+              </div>
+            </div>
+          </div>
 
            </div>
            );

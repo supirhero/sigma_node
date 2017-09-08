@@ -14,7 +14,8 @@ class DashboardHome extends Component {
   constructor() {
     super()
     this.state= {
-      search : ''
+      search : '',
+      this_year : moment().format("YYYY")
     }
   }
   componentDidMount() {
@@ -298,7 +299,7 @@ class DashboardHome extends Component {
     <div className='grid wrap'>
       <div className='unit whole'>
         <p>
-          © 2016 - Project Management & Resources Delivery System. All rights reserved
+        {`© ${this.state.this_year} - Project Management & Resources Delivery System. All rights reserved`} 
         </p>
       </div>
     </div>
