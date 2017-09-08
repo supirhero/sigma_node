@@ -299,6 +299,9 @@ input:disabled {
         color: white;
         text-decoration: none;
       }
+      a:hover{
+        color:#464646;
+      }
     }
     li.active{
       border-bottom: 4px solid white;
