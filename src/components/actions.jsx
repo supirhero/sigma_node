@@ -2059,6 +2059,29 @@ export function getUserAccess() {
   }
 }
 
+export function editUserAccess(props) {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}role/useraccess_edit?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              user_id:props.user_id,
+              prof_id:props.prof_id
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+
 
 
 export function reportFindProject(value,status,schedule,budget) {
@@ -2295,16 +2318,14 @@ export const uploadUsers = (files) => {
     const formData = new FormData();
     const token = cookies.get('token')  
     formData.append('userfile',files[0])
+    store.dispatch({type: 'LOAD', name:'uploadUser', show: true})
     return fetch(`${baseURL}Datamaster/upload_users?token=${token}`,{
       method:'POST',
       body:formData
     }).then(
       res => {
-        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-        
-        store.dispatch({type:'API', name: 'datamaster', data: res, append:true})
-
-
+        store.dispatch({type: 'LOAD', name:'uploadUser', show: false})
+        showNotif('Successfully uploaded user', 'GREEN') 
       },
     )
   }

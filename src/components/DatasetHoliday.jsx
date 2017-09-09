@@ -177,7 +177,7 @@ onSubmitUpdateHoliday(props){
                         <div className="unit whole">
                             <Field
                             inputName="HOLIDAY"
-                            name="HOLIDAY_ID"
+                            name="HOLIDAY"
                             type='input'
                             component={ReduxInput}
                           />

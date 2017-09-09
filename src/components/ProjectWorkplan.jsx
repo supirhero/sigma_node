@@ -332,7 +332,11 @@ class ProjectWorkplan extends Component {
   }
   onSubmitWorkplan(props){
     const id = this.props.state.page.id
-    this.props.uploadWorkplan(id,props.document)
+    this.props.uploadWorkplan(id,props.document).then(
+      res=>{
+        this.props.dispatch(getWorkplanView(id))
+      }
+    )
   }
   onSubmitEditTask(props){
     const id = this.props.state.page.id

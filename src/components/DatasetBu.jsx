@@ -32,6 +32,7 @@ class DatasetBu extends Component {
     // alert("New Business Unit Added")
     this.props.dispatch(addBU(props)).then(
       ()=> {
+        store.dispatch(getDataMaster("bu",this.state.search))
         store.dispatch({
           type: 'POPUP',
           name: 'createBusinessUnit',
@@ -43,6 +44,10 @@ class DatasetBu extends Component {
       }
     )
   }
+
+
+  
+
 
   onSubmitEdit(props){
     alert("Business Unit Updated")
@@ -144,7 +149,7 @@ class DatasetBu extends Component {
                         validate={[required]}>
                         {
                           bu?bu.map((value,index)=>{
-                            return <option key={index} value={value.BU_PARENT_ID}>{value.BU_PARENT_ID}</option>
+                            return <option key={index} value={value.BU_ID}>{value.BU_NAME}</option>
                           }
                         ):null
                         }
@@ -212,10 +217,11 @@ class DatasetBu extends Component {
                         validate={[required]}>
                         {
                           bu?bu.map((value,index)=>{
-                            return <option key={index} value={value.BU_PARENT_ID}>{value.BU_PARENT_ID}</option>
+                            return <option key={index} value={value.BU_ID}>{value.BU_NAME}</option>
                           }
                         ):null
                         }
+
                         </Field>
                         </div>
                       </div>

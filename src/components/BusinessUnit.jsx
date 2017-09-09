@@ -145,10 +145,10 @@ class BusinessUnit extends Component {
             page: {
               name: 'new-project',
               new_project: {
-                bu_code: state.page.business_unit.bu_code
+                bu_code: id
               }
             }
-                        }))
+          }))
         }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
         <Search placeholder='Search Business Units or Project' style={{width:'78%', display:'inline-block'}}
         onChange={e=>{
