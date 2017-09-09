@@ -1080,7 +1080,7 @@ export function taskList(project_id) {
 
     }).then(
             (res) => {
-              alert('fetched tasklist');
+              
               store.dispatch({ type: 'API', name: 'timesheet' ,
                 data: res, append: true}
               );
@@ -2275,7 +2275,7 @@ export const uploadUsers = (files) => {
     const formData = new FormData();
     const token = cookies.get('token')  
     formData.append('userfile',files[0])
-    return fetch(`${baseURL}Datamaster/upload_users/?token=${token}`,{
+    return fetch(`${baseURL}Datamaster/upload_users?token=${token}`,{
       method:'POST',
       body:formData
     }).then(
