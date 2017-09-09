@@ -1606,6 +1606,7 @@ export const requestRebaselineFetch = (id,reason,files ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // console.log("DOCS",data);
   return function(dispatch){
+    const token = cookies.get('token')
     const formData = new FormData();
     // formData.append('array',array);
     formData.append('evidence',files[0])
