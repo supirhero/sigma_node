@@ -401,7 +401,7 @@ component={ReduxSelect}
                 {
                 value.is_approved == 0 &&
                 <a style={{marginLeft:'45px'}} onClick={e => {
-                 
+                  store.dispatch(taskList(value.project_id))
                   this.props.initialize(
                     {
                       TS_DATE: value.ts_date,
@@ -414,9 +414,9 @@ component={ReduxSelect}
                       TS_SUBJECT: value.subject,
                       TS_MESSAGE: value.message,
                     }
-                   ,()=>{
-                    store.dispatch(taskList(value.wbs_id))
-                   })
+                   ,
+                    
+                   )
                    this.props.dispatch({
                     type: 'POPUP',
                     name:'resubmitTimesheet',
