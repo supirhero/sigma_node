@@ -140,6 +140,15 @@ class BusinessUnit extends Component {
         
         <button className='btn-secondary' style={{padding:'17px 22px', width:'20%', float:'right'}} onClick={e => {
           browserHistory.push('/new-project')
+          this.props.dispatch(changeRoute({
+            type: 'PUSH',
+            page: {
+              name: 'new-project',
+              new_project: {
+                bu_code: state.page.business_unit.bu_code
+              }
+            }
+                        }))
         }}><i style={{verticalAlign:'bottom', marginRight:'7px'}} className="material-icons md-18">add</i>NEW PROJECT</button>
         <Search placeholder='Search Business Units or Project' style={{width:'78%', display:'inline-block'}}
         onChange={e=>{

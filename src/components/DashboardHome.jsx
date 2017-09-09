@@ -184,7 +184,7 @@ class DashboardHome extends Component {
                       this.props.state.auth.privilege.create_project &&
                       <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
                         browserHistory.push('/new-project')
-                        store.dispatch(changeRoute({
+                        this.props.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {
                             name: 'new-project',

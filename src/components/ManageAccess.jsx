@@ -33,7 +33,7 @@ class ManageAcess extends Component {
                 form='dataset_bu'
                 editPopUp='editRole'
                 tableHeader={[{value:'NIK'},{value:'NAME'},{value:'EMAIL'},{value: 'ROLE'}]}
-                tableData={ store.getState().data.user_list ? store.getState().data.user_list.map((value,index)=>{
+                tableData={ this.props.state.data.user_list ? store.getState().data.user_list.map((value,index)=>{
                   return {column:[
                     {value:value.USER_ID},
                     {value:value.USER_NAME},
@@ -60,6 +60,7 @@ class ManageAcess extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
 		// filter: ownProps.location.query.filter
   };
 }

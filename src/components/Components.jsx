@@ -375,7 +375,7 @@ export class RenderRadioGroup extends Component {
         {...this.props.select}
         {...this.props.custom}
         {...this.props.input}
-        value={this.state.value}
+        
         onChange={e => {
           this.setState({value: e.target.value}, ()=> {
             this.props.input.onChange(this.state.value)
