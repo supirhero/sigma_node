@@ -50,7 +50,7 @@ class DashboardHome extends Component {
                     <ul>
                       <li>
                         <span className='icon-speedometer'>&nbsp;&nbsp;</span>
-                        <a onClick={
+                        <a href="/my-performance" onClick={
                           e => {
                           
                             browserHistory.push('/my-performance')
@@ -180,20 +180,24 @@ class DashboardHome extends Component {
                         }))
                       }
                     }>{value.bu_name}</a></large>
-
-                    <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
-                      browserHistory.push('/new-project')
-                      store.dispatch(changeRoute({
-                        type: 'PUSH',
-                        page: {
-                          name: 'new-project',
-                          new_project: {
-                            bu_code: value.bu_code
+                    {
+                      this.props.state.auth.privilege.create_project &&
+                      <button className='btn-secondary' style={{padding:'15px 22px'}} onClick={e => {
+                        browserHistory.push('/new-project')
+                        store.dispatch(changeRoute({
+                          type: 'PUSH',
+                          page: {
+                            name: 'new-project',
+                            new_project: {
+                              bu_code: value.bu_code
+                            }
                           }
-                        }
-                      }))
+                        }))
 
-                    }}><i style={{verticalAlign:'bottom', marginRight:'7px', color: '#FC4D54'}} className="material-icons md-18">add</i>NEW PROJECT</button>
+                      }}>
+                        <i style={{verticalAlign:'bottom', marginRight:'7px', color: '#FC4D54'}} className="material-icons md-18">add</i>NEW PROJECT
+                      </button>
+                    }
                   </div>
                 </div>
 

@@ -28,7 +28,7 @@ class MainPage extends Component {
     return(
       <div>
         {
-          <div className={alert && alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}
+          <div className={this.props.state.alert && alert && alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}
           style={{backgroundColor: color }}
           >
           <small>{alert && alert.message ? alert.message : '' }</small>

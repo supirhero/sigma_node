@@ -7,7 +7,23 @@ import moment from 'moment';
 
 import store from '../reducers/combineReducers.jsx';
 
-import { Divider, Header, ProjectHeader, PopUp, ReduxInput, WorkplanRow, PageLoader, datepickerUniversal ,ReduxInputDisabled,required,ReduxSelect,ReduxUploadWorkplan, Menu, MenuItem, MenuSection, } from './Components.jsx';
+import { 
+  Divider, 
+  Header, 
+  ProjectHeader, 
+  PopUp, 
+  ReduxInput, 
+  WorkplanRow, 
+  PageLoader, 
+  datepickerUniversal,
+  ReduxInputDisabled,
+  required,
+  ReduxSelect,
+  ReduxUploadWorkplan, 
+  Menu, 
+  MenuItem, 
+  MenuSection,
+  Loader } from './Components.jsx';
 
 
 import { Field, reduxForm } from 'redux-form';
@@ -27,7 +43,6 @@ class ProjectWorkplan extends Component {
       array: {
         new_task :[],
         modified_task:[],
-        manualUpdate:[]
       },
       assignMember:{
         MEMBER:'',
@@ -812,6 +827,8 @@ class ProjectWorkplan extends Component {
               }
             >UPLOAD</button>
             <PopUp id="uploadWorkplan" dividerText="UPLOAD WORKPLAN" btnText="UPLOAD" btnClass="btn-secondary" btnStyle={{ width: '200px', float: 'left' }}>
+            <Loader id='upload_workplan' style ={{height:'280px'}}>
+
             <form onSubmit={handleSubmit(this.onSubmitWorkplan.bind(this))}>
               <div>
               <h2 className='input-desc'>You can upload your project workplan to generate task automatically on PRouDS. Please download the project workplan template <a>here</a></h2>
@@ -844,6 +861,7 @@ class ProjectWorkplan extends Component {
               </div>
 
               </form>
+              </Loader>
             </PopUp>
           </div>
 

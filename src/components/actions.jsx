@@ -23,7 +23,7 @@ console.log(token)
 
 
 export function login(email, password) {
-  store.dispatch({type: 'LOADER', loader:'login-loader', show: true})
+  store.dispatch({type: 'LOAD', name:'login', show: true})
   return function (dispatch) {
     return axios({
             method: 'POST',
@@ -35,6 +35,7 @@ export function login(email, password) {
                   }
           }).then(
             res => {
+              store.dispatch({type: 'LOAD', loader:'login', show: false})
               // browserHistory.replace('/')
               console.log("TOKEN", res);
               cookies.set('token', res.data.token, { path: '/' });
@@ -47,7 +48,7 @@ export function login(email, password) {
                 store.dispatch(replace('/'))
               }
               else {
-                store.dispatch({type: 'LOADER', loader:'login-loader', show: false})
+                store.dispatch({type: 'LOAD', name:'login', show: false})
 
                 store.dispatch({type:'LOGIN', isloggedin: false})
 
@@ -57,6 +58,8 @@ export function login(email, password) {
           )
           .catch(
             res=>{
+              store.dispatch({type: 'LOAD', name:'login', show: false})
+              
               store.dispatch({type: 'LOADER', loader:'login-loader', show: false})
               
             }
@@ -1326,12 +1329,29 @@ export function uploadWorkplan(project_id,files){
     const formData = new FormData()
     formData.append('project_id',project_id)
     formData.append('document',files[0])
-    fetch(`${baseURL}task/upload_wbs?token=${token}`,{
+    store.dispatch({type: 'LOAD', name:'upload_workplan', show: true})
+    
+    return fetch(`${baseURL}task/upload_wbs?token=${token}`,{
       method:'POST',
       body:formData
     }).then(res=> {
+      store.dispatch({
+        type: 'POPUP',
+        name: 'uploadWorkplan',
+        data: {
+          active: false,
+        },
+      });
+      store.dispatch({type: 'LOAD', name:'upload_workplan', show: false})
+    
       return res
-    })
+    }).catch(
+      res => {
+        
+      store.dispatch({type: 'LOAD', name:'upload_workplan', show: false})
+      
+      }
+    )
   }
 }
 

@@ -297,6 +297,7 @@ export class RenderRadioGroup extends Component {
       )
   }}
 
+
   export class ReduxInput extends Component {
     componentDidUpdate() {
 
@@ -342,6 +343,8 @@ export class RenderRadioGroup extends Component {
     
       return(
         <div>
+          {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+          
         <ReactAutocomplete
         menuStyle={{
           opacity:'1'
@@ -367,7 +370,7 @@ export class RenderRadioGroup extends Component {
         // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
         getItemValue={item => item.IWO_NO}
         renderItem={(item, highlighted) =>
-          <small key={item.IWO_NO}>{item.IWO_NO}</small>  
+          <small style={{padding:'8px'}} key={item.IWO_NO}>{item.IWO_NO}</small>  
         }
         {...this.props.select}
         {...this.props.custom}
@@ -423,7 +426,7 @@ export class RenderRadioGroup extends Component {
                         }
                       ]
                       fields.map((value, index) => {
-                        store.dispatch(change("add_project", 
+                        store.dispatch(change(this.props.forms, 
                           value.field, value.value
                         ))
                       })
@@ -2875,17 +2878,21 @@ export class ReduxDropProfilePicture extends Component {
   }
 }
 
-export class LoaderLogin extends Component {
+export class Loader extends Component {
   render(){
     return(
-      <div className='loader-login-wrapper'>
-      <div className='load' id={this.props.id}>
-      <div className='loader'  style={this.props.style}>
-      <div className='loader__figure'></div>
+      <div className='loader-login-wrapper' style={this.props.style}>
+        {
+          store.getState().loader[this.props.id] && store.getState().loader[this.props.id].show ?
+          <div className='load' id={this.props.id}>
+            <div className='loader'  >
+              <div className='loader__figure'></div>
+            </div>
+          </div>
+          :
+          this.props.children
 
-      </div>
-      </div>
-      {this.props.children}
+        }
       </div>
       )
   }

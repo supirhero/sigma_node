@@ -91,12 +91,32 @@ const page = (state = Immutable.List(), action) => {
     return Object.assign({}, state,
       action.page
     )
+    break;
+   
 
 
     default: return state
 
   }
 }
+
+const loader = (state = Immutable.List(), action) => {
+  switch (action.type) {
+ 
+    case 'LOAD':
+    return Object.assign({}, {
+      [action.name]: {
+        show: action.show
+      }
+    })
+    break;
+
+
+    default: return state
+
+  }
+}
+
 const alert = (state = initialState, action) => {
   switch (action.type) {
     case 'CONFIRM': 
@@ -179,9 +199,9 @@ const data = (state = Immutable.List(), action) => {
         // console.log("API DATA", action.data.data);
 
         if (action.append) {
-        return Object.assign({},state,
-          action.data.data
-        )
+          return Object.assign({},state,
+            action.data.data
+          )
 
         }
         else {
@@ -203,8 +223,9 @@ const data = (state = Immutable.List(), action) => {
         }
       })
       return state;
-
   }
+    
+
 }
 
 }
@@ -213,6 +234,7 @@ const appReducer = combineReducers({
   data,
   page,
   alert,
+  loader,
   routing : routerReducer,
   form: reduxForm
 })

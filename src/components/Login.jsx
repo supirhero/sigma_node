@@ -8,7 +8,7 @@ import {Field, reduxForm} from 'redux-form';
 
 import store from '../reducers/combineReducers.jsx'
 import {getData, login} from './actions.jsx'
-import {Input, LoaderLogin, ReduxInput,ReduxInputMask} from './Components.jsx'
+import {Input, Loader, ReduxInput,ReduxInputMask} from './Components.jsx'
 
 
 
@@ -25,6 +25,8 @@ class Login extends Component {
         <div className='grid wrap'>
             <div className='unit whole'>
               <div className='card shadow login' style={{padding:'0'}}>
+              <Loader id='login'>
+                
                 <div className='unit two-fifths no-gutters' style={{height:'100%'}}>
                   <span style={{position:'relative'}}>
                     <div id='picture'>
@@ -34,7 +36,6 @@ class Login extends Component {
                     </div>
                   </span>
                 </div>
-                <LoaderLogin id='login-loader'>
                 <div className='unit three-fifths'>
                   <div className='margin'>
                     <large>SIGN IN</large>
@@ -75,7 +76,7 @@ class Login extends Component {
 
                 </div>
               </div>
-            </LoaderLogin>
+            </Loader>
             </div>
           </div>
 

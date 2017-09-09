@@ -88,7 +88,7 @@ class Dashboard extends Component {
                             }/>
                           </MenuSection>
                           {
-                            this.props.state.auth.privilege.master_data_access &&
+                            this.props.state.auth.privilege.master_data_access && this.props.state.auth.privilege.manage_role_access &&
                             
                             <MenuSection>
                             <MenuHeader title='ADMIN CONSOLE'/>

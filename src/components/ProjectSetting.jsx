@@ -6,7 +6,8 @@ import { push, replace, goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx';
 import { Line } from 'react-progressbar.js';
-import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal, required } from './Components.jsx';
+import { Divider, Input, RadioButton, Select, PopUp, ProjectHeader, InputFile, muiTheme, ReduxSelect, ReduxInput, ReduxInputDisabled, PageLoader, datepicker, datepickerUniversal, 
+  required, ReduxAutoComplete } from './Components.jsx';
 import { Field, reduxForm, load } from 'redux-form';
 import {
   Checkbox,
@@ -58,12 +59,12 @@ class EditProject extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.state.page.id;
     const iwo = this.props.state ? this.props.state : null;
-    this.props.dispatch(getIWOEditProject(30)).then((res2) => {
-      // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
-    });
+    // this.props.dispatch(getIWOEditProject(30)).then((res2) => {
+    //   // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
+    // });
     this.props.dispatch(getEditProjectView(id)).then(
         (res) => {
           console.log('RES', res);
@@ -110,7 +111,19 @@ class EditProject extends Component {
     const projectManager = project.project_manajer_list ? project.project_manajer_list : null;
     const accountManager = project.account_manager_list ? project.account_manager_list : null;
     const projectEffort = project.type_of_effort ? project.type_of_effort : null;
-    const iwo = project.iwo ? project.iwo : null;
+    const iwo = project.iwolist ? project.iwolist : null;
+    const iwo_map = iwo ? iwo.map((value,index)=>{
+      return {
+        IWO_NO:value.iwo_no, 
+        PROJECT_NAME:value.project_name, 
+        RELATED_BU:value.related_bu, 
+        CUSTOMER_ID:value.customer_id, 
+        MARGIN:value.margin,
+        END_CUSTOMER: value.end_customer,
+        AM_ID: value.account_manager_id,
+        AMOUNT: value.amount
+      }
+     }) : null
     const iwo_no = this.props.state.data.project_setting && (this.props.state.data.project_setting.iwo_no).toUpperCase()
     return (
         !this.state.loaded  ? <PageLoader /> :
@@ -146,83 +159,35 @@ class EditProject extends Component {
             </div>
             <div className="grid wrap narrow padding-left">
               <div className="unit whole">
-                <Field
-                  inputName="IWO NUMBER"
-                  name="IWO_NO"
-                  selectStyle={
-                    !iwo ?
-                    {
+              {
+              !iwo ? 
+                  <Input
+                  inputStyle={{
                     backgroundColor:'white',
                     backgroundSize: '33px',
                     backgroundImage:'url(http://www.xiconeditor.com/image/icons/loading.gif)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right',
-                    }:{}
-                  }
-                  // component = {store.getState().data.project_setting.iwo_no !== "NONE" ? ReduxSelect : ReduxInputDisabled}
-                  component={ReduxSelect}
-                  // component={store.getState().data.project_setting.iwo_no !="NONE" ? ReduxInputDisabled : ReduxInput}
-                  onChange={(e, value) => {
-                    const iwo_no = this.props.formValues.values.IWO_NO;
-                    const i = _.findIndex(iwo, { IWO_NO: value });
-                    const arr = iwo[i];
-                    const fields = [
-                      {
-                        field: 'AMOUNT',
-                        value: arr.AMOUNT,
-                      },
-                      {
-                        field: 'PROJECT_NAME',
-                        value: arr.PROJECT_NAME,
-                      },
-                      {
-                        field: 'RELATED',
-                        value: arr.RELATED_BU,
-                      },
-                      {
-                        field: 'CUST_ID',
-                        value: arr.CUSTOMER_ID,
-                      },
-                      {
-                        field: 'MARGIN',
-                        value: arr.MARGIN,
-                      },
-                      {
-                        field: 'END_CUST_ID',
-                        value: arr.END_CUSTOMER,
-                      },
-                      {
-                        field: 'START',
-                        value: arr.PROJECT_DATE_START,
-                      },
-                      {
-                        field: 'END',
-                        value: arr.PROJECT_DATE_STOP,
-                      },
-                    ];
-
-                    fields.map((value, index) => {
-                      this.props.change(
-                        value.field, value.value,
-                      );
-                    });
+                    width:'100%'
                   }}
-                >
-                  {
-                    this.props.state.data.project_setting &&
-                    this.props.state.data.project_setting.iwo_no !='NONE' ? 
-                    <option value={this.props.state.data.project_setting.iwo_no}{...this.props.option}>{this.props.state.data.project_setting.iwo_no}</option>
-                      :
-                      <option>NONE</option>
-                  }
-                  {
-                    iwo &&
-                    iwo.map((value, index) => (
-                      <option value={value.IWO_NO} {...this.props.option}>{value.IWO_NO}</option>
+                />
+                :
+                <Field
+                  inputName="IWO NUMBER"
+                  name="IWO_NO"
+                  forms="edit_project"
+                  data={iwo_map}
+                  validate={iwo && [required]}
+                  component={ReduxAutoComplete}
+                  onChange = {(e,value,bla) => console.log("ASDAD")}
+                  
+                  />
+                
+                }
 
-                    ))
-                  }
-                </Field>
+
+
+                
 
                 <Field
                   inputName="NAME"
