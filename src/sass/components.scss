@@ -290,7 +290,7 @@ input:disabled {
     display: inline-block;
     list-style: none;
     li {
-      border-bottom: 4px solid white;
+      // border-bottom: 4px solid white;
       padding: 27px 0;
       display: inline-block;
       margin-left: 15%;
@@ -299,7 +299,14 @@ input:disabled {
         color: white;
         text-decoration: none;
       }
+      a:hover{
+        color:#464646;
+      }
     }
+    li.active{
+      border-bottom: 4px solid white;
+    }
+
   }
   .profile {
     margin: 21px 4% 0 0;

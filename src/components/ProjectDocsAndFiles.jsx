@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
-
+import fileDownload from 'react-file-download';
 import {Divider, Header, ProjectHeader, PopUp, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
 import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif } from './actions.jsx'
 
@@ -157,12 +157,15 @@ class ProjectDocsAndFiles extends Component {
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>
                         <div className='unit four-fifths'>
-                          <a style={{ display:'inline'}}>{value.url}</a>
-                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}, 13:23</small>
+                          <a href ={`http://prouds2.telkomsigma.co.id/prouds-api/document_assets/rebaseline_evidence/${value.url}`} style={{ display:'inline'}} 
+                            
+                          >{value.doc_name}</a>
+                          <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}</small>
                         </div>
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right', marginTop:'9px'}}> &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
                             e=> {
+                              value.jenis !== "rebaseline" ?
                               store.dispatch({
                               type: 'CONFIRM',
                               message: 'Would you like to delete this document?',
@@ -184,7 +187,7 @@ class ProjectDocsAndFiles extends Component {
 
                               }
                               
-                            })
+                            }) : alert("Can't delete document from re-baseline evidence")
                               e.preventDefault()
                             }
                           }></span></medium>
@@ -193,6 +196,9 @@ class ProjectDocsAndFiles extends Component {
                       <div className='grid'>
                         <div className='unit whole'>
                           <small>{value.doc_desc}</small>
+                          <br />
+                          <br />
+                          <small>{value.jenis === "rebaseline" ? "type : rebaseline" : "type: document"}</small>
                         </div>
 
                       </div>

@@ -6,7 +6,7 @@ import {logout} from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader,MenuNotifItem} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
-
+import moment from 'moment'
 
 
 
@@ -14,6 +14,13 @@ import { routerMiddleware, push } from 'react-router-redux'
 
 
 class Dashboard extends Component {
+  constructor(){
+    super();
+    this.state = {
+      active : 'HOME'
+    };
+  }
+
   componentDidMount() {
     // if (store.getState().dom.popup) {
     //   document.body.style.overflow = 'hidden';
@@ -52,15 +59,17 @@ class Dashboard extends Component {
                     <div className='unit whole no-gutters'>
                       <div id='prouds-logo'></div>
                       <ul>
-                        <li><a onClick={
+                        <li className={ this.state.active == "HOME" ? 'active' : '' }><a onClick={
                           e => {
                             browserHistory.push('/')
                             e.preventDefault()
-                          }}>HOME</a></li>
-                        <li><a onClick={
+                            this.setState({active:"HOME"})
+                          }} >HOME</a></li>
+                        <li className={ this.state.active == "REPORTS" ? 'active' : '' }><a onClick={
                           e => {
                             browserHistory.push('/reports')
                             e.preventDefault()
+                            this.setState({active:"REPORTS"})
                           }}>REPORTS</a></li>
                       </ul>
                       <div id='sigma-logo'></div>
@@ -158,6 +167,15 @@ class Dashboard extends Component {
                   }></button> */}
                 </div>
                 {this.props.children}
+                <div className="footer">
+                <div className='grid wrap'>
+                  <div className='unit whole'>
+                    <p>
+                    {`© ${moment().format("YYYY")} - Project Management & Resources Delivery System. All rights reserved`} 
+                    </p>
+                  </div>
+                </div>
+                </div>
               </div>
 
 

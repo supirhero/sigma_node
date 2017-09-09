@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {ReduxInput, required} from './Components.jsx'
+import {ReduxInput, required, ReduxInputMask} from './Components.jsx'
 import {registerSigma, showNotif} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -26,7 +26,7 @@ class RegisterSigma extends Component {
               inputName="NIK"
               name="V_USER_ID"
               type='input'
-              component={ReduxInput}
+              component={ReduxInputMask}
               validate={[required]}
             />
             <Field
@@ -49,7 +49,7 @@ class RegisterSigma extends Component {
               inputName="PASSWORD"
               name="V_PASSWORD"
               type='input'
-              component={ReduxInput}
+              component={ReduxInputMask}
               validate={[required]}
             />  
           </div>

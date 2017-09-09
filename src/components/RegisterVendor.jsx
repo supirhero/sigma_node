@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {ReduxInput, required} from './Components.jsx'
+import {ReduxInput, required, ReduxInputMask} from './Components.jsx'
 import {registerVendor, showNotif} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -58,7 +58,7 @@ class RegisterVendor extends Component {
               inputName="PASSWORD" 
               name="V_PASSWORD"
               type='input'
-              component={ReduxInput}
+              component={ReduxInputMask}
               validate={[required]}
             /> 
           </div>

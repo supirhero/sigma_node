@@ -35,13 +35,23 @@ class ProjectOverview extends Component {
                   </div>
                 </div>
                 <div className='grid'>
+                <div className='unit two-fifths'>
+                  <medium>Project Name</medium>
+                  <a style={{ marginTop: '12px', display:'block'}}>{overview.project_name}</a>
+                </div>
+                <div className='unit three-fifths'>
+                  <medium>Project Manager</medium>
+                  <small style={{ marginTop: '12px', display:'block'}}>{overview.pm_name ? overview.pm_name : '-'}</small>
+                </div>
+              </div>
+                <div className='grid'>
                   <div className='unit two-fifths'>
                     <medium>IWO (Internal Work Order)</medium>
-                    <a style={{ marginTop: '12px', display:'block'}}>{overview.iwo}</a>
+                    <a style={{ marginTop: '12px', display:'block'}}>{overview.iwo ? overview.iwo : '-'}</a>
                   </div>
                   <div className='unit three-fifths'>
                     <medium>Business Unit Owner</medium>
-                    <a style={{ marginTop: '12px', display:'block'}}>{overview.bu_owner}</a>
+                    <a style={{ marginTop: '12px', display:'block'}}>{overview.bu_owner ? overview.bu_owner : '-'}</a>
                   </div>
                 </div>
                 <div className='grid'>
@@ -51,10 +61,20 @@ class ProjectOverview extends Component {
                   </div>
                   <div className='unit three-fifths'>
                   <medium>Effort Type</medium>
-                  <small>{overview.effort_type}</small>
+                  <small>{overview.effort_type ? overview.effort_type : '-'}</small>
                 </div>
+                </div>
+                <div className='grid'>
+                <div className='unit two-fifths'>
+                  <medium>Project Type</medium>
+                  <small>{overview.project_type ? overview.project_type : '-'}</small>
+                </div>
+                <div className='unit three-fifths'>
+                <medium>Project Status</medium>
+                <small>{overview.project_status ? overview.project_status : '-'}</small>
+              </div>
 
-                </div>
+              </div>
 
               </div>
             </div>

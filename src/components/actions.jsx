@@ -107,6 +107,7 @@ export function getDashboardView() {
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               store.dispatch({type:'API', name: 'home', data: res})
+              return res
             },
 
           )
@@ -1343,12 +1344,13 @@ export function uploadWorkplan(project_id,files){
         },
       });
       store.dispatch({type: 'LOAD', name:'upload_workplan', show: false})
-    
+      showNotif('Successfully uploaded workplan', 'GREEN') 
+
       return res
     }).catch(
       res => {
-        
-      store.dispatch({type: 'LOAD', name:'upload_workplan', show: false})
+        showNotif('Failed uploading workplan', 'RED') 
+        store.dispatch({type: 'LOAD', name:'upload_workplan', show: false})
       
       }
     )
@@ -1619,6 +1621,35 @@ export function requestRebaseline(id, props, array){
   }
 }
 
+
+
+
+export const requestRebaselineFetch = (id,reason,files ) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  // console.log("DOCS",data);
+  return function(dispatch){
+    const token = cookies.get('token')
+    const formData = new FormData();
+    // formData.append('array',array);
+    formData.append('evidence',files[0])
+    formData.append('project_id',id)
+    formData.append('reason',reason)
+    return fetch(`${baseURL}project/rebaseline/${id}?token=${token}`,{
+      method:'POST',
+      body:formData
+    }).then(
+      res => {
+        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+        
+        
+
+
+      },
+    )
+  }
+}
+
+
 export function getDataMaster(data,keyword){
 
   return function(dispatch){
@@ -1807,12 +1838,11 @@ export function editProfile(no_hp,address,files){
     formData.append('no_hp',no_hp);
     formData.append('address',address);
     formData.append('image',files ? files[0] : null)
-    fetch(`${baseURL}home/edit_user?token=${token}`,{
+    return fetch(`${baseURL}home/edit_user?token=${token}`,{
       method:'POST',
       body:formData
     }).then(
       (res)=>{
-        alert('Profile Updated')
         // store.dispatch(viewTimesheet(TS_DATE));
 
 

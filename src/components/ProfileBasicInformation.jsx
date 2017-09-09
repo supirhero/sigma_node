@@ -7,16 +7,17 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { deleteAuthentication } from './actions.jsx';
+import { goBack } from 'react-router-redux'
+
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan} from './Components.jsx';
-import {editProfile} from './actions.jsx'
+import {editProfile, getDashboardView, showNotif} from './actions.jsx'
 
 
 class ProfileBasicInformation extends Component {
-  handleInitialize(data) {
-    const user_data = store.getState().auth.userdata;
-
+  handleInitialize(user_data) {
+    // const user_data = store.getState().auth.userdata;
     const initData = {
       USER_ID: user_data.user_id,
       ROLE: user_data.profile_name,
@@ -30,16 +31,22 @@ class ProfileBasicInformation extends Component {
   }
 
   componentWillMount() {
-    this.handleInitialize();
+    this.props.dispatch(getDashboardView()).then(
+      (res) => {
+        this.handleInitialize(res.data.userdata);
+
+      }
+    )
+    
   }
 
 
 
   onSubmit(props) {
     this.props.dispatch(editProfile(props.no_hp,props.address,props.image)).then(
-      ()=>{
-        alert("Profile Updated")
-        
+      res=>{
+        showNotif("Successfully edited profile", 'GREEN')
+        this.props.dispatch(goBack())
       }
     )
   }

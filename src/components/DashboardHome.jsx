@@ -299,15 +299,7 @@ class DashboardHome extends Component {
             })
           }
     </div>
-    <div className="footer">
-    <div className='grid wrap'>
-      <div className='unit whole'>
-        <p>
-        {`© ${this.state.this_year} - Project Management & Resources Delivery System. All rights reserved`} 
-        </p>
-      </div>
-    </div>
-  </div>
+
 
   </div>
 
