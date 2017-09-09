@@ -145,7 +145,7 @@ class ProjectTeamMember extends Component {
                                         this.props.dispatch({
                                           type: 'CONFIRM',
                                           message: 'Would you like to remove member?',
-                                          show:true,
+                                          show:false,
                                         })
                                         
                                         this.props.dispatch(getAvailableProjectTeamMember(id))
