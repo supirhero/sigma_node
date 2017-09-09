@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { deleteAuthentication , getUserAccess} from './actions.jsx';
+import { deleteAuthentication , getUserAccess,editUserAccess} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TableNew ,Header, Search, PopUp,TablePaginationUser } from './Components.jsx';
+import { Select, Input, Table,TableNew ,Header, Search, PopUp,ReduxSelect,ReduxInput,ReduxInputDisabled,RadioButton ,TablePaginationAccess} from './Components.jsx';
+import { Field, reduxForm } from 'redux-form';
 
 
 class ManageAcess extends Component {
@@ -14,12 +15,79 @@ class ManageAcess extends Component {
 
   componentWillMount(){
     store.dispatch(getUserAccess())
-    
-
   }
+
+
+  onSubmitEdit(props){
+    alert("Access Updated")
+    this.props.dispatch(editUserAccess(props)).then(
+      ()=> {
+        
+        store.dispatch({
+          type: 'POPUP',
+          name: 'editAccess',
+          data: {
+            active:false,
+          }
+        })
+        store.dispatch(getUserAccess())
+      }
+    )
+  }
+
   render() {
+    const { handleSubmit } = this.props;
     return (
       <div>
+      <PopUp id="editAccess" dividerText="EDIT ACCESS" btnText="EDIT" btnClass='btn-primary' style={{ display: 'inline-block', marginLeft: '35px' }}>
+      <form onSubmit={handleSubmit(this.onSubmitEdit.bind(this))}>
+        <div>
+          <div className="grid wrap narrow">
+            <div className="unit whole">
+                <Field
+                inputName="USER ID"
+                name="user_id"
+                component={ReduxInputDisabled}
+                // validate={[required]}
+              />
+            </div>
+          </div>
+          <div className="grid wrap narrow">
+            <div className="unit whole">
+            <Field
+            inputName="ACCESS"
+            name="prof_id"
+            component={ReduxSelect}
+            // validate={[required]}
+          >
+          {
+            store.getState().data.profile_list.map((value,index)=>{
+              return <option key={index} value={value.PROF_ID}>{value.PROF_NAME}</option>
+            }
+          )
+      }
+          </Field>
+            </div>
+          </div>
+
+          <div className="grid wrap narrow">
+            <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
+              <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={e=> {
+                this.props.dispatch({
+                    type: 'POPUP',
+                    name:'editAccess',
+                    data: {
+                      active:false
+                    }
+                  })
+                e.preventDefault()
+                }}> CANCEL </button>
+              <button type='submit' style={{ display: 'inline-block', width: '200px', marginLeft: '40px' }} className="btn-primary"> EDIT </button>
+            </div>
+          </div>
+        </div>
+        </form>
+      </PopUp>
         <div className="grid dataset">
           <div className="unit whole">
             <div className="card" style={{ padding: '15px 35px' }}>
@@ -29,10 +97,10 @@ class ManageAcess extends Component {
 									<Search placeholder='search customer' style={{float:'right',width:'400px'}} />
                 </div>
                 <div className="unit whole">
-                <TablePaginationUser
+                <TablePaginationAccess
                 form='dataset_bu'
-                editPopUp='editRole'
-                tableHeader={[{value:'NIK'},{value:'NAME'},{value:'EMAIL'},{value: 'ROLE'}]}
+                editPopUp='editAccess'
+                tableHeader={[{value:'NIK'},{value:'NAME'},{value:'EMAIL'},{value:'ROLE'}]}
                 tableData={ store.getState().data.user_list ? store.getState().data.user_list.map((value,index)=>{
                   return {column:[
                     {value:value.USER_ID},
@@ -42,7 +110,7 @@ class ManageAcess extends Component {
                     
                   ]}
                 }):null}>
-              </TablePaginationUser>   
+              </TablePaginationAccess>   
                 
                 </div>
                  <div className="unit whole">
@@ -58,11 +126,20 @@ class ManageAcess extends Component {
 }
 
 
+
+
 function mapStateToProps(state) {
   return {
-		// filter: ownProps.location.query.filter
+
+    formValues: state.form.editAccess,
+    state,
+    // filter: ownProps.location.query.filter
   };
 }
 
-export default connect(mapStateToProps)(ManageAcess);
-// export default Login
+export default reduxForm({
+  // Must be unique, this will be the name for THIS PARTICULAR FORM
+  form: 'editAccess',
+})(
+  connect(mapStateToProps, { deleteAuthentication , getUserAccess,editUserAccess} )(ManageAcess),
+);

@@ -2029,6 +2029,29 @@ export function getUserAccess() {
   }
 }
 
+export function editUserAccess(props) {
+  store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+  const token = cookies.get('token')
+  return function (dispatch) {
+    const token = cookies.get('token')
+    return axios({
+            method: 'POST',
+            url: `${baseURL}role/useraccess_edit?token=${token}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data:{
+              user_id:props.user_id,
+              prof_id:props.prof_id
+            }
+          }).then(
+            res => {
+              store.dispatch({type:'API', name: 'roles', data: res})
+            },
+
+          )
+  }
+}
+
+
 
 
 export function reportFindProject(value,status,schedule,budget) {
