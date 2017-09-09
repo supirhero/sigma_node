@@ -165,6 +165,7 @@ class ProjectDocsAndFiles extends Component {
                         <div className='unit one-fifth'>
                           <medium style={{textAlign:'right', marginTop:'9px'}}> &nbsp;&nbsp;&nbsp;&nbsp;<span className='icon-trash' style={{color:'#D62431'}} onClick={
                             e=> {
+                              value.jenis !== "rebaseline" ?
                               store.dispatch({
                               type: 'CONFIRM',
                               message: 'Would you like to delete this document?',
@@ -186,7 +187,7 @@ class ProjectDocsAndFiles extends Component {
 
                               }
                               
-                            })
+                            }) : alert("Can't delete document from re-baseline evidence")
                               e.preventDefault()
                             }
                           }></span></medium>
