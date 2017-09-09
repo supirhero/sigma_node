@@ -1468,8 +1468,10 @@ export class TablePagination extends Component {
                     type: 'CONFIRM',
                     message: '',
                     onConfirm: null
-                  })
-                  store.dispatch(getDataMaster("holiday"))
+                  }).thenI(
+
+                    store.dispatch(getDataMaster("holiday",""))
+                  )
 
                 })
               }
