@@ -19,7 +19,37 @@ const token_string = `?token=${token}`
 console.log(token)
 
 
-
+axios.interceptors.response.use(undefined, function (error) {
+  if(error.response.status && error.response.status === 404) 
+  {
+    
+    showNotif('404 Page not found', 'RED')
+    store.dispatch(goBack())
+    // ipcRenderer.send('response-unauthenticated');
+    return Promise.reject(error);
+  }
+  else if(error.response.status && error.response.status === 403) 
+    {
+      console.log('ERROR', error)
+      showNotif(error.response.data.message, 'RED')
+      store.dispatch(replace('/'))
+      // ipcRenderer.send('response-unauthenticated');
+      return Promise.reject(error);
+    }
+  else if(error.response.status && error.response.status === 400) {
+    console.log('ERROR', error)
+    showNotif(error.response.data.message, 'RED')
+    // ipcRenderer.send('response-unauthenticated');
+    return Promise.reject(error);
+  }
+  else if(error.response.status && error.response.status === 401) {
+    showNotif(error.response.data.message, 'RED')
+    store.dispatch(logout())
+    store.dispatch(replace('/auth'))
+    
+    return Promise.reject(error);
+  }
+});
 
 
 export function login(email, password) {
@@ -441,7 +471,7 @@ export const addNewProject = (data,id) => {
               ACTUAL_COST:data.ACTUAL_COST,
               AMOUNT:parseFloat(data.AMOUNT),
               AM_ID:data.AM_ID,
-              BU:id,
+              BU:id2323,
               COGS:data.COGS,
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
@@ -2186,38 +2216,7 @@ export function editTaskPercentAction(PROJECT_ID, WBS_ID, props){
 }
 
 
-axios.interceptors.response.use(undefined, function (error) {
-  if(error.response.status && error.response.status === 404) 
-  {
-    
-    showNotif('404 Page not found', 'RED')
-    store.dispatch(goBack())
-    // ipcRenderer.send('response-unauthenticated');
-    return Promise.reject(error);
-  }
-  else if(error.response.status && error.response.status === 403) 
-    {
-      console.log('ERROR', error)
-      showNotif(error.response.data.message, 'RED')
-      store.dispatch(replace('/'))
-      // ipcRenderer.send('response-unauthenticated');
-      return Promise.reject(error);
-    }
-  else if(error.response.status && error.response.status === 400) {
-    console.log('ERROR', error)
-    showNotif(error.response.data.message, 'RED')
-    // ipcRenderer.send('response-unauthenticated');
-    return Promise.reject(error);
-  }
-  else if(error.response.status && error.response.status === 401) {
-    showNotif(error.response.data.message, 'RED')
-    store.dispatch(logout())
-    store.dispatch(replace('/auth'))
-    
-    
-    return Promise.reject(error);
-  }
-});
+
 export const gethistory = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
