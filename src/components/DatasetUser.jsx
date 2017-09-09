@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan,ReduxUploadUser} from './Components.jsx';
+import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan,ReduxUploadUser,Loader} from './Components.jsx';
 import {getDataMasterUser,getDataMaster,changePassword,uploadUsers} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -40,8 +40,8 @@ class DatasetUser extends Component {
   }
 
   onSubmitUploadUser(props){
-    alert("File Uploaded")
     this.props.dispatch(uploadUsers(props.userfile)).then(res => {
+      
       this.props.dispatch(getDataMaster("user",this.state.search))
       store.dispatch({
         type: 'POPUP',
@@ -115,6 +115,7 @@ class DatasetUser extends Component {
       </PopUp>
 
       <PopUp id="uploadUser" context={this} dividerText="UPLOAD USER" btnClass='btn-primary' btnText="EDIT" style={{display:'inline-block', marginLeft:'35px'}}>
+      <Loader id='uploadUser' style ={{height:'280px'}}>
       <form onSubmit={handleSubmit(this.onSubmitUploadUser.bind(this))}>
         <div>    
         <div className="grid wrap narrow">
@@ -150,6 +151,7 @@ class DatasetUser extends Component {
             </div>
         </div>
         </form>
+        </Loader>
       </PopUp>
 
         <div className="grid wrap dataset">

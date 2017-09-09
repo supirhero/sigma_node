@@ -2296,16 +2296,14 @@ export const uploadUsers = (files) => {
     const formData = new FormData();
     const token = cookies.get('token')  
     formData.append('userfile',files[0])
+    store.dispatch({type: 'LOAD', name:'uploadUser', show: true})
     return fetch(`${baseURL}Datamaster/upload_users?token=${token}`,{
       method:'POST',
       body:formData
     }).then(
       res => {
-        // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-        
-        store.dispatch({type:'API', name: 'datamaster', data: res, append:true})
-
-
+        store.dispatch({type: 'LOAD', name:'uploadUser', show: false})
+        showNotif('Successfully uploaded user', 'GREEN') 
       },
     )
   }
