@@ -53,11 +53,11 @@ class MyRecentActivities extends Component {
 
   
 handleMonthChange (e) {
-  this.setState({month: e.target.value})
-  console.log(e.target.value);
+  this.setState({month: e.target.value })
+  console.log(e.target.value)
   e.preventDefault()
-
  }
+
  handleYearChange (e) {
    this.setState({year: e.target.value});
    console.log(e.target.value);
@@ -116,6 +116,54 @@ const year = [
         default:
       }
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
+    }
+
+    function divider(value) {
+      let month_name = "";
+
+      switch (value) {
+        case 1:
+          month_name = 'January';
+          break;
+        case 2:
+          month_name = 'February';
+          break;
+        case 3:
+          month_name = 'March';
+          break;
+        case 4:
+          month_name = 'April';
+          break;
+        case 5:
+          month_name = 'May';
+          break;
+        case 6:
+          month_name = 'June';
+          break;
+        case 7:
+          month_name = 'July';
+          break;
+        case 8:
+          month_name = 'August';
+          break;
+        case 9:
+          month_name = 'September';
+          break;
+        case 10:
+          month_name = 'October';
+          break;
+        case 11:
+          month_name = 'November';
+          break;
+        case 12:
+          month_name = 'December';
+          break;
+      
+       
+      }
+      return (
+        <Divider style={{ marginTop: '0' }} text={month_name} />
+      );
     }
 
     return (
@@ -308,8 +356,8 @@ component={ReduxSelect}
         month.map((value,index) => {
         return(
           <option key={index} value={value.number}>{value.name}</option>
-
         )
+        
       })}
     </select>
     <select onChange={this.handleYearChange.bind(this)} 
@@ -335,7 +383,11 @@ component={ReduxSelect}
     <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
       console.log(this.state.month,this.state.year);
       store.dispatch(getMyActivities(this.state.month,this.state.year))
-      this.setState({month_name:e.target.value})
+      this.setState({month_name:e.target.value},()=>{
+        console.log(this.state.month_name)
+
+      })
+      
       // store.dispatch(myPerformance('1','2017'))
       e.preventDefault()
     }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -348,7 +400,7 @@ component={ReduxSelect}
 
         <div className="grid wrap">
           <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text={this.state.month_name} />
+            {divider(this.state.month_name)}
           </div>
         </div>
         {

@@ -26,7 +26,8 @@ class EditProject extends Component {
   constructor() {
     super()
     this.state={
-      loaded: false
+      loaded: false,
+      project_type:""
     }
   }
   handleInitialize(data, bu_code, id) {
@@ -105,6 +106,11 @@ class EditProject extends Component {
         // {value: 'In Planning'},
         // {value: 'Cancelled'},
     ];
+
+    const nonProject = [
+      { name:'Non Project', value:"8"},
+    ];
+    
     const { handleSubmit } = this.props;
     const project = this.props.state.data;
     const projectSetting = project.project_setting ? project.project_setting : null;
@@ -292,7 +298,7 @@ class EditProject extends Component {
                   <div className="unit half">
 
                     <Field name="PROJECT_TYPE_ID" component={RadioButtonGroup}>
-                      <RadioButton value="project" label="Project" />
+                      <RadioButton value="project" label="Project"  />
                     </Field>
                   </div>
                   <div className="unit half">
@@ -334,10 +340,13 @@ class EditProject extends Component {
                     >
                         <option></option>
                       {
-                          projectEffort &&
+                          projectSetting.project_type_id =="project" ?
                           projectEffort.map((value, index) => (
                             <option key={index} value={value.value} {...this.props.option}>{value.name}</option>
-                          ))
+                          )) : 
+                          
+                            <option value="8">Non Project</option>
+                          
                         }
                     </Field>
 

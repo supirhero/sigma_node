@@ -40,7 +40,7 @@ class Timesheet extends Component {
     this.props.addTimesheet(props.PROJECT_ID,props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
     .then(
       (res)=>{
-        store.dispatch(viewTimesheet(this.state.selected))
+        this.props.dispatch(viewTimesheet(this.state.selected))
         this.props.dispatch({
           type: 'POPUP',
           name:'addNewTimesheet',
@@ -460,5 +460,5 @@ export default reduxForm({
 form: 'AddNewTimesheet',
 
 })(
-connect(mapStateToProps, { addTimesheet })(Timesheet),
+connect(mapStateToProps, { addTimesheet,viewTimesheet })(Timesheet),
 );
