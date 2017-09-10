@@ -399,7 +399,7 @@ export const getIssue = (id) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
-            method: 'GET',
+            method: 'POST',
             url: `${baseURL}home/projectissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 
@@ -442,7 +442,6 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // console.log("DOCS",data);
   return function(dispatch){
-    const token = cookies.get('token')
     const formData = new FormData();
     formData.append('PROJECT_ID',id);
     formData.append('SUBJECT',SUBJECT);
@@ -452,12 +451,7 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
     return fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
       method:'POST',
       body:formData
-    }).then(
-      res=>{
-
-        showNotif('Successfully added issue', 'GREEN') 
-      }
-    )
+    })
   }
 }
 
@@ -1395,7 +1389,6 @@ export function uploadWorkplan(project_id,files){
 
 export function getTaskMemberView(project_id,wbs_id){
   return function(dispatch){
-    const token = cookies.get('token')
     return axios({
       method:'POST',
       // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
@@ -1455,7 +1448,8 @@ export function assignTaskMember(props,RP_ID,EMAIL,NAME){
       }
     }).then(
       (res)=>{
-        store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+        // store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+        return res
       }
     )
   }

@@ -8,6 +8,8 @@ import { authenticated } from './Auth.jsx'
 import Login from './Login.jsx'
 import Auth from './Auth.jsx'
 import { Confirmation } from './Components.jsx'
+import { hideNotification } from './actions.jsx'
+
 import store from '../reducers/combineReducers.jsx'
 import Dashboard from './Dashboard.jsx'
 
@@ -29,9 +31,23 @@ class MainPage extends Component {
       <div>
         {
           <div className={this.props.state.alert && alert && alert.show == true ? 'alert-popup shadow active' : 'alert-popup shadow'}
-          style={{backgroundColor: color }}
+          style={{backgroundColor: color}}
           >
+          <div style={{position:'relative'}} >
+          <div className="material-icons" style={{color:'white',position:'absolute', top:'-13px', right:'0px', width:'7px', height:'7px'}} onClick={e=> {
+            this.props.dispatch(
+              {
+                type:'ALERT',
+                show: false,
+                message: ''
+                
+              }
+            )
+            e.preventDefault()
+            }}>clear</div>
           <small>{alert && alert.message ? alert.message : '' }</small>
+
+          </div>
         </div>
         }
         <Confirmation/>

@@ -295,7 +295,8 @@ class ProjectWorkplan extends Component {
   onSubmitAssign(props){
     const id = this.props.state.page.id;
     this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
-
+      console.log("MEESAGE", res.data.message)
+      showNotif(res.data.message, "GREEN")
       const id = this.props.state.page.id;
       this.props.dispatch(getWorkplanView(id))
       this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
@@ -584,7 +585,7 @@ class ProjectWorkplan extends Component {
               </div>
               <div className="grid wrap narrow">
                 <div className="unit three-fifths">
-                    <h2 className="input-desc">Invite Member</h2>
+                    <h2 className="input-name">Invite Member</h2>
                       <ReactAutocomplete
                       menuStyle={{
                         opacity:'1'
@@ -592,7 +593,7 @@ class ProjectWorkplan extends Component {
                       getItemValue={(label) => label.label}
                       style={{width:'500px',marginTop:'60px'}}
                       items={available_to_assign}
-                      wrapperProps={{width:'899px'}}
+                      wrapperProps={{style:{width:'100%'}}}
                       menuStyle={{
                         borderRadius: '3px',
                         boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
@@ -666,7 +667,7 @@ class ProjectWorkplan extends Component {
                                 const id = this.props.state.page.id;
                                 this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
 
-                                showNotif("Successfully removed member from task")
+                                showNotif(res.data.message, "GREEN")
                               })
                                 e.preventDefault()
                             }}
