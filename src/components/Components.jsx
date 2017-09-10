@@ -2316,8 +2316,6 @@ export class TablePaginationRoles extends Component {
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
-                            alert(row.column[0].value)
-                            console.log(row,"TESTLIAT")
                             store.dispatch(editProfileView(row.column[0].value)).then(
                               res => {
 
@@ -2534,7 +2532,8 @@ export class TablePaginationAccess extends Component {
                             ))
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
-                          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
+                          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} 
+                          onClick={e => {
                             alert(row.column[0].value)
                             console.log(row,"TESTLIAT")
                             store.dispatch(getUserAccess()).then(
@@ -2561,14 +2560,14 @@ export class TablePaginationAccess extends Component {
                           EDIT
                           </button>
                           
-                          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
+                          {/* <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                             // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                             //   store.dispatch(getDataMaster("holiday"))
                             // })
                             e.preventDefault()
                           }}> 
                           <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
-                          </button>
+                          </button> */}
                           </td>
                           </tr>
                           ))

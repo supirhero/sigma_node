@@ -29,8 +29,8 @@ import {
 import { Field, reduxForm } from 'redux-form';
 
 import { getWorkplanView, addTaskWorkplan, getCreateTaskView, getTaskMemberView ,requestRebaselineFetch,assignTaskMember,uploadWorkplan, getEditTaskView, editTaskAction, requestRebaseline,deleteTask,
-denyRebaseline,acceptRebaseline, baseline, showNotif,getCurrentProgress,editTaskPercentAction
-} from './actions.jsx';
+denyRebaseline,acceptRebaseline, baseline, showNotif,getCurrentProgress,editTaskPercentAction,
+removeTaskMember} from './actions.jsx';
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -40,6 +40,7 @@ class ProjectWorkplan extends Component {
     this.state = {
       clicked: false,
       WBS_id: '',
+      WBS_NAME: '',
       array: {
         new_task :[],
         modified_task:[],
@@ -170,8 +171,8 @@ class ProjectWorkplan extends Component {
               }}/>
               <MenuItem title='Assign' onClick={e => {
                 // this.setState({WBS_id:value.WBS_id})
-                // this.setState({WBS_name:value.WBS_name})
-                // this.setState({WBS_ID:value.WBS_ID})
+                this.setState({WBS_NAME:value.WBS_NAME})
+                this.setState({WBS_ID:value.WBS_ID})
                 this.props.dispatch({
                   type: 'POPUP',
                   name:'assign_task',
@@ -294,17 +295,10 @@ class ProjectWorkplan extends Component {
   onSubmitAssign(props){
     const id = this.props.state.page.id;
     this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
-    this.props.dispatch(getWorkplanView(id));
-      
-    
-      this.props.dispatch({
-        type: 'POPUP',
-        name:'assign_task',
-        data: {
-          active:false
-        }
-      })
+
+      const id = this.props.state.page.id;
       this.props.dispatch(getWorkplanView(id))
+      this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
     });
   }
 
@@ -335,7 +329,7 @@ class ProjectWorkplan extends Component {
   onSubmitRebaseline(props){
     alert('Re-baseline Request Success')
     var id = this.props.state.page.id
-    store.dispatch(requestRebaselineFetch(id,props.reason,props.evidence))
+    this.props.dispatch(requestRebaselineFetch(id,props.reason,props.evidence))
     .then(res=> {
       this.props.dispatch(getCreateTaskView(id));
       this.props.dispatch(getWorkplanView(id))
@@ -408,7 +402,7 @@ class ProjectWorkplan extends Component {
     
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
-    const available_to_assign = store.getState().data.available_to_assign ? store.getState().data.available_to_assign.map((value,index)=>{
+    const available_to_assign = this.props.state.data.available_to_assign ? this.props.state.data.available_to_assign.map((value,index)=>{
       return {EMAIL:value.EMAIL , RP_ID:value.RP_ID, USER_NAME:value.USER_NAME}
      }) : null
 
@@ -665,7 +659,18 @@ class ProjectWorkplan extends Component {
                         <small style={{ display: 'inline-block', float: 'left' }}>{value.EMAIL}</small>
                       </div>
                       <div className="unit one-fifth">
-                        <h2 className="input-desc" style={{ display: 'inline-block', float: 'left', textAlign:'center' }}><i  style={{color:'#D62431'}} className='icon-trash'></i></h2>
+                        <h2 className="input-desc list-pointer" style={{ display: 'inline-block', float: 'left', textAlign:'center' }}>
+                          <i  style={{color:'#D62431'}} className='icon-trash'
+                            onClick={e=> {
+                              this.props.dispatch(removeTaskMember(this.state.WBS_ID, value.RP_ID, value.EMAIL, value.USER_NAME, this.state.WBS_NAME)).then(res => {
+                                const id = this.props.state.page.id;
+                                this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
+
+                                showNotif("Successfully removed member from task")
+                              })
+                                e.preventDefault()
+                            }}
+                        ></i></h2>
                       </div>
                     </div>
                   </div>

@@ -44,8 +44,8 @@ axios.interceptors.response.use(undefined, function (error) {
   }
   else if(error.response.status && error.response.status === 401) {
     showNotif(error.response.data.message, 'RED')
-    store.dispatch(logout())
     store.dispatch(replace('/auth'))
+    store.dispatch(logout())
     
     return Promise.reject(error);
   }
@@ -1408,6 +1408,30 @@ export function getTaskMemberView(project_id,wbs_id){
     }).then(
       (res)=>{
         store.dispatch({ type: 'API', name: 'taskMember',  data: res });
+        return res
+      }
+    )
+  }
+}
+
+export function removeTaskMember(WBS_ID,RP_ID,EMAIL,NAME,WBS_NAME){
+  return function(dispatch){
+    return axios({
+      method:'POST',
+      // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
+      url:`${baseURL}task/removeTaskMemberProject?token=${token}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      data:{
+        WBS_ID,
+        RP_ID,
+        EMAIL,
+        NAME,
+        WBS_NAME
+        
+        
+      }
+    }).then(
+      (res)=>{
         return res
       }
     )
