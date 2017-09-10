@@ -2114,7 +2114,7 @@ export class TablePaginationUser extends Component {
     }
 
     return (
-      <div>
+      <div id = {this.props.id}>
       <div className="grid">
       <div className="unit whole">
 
@@ -2136,11 +2136,12 @@ export class TablePaginationUser extends Component {
         this.props.tableData &&
         this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
           <tr className="items" key={index}>
-          {
-            row.column.map((column, index) => (
-              <td key={index}>{column.value}</td>
-              ))
-          }
+          <td>{row.column[0].value}</td>
+          <td> {row.column[1].value}</td>
+          <td>{row.column[2].value}</td>
+          <td>{row.column[3].value}</td>
+          <td>{row.column[4].value}</td>
+          <td>{row.column[5].value}</td>
           <td style={{ position: 'relative', float:'right' }}>
           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} onClick={e => {
             store.dispatch({
@@ -2153,35 +2154,14 @@ export class TablePaginationUser extends Component {
             store.dispatch(initialize(this.props.form,
             {
               USER_ID: row.column[0].value,
+              is_active:row.column[6].value
             }
             ))
             e.preventDefault()
           }}> 
           EDIT
           </button>
-          
-          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
-            store.dispatch({
-              type: 'CONFIRM',
-              message: 'Delete User?',
-              show:true,
-              onConfirm: ()=> {
-                store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
-                  store.dispatch({
-                    type: 'CONFIRM',
-                    message: '',
-                    onConfirm: null
-                  })
-                  store.dispatch(getDataMaster("user"))
-
-                })
-              }
-            })
-            
-            e.preventDefault()
-          }}> 
-          <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
-          </button>
+        
           </td>
           </tr>
           ))

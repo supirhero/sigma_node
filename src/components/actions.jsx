@@ -2277,7 +2277,8 @@ export function changePassword(props){
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
       data: { 
         user_id : props.USER_ID, 
-        password : props.PASSWORD 
+        password : props.PASSWORD,
+        is_active: props.is_active
       } 
     }).then( 
       (res)=>{ 

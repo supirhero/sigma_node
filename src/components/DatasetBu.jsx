@@ -129,6 +129,7 @@ class DatasetBu extends Component {
                         name="BU_HEAD"                      
                         component={ReduxSelect}
                         validate={[required]}>
+                        <option></option>
                         {
                               bu?bu.map((value,index)=>{
                                 return <option key={index} value={value.BU_HEAD}>{value.BU_HEAD_NAME}</option>

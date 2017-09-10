@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
-import { Select, Input, Table,TablePaginationUser,Header,Search ,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan,ReduxUploadUser,Loader} from './Components.jsx';
+import { Select, Input, Table,TablePaginationUser,Header,Search ,ReduxSelect,PageLoader,PopUp,ReduxInputDisabled,ReduxInput,ReduxUploadWorkplan,ReduxUploadUser,Loader} from './Components.jsx';
 import {getDataMasterUser,getDataMaster,changePassword,uploadUsers} from './actions.jsx'
 import {Field, reduxForm} from 'redux-form';
 
@@ -25,7 +25,7 @@ class DatasetUser extends Component {
   }
 
   onSubmitUpdateUser(props){
-    alert("User Password Changed")
+    
     this.props.dispatch(changePassword(props)).then(res => {
       this.props.dispatch(getDataMaster("user",this.state.search))
       store.dispatch({
@@ -62,7 +62,10 @@ class DatasetUser extends Component {
     const {handleSubmit} = this.props;
     const state = store.getState()
     const user = state.data.user
-
+    const status= [
+      {name:'Activate',value:1},
+      {name:'Deactivate',value:0},
+    ]
 
     if (!user){
       <PageLoader />
@@ -93,6 +96,24 @@ class DatasetUser extends Component {
         />
           </div>
         </div>
+        <div className="grid wrap narrow">
+        <div className="unit whole">
+        <Field
+        inputName="Select Status"
+        name="is_active"
+        type='input'
+        component={ReduxSelect}
+      >
+      {
+        status.map((value,index) => {
+        return(
+          <option key={index} value={value.value}>{value.name}</option>
+
+        )
+      })}
+      </Field>
+        </div>
+      </div>
             <div className="grid wrap narrow">
               <div className="unit whole" style={{ textAlign: 'center', marginTop: '30px' }}>
                 <button style={{ display: 'inline-block', width: '200px' }} className="btn-secondary" onClick={
@@ -190,12 +211,14 @@ class DatasetUser extends Component {
                 </Search>
               </div>
               <div className="unit whole">
+              <Loader id='tableUser' style ={{height:'280px'}}>
               <TablePaginationUser 
+              id = 'tableUser'
               form='uploadUser' 
               editPopUp='editUser' 
               deletePopUp='deleteUser' 
                
-             tableHeader={[{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'USER TYPE'},{value:'LAST LOGIN'},{value:null}]} 
+             tableHeader={[{value:'ID'},{value:'NAME'},{value:'EMAIL'},{value:'USER TYPE'},{value:'LAST LOGIN'},{value:'STATUS'}]} 
              tableData={ 
               user ?  user.map((value,index)=>{ 
                 return {column:[ 
@@ -203,12 +226,15 @@ class DatasetUser extends Component {
                   {value:value.USER_NAME}, 
                   {value:value.EMAIL}, 
                   {value:value.USER_TYPE_ID}, 
-                  {value:value.LAST_LOGIN && `${(value.LAST_LOGIN).substr(0,10)} | ${(value.LAST_LOGIN).substr(11,5)} ${(value.LAST_LOGIN).substr(26,2)}`} 
+                  {value:value.LAST_LOGIN && `${(value.LAST_LOGIN).substr(0,10)} | ${(value.LAST_LOGIN).substr(11,5)} ${(value.LAST_LOGIN).substr(26,2)}`},
+                  {value:value.IS_ACTIVE == "1" ? "Active" : "Deactive"} ,
+                  {value:value.IS_ACTIVE}
                 ]} 
-             }) : [ ] }> 
+             }) : "" }> 
               
             
-           </TablePaginationUser>                      
+           </TablePaginationUser>          
+           </Loader>            
               </div>
 
                 
