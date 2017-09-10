@@ -51,10 +51,35 @@ class ProfileBasicInformation extends Component {
     )
   }
 
+ 
+  
+
 
   render() {
     const imageURL = store.getState().auth.userdata && store.getState().auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + store.getState().auth.userdata.image +  ')' : null
     const { handleSubmit } = this.props;
+    const normalizePhone = (value, previousValue) => {
+      if (!value) {
+        return value
+      }
+      const onlyNums = value.replace(/[^\d]/g, '')
+      if (!previousValue || value.length > previousValue.length) {
+        // typing forward
+        if (onlyNums.length === 3) {
+          return onlyNums + '-'
+        }
+        if (onlyNums.length === 6) {
+          return onlyNums.slice(0, 3) + '-' + onlyNums.slice(3) + '-'
+        }
+      }
+      if (onlyNums.length <= 3) {
+        return onlyNums
+      }
+      if (onlyNums.length <= 6) {
+        return onlyNums.slice(0, 3) + '-' + onlyNums.slice(3)
+      }
+      return onlyNums.slice(0, 3) + '-' + onlyNums.slice(3, 6) + '-' + onlyNums.slice(6, 10)
+    }
     return (
       <div>
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -108,9 +133,10 @@ class ProfileBasicInformation extends Component {
               <Field
                 inputName="PHONE NUMBER"
                 name="no_hp"
-                type="number"
-                component={ReduxInputNumber}
+                type="text"
+                component={ReduxInput}
                 // validate ={isInt}
+                normalize={normalizePhone}
               />
               <Field
                 inputName="ADDRESS"
