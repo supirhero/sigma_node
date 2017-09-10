@@ -115,7 +115,7 @@ class ProjectWorkplan extends Component {
       <td style={{position:'relative', paddingRight:'10px'}} >
 
       {
-        value.LEAF == 1 &&
+        value.LEAF == 1 && store.getState().data.project_status !== "In Progress" &&
         // React.cloneElement(this.props.children, { data: value })
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
             <MenuSection>
