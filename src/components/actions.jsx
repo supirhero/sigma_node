@@ -466,7 +466,7 @@ export const addNewProject = (data,id) => {
     const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}project/addProject_action?token=${token}` ,
+            url: `${baseURL}project/addProject_acion?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
@@ -504,7 +504,7 @@ export const addNewProject = (data,id) => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log("REQ",req);
               // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
+            }
           )
   }
 }
