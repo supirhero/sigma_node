@@ -11,7 +11,7 @@ import { goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan} from './Components.jsx';
+import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan,ReduxInputNumber} from './Components.jsx';
 import {editProfile, getDashboardView, showNotif} from './actions.jsx'
 
 
@@ -108,8 +108,8 @@ class ProfileBasicInformation extends Component {
               <Field
                 inputName="PHONE NUMBER"
                 name="no_hp"
-                type="no_hp"
-                component={ReduxInput}
+                type="number"
+                component={ReduxInputNumber}
               />
               <Field
                 inputName="ADDRESS"

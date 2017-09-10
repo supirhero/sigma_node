@@ -399,7 +399,7 @@ export const getIssue = (id) => {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
-            method: 'POST',
+            method: 'GET',
             url: `${baseURL}home/projectissue/${id}?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 

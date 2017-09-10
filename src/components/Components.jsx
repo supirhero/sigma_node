@@ -329,6 +329,39 @@ export class RenderRadioGroup extends Component {
 
   }
 
+  export class ReduxInputNumber extends Component {
+    componentDidUpdate() {
+
+      console.log('PROPS', this.props);
+    }
+    render(){
+      if(this.props.meta.error == 'IWO is already used'){
+        console.log("ERRORRR",this.props.meta.error );
+        this.props.meta.error = undefined
+      }
+      return(
+        <div style={this.props.style}>
+        {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
+        {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
+        <input
+        className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
+        style={{width:'100%'}}
+        placeholder={this.props.placeholder}
+        type='text'
+        pattern="[0-9]*"
+        {...this.props.input}
+        // onkeypress={"return event.charCode >= 48 && event.charCode <= 57"}
+
+        // {...this.props.field}
+        >
+        </input>
+        {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>) )}
+        </div>
+        )
+    }
+
+  }
+
   export class ReduxAutoComplete extends Component {
     constructor() {
       super()
@@ -2510,7 +2543,7 @@ export class TablePaginationAccess extends Component {
                                 store.dispatch(initialize('editAccess',
                                   {
                                     user_id:row.column[0].value,
-                                    prof_id:row.column[3].value,
+                                    prof_id:row.column[4].value,
                                     
                                   }
                                   ))

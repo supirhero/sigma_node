@@ -37,6 +37,8 @@ class ManageAcess extends Component {
 
   render() {
     const { handleSubmit } = this.props;
+    const user_list = store.getState().data.user_list;
+    
     return (
       <div>
       <PopUp id="editAccess" dividerText="EDIT ACCESS" btnText="EDIT" btnClass='btn-primary' style={{ display: 'inline-block', marginLeft: '35px' }}>
@@ -61,10 +63,10 @@ class ManageAcess extends Component {
             // validate={[required]}
           >
           {
-            store.getState().data.profile_list.map((value,index)=>{
+            user_list ? user_list.map((value,index)=>{
               return <option key={index} value={value.PROF_ID}>{value.PROF_NAME}</option>
             }
-          )
+          ) : null
       }
           </Field>
             </div>
@@ -107,6 +109,7 @@ class ManageAcess extends Component {
                     {value:value.USER_NAME},
                     {value:value.EMAIL},
                     {value:value.PROF_NAME},
+                    {value:value.PROF_ID}
                     
                   ]}
                 }):null}>
