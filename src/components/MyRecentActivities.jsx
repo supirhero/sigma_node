@@ -407,7 +407,7 @@ component={ReduxSelect}
                       TS_DATE: value.ts_date,
                       TS_ID:value.ts_id,
                       PROJECT_ID: value.project_id,
-                      WP_ID: value.wbs_id,
+                      WP_ID: value.wp,
                       
                       // initialize:value.wbs_name,
                       HOUR: value.hour_total,
