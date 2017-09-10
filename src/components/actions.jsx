@@ -351,6 +351,7 @@ export const addDocsAndFiles = (desc,files, id ) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // console.log("DOCS",data);
   return function(dispatch){
+    const token = cookies.get('token')
     const formData = new FormData();
     formData.append('desc',desc);
     formData.append('document',files[0])
@@ -1416,6 +1417,7 @@ export function getTaskMemberView(project_id,wbs_id){
 
 export function removeTaskMember(WBS_ID,RP_ID,EMAIL,NAME,WBS_NAME){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
       // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,
@@ -1440,8 +1442,8 @@ export function removeTaskMember(WBS_ID,RP_ID,EMAIL,NAME,WBS_NAME){
 
 
 export function assignTaskMember(props,RP_ID,EMAIL,NAME){
-
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
       url:`${baseURL}task/assignTaskMemberProject?token=${token}`,
@@ -1895,6 +1897,7 @@ export function editBU(data){
 
 export function editProfile(no_hp,address,files){
   return function(dispatch){
+    const token = cookies.get('token')
     const formData = new FormData();
     formData.append('no_hp',no_hp);
     formData.append('address',address);
@@ -1937,8 +1940,8 @@ export function weekTimesheet(click){
 
 
 export function baseline(id) {
-  const token = cookies.get('token')
-    return function (dispatch) {
+  return function (dispatch) {
+    const token = cookies.get('token')
       return axios({
               method: 'GET',
               url: `${baseURL}project/baseline/${id}?token=${token}`,
