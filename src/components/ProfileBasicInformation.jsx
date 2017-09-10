@@ -110,7 +110,7 @@ class ProfileBasicInformation extends Component {
                 name="no_hp"
                 type="number"
                 component={ReduxInputNumber}
-                validate ={isInt}
+                // validate ={isInt}
               />
               <Field
                 inputName="ADDRESS"
