@@ -333,8 +333,10 @@ class EditProject extends Component {
                       component={ReduxSelect}
                     >
                         <option></option>
-                      {
-                        this.props.formValues && 
+                       {
+                          this.props.formValues &&
+                          this.props.formValues.values &&
+                          
                           this.props.formValues.values.PROJECT_TYPE_ID == 'project' ?
                           projectEffort &&
                           projectEffort.map((value, index) => (
