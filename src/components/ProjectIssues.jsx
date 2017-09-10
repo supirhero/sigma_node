@@ -132,6 +132,7 @@ class ProjectIssues extends Component {
                       name="PRIORITY"
                       style={{ width: '96%' }}
                       component={ReduxSelect}>
+                      <option></option>
                       {
                         priority.map((value, index)=> (
                           <option key={index} value={value.value} {...this.props.option}>{value.value}</option>
