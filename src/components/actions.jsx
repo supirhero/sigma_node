@@ -466,13 +466,13 @@ export const addNewProject = (data,id) => {
     const token = cookies.get('token')
     return axios({
             method: 'POST',
-            url: `${baseURL}project/addProject_acion?token=${token}` ,
+            url: `${baseURL}project/addProject_action?token=${token}` ,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: {
               ACTUAL_COST:data.ACTUAL_COST,
               AMOUNT:parseFloat(data.AMOUNT),
               AM_ID:data.AM_ID,
-              BU:id2323,
+              BU:id,
               COGS:data.COGS,
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
