@@ -1236,7 +1236,7 @@ export function resubmitTimesheet(props) {
            PROJECT_ID:props.PROJECT_ID,
            WP_ID:props.WP_ID,
             TS_ID:props.TS_ID,
-            TS_DATE:props.TS_DATE,
+            TS_DATE:moment(props.TS_DATE).format('YYYY-MM-DD'),
              HOUR:props.HOUR,
              TS_SUBJECT:props.TS_SUBJECT,
              TS_MESSAGE:props.TS_MESSAGE,

@@ -103,7 +103,7 @@ componentDidUpdate(){
       switch (value) {
         case '0':
           status = 'DENIED';
-          resubmit = "RE-SUBMIT TIMESHEET"
+          resubmit = ""
           break;
         case '1':
           status = 'APPROVED';
