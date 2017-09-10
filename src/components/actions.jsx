@@ -11,7 +11,7 @@ var compile_mode = process.env.NODE_ENV
 
 import fileDownload from 'react-file-download';
 // const baseURL = "http://45.77.45.126/dev/"
-const baseURL = "http://10.210.20.9/sigmadev/"
+const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
 // const token = store.getState().auth ? store.getState().auth.token : null
 const token = cookies.get('token')
