@@ -722,6 +722,7 @@ class ProjectWorkplan extends Component {
         </div>
         <div className="grid wrap narrow">
           <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
+          { this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
             <button
               className="btn-primary"
               style={status == 'ON HOLD' ? { width: '100%', float: 'left', padding:'15px 20px' } : { width: '200px', float: 'left' }}
@@ -740,6 +741,7 @@ class ProjectWorkplan extends Component {
                 }
               }
             >CREATE TASK</button>
+            }
             {
             <PopUp id="createTask" dividerText="CREATE TASK" btnText="CREATE TASK" btnClass="btn-primary" btnStyle={{ width: '200px', float: 'right' }}>
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -818,21 +820,15 @@ class ProjectWorkplan extends Component {
             </PopUp>
 }
           </div>
-          <div className={status == 'ON HOLD' ? "unit one-fourth": "unit one-third no-gutters" }>
+          {
+             
+          <div className={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? "unit one-fourth": "unit one-third no-gutters" }>
             <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
-                if(status == "NOT STARTED") {
+                if(status == "NOT STARTED" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task) {
                   this.props.dispatch(baseline(id)).then(res => {
                     this.props.dispatch(getWorkplanView(id));
                     
                     showNotif('Baseline successful', 'GREEN')
-                  })
-                }
-                else if(status == "ON HOLD") {
-                  this.props.dispatch(denyRebaseline(id)).then(res => {
-                     showNotif('Rebaseline request denied', 'GREEN')
-                    
-                    this.props.dispatch(getWorkplanView(id));
-                    
                   })
                 }
                 else {
@@ -846,10 +842,13 @@ class ProjectWorkplan extends Component {
 
                 }
               
-            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' ? "RE-BASELINE" : "DENY"}</button>
+            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' && "RE-BASELINE" }</button> 
 
           </div>
+          }
           {
+            this.props.state.auth.privilege.approve_rebaseline
+            &&
             status == 'ON HOLD' &&
             <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
             <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
@@ -862,8 +861,27 @@ class ProjectWorkplan extends Component {
               
             }}>ACCEPT</button>
 
-          </div>}
+          </div>
+        }
+        {
+          this.props.state.auth.privilege.approve_rebaseline
+          &&
+          status == 'ON HOLD' &&
+          <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
+          <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+              this.props.dispatch(denyRebaseline(id)).then(res => {
+              showNotif('Rebaseline request denied', 'GREEN')
+
+              this.props.dispatch(getWorkplanView(id));
+
+              })
+            
+          }}>DENY</button>
+
+        </div>
+      }
           <div className={status == 'ON HOLD' ? "unit one-fourth": "unit one-third no-gutters" }>
+          { this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
             <button
               className="btn-secondary"
               style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }}
@@ -881,6 +899,7 @@ class ProjectWorkplan extends Component {
                 }
               }
             >UPLOAD</button>
+            }
             <PopUp id="uploadWorkplan" dividerText="UPLOAD WORKPLAN" btnText="UPLOAD" btnClass="btn-secondary" btnStyle={{ width: '200px', float: 'left' }}>
             <Loader id='upload_workplan' style ={{height:'280px'}}>
 
