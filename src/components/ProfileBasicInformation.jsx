@@ -56,7 +56,7 @@ class ProfileBasicInformation extends Component {
 
 
   render() {
-    const imageURL = store.getState().auth.userdata && store.getState().auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + store.getState().auth.userdata.image +  ')' : null
+    const imageURL = store.getState().auth.userdata && store.getState().auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + store.getState().auth.userdata.image +  ')' : null
     const { handleSubmit } = this.props;
     const normalizePhone = (value, previousValue) => {
       if (!value) {

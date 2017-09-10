@@ -157,8 +157,8 @@ class ProjectDocsAndFiles extends Component {
                     <div className='card' style={{padding:'15px'}}>
                       <div className='grid'>
                         <div className='unit four-fifths'>
-                          <a href ={`http://prouds2.telkomsigma.co.id/prouds-api/document_assets/rebaseline_evidence/${value.url}`} style={{ display:'inline'}} 
-                            
+                          <a href ={`http://prouds.telkomsigma.co.id:8089/sigmadev/document_assets/rebaseline_evidence/${value.url}`} style={{ display:'inline'}} 
+                          
                           >{value.doc_name}</a>
                           <small style={{color:'#717171', display:'inline'}}>&nbsp;uploaded by {value.upload_by} at {value.date_upload}</small>
                         </div>

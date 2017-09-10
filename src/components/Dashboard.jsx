@@ -40,7 +40,7 @@ class Dashboard extends Component {
     render(){
       const auth = this.props.state.data
       const alert = this.props.state.alert.alert
-      const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')' : null
+      const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + auth.userdata.image +  ')' : null
       
       const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == "GREEN" ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
       return(

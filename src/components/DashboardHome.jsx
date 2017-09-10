@@ -29,7 +29,7 @@ class DashboardHome extends Component {
     // var projects = state.data.projects ? state.data.projects : null
     var auth = this.props.state.data
     var project = auth ? auth.project : null
-    const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds2.telkomsigma.co.id/prouds-api' + auth.userdata.image +  ')' : null
+    const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + auth.userdata.image +  ')' : null
     // console.log(projects);
     return(
       !auth.datatimesheet && !auth.project && !auth.userdata ? <PageLoader></PageLoader> :
