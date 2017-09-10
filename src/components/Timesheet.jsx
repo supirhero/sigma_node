@@ -40,6 +40,7 @@ class Timesheet extends Component {
     this.props.addTimesheet(props.PROJECT_ID,props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
     .then(
       (res)=>{
+        store.dispatch(viewTimesheet(this.state.selected))
         this.props.dispatch({
           type: 'POPUP',
           name:'addNewTimesheet',
@@ -51,7 +52,6 @@ class Timesheet extends Component {
         
         // res.preventDefault()
         // console.log("closed")
-        store.dispatch(viewTimesheet(this.state.selected))
       }
       
     )
@@ -289,7 +289,7 @@ componentDidUpdate(){
                                           component={ReduxSelect}
                                           // validate={[required]}
                                           >
-                                          <option></option>
+                                          
                                               {
                                                 timesheet.task.map((value,index)=>{
                                                   return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>

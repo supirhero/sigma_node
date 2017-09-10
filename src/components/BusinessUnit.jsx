@@ -126,16 +126,21 @@ class BusinessUnit extends Component {
         <div className="grid wrap">
         <div className="unit whole">
         <div className="unit half">
-          SPI:
-          {
+        <medium>
+        SPI:
+        {
           state.data.bu_spi
-          }
+        }
+        </medium>
         </div>
-        <div className="unit half">
-      
-             CPI:{
+        <div className="unit half" style={{float:'right'}}>
+        <medium>
+        
+        CPI:
+        {
           state.data.bu_cpi
-          } 
+        } 
+        </medium>
         </div>
         
         <button className='btn-secondary' style={{padding:'17px 22px', width:'20%', float:'right'}} onClick={e => {
