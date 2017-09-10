@@ -22,7 +22,7 @@ import {MuiThemeProvider, getMuiTheme, RadioButton as RadioMaterial } from 'mate
 
 import {addNewProject, getAddProjectView, pop, getIWO, getAccountManager,getDashboardView, showNotif } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
-import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, ReduxInputAsync, RenderRadioGroup, ReduxAutoComplete} from './Components.jsx'
+import {Divider, Input, RadioButton, Select, PopUp, ReduxInput, muiTheme, ReduxSelect, ReduxInputDisabled, InputFile, PageLoader, required, datepickerUniversal, RenderRadioGroup, ReduxAutoComplete} from './Components.jsx'
 
 
 
@@ -67,16 +67,16 @@ class NewProject extends Component {
     // store.dispatch(getIWO(30)).then(()=> {
     //
     // })
-    const state = store.getState()
+    const state = this.props.state
     const id = this.props.state.page ? this.props.state.page.new_project.bu_code : null
     const iwo = this.props.state.page ? this.props.state.page.new_project.iwo : null
 
-    const err = store.dispatch(getAddProjectView(id)).then(
+    const err = this.props.dispatch(getAddProjectView(id)).then(
       (res) => {
         this.handleInitialize(res.data.business_unit);
         console.log("VIEW", res);
         // const data = this.props.state.data.business_unit
-        // store.dispatch(getIWO(30)).then((res2)=> {
+        // this.props.dispatch(getIWO(30)).then((res2)=> {
         //   // this.handleInitialize(res.data.business_unit,res2.data.iwo);
         //   console.log("IWO", res2);
         //
@@ -84,7 +84,7 @@ class NewProject extends Component {
 
       }
     )
-    store.dispatch(getIWO(30)).then((res2)=> {
+    this.props.dispatch(getIWO(30)).then((res2)=> {
       // this.handleInitialize(res.data.business_unit,res2.data.iwo);
       console.log("IWO", res2);
 
@@ -95,7 +95,7 @@ class NewProject extends Component {
 
   }
   componentWillUnmount(){
-    store.dispatch(pop('new_project'))
+    this.props.dispatch(pop('new_project'))
 
   }
   onSubmit(props){
@@ -103,11 +103,16 @@ class NewProject extends Component {
     // this.props.dispatch(getDashboardView())
     console.log('ONSUBMIT PROPS', props);
     // alert("submitted")
-    store.dispatch(addNewProject(props, id)).then(
+    this.props.dispatch(addNewProject(props, id)).then(
       res => {
+        this.props.dispatch(goBack())
+        
         showNotif('Successfully created a new project', 'GREEN')
       }
-    )
+    ).catch(()=> {
+      showNotif('Server error', 'RED')
+      
+    })
       
   }
     render(){
@@ -173,14 +178,7 @@ class NewProject extends Component {
                 handleSubmit(this.onSubmit.bind(this))
               // }
             }
-            // onSubmit = {event =>
-            //   handleSubmit(this.onSubmit.bind(this))(event)// <---- this is the promise returned from handleSubmit()
-            //   // console.log();
-            //     .catch(errors => {
-            //         alert('error')
-            //         // submission was unsuccessful
-            //       })
-            //     }
+        
             >
           <div className='grid wrap narrow'>
             <div className='unit whole'>
@@ -730,7 +728,7 @@ class NewProject extends Component {
                 <div className='unit one-quarter'>
                   {/* <button className='btn-primary' onClick={
                     e => {
-                      store.dispatch({
+                      this.props.dispatch({
                         type : 'POPUP',
                         id : 'form',
                         popup : true
@@ -974,6 +972,7 @@ export default connect(mapStateToProps, { addNewProject })
         form: 'add_project',
         // RejectedSubmitPromise: true
         onSubmitFail: errors => {
+          console.log("ERRORS", errors)
           showNotif('Failed to create project', 'RED')
           
           // window.scrollTo(0, 0)

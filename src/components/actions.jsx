@@ -477,7 +477,7 @@ export const addNewProject = (data,id) => {
               CUST_ID:data.CUST_ID,
               DESC:data.DESC,
               END_CUST_ID:data.END_CUST_ID,
-              ho_operation:data.HO,
+              HO:data.HO,
               IWO_NO:data.IWO_NO,
               MARGIN:parseFloat(data.MARGIN),
               OVERHEAD:data.OVERHEAD,
@@ -496,15 +496,10 @@ export const addNewProject = (data,id) => {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              dispatch(goBack())
               console.log("RES",res.data);
               // store.dispatch({type:'API', name: 'project', data: res, append:true})
-            },
-            req => {
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-              console.log("REQ",req);
-              // store.dispatch({type:'API', name: 'project', data: res, append:true})
             }
+          
           )
   }
 }
@@ -1389,6 +1384,8 @@ export function uploadWorkplan(project_id,files){
 }
 
 export function getTaskMemberView(project_id,wbs_id){
+  const token = cookies.get('token')
+  
   return function(dispatch){
     return axios({
       method:'POST',

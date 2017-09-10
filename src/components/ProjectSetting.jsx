@@ -334,10 +334,14 @@ class EditProject extends Component {
                     >
                         <option></option>
                       {
+                          this.props.formValues.values.PROJECT_TYPE_ID == 'project' ?
                           projectEffort &&
                           projectEffort.map((value, index) => (
                             <option key={index} value={value.value} {...this.props.option}>{value.name}</option>
                           ))
+                          :
+                          <option value='8' {...this.props.option}>Non Project</option>
+                          
                         }
                     </Field>
 

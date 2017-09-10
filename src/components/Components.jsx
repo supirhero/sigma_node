@@ -304,10 +304,10 @@ export class RenderRadioGroup extends Component {
       console.log('PROPS', this.props);
     }
     render(){
-      if(this.props.meta.error == 'IWO is already used'){
-        console.log("ERRORRR",this.props.meta.error );
-        this.props.meta.error = undefined
-      }
+      // if(this.props.meta.error == 'IWO is already used'){
+      //   console.log("ERRORRR",this.props.meta.error );
+      //   this.props.meta.error = undefined
+      // }
       return(
         <div style={this.props.style}>
         {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
@@ -765,7 +765,7 @@ export class BarChart extends Component {
 
 export class BarChartSPI extends Component {
   render() {
-    const COLORS = ['#42C878', '#CF000F'];
+    const COLORS = ['#42C878', '#fa5962'];
     return(
       <div className='bar-chart-container'>
       <large style={this.props.labelStyle}>{this.props.label}</large>
@@ -796,7 +796,7 @@ export class BarChartCPI extends Component {
 
   render() {
     const customLabel = "yee";
-    const COLORS = ['#42C878', '#CF000F'];
+    const COLORS = ['#42C878', '#fa5962'];
     return(
       <div className='bar-chart-container'>
       <large style={this.props.labelStyle}>{this.props.label}</large>

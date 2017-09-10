@@ -13,6 +13,7 @@ class ReportsOverview extends Component {
   constructor(){ 
     super(); 
     this.state = { 
+      viewBar: true, 
       month : 8, 
       year: 2017 
     }; 
@@ -119,8 +120,8 @@ class ReportsOverview extends Component {
               <div className="grid wrap">
                 <div className="unit half">
                   <Header text='Monthly Performance' style={{display:'inline-block'}} />
-                  <Tab className="fa fa-bar-chart fa-2x " style={{marginLeft:'20px', color:'#cccccc'}}></Tab>
-                  <Tab className="fa fa-table fa-2x " style={{marginLeft:'20px',color:'#cccccc'}}></Tab>
+                  <Tab className="fa fa-bar-chart fa-2x tab" selectedTabClassName='active' style={{marginLeft:'14%', fontSize: '27px'}}></Tab>
+                  <Tab className="fa fa-table fa-2x tab" selectedTabClassName='active' style={{marginLeft:'20px', fontSize: '27px'}}></Tab>
                 </div>
                 <div className="unit half">
                   <div className="grid">
