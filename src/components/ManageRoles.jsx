@@ -3,7 +3,7 @@ import { connect,destroy } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { deleteAuthentication,getProfile,editProfileView ,createProfile, editProfileAction} from './actions.jsx';
+import { deleteAuthentication,getProfile,editProfileView ,createProfile, editProfileAction, showNotif} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TableNew ,Header, Search, PopUp,ReduxSelect,ReduxInput,ReduxInputDisabled,RadioButton ,TablePaginationRoles} from './Components.jsx';
 import {
@@ -35,9 +35,9 @@ class ManageRoles extends Component {
   // }
 
   onSubmit(props){
-    alert("New Role Created")
     this.props.dispatch(createProfile(props)).then(
       ()=> {
+        showNotif('Successfully created role', 'GREEN')
         
         store.dispatch({
           type: 'POPUP',
@@ -46,17 +46,16 @@ class ManageRoles extends Component {
             active:false,
           }
         })
-        store.dispatch(getProfile())
+        this.props.dispatch(getProfile())
       }
     )
 
   }
 
   onSubmitEdit(props){
-    alert("Role Updated")
     this.props.dispatch(editProfileAction(props)).then(
       ()=> {
-        
+        showNotif('Successfully edited role', 'GREEN')
         store.dispatch({
           type: 'POPUP',
           name: 'createRole',
@@ -64,7 +63,7 @@ class ManageRoles extends Component {
             active:false,
           }
         })
-        store.dispatch(getProfile())
+        this.props.dispatch(getProfile())
       }
     )
   }
@@ -395,7 +394,7 @@ class ManageRoles extends Component {
                 form='addNewRole'
                 editPopUp='editRole'
                 tableHeader={[{value:'ID'},{value:'NAME'},{value:'DESCRIPTION'}, {value: null}]}
-                tableData={ store.getState().data.profile ? store.getState().data.profile.map((value,index)=>{
+                tableData={ this.props.state.data.profile ? store.getState().data.profile.map((value,index)=>{
                   return {column:[
                     {value:value.PROF_ID},
                     {value:value.PROF_NAME},
