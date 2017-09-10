@@ -11,7 +11,7 @@ import { goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
-import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan,ReduxInputNumber} from './Components.jsx';
+import { Input, ReduxInput, ReduxInputDisabled, ReduxUploadWorkplan,ReduxInputNumber,isInt} from './Components.jsx';
 import {editProfile, getDashboardView, showNotif} from './actions.jsx'
 
 
@@ -110,6 +110,7 @@ class ProfileBasicInformation extends Component {
                 name="no_hp"
                 type="number"
                 component={ReduxInputNumber}
+                validate ={[isInt]}
               />
               <Field
                 inputName="ADDRESS"

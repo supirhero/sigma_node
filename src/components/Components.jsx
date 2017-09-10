@@ -32,7 +32,7 @@ import PasswordMask from 'react-password-mask';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 export const required = value => (value ? undefined : 'Required')
-export const isInt = value => (Number.isInteger(value) ? undefined : 'Wring input type')
+export const isInt = value => (Number.isInteger(value) ? undefined : 'Wrong input type')
 
 // export const required = value => (console.log("REQUIRED",value))
 

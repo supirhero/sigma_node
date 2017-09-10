@@ -442,6 +442,7 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   // console.log("DOCS",data);
   return function(dispatch){
+    const token = cookies.get('token')
     const formData = new FormData();
     formData.append('PROJECT_ID',id);
     formData.append('SUBJECT',SUBJECT);
