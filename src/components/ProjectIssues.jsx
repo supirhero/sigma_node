@@ -194,7 +194,7 @@ class ProjectIssues extends Component {
             <div className="grid">
               <div className="unit four-fifths">
                 <a style={{ display: 'inline' }}>ISSUES #{value.issue_id}</a>
-                <small style={{ color: '#717171', display: 'inline' }}>&nbsp;&nbsp;reported by {value.reported_by} at {value.date_issue}, 13:23</small>
+                <small style={{ color: '#717171', display: 'inline' }}>&nbsp;&nbsp;reported by {value.reported_by} at {value.date_issue}</small>
               </div>
               <div className="unit one-fifth">
                 <medium style={{ textAlign: 'right' }}><span className="icon-options" /></medium>
