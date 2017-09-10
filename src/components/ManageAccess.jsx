@@ -109,7 +109,7 @@ class ManageAcess extends Component {
 							<div className="table-wrap">							
                 <div className="unit whole">
 									<Header text='User Access' style={{display:'inline-block'}} />
-                  <Search placeholder='Search for Roles' style={{width:'400px', display:'block', float:'right'}}
+                  <Search placeholder='Search for User' style={{width:'400px', display:'block', float:'right'}}
                   onChange={e=>{
                     this.setState({search:e.target.value},()=>{
                       store.dispatch(getUserAccess(this.state.search))

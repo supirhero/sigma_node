@@ -2379,19 +2379,7 @@ export class TablePaginationRoles extends Component {
 <div className="unit whole">
 
 </div>
-<div className="container" style={{float:'left'}}>
-<small style={{display:'inline-block'}}>show entries</small>
-<Select
-style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-items={{
-  items : [
-  {title : '10'},
-  {title : '20'}
-  ]
-}}
-/>
 
-</div>
 <div className="container" style={{float:'right'}}>
 <button className="arrow" onClick={e=> {
   this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
@@ -2562,19 +2550,7 @@ export class TablePaginationAccess extends Component {
 <div className="unit whole">
 
 </div>
-<div className="container" style={{float:'left'}}>
-<small style={{display:'inline-block'}}>show entries</small>
-<Select
-style={{width:'85px', height:'40px',marginLeft:'20px',display:'inline-block'}}
-items={{
-  items : [
-  {title : '10'},
-  {title : '20'}
-  ]
-}}
-/>
 
-</div>
 <div className="container" style={{float:'right'}}>
 <button className="arrow" onClick={e=> {
   this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})

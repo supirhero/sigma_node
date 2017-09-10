@@ -391,7 +391,7 @@ class ManageRoles extends Component {
                   </PopUp>
 
                   
-                  <Search placeholder='Search for User' style={{width:'400px', display:'block', float:'right'}}
+                  <Search placeholder='Search for Roles' style={{width:'400px', display:'block', float:'right'}}
                   onChange={e=>{
                     this.setState({search:e.target.value},()=>{
                       store.dispatch(getProfile(this.state.search))
