@@ -347,8 +347,8 @@ export class RenderRadioGroup extends Component {
         className={this.props.meta.touched && ((this.props.meta.error && 'error'))}
         style={{width:'100%'}}
         placeholder={this.props.placeholder}
-        type='text'
-        pattern="[0-9]*"
+        type='number'
+        // pattern="[0-9]*"
         {...this.props.input}
         // onkeypress={"return event.charCode >= 48 && event.charCode <= 57"}
 
