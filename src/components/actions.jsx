@@ -452,7 +452,12 @@ export const addIssue = (id,SUBJECT,MESSAGE,PRIORITY,file_upload) => {
     return fetch(`${baseURL}home/addissue/${id}?token=${token}`,{
       method:'POST',
       body:formData
-    })
+    }).then(
+      res=>{
+
+        showNotif('Successfully added issue', 'GREEN') 
+      }
+    )
   }
 }
 
