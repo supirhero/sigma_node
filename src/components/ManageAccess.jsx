@@ -38,6 +38,7 @@ class ManageAcess extends Component {
   render() {
     const { handleSubmit } = this.props;
     const user_list = store.getState().data.user_list;
+    const profile_list = store.getState().data.profile_list;
     
     return (
       <div>
@@ -63,10 +64,15 @@ class ManageAcess extends Component {
             // validate={[required]}
           >
           {
-            user_list ? user_list.map((value,index)=>{
-              return <option key={index} value={value.PROF_ID}>{value.PROF_NAME}</option>
-            }
-          ) : null
+          //   user_list ? user_list.map((value,index)=>{
+          //     return <option key={index} value={value.PROF_ID}>{value.PROF_NAME}</option>
+          //   }
+          // ) : null
+
+          profile_list ? profile_list.map((value,index)=>{
+            return <option key={index} value={value.PROF_ID}>{value.PROF_NAME}</option>
+          }
+        ) : null
       }
           </Field>
             </div>

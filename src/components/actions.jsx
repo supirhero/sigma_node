@@ -1389,6 +1389,7 @@ export function uploadWorkplan(project_id,files){
 
 export function getTaskMemberView(project_id,wbs_id){
   return function(dispatch){
+    const token = cookies.get('token')
     return axios({
       method:'POST',
       // url:`${baseURL}/dev/task/workplan_view/${id}?token=${token}`,

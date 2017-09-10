@@ -2163,7 +2163,7 @@ export class TablePaginationUser extends Component {
           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
             store.dispatch({
               type: 'CONFIRM',
-              message: 'Delete Holday?',
+              message: 'Delete User?',
               show:true,
               onConfirm: ()=> {
                 store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
@@ -2172,7 +2172,7 @@ export class TablePaginationUser extends Component {
                     message: '',
                     onConfirm: null
                   })
-                  store.dispatch(getDataMaster("holiday"))
+                  store.dispatch(getDataMaster("user"))
 
                 })
               }
