@@ -20,13 +20,16 @@ class ManageRoles extends Component {
   constructor(){
     super();
     this.state = {
-      id : 0
+      id : 0,
+      search: ""
 
     };
   }
 
+
+
   componentWillMount(){
-    store.dispatch(getProfile())
+    store.dispatch(getProfile(this.state.search))
     // store.dispatch(editProfileView("3"))
   }
 
@@ -46,7 +49,7 @@ class ManageRoles extends Component {
             active:false,
           }
         })
-        this.props.dispatch(getProfile())
+        this.props.dispatch(getProfile(this.state.search))
       }
     )
 
@@ -63,7 +66,7 @@ class ManageRoles extends Component {
             active:false,
           }
         })
-        this.props.dispatch(getProfile())
+        this.props.dispatch(getProfile(this.state.search))
       }
     )
   }
@@ -387,7 +390,18 @@ class ManageRoles extends Component {
                     </form>
                   </PopUp>
 
-                  <Search placeholder="search project type" style={{ float: 'right', width: '400px' }} />
+                  
+                  <Search placeholder='Search for User' style={{width:'400px', display:'block', float:'right'}}
+                  onChange={e=>{
+                    this.setState({search:e.target.value},()=>{
+                      store.dispatch(getProfile(this.state.search))
+                    })
+                    e.preventDefault()
+                  }}
+                  
+                   >
+            
+                  </Search>
                 </div>
                 <div className="unit whole">
                 <TablePaginationRoles

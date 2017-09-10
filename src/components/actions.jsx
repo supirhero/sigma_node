@@ -1951,12 +1951,12 @@ export function baseline(id) {
   
 
 
-export function getProfile() {
+export function getProfile(keyword) {
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}role/getprofile?token=${token}`,
+            url: `${baseURL}role/getprofile/${keyword}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }).then(
             res => {
@@ -2069,14 +2069,14 @@ export function createProfile(props){
   }
 }
 
-export function getUserAccess() {
+export function getUserAccess(keyword) {
   store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
   const token = cookies.get('token')
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
             method: 'GET',
-            url: `${baseURL}role/useraccess_view?token=${token}`,
+            url: `${baseURL}role/useraccess_view/${keyword}?token=${token}`,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }).then(
             res => {

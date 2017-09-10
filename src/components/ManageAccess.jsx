@@ -10,11 +10,18 @@ import { Field, reduxForm } from 'redux-form';
 
 
 class ManageAcess extends Component {
+  constructor(){
+    super();
+    this.state = {
+      search: ""
+
+    };
+  }
 
 
 
   componentWillMount(){
-    store.dispatch(getUserAccess())
+    store.dispatch(getUserAccess(this.state.search))
   }
 
 
@@ -30,7 +37,7 @@ class ManageAcess extends Component {
             active:false,
           }
         })
-        store.dispatch(getUserAccess())
+        store.dispatch(getUserAccess(this.state.search))
       }
     )
   }
@@ -102,7 +109,17 @@ class ManageAcess extends Component {
 							<div className="table-wrap">							
                 <div className="unit whole">
 									<Header text='User Access' style={{display:'inline-block'}} />
-									<Search placeholder='search customer' style={{float:'right',width:'400px'}} />
+                  <Search placeholder='Search for Roles' style={{width:'400px', display:'block', float:'right'}}
+                  onChange={e=>{
+                    this.setState({search:e.target.value},()=>{
+                      store.dispatch(getUserAccess(this.state.search))
+                    })
+                    e.preventDefault()
+                  }}
+                  
+                   >
+            
+                  </Search>
                 </div>
                 <div className="unit whole">
                 <TablePaginationAccess
