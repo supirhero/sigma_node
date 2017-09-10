@@ -823,7 +823,7 @@ class ProjectWorkplan extends Component {
           {
              
           <div className={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? "unit one-fourth": "unit one-third no-gutters" }>
-            <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+            <button className="btn-secondary" style={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
                 if(status == "NOT STARTED" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task) {
                   this.props.dispatch(baseline(id)).then(res => {
                     this.props.dispatch(getWorkplanView(id));
@@ -832,6 +832,7 @@ class ProjectWorkplan extends Component {
                   })
                 }
                 else {
+                  status == "NOT STARTED" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
                 this.props.dispatch({
                   type: 'POPUP',
                   name: 'request_rebaseline',
