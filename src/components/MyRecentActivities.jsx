@@ -118,6 +118,52 @@ const year = [
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
 
+    function divider(value) {
+      
+      let text = "September";
+      switch (value) {
+        case "1":
+          text = 'January';
+          break;
+        case "2":
+          text = 'February';
+          break;
+        case "3":
+          text = 'March';
+          break;
+        case "4":
+          text = 'April';
+          break;
+        case "5":
+          text = 'May';
+          break;
+        case "6":
+          text = 'June';
+          break;
+        case "7":
+          text = 'July';
+          break;
+        case "8":
+          text = 'August';
+          break;
+        case "9":
+          text = 'September';
+          break;
+        case "10":
+          text = 'October';
+          break;
+        case "11":
+          text = 'November';
+          break;
+        case "12":
+          text = 'December';
+          break;
+       
+        default:
+      }
+      return (<Divider style={{ marginTop: '0' }} text={text} />);
+    }
+
     return (
 
       <div>
@@ -335,7 +381,7 @@ component={ReduxSelect}
     <button className='btn-primary'style={{padding:'11px 14px'}} onClick={(e)=> {
       console.log(this.state.month,this.state.year);
       store.dispatch(getMyActivities(this.state.month,this.state.year))
-      this.setState({month_name:e.target.value})
+      this.setState({month_name:this.state.month})
       // store.dispatch(myPerformance('1','2017'))
       e.preventDefault()
     }} ><span className='material-icons' style={{color:'white'}}>search</span></button>
@@ -348,7 +394,7 @@ component={ReduxSelect}
 
         <div className="grid wrap">
           <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text={this.state.month_name} />
+            {divider(this.state.month_name)}
           </div>
         </div>
         {
