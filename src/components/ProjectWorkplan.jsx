@@ -78,9 +78,11 @@ class ProjectWorkplan extends Component {
       }
       return (
         <i className={className}>error</i>
-        
       );
     }
+
+
+  
 
     return(
       <tr onClick={
@@ -407,6 +409,21 @@ class ProjectWorkplan extends Component {
       return {EMAIL:value.EMAIL , RP_ID:value.RP_ID, USER_NAME:value.USER_NAME}
      }) : null
 
+     function statusAssign(value) {
+      let className = '';
+      switch (value) {
+        case 'create':
+          className = 'material-icons rebase-create';
+          break;
+        case "delete":
+          className = 'material-icons rebase-delete';
+          break;
+      }
+      return (
+        <i className={className} style={{display:'inline-block',marginLeft:'20px',marginTop:'-3px'}}>error</i>
+      );
+    }
+
     const currently_assigned = this.props.state.data.currently_assigned;
     return (
       <div className="project-workplan">
@@ -660,7 +677,7 @@ class ProjectWorkplan extends Component {
                         <small style={{ display: 'inline-block', float: 'left' }}>{value.EMAIL}</small>
                       </div>
                       <div className="unit one-fifth">
-                        <h2 className="input-desc list-pointer" style={{ display: 'inline-block', float: 'left', textAlign:'center' }}>
+                        <h2 className="input-desc list-pointer" style={{ display: 'inline-block', float: 'left', textAlign:'center',width:'50px' }}>
                           <i  style={{color:'#D62431'}} className='icon-trash'
                             onClick={e=> {
                               this.props.dispatch(removeTaskMember(this.state.WBS_ID, value.RP_ID, value.EMAIL, value.USER_NAME, this.state.WBS_NAME)).then(res => {
@@ -672,6 +689,10 @@ class ProjectWorkplan extends Component {
                                 e.preventDefault()
                             }}
                         ></i></h2>
+                        {
+                          value.status !== 'none' &&
+                           statusAssign(value.status)
+                         }
                       </div>
                     </div>
                   </div>
