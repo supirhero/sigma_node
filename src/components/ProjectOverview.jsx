@@ -11,6 +11,14 @@ import { Line } from 'react-progressbar.js'
 
 
 class ProjectOverview extends Component {
+  componentWillMount(){
+    const id = this.props.state.page.id
+    this.props.dispatch(getProjectDetail(id)).then(
+      (res)=>{
+      }
+    )
+
+  }
     render(){
       const appStore = this.props.state
       const overview = appStore.data.overview ? appStore.data.overview : null

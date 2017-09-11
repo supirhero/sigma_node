@@ -402,6 +402,9 @@ class ProjectWorkplan extends Component {
     // console.log('STATUSSS',this.props.state.data.project_status)
     const status = (this.props.state.data.project_status ? this.props.state.data.project_status : '').toUpperCase()
     const id = this.props.state.page.id;
+
+    const creat_edit_upload_percent_member_task = this.props.state.auth.privilege.creat_edit_upload_percent_member_task;
+    const approve_rebaseline = this.props.state.auth.privilege.approve_rebaseline;
     
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
@@ -721,11 +724,11 @@ class ProjectWorkplan extends Component {
           </div>
         </div>
         <div className="grid wrap narrow">
-          <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
+          {/* <div className='unit whole'> */}
           { this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
             <button
               className="btn-primary"
-              style={status == 'ON HOLD' ? { width: '100%', float: 'left', padding:'15px 20px' } : { width: '200px', float: 'left' }}
+              style={{ width: '200px', float: 'left' }}
               onClick={
                 (e) => {
                   console.log('PROPS', this.props);
@@ -819,20 +822,25 @@ class ProjectWorkplan extends Component {
               </form>
             </PopUp>
 }
-          </div>
           {
-             
-          <div className={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? "unit one-fourth": "unit one-third no-gutters" }>
-            <button className="btn-secondary" style={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
-                if(status == "NOT STARTED" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task) {
+            status == "NOT STARTED" &&
+            <button className="btn-secondary" style={{ width: '200px', float: 'left' }} onClick={e=> {
                   this.props.dispatch(baseline(id)).then(res => {
                     this.props.dispatch(getWorkplanView(id));
                     
                     showNotif('Baseline successful', 'GREEN')
                   })
-                }
-                else {
-                  status == "NOT STARTED" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
+             
+              
+            }}>BASELINE</button> 
+
+        }
+             
+        {
+          approve_rebaseline == false &&
+          
+          status == 'IN PROGRESS' &&
+            <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
                 this.props.dispatch({
                   type: 'POPUP',
                   name: 'request_rebaseline',
@@ -840,18 +848,31 @@ class ProjectWorkplan extends Component {
                     active: true,
                   },
                 });
-
-                }
               
-            }}>{status == "NOT STARTED" ? "BASELINE" : status == 'IN PROGRESS' && "RE-BASELINE" }</button> 
+            }}>RE-BASELINE</button> 
 
-          </div>
           }
+
           {
+            creat_edit_upload_percent_member_task == false &&
+            
+            status == "ON HOLD" &&
+            <button className="btn-secondary" style={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+              this.props.dispatch(denyRebaseline(id)).then(res => {
+                showNotif('Rebaseline request denied', 'GREEN')
+               
+               this.props.dispatch(getWorkplanView(id));
+               
+             })
+            }}>DENY</button> 
+
+          }
+
+          {
+            creat_edit_upload_percent_member_task == false &&
             this.props.state.auth.privilege.approve_rebaseline
             &&
             status == 'ON HOLD' &&
-            <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
             <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
                 this.props.dispatch(acceptRebaseline(id)).then(res => {
                 showNotif('Rebaseline request Accepted', 'GREEN')
@@ -862,30 +883,14 @@ class ProjectWorkplan extends Component {
               
             }}>ACCEPT</button>
 
-          </div>
         }
-        {
-          this.props.state.auth.privilege.approve_rebaseline
-          &&
-          status == 'ON HOLD' &&
-          <div className={status == 'ON HOLD' ? "unit one-fourth ": "unit one-third no-gutters" }>
-          <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
-              this.props.dispatch(denyRebaseline(id)).then(res => {
-              showNotif('Rebaseline request denied', 'GREEN')
 
-              this.props.dispatch(getWorkplanView(id));
-
-              })
-            
-          }}>DENY</button>
-
-        </div>
-      }
-          <div className={status == 'ON HOLD' ? "unit one-fourth": "unit one-third no-gutters" }>
+        
+    
           { this.props.state.auth.privilege.creat_edit_upload_percent_member_task &&
             <button
               className="btn-secondary"
-              style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }}
+              style={{ width: '200px', float: 'left' }}
               onClick={
                 (e) => {
                   console.log('PROPS', this.props);
@@ -938,7 +943,6 @@ class ProjectWorkplan extends Component {
               </form>
               </Loader>
             </PopUp>
-          </div>
 
         </div>
         <div className="grid wrap">
