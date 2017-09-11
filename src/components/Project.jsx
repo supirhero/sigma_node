@@ -21,15 +21,7 @@ class Project extends Component {
     this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
   }
 
-  componentWillMount(){
-    const id = this.props.state.page.id
-    this.props.dispatch(getProjectDetail(id)).then(
-      (res)=>{
-        console.log('detail project');
-      }
-    )
-
-  }
+ 
 
   componentWillUnmount(){
     store.dispatch(pop())
