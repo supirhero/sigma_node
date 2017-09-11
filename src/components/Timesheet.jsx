@@ -281,27 +281,26 @@ componentDidUpdate(){
                   </div>
                   <div className="grid wrap narrow">
                   <div className="unit three-quarters">
-                                      {
-                                        timesheet.task ?
+                                        
                                         <Field
                                         name="WP_ID"                                        
                                           inputName="TASK"
                                           component={ReduxSelect}
                                           // validate={[required]}
                                           >
-                                          
+                                          <option></option>
                                               {
+                                                timesheet.task ?
                                                 timesheet.task.map((value,index)=>{
+                                                  
                                                   return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
-                                                }
-                                              )
+                                                } 
+                                              ) : <option></option>
                                               }
                                        </Field>
-                                       :
-                                        <Select inputName="TASK">
-                                        <options> </options>
-                                        </Select>
-                                      }
+                                       
+                                        
+                                      
                                       </div>
 
                     <div className="unit one-quarter">

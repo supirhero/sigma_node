@@ -1110,7 +1110,7 @@ export function taskList(project_id) {
 
     }).then(
             (res) => {
-              
+              showNotif('Pilih Task', 'GREEN') 
               store.dispatch({ type: 'API', name: 'timesheet' ,
                 data: res, append: true}
               );
