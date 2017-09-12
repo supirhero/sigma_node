@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, required,TimeSheetTimeButton, PopUp, ReduxSelect,Select,ReduxInput,PageLoader,datepickerTimesheet} from './components.jsx';
 import { Field, reduxForm ,initialize} from 'redux-form';
-import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet } from './actions.jsx';
+import { addTimesheet, viewTimesheet, taskList, pop,weekTimesheet ,showNotif} from './actions.jsx';
 import moment from 'moment';
 
 
@@ -186,7 +186,8 @@ componentDidUpdate(){
                             },()=>{
                               this.handleInitialize()
                               console.log(this.state.datepicker)
-                            }) : alert("Timesheet submission in the future is not allowed! ")
+                            }) : showNotif("Timesheet submission in the future is not allowed!","RED") 
+
                           })
                         }
                       } 

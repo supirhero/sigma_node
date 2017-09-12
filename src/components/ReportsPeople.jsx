@@ -21,7 +21,8 @@ class ReportsPeople extends Component {
 
 
   componentWillMount(){
-    store.dispatch(reportPeople(store.dispatch(reportPeople((store.getState().auth.userdata.bu_id).toString(),"6","2017"))))
+    store.dispatch(reportPeople((store.getState().auth.userdata.bu_id).toString(),"9","2017"))
+    // store.dispatch(reportPeople(store.dispatch(reportPeople((store.getState().auth.userdata.bu_id).toString(),"6","2017"))))
     store.dispatch(getListBU())
   }
 

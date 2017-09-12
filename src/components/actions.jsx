@@ -11,11 +11,7 @@ var compile_mode = process.env.NODE_ENV
 
 import fileDownload from 'react-file-download';
 
-// const baseURL = "http://prouds.telkomsigma.co.id:8090/sigmadev/index.php/"
-// const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
-
-// const baseURL = "http://prouds.telkomsigma.co.id/apiprouds/"
 // const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
 const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
@@ -1237,7 +1233,7 @@ export function addTimesheet(PROJECT_ID,WP_ID,TS_DATE,HOUR,TS_SUBJECT,TS_MESSAGE
     }).then(
       (res)=>{
         console.log("ADDTIMESHEET");
-        alert('successful')
+        showNotif('Successfully added new timesheet', 'GREEN') 
         // store.dispatch(viewTimesheet(TS_DATE));
 
 
