@@ -839,7 +839,7 @@ class ProjectWorkplan extends Component {
         }
              
         {
-          approve_rebaseline == false &&
+          approve_rebaseline == true &&
           
           status == 'IN PROGRESS' &&
             <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
@@ -856,7 +856,7 @@ class ProjectWorkplan extends Component {
           }
 
           {
-            creat_edit_upload_percent_member_task == false &&
+            creat_edit_upload_percent_member_task == true &&
             
             status == "ON HOLD" &&
             <button className="btn-secondary" style={status == 'ON HOLD' && this.props.state.auth.privilege.creat_edit_upload_percent_member_task ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
@@ -871,9 +871,8 @@ class ProjectWorkplan extends Component {
           }
 
           {
-            creat_edit_upload_percent_member_task == false &&
-            this.props.state.auth.privilege.approve_rebaseline
-            &&
+            creat_edit_upload_percent_member_task == true &&
+            
             status == 'ON HOLD' &&
             <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
                 this.props.dispatch(acceptRebaseline(id)).then(res => {

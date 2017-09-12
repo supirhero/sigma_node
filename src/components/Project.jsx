@@ -21,7 +21,10 @@ class Project extends Component {
     this.props.addTimesheet(props.WP_ID,props.TS_DATE,props.HOUR,props.TS_SUBJECT,props.TS_MESSAGE)
   }
 
- 
+  componentWillMount(){
+    const id = this.props.state.page.id
+    this.props.dispatch(getProjectDetail(id))
+  }
 
   componentWillUnmount(){
     store.dispatch(pop())
@@ -108,9 +111,7 @@ class Project extends Component {
         <div className='unit four-fifths'>
 
           {
-            store.getState().data.overview ?
-            this.props.children:
-            <PageLoader></PageLoader>
+            this.props.children
 
 
           }

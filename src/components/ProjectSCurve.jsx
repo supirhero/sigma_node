@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 import {Divider, Header, ProjectHeader, SCurve ,TableNew,PageLoader} from  './Components.jsx'
-import {getSCurve,pop} from './actions.jsx'
+import {getSCurve,pop, getProjectDetail} from './actions.jsx'
 
 
 
@@ -12,6 +12,8 @@ class ProjectSCurve extends Component {
   componentWillMount(){
     const id = this.props.state.page.id
     this.props.dispatch(getSCurve(id))
+    this.props.dispatch(getProjectDetail(id))
+    
     // const state = store.getState()
     // const s_curve = state.data.s_curve ? state.data.s_curve : null
   }
@@ -38,6 +40,8 @@ class ProjectSCurve extends Component {
       }
 
       return(
+        !this.props.state.data.overview ? <PageLoader/> :
+        
         <div className='project-DocsFiles'>
           <div className='grid padding-left'>
             <div className='unit whole'>
