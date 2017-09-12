@@ -16,8 +16,8 @@ import fileDownload from 'react-file-download';
 
 
 // const baseURL = "http://prouds.telkomsigma.co.id/apiprouds/"
-// const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
-const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
+const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
+// const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
 
 
