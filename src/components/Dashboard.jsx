@@ -132,6 +132,7 @@ class Dashboard extends Component {
                         </Menu>
 
                         <Menu style={{display:'inline'}} triggerClass='notif'>
+                        
                         // <MenuSection>
                         //   <MenuNotifItem onClick={
                         //     e => {
