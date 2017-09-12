@@ -165,7 +165,14 @@ export function changeRoute(params) {
   switch (params.type) {
     case 'PUSH':
       var id = params.page.id ? '/' + params.page.id : ''
-      store.dispatch(push(`/${params.page.name}${id}`))
+      store.dispatch(push(
+        {
+          pathname: `/${params.page.name}`,
+          search : `?id=${params.page.id}`
+
+      
+        }
+      ))
       break;
     case 'REPLACE':
       store.dispatch(replace(params.path))
