@@ -63,12 +63,13 @@ class ProjectActivities extends Component {
         </div>
         <div className="grid wrap padding-left">
           <div className="unit whole">
-            <Divider style={{ marginTop: '0' }} text={project_activity.ts_date} />
+            <Divider style={{ marginTop: '0' }} text={project_activity && project_activity.length != 0 ? project_activity.ts_date : null } />
           </div>
         </div>
 
         <div className="grid wrap padding-left">
           {
+          project_activity && project_activity.length != 0 &&
           project_activity.map((value, index) => (
             <div key={index}>
               <div className="grid wrap">

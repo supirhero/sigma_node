@@ -164,6 +164,8 @@ class EditProject extends Component {
               {
               !iwo ? 
                   <Input
+                  inputName="IWO NUMBER"
+                  
                   inputStyle={{
                     backgroundColor:'white',
                     backgroundSize: '33px',
