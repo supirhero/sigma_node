@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Header, ProjectHeader, Input, BarChart, Table, InputFile, TableNew,PageLoader } from './Components.jsx';
-import {pop,getSPI,getCPI} from './actions.jsx'
+import {pop,getSPI,getCPI, getProjectDetail} from './actions.jsx'
 
 
 
@@ -17,6 +17,8 @@ class ProjectSpiCpi extends Component {
     const cpi = state.data.cpi ? state.data.cpi : null
     store.dispatch(getSPI(id))
     store.dispatch(getCPI(id))
+    this.props.dispatch(getProjectDetail(id))
+    
   }
 
   componentWillUnmount() {
@@ -71,6 +73,8 @@ if (!spi && !cpi) {
       return <PageLoader />;
     }
     return (  
+      !this.props.state.data.overview ? <PageLoader/> :
+      
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">

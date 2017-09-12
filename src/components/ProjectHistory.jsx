@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
 import {Divider, Header,Table, ProjectHeader, Input,TablePaginationHistory,PopUp,handleSubmit,Field,ReduxInputDisabled, PageLoader,TableNew,BarChart} from  './Components.jsx'
-import { gethistory,gethistoryDetail} from './actions.jsx'
+import { gethistory,gethistoryDetail, getProjectDetail} from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -19,9 +19,11 @@ class ProjectHistory extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.state.page.id
     // store.dispatch(getProjectTeamMember(id))
+    this.props.dispatch(getProjectDetail(id))
+    
     store.dispatch(gethistory(id))
   }
 
@@ -42,6 +44,8 @@ class ProjectHistory extends Component {
      // })
 
       return(
+        !this.props.state.data.overview ? <PageLoader/> :
+        
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>

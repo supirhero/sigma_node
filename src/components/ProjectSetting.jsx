@@ -65,6 +65,8 @@ class EditProject extends Component {
     // this.props.dispatch(getIWOEditProject(30)).then((res2) => {
     //   // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
     // });
+    this.props.dispatch(getProjectDetail(id))
+    
     this.props.dispatch(getEditProjectView(id)).then(
         (res) => {
           console.log('RES', res);
@@ -126,7 +128,7 @@ class EditProject extends Component {
      }) : null
     const iwo_no = this.props.state.data.project_setting && (this.props.state.data.project_setting.iwo_no).toUpperCase()
     return (
-        !this.state.loaded  ? <PageLoader /> :
+        !this.state.loaded &&  !this.props.state.data.overview ? <PageLoader/> :
         <div>
 
 

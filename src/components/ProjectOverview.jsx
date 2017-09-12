@@ -5,24 +5,21 @@ import { Link, browserHistory } from 'react-router'
 import { push, replace, goBack } from 'react-router-redux'
 
 import store from '../reducers/combineReducers.jsx'
-import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select} from  './components.jsx'
-
+import {Divider, TimeSheetTimeButton, Header, ProjectHeader,PopUp,Input,Select, PageLoader} from  './components.jsx'
+import {getProjectDetail} from './actions.jsx'
 import { Line } from 'react-progressbar.js'
 
 
 class ProjectOverview extends Component {
   componentWillMount(){
     const id = this.props.state.page.id
-    this.props.dispatch(getProjectDetail(id)).then(
-      (res)=>{
-      }
-    )
-
+    this.props.dispatch(getProjectDetail(id))
   }
     render(){
       const appStore = this.props.state
       const overview = appStore.data.overview ? appStore.data.overview : null
       return(
+        !this.props.state.data.overview ? <PageLoader/> :
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>

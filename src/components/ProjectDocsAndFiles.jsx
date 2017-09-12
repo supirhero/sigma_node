@@ -6,14 +6,16 @@ import store from '../reducers/combineReducers.jsx'
 import {Field, reduxForm} from 'redux-form';
 import fileDownload from 'react-file-download';
 import {Divider, Header, ProjectHeader, PopUp, PageLoader, ReduxInput,ReduxDrop, ReduxUploadWorkplan, EmptyData,required} from  './Components.jsx'
-import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif } from './actions.jsx'
+import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif,getProjectDetail } from './actions.jsx'
 
 
 
 class ProjectDocsAndFiles extends Component {
-  componentDidMount(){
+  componentWillMount(){
     const id = store.getState().page.id
     store.dispatch(getDocsFiles(id))
+    this.props.dispatch(getProjectDetail(id))
+    
   }
   onSubmit(props){
     const id = store.getState().page.id
@@ -55,6 +57,8 @@ class ProjectDocsAndFiles extends Component {
       const project_doc_list = appStore.data.project_doc_list
       const overview = appStore.data.overview ? appStore.data.overview : null
       return(
+        !this.props.state.data.overview ? <PageLoader/> :
+        
         <div className='project-DocsFiles'>
           
           <PopUp id="uploadFileDocsFiles" dividerText="UPLOAD FILE" btnText="UPLOAD FILE" btnClass='btn-primary' btnStyle={{display:'block', margin: 'auto'}}>
@@ -152,6 +156,7 @@ class ProjectDocsAndFiles extends Component {
             typeof project_doc_list[0] !== 'undefined'?
             project_doc_list.map((value, index) => {
               return (
+
                 <div className='grid padding-left' key={index}>
                   <div className='unit whole'>
                     <div className='card' style={{padding:'15px'}}>
