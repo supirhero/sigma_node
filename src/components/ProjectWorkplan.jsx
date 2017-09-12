@@ -119,11 +119,13 @@ class ProjectWorkplan extends Component {
       <td style={{position:'relative', paddingRight:'10px'}} >
 
       {
-        value.LEAF == 1 && store.getState().data.project_status !== "In Progress" &&
         // React.cloneElement(this.props.children, { data: value })
+        value.LEAF == 1 && this.props.state.auth.privilege.creat_edit_upload_percent_member_task && 
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
             <MenuSection>
-             
+             {
+              
+              value.LEAF == 1  && this.props.state.auth.privilege.creat_edit_upload_percent_member_task && 
             <MenuItem title='Manual Update' onClick={e => {
               this.props.dispatch(getCurrentProgress(value.WBS_ID)).then(
              res => {
@@ -145,6 +147,9 @@ class ProjectWorkplan extends Component {
            )
            e.preventDefault()
          }}/>
+        }
+        {
+          value.LEAF == 1 && store.getState().data.project_status !== "In Progress" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task && 
               <MenuItem title='Edit' onClick={e => {
                 this.props.dispatch({
                       type: 'POPUP',
@@ -172,6 +177,9 @@ class ProjectWorkplan extends Component {
 
                 e.preventDefault()
               }}/>
+            }
+            {
+              value.LEAF == 1 && store.getState().data.project_status !== "In Progress" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task && 
               <MenuItem title='Assign' onClick={e => {
                 // this.setState({WBS_id:value.WBS_id})
                 this.setState({WBS_NAME:value.WBS_NAME})
@@ -194,7 +202,10 @@ class ProjectWorkplan extends Component {
 
                 e.preventDefault()
               }}/>
-
+            }
+{
+  
+  value.LEAF == 1 && store.getState().data.project_status !== "In Progress" && this.props.state.auth.privilege.creat_edit_upload_percent_member_task && 
               <MenuItem title='Delete' onClick={e => {
                 // this.props.dispatch()
                 {/* this.props.dispatch({
@@ -229,6 +240,7 @@ class ProjectWorkplan extends Component {
                 e.preventDefault()
               }}/>
 
+            }
 
 
             </MenuSection>
