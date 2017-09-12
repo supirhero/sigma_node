@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { deleteAuthentication , getUserAccess,editUserAccess} from './actions.jsx';
+import { deleteAuthentication , getUserAccess,editUserAccess,showNotif} from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TableNew ,Header, Search, PopUp,ReduxSelect,ReduxInput,ReduxInputDisabled,RadioButton ,TablePaginationAccess} from './Components.jsx';
 import { Field, reduxForm } from 'redux-form';
@@ -26,7 +26,7 @@ class ManageAcess extends Component {
 
 
   onSubmitEdit(props){
-    alert("Access Updated")
+    showNotif('Access Updated ', 'GREEN') 
     this.props.dispatch(editUserAccess(props)).then(
       ()=> {
         

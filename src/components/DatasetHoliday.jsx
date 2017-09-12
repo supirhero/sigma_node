@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import { Select, Input, Table,TableNew,Header,Search,PopUp,PageLoader,ReduxInput,datepickerUniversal,TablePagination, Pagination, ReduxInputDisabled} from './Components.jsx';
-import {getDataMaster,addHoliday, updateHoliday,changePassword} from './actions.jsx'
+import {getDataMaster,addHoliday, updateHoliday,changePassword,showNotif} from './actions.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
 import {Field, reduxForm} from 'redux-form';
 
@@ -33,7 +33,8 @@ class DatasetHoliday extends Component {
 // }
 
 onSubmitUpdateHoliday(props){
-  alert("Holiday Updated")
+  
+  showNotif('Holiday Updated', 'GREEN') 
   this.props.dispatch(updateHoliday(props)).then(res => {
     this.props.dispatch(getDataMaster("holiday",this.state.search))
     store.dispatch({
@@ -56,7 +57,7 @@ onSubmitUpdateHoliday(props){
   }
 
   onSubmit(props){
-    alert("New Holiday Added")
+    showNotif('New Holiday Added', 'GREEN') 
     this.props.dispatch(addHoliday(props)).then(
       ()=> {
         this.props.dispatch(getDataMaster("holiday",this.state.search))

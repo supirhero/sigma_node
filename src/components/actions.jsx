@@ -12,8 +12,8 @@ var compile_mode = process.env.NODE_ENV
 import fileDownload from 'react-file-download';
 
 
-// const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
-const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
+const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
+// const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
 
 
@@ -247,7 +247,8 @@ export const assignProjectTeamMember = (id,user_id) => {
               // store.dispatch(getAvailableProjectTeamMember(id))
               store.dispatch({type:'API', name: 'project',  data: res, append: true})
               res.data.status == "Error" ? 
-              alert("Gagal, User sudah ada di dalam project") : alert("Berhasil menambahkan user ke dalam project"),()=>{
+              showNotif('Gagal, User sudah ada di dalam project', 'RED') 
+              : showNotif('Berhasil menambahkan user ke dalam project', 'GREEN'),()=>{
               }
             },
           )
@@ -1272,7 +1273,7 @@ export function confirmationTimesheet(ts_id,project_id,confirm) {
       data: {ts_id,project_id,confirm}
     }).then(
       (res)=>{
-        alert('updated')
+        showNotif('Updated', 'GREEN')
         
       }
     )
@@ -2309,7 +2310,8 @@ export function changePassword(props){
     }).then( 
       (res)=>{ 
         return res 
-        alert('password changed') 
+        showNotif('Password Changed', 'GREEN')
+        
       } 
     ) 
   } 
