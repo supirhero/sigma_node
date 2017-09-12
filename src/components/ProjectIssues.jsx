@@ -5,13 +5,15 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Field, reduxForm } from 'redux-form';
 import { Divider, Header, ProjectHeader, PopUp, ReduxDrop, Input, Select, InputFile,required ,ReduxInput, ReduxUploadWorkplan,ReduxDropZone2, ReduxFileInput ,ReduxDropBisa,ReduxFinal,ReduxSelect,EmptyData,PageLoader } from './Components.jsx';
-import { getIssue, addIssue, pop } from './actions.jsx';
+import { getIssue, addIssue, pop, getProjectDetail } from './actions.jsx';
 import DropZone from 'react-dropzone'
 
 class ProjectIssues extends Component {
   componentWillMount() {
     const id = store.getState().page.id;
     this.props.dispatch(getIssue(id));
+    this.props.dispatch(getProjectDetail(id))
+    
   }
 
   onSubmit(props) {
@@ -70,6 +72,8 @@ class ProjectIssues extends Component {
     const overview = state.data.overview ? state.data.overview : null
 
     return (
+      !this.props.state.data.overview ? <PageLoader/> :
+      
       <div className="project-DocsFiles">
         <div className="grid padding-left">
           <div className="unit whole">

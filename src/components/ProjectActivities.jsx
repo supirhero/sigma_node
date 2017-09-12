@@ -6,19 +6,21 @@ import { Link, browserHistory } from 'react-router';
 import store from '../reducers/combineReducers.jsx';
 import { Divider, Input, RadioButton, Select, ProjectHeader, PageLoader } from './Components.jsx';
 import { Line } from 'react-progressbar.js';
-import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyData } from './actions.jsx';
+import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyData, getProjectDetail } from './actions.jsx';
 import moment from 'moment'
 class ProjectActivities extends Component {
   componentWillMount() {
-    const id = store.getState().page.id
-    // store.dispatch(getMyActivities());
-    store.dispatch(getProjectActivities(id))
-    const state = store.getState();
+    const id = this.props.state.page.id
+    // this.props.dispatch(getMyActivities());
+    this.props.dispatch(getProjectDetail(id))
+    
+    this.props.dispatch(getProjectActivities(id))
+    const state = this.props.state;
     const project_activity = state.data.project_activities;
   }
 
   componentWillUnmount() {
-    store.dispatch(pop());
+    this.props.dispatch(pop());
   }
 
   render() {
@@ -43,13 +45,15 @@ class ProjectActivities extends Component {
 
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
-    const state = store.getState();
-    const id = store.getState().page.id
+    const state = this.props.state;
+    const id = this.props.state.page.id
     const project_activity = state.data.project_activities;
-    if (!project_activity) {
-      return <PageLoader />;
-    }
+
     return (
+      !project_activity && 
+      !this.props.state.data.overview ? 
+      <PageLoader/> :
+      
       <div>
       
         <div className="grid wrap padding-left">
@@ -149,7 +153,7 @@ class ProjectActivities extends Component {
                           <a onClick={(e) => {
                             store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "0")).then(
                               ()=>{
-                                const id = store.getState().page.id
+                                const id = this.props.state.page.id
                                 store.dispatch(getProjectActivities(id))
                               }
                             )
@@ -162,7 +166,7 @@ class ProjectActivities extends Component {
                             onClick={(e) => {
                               store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1")).then(
                                 ()=>{
-                                  const id = store.getState().page.id
+                                  const id = this.props.state.page.id
                                   store.dispatch(getProjectActivities(id))
                                 }
                               )

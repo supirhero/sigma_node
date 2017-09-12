@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
 import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
-import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif } from './actions.jsx'
+import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -19,9 +19,11 @@ class ProjectTeamMember extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.state.page.id
     // store.dispatch(getProjectTeamMember(id))
+    this.props.dispatch(getProjectDetail(id))
+    
     store.dispatch(getAvailableProjectTeamMember(id))
   }
 
@@ -33,6 +35,8 @@ class ProjectTeamMember extends Component {
        return {id:value.USER_ID , label:value.USER_NAME}
       }) : []
       return(
+        !this.props.state.data.overview ? <PageLoader/> :
+        
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
