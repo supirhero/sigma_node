@@ -141,6 +141,8 @@ export function getDashboardView() {
           }).then(
             res => {
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+              store.dispatch({type:'UPDATE_AUTH', name: 'home', data: res})
+              
               store.dispatch({type:'API', name: 'home', data: res})
               return res
             },
