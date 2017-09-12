@@ -192,7 +192,7 @@ class ProjectDocsAndFiles extends Component {
 
                               }
                               
-                            }) : alert("Can't delete document from re-baseline evidence")
+                            }) : showNotif("Can't delete document from re-baseline evidence", 'RED')
                               e.preventDefault()
                             }
                           }></span></medium>
