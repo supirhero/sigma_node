@@ -120,14 +120,13 @@ class ProjectWorkplan extends Component {
 
       {
         // React.cloneElement(this.props.children, { data: value })
-        value.WBS_PARENT_ID !== null && this.props.state.auth.privilege.workplan_modification
+        value.LEAF != 0 && value.WBS_PARENT_ID !== null && this.props.state.auth.privilege.workplan_modification
  && 
           <Menu menuStyle={{top:'41', right:'10', width:'200px'}} style={{display:'inline'}} triggerClass='material-icons' triggerStyle={{fontSize:'17px', color:'#fa5962'}} icon='more_horiz'>
             <MenuSection>
              {
               
-              value.LEAF == 1  && this.props.state.auth.privilege.workplan_modification
- && 
+              value.LEAF == 1  && this.props.state.auth.privilege.workplan_modification && 
             <MenuItem title='Manual Update' onClick={e => {
               this.props.dispatch(getCurrentProgress(value.WBS_ID)).then(
              res => {
@@ -151,7 +150,7 @@ class ProjectWorkplan extends Component {
          }}/>
         }
         {
-          value.LEAF == 1 && store.getState().data.project_status !== "In Progress" && this.props.state.auth.privilege.workplan_modification
+          value.LEAF == 1 && this.props.state.auth.privilege.workplan_modification
  && 
               <MenuItem title='Edit' onClick={e => {
                 this.props.dispatch({
@@ -327,15 +326,15 @@ class ProjectWorkplan extends Component {
     const id = this.props.state.page.id 
     console.log(this.state.WBS_ID) 
     this.props.editTaskPercentAction(this.props.state.page.id,this.state.WBS_id,props).then(res=>{ 
-      var newState = this.state.array.manualUpdate.concat( 
-        { 
-          // PROJECT_ID: this.props.state.page.id, 
-          PROJECT_ID:id, 
-          WBS_ID: this.state.WBS_id, 
-          DESCRIPTION:props.DESCRIPTION, 
-          WORK_PERCENT_COMPLETE: props.WORK_PERCENT_COMPLETE 
-        } 
-      ) 
+      // var newState = this.state.array.manualUpdate.concat( 
+      //   { 
+      //     // PROJECT_ID: this.props.state.page.id, 
+      //     PROJECT_ID:id, 
+      //     WBS_ID: this.state.WBS_id, 
+      //     DESCRIPTION:props.DESCRIPTION, 
+      //     WORK_PERCENT_COMPLETE: props.WORK_PERCENT_COMPLETE 
+      //   } 
+      // ) 
       this.props.dispatch({ 
         type: 'POPUP', 
         name:'manualUpdate', 
@@ -349,10 +348,10 @@ class ProjectWorkplan extends Component {
   } 
 
   onSubmitRebaseline(props){
-    showNotif('Re-baseline Request Success', 'GREEN')
     var id = this.props.state.page.id
     this.props.dispatch(requestRebaselineFetch(id,props.reason,props.evidence))
     .then(res=> {
+      showNotif('Re-baseline Request Success', 'GREEN')
       this.props.dispatch(getCreateTaskView(id));
       this.props.dispatch(getWorkplanView(id))
       // this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).
@@ -513,7 +512,7 @@ class ProjectWorkplan extends Component {
             inputName="PARENT"
             name="PARENT_EDIT"
             type="input"
-            component={ReduxSelect}
+            component={  this.props.state.data.project_status != "In Progress" ? ReduxSelect : ReduxInputDisabled }
           >
             {
 
@@ -533,7 +532,7 @@ class ProjectWorkplan extends Component {
               inputName="START DATE"
               name="START_DATE_EDIT"
               type="input"
-              component={this.props.state.data.project_status == "IN PROGRESS" ? ReduxInputDisabled : datepickerUniversal}
+              component={this.props.state.data.project_status == "In Progress" ? ReduxInputDisabled : datepickerUniversal}
             />
 
             </div>
@@ -542,7 +541,7 @@ class ProjectWorkplan extends Component {
             inputName="END DATE"
             name="FINISH_DATE_EDIT"
             type="input"
-            component={datepickerUniversal}
+            component={this.props.state.data.project_status == "In Progress" ? ReduxInputDisabled : datepickerUniversal}
           />
             </div>
 
@@ -845,6 +844,7 @@ class ProjectWorkplan extends Component {
             </PopUp>
 }
           {
+            workplan_modification == true &&
             status == "NOT STARTED" &&
             <button className="btn-secondary" style={{ width: '200px', float: 'left' }} onClick={e=> {
                   this.props.dispatch(baseline(id)).then(res => {
@@ -859,7 +859,7 @@ class ProjectWorkplan extends Component {
         }
              
         {
-          approve_rebaseline == true && 
+          workplan_modification == true && 
           
           status == 'IN PROGRESS' &&
             <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
@@ -879,8 +879,7 @@ class ProjectWorkplan extends Component {
             approve_rebaseline== true &&
             
             status == "ON HOLD" &&
-            <button className="btn-secondary" style={status == 'ON HOLD' && this.props.state.auth.privilege.workplan_modification
- ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+            <button className="btn-secondary" style={{ width: '200px', float: 'left'}} onClick={e=> {
               this.props.dispatch(denyRebaseline(id)).then(res => {
                 showNotif('Rebaseline request denied', 'GREEN')
                
@@ -892,11 +891,9 @@ class ProjectWorkplan extends Component {
           }
 
           {
-            approve_rebaseline
- == true &&
-            
+            approve_rebaseline == true &&
             status == 'ON HOLD' &&
-            <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '100%', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
+            <button className="btn-secondary" style={status == 'ON HOLD' ? { width: '200px', float: 'left' } : { width: '200px', float: 'left' }} onClick={e=> {
                 this.props.dispatch(acceptRebaseline(id)).then(res => {
                 showNotif('Rebaseline request Accepted', 'GREEN')
 
@@ -910,8 +907,7 @@ class ProjectWorkplan extends Component {
 
         
     
-          { this.props.state.auth.privilege.workplan_modification
- &&
+          { this.props.state.auth.privilege.workplan_modification &&
             <button
               className="btn-secondary"
               style={{ width: '200px', float: 'left' }}
