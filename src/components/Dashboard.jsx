@@ -38,7 +38,7 @@ class Dashboard extends Component {
   }
 
     render(){
-      const auth = this.props.state.data
+      const auth = this.props.state.auth
       const alert = this.props.state.alert.alert
       const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + auth.userdata.image +  ')' : null
       

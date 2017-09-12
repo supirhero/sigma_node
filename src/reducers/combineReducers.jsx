@@ -68,6 +68,9 @@ var auth = (state = Immutable.List(), action) => {
     case 'LOGIN_DATA':
       return Object.assign({}, state, action.data.data)
     break;
+    case 'UPDATE_AUTH': 
+      return Object.assign({}, state, action.data.data)
+    break;
 
     case 'LOGIN':
       return Object.assign({}, state, {
