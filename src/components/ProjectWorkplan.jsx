@@ -44,6 +44,7 @@ class ProjectWorkplan extends Component {
       array: {
         new_task :[],
         modified_task:[],
+        manualUpdate:[]
       },
       assignMember:{
         MEMBER:'',
@@ -324,7 +325,8 @@ class ProjectWorkplan extends Component {
         data: { 
           active:false 
         }                                                                                                                                                                                                                                                                                                                                                                                                            
-      }) 
+      })
+      showNotif('Successfully update task manually', 'GREEN')  
       this.props.dispatch(getWorkplanView(id))
     }) 
   } 

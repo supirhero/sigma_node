@@ -211,35 +211,22 @@ const year = [
         </div>
         <div className="grid wrap narrow">
         <div className="unit three-quarters">
-        {
-          store.getState().data.task ?
-          <Field
-          name="WP_ID"                                        
-            inputName="TASK"
-            component={ReduxSelect}
-            // validate={[required]}
-            >
-            
-                {
-                  store.getState().data.task.map((value,index)=>{
-                    return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
-                  }
-                )
-                }
-         </Field>
-   :
-  //  <Select inputName="TASK">
-  //  <options> </options>
-  //  </Select>
-  <Field 
-  name="WP_ID"                                        
-inputName="TASK"
-component={ReduxSelect}
-
->
-<options> </options>
-</Field>
-        }
+        <Field
+        name="WP_ID"                                        
+          inputName="TASK"
+          component={ReduxSelect}
+          // validate={[required]}
+          >
+          <option></option>
+              {
+                store.getState().data.task ?
+                store.getState().data.task.map((value,index)=>{
+                  
+                  return <option key={index} value={value.WP_ID}>{value.WBS_NAME}</option>
+                } 
+              ) : <option></option>
+              }
+       </Field>
                         
                             </div>
 
