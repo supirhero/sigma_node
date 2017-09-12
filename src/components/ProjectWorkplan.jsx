@@ -845,7 +845,8 @@ class ProjectWorkplan extends Component {
             </PopUp>
 }
           {
-            status == "NOT STARTED" &&
+            workplan_modification == true && 
+            status == "NOT STARTED" && 
             <button className="btn-secondary" style={{ width: '200px', float: 'left' }} onClick={e=> {
                   this.props.dispatch(baseline(id)).then(res => {
                     this.props.dispatch(getWorkplanView(id));
@@ -859,7 +860,7 @@ class ProjectWorkplan extends Component {
         }
              
         {
-          approve_rebaseline == true && 
+          workplan_modification == true && 
           
           status == 'IN PROGRESS' &&
             <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
