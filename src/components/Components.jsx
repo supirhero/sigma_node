@@ -118,7 +118,11 @@ export class Menu extends Component {
   }
   render(){
     return(
-      <div style={this.props.style}>
+      <div style={this.props.style} onMouseLeave={
+        e=> {
+          this.setState({clicked:false})
+        }}
+      >
       {
         this.props.triggerInput=='true' ?
         <input 
@@ -2711,7 +2715,7 @@ export class ProjectHeader extends Component {
 //                     ))
 //                   }
 //                 </tr>
-//             </thead>
+//             </thead>p
 //               <tbody>
 //                 {
 //                   this.props.tableData.map((row,index) => (

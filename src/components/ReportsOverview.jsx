@@ -6,7 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { deleteAuthentication } from './actions.jsx';
 import store from '../reducers/combineReducers.jsx';
 import {Cell} from 'recharts'
-import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header ,PageLoader} from './Components.jsx';
+import { Select , Input, BarChartSPI,BarChartCPI,BarChart, LineChart, Checkbox, TableNew, Header ,PageLoader, Loader} from './Components.jsx';
 import {reportMonthly,reportYearly,pop, showNotif} from './actions.jsx'
 
 class ReportsOverview extends Component {
@@ -184,35 +184,38 @@ class ReportsOverview extends Component {
 
               <TabPanel>
               <div className="grid wrap narrow">
-                <div className="unit whole">
-                 <BarChartSPI
-                fill = '#65bdf4'       
-                 label="SPI Graph"
-                 labelStyle={{padding:'0 40%'}}
-                //  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                 data={ r_monthly && r_monthly.map((value,index)=>{
-                  return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
-                }) 
-              }
-                 />
-                 
-                
-                </div>
+                  <Loader id="reportSPICPI">
+                    <div className="unit whole">
+                    <BarChartSPI
+                    fill = '#65bdf4'       
+                    label="SPI Graph"
+                    labelStyle={{padding:'0 40%'}}
+                    //  ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                    data={ r_monthly && r_monthly.map((value,index)=>{
+                      return {name:value.BU_ALIAS , value:parseFloat(value.SPI)}
+                    }) 
+                  }
+                    />
+                    
+                    
+                    </div>
 
 
-              <div className="unit whole" style={{marginTop:'50px'}}>
-                  <BarChartCPI
-                  fill = '#65bdf4'       
-                  label="CPI Graph"
-                  labelStyle={{padding:'0 40%'}}
-                  // ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
-                  data={r_monthly ? r_monthly.map((value,index)=>{
-                    return {name:value.BU_ALIAS , value:parseFloat(value.CPI)}
-                  }) : null
-                }
-                  />
+                  <div className="unit whole" style={{marginTop:'50px'}}>
+                      <BarChartCPI
+                      fill = '#65bdf4'       
+                      label="CPI Graph"
+                      labelStyle={{padding:'0 40%'}}
+                      // ticks={[ 0,0.3,0.6,0.9,1.2,1.5,1.8]}
+                      data={r_monthly ? r_monthly.map((value,index)=>{
+                        return {name:value.BU_ALIAS , value:parseFloat(value.CPI)}
+                      }) : null
+                    }
+                      />
 
-                </div>
+                    </div>
+
+                  </Loader>
               </div>
               </TabPanel>
 
@@ -293,11 +296,13 @@ class ReportsOverview extends Component {
         <div className="grid wrap wider reports" >
           <div className="unit whole" style={{paddingTop:0}}>
             <div className="card" style={{ padding: '35px' }}>
+              <Loader id="historySPICPI">
               <div className="grid wrap narrow" style={{marginTop:'55px'}}>
                 <div className="unit whole">
                  {
                   !r_yearly_spi ? <PageLoader /> :
-                
+
+
                   <LineChart
                     label="SPI HISTORY"
                     data=
@@ -354,6 +359,7 @@ class ReportsOverview extends Component {
                 } 
                 </div>
               </div>
+              </Loader>
             </div>
           </div>
         </div>

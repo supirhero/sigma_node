@@ -765,6 +765,8 @@ export const getCPI = (id) => {
 
 
 export const reportMonthly = (bulan,tahun) => {
+  store.dispatch({type: 'LOAD', name:'reportSPICPI', show: true})
+  
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -779,11 +781,17 @@ export const reportMonthly = (bulan,tahun) => {
              }
           }).then(
             res => {
+              store.dispatch({type: 'LOAD', name:'reportSPICPI', show: false})
+  
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
               store.dispatch({type:'API', name: 'report', data: res, append:true})
-            },
+            }
           )
+        .catch(()=>{
+          store.dispatch({type: 'LOAD', name:'reportSPICPI', show: false})
+          
+        })
   }
 
 }
@@ -841,6 +849,7 @@ export const reportUtilBu = (bu_id,tahun) => {
 
 
 export const reportYearly = (tahun) => {
+  store.dispatch({type: 'LOAD', name:'historySPICPI', show: true})
   return function (dispatch) {
     const token = cookies.get('token')
     return axios({
@@ -851,11 +860,17 @@ export const reportYearly = (tahun) => {
              }
           }).then(
             res => {
+              store.dispatch({type: 'LOAD', name:'historySPICPI', show: false})
+  
               // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
               store.dispatch({type:'API', name: 'report', data: res, append:true})
             },
           )
+          .catch(res=> {
+            store.dispatch({type: 'LOAD', name:'historySPICPI', show: false})
+  
+          })
   }
 
 }

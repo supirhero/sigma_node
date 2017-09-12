@@ -81,7 +81,9 @@ class Dashboard extends Component {
                           backgroundSize: 'cover',
                           backgroundPosition: 'center'
                         
-                        }} triggerClass='profile'>
+                        }} 
+                        menuStyle={{top:'60'}}
+                        triggerClass='profile'>
                           <MenuSection>
                             <MenuHeader title={auth.userdata ? auth.userdata.user_name: null} subTitle={auth.userdata ?auth.userdata.profile_name : null }/>
                             <MenuItem title='Home' onClick={
