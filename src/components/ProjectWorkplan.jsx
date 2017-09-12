@@ -845,7 +845,7 @@ class ProjectWorkplan extends Component {
 }
           {
             workplan_modification == true &&
-            approve_rebaseline !==true &&
+            
             status == "NOT STARTED" &&
             <button className="btn-secondary" style={{ width: '200px', float: 'left' }} onClick={e=> {
                   this.props.dispatch(baseline(id)).then(res => {
@@ -861,7 +861,7 @@ class ProjectWorkplan extends Component {
              
         {
           workplan_modification == true && 
-          approve_rebaseline !==true &&
+          
           status == 'IN PROGRESS' &&
             <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
                 this.props.dispatch({
