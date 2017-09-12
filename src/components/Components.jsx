@@ -2341,6 +2341,7 @@ export class TablePaginationRoles extends Component {
                                     role_13:res.data.profile_privilege[12].PRIVILEGE,
                                     role_14:res.data.profile_privilege[13].PRIVILEGE,
                                     role_15:res.data.profile_privilege[14].PRIVILEGE,
+                                    role_16:res.data.profile_privilege[15].PRIVILEGE,
                                   }
                                   ))
                               }
