@@ -149,6 +149,7 @@ class ProjectActivities extends Component {
                       <small style={{ fontSize: '12px' }}>{value.ts_date ? `submitted for : ${moment(value.ts_date).format('DD-MMM-YYYY')}` : null}</small> 
                         <medium style={{ display: 'inline', marginLeft: '170px' }}>
                           {
+                            store.getState().auth.privilege.timesheet_approval == true &&
                         value.is_approved === '-1' &&
                         <span>
                           <a onClick={(e) => {
