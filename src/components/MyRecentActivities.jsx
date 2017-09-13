@@ -412,7 +412,7 @@ const year = [
                   <div className="person-image" style={{ margin: 'auto' }} />
                   <div className="person-info" style={{ marginLeft: '55px' }}>
                     <medium style={{ float: 'left' }}><b>{value.user_name}</b></medium>
-                    <small style={{ display: 'inline' }}>, {value.user_role}</small>
+                    <small style={{ display: 'inline' }}>, {value.user_role ? value.user_role : null}</small>
                   </div>
                   <div style={{ display: 'inline-block', marginLeft: '55px', marginTop: '-25px' }}>
                     <small>
