@@ -118,8 +118,7 @@ export class Menu extends Component {
   }
   render(){
     return(
-      <div style={this.props.style}
-      >
+      <div style={this.props.style}>
       {
         this.props.triggerInput=='true' ?
         <input 
@@ -2712,7 +2711,7 @@ export class ProjectHeader extends Component {
 //                     ))
 //                   }
 //                 </tr>
-//             </thead>p
+//             </thead>
 //               <tbody>
 //                 {
 //                   this.props.tableData.map((row,index) => (

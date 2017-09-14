@@ -11,9 +11,11 @@ var compile_mode = process.env.NODE_ENV
 
 import fileDownload from 'react-file-download';
 
+//DEVELOPMENT
+// const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
 
-const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
-// const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
+// PRODUCTION
+const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
 
 
@@ -2046,6 +2048,7 @@ export function editProfileAction(props){
               role_13:props.role_13,
               role_14:props.role_14,
               role_15:props.role_15,
+              role_16:props.role_16
             }
           }).then(
             res => {
@@ -2086,6 +2089,7 @@ export function createProfile(props){
               role_13:props.role_13,
               role_14:props.role_14,
               role_15:props.role_15,
+              role_16:props.role_16
             }
           }).then(
             res => {

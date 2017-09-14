@@ -129,7 +129,7 @@ class ProjectActivities extends Component {
                         <div className="person-image" style={{margin:'auto'}} />
                         <div className="person-info" style={{marginLeft:'55px'}}>
                           <medium style={{float:'left'}}><b>{value.user_name}</b></medium>
-                          <small style={{display:'inline'}}>, Project Manager</small>
+                          <small style={{display:'inline'}}>, {value.user_role ? value.user_role : null}</small>
                         </div>
                       <div style={{display: 'inline-block',marginLeft:'55px',marginTop:'-25px'}}>
                           <small>
@@ -149,6 +149,7 @@ class ProjectActivities extends Component {
                       <small style={{ fontSize: '12px' }}>{value.ts_date ? `submitted for : ${moment(value.ts_date).format('DD-MMM-YYYY')}` : null}</small> 
                         <medium style={{ display: 'inline', marginLeft: '170px' }}>
                           {
+                            store.getState().auth.privilege.timesheet_approval == true &&
                         value.is_approved === '-1' &&
                         <span>
                           <a onClick={(e) => {

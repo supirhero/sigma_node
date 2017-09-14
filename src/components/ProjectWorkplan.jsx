@@ -181,7 +181,7 @@ class ProjectWorkplan extends Component {
               }}/>
             }
             {
-              value.LEAF == 1 && store.getState().data.project_status !== "In Progress" && this.props.state.auth.privilege.workplan_modification
+              value.LEAF == 1 && this.props.state.auth.privilege.workplan_modification
  && 
               <MenuItem title='Assign' onClick={e => {
                 // this.setState({WBS_id:value.WBS_id})
@@ -856,6 +856,7 @@ class ProjectWorkplan extends Component {
 }
           {
             workplan_modification == true &&
+            
             status == "NOT STARTED" &&
             <button className="btn-secondary" style={{ width: '200px', float: 'left' }} onClick={e=> {
                   this.props.dispatch(baseline(id)).then(res => {
@@ -871,6 +872,7 @@ class ProjectWorkplan extends Component {
              
         {
           workplan_modification == true && 
+          
           
           status == 'IN PROGRESS' &&
             <button className="btn-secondary" style={ { width: '200px', float: 'left' }} onClick={e=> {
