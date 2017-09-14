@@ -37,7 +37,6 @@ axios.interceptors.response.use(undefined, function (error) {
   }
   else if(error.response.status && error.response.status === 403) 
     {
-      console.log('ERROR', error)
       showNotif(error.response.data.message, 'RED')
       store.dispatch(replace('/'))
       // ipcRenderer.send('response-unauthenticated');
@@ -167,7 +166,13 @@ export function changeRoute(params) {
   switch (params.type) {
     case 'PUSH':
       var id = params.page.id ? '/' + params.page.id : ''
-      store.dispatch(push(`/${params.page.name}${id}`))
+      store.dispatch(push(
+        {
+          pathname: `/${params.page.name}`,
+          search : "?id=" + params.page.id,
+       
+        }
+      ))
       break;
     case 'REPLACE':
       store.dispatch(replace(params.path))
@@ -1719,12 +1724,14 @@ export const requestRebaselineFetch = (id,reason,files ) => {
       body:formData
     }).then(
       res => {
+        return res
         // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-        
-        
-
-
-      },
+      }
+    )
+    .catch(
+      err => {
+        alert(err)
+      }
     )
   }
 }

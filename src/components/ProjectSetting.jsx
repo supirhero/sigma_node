@@ -60,7 +60,7 @@ class EditProject extends Component {
 
 
   componentWillMount() {
-    const id = this.props.state.page.id;
+    const id = this.props.location.query.id
     const iwo = this.props.state ? this.props.state : null;
     // this.props.dispatch(getIWOEditProject(30)).then((res2) => {
     //   // this.handleInitialize(res.data.project_setting, res2.data.iwo, res.data.project_business_unit_detail, id);
@@ -82,11 +82,11 @@ class EditProject extends Component {
   }
   onSubmit(props) {
     console.log(props);
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     const bu_code = store.getState().page.project.bu_code;
 
     this.props.editProject(props, id, bu_code).then(res=> {
-      const id = this.props.state.page.id
+      const id = this.props.location.query.id
       this.props.dispatch(getProjectDetail(id)).then(
         (res)=>{
           console.log('detail project');

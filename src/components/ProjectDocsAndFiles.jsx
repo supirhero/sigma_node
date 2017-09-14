@@ -12,13 +12,13 @@ import { getDocsFiles, addDocsAndFiles,deleteProjectDoc,showNotif,getProjectDeta
 
 class ProjectDocsAndFiles extends Component {
   componentWillMount(){
-    const id = store.getState().page.id
+    const id = this.props.location.query.id
     store.dispatch(getDocsFiles(id))
     this.props.dispatch(getProjectDetail(id))
     
   }
   onSubmit(props){
-    const id = store.getState().page.id
+    const id = this.props.location.query.id
     this.props.dispatch(addDocsAndFiles(props.desc, props.document,id)).then(
       (res)=>{
         showNotif('Successfully added document', 'GREEN')
@@ -38,7 +38,7 @@ class ProjectDocsAndFiles extends Component {
   }
 
   onSubmitDelete(){
-    const id = store.getState().page.id
+    const id = this.props.location.query.id
     this.props.dispatch(deleteProjectDoc(id)).then(
       (res)=>{
         this.props.dispatch(getDocsFiles(id))
@@ -177,7 +177,7 @@ class ProjectDocsAndFiles extends Component {
                               show:true,
                               onConfirm: ()=> {
                                 this.props.dispatch(deleteProjectDoc(value.doc_id)).then(()=> {
-                                  const id = store.getState().page.id
+                                  const id = this.props.location.query.id
                                   
                                   // store.dispatch(getProjectTeamMember(id))
                                   this.props.dispatch(getDocsFiles(id))

@@ -115,12 +115,12 @@ render(
         </Route>
         <Route path='my-assignments' component={MyAssignments}></Route>
         <Route path='business-unit' component={BusinessUnit}></Route>
-        <Route path=':id/workplan' component={ProjectWorkplan}></Route>
-        <Route path='project/:id' component={Project}>
+        <Route path='workplan(?=:id)' component={ProjectWorkplan}></Route>
+        <Route path='project(:id)' component={Project}>
           <IndexRoute component={ProjectOverview} ></IndexRoute>
-          <Route path='edit-project' component={ProjectSetting}></Route>
-          <Route path='activities' component={ProjectActivities}></Route>
-          <Route path='team-member' component={ProjectTeamMember}></Route>
+          <Route path='edit-project(?=:id)' component={ProjectSetting}></Route>
+          <Route path='activities(?=:id)' component={ProjectActivities}></Route>
+          <Route path='team-member(:id)' component={ProjectTeamMember}></Route>
           <Route path='docs-and-files' component={ProjectDocsAndFiles}></Route>
           <Route path='issues' component={ProjectIssues}></Route>
           <Route path='workplan' component={ProjectWorkplan}></Route>

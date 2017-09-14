@@ -167,8 +167,8 @@ class DashboardHome extends Component {
 
                     <large style={{display:'inline-block'}}>Business Unit&nbsp;:&nbsp;&nbsp; <a style={{fontSize:'20px'}} onClick={
                       e=> {
-                        // browserHistory.push('/business-unit')
-                        store.dispatch(changeRoute({
+                        browserHistory.push('/business-unit?bu_code =' + value.bu_code)
+                        {/* store.dispatch(changeRoute({
                           type: 'PUSH',
                           page: {
                             name: 'business-unit',
@@ -177,7 +177,7 @@ class DashboardHome extends Component {
 
                             }
                           }
-                        }))
+                        })) */}
                       }
                     }>{value.bu_name}</a></large>
                     {
@@ -204,21 +204,21 @@ class DashboardHome extends Component {
                     {
                       value.project_list ? value.project_list.map((value,index) => {
                         var color= '#F48165'
-                        switch (value.project_status) {
-                          case 'In Progress':
+                        switch (value.project_status.toUpperCase()) {
+                          case 'IN PROGRESS':
 
                             color= '#65BDF4'
                             break;
-                          case 'Completed':
+                          case 'COMPLETED':
                             color= '#42C878'
                             break;
-                          case 'Overdue':
+                          case 'OVERDUE':
                             color='#CB0000'
                             break;
-                          case 'On Hold':
+                          case 'ON HOLD':
                             color = '#777777'
                             break;
-                          case 'In Planning':
+                          case 'IN PLANNING':
                             color = '#777777'
                             break;
                           default:

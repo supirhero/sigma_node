@@ -20,7 +20,7 @@ class ProjectTeamMember extends Component {
   }
 
   componentWillMount() {
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     // store.dispatch(getProjectTeamMember(id))
     this.props.dispatch(getProjectDetail(id))
     
@@ -101,8 +101,8 @@ class ProjectTeamMember extends Component {
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(this.props.state.page.id,this.state.id)).then(()=>{
-                      this.props.dispatch(getAvailableProjectTeamMember(this.props.state.page.id)) 
+                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.id)).then(()=>{
+                      this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
                     })
                   }
                 }

@@ -10,7 +10,7 @@ import {getSCurve,pop, getProjectDetail} from './actions.jsx'
 
 class ProjectSCurve extends Component {
   componentWillMount(){
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     this.props.dispatch(getSCurve(id))
     this.props.dispatch(getProjectDetail(id))
     
