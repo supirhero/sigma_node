@@ -12,7 +12,8 @@ import { Line } from 'react-progressbar.js'
 
 class ProjectOverview extends Component {
   componentWillMount(){
-    const id = this.props.state.page.id
+    console.log("PROPS",this.props)
+    const id = this.props.location.query.id
     this.props.dispatch(getProjectDetail(id))
   }
     render(){
@@ -120,7 +121,7 @@ class ProjectOverview extends Component {
                   </div>
                   <div className=' unit one-fifth no-gutters'>
                     <a onClick={e => {
-                      this.props.dispatch(push(`/${this.props.state.page.id}/Workplan`))
+                      this.props.dispatch(push(`/${this.props.location.query.id}/Workplan`))
                       e.preventDefault()
                     }}>View Workplan</a>
                   </div>
@@ -201,7 +202,8 @@ class ProjectOverview extends Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    state,
+    id: state.routing.locationBeforeTransitions,
   }
 }
 export default connect(mapStateToProps)(ProjectOverview)

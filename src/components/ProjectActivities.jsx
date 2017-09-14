@@ -10,7 +10,7 @@ import { getMyActivities, confirmationTimesheet, pop,getProjectActivities,EmptyD
 import moment from 'moment'
 class ProjectActivities extends Component {
   componentWillMount() {
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     // this.props.dispatch(getMyActivities());
     this.props.dispatch(getProjectDetail(id))
     
@@ -46,7 +46,7 @@ class ProjectActivities extends Component {
       return (<div className={className} style={{ float: 'right' }}>{text}</div>);
     }
     const state = this.props.state;
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     const project_activity = state.data.project_activities;
 
     return (
@@ -154,7 +154,7 @@ class ProjectActivities extends Component {
                           <a onClick={(e) => {
                             store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "0")).then(
                               ()=>{
-                                const id = this.props.state.page.id
+                                const id = this.props.location.query.id
                                 store.dispatch(getProjectActivities(id))
                               }
                             )
@@ -167,7 +167,7 @@ class ProjectActivities extends Component {
                             onClick={(e) => {
                               store.dispatch(confirmationTimesheet(value.ts_id,value.project_id, "1")).then(
                                 ()=>{
-                                  const id = this.props.state.page.id
+                                  const id = this.props.location.query.id
                                   store.dispatch(getProjectActivities(id))
                                 }
                               )

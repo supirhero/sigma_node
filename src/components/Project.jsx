@@ -22,7 +22,7 @@ class Project extends Component {
   }
 
   componentWillMount(){
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     this.props.dispatch(getProjectDetail(id))
   }
 
@@ -32,20 +32,20 @@ class Project extends Component {
 
   render(){
     const { handleSubmit } = this.props;
-    const id = store.getState().page.id
+    const id = "?id=" + this.props.location.query.id
     const sidebar = [
-      {type:'menu', name : 'Overview', path: `/project/${id}`},
-      {type:'menu', name : 'Edit Project', path: `/project/${id}/edit-project`},
-      {type:'menu', name : 'Activities', path: `/project/${id}/activities`},
+      {type:'menu', name : 'Overview', path: `/project${id}`},
+      {type:'menu', name : 'Edit Project', path: `/project/edit-project${id}`},
+      {type:'menu', name : 'Activities', path: `/project/activities${id}`},
       {type:'title', name : 'MANAGE'},
-      {type:'menu', name : 'Workplan', path: `/${id}/workplan`},
-      {type:'menu', name : 'Team Member', path: `/project/${id}/team-member`},
-      {type:'menu', name : 'History', path: `/project/${id}/history`}, 
-      {type:'menu', name : 'Doc & Files', path: `/project/${id}/docs-and-files`},
-      {type:'menu', name : 'Issues', path: `/project/${id}/issues`},
+      {type:'menu', name : 'Workplan', path: `/workplan${id}`},
+      {type:'menu', name : 'Team Member', path: `/project/team-member${id}`},
+      {type:'menu', name : 'History', path: `/project/history${id}`}, 
+      {type:'menu', name : 'Doc & Files', path: `/project/docs-and-files${id}`},
+      {type:'menu', name : 'Issues', path: `/project/issues${id}`},
       {type:'title', name : 'REPORTS'},
-      {type:'menu', name : 'SPI & CPI', path: `/project/${id}/spi-and-cpi`},
-      {type:'menu', name : 'S-Curve', path: `/project/${id}/s-curve`},
+      {type:'menu', name : 'SPI & CPI', path: `/project/spi-and-cpi${id}`},
+      {type:'menu', name : 'S-Curve', path: `/project/s-curve${id}`},
       // {type:'menu', name : 'Gantt Chart', path: `/project/${id}/gantt-chart`},
     ]
     return(
@@ -78,6 +78,8 @@ class Project extends Component {
                                   }
                                   else {
                                     browserHistory.replace(value.path)
+                                    
+                                    
 
                                   }
                                   e.preventDefault()

@@ -12,7 +12,7 @@ import {pop,getSPI,getCPI, getProjectDetail} from './actions.jsx'
 class ProjectSpiCpi extends Component {
   componentWillMount(){
     const state = store.getState()
-    const id = store.getState().page.id
+    const id = this.props.location.query.id
     const spi = state.data.spi ? state.data.spi : null
     const cpi = state.data.cpi ? state.data.cpi : null
     store.dispatch(getSPI(id))

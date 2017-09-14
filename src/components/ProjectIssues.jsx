@@ -10,14 +10,14 @@ import DropZone from 'react-dropzone'
 
 class ProjectIssues extends Component {
   componentWillMount() {
-    const id = store.getState().page.id;
+    const id = this.props.location.query.id
     this.props.dispatch(getIssue(id));
     this.props.dispatch(getProjectDetail(id))
     
   }
 
   onSubmit(props) {
-    const id = store.getState().page.id;
+    const id = this.props.location.query.id
     this.props.dispatch(addIssue(id,props.SUBJECT,props.MESSAGE,props.PRIORITY,props.file_upload)).then(res=>{
       this.props.dispatch(getIssue(id));
      

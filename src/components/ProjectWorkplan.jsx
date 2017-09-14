@@ -198,7 +198,7 @@ class ProjectWorkplan extends Component {
                   WBS_NAME: value.WBS_NAME,
                   WBS_ID: value.WBS_ID
                 })
-                const id = this.props.state.page.id;
+                const id = this.props.location.query.id
 
                 this.props.dispatch(getTaskMemberView(id,value.WBS_ID))
                 console.log(value.WBS_ID)
@@ -232,7 +232,7 @@ class ProjectWorkplan extends Component {
                             message: '',
                             show: false,
                           })
-                          const id = this.props.state.page.id;
+                          const id = this.props.location.query.id;
                           this.props.dispatch(getWorkplanView(id))
                         }
                       )
@@ -280,7 +280,7 @@ class ProjectWorkplan extends Component {
 
 
   onSubmit(props) {
-    const id = this.props.state.page.id;
+    const id = this.props.location.query.id;
     this.props.addTaskWorkplan(id, this.state.WBS_id,props).then(res=> {
     this.props.dispatch(getCreateTaskView(id));
     
@@ -312,23 +312,22 @@ class ProjectWorkplan extends Component {
   }
 
   onSubmitAssign(props){
-    const id = this.props.state.page.id;
+    const id = this.props.location.query.id;
     this.props.assignTaskMember(props,this.state.data.RP_ID, this.state.data.MAIL, this.state.data.USER_NAME).then(res=> {
       console.log("MEESAGE", res.data.message)
       showNotif(res.data.message, "GREEN")
-      const id = this.props.state.page.id;
       this.props.dispatch(getWorkplanView(id))
       this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
     });
   }
 
   onSubmitManualUpdate(props){ 
-    const id = this.props.state.page.id 
+    const id = this.props.location.query.id 
     console.log(this.state.WBS_ID) 
-    this.props.editTaskPercentAction(this.props.state.page.id,this.state.WBS_id,props).then(res=>{ 
+    this.props.editTaskPercentAction(id,this.state.WBS_id,props).then(res=>{ 
       // var newState = this.state.array.manualUpdate.concat( 
       //   { 
-      //     // PROJECT_ID: this.props.state.page.id, 
+      //     // PROJECT_ID: this.props.location.query.id, 
       //     PROJECT_ID:id, 
       //     WBS_ID: this.state.WBS_id, 
       //     DESCRIPTION:props.DESCRIPTION, 
@@ -348,27 +347,39 @@ class ProjectWorkplan extends Component {
   } 
 
   onSubmitRebaseline(props){
-    var id = this.props.state.page.id
+    var id = this.props.location.query.id
     this.props.dispatch(requestRebaselineFetch(id,props.reason,props.evidence))
     .then(res=> {
-      showNotif('Re-baseline Request Success', 'GREEN')
-      this.props.dispatch(getCreateTaskView(id));
-      this.props.dispatch(getWorkplanView(id))
+      
       // this.props.requestRebaseline(id,props, JSON.stringify(this.state.array)).
-    
-    
-      this.props.dispatch({
-        type: 'POPUP',
-        name: 'request_rebaseline',
-        data: {
-          active: false,
-        },
-      });
+      console.log("REBASE ERROR", res.statusText)
+      if(res.statusText == "Forbidden") {
+        showNotif('You are not allowed to do this operation', 'RED')
+      }
+      else if (!res.ok) {
+        showNotif('Failed to perform rebaseline', 'RED')
+        
+      }
+      else {
+        showNotif('Re-baseline Request Success', 'GREEN')
+        this.props.dispatch(getCreateTaskView(id));
+        this.props.dispatch(getWorkplanView(id))
+        this.props.dispatch({
+          type: 'POPUP',
+          name: 'request_rebaseline',
+          data: {
+            active: false,
+          },
+        });
+        
+      }
+      
+     
     })
     
   }
   onSubmitWorkplan(props){
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     this.props.uploadWorkplan(id,props.document).then(
       res=>{
         this.props.dispatch(getWorkplanView(id))
@@ -376,7 +387,7 @@ class ProjectWorkplan extends Component {
     )
   }
   onSubmitEditTask(props){
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     this.props.editTaskAction(id,this.state.WBS_id,props).then(res=>{
     this.props.dispatch(getCreateTaskView(id));
     
@@ -410,7 +421,7 @@ class ProjectWorkplan extends Component {
   }
 
   componentWillMount() {
-    const id = this.props.state.page.id;
+    const id = this.props.location.query.id;
     this.props.dispatch(getWorkplanView(id));
     this.props.dispatch(getCreateTaskView(id));
   }
@@ -419,7 +430,7 @@ class ProjectWorkplan extends Component {
     const { handleSubmit } = this.props;
     // console.log('STATUSSS',this.props.state.data.project_status)
     const status = (this.props.state.data.project_status ? this.props.state.data.project_status : '').toUpperCase()
-    const id = this.props.state.page.id;
+    const id = this.props.location.query.id;
 
     const workplan_modification
  = this.props.state.auth.privilege.workplan_modification
@@ -704,7 +715,7 @@ class ProjectWorkplan extends Component {
                           <i  style={{color:'#D62431'}} className='icon-trash'
                             onClick={e=> {
                               this.props.dispatch(removeTaskMember(this.state.WBS_ID, value.RP_ID, value.EMAIL, value.USER_NAME, this.state.WBS_NAME)).then(res => {
-                                const id = this.props.state.page.id;
+                                const id = this.props.location.query.id;
                                 this.props.dispatch(getTaskMemberView(id,this.state.WBS_ID))
 
                                 showNotif(res.data.message, "GREEN")

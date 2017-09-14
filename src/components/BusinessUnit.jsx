@@ -37,7 +37,7 @@ class BusinessUnit extends Component {
 
   componentWillMount(){
     var state = store.getState();
-    const id = state.page.business_unit.bu_code
+    const id = this.props.location.query.bu_code
     store.dispatch(getBusinessUnitDetail(id))
   }
 
@@ -50,7 +50,7 @@ class BusinessUnit extends Component {
     // var state = this.props.state;
     var state = store.getState();
     
-    const id = state.page.business_unit.bu_code
+    const id = this.props.location.query.bu_code
     const available_assign = state.data.nonmember ? state.data.nonmember.map((value,index)=>{
       return {id:value.USER_ID , label:value.USER_NAME}
     }) : []
@@ -289,7 +289,7 @@ class BusinessUnit extends Component {
                     this.props.dispatch(inviteToBusiness(state.data.bu_id,this.state.id)).then(()=>{
                       showNotif('Successfully added member to business unit', 'GREEN')
 
-                      this.props.dispatch(getBusinessUnitDetail(state.page.business_unit.bu_code))
+                      this.props.dispatch(getBusinessUnitDetail(this.props.location.query.bu_code))
 
                     })
                   }

@@ -12,8 +12,8 @@ var compile_mode = process.env.NODE_ENV
 import fileDownload from 'react-file-download';
 
 
-// const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
-const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
+const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/" 
+// const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
 
 
@@ -35,7 +35,6 @@ axios.interceptors.response.use(undefined, function (error) {
   }
   else if(error.response.status && error.response.status === 403) 
     {
-      console.log('ERROR', error)
       showNotif(error.response.data.message, 'RED')
       store.dispatch(replace('/'))
       // ipcRenderer.send('response-unauthenticated');
@@ -168,9 +167,8 @@ export function changeRoute(params) {
       store.dispatch(push(
         {
           pathname: `/${params.page.name}`,
-          search : `?id=${params.page.id}`
-
-      
+          search : "?id=" + params.page.id,
+       
         }
       ))
       break;
@@ -1724,12 +1722,14 @@ export const requestRebaselineFetch = (id,reason,files ) => {
       body:formData
     }).then(
       res => {
+        return res
         // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
-        
-        
-
-
-      },
+      }
+    )
+    .catch(
+      err => {
+        alert(err)
+      }
     )
   }
 }

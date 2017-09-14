@@ -20,7 +20,7 @@ class ProjectHistory extends Component {
   }
 
   componentWillMount() {
-    const id = this.props.state.page.id
+    const id = this.props.location.query.id
     // store.dispatch(getProjectTeamMember(id))
     this.props.dispatch(getProjectDetail(id))
     
