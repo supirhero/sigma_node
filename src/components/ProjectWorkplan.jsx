@@ -114,7 +114,7 @@ class ProjectWorkplan extends Component {
       <td>{value.ORDE !=="0" ? value.DURATION: "" }</td>
       <td>{value.ORDE !== "0" ? value.START_DATE : ""}</td>
       <td>{value.ORDE !== "0" ? value.FINISH_DATE : ""}</td>
-       <td>{value.WORK_PERCENT_COMPLETE !== 0 ? Math.round(value.WORK_PERCENT_COMPLETE * 100)/100 : Math.round(parseInt(value.PROGRESS_WBS * 100))/100}%</td>
+       <td>{value.WORK_PERCENT_COMPLETE != 0 ? Math.round(value.WORK_PERCENT_COMPLETE * 100)/100 : Math.round(parseInt(value.PROGRESS_WBS * 100))/100}%</td>
       <td>{value.RESOURCE_WBS} people</td>
       <td style={{position:'relative', paddingRight:'10px'}} >
 
