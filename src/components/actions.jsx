@@ -923,10 +923,7 @@ export const reportDownloadFilt2er = (status, schedule, budget) => {
     }).then(
             res => {
               fileDownload(res,'report.xls' )
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.json());
-              // store.dispatch({type:'API', name: 'report', data: res, append:true})
-
             },
           )
   }
@@ -945,7 +942,6 @@ export const reportDownloadFilter = (status, schedule, budget, keyword) => {
              },
              responseType: "arraybuffer",
              data:{
-              // value:props.value,
               status: status,
               schedule: schedule,
               budget: budget,
@@ -954,9 +950,7 @@ export const reportDownloadFilter = (status, schedule, budget, keyword) => {
           }).then(
             res => {
               fileDownload(res.data, 'report.xls' )
-              // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
               console.log(res.data);
-              // store.dispatch({type:'API', name: 'report', data: res, append:true})
 
             },
           )
@@ -974,7 +968,6 @@ export const reportSearchProject = (status, schedule, budget, keyword, page, lim
               'Content-Type': 'application/x-www-form-urlencoded'
              },
              data:{
-              // value:props.value,
               status: status,
               schedule: schedule,
               budget: budget,
@@ -1112,7 +1105,6 @@ export function viewTimesheet(date) {
 
     }).then(
             (res) => {
-              // alert('timesheed fetched');
               store.dispatch({ type: 'API', name: 'timesheet', data: res });
             },
 
@@ -1730,7 +1722,6 @@ export const requestRebaselineFetch = (id,reason,files ) => {
     )
     .catch(
       err => {
-        alert(err)
       }
     )
   }
