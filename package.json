@@ -54,6 +54,7 @@
     "react-tabs": "^1.1.0",
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.7.1",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.0.3",
     "redux-form-material-ui": "^4.2.0",
     "redux-persist": "^4.8.2",
