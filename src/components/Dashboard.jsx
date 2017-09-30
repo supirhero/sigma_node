@@ -41,10 +41,13 @@ class Dashboard extends Component {
   }
 
     render(){
+      setInterval(()=> {
+        this.props.dispatch(getNotif())
+        console.log("LOOP")
+      }, 300000);
       const auth = this.props.state.auth
       const alert = this.props.state.alert.alert
       const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + auth.userdata.image +  ')' : null
-      
       const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == "GREEN" ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
       return(
                   <div className="unit whole" style={{position:'relative'}}>
@@ -139,6 +142,8 @@ class Dashboard extends Component {
                         <Menu style={{display:'inline'}} triggerClass='notif' icon={ this.props.state.auth.unread_notif }>
                           <MenuSection >
                             {
+                              
+                              this.props.state.auth.notif_list && 
                               this.props.state.auth.notif_list.map((value,index)=> (
                                 <MenuNotifItem style={{width:'450px'}} key={index} onClick={
                               e => {
