@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
-import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput} from  './Components.jsx'
 import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
@@ -15,7 +15,8 @@ class ProjectTeamMember extends Component {
     super(props)
     this.state = {
       label: '',
-      id:''
+      id:'',
+      external:''
     }
   }
 
@@ -46,6 +47,7 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
 
+            <h2 className='input-name'>Internal</h2>
             <ReactAutocomplete
             menuStyle={{
               opacity:'1'
@@ -92,6 +94,12 @@ class ProjectTeamMember extends Component {
               console.log(id)
           }}
           />
+          <Input inputName="External" onChange={e => {
+            this.setState({ external: e.target.value }, () => {
+              console.log(this.state.external)
+            });
+            e.preventDefault();
+          }}></Input>
 
        
             </div>

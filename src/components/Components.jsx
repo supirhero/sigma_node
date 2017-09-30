@@ -253,7 +253,7 @@ export class Input extends Component {
       <div style={this.props.style}>
       {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
       {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-      <input style={this.props.inputStyle} placeholder={this.props.placeholder}></input>
+      <input style={this.props.inputStyle} placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
       {this.props.children}
       </div>
 
@@ -905,7 +905,6 @@ export class Search extends Component {
       )
   }
 }
-
 export class Confirmation extends Component {
   constructor(){
     super();
