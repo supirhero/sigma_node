@@ -5,7 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
 import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput} from  './Components.jsx'
-import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
+import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,assignProjectTeamNonMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -47,7 +47,7 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
 
-            <h2 className='input-name'>Internal</h2>
+            <h2 className='input-name'>Available Member</h2>
             <ReactAutocomplete
             menuStyle={{
               opacity:'1'
@@ -94,7 +94,7 @@ class ProjectTeamMember extends Component {
               console.log(id)
           }}
           />
-          <Input inputName="External" onChange={e => {
+          <Input inputName="Non Member" onChange={e => {
             this.setState({ external: e.target.value }, () => {
               console.log(this.state.external)
             });
@@ -109,11 +109,12 @@ class ProjectTeamMember extends Component {
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.id)).then(()=>{
+                    this.props.dispatch(assignProjectTeamNonMember(this.props.location.query.id,this.state.external)).then(()=>{
                       this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
                     })
                   }
                 }
+                style={{marginTop:"115px"}}
               >INVITE</button>
 
             </div>

@@ -300,6 +300,36 @@ export const assignProjectTeamMember = (id, user_id) => {
   };
 };
 
+export const assignProjectTeamNonMember = (id, email) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function(dispatch) {
+    const token = cookies.get("token");
+    return axios({
+      method: "POST",
+      url: `${baseURL}project/availablemembercross/${id}?token=${token}`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        project_id:id,
+        email
+      }
+    }).then(res => {
+      // store.dispatch({type: 'LOADER', loader:'project-loader', show: false})
+      console.log(res.data);
+      // store.dispatch(getAvailableProjectTeamMember(id))
+      store.dispatch({
+        type: "API",
+        name: "project",
+        data: res,
+        append: true
+      });
+    });
+  };
+};
+
+
 export const registerVendor = props => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
