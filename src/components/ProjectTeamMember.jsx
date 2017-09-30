@@ -47,6 +47,8 @@ class ProjectTeamMember extends Component {
             <div className='unit four-fifths'>
 
             <ReactAutocomplete
+            selectOnBlur= {true}
+            
             menuStyle={{
               opacity:'1'
 

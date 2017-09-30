@@ -200,7 +200,7 @@ export class MenuItem extends Component {
 export class MenuNotifItem extends Component {
   render() {
     return(
-      <div className='menu-notif-item' onClick={this.props.onClick}>
+      <div style={this.props.style} className='menu-notif-item' onClick={this.props.onClick}>
       <small className='menu-title'>{this.props.children}</small>
       </div>
       )
