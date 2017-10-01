@@ -151,7 +151,7 @@ export class Menu extends Component {
               this.setState({clicked:true})
             }
           }
-        }>{this.props.icon}
+        }> <small style={this.props.iconStyle}>{this.props.icon}</small>
         </div>}
 
 
@@ -201,7 +201,7 @@ export class MenuNotifItem extends Component {
   render() {
     return(
       <div style={this.props.style} className='menu-notif-item' onClick={this.props.onClick}>
-      <small className='menu-title'>{this.props.children}</small>
+        <small className='menu-title'>{this.props.children}</small>
       </div>
       )
   }
