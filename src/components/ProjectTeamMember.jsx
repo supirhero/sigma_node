@@ -124,7 +124,7 @@ class ProjectTeamMember extends Component {
        height:'300px', overflow:'scroll'
 
      }}
-     placeholder = "Select Business Unit"
+     placeholder = "Select Member"
      triggerInput='true'
      inputStyle={
      
@@ -175,12 +175,16 @@ class ProjectTeamMember extends Component {
               console.log(this.state.external)
             });
             e.preventDefault();
-          }}></Input>
+            
+          }}
+          placeholder = "Input Non-Member Email"
+          ></Input>
 
        
             </div>
             <div className='unit one-fifth'>
               <button className='btn-primary' 
+              style={{marginTop:'60px',padding:'7px 42px'}}
 
                 onClick=
                 {
@@ -194,6 +198,7 @@ class ProjectTeamMember extends Component {
               >INVITE MEMBER</button>
 
               <button className='btn-primary' 
+              style={{marginTop:'52px',padding:'4px 42px'}}
               
                               onClick=
                               {

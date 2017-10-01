@@ -68,7 +68,8 @@ class ProjectWorkplan extends Component {
         NAME: ""
       },
       label: "",
-      id: ""
+      id: "",
+      selectArr : [],
     };
   }
 
@@ -761,7 +762,7 @@ class ProjectWorkplan extends Component {
                 <div className="grid wrap narrow">
                   <div className="unit three-fifths">
                     <h2 className="input-name">Invite Member</h2>
-                    <ReactAutocomplete
+                  {/*   <ReactAutocomplete
                       menuStyle={{
                         opacity: "1"
                       }}
@@ -801,7 +802,60 @@ class ProjectWorkplan extends Component {
                           console.log(this.state.data);
                         });
                       }}
-                    />
+                    /> */}
+                    <Menu
+                    style={{position:'relative', display:'inline'}}
+                    menuStyle={{ 
+                     width:'500px', top:'50px', right:'auto',
+                     height:'300px', overflow:'scroll'
+              
+                   }}
+                   placeholder = "Select Member"
+                   triggerInput='true'
+                   inputStyle={
+                   
+                     { width: '100%', display: 'inline-block', float: 'left' }}
+                     >
+                     {
+              
+                       available_to_assign.map((value,index)=> {
+                         return(
+                             <MenuItem key={index} 
+                             style={{paddingLeft:'10px', paddingTop:'10px', zIndex:'10'}} 
+                             >
+                              <input type="checkbox" style={{display:'inline-block', width:'auto'}} onClick={e=>{
+                                console.log("CHECKED VAL",e.target.checked)
+                                if(e.target.checked == true) {
+                                  var newState = this.state.selectArr.concat(value.RP_ID)
+                                  this.setState({selectArr : newState}
+                                    
+                                  ,()=>{
+                                    console.log("selectARR",this.state.selectArr)
+                                  })
+                                }
+                                else {
+                                  var newState = this.state.selectArr.filter((val)=>{
+                                    return val != value.RP_ID})
+                                    this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
+                                    
+                                }
+                                
+                                console.log(value.id,e.target)
+                              }}></input>
+                              <small style={{display:'inline-block', marginLeft:'10px'}}>{value.USER_NAME}</small> 
+                             </MenuItem>
+              
+              
+              
+                        )
+              
+                       }
+              
+                       
+                       )
+                     }
+              
+                     </Menu>
                   </div>
 
                   <div className="unit two-fifths">
@@ -915,7 +969,7 @@ class ProjectWorkplan extends Component {
           {this.props.state.auth.privilege.workplan_modification && (
             <button
               className="btn-primary"
-              style={{ width: "200px", float: "left" }}
+              style={{ width: "200px", float: "left",marginRight:'10px' }}
               onClick={e => {
                 console.log("PROPS", this.props);
 
@@ -1031,7 +1085,7 @@ class ProjectWorkplan extends Component {
           status == "NOT STARTED" && (
             <button
               className="btn-secondary"
-              style={{ width: "200px", float: "left" }}
+              style={{ width: "200px", float: "left",marginRight:'10px' }}
               onClick={e => {
                 this.props.dispatch(baseline(id)).then(res => {
                   this.props.dispatch(getWorkplanView(id));
