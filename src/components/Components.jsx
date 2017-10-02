@@ -151,7 +151,7 @@ export class Menu extends Component {
               this.setState({clicked:true})
             }
           }
-        }>{this.props.icon}
+        }> <small style={this.props.iconStyle}>{this.props.icon}</small>
         </div>}
 
 
@@ -201,7 +201,7 @@ export class MenuNotifItem extends Component {
   render() {
     return(
       <div style={this.props.style} className='menu-notif-item' onClick={this.props.onClick}>
-      <small className='menu-title'>{this.props.children}</small>
+        <small className='menu-title'>{this.props.children}</small>
       </div>
       )
   }
@@ -253,7 +253,7 @@ export class Input extends Component {
       <div style={this.props.style}>
       {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
       {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-      <input style={this.props.inputStyle} placeholder={this.props.placeholder}></input>
+      <input style={this.props.inputStyle} placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
       {this.props.children}
       </div>
 
@@ -905,7 +905,6 @@ export class Search extends Component {
       )
   }
 }
-
 export class Confirmation extends Component {
   constructor(){
     super();
