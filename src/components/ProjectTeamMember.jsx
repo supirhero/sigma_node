@@ -48,8 +48,10 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
 
+
             <h2 className='input-name'>Available Member</h2>
             {/*<ReactAutocomplete
+
             menuStyle={{
               opacity:'1'
 

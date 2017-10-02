@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import {logout} from './actions.jsx'
+import { logout, getNumberNotif,getNotif, changeRoute } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader,MenuNotifItem} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
@@ -29,6 +29,9 @@ class Dashboard extends Component {
     // }
     // console.log('work');
     // console.log(process.env.NODE_ENV);
+    this.props.dispatch(getNumberNotif())
+    this.props.dispatch(getNotif())
+    
     var compile_mode = process.env.NODE_ENV
     // var compile_mode = (process.env.npm_lifecycle_script.split(' ')[3]).replace('--', '')
     console.log('compiling : ', compile_mode)
@@ -41,7 +44,7 @@ class Dashboard extends Component {
       const auth = this.props.state.auth
       const alert = this.props.state.alert.alert
       const imageURL = auth.userdata && auth.userdata.image ? 'url(http://prouds.telkomsigma.co.id:8089/sigmadev' + auth.userdata.image +  ')' : null
-      
+        
       const color = alert ? alert.color == 'RED' ? '#e7666a' : alert.color == "GREEN" ? '#67e766' : alert.color == 'YELLOW' ? '#e7d866' : '#efefee' : '#efefee'
       return(
                   <div className="unit whole" style={{position:'relative'}}>
@@ -132,6 +135,55 @@ class Dashboard extends Component {
                           </MenuSection>
 
                         </Menu>
+                        
+                        <Menu style={{display:'inline'}} triggerClass='notif' iconStyle={{
+                          fontFamily: 'Open Sans,sans-serif',
+                          fontSize: '17px',
+                          color: '#fa5962',
+                          marginTop: '5px',
+                          fontWeight: '700',
+                          textAlign: 'center',
+                        }} icon={ this.props.state.auth.unread_notif }>
+                          <MenuSection >
+                            {
+                              this.props.state.auth.notif_list &&
+                              this.props.state.auth.notif_list.map((value,index)=> (
+                                <MenuNotifItem style={{width:'450px'}} key={index} onClick={e => {
+                                  store.dispatch(
+                                    changeRoute({
+                                      type: "PUSH",
+                                      page: {
+                                        name: "project",
+                                        id: value.project_id,
+                                        project: {
+                                          status: value.project_status,
+                                          bu_code: value.bu_code
+                                        }
+                                      }
+                                    })
+                                  );
+  
+                                  e.preventDefault();
+                                }}>
+                              <div className="person">
+                              <div className="person-image" style={{marginLeft:'0',marginBottom:'20px', display:'inline-block'}} />
+                              <div className="person-info" style={{position:'inherit', display:'inline-block', width:'84%'}}>
+                                <small className="notif-info">
+                                  <a>{value.user_name}</a> {value.text}
+                                </small>
+                                <small style={{marginTop:'8px'}}><i>
+                                  {
+                                    moment(value.datetime).format('DD MMM YYYY')
+                                  
+                                  }</i></small>
+                              </div>
+                            </div>
+                            </MenuNotifItem>
+                              ))
+                            }
+                            
+                          </MenuSection>
+                      </Menu>
 
                        
 

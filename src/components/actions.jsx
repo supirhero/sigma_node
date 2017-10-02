@@ -15,7 +15,7 @@ import fileDownload from "react-file-download";
 const baseURL = "http://45.77.45.126/dev/";
 //DEVELOPMENT
 // const baseURL = "http://prouds2.telkomsigma.co.id/prouds-api/";
-
+``
 // PRODUCTION
 // const baseURL = "http://prouds.telkomsigma.co.id:8089/sigmadev/"
 
@@ -301,6 +301,49 @@ export const assignProjectTeamMember = (id, user_id) => {
 };
 
 
+export const getNumberNotif = () => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function(dispatch) {
+    const token = cookies.get("token");
+    return axios({
+      method: "GET",
+      url: `${baseURL}notif/check?token=${token}`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(res => {
+        store.dispatch({
+        type: "UPDATE_AUTH",
+        data: res,
+        append: true
+      });
+      console.log("RESS",res)
+    });
+  };
+};
+
+export const getNotif = () => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function(dispatch) {
+    const token = cookies.get("token");
+    return axios({
+      method: "GET",
+      url: `${baseURL}notif/get?token=${token}`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(res => {
+        store.dispatch({
+        type: "UPDATE_AUTH",
+        data: res,
+        append: true
+      });
+      console.log("RESS",res)
+    });
+  };
+};
 
 
 export const registerVendor = props => {

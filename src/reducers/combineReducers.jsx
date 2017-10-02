@@ -9,7 +9,6 @@ import { reducer as reduxForm } from "redux-form";
 import * as storage from "redux-storage";
 import Immutable from "immutable";
 import _ from "lodash";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 // import {getData} from '../components/actions.jsx'
 var compile_mode = process.env.NODE_ENV;
@@ -245,7 +244,7 @@ const routeMiddleware = routerMiddleware(browserHistory);
 export const store = createStore(
   rootReducer,
   loadState(),
-  composeWithDevTools(applyMiddleware(thunk, routeMiddleware))
+  applyMiddleware(thunk, routeMiddleware)
 );
 // const reducer = storage.reducer(allReducers);
 //
