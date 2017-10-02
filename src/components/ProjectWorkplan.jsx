@@ -344,13 +344,12 @@ class ProjectWorkplan extends Component {
   }
 
   onSubmitAssign(props) {
+    console.log("DARI MANAA",this.state)
     const id = this.props.location.query.id;
     this.props
       .assignTaskMember(
         props,
-        this.state.data.RP_ID,
-        this.state.data.MAIL,
-        this.state.data.USER_NAME
+        this.state.selectArr,   
       )
       .then(res => {
         console.log("MEESAGE", res.data.message);
