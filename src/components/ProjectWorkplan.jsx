@@ -162,7 +162,7 @@ class ProjectWorkplan extends Component {
               style={{ display: "inline" }}
               triggerClass="material-icons"
               triggerStyle={{ fontSize: "17px", color: "#fa5962" }}
-              icon="more_horiz"
+              workplanIcon="more_horiz"
             >
               <MenuSection>
                 {value.LEAF == 1 &&

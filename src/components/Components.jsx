@@ -151,7 +151,10 @@ export class Menu extends Component {
               this.setState({clicked:true})
             }
           }
-        }> <small style={this.props.iconStyle}>{this.props.icon}</small>
+        }> {
+          this.props.workplanIcon ? this.props.workplanIcon :
+          <small style={this.props.iconStyle}>{this.props.icon}</small>
+        }
         </div>}
 
 
