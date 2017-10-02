@@ -4,8 +4,8 @@ import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
 
-import {Divider, Header, ProjectHeader, Input, PageLoader} from  './Components.jsx'
-import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
+import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput,Menu,MenuItem} from  './Components.jsx'
+import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,assignProjectTeamNonMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
 
@@ -14,8 +14,10 @@ class ProjectTeamMember extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      selectArr : [],
       label: '',
-      id:''
+      id:'',
+      external:''
     }
   }
 
@@ -46,13 +48,16 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
 
-            <ReactAutocomplete
-            selectOnBlur= {true}
-            
+
+            <h2 className='input-name'>Available Member</h2>
+            {/*<ReactAutocomplete
+
             menuStyle={{
               opacity:'1'
 
             }}
+            open={true}
+            selectOnBlur={true}
             getItemValue={(label) => label.label}
             style={{width:'500px',marginTop:'60px'}}
             items={available_assign}
@@ -75,8 +80,28 @@ class ProjectTeamMember extends Component {
             getItemValue={item => item.label}
             renderItem={(item, highlighted) =>
               <div className="small-wrap">
-                <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
+              <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
+              <input type="checkbox"  onClick={e=>{
+                console.log("CHECKED VAL",e.target.checked)
+                if(e.target.checked == true) {
+                  var newState = this.state.selectArr.concat(item.id)
+                  this.setState({selectArr : newState}
+                    
+                  ,()=>{
+                    console.log("selectARR",this.state.selectArr)
+                  })
+                }
+                else {
+                  var newState = this.state.selectArr.filter((value)=>{
+                    return value != item.id})
+                    this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
+                    
+                }
+                
+                console.log(item.id,e.target)
+              }}>
 
+              </input>
               </div>
             }
             value={this.state.value}
@@ -88,27 +113,105 @@ class ProjectTeamMember extends Component {
               console.log('LABELLLL',id)
               this.setState({ id:label.id})
               this.setState({label:label.label})
-              this.setState({ value: label.label})
               
               // alert(`selected ${this.state.label}`)
               console.log(id)
           }}
-          />
+        />
+      */}
+      <Menu
+      style={{position:'relative', display:'inline'}}
+      menuStyle={{ 
+       width:'500px', top:'50px', right:'auto',
+       height:'300px', overflow:'scroll'
+
+     }}
+     placeholder = "Select Member"
+     triggerInput='true'
+     inputStyle={
+     
+       { width: '100%', display: 'inline-block', float: 'left' }}
+       >
+       {
+
+         available_assign.map((value,index)=> {
+           return(
+               <MenuItem key={index} 
+               style={{paddingLeft:'10px', paddingTop:'10px', zIndex:'10'}} 
+               >
+                <input type="checkbox" style={{display:'inline-block', width:'auto'}} onClick={e=>{
+                  console.log("CHECKED VAL",e.target.checked)
+                  if(e.target.checked == true) {
+                    var newState = this.state.selectArr.concat(value.id)
+                    this.setState({selectArr : newState}
+                      
+                    ,()=>{
+                      console.log("selectARR",this.state.selectArr)
+                    })
+                  }
+                  else {
+                    var newState = this.state.selectArr.filter((val)=>{
+                      return val != value.id})
+                      this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
+                      
+                  }
+                  
+                  console.log(value.id,e.target)
+                }}></input>
+                <small style={{display:'inline-block', marginLeft:'10px'}}>{value.label}</small> 
+               </MenuItem>
+
+
+
+          )
+
+         }
+
+         
+         )
+       }
+
+       </Menu>
+          <Input inputName="Non Member" onChange={e => {
+            this.setState({ external: e.target.value }, () => {
+              console.log(this.state.external)
+            });
+            e.preventDefault();
+            
+          }}
+          placeholder = "Input Non-Member Email"
+          ></Input>
 
        
             </div>
             <div className='unit one-fifth'>
               <button className='btn-primary' 
+              style={{marginTop:'60px',padding:'7px 42px'}}
 
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.id)).then(()=>{
+                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.selectArr)).then(()=>{
                       this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
                     })
                   }
                 }
-              >INVITE</button>
+                
+              >INVITE MEMBER</button>
+
+              <button className='btn-primary' 
+              style={{marginTop:'52px',padding:'4px 42px'}}
+              
+                              onClick=
+                              {
+                                e => {
+                                  this.props.dispatch(assignProjectTeamNonMember(this.props.location.query.id,this.state.external)).then(()=>{
+                                    this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
+                                  })
+                                }
+                              }
+                              
+                            >INVITE NON-MEMBER</button>
 
             </div>
           </div>
