@@ -150,12 +150,12 @@ class NewProject extends Component {
       ]
 
       const typeOfEffort = [
-        {name:'Project',value:'1'},
-        {name:'CR',value:'2'},
-        {name:'Manage Operation',value:'3'},
-        {name:'Maintenance',value:'4'},
-        {name:'Manage Service',value:'7'},
-        {name:'Non Project',value:'8'},
+        {name:'Project',value:1},
+        {name:'CR',value:2},
+        {name:'Manage Operation',value:3},
+        {name:'Maintenance',value:4},
+        {name:'Manage Service',value:7},
+        {name:'Non Project',value:8},
       ]
 
       const typeOfExpense = [

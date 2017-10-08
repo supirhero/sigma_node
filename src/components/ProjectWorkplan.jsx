@@ -356,6 +356,7 @@ class ProjectWorkplan extends Component {
         showNotif(res.data.message, "GREEN");
         this.props.dispatch(getWorkplanView(id));
         this.props.dispatch(getTaskMemberView(id, this.state.WBS_ID));
+        resetForm()
       });
   }
 

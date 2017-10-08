@@ -15,6 +15,7 @@ class ProjectTeamMember extends Component {
     super(props)
     this.state = {
       selectArr : [],
+      names:[],
       label: '',
       id:'',
       external:''
@@ -47,78 +48,7 @@ class ProjectTeamMember extends Component {
           </div>
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
-
-
             <h2 className='input-name'>Available Member</h2>
-            {/*<ReactAutocomplete
-
-            menuStyle={{
-              opacity:'1'
-
-            }}
-            open={true}
-            selectOnBlur={true}
-            getItemValue={(label) => label.label}
-            style={{width:'500px',marginTop:'60px'}}
-            items={available_assign}
-            wrapperProps={{
-              style:{width:'100%', zIndex:'3', position:'relative'}
-              }}
-            menuStyle={{
-              borderRadius: '3px',
-              boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-              background: 'white',
-              padding: '2px 0',
-              fontSize: '90%',
-              position: 'fixed',
-              display:'block',
-              cursor:'pointer',
-              overflow: 'auto',
-              maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
-            }}
-            shouldItemRender={(item, value) => item.label && item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-            getItemValue={item => item.label}
-            renderItem={(item, highlighted) =>
-              <div className="small-wrap">
-              <small className='small-hover' style={{padding:'6px 0 0 5px'}} key={item.id}>{item.label}</small>  
-              <input type="checkbox"  onClick={e=>{
-                console.log("CHECKED VAL",e.target.checked)
-                if(e.target.checked == true) {
-                  var newState = this.state.selectArr.concat(item.id)
-                  this.setState({selectArr : newState}
-                    
-                  ,()=>{
-                    console.log("selectARR",this.state.selectArr)
-                  })
-                }
-                else {
-                  var newState = this.state.selectArr.filter((value)=>{
-                    return value != item.id})
-                    this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
-                    
-                }
-                
-                console.log(item.id,e.target)
-              }}>
-
-              </input>
-              </div>
-            }
-            value={this.state.value}
-            onChange={e => {
-              this.setState({ value: e.target.value })
-           
-          }}
-            onSelect={(id,label) => {
-              console.log('LABELLLL',id)
-              this.setState({ id:label.id})
-              this.setState({label:label.label})
-              
-              // alert(`selected ${this.state.label}`)
-              console.log(id)
-          }}
-        />
-      */}
       <Menu
       style={{position:'relative', display:'inline'}}
       menuStyle={{ 
@@ -143,21 +73,26 @@ class ProjectTeamMember extends Component {
                   console.log("CHECKED VAL",e.target.checked)
                   if(e.target.checked == true) {
                     var newState = this.state.selectArr.concat(value.id)
-                    this.setState({selectArr : newState}
+                    var nameState = this.state.names.concat(value.label)
+                    this.setState({selectArr : newState, names:nameState}
                       
                     ,()=>{
                       console.log("selectARR",this.state.selectArr)
+                      console.log("NAMEZZZZZ",this.state.names)
                     })
                   }
                   else {
                     var newState = this.state.selectArr.filter((val)=>{
                       return val != value.id})
-                      this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
-                      
-                  }
+                      this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))   
+                      var nameState = this.state.names.filter((val)=>{
+                        return val != value.label})
+                        this.setState({names:nameState}), () => console.log("NAMEZZZ",this.state.names)
+                      }
                   
                   console.log(value.id,e.target)
-                }}></input>
+                }}>
+                </input>
                 <small style={{display:'inline-block', marginLeft:'10px'}}>{value.label}</small> 
                </MenuItem>
 
@@ -193,6 +128,7 @@ class ProjectTeamMember extends Component {
                   e => {
                     this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.selectArr)).then(()=>{
                       this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
+                      reset()
                     })
                   }
                 }
