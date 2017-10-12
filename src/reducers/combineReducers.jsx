@@ -139,7 +139,7 @@ const alert = (state = initialState, action) => {
 const data = (state = Immutable.List(), action) => {
   const prevState = state;
   // state = {
-  console.log("json", action);
+  // console.log("json", action);
   //   isLoggedIn : false
   // }
   if (compile_mode == "mock") {

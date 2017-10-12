@@ -19,7 +19,7 @@ import {initialize, change} from 'redux-form';
 import ReactAutocomplete from 'react-autocomplete'
 
 
-import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView,gethistorydetail,getUserAccess} from './actions.jsx'
+import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView,gethistorydetail,getUserAccess, getNotif } from './actions.jsx'
 
 const cookies = new Cookies();
 const baseURL = "http://45.77.45.126"
@@ -118,6 +118,7 @@ export class Menu extends Component {
   }
   render(){
     return(
+
       <div style={this.props.style}>
       {
         this.props.triggerInput=='true' ?
@@ -141,9 +142,13 @@ export class Menu extends Component {
         ></input>
         :
         <div className={this.props.triggerClass} style={this.props.triggerStyle} 
-
         onClick={
           () => {
+            if(this.props.notif) {
+              store.dispatch(getNotif())
+
+            }
+          
             if (this.state.clicked) {
               this.setState({clicked:false})
             }
@@ -151,11 +156,13 @@ export class Menu extends Component {
               this.setState({clicked:true})
             }
           }
-        }> {
-          this.props.workplanIcon ? this.props.workplanIcon :
-          <small style={this.props.iconStyle}>{this.props.icon}</small>
+        }> 
+          {
+            this.props.workplanIcon ? this.props.workplanIcon :
+            <small style={this.props.iconStyle}>{this.props.icon}</small>
+          }
+        </div>
         }
-        </div>}
 
 
         <div
@@ -166,7 +173,7 @@ export class Menu extends Component {
               clicked : false
             })
           }
-        } style={this.props.menuStyle} className={this.state.clicked ? 'menu active' : 'menu'}>
+        } style={this.props.menuStyle} id={this.props.id} className={this.state.clicked ? 'menu active' : 'menu'}>
         {this.props.children}
 
         </div>

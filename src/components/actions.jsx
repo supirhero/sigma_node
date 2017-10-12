@@ -318,21 +318,43 @@ export const getNumberNotif = () => {
         data: res,
         append: true
       });
-      console.log("RESS",res)
     });
   };
 };
 
-export const getNotif = () => {
+export const markNotifRead = (id) => {
   // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
 
   return function(dispatch) {
     const token = cookies.get("token");
     return axios({
-      method: "GET",
+      method: "POST",
+      url: `${baseURL}notif/read?token=${token}`,
+      data: {
+        notif_id : id
+      },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(res => {
+    
+    });
+  };
+};
+
+export const getNotif = (time) => {
+  // store.dispatch({type: 'LOADER', loader:'project-loader', show: true})
+
+  return function(dispatch) {
+    const token = cookies.get("token");
+    return axios({
+      method: "POST",
       url: `${baseURL}notif/get?token=${token}`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        time: time
       }
     }).then(res => {
         store.dispatch({
@@ -340,7 +362,6 @@ export const getNotif = () => {
         data: res,
         append: true
       });
-      console.log("RESS",res)
     });
   };
 };

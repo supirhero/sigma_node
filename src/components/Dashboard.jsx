@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
-import { logout, getNumberNotif,getNotif, changeRoute } from './actions.jsx'
+import { logout, getNumberNotif,getNotif, changeRoute, markNotifRead } from './actions.jsx'
 import store from '../reducers/combineReducers.jsx'
 import {Menu, MenuSection, MenuItem, MenuHeader,MenuNotifItem} from './Components.jsx'
 import { routerMiddleware, push } from 'react-router-redux'
@@ -30,7 +30,8 @@ class Dashboard extends Component {
     // console.log('work');
     // console.log(process.env.NODE_ENV);
     this.props.dispatch(getNumberNotif())
-    this.props.dispatch(getNotif())
+
+    
     
     var compile_mode = process.env.NODE_ENV
     // var compile_mode = (process.env.npm_lifecycle_script.split(' ')[3]).replace('--', '')
@@ -40,10 +41,11 @@ class Dashboard extends Component {
 
   }
 
+  
+
     render(){
       setInterval(()=> {
-        this.props.dispatch(getNotif())
-        console.log("LOOP")
+        this.props.dispatch(getNumberNotif())
       }, 300000);
       const auth = this.props.state.auth
       const alert = this.props.state.alert.alert
@@ -147,12 +149,28 @@ class Dashboard extends Component {
                           marginTop: '5px',
                           fontWeight: '700',
                           textAlign: 'center',
-                        }} icon={ this.props.state.auth.unread_notif }>
+                        }}
+                        id="notif-menu"
+                        notif = {true}
+                        menuStyle={{
+                          height:'350px', overflow:'scroll'
+                        }} 
+                        icon={ this.props.state.auth.unread_notif }>
                           <MenuSection >
                             {
+                              this.props.state.auth.notif_list == "" ?
+                              <MenuNotifItem>
+                              <small className="notif-info">
+                                No notifications
+                                </small>
+                              </MenuNotifItem>
+                              :
+                                
                               this.props.state.auth.notif_list &&
                               this.props.state.auth.notif_list.map((value,index)=> (
+                                
                                 <MenuNotifItem style={{width:'450px'}} key={index} onClick={e => {
+                                  this.props.dispatch(markNotifRead(value.notif_id))
                                   store.dispatch(
                                     changeRoute({
                                       type: "PUSH",
@@ -182,10 +200,19 @@ class Dashboard extends Component {
                                   }</i></small>
                               </div>
                             </div>
+                            
                             </MenuNotifItem>
                               ))
+                              
                             }
-                            
+                            <MenuNotifItem onClick={ e=> {
+                              this.props.dispatch(getNotif(this.props.state.auth.notif_info.load_more))
+
+                              }}>
+                              <small className="notif-info">
+                                Click to load next
+                                </small>
+                            </MenuNotifItem>
                           </MenuSection>
                       </Menu>
 
