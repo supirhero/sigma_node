@@ -16,8 +16,8 @@ import Cookies from 'universal-cookie';
 import { connect } from 'react-redux'
 import Autosuggest from 'react-autosuggest';
 import {initialize, change} from 'redux-form';
-import ReactAutocomplete from 'react-autocomplete'
-
+import ReactAutocomplete from 'react-autocomplete';
+import {Select as ReactSelect} from 'react-select';
 
 import {checkIWOUsed, deleteHoliday, getDataMaster,changeRoute,editProfileView,gethistorydetail,getUserAccess} from './actions.jsx'
 
@@ -139,6 +139,90 @@ export class Menu extends Component {
           }
         }
         ></input>
+        :
+        <div className={this.props.triggerClass} style={this.props.triggerStyle} 
+
+        onClick={
+          () => {
+            if (this.state.clicked) {
+              this.setState({clicked:false})
+            }
+            else {
+              this.setState({clicked:true})
+            }
+          }
+        }> {
+          this.props.workplanIcon ? this.props.workplanIcon :
+          <small style={this.props.iconStyle}>{this.props.icon}</small>
+        }
+        </div>}
+
+
+        <div
+        
+        onMouseLeave = {
+          () => {
+            this.setState({
+              clicked : false
+            })
+          }
+        } style={this.props.menuStyle} className={this.state.clicked ? 'menu active' : 'menu'}>
+        {this.props.children}
+
+        </div>
+        </div>
+        )
+  }
+
+}
+export class MenuInvite extends Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked : false,
+      value:[],
+      stayOpen: false,
+      disabled:false
+
+    };
+  }
+  handleSelectChange (value) {
+    console.log('You\'ve selected:', value);
+    this.setState({ value });
+  }
+  render(){ 
+    return(
+      <div style={this.props.style}>
+      {
+        this.props.triggerInput=='true' ?
+        // <ReactSelect 
+        // placeholder = {this.props.placeholder}
+        // style={this.props.inputStyle}
+        // value={this.props.defaultValue}
+        // onkeydown="return false;"
+
+        // onClick={
+        //   () => {
+        //     console.log('working');
+        //     if (this.state.clicked) {
+        //       this.setState({clicked:false})
+        //     }
+        //     else {
+        //       this.setState({clicked:true})
+        //     }
+        //   }
+        // }
+        // ></ReactSelect>
+        <ReactSelect
+        closeOnSelect={true}
+        disabled = {this.state.disabled}
+        multi ={true}
+        onChange={this.handleSelectChange}
+        options={this.props.options}
+        placeholder="Select your favourite(s)"
+        simpleValue
+        value={this.state.value}
+      />
         :
         <div className={this.props.triggerClass} style={this.props.triggerStyle} 
 

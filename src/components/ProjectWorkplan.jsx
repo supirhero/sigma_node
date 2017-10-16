@@ -46,7 +46,8 @@ import {
   showNotif,
   getCurrentProgress,
   editTaskPercentAction,
-  removeTaskMember
+  removeTaskMember,
+  downloadTemplate
 } from "./actions.jsx";
 import ReactAutocomplete from "react-autocomplete";
 
@@ -815,7 +816,7 @@ class ProjectWorkplan extends Component {
                    inputStyle={
                    
                      { width: '100%', display: 'inline-block', float: 'left' }}
-                     >
+                     > 
                      {
               
                        available_to_assign.map((value,index)=> {
@@ -1189,7 +1190,7 @@ class ProjectWorkplan extends Component {
                   <h2 className="input-desc">
                     You can upload your project workplan to generate task
                     automatically on PRouDS. Please download the project
-                    workplan template <a>here</a>
+                    workplan template <a href="http://45.77.45.126/dev/document_assets/wp_temp/template_workplan.xls">here</a>
                   </h2>
                   <h2 className="input-desc">
                     <i>SELECT FILE</i>
@@ -1327,7 +1328,8 @@ export default reduxForm({
     requestRebaseline,
     assignTaskMember,
     getCurrentProgress,
-    editTaskPercentAction
+    editTaskPercentAction,
+    downloadTemplate
   })(ProjectWorkplan)
 );
 // export default Login

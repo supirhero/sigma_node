@@ -18,11 +18,6 @@ class Timesheet extends Component {
       holiday: null,
       selected:moment().format("YYYY-MM-DD"),
       datepicker: null, 
-     
-      
-      
-
-      
     };
   }
 
@@ -69,6 +64,7 @@ class Timesheet extends Component {
     
   }
 
+  
 componentDidUpdate(){
   e=>{
   store.dispatch(viewTimesheet(this.state.selected))

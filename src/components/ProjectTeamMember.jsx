@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
+import Select from 'react-select';
 
-import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput,Menu,MenuItem} from  './Components.jsx'
+import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput,MenuInvite,MenuItem} from  './Components.jsx'
 import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,assignProjectTeamNonMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
 import ReactAutocomplete from 'react-autocomplete'
 
@@ -18,7 +19,11 @@ class ProjectTeamMember extends Component {
       names:[],
       label: '',
       id:'',
-      external:''
+      external:'',
+
+      value:[],
+      stayOpen: false,
+      disabled:false
     }
   }
 
@@ -30,6 +35,11 @@ class ProjectTeamMember extends Component {
     store.dispatch(getAvailableProjectTeamMember(id))
   }
 
+  handleSelectChange (value) {
+    console.log('You\'ve selected:', value);
+    this.setState({ value });
+  }
+
     render(){
       const appStore = this.props.state;
       const active_member = this.props.state.data.exist
@@ -37,6 +47,15 @@ class ProjectTeamMember extends Component {
       const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
        return {id:value.USER_ID , label:value.USER_NAME}
       }) : []
+      
+const FLAVOURS = [
+	{ label: 'Chocolate', value: 'chocolate' },
+	{ label: 'Vanilla', value: 'vanilla' },
+	{ label: 'Strawberry', value: 'strawberry' },
+	{ label: 'Caramel', value: 'caramel' },
+	{ label: 'Cookies and Cream', value: 'cookiescream' },
+	{ label: 'Peppermint', value: 'peppermint' },
+];
       return(
         !this.props.state.data.overview ? <PageLoader/> :
         
@@ -49,19 +68,30 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
             <h2 className='input-name'>Available Member</h2>
-      <Menu
+            <Select
+            closeOnSelect={true}
+            disabled = {this.state.disabled}
+            multi ={true}
+            onChange={this.handleSelectChange}
+            options={FLAVOURS}
+            placeholder="Select your favourite(s)"
+            simpleValue
+            value={this.state.value}
+          />
+            {/* 
+      <MenuInvite
       style={{position:'relative', display:'inline'}}
       menuStyle={{ 
        width:'500px', top:'50px', right:'auto',
        height:'300px', overflow:'scroll'
-
      }}
+     options={FLAVOURS}
      placeholder = "Select Member"
      triggerInput='true'
      inputStyle={
      
        { width: '100%', display: 'inline-block', float: 'left' }}
-       >
+       > 
        {
 
          available_assign.map((value,index)=> {
@@ -91,7 +121,7 @@ class ProjectTeamMember extends Component {
                       }
                   
                   console.log(value.id,e.target)
-                }}>
+                }}> 
                 </input>
                 <small style={{display:'inline-block', marginLeft:'10px'}}>{value.label}</small> 
                </MenuItem>
@@ -106,7 +136,8 @@ class ProjectTeamMember extends Component {
          )
        }
 
-       </Menu>
+       </MenuInvite>
+       */}
           <Input inputName="Non Member" onChange={e => {
             this.setState({ external: e.target.value }, () => {
               console.log(this.state.external)

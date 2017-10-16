@@ -8,7 +8,8 @@ import {
   changeRoute,
   getDashboardView,
   showNotif,
-  searchHome
+  searchHome,
+  downloadTemplate
 } from "./actions.jsx";
 import { Meter, Search, PageLoader } from "./Components.jsx";
 import store from "../reducers/combineReducers.jsx";
@@ -122,7 +123,7 @@ class DashboardHome extends Component {
                     <button className="btn-primary" style={{ width: "100%" }}>
                       TIMESHEET
                     </button>
-                  </Link>
+                    </Link>
                 </div>
               </div>
               <div className="grid">
