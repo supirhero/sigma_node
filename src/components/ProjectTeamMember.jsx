@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
 import store from '../reducers/combineReducers.jsx'
+import Select from 'react-select';
 
 import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput,Menu,MenuItem} from  './Components.jsx'
 import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,assignProjectTeamNonMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
@@ -16,6 +17,7 @@ class ProjectTeamMember extends Component {
     this.state = {
       selectArr : [],
       names:[],
+      value:[],
       label: '',
       id:'',
       external:''
@@ -30,12 +32,24 @@ class ProjectTeamMember extends Component {
     store.dispatch(getAvailableProjectTeamMember(id))
   }
 
+  handleSelectChange (value) {
+    const ArrayMantap = value.map((value,index)=>{
+      return value.value
+    })
+    console.log(ArrayMantap,"INI LOOH")
+    this.setState({ value:ArrayMantap })
+      // console.log('You\'ve selected:', this.state.value);
+      // console.log('You\'ve selected:', this.state.value.map((value,index)=>{
+      //   return [value.value]
+      // })
+	}
+
     render(){
       const appStore = this.props.state;
       const active_member = this.props.state.data.exist
       const overview = appStore.data.overview ? appStore.data.overview : null
       const available_assign = store.getState().data.data ? store.getState().data.data.map((value,index)=>{
-       return {id:value.USER_ID , label:value.USER_NAME}
+       return {value:value.USER_ID , label:value.USER_NAME}
       }) : []
       return(
         !this.props.state.data.overview ? <PageLoader/> :
@@ -49,64 +63,25 @@ class ProjectTeamMember extends Component {
           <div className='grid padding-left'>
             <div className='unit four-fifths'>
             <h2 className='input-name'>Available Member</h2>
-      <Menu
-      style={{position:'relative', display:'inline'}}
-      menuStyle={{ 
-       width:'500px', top:'50px', right:'auto',
-       height:'300px', overflow:'scroll'
-
-     }}
-     placeholder = "Select Member"
-     triggerInput='true'
-     inputStyle={
-     
-       { width: '100%', display: 'inline-block', float: 'left' }}
-       >
-       {
-
-         available_assign.map((value,index)=> {
-           return(
-               <MenuItem key={index} 
-               style={{paddingLeft:'10px', paddingTop:'10px', zIndex:'10'}} 
-               >
-                <input type="checkbox" style={{display:'inline-block', width:'auto'}} onClick={e=>{
-                  console.log("CHECKED VAL",e.target.checked)
-                  if(e.target.checked == true) {
-                    var newState = this.state.selectArr.concat(value.id)
-                    var nameState = this.state.names.concat(value.label)
-                    this.setState({selectArr : newState, names:nameState}
-                      
-                    ,()=>{
-                      console.log("selectARR",this.state.selectArr)
-                      console.log("NAMEZZZZZ",this.state.names)
-                    })
-                  }
-                  else {
-                    var newState = this.state.selectArr.filter((val)=>{
-                      return val != value.id})
-                      this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))   
-                      var nameState = this.state.names.filter((val)=>{
-                        return val != value.label})
-                        this.setState({names:nameState}), () => console.log("NAMEZZZ",this.state.names)
-                      }
-                  
-                  console.log(value.id,e.target)
-                }}>
-                </input>
-                <small style={{display:'inline-block', marginLeft:'10px'}}>{value.label}</small> 
-               </MenuItem>
-
-
-
-          )
-
-         }
-
-         
-         )
-       }
-
-       </Menu>
+            <Select
+            closeOnSelect={false}
+            disabled={false}
+            multi
+            // joinValues={true}
+            // onChange={e=>{
+            //   // console.log(e)
+            //   this.setState({value:e},()=>{
+            //     console.log(this.state.value)
+            //   })
+            // }}
+            onChange={this.handleSelectChange.bind(this)}
+            options={available_assign}
+            placeholder="Select Member"
+            // simpleValue = {true}
+            value={this.state.value}
+            className="yooo"
+            style={{height:'50px',borderRadius:0,border:'1px solid #eee'}}
+          />
           <Input inputName="Non Member" onChange={e => {
             this.setState({ external: e.target.value }, () => {
               console.log(this.state.external)
@@ -115,6 +90,7 @@ class ProjectTeamMember extends Component {
             
           }}
           placeholder = "Input Non-Member Email"
+          
           ></Input>
 
        
@@ -126,7 +102,7 @@ class ProjectTeamMember extends Component {
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.selectArr)).then(()=>{
+                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.value)).then(()=>{
                       this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
                       reset()
                     })
@@ -156,7 +132,7 @@ class ProjectTeamMember extends Component {
               <Divider text='ACTIVE MEMBERS'/>
             </div>
           </div>
-
+        
           <div className='grid padding-left'>
             <div className='unit whole'>
               {
