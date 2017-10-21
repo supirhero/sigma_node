@@ -210,7 +210,7 @@ class DashboardHome extends Component {
                           style={{ fontSize: "20px" }}
                           onClick={e => {
                             browserHistory.push(
-                              "/business-unit?bu_code =" + value.bu_code
+                              "/business-unit?bu_code=" + value.bu_code
                             );
                             {
                               /* store.dispatch(changeRoute({
