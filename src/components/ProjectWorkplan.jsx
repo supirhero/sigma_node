@@ -1189,7 +1189,7 @@ class ProjectWorkplan extends Component {
                   <h2 className="input-desc">
                     You can upload your project workplan to generate task
                     automatically on PRouDS. Please download the project
-                    workplan template <a>here</a>
+                    workplan template <a href="http://45.77.45.126/dev/document_assets/wp_temp/template_workplan.xls">here</a>
                   </h2>
                   <h2 className="input-desc">
                     <i>SELECT FILE</i>

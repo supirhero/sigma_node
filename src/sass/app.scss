@@ -14,11 +14,9 @@
 @import "project";
 @import "ProjectOverview";
 @import "loader";
-@import '../../node_modules/react-datepicker/dist/react-datepicker.min.css'; 
+@import '../../node_modules/react-datepicker/dist/react-datepicker.min.css';
 @import '../../node_modules/react-day-picker/lib/style.css';
-
-
-
+@import '../../node_modules/react-select/dist/react-select.css';
 
 body {
   background-color: $color-background;
