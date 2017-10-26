@@ -191,7 +191,7 @@ class Dashboard extends Component {
                                     changeRoute({
                                       type: "PUSH",
                                       page: {
-                                        name: "project",
+                                        name: "project/activities",
                                         id: value.project_id,
                                         project: {
                                           status: value.project_status,
