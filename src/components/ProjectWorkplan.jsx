@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, browserHistory } from "react-router";
 import { Grid } from "react-redux-grid";
 import moment from "moment";
-
+import Select from 'react-select';
 import store from "../reducers/combineReducers.jsx";
 
 import {
@@ -57,6 +57,7 @@ class ProjectWorkplan extends Component {
       clicked: false,
       WBS_id: "",
       WBS_NAME: "",
+      value:[],
       array: {
         new_task: [],
         modified_task: [],
@@ -298,7 +299,8 @@ class ProjectWorkplan extends Component {
           )}
         </td>
         <td style={{ position: "relative" }}>
-          {value.status !== "none" && status(value.status)}
+        {console.log(value.status,"INI LOH SI VALUE STATUS")}
+          {value.LEAF !== "0" && value.status !== "none" && status(value.status)}
         </td>
       </tr>
     );
@@ -349,7 +351,7 @@ class ProjectWorkplan extends Component {
     this.props
       .assignTaskMember(
         props,
-        this.state.selectArr,   
+        this.state.value,   
       )
       .then(res => {
         console.log("MEESAGE", res.data.message);
@@ -359,6 +361,18 @@ class ProjectWorkplan extends Component {
         resetForm()
       });
   }
+
+  handleSelectChange (value) {
+    const ArrayMantap = value.map((value,index)=>{
+      return value.value
+    })
+    console.log(ArrayMantap,"INI LOOH")
+    this.setState({ value:ArrayMantap })
+      // console.log('You\'ve selected:', this.state.value);
+      // console.log('You\'ve selected:', this.state.value.map((value,index)=>{
+      //   return [value.value]
+      // })
+	}
 
   onSubmitManualUpdate(props) {
     const id = this.props.location.query.id;
@@ -469,6 +483,15 @@ class ProjectWorkplan extends Component {
     const workplan = this.props.state.data.workplan;
     const workplan_view = this.props.state.data.parent;
     const available_to_assign = this.props.state.data.available_to_assign
+      ? this.props.state.data.available_to_assign.map((value, index) => {
+          return {
+            EMAIL: value.EMAIL,
+            value: value.RP_ID,
+            label: value.USER_NAME
+          };
+        })
+      : null;
+    const available_to_assign2 = this.props.state.data.available_to_assign
       ? this.props.state.data.available_to_assign.map((value, index) => {
           return {
             EMAIL: value.EMAIL,
@@ -803,6 +826,7 @@ class ProjectWorkplan extends Component {
                         });
                       }}
                     /> */}
+                    {/* 
                     <Menu
                     style={{position:'relative', display:'inline'}}
                     menuStyle={{ 
@@ -856,6 +880,26 @@ class ProjectWorkplan extends Component {
                      }
               
                      </Menu>
+                     */}
+                     <Select
+                     closeOnSelect={false}
+                     disabled={false}
+                     multi
+                     // joinValues={true}
+                     // onChange={e=>{
+                     //   // console.log(e)
+                     //   this.setState({value:e},()=>{
+                     //     console.log(this.state.value)
+                     //   })
+                     // }}
+                     onChange={this.handleSelectChange.bind(this)}
+                     options={available_to_assign}
+                     placeholder="Select Member"
+                     // simpleValue = {true}
+                     value={this.state.value}
+                     className="yooo"
+                     style={{height:'50px',borderRadius:0,border:'1px solid #eee'}}
+                   />
                   </div>
 
                   <div className="unit two-fifths">
