@@ -17,7 +17,8 @@ class Dashboard extends Component {
   constructor(){
     super();
     this.state = {
-      active : 'HOME'
+      active : 'HOME',
+      notif_load: false
     };
   }
 
@@ -156,10 +157,25 @@ class Dashboard extends Component {
                           height:'350px', overflow:'scroll'
                         }} 
                         icon={ this.props.state.auth.unread_notif }>
+                        
                           <MenuSection >
                             {
+                              this.state.notif_load ? 
+
+                              <MenuNotifItem
+                              style={{width:'450px', height:'270px'}}
+                              >
+                              <small className="notif-info">
+                                Loading other notifications...
+                                </small>
+                              </MenuNotifItem>
+
+                              :
+
                               this.props.state.auth.notif_list == "" ?
-                              <MenuNotifItem>
+                              <MenuNotifItem
+                              style={{width:'450px'}}
+                              >
                               <small className="notif-info">
                                 No notifications
                                 </small>
@@ -175,7 +191,7 @@ class Dashboard extends Component {
                                     changeRoute({
                                       type: "PUSH",
                                       page: {
-                                        name: "project",
+                                        name: "project/activities",
                                         id: value.project_id,
                                         project: {
                                           status: value.project_status,
@@ -206,7 +222,12 @@ class Dashboard extends Component {
                               
                             }
                             <MenuNotifItem onClick={ e=> {
-                              this.props.dispatch(getNotif(this.props.state.auth.notif_info.load_more))
+                              this.setState({notif_load:true})
+                              
+                              this.props.dispatch(getNotif(this.props.state.auth.notif_info.load_more)).then( ()=> {
+                                this.setState({notif_load:false})
+                                
+                              })
 
                               }}>
                               <small className="notif-info">
