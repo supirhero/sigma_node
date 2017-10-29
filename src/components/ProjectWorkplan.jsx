@@ -351,11 +351,11 @@ class ProjectWorkplan extends Component {
     this.props
       .assignTaskMember(
         props,
-        this.state.value,   
+        this.state.value,
       )
       .then(res => {
         console.log("MEESAGE", res.data.message);
-        showNotif(res.data.message, "GREEN");
+        showNotif("Member berhasil ditambah", "GREEN");
         this.props.dispatch(getWorkplanView(id));
         this.props.dispatch(getTaskMemberView(id, this.state.WBS_ID));
         resetForm()
@@ -826,33 +826,33 @@ class ProjectWorkplan extends Component {
                         });
                       }}
                     /> */}
-                    {/* 
+                    {/*
                     <Menu
                     style={{position:'relative', display:'inline'}}
-                    menuStyle={{ 
+                    menuStyle={{
                      width:'500px', top:'50px', right:'auto',
                      height:'300px', overflow:'scroll'
-              
+
                    }}
                    placeholder = "Select Member"
                    triggerInput='true'
                    inputStyle={
-                   
+
                      { width: '100%', display: 'inline-block', float: 'left' }}
                      >
                      {
-              
+
                        available_to_assign.map((value,index)=> {
                          return(
-                             <MenuItem key={index} 
-                             style={{paddingLeft:'10px', paddingTop:'10px', zIndex:'10'}} 
+                             <MenuItem key={index}
+                             style={{paddingLeft:'10px', paddingTop:'10px', zIndex:'10'}}
                              >
                               <input type="checkbox" style={{display:'inline-block', width:'auto'}} onClick={e=>{
                                 console.log("CHECKED VAL",e.target.checked)
                                 if(e.target.checked == true) {
                                   var newState = this.state.selectArr.concat(value.RP_ID)
                                   this.setState({selectArr : newState}
-                                    
+
                                   ,()=>{
                                     console.log("selectARR",this.state.selectArr)
                                   })
@@ -861,24 +861,24 @@ class ProjectWorkplan extends Component {
                                   var newState = this.state.selectArr.filter((val)=>{
                                     return val != value.RP_ID})
                                     this.setState({selectArr : newState}, ()=> console.log("selectARR",this.state.selectArr))
-                                    
+
                                 }
-                                
+
                                 console.log(value.id,e.target)
                               }}></input>
-                              <small style={{display:'inline-block', marginLeft:'10px'}}>{value.USER_NAME}</small> 
+                              <small style={{display:'inline-block', marginLeft:'10px'}}>{value.USER_NAME}</small>
                              </MenuItem>
-              
-              
-              
+
+
+
                         )
-              
+
                        }
-              
-                       
+
+
                        )
                      }
-              
+
                      </Menu>
                      */}
                      <Select
@@ -979,7 +979,7 @@ class ProjectWorkplan extends Component {
                                       getTaskMemberView(id, this.state.WBS_ID)
                                     );
 
-                                    showNotif(res.data.message, "GREEN");
+                                    showNotif("Task member berhasil di hapus", "GREEN");
                                   });
                                 e.preventDefault();
                               }}
