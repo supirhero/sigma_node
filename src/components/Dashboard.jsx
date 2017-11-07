@@ -196,8 +196,11 @@ class Dashboard extends Component {
                                         project: {
                                           status: value.project_status,
                                           bu_code: value.bu_code
+                                        }                                      
+                                      },
+                                      state: {
+                                          page: 'Activities'
                                         }
-                                      }
                                     })
                                   );
   

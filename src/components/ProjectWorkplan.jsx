@@ -1038,6 +1038,8 @@ class ProjectWorkplan extends Component {
               btnClass="btn-primary"
               btnStyle={{ width: "200px", float: "right" }}
             >
+            <Loader id="createTask" style={{ height: "480px" }}>
+            
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <div>
                   <div className="grid wrap">
@@ -1123,6 +1125,7 @@ class ProjectWorkplan extends Component {
                   </div>
                 </div>
               </form>
+            </Loader>
             </PopUp>
           }
           {workplan_modification == true &&

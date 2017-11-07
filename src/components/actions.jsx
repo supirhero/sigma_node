@@ -198,7 +198,8 @@ export function changeRoute(params) {
       store.dispatch(
         push({
           pathname: `/${params.page.name}`,
-          search: "?id=" + params.page.id
+          search: "?id=" + params.page.id,
+          state: params.state
         })
       );
       break;
@@ -1287,8 +1288,14 @@ export function taskList(project_id) {
 // }
 
 export function addTaskWorkplan(id, wbs_id, data) {
+  
   return function(dispatch) {
     const token = cookies.get("token");
+    store.dispatch({
+      type: "LOAD",
+      name: "createTask",
+      show: true
+    });
     return axios({
       method: "POST",
       url: `${baseURL}task/createTask?token=${token}`,
@@ -1305,6 +1312,11 @@ export function addTaskWorkplan(id, wbs_id, data) {
         FINISH_DATE: moment(data.FINISH_DATE).format("YYYY-MM-DD")
       }
     }).then(res => {
+      store.dispatch({
+        type: "LOAD",
+        name: "createTask",
+        show: false
+      });
       console.log("ADD TASK SUCCESSFULL", res);
       store.dispatch(getWorkplanView(id));
       return res;

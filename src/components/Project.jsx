@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link, browserHistory } from 'react-router'
+import { push, replace, goBack } from "react-router-redux";
 
 
 import store from '../reducers/combineReducers.jsx'
@@ -34,18 +35,18 @@ class Project extends Component {
     const { handleSubmit } = this.props;
     const id = "?id=" + this.props.location.query.id
     const sidebar = [
-      {type:'menu', name : 'Overview', path: `/project${id}`},
-      {type:'menu', name : 'Edit Project', path: `/project/edit-project${id}`},
-      {type:'menu', name : 'Activities', path: `/project/activities${id}`},
+      {type:'menu', name : 'Overview', path: `/project`},
+      {type:'menu', name : 'Edit Project', path: `/project/edit-project`},
+      {type:'menu', name : 'Activities', path: `/project/activities`},
       {type:'title', name : 'MANAGE'},
-      {type:'menu', name : 'Workplan', path: `/workplan${id}`},
-      {type:'menu', name : 'Team Member', path: `/project/team-member${id}`},
-      {type:'menu', name : 'History', path: `/project/history${id}`}, 
-      {type:'menu', name : 'Doc & Files', path: `/project/docs-and-files${id}`},
-      {type:'menu', name : 'Issues', path: `/project/issues${id}`},
+      {type:'menu', name : 'Workplan', path: `/workplan`},
+      {type:'menu', name : 'Team Member', path: `/project/team-member`},
+      {type:'menu', name : 'History', path: `/project/history`}, 
+      {type:'menu', name : 'Doc & Files', path: `/project/docs-and-files`},
+      {type:'menu', name : 'Issues', path: `/project/issues`},
       {type:'title', name : 'REPORTS'},
-      {type:'menu', name : 'SPI & CPI', path: `/project/spi-and-cpi${id}`},
-      {type:'menu', name : 'S-Curve', path: `/project/s-curve${id}`},
+      {type:'menu', name : 'SPI & CPI', path: `/project/spi-and-cpi`},
+      {type:'menu', name : 'S-Curve', path: `/project/s-curve`},
       // {type:'menu', name : 'Gantt Chart', path: `/project/${id}/gantt-chart`},
     ]
     return(
@@ -67,18 +68,34 @@ class Project extends Component {
                           {/* if( value.name == 'Team Member' && this.props.state.auth.privilege.project_member) { */}
 
                             return(
-                              <li key={index}><a className={ this.state.active == value.name ? 'active' : '' } onClick={
+                              <li key={index}><a className={ value.name == this.props.location.state.page ? 'active' : '' } onClick={
                                 e => {
                                   const name = value.name
                                   this.setState({
                                     active : value.name
                                   })
                                   if (value.name == 'Workplan') {
-                                    browserHistory.push(value.path)
+                                    this.props.dispatch(
+                                      push({
+                                        pathname: value.path,
+                                        search: "?id=" + this.props.location.query.id,
+                                        state: {
+                                          page: value.name
+                                        }
+                                      })
+                                    )
                                   }
                                   else {
-                                    browserHistory.replace(value.path)
-                                    
+                                    // browserHistory.replace(value.path)
+                                    this.props.dispatch(
+                                      replace({
+                                        pathname: value.path,
+                                        search: "?id=" + this.props.location.query.id,
+                                        state: {
+                                          page: value.name
+                                        }
+                                      })
+                                    )
                                     
 
                                   }
