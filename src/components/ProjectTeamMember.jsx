@@ -7,7 +7,6 @@ import Select from 'react-select';
 
 import {Divider, Header, ProjectHeader, Input, PageLoader,ReduxInput,Menu,MenuItem} from  './Components.jsx'
 import { getProjectTeamMember, getAvailableProjectTeamMember ,assignProjectTeamMember,assignProjectTeamNonMember,pop, deleteProjectTeamMember, showNotif, getProjectDetail } from './actions.jsx'
-import ReactAutocomplete from 'react-autocomplete'
 
 
 
@@ -28,7 +27,7 @@ class ProjectTeamMember extends Component {
     const id = this.props.location.query.id
     // store.dispatch(getProjectTeamMember(id))
     this.props.dispatch(getProjectDetail(id))
-    
+
     store.dispatch(getAvailableProjectTeamMember(id))
   }
 
@@ -53,7 +52,7 @@ class ProjectTeamMember extends Component {
       }) : []
       return(
         !this.props.state.data.overview ? <PageLoader/> :
-        
+
         <div className='project-overview'>
           <div className='grid padding-left'>
             <div className='unit whole'>
@@ -87,42 +86,58 @@ class ProjectTeamMember extends Component {
               console.log(this.state.external)
             });
             e.preventDefault();
-            
+
           }}
           placeholder = "Input Non-Member Email"
-          
+
           ></Input>
 
-       
+
             </div>
             <div className='unit one-fifth'>
-              <button className='btn-primary' 
+              <button className='btn-primary'
               style={{marginTop:'60px',padding:'7px 42px'}}
 
                 onClick=
                 {
                   e => {
-                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.value)).then(()=>{
-                      this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
+                    this.props.dispatch(assignProjectTeamMember(this.props.location.query.id,this.state.value))
+                    .then(()=>{
+                      this.setState({value:''},()=>{
+                        console.log(this.state.value)
+                      })
+                    })
+                    .then(()=>{
+                      this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id))
                       reset()
                     })
+
                   }
                 }
-                
+
+                // onSubmit={
+                //   e=>{
+                //     this.setState({value:''},()=>{
+                //       console.log(this.state.value,"MANA LO")
+                //     })
+                //     e.preventDefault()
+                //   }
+                // }
+
               >INVITE MEMBER</button>
 
-              <button className='btn-primary' 
+              <button className='btn-primary'
               style={{marginTop:'52px',padding:'4px 42px'}}
-              
+
                               onClick=
                               {
                                 e => {
                                   this.props.dispatch(assignProjectTeamNonMember(this.props.location.query.id,this.state.external)).then(()=>{
-                                    this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id)) 
+                                    this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id))
                                   })
                                 }
                               }
-                              
+
                             >INVITE NON-MEMBER</button>
 
             </div>
@@ -132,7 +147,7 @@ class ProjectTeamMember extends Component {
               <Divider text='ACTIVE MEMBERS'/>
             </div>
           </div>
-        
+
           <div className='grid padding-left'>
             <div className='unit whole'>
               {
@@ -168,12 +183,12 @@ class ProjectTeamMember extends Component {
                                           message: 'Would you like to remove member?',
                                           show:false,
                                         })
-                                        
+
                                         this.props.dispatch(getAvailableProjectTeamMember(id))
                                       })
                                 }
                               })
-                        
+
 
                             e.preventDefault()
                           }
