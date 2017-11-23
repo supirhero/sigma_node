@@ -122,7 +122,7 @@ export class Menu extends Component {
       <div style={this.props.style}>
       {
         this.props.triggerInput=='true' ?
-        <input 
+        <input
         placeholder = {this.props.placeholder}
         style={this.props.inputStyle}
         value={this.props.defaultValue}
@@ -141,14 +141,14 @@ export class Menu extends Component {
         }
         ></input>
         :
-        <div className={this.props.triggerClass} style={this.props.triggerStyle} 
+        <div className={this.props.triggerClass} style={this.props.triggerStyle}
         onClick={
           () => {
             if(this.props.notif) {
               store.dispatch(getNotif())
 
             }
-          
+
             if (this.state.clicked) {
               this.setState({clicked:false})
             }
@@ -156,7 +156,7 @@ export class Menu extends Component {
               this.setState({clicked:true})
             }
           }
-        }> 
+        }>
           {
             this.props.workplanIcon ? this.props.workplanIcon :
             <small style={this.props.iconStyle}>{this.props.icon}</small>
@@ -166,7 +166,7 @@ export class Menu extends Component {
 
 
         <div
-        
+
         onMouseLeave = {
           () => {
             this.setState({
@@ -263,8 +263,9 @@ export class Input extends Component {
       <div style={this.props.style}>
       {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
       {this.props.inputDesc ? <h2 className='input-desc'>{this.props.inputDesc}</h2> : null}
-      <input style={this.props.inputStyle} placeholder={this.props.placeholder} onChange={this.props.onChange}></input>
+      <input style={this.props.inputStyle} placeholder={this.props.placeholder} onChange={this.props.onChange} value={this.props.value}></input>
       {this.props.children}
+
       </div>
 
       )
@@ -381,13 +382,13 @@ export class RenderRadioGroup extends Component {
         RP_ID: null
       }
     }
- 
+
     render(){
-    
+
       return(
         <div>
           {this.props.inputName ? <h2 className='input-name'>{this.props.inputName}</h2> : null}
-          
+
         <ReactAutocomplete
         menuStyle={{
           opacity:'1'
@@ -413,18 +414,18 @@ export class RenderRadioGroup extends Component {
         // shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
         getItemValue={item => item.IWO_NO}
         renderItem={(item, highlighted) =>
-          <small style={{padding:'8px'}} key={item.IWO_NO}>{item.IWO_NO}</small>  
+          <small style={{padding:'8px'}} key={item.IWO_NO}>{item.IWO_NO}</small>
         }
         {...this.props.select}
         {...this.props.custom}
         {...this.props.input}
-        
+
         onChange={e => {
           this.setState({value: e.target.value}, ()=> {
             this.props.input.onChange(this.state.value)
 
           })
-          
+
       }}
         onSelect={(IWO_NO, value) => {
           this.props.input.onChange(IWO_NO)
@@ -469,7 +470,7 @@ export class RenderRadioGroup extends Component {
                         }
                       ]
                       fields.map((value, index) => {
-                        store.dispatch(change(this.props.forms, 
+                        store.dispatch(change(this.props.forms,
                           value.field, value.value
                         ))
                       })
@@ -481,7 +482,7 @@ export class RenderRadioGroup extends Component {
                     }}
                   />
                   {this.props.meta.touched && ((this.props.meta.error && <span className='error-alert'>{this.props.meta.error}</span>))}
-                  
+
                   </div>
 
         )
@@ -710,7 +711,7 @@ export class TimeSheetTimeButton extends Component {
   render(){
     return(
       <button className ='btn-secondary' style={{float:'left', width:'122px', height:'125px'}} onClick={this.props.onClick}
-      
+
       >
       {this.props.text}
       <small style={{marginTop:'10px'}}>{this.props.hours}</small>
@@ -931,7 +932,7 @@ export class Confirmation extends Component {
 
       store.getState().alert.confirmation && store.getState().alert.confirmation.show ?
       <div style={this.props.style}>
-      <div 
+      <div
       className={' popup-container'} style={{zIndex:'30', display:'block'}}
       >
       <div className='grid wrap' style={{position:'relative'}}>
@@ -945,14 +946,14 @@ export class Confirmation extends Component {
             type: 'CONFIRM',
             message: '',
             show:false,
-            
+
           })
           e.preventDefault()
         }
       }>CANCEL</button>
       <button className='btn-primary' style={{width:'45%', float:'right'}} onClick={(e)=> store.getState().alert.confirmation.onConfirm(e)}>APPROVE</button>
       </div>
-      
+
 
       </div>
       </div>
@@ -1304,7 +1305,7 @@ export class TablePaginationMIS extends Component {
     };
   }
   // getInitialState() {
-  //   return { 
+  //   return {
   //     page : 0,
   //     ceiling: 0,
   //     floor: 10,
@@ -1316,7 +1317,7 @@ export class TablePaginationMIS extends Component {
     var pages = [];
     const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
 
-    
+
     for (var i=1; i<=pagesAmount; i++) {
       pages.push(i);
     }
@@ -1326,7 +1327,7 @@ export class TablePaginationMIS extends Component {
       <div className="grid">
       <div className="unit whole">
 
-      
+
       <table className="table" style={{ width: '100%' }}>
       <thead>
       <tr>
@@ -1340,7 +1341,7 @@ export class TablePaginationMIS extends Component {
 
       <tbody>
       {
-        
+
         this.props.tableData &&
         this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
           <tr className="items" key={index}>
@@ -1349,7 +1350,7 @@ export class TablePaginationMIS extends Component {
               <td key={index}>{column.value}</td>
               ))
           }
-          <td style={{ position: 'relative', float:'right' }}> 
+          <td style={{ position: 'relative', float:'right' }}>
           </td>
           </tr>
           ))
@@ -1362,38 +1363,38 @@ export class TablePaginationMIS extends Component {
       </div>
       <div className="grid">
       <div className="unit whole">
-      
+
       </div>
       <div className="container" style={{float:'right'}}>
       <button className="arrow" onClick={e=> {
         this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-        
+
         e.preventDefault()
       }}> <b> &lt; </b> </button>
       {
-        
+
         pages.slice(
           3 % this.state.page != 3 ? 0 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page -2 :
-          
+
           (this.state.page-3)
-          : this.state.page-3  
+          : this.state.page-3
           ,
           3 % this.state.page != 3 ? 5 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page +1 :
           this.state.page+2
-          : this.state.page+2  
+          : this.state.page+2
 
           ).map((value, index)=> (
-            <button 
+            <button
             className={this.state.page == value ? "pagination" : 'arrow'}
             onClick={e=> {
               this.setState({page: value},()=>[
                 console.log(this.state.page)
                 ])
-              
+
               var ceiling = value*10
               var floor = ceiling-10
               this.setState({
@@ -1410,7 +1411,7 @@ export class TablePaginationMIS extends Component {
         <button className="arrow">. . .</button>
         <button className="arrow" onClick={e=> {
           this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-          
+
           e.preventDefault()
         }}> <b> &gt; </b> </button>
         </div>
@@ -1432,7 +1433,7 @@ export class TablePagination extends Component {
     };
   }
   // getInitialState() {
-  //   return { 
+  //   return {
   //     page : 0,
   //     ceiling: 0,
   //     floor: 10,
@@ -1444,7 +1445,7 @@ export class TablePagination extends Component {
     var pages = [];
     const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
 
-    
+
     for (var i=1; i<=pagesAmount; i++) {
       pages.push(i);
     }
@@ -1454,7 +1455,7 @@ export class TablePagination extends Component {
       <div className="grid">
       <div className="unit whole">
 
-      
+
       <table className="table" style={{ width: '100%' }}>
       <thead>
       <tr>
@@ -1468,7 +1469,7 @@ export class TablePagination extends Component {
 
       <tbody>
       {
-        
+
         this.props.tableData &&
         this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
           <tr className="items" key={index}>
@@ -1495,10 +1496,10 @@ export class TablePagination extends Component {
             }
             ))
             e.preventDefault()
-          }}> 
+          }}>
           EDIT
           </button>
-          
+
           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
             store.dispatch({
               type: 'CONFIRM',
@@ -1518,9 +1519,9 @@ export class TablePagination extends Component {
                 })
               }
             })
-            
+
             e.preventDefault()
-          }}> 
+          }}>
           <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
           </button>
           </td>
@@ -1535,38 +1536,38 @@ export class TablePagination extends Component {
       </div>
       <div className="grid">
       <div className="unit whole">
-      
+
       </div>
       <div className="container" style={{float:'right'}}>
       <button className="arrow" onClick={e=> {
         this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-        
+
         e.preventDefault()
       }}> <b> &lt; </b> </button>
       {
-        
+
         pages.slice(
           3 % this.state.page != 3 ? 0 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page -2 :
-          
+
           (this.state.page-3)
-          : this.state.page-3  
+          : this.state.page-3
           ,
           3 % this.state.page != 3 ? 5 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page +1 :
           this.state.page+2
-          : this.state.page+2  
+          : this.state.page+2
 
           ).map((value, index)=> (
-            <button 
+            <button
             className={this.state.page == value ? "pagination" : 'arrow'}
             onClick={e=> {
               this.setState({page: value},()=>[
                 console.log(this.state.page)
                 ])
-              
+
               var ceiling = value*10
               var floor = ceiling-10
               this.setState({
@@ -1583,7 +1584,7 @@ export class TablePagination extends Component {
         <button className="arrow">. . .</button>
         <button className="arrow" onClick={e=> {
           this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-          
+
           e.preventDefault()
         }}> <b> &gt; </b> </button>
         </div>
@@ -1604,28 +1605,28 @@ export class TablePaginationHistory extends Component {
     };
   }
     // getInitialState() {
-    //   return { 
+    //   return {
     //     page : 0,
     //     ceiling: 0,
     //     floor: 10,
     //     data : props.tableData.slice(0,10)
-    
+
     //   };
     // }
     render() {
       var pages = [];
-      const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0 
-      
+      const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+
       for (var i=1; i<=pagesAmount; i++) {
         pages.push(i);
       }
-      
+
       return (
         <div>
         <div className="grid">
         <div className="unit whole">
-        
-        
+
+
         <table className="table" style={{ width: '100%' }}>
         <thead>
         <tr>
@@ -1636,10 +1637,10 @@ export class TablePaginationHistory extends Component {
         }
         </tr>
         </thead>
-        
+
         <tbody>
         {
-          
+
           this.props.tableData &&
           this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
             <tr className="items" key={index}>
@@ -1648,7 +1649,7 @@ export class TablePaginationHistory extends Component {
             <td>{row.column[2].value}</td>
             <td> {row.column[3].value}</td>
             <td>{row.column[4].value}</td>
-            
+
                         {/* {
                           row.column.map((column, index) => (
                         <td key={index}>{column.value}</td>
@@ -1666,22 +1667,22 @@ export class TablePaginationHistory extends Component {
                             }
                           })
                           e.preventDefault()
-                        }}> 
+                        }}>
                         DETAIL
                         </button>
                         </td>
                         </tr>
                         ))
         }
-        
+
         </tbody>
         </table>
-        
+
         </div>
         </div>
         <div className="grid">
         <div className="unit whole">
-        
+
         </div>
         <div className="container" style={{float:'left'}}>
         <small style={{display:'inline-block'}}>show entries</small>
@@ -1694,38 +1695,38 @@ export class TablePaginationHistory extends Component {
           ]
         }}
         />
-        
+
         </div>
         <div className="container" style={{float:'right'}}>
         <button className="arrow" onClick={e=> {
           this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-          
+
           e.preventDefault()
         }}> <b> &lt; </b> </button>
         {
-          
+
           pages.slice(
             3 % this.state.page != 3 ? 0 :
-            this.state.page % 3  == 0  ? 
+            this.state.page % 3  == 0  ?
             this.state.page % 2 != 0 ? this.state.page -2 :
-            
+
             (this.state.page-3)
-            : this.state.page-3  
+            : this.state.page-3
             ,
             3 % this.state.page != 3 ? 5 :
-            this.state.page % 3  == 0  ? 
+            this.state.page % 3  == 0  ?
             this.state.page % 2 != 0 ? this.state.page +1 :
             this.state.page+2
-            : this.state.page+2  
-            
+            : this.state.page+2
+
             ).map((value, index)=> (
-              <button 
+              <button
               className={this.state.page == value ? "pagination" : 'arrow'}
               onClick={e=> {
                 this.setState({page: value},()=>[
                   console.log(this.state.page)
                   ])
-                
+
                 var ceiling = value*10
                 var floor = ceiling-10
                 this.setState({
@@ -1742,13 +1743,13 @@ export class TablePaginationHistory extends Component {
           <button className="arrow">. . .</button>
           <button className="arrow" onClick={e=> {
             this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-            
+
             e.preventDefault()
           }}> <b> &gt; </b> </button>
           </div>
           </div>
           </div>
-          
+
           );
 }
 }
@@ -1756,8 +1757,8 @@ export class TablePaginationHistory extends Component {
 
 
 
-    
- 
+
+
 
 
 export class TablePaginationBU extends Component {
@@ -1770,28 +1771,28 @@ export class TablePaginationBU extends Component {
     };
   }
     // getInitialState() {
-    //   return { 
+    //   return {
     //     page : 0,
     //     ceiling: 0,
     //     floor: 10,
     //     data : props.tableData.slice(0,10)
-    
+
     //   };
     // }
     render() {
       var pages = [];
       const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
-      
+
       for (var i=1; i<=pagesAmount; i++) {
         pages.push(i);
       }
-      
+
       return (
         <div>
         <div className="grid">
         <div className="unit whole">
-        
-        
+
+
         <table className="table" style={{ width: '100%' }}>
         <thead>
         <tr>
@@ -1802,17 +1803,17 @@ export class TablePaginationBU extends Component {
         }
         </tr>
         </thead>
-        
+
         <tbody>
         {
-          
+
           this.props.tableData &&
           this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
             <tr className="items" key={index}>
             <td>{row.column[0].value}</td>
             <td> {row.column[1].value}</td>
             <td>{row.column[2].value}</td>
-            
+
 
                         {/* {
                           row.column.map((column, index) => (
@@ -1835,7 +1836,7 @@ export class TablePaginationBU extends Component {
                           //   store.dispatch(getDataMaster("holiday"))
                           // })
                           e.preventDefault()
-                        }}> 
+                        }}>
                         DETAIL
                         </button>
 
@@ -1858,66 +1859,66 @@ export class TablePaginationBU extends Component {
                           }
                           ))
                           e.preventDefault()
-                        }}> 
+                        }}>
                         EDIT
                         </button>
-                        
+
                         <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
-                          
-                          
-                          
+
+
+
                           // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                           //   store.dispatch(getDataMaster("holiday"))
                           // })
                           e.preventDefault()
-                        }}> 
+                        }}>
                         <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
                         </button>
-                        
+
                         </td>
                         </tr>
                         ))
         }
-        
+
         </tbody>
         </table>
-        
+
         </div>
         </div>
         <div className="grid">
         <div className="unit whole">
-        
+
         </div>
         <div className="container" style={{float:'right'}}>
         <button className="arrow" onClick={e=> {
           this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-          
+
           e.preventDefault()
         }}> <b> &lt; </b> </button>
         {
-          
+
           pages.slice(
             3 % this.state.page != 3 ? 0 :
-            this.state.page % 3  == 0  ? 
+            this.state.page % 3  == 0  ?
             this.state.page % 2 != 0 ? this.state.page -2 :
-            
+
             (this.state.page-3)
-            : this.state.page-3  
+            : this.state.page-3
             ,
             3 % this.state.page != 3 ? 5 :
-            this.state.page % 3  == 0  ? 
+            this.state.page % 3  == 0  ?
             this.state.page % 2 != 0 ? this.state.page +1 :
             this.state.page+2
-            : this.state.page+2  
-            
+            : this.state.page+2
+
             ).map((value, index)=> (
-              <button 
+              <button
               className={this.state.page == value ? "pagination" : 'arrow'}
               onClick={e=> {
                 this.setState({page: value},()=>[
                   console.log(this.state.page)
                   ])
-                
+
                 var ceiling = value*10
                 var floor = ceiling-10
                 this.setState({
@@ -1934,13 +1935,13 @@ export class TablePaginationBU extends Component {
           <button className="arrow">. . .</button>
           <button className="arrow" onClick={e=> {
             this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-            
+
             e.preventDefault()
           }}> <b> &gt; </b> </button>
           </div>
           </div>
           </div>
-          
+
           );
 }
 }
@@ -1957,28 +1958,28 @@ export class TablePaginationProject extends Component {
     };
   }
       // getInitialState() {
-      //   return { 
+      //   return {
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-      
+
       //   };
       // }
       render() {
         var pages = [];
         const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
-        
+
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-        
+
         return (
           <div>
           <div className="grid">
           <div className="unit whole">
-          
-          
+
+
           <table className="table" style={{ width: '100%' }}>
           <thead>
           <tr>
@@ -1989,10 +1990,10 @@ export class TablePaginationProject extends Component {
           }
           </tr>
           </thead>
-          
+
           <tbody>
           {
-            
+
             this.props.tableData &&
             this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
               <tr className="items" key={index}>
@@ -2000,30 +2001,30 @@ export class TablePaginationProject extends Component {
               <td> {row.column[1].value}</td>
               <td>{row.column[2].value}</td>
               <td>{row.column[3].value}</td>
-              
-              
+
+
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
                             ))
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
-                          
-                          
-                          
+
+
+
                           </td>
                           </tr>
                           ))
           }
-          
+
           </tbody>
           </table>
-          
+
           </div>
           </div>
           <div className="grid">
           <div className="unit whole">
-          
+
           </div>
           <div className="container" style={{float:'left'}}>
           <small style={{display:'inline-block'}}>show entries</small>
@@ -2036,38 +2037,38 @@ export class TablePaginationProject extends Component {
             ]
           }}
           />
-          
+
           </div>
           <div className="container" style={{float:'right'}}>
           <button className="arrow" onClick={e=> {
             this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-            
+
             e.preventDefault()
           }}> <b> &lt; </b> </button>
           {
-            
+
             pages.slice(
               3 % this.state.page != 3 ? 0 :
-              this.state.page % 3  == 0  ? 
+              this.state.page % 3  == 0  ?
               this.state.page % 2 != 0 ? this.state.page -2 :
-              
+
               (this.state.page-3)
-              : this.state.page-3  
+              : this.state.page-3
               ,
               3 % this.state.page != 3 ? 5 :
-              this.state.page % 3  == 0  ? 
+              this.state.page % 3  == 0  ?
               this.state.page % 2 != 0 ? this.state.page +1 :
               this.state.page+2
-              : this.state.page+2  
-              
+              : this.state.page+2
+
               ).map((value, index)=> (
-                <button 
+                <button
                 className={this.state.page == value ? "pagination" : 'arrow'}
                 onClick={e=> {
                   this.setState({page: value},()=>[
                     console.log(this.state.page)
                     ])
-                  
+
                   var ceiling = value*10
                   var floor = ceiling-10
                   this.setState({
@@ -2084,13 +2085,13 @@ export class TablePaginationProject extends Component {
             <button className="arrow">. . .</button>
             <button className="arrow" onClick={e=> {
               this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-              
+
               e.preventDefault()
             }}> <b> &gt; </b> </button>
             </div>
             </div>
             </div>
-            
+
             );
 }
 }
@@ -2105,7 +2106,7 @@ export class TablePaginationUser extends Component {
     };
   }
   // getInitialState() {
-  //   return { 
+  //   return {
   //     page : 0,
   //     ceiling: 0,
   //     floor: 10,
@@ -2117,7 +2118,7 @@ export class TablePaginationUser extends Component {
     var pages = [];
     const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
 
-    
+
     for (var i=1; i<=pagesAmount; i++) {
       pages.push(i);
     }
@@ -2127,7 +2128,7 @@ export class TablePaginationUser extends Component {
       <div className="grid">
       <div className="unit whole">
 
-      
+
       <table className="table" style={{ width: '100%' }}>
       <thead>
       <tr>
@@ -2141,7 +2142,7 @@ export class TablePaginationUser extends Component {
 
       <tbody>
       {
-        
+
         this.props.tableData &&
         this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
           <tr className="items" key={index}>
@@ -2167,10 +2168,10 @@ export class TablePaginationUser extends Component {
             }
             ))
             e.preventDefault()
-          }}> 
+          }}>
           EDIT
           </button>
-        
+
           </td>
           </tr>
           ))
@@ -2183,38 +2184,38 @@ export class TablePaginationUser extends Component {
       </div>
       <div className="grid">
       <div className="unit whole">
-      
+
       </div>
       <div className="container" style={{float:'right'}}>
       <button className="arrow" onClick={e=> {
         this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-        
+
         e.preventDefault()
       }}> <b> &lt; </b> </button>
       {
-        
+
         pages.slice(
           3 % this.state.page != 3 ? 0 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page -2 :
-          
+
           (this.state.page-3)
-          : this.state.page-3  
+          : this.state.page-3
           ,
           3 % this.state.page != 3 ? 5 :
-          this.state.page % 3  == 0  ? 
+          this.state.page % 3  == 0  ?
           this.state.page % 2 != 0 ? this.state.page +1 :
           this.state.page+2
-          : this.state.page+2  
+          : this.state.page+2
 
           ).map((value, index)=> (
-            <button 
+            <button
             className={this.state.page == value ? "pagination" : 'arrow'}
             onClick={e=> {
               this.setState({page: value},()=>[
                 console.log(this.state.page)
                 ])
-              
+
               var ceiling = value*10
               var floor = ceiling-10
               this.setState({
@@ -2231,7 +2232,7 @@ export class TablePaginationUser extends Component {
         <button className="arrow">. . .</button>
         <button className="arrow" onClick={e=> {
           this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-          
+
           e.preventDefault()
         }}> <b> &gt; </b> </button>
         </div>
@@ -2254,28 +2255,28 @@ export class TablePaginationRoles extends Component {
     };
   }
       // getInitialState() {
-      //   return { 
+      //   return {
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-      
+
       //   };
       // }
       render() {
         var pages = [];
-        const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0 
-        
+        const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-        
+
         return (
           <div>
           <div className="grid">
           <div className="unit whole">
-          
-          
+
+
           <table className="table" style={{ width: '100%' }}>
           <thead>
           <tr>
@@ -2286,18 +2287,18 @@ export class TablePaginationRoles extends Component {
           }
           </tr>
           </thead>
-          
+
           <tbody>
           {
-            
+
             this.props.tableData &&
             this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
               <tr className="items" key={index}>
               <td>{row.column[0].value}</td>
               <td> {row.column[1].value}</td>
               <td>{row.column[2].value}</td>
-              
-              
+
+
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
@@ -2362,16 +2363,16 @@ export class TablePaginationRoles extends Component {
                               }
                             })
                             e.preventDefault()
-                          }}> 
+                          }}>
                           EDIT
                           </button>
-                          
+
                           <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                             // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                             //   store.dispatch(getDataMaster("holiday"))
                             // })
                             e.preventDefault()
-                          }}> 
+                          }}>
                           <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
                           </button>
                           </td>
@@ -2392,33 +2393,33 @@ export class TablePaginationRoles extends Component {
 <div className="container" style={{float:'right'}}>
 <button className="arrow" onClick={e=> {
   this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-  
+
   e.preventDefault()
 }}> <b> &lt; </b> </button>
 {
-  
+
   pages.slice(
     3 % this.state.page != 3 ? 0 :
-    this.state.page % 3  == 0  ? 
+    this.state.page % 3  == 0  ?
     this.state.page % 2 != 0 ? this.state.page -2 :
-    
+
     (this.state.page-3)
-    : this.state.page-3  
+    : this.state.page-3
     ,
     3 % this.state.page != 3 ? 5 :
-    this.state.page % 3  == 0  ? 
+    this.state.page % 3  == 0  ?
     this.state.page % 2 != 0 ? this.state.page +1 :
     this.state.page+2
-    : this.state.page+2  
-    
+    : this.state.page+2
+
     ).map((value, index)=> (
-      <button 
+      <button
       className={this.state.page == value ? "pagination" : 'arrow'}
       onClick={e=> {
         this.setState({page: value},()=>[
           console.log(this.state.page)
           ])
-        
+
         var ceiling = value*10
         var floor = ceiling-10
         this.setState({
@@ -2435,13 +2436,13 @@ export class TablePaginationRoles extends Component {
   <button className="arrow">. . .</button>
   <button className="arrow" onClick={e=> {
     this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-    
+
     e.preventDefault()
   }}> <b> &gt; </b> </button>
   </div>
   </div>
   </div>
-  
+
   );
 }
 }
@@ -2458,28 +2459,28 @@ export class TablePaginationAccess extends Component {
     };
   }
       // getInitialState() {
-      //   return { 
+      //   return {
       //     page : 0,
       //     ceiling: 0,
       //     floor: 10,
       //     data : props.tableData.slice(0,10)
-      
+
       //   };
       // }
       render() {
         var pages = [];
-        const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0 
-        
+        const pagesAmount = this.props.tableData ? Math.ceil(this.props.tableData.length/10) : 0
+
         for (var i=1; i<=pagesAmount; i++) {
           pages.push(i);
         }
-        
+
         return (
           <div>
           <div className="grid">
           <div className="unit whole">
-          
-          
+
+
           <table className="table" style={{ width: '100%' }}>
           <thead>
           <tr>
@@ -2490,10 +2491,10 @@ export class TablePaginationAccess extends Component {
           }
           </tr>
           </thead>
-          
+
           <tbody>
           {
-            
+
             this.props.tableData &&
             this.props.tableData.slice((this.state.page *10)-10, this.state.page*10).map((row, index) => (
               <tr className="items" key={index}>
@@ -2501,17 +2502,17 @@ export class TablePaginationAccess extends Component {
               <td> {row.column[1].value}</td>
               <td>{row.column[2].value}</td>
               <td>{row.column[3].value}</td>
-              
-              
+
+
                           {/* {
                             row.column.map((column, index) => (
                           <td key={index}>{column.value}</td>
                             ))
                           } */}
                           <td style={{ position: 'relative', float:'right' }}>
-                          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}} 
+                          <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',marginRight:'7px',width:'100px',height:'30px',borderRadius:'2px', padding: '0'}}
                           onClick={e => {
-                            
+
                             console.log(row,"TESTLIAT")
                             store.dispatch(getUserAccess()).then(
                               res => {
@@ -2520,7 +2521,7 @@ export class TablePaginationAccess extends Component {
                                   {
                                     user_id:row.column[0].value,
                                     prof_id:row.column[4].value,
-                                    
+
                                   }
                                   ))
                               }
@@ -2533,16 +2534,16 @@ export class TablePaginationAccess extends Component {
                               }
                             })
                             e.preventDefault()
-                          }}> 
+                          }}>
                           EDIT
                           </button>
-                          
+
                           {/* <button className="btn-primary" title='Edit' style={{display: 'inline-block', verticalAlign:'middle',width:'30px',height:'30px',borderRadius:'2px', padding: '0', margin:'0'}} onClick={e => {
                             // store.dispatch(deleteHoliday(row.column[3].value,)).then(()=>{
                             //   store.dispatch(getDataMaster("holiday"))
                             // })
                             e.preventDefault()
-                          }}> 
+                          }}>
                           <span className="fa fa-trash fa-2x" style={{ color: 'white', fontSize: '17px'}} />
                           </button> */}
                           </td>
@@ -2563,33 +2564,33 @@ export class TablePaginationAccess extends Component {
 <div className="container" style={{float:'right'}}>
 <button className="arrow" onClick={e=> {
   this.setState({page : this.state.page-1 == 0 ? this.state.page : this.state.page -1})
-  
+
   e.preventDefault()
 }}> <b> &lt; </b> </button>
 {
-  
+
   pages.slice(
     3 % this.state.page != 3 ? 0 :
-    this.state.page % 3  == 0  ? 
+    this.state.page % 3  == 0  ?
     this.state.page % 2 != 0 ? this.state.page -2 :
-    
+
     (this.state.page-3)
-    : this.state.page-3  
+    : this.state.page-3
     ,
     3 % this.state.page != 3 ? 5 :
-    this.state.page % 3  == 0  ? 
+    this.state.page % 3  == 0  ?
     this.state.page % 2 != 0 ? this.state.page +1 :
     this.state.page+2
-    : this.state.page+2  
-    
+    : this.state.page+2
+
     ).map((value, index)=> (
-      <button 
+      <button
       className={this.state.page == value ? "pagination" : 'arrow'}
       onClick={e=> {
         this.setState({page: value},()=>[
           console.log(this.state.page)
           ])
-        
+
         var ceiling = value*10
         var floor = ceiling-10
         this.setState({
@@ -2606,13 +2607,13 @@ export class TablePaginationAccess extends Component {
   <button className="arrow">. . .</button>
   <button className="arrow" onClick={e=> {
     this.setState({page : this.state.page+1 > pagesAmount ? this.state.page : this.state.page +1})
-    
+
     e.preventDefault()
   }}> <b> &gt; </b> </button>
   </div>
   </div>
   </div>
-  
+
   );
 }
 }
@@ -2980,7 +2981,7 @@ export class ReduxUploadWorkplan extends Component {
     this.state= {
       value:''
     }
-  } 
+  }
   render(){
     return(
       <div>
@@ -2995,10 +2996,10 @@ export class ReduxUploadWorkplan extends Component {
         this.setState({
           value:filesToUpload[0].name
         })
-        
+
       }}
       >
-       <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input> 
+       <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input>
       </Dropzone>
 
       </div>
@@ -3012,7 +3013,7 @@ export class ReduxUploadUser extends Component {
     this.state= {
       value:''
     }
-  } 
+  }
   render(){
     return(
       <div>
@@ -3027,7 +3028,7 @@ export class ReduxUploadUser extends Component {
         this.setState({
           value:filesToUpload[0].name
         })
-        
+
       }}
       >
       <input placeholder={this.props.placeholder} type="text" value={this.state.value} onkeydown="return false;"></input>
@@ -3147,7 +3148,7 @@ export class datepickerUniversal extends Component {
       placeholder={placeholder}
       dateFormat="DD-MMM-YYYY"
       className={ this.props.meta.touched && this.props.meta.error != null && 'error'}
-      
+
       // selected={input.value ? moment(input.value, `DD-MMM${.toUpperCase()}-YY`) : null}
       selected={input.value ? moment(input.value, "DD-MMM-YYYY") : null}
       // selected={input.value ? moment(input.value, "YYYY-MM-DD") : null}
@@ -3223,4 +3224,3 @@ export class datepickerTimesheet extends Component {
   }
 
   // export connect(mapStateToProps)(PopUp)
-  

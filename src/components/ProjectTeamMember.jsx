@@ -89,7 +89,7 @@ class ProjectTeamMember extends Component {
 
           }}
           placeholder = "Input Non-Member Email"
-
+          value={this.state.external}
           ></Input>
 
 
@@ -132,7 +132,18 @@ class ProjectTeamMember extends Component {
                               onClick=
                               {
                                 e => {
-                                  this.props.dispatch(assignProjectTeamNonMember(this.props.location.query.id,this.state.external)).then(()=>{
+                                  this.props.dispatch(assignProjectTeamNonMember(this.props.location.query.id,this.state.external))
+                                  .then(()=>{
+                                    this.setState({external:''},()=>{
+                                      console.log(this.state.external)
+                                    })
+                                  })
+                                  .catch(()=>{
+                                    this.setState({external:''},()=>{
+                                      console.log(this.state.external)
+                                    })
+                                  })
+                                  .then(()=>{
                                     this.props.dispatch(getAvailableProjectTeamMember(this.props.location.query.id))
                                   })
                                 }
